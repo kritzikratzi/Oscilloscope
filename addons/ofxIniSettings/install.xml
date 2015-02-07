@@ -1,0 +1,28 @@
+<install>
+	
+	<version>0.1</version>
+	<author>Rick Companje</author>
+	<url></url>
+	
+	<requires>ofxExtras</requires>
+	
+	<add>	
+			
+		<!-- 	=====================================================================	-->
+		<!--	========================== add per project using this addon =========	-->
+		<!-- 	=====================================================================	-->
+	
+		<src>
+			<folder name="addons/ofxIniSettings">
+				<file>../../../addons/ofxIniSettings/ofxIniSettings.h</file>
+				<file>../../../addons/ofxIniSettings/ofxIniSettings.cpp</file>
+			</folder>
+		</src>
+		
+		<include>
+			<path>../../../addons/ofxIniSettings</path>
+		</include>
+		
+	</add>
+	 
+</install>

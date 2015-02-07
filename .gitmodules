@@ -1,0 +1,3 @@
+[submodule "ofxMightyUI"]
+	path = ofxMightyUI
+	url = git@github.com:kritzikratzi/ofxMightyUI.git

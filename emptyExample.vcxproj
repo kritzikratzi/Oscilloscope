@@ -1,0 +1,194 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{7FD42DF7-442E-479A-BA76-D0022F99702A}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>emptyExample</RootNamespace>
+    <ProjectName>BlendOSC</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v110</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>v110</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\libs\openFrameworksCompiled\project\vs\openFrameworksRelease.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\libs\openFrameworksCompiled\project\vs\openFrameworksDebug.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>bin\</OutDir>
+    <IntDir>obj\$(Configuration)\</IntDir>
+    <TargetName>$(ProjectName)_debug</TargetName>
+    <LinkIncremental>true</LinkIncremental>
+    <GenerateManifest>true</GenerateManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>bin\</OutDir>
+    <IntDir>obj\$(Configuration)\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;..\..\..\addons\ofxNetwork\src;addons\ofxExtras\src;addons\ofxIniSettings\src;ofxMightyUI\addons\ofxMUI;ofxMightyUI\addons\ofxFontStash;src\ui;src\ui\hiddenLines</AdditionalIncludeDirectories>
+      <CompileAs>CompileAsCpp</CompileAs>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+    <PostBuildEvent>
+      <Command>xcopy /e /i /y "$(ProjectDir)..\..\..\export\vs\*.dll" "$(ProjectDir)bin"
+xcopy /e /i /y "$(ProjectDir)ofxMightyUI\bin\data\mui" "$(ProjectDir)bin\data\mui"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;..\..\..\addons\ofxNetwork\src;addons\ofxExtras\src;addons\ofxIniSettings\src;ofxMightyUI\addons\ofxMUI;ofxMightyUI\addons\ofxFontStash;src\ui;src\ui\hiddenLines</AdditionalIncludeDirectories>
+      <CompileAs>CompileAsCpp</CompileAs>
+    </ClCompile>
+    <Link>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+    <PostBuildEvent>
+      <Command>xcopy /e /i /y "$(ProjectDir)..\..\..\export\vs\*.dll" "$(ProjectDir)bin"
+xcopy /e /i /y "$(ProjectDir)ofxMightyUI\bin\data\mui" "$(ProjectDir)bin\data\mui"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\addons\ofxNetwork\src\ofxTCPClient.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxNetwork\src\ofxTCPManager.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxNetwork\src\ofxTCPServer.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxNetwork\src\ofxUDPManager.cpp" />
+    <ClCompile Include="addons\ofxExtras\src\ofxExtras.cpp" />
+    <ClCompile Include="addons\ofxIniSettings\src\ofxIniSettings.cpp" />
+    <ClCompile Include="ofxMightyUI\addons\ofxFontStash\fontstash.c" />
+    <ClCompile Include="ofxMightyUI\addons\ofxFontStash\ofxFontStash.cpp" />
+    <ClCompile Include="ofxMightyUI\addons\ofxFontStash\ofxTrueTypeFontFS.cpp" />
+    <ClCompile Include="ofxMightyUI\addons\ofxMUI\BarButton.cpp" />
+    <ClCompile Include="ofxMightyUI\addons\ofxMUI\Button.cpp" />
+    <ClCompile Include="ofxMightyUI\addons\ofxMUI\Container.cpp" />
+    <ClCompile Include="ofxMightyUI\addons\ofxMUI\CppTweener.cpp" />
+    <ClCompile Include="ofxMightyUI\addons\ofxMUI\EmptyContainer.cpp" />
+    <ClCompile Include="ofxMightyUI\addons\ofxMUI\Helpers.cpp" />
+    <ClCompile Include="ofxMightyUI\addons\ofxMUI\InternalWindow.cpp" />
+    <ClCompile Include="ofxMightyUI\addons\ofxMUI\Label.cpp" />
+    <ClCompile Include="ofxMightyUI\addons\ofxMUI\Layout.cpp" />
+    <ClCompile Include="ofxMightyUI\addons\ofxMUI\LoadWindow.cpp" />
+    <ClCompile Include="ofxMightyUI\addons\ofxMUI\MUI.cpp" />
+    <ClCompile Include="ofxMightyUI\addons\ofxMUI\Root.cpp" />
+    <ClCompile Include="ofxMightyUI\addons\ofxMUI\ScrollPane.cpp" />
+    <ClCompile Include="ofxMightyUI\addons\ofxMUI\SegmentedSelect.cpp" />
+    <ClCompile Include="ofxMightyUI\addons\ofxMUI\Slider.cpp" />
+    <ClCompile Include="ofxMightyUI\addons\ofxMUI\SliderWithLabel.cpp" />
+    <ClCompile Include="ofxMightyUI\addons\ofxMUI\TextField.cpp" />
+    <ClCompile Include="ofxMightyUI\addons\ofxMUI\ToggleButton.cpp" />
+    <ClCompile Include="src\hiddenLines\HiddenLineRemover.cpp" />
+    <ClCompile Include="src\hiddenLines\Obj3D.cpp" />
+    <ClCompile Include="src\hiddenLines\Polygon3D.cpp" />
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\sounddevices.cpp" />
+    <ClCompile Include="src\testApp.cpp" />
+    <ClCompile Include="src\ui\ConfigView.cpp" />
+    <ClCompile Include="src\ui\MeshView.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\addons\ofxNetwork\src\ofxNetwork.h" />
+    <ClInclude Include="..\..\..\addons\ofxNetwork\src\ofxNetworkUtils.h" />
+    <ClInclude Include="..\..\..\addons\ofxNetwork\src\ofxTCPClient.h" />
+    <ClInclude Include="..\..\..\addons\ofxNetwork\src\ofxTCPManager.h" />
+    <ClInclude Include="..\..\..\addons\ofxNetwork\src\ofxTCPServer.h" />
+    <ClInclude Include="..\..\..\addons\ofxNetwork\src\ofxUDPManager.h" />
+    <ClInclude Include="addons\ofxExtras\src\ofxExtras.h" />
+    <ClInclude Include="addons\ofxIniSettings\src\ofxIniSettings.h" />
+    <ClInclude Include="ofxMightyUI\addons\ofxFontStash\fontstash.h" />
+    <ClInclude Include="ofxMightyUI\addons\ofxFontStash\ofxFontStash.h" />
+    <ClInclude Include="ofxMightyUI\addons\ofxFontStash\ofxTrueTypeFontFS.h" />
+    <ClInclude Include="ofxMightyUI\addons\ofxFontStash\stb_truetype.h" />
+    <ClInclude Include="ofxMightyUI\addons\ofxMUI\BarButton.h" />
+    <ClInclude Include="ofxMightyUI\addons\ofxMUI\Button.h" />
+    <ClInclude Include="ofxMightyUI\addons\ofxMUI\Container.h" />
+    <ClInclude Include="ofxMightyUI\addons\ofxMUI\CppTweener.h" />
+    <ClInclude Include="ofxMightyUI\addons\ofxMUI\EmptyContainer.h" />
+    <ClInclude Include="ofxMightyUI\addons\ofxMUI\Helpers.h" />
+    <ClInclude Include="ofxMightyUI\addons\ofxMUI\InternalWindow.h" />
+    <ClInclude Include="ofxMightyUI\addons\ofxMUI\Label.h" />
+    <ClInclude Include="ofxMightyUI\addons\ofxMUI\Layout.h" />
+    <ClInclude Include="ofxMightyUI\addons\ofxMUI\LoadWindow.h" />
+    <ClInclude Include="ofxMightyUI\addons\ofxMUI\MUI.h" />
+    <ClInclude Include="ofxMightyUI\addons\ofxMUI\Root.h" />
+    <ClInclude Include="ofxMightyUI\addons\ofxMUI\ScrollPane.h" />
+    <ClInclude Include="ofxMightyUI\addons\ofxMUI\SegmentedSelect.h" />
+    <ClInclude Include="ofxMightyUI\addons\ofxMUI\Slider.h" />
+    <ClInclude Include="ofxMightyUI\addons\ofxMUI\SliderWithLabel.h" />
+    <ClInclude Include="ofxMightyUI\addons\ofxMUI\TextField.h" />
+    <ClInclude Include="ofxMightyUI\addons\ofxMUI\ToggleButton.h" />
+    <ClInclude Include="src\chinesepostmanproblem.h" />
+    <ClInclude Include="src\hiddenLines\HiddenLineRemover.h" />
+    <ClInclude Include="src\hiddenLines\Obj3D.h" />
+    <ClInclude Include="src\hiddenLines\Polygon3D.h" />
+    <ClInclude Include="src\hiddenLines\Tools2D.h" />
+    <ClInclude Include="src\hiddenLines\Tria.h" />
+    <ClInclude Include="src\hiddenLines\Triangle.h" />
+    <ClInclude Include="src\settings.h" />
+    <ClInclude Include="src\sounddevices.h" />
+    <ClInclude Include="src\testApp.h" />
+    <ClInclude Include="src\ui\ConfigView.h" />
+    <ClInclude Include="src\ui\MeshView.h" />
+    <ClInclude Include="src\util.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\libs\openFrameworksCompiled\project\vs\openframeworksLib.vcxproj">
+      <Project>{5837595d-aca9-485c-8e76-729040ce4b0b}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="icon.rc">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">/D_DEBUG %(AdditionalOptions)</AdditionalOptions>
+    </ResourceCompile>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+</Project>

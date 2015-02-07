@@ -1,0 +1,267 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="src\testApp.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\main.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxNetwork\src\ofxTCPClient.cpp">
+      <Filter>src\ofxNetwork</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxNetwork\src\ofxTCPManager.cpp">
+      <Filter>src\ofxNetwork</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxNetwork\src\ofxTCPServer.cpp">
+      <Filter>src\ofxNetwork</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxNetwork\src\ofxUDPManager.cpp">
+      <Filter>src\ofxNetwork</Filter>
+    </ClCompile>
+    <ClCompile Include="addons\ofxIniSettings\src\ofxIniSettings.cpp">
+      <Filter>src\ofxInitSettings</Filter>
+    </ClCompile>
+    <ClCompile Include="addons\ofxExtras\src\ofxExtras.cpp">
+      <Filter>src\ofxExtras</Filter>
+    </ClCompile>
+    <ClCompile Include="ofxMightyUI\addons\ofxFontStash\fontstash.c">
+      <Filter>ofxMightyUI\ofxFontStash</Filter>
+    </ClCompile>
+    <ClCompile Include="ofxMightyUI\addons\ofxFontStash\ofxFontStash.cpp">
+      <Filter>ofxMightyUI\ofxFontStash</Filter>
+    </ClCompile>
+    <ClCompile Include="ofxMightyUI\addons\ofxFontStash\ofxTrueTypeFontFS.cpp">
+      <Filter>ofxMightyUI\ofxFontStash</Filter>
+    </ClCompile>
+    <ClCompile Include="ofxMightyUI\addons\ofxMUI\BarButton.cpp">
+      <Filter>ofxMightyUI\ofxMUI</Filter>
+    </ClCompile>
+    <ClCompile Include="ofxMightyUI\addons\ofxMUI\Button.cpp">
+      <Filter>ofxMightyUI\ofxMUI</Filter>
+    </ClCompile>
+    <ClCompile Include="ofxMightyUI\addons\ofxMUI\Container.cpp">
+      <Filter>ofxMightyUI\ofxMUI</Filter>
+    </ClCompile>
+    <ClCompile Include="ofxMightyUI\addons\ofxMUI\CppTweener.cpp">
+      <Filter>ofxMightyUI\ofxMUI</Filter>
+    </ClCompile>
+    <ClCompile Include="ofxMightyUI\addons\ofxMUI\EmptyContainer.cpp">
+      <Filter>ofxMightyUI\ofxMUI</Filter>
+    </ClCompile>
+    <ClCompile Include="ofxMightyUI\addons\ofxMUI\Helpers.cpp">
+      <Filter>ofxMightyUI\ofxMUI</Filter>
+    </ClCompile>
+    <ClCompile Include="ofxMightyUI\addons\ofxMUI\InternalWindow.cpp">
+      <Filter>ofxMightyUI\ofxMUI</Filter>
+    </ClCompile>
+    <ClCompile Include="ofxMightyUI\addons\ofxMUI\Label.cpp">
+      <Filter>ofxMightyUI\ofxMUI</Filter>
+    </ClCompile>
+    <ClCompile Include="ofxMightyUI\addons\ofxMUI\Layout.cpp">
+      <Filter>ofxMightyUI\ofxMUI</Filter>
+    </ClCompile>
+    <ClCompile Include="ofxMightyUI\addons\ofxMUI\LoadWindow.cpp">
+      <Filter>ofxMightyUI\ofxMUI</Filter>
+    </ClCompile>
+    <ClCompile Include="ofxMightyUI\addons\ofxMUI\MUI.cpp">
+      <Filter>ofxMightyUI\ofxMUI</Filter>
+    </ClCompile>
+    <ClCompile Include="ofxMightyUI\addons\ofxMUI\Root.cpp">
+      <Filter>ofxMightyUI\ofxMUI</Filter>
+    </ClCompile>
+    <ClCompile Include="ofxMightyUI\addons\ofxMUI\ScrollPane.cpp">
+      <Filter>ofxMightyUI\ofxMUI</Filter>
+    </ClCompile>
+    <ClCompile Include="ofxMightyUI\addons\ofxMUI\SegmentedSelect.cpp">
+      <Filter>ofxMightyUI\ofxMUI</Filter>
+    </ClCompile>
+    <ClCompile Include="ofxMightyUI\addons\ofxMUI\Slider.cpp">
+      <Filter>ofxMightyUI\ofxMUI</Filter>
+    </ClCompile>
+    <ClCompile Include="ofxMightyUI\addons\ofxMUI\SliderWithLabel.cpp">
+      <Filter>ofxMightyUI\ofxMUI</Filter>
+    </ClCompile>
+    <ClCompile Include="ofxMightyUI\addons\ofxMUI\TextField.cpp">
+      <Filter>ofxMightyUI\ofxMUI</Filter>
+    </ClCompile>
+    <ClCompile Include="ofxMightyUI\addons\ofxMUI\ToggleButton.cpp">
+      <Filter>ofxMightyUI\ofxMUI</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sounddevices.cpp" />
+    <ClCompile Include="src\ui\ConfigView.cpp">
+      <Filter>src\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ui\MeshView.cpp">
+      <Filter>src\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\hiddenLines\HiddenLineRemover.cpp">
+      <Filter>src\hiddenLines</Filter>
+    </ClCompile>
+    <ClCompile Include="src\hiddenLines\Obj3D.cpp">
+      <Filter>src\hiddenLines</Filter>
+    </ClCompile>
+    <ClCompile Include="src\hiddenLines\Polygon3D.cpp">
+      <Filter>src\hiddenLines</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="src">
+      <UniqueIdentifier>{d8376475-7454-4a24-b08a-aac121d3ad6f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\ofxNetwork">
+      <UniqueIdentifier>{6aa4e505-41cd-4962-ac41-6ad4e8c4304a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\ofxInitSettings">
+      <UniqueIdentifier>{a8d82668-7855-47d0-ad88-c46c90176d3c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\ofxExtras">
+      <UniqueIdentifier>{476708c7-a0c3-426c-a5ef-9e5d52f2b08f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ofxMightyUI">
+      <UniqueIdentifier>{9d3ec387-6920-450c-9fa8-95a62f1eff3b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ofxMightyUI\ofxMUI">
+      <UniqueIdentifier>{65d55bdf-f6f1-49d4-a5bb-d0b92cae4db9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ofxMightyUI\ofxFontStash">
+      <UniqueIdentifier>{5ea4aee9-3772-4ef8-9c3c-e524c49ad752}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\ui">
+      <UniqueIdentifier>{13007edc-9d07-4805-8043-b72c75aec223}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\hiddenLines">
+      <UniqueIdentifier>{252b4cf6-5487-4f90-9106-99c1e829146c}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\testApp.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\util.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxNetwork\src\ofxNetwork.h">
+      <Filter>src\ofxNetwork</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxNetwork\src\ofxNetworkUtils.h">
+      <Filter>src\ofxNetwork</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxNetwork\src\ofxTCPClient.h">
+      <Filter>src\ofxNetwork</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxNetwork\src\ofxTCPManager.h">
+      <Filter>src\ofxNetwork</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxNetwork\src\ofxTCPServer.h">
+      <Filter>src\ofxNetwork</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxNetwork\src\ofxUDPManager.h">
+      <Filter>src\ofxNetwork</Filter>
+    </ClInclude>
+    <ClInclude Include="src\chinesepostmanproblem.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="addons\ofxIniSettings\src\ofxIniSettings.h">
+      <Filter>src\ofxInitSettings</Filter>
+    </ClInclude>
+    <ClInclude Include="addons\ofxExtras\src\ofxExtras.h">
+      <Filter>src\ofxExtras</Filter>
+    </ClInclude>
+    <ClInclude Include="ofxMightyUI\addons\ofxFontStash\fontstash.h">
+      <Filter>ofxMightyUI\ofxFontStash</Filter>
+    </ClInclude>
+    <ClInclude Include="ofxMightyUI\addons\ofxFontStash\ofxFontStash.h">
+      <Filter>ofxMightyUI\ofxFontStash</Filter>
+    </ClInclude>
+    <ClInclude Include="ofxMightyUI\addons\ofxFontStash\ofxTrueTypeFontFS.h">
+      <Filter>ofxMightyUI\ofxFontStash</Filter>
+    </ClInclude>
+    <ClInclude Include="ofxMightyUI\addons\ofxFontStash\stb_truetype.h">
+      <Filter>ofxMightyUI\ofxFontStash</Filter>
+    </ClInclude>
+    <ClInclude Include="ofxMightyUI\addons\ofxMUI\BarButton.h">
+      <Filter>ofxMightyUI\ofxMUI</Filter>
+    </ClInclude>
+    <ClInclude Include="ofxMightyUI\addons\ofxMUI\Button.h">
+      <Filter>ofxMightyUI\ofxMUI</Filter>
+    </ClInclude>
+    <ClInclude Include="ofxMightyUI\addons\ofxMUI\Container.h">
+      <Filter>ofxMightyUI\ofxMUI</Filter>
+    </ClInclude>
+    <ClInclude Include="ofxMightyUI\addons\ofxMUI\CppTweener.h">
+      <Filter>ofxMightyUI\ofxMUI</Filter>
+    </ClInclude>
+    <ClInclude Include="ofxMightyUI\addons\ofxMUI\EmptyContainer.h">
+      <Filter>ofxMightyUI\ofxMUI</Filter>
+    </ClInclude>
+    <ClInclude Include="ofxMightyUI\addons\ofxMUI\Helpers.h">
+      <Filter>ofxMightyUI\ofxMUI</Filter>
+    </ClInclude>
+    <ClInclude Include="ofxMightyUI\addons\ofxMUI\InternalWindow.h">
+      <Filter>ofxMightyUI\ofxMUI</Filter>
+    </ClInclude>
+    <ClInclude Include="ofxMightyUI\addons\ofxMUI\Label.h">
+      <Filter>ofxMightyUI\ofxMUI</Filter>
+    </ClInclude>
+    <ClInclude Include="ofxMightyUI\addons\ofxMUI\Layout.h">
+      <Filter>ofxMightyUI\ofxMUI</Filter>
+    </ClInclude>
+    <ClInclude Include="ofxMightyUI\addons\ofxMUI\LoadWindow.h">
+      <Filter>ofxMightyUI\ofxMUI</Filter>
+    </ClInclude>
+    <ClInclude Include="ofxMightyUI\addons\ofxMUI\MUI.h">
+      <Filter>ofxMightyUI\ofxMUI</Filter>
+    </ClInclude>
+    <ClInclude Include="ofxMightyUI\addons\ofxMUI\Root.h">
+      <Filter>ofxMightyUI\ofxMUI</Filter>
+    </ClInclude>
+    <ClInclude Include="ofxMightyUI\addons\ofxMUI\ScrollPane.h">
+      <Filter>ofxMightyUI\ofxMUI</Filter>
+    </ClInclude>
+    <ClInclude Include="ofxMightyUI\addons\ofxMUI\SegmentedSelect.h">
+      <Filter>ofxMightyUI\ofxMUI</Filter>
+    </ClInclude>
+    <ClInclude Include="ofxMightyUI\addons\ofxMUI\Slider.h">
+      <Filter>ofxMightyUI\ofxMUI</Filter>
+    </ClInclude>
+    <ClInclude Include="ofxMightyUI\addons\ofxMUI\SliderWithLabel.h">
+      <Filter>ofxMightyUI\ofxMUI</Filter>
+    </ClInclude>
+    <ClInclude Include="ofxMightyUI\addons\ofxMUI\TextField.h">
+      <Filter>ofxMightyUI\ofxMUI</Filter>
+    </ClInclude>
+    <ClInclude Include="ofxMightyUI\addons\ofxMUI\ToggleButton.h">
+      <Filter>ofxMightyUI\ofxMUI</Filter>
+    </ClInclude>
+    <ClInclude Include="src\settings.h" />
+    <ClInclude Include="src\sounddevices.h" />
+    <ClInclude Include="src\ui\ConfigView.h">
+      <Filter>src\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ui\MeshView.h">
+      <Filter>src\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\hiddenLines\HiddenLineRemover.h">
+      <Filter>src\hiddenLines</Filter>
+    </ClInclude>
+    <ClInclude Include="src\hiddenLines\Obj3D.h">
+      <Filter>src\hiddenLines</Filter>
+    </ClInclude>
+    <ClInclude Include="src\hiddenLines\Polygon3D.h">
+      <Filter>src\hiddenLines</Filter>
+    </ClInclude>
+    <ClInclude Include="src\hiddenLines\Tools2D.h">
+      <Filter>src\hiddenLines</Filter>
+    </ClInclude>
+    <ClInclude Include="src\hiddenLines\Tria.h">
+      <Filter>src\hiddenLines</Filter>
+    </ClInclude>
+    <ClInclude Include="src\hiddenLines\Triangle.h">
+      <Filter>src\hiddenLines</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="icon.rc" />
+  </ItemGroup>
+</Project>
