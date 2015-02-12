@@ -99,7 +99,7 @@ void MonoSample::peel(int N){
 			N = remaining;
 		}
 	}
-	playbackIndex = fmaxf(0,playbackIndex-N);
+	playbackIndex = MAX(0,playbackIndex-N);
 	totalLength -= N;
 	lock.unlock();
 }

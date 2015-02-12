@@ -3,8 +3,9 @@
 #include "sounddevices.h"
 #include "MUI.h" 
 #include "ofAppGLFWWindow.h"
+#if defined(TARGET_OSX)
 #import <AppKit/AppKit.h>
-
+#endif
 //========================================================================
 int main( ){
 
