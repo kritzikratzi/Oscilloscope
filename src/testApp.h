@@ -15,7 +15,9 @@ class testApp : public ofBaseApp{
 		void startApplication();
 		void stopApplication();
 		void update();
+		void update( ofMesh &shapeMesh, MonoSample &left, MonoSample &right );
 		void draw();
+		void draw( ofMesh &shapeMesh );
 		void exit();
 
 		void keyPressed  (int key);
@@ -35,11 +37,13 @@ class testApp : public ofBaseApp{
 		mui::Root * root;
 		ConfigView * configView;
 		MeshView * meshView;
-		ofPath path;
-		ofMesh shapeMesh;
+		ofMesh shapeMesh1;
+		ofMesh shapeMesh2;
 		Settings settings;
 		ofImage dotImage; 
 	
-		MonoSample left;
-		MonoSample right;
+		MonoSample left1;
+		MonoSample right1;
+		MonoSample left2;
+		MonoSample right2;
 };

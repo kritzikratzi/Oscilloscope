@@ -38,8 +38,10 @@ void testApp::setup(){
 	meshView->visible = false;
 	root->add( meshView );
 	
-	left.loop = false;
-	right.loop = false;
+	left1.loop = false;
+	right1.loop = false;
+	left2.loop = false;
+	right2.loop = false;
 
 
 }
@@ -49,8 +51,10 @@ void testApp::startApplication(){
 	if( applicationRunning ) return;
 	applicationRunning = true;
 	
-	left.play();
-	right.play();
+	left1.play();
+	right1.play();
+	left2.play();
+	right2.play();
 
 	configView->toSettings( settings );
 	meshView->flipXY->selected = settings.flipXY;
@@ -68,7 +72,7 @@ void testApp::startApplication(){
 	cout << "    Buffer size: " << settings.bufferSize << endl;
 	cout << "    Num Buffers: " << settings.numBuffers << endl;
 	soundStream.setDeviceID( settings.deviceId );
-	soundStream.setup(this, 0, 2, settings.sampleRate, settings.bufferSize, settings.numBuffers);
+	soundStream.setup(this, 0, 4, settings.sampleRate, settings.bufferSize, settings.numBuffers);
 }
 
 
@@ -95,6 +99,11 @@ void testApp::update(){
 	root->handleUpdate();
 	if( !applicationRunning ) return;
 	
+	update( shapeMesh1, left1, right1 );
+	update( shapeMesh2, left2, right2 );
+}
+
+void testApp::update( ofMesh &shapeMesh, MonoSample &left, MonoSample &right ){
 	shapeMesh.clear();
 	shapeMesh.setMode(OF_PRIMITIVE_LINE_STRIP);
 	shapeMesh.enableColors();
@@ -158,6 +167,27 @@ void testApp::draw(){
 	ofLine( -10, 0, 10, 0 );
 	ofLine( 0, -10, 0, 10 );
 
+	draw( shapeMesh1 );
+	draw( shapeMesh2 );
+/*	vector<ofVec3f> verts = shapeMesh.getVertices();
+	vector<ofVec3f>::iterator it = verts.begin();
+	ofSetColor(255,20);
+	int i = 0;
+	while( it != verts.end() ){
+		if( i % 10 == 0 )
+			dotImage.draw((*it).x-dotImage.width/2, (*it).y-dotImage.height/2);
+		++i;
+		++it;
+	}*/
+//	ofDisableBlendMode();
+	
+	ofPopMatrix();
+	
+	root->handleDraw();
+}
+
+void testApp::draw( ofMesh &shapeMesh ){
+	
 	ofSetColor(50, 255, 50, 30);
 	shapeMesh.disableColors();
 	ofSetLineWidth(20.0);
@@ -176,22 +206,6 @@ void testApp::draw(){
 	shapeMesh.enableColors();
 	ofSetLineWidth(1.0);
 	shapeMesh.draw();
-	
-/*	vector<ofVec3f> verts = shapeMesh.getVertices();
-	vector<ofVec3f>::iterator it = verts.begin();
-	ofSetColor(255,20);
-	int i = 0;
-	while( it != verts.end() ){
-		if( i % 10 == 0 )
-			dotImage.draw((*it).x-dotImage.width/2, (*it).y-dotImage.height/2);
-		++i;
-		++it;
-	}*/
-//	ofDisableBlendMode();
-	
-	ofPopMatrix();
-	
-	root->handleDraw();
 }
 
 void testApp::exit(){
@@ -241,8 +255,10 @@ void testApp::windowResized(int w, int h){
 
 //--------------------------------------------------------------
 void testApp::audioIn(float * input, int bufferSize, int nChannels){
-	left.append(input, bufferSize,2);
-	right.append(input+1,bufferSize,2);
+	left1.append(input+0, bufferSize,nChannels);
+	right1.append(input+1,bufferSize,nChannels);
+	left2.append(input+2, bufferSize,nChannels);
+	right2.append(input+3,bufferSize,nChannels);
 }
 
 //--------------------------------------------------------------

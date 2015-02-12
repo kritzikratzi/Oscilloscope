@@ -1,9 +1,9 @@
 invertY=false
 invertX=false
-flipXY=true
+flipXY=false
 channelMapping=
-scale=3.59744
-deviceId=2
+scale=1
+deviceId=0
 port=11995
 sampleRate=96000
 bufferSize=512
