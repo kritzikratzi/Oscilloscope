@@ -9,6 +9,7 @@
 #ifndef __audioInputExample__Audio__
 #define __audioInputExample__Audio__
 
+#include "ofConstants.h"
 #include <iostream>
 #include <vector>
 #include <math.h>
@@ -50,7 +51,7 @@ public:
 			vDSP_maxmgv( buffer, 1, &result, N );
 		#else
 			for( int i = N-1; i >= 0; i-- ){
-				result = fmaxf( fabsf( buffer[i] ), result );
+				result = MAX( fabsf( buffer[i] ), result );
 			}
 		#endif
 		return result;

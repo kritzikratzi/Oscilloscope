@@ -14,7 +14,7 @@
     <ProjectGuid>{7FD42DF7-442E-479A-BA76-D0022F99702A}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>emptyExample</RootNamespace>
-    <ProjectName>BlendOSC</ProjectName>
+    <ProjectName>Oscilloscope</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -99,10 +99,6 @@ xcopy /e /i /y "$(ProjectDir)ofxMightyUI\bin\data\mui" "$(ProjectDir)bin\data\mu
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\addons\ofxNetwork\src\ofxTCPClient.cpp" />
-    <ClCompile Include="..\..\..\addons\ofxNetwork\src\ofxTCPManager.cpp" />
-    <ClCompile Include="..\..\..\addons\ofxNetwork\src\ofxTCPServer.cpp" />
-    <ClCompile Include="..\..\..\addons\ofxNetwork\src\ofxUDPManager.cpp" />
     <ClCompile Include="addons\ofxExtras\src\ofxExtras.cpp" />
     <ClCompile Include="addons\ofxIniSettings\src\ofxIniSettings.cpp" />
     <ClCompile Include="ofxMightyUI\addons\ofxFontStash\fontstash.c" />
@@ -126,9 +122,7 @@ xcopy /e /i /y "$(ProjectDir)ofxMightyUI\bin\data\mui" "$(ProjectDir)bin\data\mu
     <ClCompile Include="ofxMightyUI\addons\ofxMUI\SliderWithLabel.cpp" />
     <ClCompile Include="ofxMightyUI\addons\ofxMUI\TextField.cpp" />
     <ClCompile Include="ofxMightyUI\addons\ofxMUI\ToggleButton.cpp" />
-    <ClCompile Include="src\hiddenLines\HiddenLineRemover.cpp" />
-    <ClCompile Include="src\hiddenLines\Obj3D.cpp" />
-    <ClCompile Include="src\hiddenLines\Polygon3D.cpp" />
+    <ClCompile Include="src\Audio.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\sounddevices.cpp" />
     <ClCompile Include="src\testApp.cpp" />
@@ -136,12 +130,6 @@ xcopy /e /i /y "$(ProjectDir)ofxMightyUI\bin\data\mui" "$(ProjectDir)bin\data\mu
     <ClCompile Include="src\ui\MeshView.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\addons\ofxNetwork\src\ofxNetwork.h" />
-    <ClInclude Include="..\..\..\addons\ofxNetwork\src\ofxNetworkUtils.h" />
-    <ClInclude Include="..\..\..\addons\ofxNetwork\src\ofxTCPClient.h" />
-    <ClInclude Include="..\..\..\addons\ofxNetwork\src\ofxTCPManager.h" />
-    <ClInclude Include="..\..\..\addons\ofxNetwork\src\ofxTCPServer.h" />
-    <ClInclude Include="..\..\..\addons\ofxNetwork\src\ofxUDPManager.h" />
     <ClInclude Include="addons\ofxExtras\src\ofxExtras.h" />
     <ClInclude Include="addons\ofxIniSettings\src\ofxIniSettings.h" />
     <ClInclude Include="ofxMightyUI\addons\ofxFontStash\fontstash.h" />
@@ -166,13 +154,7 @@ xcopy /e /i /y "$(ProjectDir)ofxMightyUI\bin\data\mui" "$(ProjectDir)bin\data\mu
     <ClInclude Include="ofxMightyUI\addons\ofxMUI\SliderWithLabel.h" />
     <ClInclude Include="ofxMightyUI\addons\ofxMUI\TextField.h" />
     <ClInclude Include="ofxMightyUI\addons\ofxMUI\ToggleButton.h" />
-    <ClInclude Include="src\chinesepostmanproblem.h" />
-    <ClInclude Include="src\hiddenLines\HiddenLineRemover.h" />
-    <ClInclude Include="src\hiddenLines\Obj3D.h" />
-    <ClInclude Include="src\hiddenLines\Polygon3D.h" />
-    <ClInclude Include="src\hiddenLines\Tools2D.h" />
-    <ClInclude Include="src\hiddenLines\Tria.h" />
-    <ClInclude Include="src\hiddenLines\Triangle.h" />
+    <ClInclude Include="src\Audio.h" />
     <ClInclude Include="src\settings.h" />
     <ClInclude Include="src\sounddevices.h" />
     <ClInclude Include="src\testApp.h" />

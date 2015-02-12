@@ -46,7 +46,8 @@ ConfigView::ConfigView( float x_, float y_, float width_, float height_)
 	vector<RtAudio::DeviceInfo>::iterator it = infos.begin();
 	while( it != infos.end() ){
 		RtAudio::DeviceInfo info = *it;
-		mui::ToggleButton * button = new mui::ToggleButton( info.name, x, y, w, h );
+		string name = string(info.name) + ": out=" + ofToString(info.outputChannels) + ",in=" + ofToString(info.inputChannels); 
+		mui::ToggleButton * button = new mui::ToggleButton( name, x, y, w, h );
 		button->onPress += Poco::Delegate<ConfigView,ofTouchEventArgs>( this, &ConfigView::buttonPressed );
 		button->fg = ofColor( 255 );
 		button->label->horizontalAlign = mui::Left;
