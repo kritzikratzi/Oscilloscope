@@ -5,7 +5,7 @@ channelMapping=
 scale=1
 deviceId=0
 port=11995
-sampleRate=96000
-bufferSize=512
+sampleRate=44100
+bufferSize=1024
 numBuffers=4
 
