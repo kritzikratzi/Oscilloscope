@@ -1,3 +1,5 @@
+clearBg=180
+lineWidth=1
 invertY=false
 invertX=false
 flipXY=false

@@ -43,7 +43,7 @@ void testApp::setup(){
 	left2.loop = false;
 	right2.loop = false;
 
-
+	lx1 = lx2 = ly1 = ly2 = 0; 
 }
 
 
@@ -61,6 +61,8 @@ void testApp::startApplication(){
 	meshView->invertX->selected = settings.invertX;
 	meshView->invertY->selected = settings.invertY;
 	meshView->scaleSlider->slider->value = settings.scale;
+	meshView->lineWidth->slider->value = settings.lineWidth;
+	meshView->clearBg->slider->value = settings.clearBg;
 
 	settings.saveToFile();
 	configView->visible = false;
@@ -82,6 +84,8 @@ void testApp::stopApplication(){
 	settings.invertX = meshView->invertX->selected;
 	settings.invertY = meshView->invertY->selected;
 	settings.scale = meshView->scaleSlider->slider->value;
+	settings.lineWidth = meshView->lineWidth->slider->value;
+	settings.clearBg = meshView->clearBg->slider->value;
 	settings.saveToFile();
 	
 	if( !applicationRunning ) return;
@@ -99,19 +103,26 @@ void testApp::update(){
 	root->handleUpdate();
 	if( !applicationRunning ) return;
 	
-	update( shapeMesh1, left1, right1 );
-	update( shapeMesh2, left2, right2 );
+	update( shapeMesh1, left1, right1, lx1, ly1 );
+	update( shapeMesh2, left2, right2, lx2, ly2 );
 }
 
-void testApp::update( ofMesh &shapeMesh, MonoSample &left, MonoSample &right ){
+void testApp::update( ofMesh &shapeMesh, MonoSample &left, MonoSample &right, float &lx, float &ly ){
 	shapeMesh.clear();
 	shapeMesh.setMode(OF_PRIMITIVE_LINE_STRIP);
 	shapeMesh.enableColors();
 	
 	static float * leftBuffer = new float[512];
 	static float * rightBuffer = new float[512];
-	
+	bool didThing = false; 
+
+	float S= ofGetWidth()/2*meshView->scaleSlider->slider->value;
+	if( left.totalLength >= 512 && right.totalLength >= 512 ){
+		shapeMesh.addVertex(ofVec3f(lx*S, ly*S,0));
+	}
+
 	while( left.totalLength >= 512 && right.totalLength >= 512 ){
+		didThing = true; 
 		memset(leftBuffer,0,512*sizeof(float));
 		memset(rightBuffer,0,512*sizeof(float));
 		
@@ -120,21 +131,20 @@ void testApp::update( ofMesh &shapeMesh, MonoSample &left, MonoSample &right ){
 		left.peel(512);
 		right.peel(512);
 		
-		float S= ofGetWidth()/2*meshView->scaleSlider->slider->value;
-		float x2 = leftBuffer[1];
-		float y2 = rightBuffer[1];
+//		float x2 = lx;
+//		float y2 = ly;
 		float x1, y1;
 		if( shapeMesh.getVertices().size() < 2048*4 ){
 			for( int i = 0; i < 512; i++ ){
 				x1 = leftBuffer[i];
 				y1 = rightBuffer[i];
 				
-				float d = ofDist(x1, y1, x2, y2);
+				//float d = ofDist(x1, y1, x2, y2);
 				shapeMesh.addVertex(ofVec3f(x1*S, y1*S,0));
-				shapeMesh.addColor(ofColor(200, 255, 200, 255*(1-powf(d,0.077))));
+	//			shapeMesh.addColor(ofColor(200, 255, 200, 255*(1-powf(d,0.077))));
 	//			shapeMesh.addColor(ofColor(i/2, 255, 255, 255));
-				x2 = x1;
-				y2 = y1;
+				lx = x1;
+				ly = y1;
 			}
 		}
 	}
@@ -143,7 +153,7 @@ void testApp::update( ofMesh &shapeMesh, MonoSample &left, MonoSample &right ){
 //--------------------------------------------------------------
 void testApp::draw(){
 	ofEnableAlphaBlending();
-	ofSetColor( 0, 80 );
+	ofSetColor( 0, meshView->clearBg->slider->value );
 	ofFill();
 	ofRect( 0, 0, ofGetWidth(), ofGetHeight() );
 	
@@ -167,8 +177,8 @@ void testApp::draw(){
 	ofLine( -10, 0, 10, 0 );
 	ofLine( 0, -10, 0, 10 );
 
-	draw( shapeMesh1 );
-	draw( shapeMesh2 );
+	draw( shapeMesh1, 0 );
+	draw( shapeMesh2, 1 );
 /*	vector<ofVec3f> verts = shapeMesh.getVertices();
 	vector<ofVec3f>::iterator it = verts.begin();
 	ofSetColor(255,20);
@@ -186,25 +196,28 @@ void testApp::draw(){
 	root->handleDraw();
 }
 
-void testApp::draw( ofMesh &shapeMesh ){
-	
-	ofSetColor(50, 255, 50, 30);
+inline void setColor( int c, int alpha, int index ){
+	if( index == 0 ) ofSetColor( 255, c, c, alpha ); 
+	else ofSetColor( c, 255, c, alpha ); 
+}
+
+void testApp::draw( ofMesh &shapeMesh, int index ){
 	shapeMesh.disableColors();
-	ofSetLineWidth(20.0);
+	float s = meshView->lineWidth->slider->value; 
+	setColor( 50, 30, index ); 
+	ofSetLineWidth(20.0*s);
 	shapeMesh.draw();
 	
-	ofSetColor(50, 255, 50, 50);
-	shapeMesh.disableColors();
-	ofSetLineWidth(5.0);
+	setColor( 50, 50, index ); 
+	ofSetLineWidth(5.0*s);
 	shapeMesh.draw();
 	
-	ofSetColor(75, 255, 75, 50);
-	shapeMesh.disableColors();
-	ofSetLineWidth(2.5);
+	setColor( 75, 50, index ); 
+	ofSetLineWidth(2.5*s);
 	shapeMesh.draw();
 	
-	shapeMesh.enableColors();
-	ofSetLineWidth(1.0);
+	setColor( 0, 255, index  ); 
+	ofSetLineWidth(s);
 	shapeMesh.draw();
 }
 
@@ -219,6 +232,10 @@ void testApp::keyPressed  (int key){
 	
 	if( key == '\t' && !configView->isVisibleOnScreen()){
 		meshView->visible = !meshView->visible;
+	}
+
+	if( key == 'f' ){
+		ofToggleFullscreen(); 
 	}
 }
 

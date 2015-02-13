@@ -34,6 +34,20 @@ MeshView::MeshView( float x_, float y_, float width_, float height_)
 	
 	x = 10;
 	y += invertY->height + 10;
+
+	w = 400; 
+	pushLabel("Linewidth", x, y, w, h );
+	lineWidth = new mui::SliderWithLabel( x, y, w, h, 0.1, 10, 1, 1 );
+	lineWidth->label->fg = ofColor( 255 );
+	y += lineWidth->height + 10;
+	add( lineWidth );
+	
+	pushLabel("Clear", x, y, w, h );
+	clearBg = new mui::SliderWithLabel( x, y, w, h, 0, 255, 180, 0 );
+	clearBg->label->fg = ofColor( 255 );
+	y += clearBg->height + 10;
+	add( clearBg );
+	
 	
 }
 

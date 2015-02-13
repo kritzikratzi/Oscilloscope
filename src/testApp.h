@@ -7,6 +7,7 @@
 #include "MeshView.h"
 #include "Audio.h"
 
+
 class testApp : public ofBaseApp{
 
 	public:
@@ -15,9 +16,9 @@ class testApp : public ofBaseApp{
 		void startApplication();
 		void stopApplication();
 		void update();
-		void update( ofMesh &shapeMesh, MonoSample &left, MonoSample &right );
+		void update( ofMesh &shapeMesh, MonoSample &left, MonoSample &right, float &lx, float &ly );
 		void draw();
-		void draw( ofMesh &shapeMesh );
+		void draw( ofMesh &shapeMesh, int index );
 		void exit();
 
 		void keyPressed  (int key);
@@ -41,6 +42,8 @@ class testApp : public ofBaseApp{
 		ofMesh shapeMesh2;
 		Settings settings;
 		ofImage dotImage; 
+
+		float lx1, ly1, lx2, ly2; 
 	
 		MonoSample left1;
 		MonoSample right1;
