@@ -42,8 +42,11 @@ void testApp::setup(){
 	right1.loop = false;
 	left2.loop = false;
 	right2.loop = false;
-
-
+	
+	TCP = NULL;
+	
+	fetcher = new Fetcher( this );
+	fetcher->startThread();
 }
 
 
@@ -72,7 +75,10 @@ void testApp::startApplication(){
 	cout << "    Buffer size: " << settings.bufferSize << endl;
 	cout << "    Num Buffers: " << settings.numBuffers << endl;
 	soundStream.setDeviceID( settings.deviceId );
-	soundStream.setup(this, 0, 4, settings.sampleRate, settings.bufferSize, settings.numBuffers);
+	soundStream.setup(this, 0, 2, settings.sampleRate, settings.bufferSize, settings.numBuffers);
+	
+	TCP = new ofxTCPServer();
+	TCP->setup(settings.port,true);
 }
 
 
@@ -90,6 +96,9 @@ void testApp::stopApplication(){
 	soundStream = ofSoundStream();
 	configView->visible = true;
 	meshView->visible = false;
+	
+	TCP->close();
+	delete TCP;
 }
 
 
@@ -257,8 +266,6 @@ void testApp::windowResized(int w, int h){
 void testApp::audioIn(float * input, int bufferSize, int nChannels){
 	left1.append(input+0, bufferSize,nChannels);
 	right1.append(input+1,bufferSize,nChannels);
-	left2.append(input+2, bufferSize,nChannels);
-	right2.append(input+3,bufferSize,nChannels);
 }
 
 //--------------------------------------------------------------
@@ -274,4 +281,35 @@ void testApp::gotMessage(ofMessage msg){
 //--------------------------------------------------------------
 void testApp::dragEvent(ofDragInfo dragInfo){ 
 
+}
+
+
+Fetcher::Fetcher( testApp * app ){
+	this->app = app;
+}
+
+void Fetcher::threadedFunction(){
+	while( isThreadRunning() ){
+		ofxTCPServer * TCP = app->TCP;
+		if( TCP != NULL && TCP->isConnected() ){
+			for( int x = 0; x < 50; x ++ ){
+				for(int i = 0; i < TCP->getLastID(); i++){
+					if( !TCP->isClientConnected(i) ) continue;
+					//string port = ofToString( TCP.getClientPort(i) );
+					string ip   = TCP->getClientIP(i);
+					static float * result = NULL;
+					int len = app->settings.bufferSize*2*sizeof(float);
+					if( result == NULL ){
+						result = new float[192000*2];
+					}
+					int received = TCP->receiveRawBytes(i, (char*)result, app->settings.bufferSize*2*sizeof(float) );
+					cout << received << "  ";
+					cout << (result[512*2-1]==0?"empty":"not empty") << endl;
+					app->left2.append(result+0, app->settings.bufferSize,2);
+					app->right2.append(result+1,app->settings.bufferSize,2);
+				}
+			}
+		}
+		ofSleepMillis(1);
+	}
 }

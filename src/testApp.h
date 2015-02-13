@@ -6,6 +6,17 @@
 #include "ConfigView.h"
 #include "MeshView.h"
 #include "Audio.h"
+#include "ofxTCPServer.h"
+#include "ofThread.h"
+
+class testApp;
+class Fetcher : public ofThread{
+public:
+	Fetcher( testApp * app );
+	void threadedFunction();
+	
+	testApp * app;
+};
 
 class testApp : public ofBaseApp{
 
@@ -46,4 +57,7 @@ class testApp : public ofBaseApp{
 		MonoSample right1;
 		MonoSample left2;
 		MonoSample right2;
+	
+		ofxTCPServer * TCP;
+		Fetcher * fetcher;
 };

@@ -22,8 +22,9 @@ public:
 	bool flipXY;
 	bool invertX;
 	bool invertY;
+	int port;
 	
-	Settings() :  sampleRate(44100), bufferSize(512), numBuffers(4), deviceId(0),scale(1.0),flipXY(false),invertX(false),invertY(false){
+	Settings() :  sampleRate(44100), bufferSize(512), numBuffers(4), deviceId(0),scale(1.0),flipXY(false),invertX(false),invertY(false), port(1234){
 	}
 	
 	void loadFromFile( string settingsFile = ofToDataPath("settings.txt") ){
@@ -36,6 +37,7 @@ public:
 		flipXY = settings.get( "flipXY", flipXY );
 		invertX = settings.get( "invertX", invertX );
 		invertY = settings.get( "invertY", invertY );
+		port = settings.get( "port", port );
 	}
 	
 	
@@ -50,5 +52,6 @@ public:
 		settings.set( "flipXY", flipXY );
 		settings.set( "invertX", invertX );
 		settings.set( "invertY", invertY );
+		settings.set( "port", port );
 	}
 };

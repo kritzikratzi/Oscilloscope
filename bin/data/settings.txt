@@ -2,10 +2,9 @@ invertY=false
 invertX=false
 flipXY=false
 channelMapping=
-scale=1
-deviceId=0
-port=11995
-sampleRate=44100
-bufferSize=1024
+scale=0.480769
+deviceId=2
+sampleRate=96000
+bufferSize=512
 numBuffers=4
-
+port=1234
