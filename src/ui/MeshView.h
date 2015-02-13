@@ -23,7 +23,10 @@ public:
 	mui::ToggleButton * flipXY;
 	mui::ToggleButton * invertX;
 	mui::ToggleButton * invertY;
-	
+
+	mui::SliderWithLabel * lineWidth;
+	mui::SliderWithLabel * clearBg;
+
 	void buttonPressed( const void * sender, ofTouchEventArgs & args );
 	
 private:

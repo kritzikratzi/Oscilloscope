@@ -22,8 +22,10 @@ public:
 	bool flipXY;
 	bool invertX;
 	bool invertY;
+	float lineWidth; 
+	int clearBg; 
 	
-	Settings() :  sampleRate(44100), bufferSize(512), numBuffers(4), deviceId(0),scale(1.0),flipXY(false),invertX(false),invertY(false){
+	Settings() :  sampleRate(44100), bufferSize(512), numBuffers(4), deviceId(0),scale(1.0),flipXY(false),invertX(false),invertY(false),lineWidth(1.0),clearBg(180){
 	}
 	
 	void loadFromFile( string settingsFile = ofToDataPath("settings.txt") ){
@@ -36,6 +38,8 @@ public:
 		flipXY = settings.get( "flipXY", flipXY );
 		invertX = settings.get( "invertX", invertX );
 		invertY = settings.get( "invertY", invertY );
+		lineWidth = settings.get( "lineWidth", lineWidth );
+		clearBg = settings.get( "clearBg", clearBg );
 	}
 	
 	
@@ -50,5 +54,7 @@ public:
 		settings.set( "flipXY", flipXY );
 		settings.set( "invertX", invertX );
 		settings.set( "invertY", invertY );
+		settings.set( "lineWidth", lineWidth ); 
+		settings.set( "clearBg", clearBg ); 
 	}
 };
