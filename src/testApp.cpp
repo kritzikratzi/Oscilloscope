@@ -16,7 +16,7 @@ void testApp::setup(){
 	ofSetBackgroundAuto(false);
 	dotImage.allocate(64, 64, OF_IMAGE_COLOR_ALPHA);
 	dotImage.loadImage( "dot.png" );
-	
+	ofEnableSmoothing(); 
 	
 	cout << "Available Sound Devices: " << endl;
 	soundStream.listDevices();
@@ -47,6 +47,13 @@ void testApp::setup(){
 	
 	fetcher = new Fetcher( this );
 	fetcher->startThread();
+
+	lx1 = lx2 = ly1 = ly2 = 0;
+	c1 = ofColor( 0 );
+	c2 = ofColor( 0 );
+	
+	s1 = 0;
+	s2 = 0;
 }
 
 
@@ -64,6 +71,11 @@ void testApp::startApplication(){
 	meshView->invertX->selected = settings.invertX;
 	meshView->invertY->selected = settings.invertY;
 	meshView->scaleSlider->slider->value = settings.scale;
+	meshView->lineWidth->slider->value = settings.lineWidth;
+	meshView->clearBg->slider->value = settings.clearBg;
+	meshView->interpolationSteps->slider->value = settings.interpolationSteps;
+	meshView->alpha->slider->value = settings.alpha;
+	meshView->beta->slider->value = settings.beta;
 
 	settings.saveToFile();
 	configView->visible = false;
@@ -88,6 +100,11 @@ void testApp::stopApplication(){
 	settings.invertX = meshView->invertX->selected;
 	settings.invertY = meshView->invertY->selected;
 	settings.scale = meshView->scaleSlider->slider->value;
+	settings.lineWidth = meshView->lineWidth->slider->value;
+	settings.clearBg = meshView->clearBg->slider->value;
+	settings.interpolationSteps = meshView->interpolationSteps->slider->value;
+	settings.alpha = meshView->alpha->slider->value;
+	settings.beta = meshView->beta->slider->value;
 	settings.saveToFile();
 	
 	if( !applicationRunning ) return;
@@ -108,42 +125,68 @@ void testApp::update(){
 	root->handleUpdate();
 	if( !applicationRunning ) return;
 	
-	update( shapeMesh1, left1, right1 );
-	update( shapeMesh2, left2, right2 );
+	update( shapeMesh1, left1, right1, a1, b1, p1, c1, s1, 0 );
+	update( shapeMesh2, left2, right2, a2, b2, p2, c2, s2, 1 );
 }
 
-void testApp::update( ofMesh &shapeMesh, MonoSample &left, MonoSample &right ){
+void testApp::update( ofMesh &shapeMesh, MonoSample &left, MonoSample &right, ofPoint &a, ofPoint &b, ofPoint &p, ofColor &lastColor, float &s, int index ){
 	shapeMesh.clear();
-	shapeMesh.setMode(OF_PRIMITIVE_LINE_STRIP);
+	shapeMesh.setMode(OF_PRIMITIVE_LINES);
 	shapeMesh.enableColors();
 	
 	static float * leftBuffer = new float[512];
 	static float * rightBuffer = new float[512];
-	
-	while( left.totalLength >= 512 && right.totalLength >= 512 ){
-		memset(leftBuffer,0,512*sizeof(float));
-		memset(rightBuffer,0,512*sizeof(float));
-		
-		left.addTo(leftBuffer, 1, 512);
-		right.addTo(rightBuffer, 1, 512);
-		left.peel(512);
-		right.peel(512);
-		
-		float S= ofGetWidth()/2*meshView->scaleSlider->slider->value;
-		float x2 = leftBuffer[1];
-		float y2 = rightBuffer[1];
-		float x1, y1;
-		if( shapeMesh.getVertices().size() < 2048*4 ){
-			for( int i = 0; i < 512; i++ ){
-				x1 = leftBuffer[i];
-				y1 = rightBuffer[i];
-				
-				float d = ofDist(x1, y1, x2, y2);
-				shapeMesh.addVertex(ofVec3f(x1*S, y1*S,0));
-				shapeMesh.addColor(ofColor(200, 255, 200, 255*(1-powf(d,0.077))));
-	//			shapeMesh.addColor(ofColor(i/2, 255, 255, 255));
-				x2 = x1;
-				y2 = y1;
+	bool didThing = false; 
+
+	float S= ofGetWidth()/2*meshView->scaleSlider->slider->value;
+	if( left.totalLength >= 512 && right.totalLength >= 512 ){
+
+		while( left.totalLength >= 512 && right.totalLength >= 512 ){
+			didThing = true; 
+			memset(leftBuffer,0,512*sizeof(float));
+			memset(rightBuffer,0,512*sizeof(float));
+			
+			left.addTo(leftBuffer, 1, 512);
+			right.addTo(rightBuffer, 1, 512);
+			left.peel(512);
+			right.peel(512);
+			
+	//		float x2 = lx;
+	//		float y2 = ly;
+			float dMax = 0;
+			if( shapeMesh.getVertices().size() < 1024*8 ){
+				for( int i = 0; i < 512-1; i++ ){
+					ofPoint c = ofPoint( leftBuffer[i], rightBuffer[i] );
+					ofPoint d = ofPoint( leftBuffer[i+1], rightBuffer[i+1] );
+					float dist = (b-c).length();
+					s = dist;
+					float alph = powf(ofClamp( 1-meshView->alpha->slider->value*s, 0, 1),meshView->beta->slider->value);
+					float E = powf(ofClamp( 1-40*s, 0, 1),40);
+					float alpha = 255*MAX(E,alph);
+					float erosion = 150*E;
+					lastColor = ofColor(index==0?255:erosion, index==1?255:erosion, erosion, alpha);
+					
+//					float ab = 255*powf(ofClamp( 1-alpha*s, 0, 1),meshView->beta->slider->value);
+					
+					dMax = MAX(dist, dMax);
+					//shapeMesh.addVertex(b*S);
+					float N = ofClamp((int)meshView->interpolationSteps->slider->value,1,100);
+					CMRPoly poly = catmullRomPoly( a, b, c, d );
+					for( int j = 0; j <= N; j++ ){
+						ofPoint pTilde = poly.eval(j/N );
+						//float d = ofDist(x1, y1, lx, ly);
+						//lastColor = ofColor(0, 255, 0, 255*powf(ofClamp(1-powf(dist,ofGetMouseY()*0.0001),0,1),ofGetMouseX()*0.001));
+
+						shapeMesh.addVertex(p*S);
+						shapeMesh.addColor(lastColor);
+						p = pTilde;
+						shapeMesh.addVertex(p*S);
+						shapeMesh.addColor(lastColor);
+					}
+					//shapeMesh.addVertex(c);
+					a = b;
+					b = c;
+				}
 			}
 		}
 	}
@@ -151,8 +194,10 @@ void testApp::update( ofMesh &shapeMesh, MonoSample &left, MonoSample &right ){
 
 //--------------------------------------------------------------
 void testApp::draw(){
+	testMesh.draw();
+
 	ofEnableAlphaBlending();
-	ofSetColor( 0, 80 );
+	ofSetColor( 0, meshView->clearBg->slider->value );
 	ofFill();
 	ofRect( 0, 0, ofGetWidth(), ofGetHeight() );
 	
@@ -176,8 +221,8 @@ void testApp::draw(){
 	ofLine( -10, 0, 10, 0 );
 	ofLine( 0, -10, 0, 10 );
 
-	draw( shapeMesh1 );
-	draw( shapeMesh2 );
+	draw( shapeMesh1, 0 );
+	draw( shapeMesh2, 1 );
 /*	vector<ofVec3f> verts = shapeMesh.getVertices();
 	vector<ofVec3f>::iterator it = verts.begin();
 	ofSetColor(255,20);
@@ -193,27 +238,52 @@ void testApp::draw(){
 	ofPopMatrix();
 	
 	root->handleDraw();
+	if( meshView->visible ){
+		ofSetColor(255);
+		ofDrawBitmapString("+C=" + ofToString(left1.totalLength) + "samples", 500,10);
+		ofDrawBitmapString("+R=" + ofToString(left2.totalLength) + "samples", 500,30);
+	}
+
 }
 
-void testApp::draw( ofMesh &shapeMesh ){
+inline void setColor( int c, int alpha, int index ){
+	if( index == 0 ) ofSetColor( 255, c, c, alpha ); 
+	else ofSetColor( c, 255, c, alpha ); 
+}
+
+inline void setColors( vector<ofFloatColor> &colors, int igrey, int ialpha, int index ){
+	float grey = igrey/255.0;
+	float alpha = ialpha/255.0;
 	
-	ofSetColor(50, 255, 50, 30);
-	shapeMesh.disableColors();
-	ofSetLineWidth(20.0);
+	vector<ofFloatColor>::iterator it = colors.begin();
+	while( it != colors.end() ){
+		(*it).a = alpha;
+		(*it).b = grey;
+		if( index == 0 ) (*it).g = grey;
+		else (*it).b = grey;
+		
+		++it;
+	}
+}
+
+void testApp::draw( ofMesh &shapeMesh, int index ){
+/*	ofEnableBlendMode(OF_BLENDMODE_ALPHA);
+	float s = meshView->lineWidth->slider->value;
+//	setColors( shapeMesh.getColors(), 50, 30, index );
+	ofSetLineWidth(20.0*s);
 	shapeMesh.draw();
 	
-	ofSetColor(50, 255, 50, 50);
-	shapeMesh.disableColors();
-	ofSetLineWidth(5.0);
+//	setColors( shapeMesh.getColors(), 50, 50, index );
+	ofSetLineWidth(5.0*s);
 	shapeMesh.draw();
 	
-	ofSetColor(75, 255, 75, 50);
-	shapeMesh.disableColors();
-	ofSetLineWidth(2.5);
+//	setColors( shapeMesh.getColors(), 75, 50, index );
+	ofSetLineWidth(2.5*s);
 	shapeMesh.draw();
 	
-	shapeMesh.enableColors();
-	ofSetLineWidth(1.0);
+/	setColors( shapeMesh.getColors(), 0, 255, index  );*/
+	float s = meshView->lineWidth->slider->value;
+	ofSetLineWidth(s);
 	shapeMesh.draw();
 }
 
@@ -228,6 +298,10 @@ void testApp::keyPressed  (int key){
 	
 	if( key == '\t' && !configView->isVisibleOnScreen()){
 		meshView->visible = !meshView->visible;
+	}
+
+	if( key == 'f' ){
+		ofToggleFullscreen(); 
 	}
 }
 
@@ -264,8 +338,10 @@ void testApp::windowResized(int w, int h){
 
 //--------------------------------------------------------------
 void testApp::audioIn(float * input, int bufferSize, int nChannels){
-	left1.append(input+0, bufferSize,nChannels);
-	right1.append(input+1,bufferSize,nChannels);
+	if( left1.totalLength < 1024*8 ){
+		left1.append(input+0, bufferSize,nChannels);
+		right1.append(input+1,bufferSize,nChannels);
+	}
 }
 
 //--------------------------------------------------------------
@@ -303,10 +379,10 @@ void Fetcher::threadedFunction(){
 						result = new float[192000*2];
 					}
 					int received = TCP->receiveRawBytes(i, (char*)result, app->settings.bufferSize*2*sizeof(float) );
-					cout << received << "  ";
-					cout << (result[512*2-1]==0?"empty":"not empty") << endl;
-					app->left2.append(result+0, app->settings.bufferSize,2);
-					app->right2.append(result+1,app->settings.bufferSize,2);
+					if( app->left2.totalLength < 1024*8 ){
+						app->left2.append(result+0, app->settings.bufferSize,2);
+						app->right2.append(result+1,app->settings.bufferSize,2);
+					}
 				}
 			}
 		}

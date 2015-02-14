@@ -89,13 +89,14 @@ void MonoSample::peel(int N){
 			// delete another
 		}
 		else{
+			// todo: this has some problems it seems. 
 			int remaining = bufferSizes[0]-N;
 			float * buffer = new float[remaining];
 			memcpy(buffer, bufferData[0], N*sizeof(float));
 			float * old = bufferData[0];
 			bufferData[0] = buffer;
 			bufferSizes[0] = N;
-			delete old;
+			delete[] old;
 			N = remaining;
 		}
 	}

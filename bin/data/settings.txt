@@ -1,9 +1,13 @@
+beta=12.3932
+alpha=0.683761
+interpolationSteps=5
+clearBg=180
+lineWidth=1
 invertY=false
 invertX=false
 flipXY=false
-channelMapping=
-scale=0.480769
-deviceId=2
+scale=1.25641
+deviceId=3
 sampleRate=96000
 bufferSize=512
 numBuffers=4

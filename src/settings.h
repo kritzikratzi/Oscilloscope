@@ -23,8 +23,13 @@ public:
 	bool invertX;
 	bool invertY;
 	int port;
+	float lineWidth; 
+	int clearBg;
+	int interpolationSteps;
+	float alpha;
+	float beta;
 	
-	Settings() :  sampleRate(44100), bufferSize(512), numBuffers(4), deviceId(0),scale(1.0),flipXY(false),invertX(false),invertY(false), port(1234){
+	Settings() :  sampleRate(44100), bufferSize(512), numBuffers(4), deviceId(0),scale(1.0),flipXY(false),invertX(false),invertY(false),lineWidth(1.0),clearBg(180),port(1234), interpolationSteps(5){
 	}
 	
 	void loadFromFile( string settingsFile = ofToDataPath("settings.txt") ){
@@ -38,6 +43,11 @@ public:
 		invertX = settings.get( "invertX", invertX );
 		invertY = settings.get( "invertY", invertY );
 		port = settings.get( "port", port );
+		lineWidth = settings.get( "lineWidth", lineWidth );
+		clearBg = settings.get( "clearBg", clearBg );
+		interpolationSteps = settings.get( "interpolationSteps", interpolationSteps );
+		alpha = settings.get( "alpha", alpha );
+		beta = settings.get( "beta", beta );
 	}
 	
 	
@@ -53,5 +63,10 @@ public:
 		settings.set( "invertX", invertX );
 		settings.set( "invertY", invertY );
 		settings.set( "port", port );
+		settings.set( "lineWidth", lineWidth ); 
+		settings.set( "clearBg", clearBg );
+		settings.set( "interpolationSteps", interpolationSteps );
+		settings.set( "alpha", alpha );
+		settings.set( "beta", beta );
 	}
 };

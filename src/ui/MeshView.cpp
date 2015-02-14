@@ -34,6 +34,38 @@ MeshView::MeshView( float x_, float y_, float width_, float height_)
 	
 	x = 10;
 	y += invertY->height + 10;
+
+	w = 400; 
+	pushLabel("Linewidth", x, y, w, h );
+	lineWidth = new mui::SliderWithLabel( x, y, w, h, 0.1, 10, 1, 1 );
+	lineWidth->label->fg = ofColor( 255 );
+	y += lineWidth->height + 10;
+	add( lineWidth );
+	
+	pushLabel("Clear", x, y, w, h );
+	clearBg = new mui::SliderWithLabel( x, y, w, h, 0, 255, 180, 0 );
+	clearBg->label->fg = ofColor( 255 );
+	y += clearBg->height + 10;
+	add( clearBg );
+	
+	pushLabel("Interpolation Steps", x, y, w, h );
+	interpolationSteps = new mui::SliderWithLabel( x, y, w, h, 1, 15, 5, 0 );
+	interpolationSteps->label->fg = ofColor( 255 );
+	y += interpolationSteps->height + 10;
+	add( interpolationSteps );
+	
+	pushLabel("Alpha", x, y, w, h );
+	alpha = new mui::SliderWithLabel( x, y, w, h, 0, 20, 1, 2 );
+	alpha->label->fg = ofColor( 255 );
+	y += alpha->height + 10;
+	add( alpha );
+	
+	pushLabel("Beta", x, y, w, h );
+	beta = new mui::SliderWithLabel( x, y, w, h, 0, 50, 1, 2 );
+	beta->label->fg = ofColor( 255 );
+	y += beta->height + 10;
+	add( beta );
+	
 	
 }
 

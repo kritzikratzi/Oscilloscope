@@ -18,6 +18,7 @@ public:
 	testApp * app;
 };
 
+
 class testApp : public ofBaseApp{
 
 	public:
@@ -26,9 +27,9 @@ class testApp : public ofBaseApp{
 		void startApplication();
 		void stopApplication();
 		void update();
-		void update( ofMesh &shapeMesh, MonoSample &left, MonoSample &right );
+		void update( ofMesh &shapeMesh, MonoSample &left, MonoSample &right, ofPoint &a, ofPoint &d, ofPoint &p, ofColor &lastColor, float &s, int index );
 		void draw();
-		void draw( ofMesh &shapeMesh );
+		void draw( ofMesh &shapeMesh, int index );
 		void exit();
 
 		void keyPressed  (int key);
@@ -50,8 +51,16 @@ class testApp : public ofBaseApp{
 		MeshView * meshView;
 		ofMesh shapeMesh1;
 		ofMesh shapeMesh2;
+	
+	ofMesh testMesh; 
 		Settings settings;
 		ofImage dotImage; 
+
+		ofPoint a1, b1, p1;
+		ofPoint a2, b2, p2;
+		float lx1, ly1, lx2, ly2;
+		ofColor c1, c2;
+		float s1, s2; 
 	
 		MonoSample left1;
 		MonoSample right1;
