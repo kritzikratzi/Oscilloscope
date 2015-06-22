@@ -1,13 +1,13 @@
-#include "MeshView.h"
+#include "OsciView.h"
 #include <Poco/Delegate.h>
 #include "sounddevices.h"
 
-MeshView::MeshView( float x_, float y_, float width_, float height_)
+OsciView::OsciView( float x_, float y_, float width_, float height_)
 : mui::Container( x_, y_, width_, height_ ){
 	float x = 10, y = 10, w = 400, h = 30;
 	
 	stopButton = new mui::Button( "Stop!", x, y, w, h );
-	stopButton->onPress += Poco::Delegate<MeshView,ofTouchEventArgs>( this, &MeshView::buttonPressed );
+	ofAddListener( stopButton->onPress, this, &OsciView::buttonPressed );
 	y += stopButton->height + 10;
 	add( stopButton );
 	
@@ -39,41 +39,41 @@ MeshView::MeshView( float x_, float y_, float width_, float height_)
 
 
 //--------------------------------------------------------------
-void MeshView::update(){
+void OsciView::update(){
 }
 
 
 //--------------------------------------------------------------
-void MeshView::draw(){
+void OsciView::draw(){
 }
 
 
 //--------------------------------------------------------------
-void MeshView::drawBackground(){
+void OsciView::drawBackground(){
 }
 
 
 //--------------------------------------------------------------
-void MeshView::touchDown( ofTouchEventArgs &touch ){
+void OsciView::touchDown( ofTouchEventArgs &touch ){
 }
 
 
 //--------------------------------------------------------------
-void MeshView::touchMoved( ofTouchEventArgs &touch ){
+void OsciView::touchMoved( ofTouchEventArgs &touch ){
 }
 
 
 //--------------------------------------------------------------
-void MeshView::touchUp( ofTouchEventArgs &touch ){
+void OsciView::touchUp( ofTouchEventArgs &touch ){
 }
 
 
 //--------------------------------------------------------------
-void MeshView::touchDoubleTap( ofTouchEventArgs &touch ){
+void OsciView::touchDoubleTap( ofTouchEventArgs &touch ){
 }
 
 //--------------------------------------------------------------
-void MeshView::pushLabel( string text, float &x, float &y, float &w, float &h ){
+void OsciView::pushLabel( string text, float &x, float &y, float &w, float &h ){
 	mui::Label * label = new mui::Label( text, x, y, w, h );
 	add( label );
 	y += label->height;
@@ -81,7 +81,7 @@ void MeshView::pushLabel( string text, float &x, float &y, float &w, float &h ){
 
 
 //--------------------------------------------------------------
-void MeshView::buttonPressed( const void * sender, ofTouchEventArgs & args ){
+void OsciView::buttonPressed( const void * sender, ofTouchEventArgs & args ){
 	if( sender == stopButton ){
 		ofBaseApp * app = ofGetAppPtr();
 		app->gotMessage( ofMessage( "stop-pressed" ) );

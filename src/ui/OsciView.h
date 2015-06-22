@@ -4,9 +4,9 @@
 #include "settings.h"
 
 
-class MeshView : public mui::Container{
+class OsciView : public mui::Container{
 public:
-	MeshView( float x_ = 0, float y_ = 0, float width_ = ofGetWidth(), float height_ = ofGetHeight() );
+	OsciView( float x_ = 0, float y_ = 0, float width_ = ofGetWidth(), float height_ = ofGetHeight() );
 	
 	virtual void update();
 	virtual void draw();

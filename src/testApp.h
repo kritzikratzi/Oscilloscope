@@ -4,7 +4,7 @@
 #include "sounddevices.h"
 #include "MUI.h" 
 #include "ConfigView.h"
-#include "MeshView.h"
+#include "OsciView.h"
 #include "Audio.h"
 
 class testApp : public ofBaseApp{
@@ -34,7 +34,7 @@ class testApp : public ofBaseApp{
 
 		mui::Root * root;
 		ConfigView * configView;
-		MeshView * meshView;
+		OsciView * osciView;
 		ofPath path;
 		ofMesh shapeMesh;
 		Settings settings;

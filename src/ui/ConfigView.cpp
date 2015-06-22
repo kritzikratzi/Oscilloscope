@@ -48,7 +48,7 @@ ConfigView::ConfigView( float x_, float y_, float width_, float height_)
 		RtAudio::DeviceInfo info = *it;
 		string name = string(info.name) + ": out=" + ofToString(info.outputChannels) + ",in=" + ofToString(info.inputChannels); 
 		mui::ToggleButton * button = new mui::ToggleButton( name, x, y, w, h );
-		button->onPress += Poco::Delegate<ConfigView,ofTouchEventArgs>( this, &ConfigView::buttonPressed );
+		ofAddListener( button->onPress, this, &ConfigView::buttonPressed );
 		button->fg = ofColor( 255 );
 		button->label->horizontalAlign = mui::Left;
 		soundcardButtons.push_back(button);
@@ -62,7 +62,7 @@ ConfigView::ConfigView( float x_, float y_, float width_, float height_)
 
 	
 	startButton = new mui::Button( "Start!", x, y, w, h );
-	startButton->onPress += Poco::Delegate<ConfigView,ofTouchEventArgs>( this, &ConfigView::buttonPressed );
+	ofAddListener( startButton->onPress, this, &ConfigView::buttonPressed );
 	y += startButton->height; 
 	add( startButton );
 }

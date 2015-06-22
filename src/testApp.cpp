@@ -34,9 +34,9 @@ void testApp::setup(){
 	configView->fromSettings( settings );
 	root->add( configView );
 	
-	meshView = new MeshView();
-	meshView->visible = false;
-	root->add( meshView );
+	osciView = new OsciView();
+	osciView->visible = false;
+	root->add( osciView );
 	
 	left.loop = false;
 	right.loop = false;
@@ -53,14 +53,14 @@ void testApp::startApplication(){
 	right.play();
 
 	configView->toSettings( settings );
-	meshView->flipXY->selected = settings.flipXY;
-	meshView->invertX->selected = settings.invertX;
-	meshView->invertY->selected = settings.invertY;
-	meshView->scaleSlider->slider->value = settings.scale;
+	osciView->flipXY->selected = settings.flipXY;
+	osciView->invertX->selected = settings.invertX;
+	osciView->invertY->selected = settings.invertY;
+	osciView->scaleSlider->slider->value = settings.scale;
 
 	settings.saveToFile();
 	configView->visible = false;
-	meshView->visible = true;
+	osciView->visible = true;
 	
 	//if you want to set the device id to be different than the default
 	cout << "Opening Sound Card: " << endl;
@@ -74,10 +74,10 @@ void testApp::startApplication(){
 
 void testApp::stopApplication(){
 	configView->fromSettings(settings);
-	settings.flipXY = meshView->flipXY->selected;
-	settings.invertX = meshView->invertX->selected;
-	settings.invertY = meshView->invertY->selected;
-	settings.scale = meshView->scaleSlider->slider->value;
+	settings.flipXY = osciView->flipXY->selected;
+	settings.invertX = osciView->invertX->selected;
+	settings.invertY = osciView->invertY->selected;
+	settings.scale = osciView->scaleSlider->slider->value;
 	settings.saveToFile();
 	
 	if( !applicationRunning ) return;
@@ -85,7 +85,7 @@ void testApp::stopApplication(){
 	soundStream.stop();
 	soundStream = ofSoundStream();
 	configView->visible = true;
-	meshView->visible = false;
+	osciView->visible = false;
 }
 
 
@@ -111,7 +111,7 @@ void testApp::update(){
 		left.peel(512);
 		right.peel(512);
 		
-		float S= ofGetWidth()/2*meshView->scaleSlider->slider->value;
+		float S= ofGetWidth()/2*osciView->scaleSlider->slider->value;
 		float x2 = leftBuffer[1];
 		float y2 = rightBuffer[1];
 		float x1, y1;
@@ -144,12 +144,12 @@ void testApp::draw(){
 	
 	int scaleX = 1;
 	int scaleY = -1;
-	if( meshView->invertX->selected ) scaleX *= -1;
-	if( meshView->invertY->selected ) scaleY *= -1;
+	if( osciView->invertX->selected ) scaleX *= -1;
+	if( osciView->invertY->selected ) scaleY *= -1;
 	
 	
 	ofScale( scaleX, scaleY );
-	if( meshView->flipXY->selected ){
+	if( osciView->flipXY->selected ){
 		ofRotate(-90);
 		ofScale( -1, 1 );
 	}
@@ -204,7 +204,7 @@ void testApp::keyPressed  (int key){
 	if( root->handleKeyPressed( key ) ) return;
 	
 	if( key == '\t' && !configView->isVisibleOnScreen()){
-		meshView->visible = !meshView->visible;
+		osciView->visible = !osciView->visible;
 	}
 }
 

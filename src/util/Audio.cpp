@@ -15,7 +15,7 @@ using namespace std;
 #endif
 
 MonoSample::MonoSample(){
-	playbackIndex = -1; 
+	playbackIndex = 0; 
 	totalLength = 0; 
 	velocity = 1;
 	loop = false;
@@ -23,10 +23,6 @@ MonoSample::MonoSample(){
 
 
 MonoSample::~MonoSample(){
-	//for( int i = 0; i < bufferData.size(); i++ ){
-	//	delete[] bufferData[i];
-	//}
-	//bufferData.clear();
 	while(!bufferData.empty()) {
         delete[] bufferData.back();
         bufferData.pop_back();
@@ -36,8 +32,24 @@ MonoSample::~MonoSample(){
 
 void MonoSample::play(){
 	lock.lock();
-	playbackIndex = 0;
+	playing = true; 
 	lock.unlock();
+}
+
+void MonoSample::skip( int numSamples ){
+	lock.lock(); 
+	_skip(numSamples);
+	lock.unlock(); 
+}
+
+void MonoSample::_skip( int numSamples ){
+	if( totalLength == 0 ){
+		playbackIndex = 0;
+	}
+	else{
+		playbackIndex = (playbackIndex+numSamples)%totalLength;
+		if( playbackIndex < 0 ) playbackIndex += totalLength; 
+	}
 }
 
 void MonoSample::append(float * buffer, int N){
@@ -52,7 +64,7 @@ void MonoSample::append(float * buffer, int N){
 
 void MonoSample::append(float * buffer, int N, int srcStride){
 	float * data = new float[N];
-	Audio::copy(data, 1, buffer, srcStride, N);
+	AudioAlgo::copy(data, 1, buffer, srcStride, N);
 	lock.lock();
 	bufferData.push_back( data );
 	bufferSizes.push_back( N );
@@ -65,7 +77,7 @@ void MonoSample::removeHead(){
 	if( bufferData.size() > 0 ){
 		float * first = bufferData[0];
 		totalLength -= bufferSizes[0];
-		playbackIndex -= bufferSizes[0];
+		_skip(-bufferSizes[0]);
 		bufferData.erase(bufferData.begin());
 		bufferSizes.erase(bufferSizes.begin());
 		
@@ -74,38 +86,83 @@ void MonoSample::removeHead(){
 	lock.unlock();
 }
 
-void MonoSample::peel(int N){
-	int NN = N;
+void MonoSample::clear(){
 	lock.lock();
-	N = MIN(N,totalLength); 
-	while( N > 0 && totalLength > 0 ){
-		if( bufferSizes[0] == N ){
-			removeHead();
-			lock.unlock();
-			return;
-		}
-		else if( bufferSizes[0] < N ){
-			removeHead();
-			// delete another
-		}
-		else{
-			int remaining = bufferSizes[0]-N;
-			float * buffer = new float[remaining];
-			memcpy(buffer, bufferData[0], N*sizeof(float));
-			float * old = bufferData[0];
-			bufferData[0] = buffer;
-			bufferSizes[0] = N;
-			delete old;
-			N = remaining;
-		}
+	while( bufferData.size() > 0 ){
+		removeHead();
 	}
-	playbackIndex = MAX(0,playbackIndex-N);
-	totalLength -= N;
+	playbackIndex = 0;
+	playing = false; 
 	lock.unlock();
 }
 
+void MonoSample::peel(int N){
+	lock.lock();
+	N = MIN(N,totalLength); 
+	int NN = N;
+	while( N > 0 && totalLength > 0 ){
+		if( bufferSizes[0] <= N ){
+			N -= bufferSizes[0]; 
+			removeHead();
+		}
+		else{
+			// todo: this has some problems it seems. 
+			int remaining = bufferSizes[0]-N;
+			float * buffer = new float[remaining];
+			memcpy(buffer, &bufferData[0][N], remaining*sizeof(float));
+			float * old = bufferData[0];
+			bufferData[0] = buffer;
+			bufferSizes[0] = remaining;
+			delete[] old;
+			
+			_skip(-N);
+			totalLength -= N;
+			break; 
+		}
+	}
+
+	lock.unlock();
+}
+
+float * MonoSample::peelHead( int &numSamples ){
+	lock.lock();
+	float * result = NULL;
+	
+	if( bufferSizes.size() > 0 ){
+		numSamples = bufferSizes[0];
+		result = bufferData[0];
+		bufferData.erase(bufferData.begin());
+		bufferSizes.erase(bufferSizes.begin());
+		_skip(-numSamples);
+	}
+	else{
+		numSamples = 0;
+	}
+	
+	lock.unlock();
+	return result;
+}
+
+float * MonoSample::peekHead( int &numSamples, int bufferNum ){
+	lock.lock();
+	float * result = NULL;
+	if( bufferSizes.size() > bufferNum ){
+		numSamples = bufferSizes[bufferNum];
+		result = bufferData[bufferNum];
+	}
+	else{
+		numSamples = 0;
+	}
+	
+	lock.unlock();
+	
+	return result;
+}
+
+
+
 void MonoSample::addTo(float *output, int outStride, int N ){
-	if( playbackIndex == -1 ){
+	if( !playing ){
 		return;
 	}
 	
@@ -146,7 +203,8 @@ void MonoSample::addTo(float *output, int outStride, int N ){
 				playbackIndex = 0;
 			}
 			else{
-				playbackIndex = -1;
+				playbackIndex = 0;
+				playing = false; 
 				lock.unlock();
 				return;
 			}

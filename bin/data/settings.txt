@@ -1,8 +1,8 @@
-invertY=false
-invertX=false
+invertY=true
+invertX=true
 flipXY=true
 channelMapping=
-scale=3.59744
+scale=10
 deviceId=0
 port=11995
 sampleRate=44100
