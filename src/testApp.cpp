@@ -1,5 +1,5 @@
 #include "testApp.h"
-#include "util.h"
+#include "util/split.h"
 #include <Poco/Mutex.h>
 #include "ofxIniSettings.h"
 
@@ -67,8 +67,10 @@ void testApp::startApplication(){
 	cout << "    Sample rate: " << settings.sampleRate << endl;
 	cout << "    Buffer size: " << settings.bufferSize << endl;
 	cout << "    Num Buffers: " << settings.numBuffers << endl;
-	soundStream.setDeviceID( settings.deviceId );
-	soundStream.setup(this, 0, 2, settings.sampleRate, settings.bufferSize, settings.numBuffers);
+	
+	ofSoundPlayer player; 
+//	soundStream.setDeviceID( settings.deviceId );
+	soundStream.setup(this, 2, 2, settings.sampleRate, settings.bufferSize, settings.numBuffers);
 }
 
 
@@ -241,8 +243,21 @@ void testApp::windowResized(int w, int h){
 
 //--------------------------------------------------------------
 void testApp::audioIn(float * input, int bufferSize, int nChannels){
-	left.append(input, bufferSize,2);
-	right.append(input+1,bufferSize,2);
+	if( !useWav ){
+		left.append(input, bufferSize,2);
+		right.append(input+1,bufferSize,2);
+	}
+}
+
+void testApp::audioOut( float * output, int bufferSize, int nChannels ){
+	if( useWav ){
+		wav.read(output, bufferSize*nChannels);
+		left.append(output, bufferSize,2);
+		right.append(output+1,bufferSize,2);
+	}
+	else{
+		
+	}
 }
 
 //--------------------------------------------------------------
@@ -256,6 +271,15 @@ void testApp::gotMessage(ofMessage msg){
 }
 
 //--------------------------------------------------------------
-void testApp::dragEvent(ofDragInfo dragInfo){ 
-
+void testApp::dragEvent(ofDragInfo dragInfo){
+	cout << "files: " << endl;
+	for( vector<string>::iterator it = dragInfo.files.begin();it != dragInfo.files.end(); ++it ){
+		cout << *it << endl;
+	}
+	
+	if( dragInfo.files.size() >= 1 ){
+		wav.open( dragInfo.files[0], WAVFILE_READ );
+		useWav = true;
+	}
+	
 }

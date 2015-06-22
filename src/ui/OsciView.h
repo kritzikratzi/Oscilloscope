@@ -1,7 +1,7 @@
 #pragma once
 
 #include "MUI.h"
-#include "settings.h"
+#include "../settings.h"
 
 
 class OsciView : public mui::Container{

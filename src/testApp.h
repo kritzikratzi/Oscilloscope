@@ -1,11 +1,13 @@
 #pragma once
 
 #include "ofMain.h"
-#include "sounddevices.h"
+#include "util/sounddevices.h"
+#include "util/WavFile.h"
 #include "MUI.h" 
-#include "ConfigView.h"
-#include "OsciView.h"
-#include "Audio.h"
+
+#include "ui/ConfigView.h"
+#include "ui/OsciView.h"
+#include "util/Audio.h"
 
 class testApp : public ofBaseApp{
 
@@ -29,7 +31,8 @@ class testApp : public ofBaseApp{
 		void gotMessage(ofMessage msg);
 		
 		void audioIn(float * input, int bufferSize, int nChannels);
-		
+		void audioOut( float * output, int bufferSize, int nChannels ); 
+	
 		ofSoundStream soundStream;
 
 		mui::Root * root;
@@ -42,4 +45,7 @@ class testApp : public ofBaseApp{
 	
 		MonoSample left;
 		MonoSample right;
+	
+		WavFile wav;
+		bool useWav; 
 };
