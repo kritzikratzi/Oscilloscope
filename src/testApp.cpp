@@ -1,6 +1,7 @@
 #include "testApp.h"
 #include "util/split.h"
 #include <Poco/Mutex.h>
+#include <Poco/TemporaryFile.h>
 #include "ofxIniSettings.h"
 
 Poco::Mutex mutex;
@@ -278,7 +279,18 @@ void testApp::dragEvent(ofDragInfo dragInfo){
 	}
 	
 	if( dragInfo.files.size() >= 1 ){
-		wav.open( dragInfo.files[0], WAVFILE_READ );
+		cout << "convert file to " << settings.sampleRate << " hz" << endl;
+		Poco::TemporaryFile tempFile;
+		tempFile.keepUntilExit();
+		
+		stringstream cmd;
+		cmd <<  "/usr/local/bin/ffmpeg -i ";
+		cmd << "\"" << dragInfo.files[0] << "\" ";
+		cmd << "-ar " << settings.sampleRate << " ";
+		cmd << "-f wav "; 
+		cmd << tempFile.path();
+		system( cmd.str().c_str() );
+		wav.open( tempFile.path(), WAVFILE_READ );
 		useWav = true;
 	}
 	

@@ -1,11 +1,11 @@
-invertY=true
-invertX=true
-flipXY=true
+invertY=false
+invertX=false
+flipXY=false
 channelMapping=
-scale=10
-deviceId=1
+scale=1
+deviceId=0
 port=11995
 sampleRate=44100
-bufferSize=1024
+bufferSize=512
 numBuffers=4
 

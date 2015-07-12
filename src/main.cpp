@@ -16,7 +16,7 @@ int main( ){
 	// pass in width and height too:
 	ofAppGLFWWindow window;
 	cout << "LAUNCH DESKTOP" << endl;
-	ofSetupOpenGL(&window, 1000,1500, OF_WINDOW);
+	ofSetupOpenGL(&window, 1000,1000, OF_WINDOW);
 
 	#if defined(TARGET_OSX)
 	NSWindow * cocoaWindow = (NSWindow*)window.getCocoaWindow();
