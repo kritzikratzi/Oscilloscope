@@ -1,11 +1,12 @@
+autoDetect=true
 invertY=false
 invertX=false
 flipXY=false
 channelMapping=
-scale=1
-deviceId=0
+scale=7.30789
+deviceId=1
 port=11995
-sampleRate=44100
+sampleRate=96000
 bufferSize=512
 numBuffers=4
 

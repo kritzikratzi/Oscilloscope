@@ -18,6 +18,7 @@ public:
 	virtual void touchDoubleTap( ofTouchEventArgs &touch );
 	
 	
+	mui::ToggleButton * autoDetectButton;
 	mui::SegmentedSelect * sampleRatesSelect;
 	mui::SegmentedSelect * bufferSizeSelect;
 	mui::SegmentedSelect * numbuffersSelect;
@@ -32,7 +33,7 @@ public:
 private:
 	
 	void pushLabel( string text, float &x, float &y, float &w, float &h );
-	
+	void autoDetect(); 
 	int selectedSoundCard;
 	vector<mui::ToggleButton*> soundcardButtons;
 };

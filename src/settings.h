@@ -13,7 +13,8 @@
 
 
 class Settings{
-public: 
+public:
+	bool autoDetect;
 	int sampleRate;
 	int bufferSize;
 	int numBuffers;
@@ -23,7 +24,7 @@ public:
 	bool invertX;
 	bool invertY;
 	
-	Settings() :  sampleRate(44100), bufferSize(512), numBuffers(4), deviceId(0),scale(1.0),flipXY(false),invertX(false),invertY(false){
+	Settings() :  sampleRate(44100), bufferSize(512), numBuffers(4), deviceId(0),scale(1.0),flipXY(false),invertX(false),invertY(false),autoDetect(true){
 	}
 	
 	void loadFromFile( string settingsFile = ofToDataPath("settings.txt") ){
@@ -36,6 +37,7 @@ public:
 		flipXY = settings.get( "flipXY", flipXY );
 		invertX = settings.get( "invertX", invertX );
 		invertY = settings.get( "invertY", invertY );
+		autoDetect = settings.get( "autoDetect", autoDetect );
 	}
 	
 	
@@ -50,5 +52,6 @@ public:
 		settings.set( "flipXY", flipXY );
 		settings.set( "invertX", invertX );
 		settings.set( "invertY", invertY );
+		settings.set( "autoDetect", autoDetect );
 	}
 };

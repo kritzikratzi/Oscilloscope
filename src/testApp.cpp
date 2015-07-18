@@ -42,6 +42,10 @@ void testApp::setup(){
 	left.loop = false;
 	right.loop = false;
 
+	
+	if( settings.autoDetect ){
+		startApplication();
+	}
 
 }
 
@@ -63,6 +67,11 @@ void testApp::startApplication(){
 	configView->visible = false;
 	osciView->visible = true;
 	
+	if( settings.autoDetect ){
+		cout << "Running auto-detect for sound cards" << endl;
+		getDefaultRtOutputParams( settings.deviceId, settings.sampleRate, settings.bufferSize, settings.numBuffers );
+	}
+	
 	//if you want to set the device id to be different than the default
 	cout << "Opening Sound Card: " << endl;
 	cout << "    Sample rate: " << settings.sampleRate << endl;
@@ -71,7 +80,8 @@ void testApp::startApplication(){
 	
 	ofSoundPlayer player; 
 //	soundStream.setDeviceID( settings.deviceId );
-	soundStream.setup(this, 2, 2, settings.sampleRate, settings.bufferSize, settings.numBuffers);
+	soundStream.setup(this, 2, 0, settings.sampleRate, settings.bufferSize, settings.numBuffers);
+	filePlayer.setupAudioOut(2, settings.sampleRate);
 }
 
 
@@ -244,15 +254,16 @@ void testApp::windowResized(int w, int h){
 
 //--------------------------------------------------------------
 void testApp::audioIn(float * input, int bufferSize, int nChannels){
-	if( !useWav ){
+	if( !filePlayer.isLoaded ){
 		left.append(input, bufferSize,2);
 		right.append(input+1,bufferSize,2);
 	}
 }
 
 void testApp::audioOut( float * output, int bufferSize, int nChannels ){
-	if( useWav ){
-		wav.read(output, bufferSize*nChannels);
+	memset(output, 0, bufferSize*nChannels);
+	if( filePlayer.isLoaded ){
+		filePlayer.audioOut(output, bufferSize, nChannels);
 		left.append(output, bufferSize,2);
 		right.append(output+1,bufferSize,2);
 	}
@@ -279,19 +290,7 @@ void testApp::dragEvent(ofDragInfo dragInfo){
 	}
 	
 	if( dragInfo.files.size() >= 1 ){
-		cout << "convert file to " << settings.sampleRate << " hz" << endl;
-		Poco::TemporaryFile tempFile;
-		tempFile.keepUntilExit();
-		
-		stringstream cmd;
-		cmd <<  "/usr/local/bin/ffmpeg -i ";
-		cmd << "\"" << dragInfo.files[0] << "\" ";
-		cmd << "-ar " << settings.sampleRate << " ";
-		cmd << "-f wav "; 
-		cmd << tempFile.path();
-		system( cmd.str().c_str() );
-		wav.open( tempFile.path(), WAVFILE_READ );
-		useWav = true;
+		filePlayer.loadSound(dragInfo.files[0]); 
 	}
 	
 }

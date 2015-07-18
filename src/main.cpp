@@ -20,6 +20,7 @@ int main( ){
 
 	#if defined(TARGET_OSX)
 	NSWindow * cocoaWindow = (NSWindow*)window.getCocoaWindow();
+	[cocoaWindow setFrame:[[NSScreen mainScreen] visibleFrame] display:YES];
 //	[cocoaWindow setLevel:10];
 	#endif
 

@@ -6,6 +6,12 @@ ConfigView::ConfigView( float x_, float y_, float width_, float height_)
 : mui::Container( x_, y_, width_, height_ ){
 	float x = 10, y = 10, w = 400, h = 30, space = 10;
 	
+	pushLabel( "Auto Detect", x, y, w, h );
+	autoDetectButton = new mui::ToggleButton( "Use system default", x, y, w, h );
+	add( autoDetectButton );
+	ofAddListener( autoDetectButton->onPress, this, &ConfigView::buttonPressed );
+	y += autoDetectButton->height + space;
+	
 	pushLabel( "Sample Rate", x, y, w, h);
 	sampleRatesSelect = new mui::SegmentedSelect( x, y, w, h );
 	sampleRatesSelect->addLabel("44100");
@@ -104,6 +110,7 @@ void ConfigView::touchDoubleTap( ofTouchEventArgs &touch ){
 
 //--------------------------------------------------------------
 void ConfigView::fromSettings( Settings & settings ){
+	autoDetectButton->selected = settings.autoDetect;
 	sampleRatesSelect->selected = ofToString( settings.sampleRate );
 	bufferSizeSelect->selected = ofToString( settings.bufferSize );
 	numbuffersSelect->selected = ofToString( settings.numBuffers );
@@ -118,10 +125,15 @@ void ConfigView::fromSettings( Settings & settings ){
 	sampleRatesSelect->commit();
 	bufferSizeSelect->commit();
 	numbuffersSelect->commit();
+	
+	if( settings.autoDetect ){
+		autoDetect();
+	}
 }
 
 //--------------------------------------------------------------
 void ConfigView::toSettings( Settings & settings ){
+	settings.autoDetect = autoDetectButton->selected;
 	settings.sampleRate = ofToInt( sampleRatesSelect->selected );
 	settings.bufferSize = ofToInt( bufferSizeSelect->selected );
 	settings.numBuffers = ofToInt( numbuffersSelect->selected );
@@ -139,7 +151,12 @@ void ConfigView::pushLabel( string text, float &x, float &y, float &w, float &h 
 
 //--------------------------------------------------------------
 void ConfigView::buttonPressed( const void * sender, ofTouchEventArgs & args ){
-	if( sender == startButton ){
+	if( sender == autoDetectButton ){
+		if( autoDetectButton->selected){
+			autoDetect();
+		}
+	}
+	else if( sender == startButton ){
 		ofBaseApp * app = ofGetAppPtr();
 		app->gotMessage( ofMessage( "start-pressed" ) );
 	}
@@ -161,3 +178,18 @@ void ConfigView::selectSoundCard( mui::ToggleButton * card ){
 	}
 }
 
+
+void ConfigView::autoDetect(){
+	int deviceId = 0;
+	int sampleRate = 44100;
+	int bufferSize = 512;
+	int numBuffers = 4;
+	getDefaultRtOutputParams(deviceId, sampleRate, bufferSize, numBuffers);
+	if( deviceId < soundcardButtons.size() ) selectSoundCard(soundcardButtons[deviceId]);
+	sampleRatesSelect->selected = ofToString(sampleRate);
+	sampleRatesSelect->commit();
+	bufferSizeSelect->selected = ofToString(bufferSize);
+	bufferSizeSelect->commit();
+	numbuffersSelect->selected = ofToString(numBuffers);
+	numbuffersSelect->commit();
+}

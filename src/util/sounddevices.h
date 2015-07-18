@@ -14,3 +14,4 @@
 
 
 vector<RtAudio::DeviceInfo> listRtSoundDevices();
+bool getDefaultRtOutputParams( int &deviceId, int &sampleRate, int &bufferSize, int &numBuffers );

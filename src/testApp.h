@@ -2,12 +2,12 @@
 
 #include "ofMain.h"
 #include "util/sounddevices.h"
-#include "util/WavFile.h"
 #include "MUI.h" 
 
 #include "ui/ConfigView.h"
 #include "ui/OsciView.h"
 #include "util/Audio.h"
+#include "ofxAvAudioPlayer.h"
 
 class testApp : public ofBaseApp{
 
@@ -46,6 +46,6 @@ class testApp : public ofBaseApp{
 		MonoSample left;
 		MonoSample right;
 	
-		WavFile wav;
-		bool useWav; 
+	
+		ofxAvAudioPlayer filePlayer;
 };

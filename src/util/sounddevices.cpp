@@ -15,6 +15,7 @@
 #include "ofMath.h"
 #include "ofUtils.h"
 
+using namespace std;
 
 vector<RtAudio::DeviceInfo> listRtSoundDevices(){
 	vector<RtAudio::DeviceInfo> infos;
@@ -40,4 +41,30 @@ vector<RtAudio::DeviceInfo> listRtSoundDevices(){
 	}
 	
 	return infos; 
+}
+
+bool getDefaultRtOutputParams( int &deviceId, int &sampleRate, int &bufferSize, int &numBuffers ){
+	ofPtr<RtAudio> audioTemp;
+	try {
+		audioTemp = ofPtr<RtAudio>(new RtAudio());
+	} catch (RtError &error) {
+		error.printMessage();
+		return false;
+	}
+	
+	deviceId = audioTemp->getDefaultOutputDevice();
+	RtAudio::DeviceInfo info = audioTemp->getDeviceInfo(deviceId);
+	
+	vector<unsigned int> &rates = info.sampleRates;
+	sampleRate = *max_element(rates.begin(), rates.end());
+	
+	#ifdef _WIN32
+		bufferSize = 1024;
+	#elif __APPLE__
+		bufferSize = 512;
+	#else
+		bufferSize = 1024;
+	#endif
+	
+	numBuffers = 4;
 }

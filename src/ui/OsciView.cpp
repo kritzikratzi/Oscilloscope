@@ -6,7 +6,7 @@ OsciView::OsciView( float x_, float y_, float width_, float height_)
 : mui::Container( x_, y_, width_, height_ ){
 	float x = 10, y = 10, w = 400, h = 30;
 	
-	stopButton = new mui::Button( "Stop!", x, y, w, h );
+	stopButton = new mui::Button( "Audio Settings", x, y, w, h );
 	ofAddListener( stopButton->onPress, this, &OsciView::buttonPressed );
 	y += stopButton->height + 10;
 	add( stopButton );
