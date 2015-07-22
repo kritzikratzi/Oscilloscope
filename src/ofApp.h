@@ -9,7 +9,7 @@
 #include "util/Audio.h"
 #include "ofxAvAudioPlayer.h"
 
-class testApp : public ofBaseApp{
+class ofApp : public ofBaseApp{
 
 	public:
 

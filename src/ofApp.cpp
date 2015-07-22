@@ -1,4 +1,4 @@
-#include "testApp.h"
+#include "ofApp.h"
 #include "util/split.h"
 #include <Poco/Mutex.h>
 #include <Poco/TemporaryFile.h>
@@ -11,7 +11,7 @@ bool applicationRunning = false;
 
 
 //--------------------------------------------------------------
-void testApp::setup(){
+void ofApp::setup(){
 	ofSetVerticalSync(true);
 	ofBackground(0);
 	ofSetBackgroundAuto(false);
@@ -50,7 +50,7 @@ void testApp::setup(){
 }
 
 
-void testApp::startApplication(){
+void ofApp::startApplication(){
 	if( applicationRunning ) return;
 	applicationRunning = true;
 	
@@ -85,7 +85,7 @@ void testApp::startApplication(){
 }
 
 
-void testApp::stopApplication(){
+void ofApp::stopApplication(){
 	configView->fromSettings(settings);
 	settings.flipXY = osciView->flipXY->selected;
 	settings.invertX = osciView->invertX->selected;
@@ -104,7 +104,7 @@ void testApp::stopApplication(){
 
 
 //--------------------------------------------------------------
-void testApp::update(){
+void ofApp::update(){
 	root->handleUpdate();
 	if( !applicationRunning ) return;
 	
@@ -145,7 +145,7 @@ void testApp::update(){
 }
 
 //--------------------------------------------------------------
-void testApp::draw(){
+void ofApp::draw(){
 	ofEnableAlphaBlending();
 	ofSetColor( 0, 80 );
 	ofFill();
@@ -207,13 +207,13 @@ void testApp::draw(){
 	root->handleDraw();
 }
 
-void testApp::exit(){
+void ofApp::exit(){
 	stopApplication();
 }
 
 
 //--------------------------------------------------------------
-void testApp::keyPressed  (int key){
+void ofApp::keyPressed  (int key){
 	if( root->handleKeyPressed( key ) ) return;
 	
 	if( key == '\t' && !configView->isVisibleOnScreen()){
@@ -222,45 +222,45 @@ void testApp::keyPressed  (int key){
 }
 
 //--------------------------------------------------------------
-void testApp::keyReleased  (int key){
+void ofApp::keyReleased  (int key){
 	if( root->handleKeyReleased( key ) ) return;
 }
 
 //--------------------------------------------------------------
-void testApp::mouseMoved(int x, int y ){
+void ofApp::mouseMoved(int x, int y ){
 	if( root->handleMouseMoved( x, y ) ) return;
 }
 
 //--------------------------------------------------------------
-void testApp::mouseDragged(int x, int y, int button){
+void ofApp::mouseDragged(int x, int y, int button){
 	if( root->handleMouseDragged( x, y, button ) ) return;
 }
 
 //--------------------------------------------------------------
-void testApp::mousePressed(int x, int y, int button){
+void ofApp::mousePressed(int x, int y, int button){
 	if( root->handleMousePressed( x, y, button ) ) return;
 }
 
 
 //--------------------------------------------------------------
-void testApp::mouseReleased(int x, int y, int button){
+void ofApp::mouseReleased(int x, int y, int button){
 	if( root->handleMouseReleased( x, y, button ) ) return;
 }
 
 //--------------------------------------------------------------
-void testApp::windowResized(int w, int h){
+void ofApp::windowResized(int w, int h){
 
 }
 
 //--------------------------------------------------------------
-void testApp::audioIn(float * input, int bufferSize, int nChannels){
+void ofApp::audioIn(float * input, int bufferSize, int nChannels){
 	if( !filePlayer.isLoaded ){
 		left.append(input, bufferSize,2);
 		right.append(input+1,bufferSize,2);
 	}
 }
 
-void testApp::audioOut( float * output, int bufferSize, int nChannels ){
+void ofApp::audioOut( float * output, int bufferSize, int nChannels ){
 	memset(output, 0, bufferSize*nChannels);
 	if( filePlayer.isLoaded ){
 		filePlayer.audioOut(output, bufferSize, nChannels);
@@ -273,7 +273,7 @@ void testApp::audioOut( float * output, int bufferSize, int nChannels ){
 }
 
 //--------------------------------------------------------------
-void testApp::gotMessage(ofMessage msg){
+void ofApp::gotMessage(ofMessage msg){
 	if( msg.message == "start-pressed" ){
 		startApplication();
 	}
@@ -283,7 +283,7 @@ void testApp::gotMessage(ofMessage msg){
 }
 
 //--------------------------------------------------------------
-void testApp::dragEvent(ofDragInfo dragInfo){
+void ofApp::dragEvent(ofDragInfo dragInfo){
 	cout << "files: " << endl;
 	for( vector<string>::iterator it = dragInfo.files.begin();it != dragInfo.files.end(); ++it ){
 		cout << *it << endl;

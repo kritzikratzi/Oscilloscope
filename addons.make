@@ -1,6 +1,2 @@
-ofxExtras
-ofxIniSettings
-ofxMidi
+ofxAvCodec
 ofxMightyUI
-ofxFontAwesome
-ofxNetwork

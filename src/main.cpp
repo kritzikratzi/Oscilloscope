@@ -1,5 +1,5 @@
 #include "ofMain.h"
-#include "testApp.h"
+#include "ofApp.h"
 #include "sounddevices.h"
 #include "MUI.h" 
 #include "ofAppGLFWWindow.h"
@@ -26,6 +26,6 @@ int main( ){
 
 	mui_init();
 	mui::MuiConfig::font = "mui/fonts/Lato-Regular.ttf";
-	ofRunApp(new testApp);
+	ofRunApp(new ofApp);
 	
 }
