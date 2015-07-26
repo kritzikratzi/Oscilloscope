@@ -33,6 +33,7 @@
 		BA70F79819D39E6A008E990B /* ofxExtras.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BA70F79619D39E6A008E990B /* ofxExtras.cpp */; };
 		BA828D2A1B378A7D002DE63F /* Audio.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BA828D281B378A7D002DE63F /* Audio.cpp */; };
 		BA828D2D1B378E6D002DE63F /* sounddevices.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BA828D2B1B378E6D002DE63F /* sounddevices.cpp */; };
+		BA9F97411B6512FA00A453D6 /* globals.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BA9F973F1B6512FA00A453D6 /* globals.cpp */; };
 		BAEE5D281B5FB3D10038C838 /* ofApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BAEE5D261B5FB3D10038C838 /* ofApp.cpp */; };
 		BBAB23CB13894F3D00AA2426 /* GLUT.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; };
 		C05CD71D597596BBE2C35D82 /* EmptyContainer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 98FCF23F427DE6A108C15AA6 /* EmptyContainer.cpp */; };
@@ -120,6 +121,7 @@
 		403378E55FDCA8AA24E8104A /* ToggleButton.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ToggleButton.cpp; sourceTree = "<group>"; };
 		406698A95BD84DAFAA009924 /* Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Image.h; sourceTree = "<group>"; };
 		416FFDAD4F62DFD86041913E /* BarButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BarButton.h; sourceTree = "<group>"; };
+		4B5DE3EE5B91921EE4FDBA84 /* ofxFontAwesome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxFontAwesome.h; sourceTree = "<group>"; };
 		4FC5B0B6811ACF1E0F875E1C /* ScrollPane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScrollPane.h; sourceTree = "<group>"; };
 		5DDEC0BDA035194309B83CD4 /* Container.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Container.h; sourceTree = "<group>"; };
 		61A842419EFF74F93FDBDE5A /* ScrollPane.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ScrollPane.cpp; sourceTree = "<group>"; };
@@ -144,7 +146,6 @@
 		BA54981C19F725C1007E9F6A /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		BA54981F19F7274C007E9F6A /* ConfigView.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ConfigView.cpp; path = ui/ConfigView.cpp; sourceTree = "<group>"; };
 		BA54982019F7274C007E9F6A /* ConfigView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ConfigView.h; path = ui/ConfigView.h; sourceTree = "<group>"; };
-		BA54982319F72932007E9F6A /* settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = settings.h; sourceTree = "<group>"; };
 		BA54982519F740CE007E9F6A /* OsciView.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OsciView.cpp; path = ui/OsciView.cpp; sourceTree = "<group>"; };
 		BA54982619F740CE007E9F6A /* OsciView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OsciView.h; path = ui/OsciView.h; sourceTree = "<group>"; };
 		BA6C702C19C620AA00302D3B /* Instructions.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Instructions.txt; sourceTree = "<group>"; };
@@ -169,6 +170,11 @@
 		BA828D291B378A7D002DE63F /* Audio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Audio.h; sourceTree = "<group>"; };
 		BA828D2B1B378E6D002DE63F /* sounddevices.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sounddevices.cpp; sourceTree = "<group>"; };
 		BA828D2C1B378E6D002DE63F /* sounddevices.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sounddevices.h; sourceTree = "<group>"; };
+		BA9F973E1B65129B00A453D6 /* FaToggleButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FaToggleButton.h; path = ui/FaToggleButton.h; sourceTree = "<group>"; };
+		BA9F973F1B6512FA00A453D6 /* globals.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = globals.cpp; sourceTree = "<group>"; };
+		BA9F97401B6512FA00A453D6 /* globals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = globals.h; sourceTree = "<group>"; };
+		BA9F97431B651E6A00A453D6 /* FaButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FaButton.h; path = ui/FaButton.h; sourceTree = "<group>"; };
+		BA9F97451B6583D300A453D6 /* L.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = L.h; path = ui/L.h; sourceTree = "<group>"; };
 		BABA49661A866519000900B1 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = assets/Images.xcassets; sourceTree = "<group>"; };
 		BAEE5D261B5FB3D10038C838 /* ofApp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofApp.cpp; sourceTree = "<group>"; };
 		BAEE5D271B5FB3D10038C838 /* ofApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofApp.h; sourceTree = "<group>"; };
@@ -285,6 +291,14 @@
 			path = src;
 			sourceTree = "<group>";
 		};
+		394A722787C901A078FE90F1 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				4B5DE3EE5B91921EE4FDBA84 /* ofxFontAwesome.h */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
 		5364BCBD16ED2DBA7E682C32 /* _fontstash */ = {
 			isa = PBXGroup;
 			children = (
@@ -308,6 +322,15 @@
 			path = ../../../addons/ofxAvCodec;
 			sourceTree = "<group>";
 		};
+		7A7B2AED0F3A3891285C8779 /* ofxFontAwesome */ = {
+			isa = PBXGroup;
+			children = (
+				394A722787C901A078FE90F1 /* src */,
+			);
+			name = ofxFontAwesome;
+			path = ../../../addons/ofxFontAwesome;
+			sourceTree = "<group>";
+		};
 		9528B28ACC55DD7983834CE9 /* src */ = {
 			isa = PBXGroup;
 			children = (
@@ -320,10 +343,13 @@
 		BA54981E19F7272C007E9F6A /* ui */ = {
 			isa = PBXGroup;
 			children = (
+				BA9F97431B651E6A00A453D6 /* FaButton.h */,
+				BA9F973E1B65129B00A453D6 /* FaToggleButton.h */,
 				BA54981F19F7274C007E9F6A /* ConfigView.cpp */,
 				BA54982019F7274C007E9F6A /* ConfigView.h */,
 				BA54982519F740CE007E9F6A /* OsciView.cpp */,
 				BA54982619F740CE007E9F6A /* OsciView.h */,
+				BA9F97451B6583D300A453D6 /* L.h */,
 			);
 			name = ui;
 			sourceTree = "<group>";
@@ -422,6 +448,7 @@
 				BA6C702A19C620AA00302D3B /* ofxNetwork */,
 				FF67370392D60EB68842FFD2 /* ofxMightyUI */,
 				62B8BF3EF72163F11B1D5315 /* ofxAvCodec */,
+				7A7B2AED0F3A3891285C8779 /* ofxFontAwesome */,
 			);
 			name = addons;
 			sourceTree = "<group>";
@@ -496,7 +523,8 @@
 				E4B69E1D0A3A1BDC003C02F2 /* main.cpp */,
 				BAEE5D261B5FB3D10038C838 /* ofApp.cpp */,
 				BAEE5D271B5FB3D10038C838 /* ofApp.h */,
-				BA54982319F72932007E9F6A /* settings.h */,
+				BA9F973F1B6512FA00A453D6 /* globals.cpp */,
+				BA9F97401B6512FA00A453D6 /* globals.h */,
 			);
 			path = src;
 			sourceTree = SOURCE_ROOT;
@@ -610,7 +638,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cp -f ../../../libs/fmodex/lib/osx/libfmodex.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS/libfmodex.dylib\"; install_name_tool -change ./libfmodex.dylib @executable_path/libfmodex.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS/$PRODUCT_NAME\";\nmkdir -p \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/Resources/\"\ncp -f \"$ICON_FILE\" \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/Resources/\"\n\ncp -rf ../../../addons/ofxMightyUI/bin/data/ \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/Resources\"\ncp -fR ../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavfilter.5.21.100.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\" 2>/dev/null | echo -n\ncp -fR ../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavutil.54.28.100.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\" 2>/dev/null | echo -n\ncp -fR ../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libswscale.3.1.101.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\" 2>/dev/null | echo -n\ncp -fR ../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavdevice.56.4.100.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\" 2>/dev/null | echo -n\ncp -fR ../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavformat.56.40.100.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\" 2>/dev/null | echo -n\ncp -fR ../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libswresample.1.2.100.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\" 2>/dev/null | echo -n\ncp -fR ../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavcodec.56.47.100.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\" 2>/dev/null | echo -n";
+			shellScript = "cp -f ../../../libs/fmodex/lib/osx/libfmodex.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS/libfmodex.dylib\"; install_name_tool -change ./libfmodex.dylib @executable_path/libfmodex.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS/$PRODUCT_NAME\";\nmkdir -p \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/Resources/\"\ncp -f \"$ICON_FILE\" \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/Resources/\"\n\ncp -rf ../../../addons/ofxMightyUI/bin/data/ \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/Resources\"\ncp -fR ../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavfilter.5.21.100.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\" 2>/dev/null | echo -n\ncp -fR ../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavutil.54.28.100.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\" 2>/dev/null | echo -n\ncp -fR ../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libswscale.3.1.101.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\" 2>/dev/null | echo -n\ncp -fR ../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavdevice.56.4.100.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\" 2>/dev/null | echo -n\ncp -fR ../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavformat.56.40.100.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\" 2>/dev/null | echo -n\ncp -fR ../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libswresample.1.2.100.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\" 2>/dev/null | echo -n\ncp -fR ../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavcodec.56.47.100.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\" 2>/dev/null | echo -n\ncp -rf ../../../addons/ofxFontAwesome/bin/data/ \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/Resources\"";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -619,6 +647,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA9F97411B6512FA00A453D6 /* globals.cpp in Sources */,
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
 				BA6C703919C620AA00302D3B /* ofxTCPManager.cpp in Sources */,
 				BA70F79819D39E6A008E990B /* ofxExtras.cpp in Sources */,

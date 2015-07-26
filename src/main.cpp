@@ -29,3 +29,11 @@ int main( ){
 	ofRunApp(new ofApp);
 	
 }
+
+#ifdef _WIN32
+INT WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
+    PSTR lpCmdLine, INT nCmdShow)
+{
+    return main();
+}
+#endif

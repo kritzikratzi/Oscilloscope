@@ -1,2 +1,3 @@
 ofxAvCodec
 ofxMightyUI
+ofxFontAwesome

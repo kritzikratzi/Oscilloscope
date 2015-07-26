@@ -1,6 +1,7 @@
 #include "ConfigView.h"
 #include <Poco/Delegate.h>
 #include "sounddevices.h"
+#include "../globals.h"
 
 ConfigView::ConfigView( float x_, float y_, float width_, float height_)
 : mui::Container( x_, y_, width_, height_ ){
@@ -85,11 +86,6 @@ void ConfigView::draw(){
 
 
 //--------------------------------------------------------------
-void ConfigView::drawBackground(){
-}
-
-
-//--------------------------------------------------------------
 void ConfigView::touchDown( ofTouchEventArgs &touch ){
 }
 
@@ -109,14 +105,14 @@ void ConfigView::touchDoubleTap( ofTouchEventArgs &touch ){
 }
 
 //--------------------------------------------------------------
-void ConfigView::fromSettings( Settings & settings ){
-	autoDetectButton->selected = settings.autoDetect;
-	sampleRatesSelect->selected = ofToString( settings.sampleRate );
-	bufferSizeSelect->selected = ofToString( settings.bufferSize );
-	numbuffersSelect->selected = ofToString( settings.numBuffers );
+void ConfigView::fromGlobals(){
+	autoDetectButton->selected = globals.autoDetect;
+	sampleRatesSelect->selected = ofToString( globals.sampleRate );
+	bufferSizeSelect->selected = ofToString( globals.bufferSize );
+	numbuffersSelect->selected = ofToString( globals.numBuffers );
 
-	if( settings.deviceId < soundcardButtons.size() ){
-		selectSoundCard( soundcardButtons[settings.deviceId] );
+	if( globals.deviceId < soundcardButtons.size() ){
+		selectSoundCard( soundcardButtons[globals.deviceId] );
 	}
 	else{
 		selectSoundCard( soundcardButtons[0] );
@@ -126,18 +122,18 @@ void ConfigView::fromSettings( Settings & settings ){
 	bufferSizeSelect->commit();
 	numbuffersSelect->commit();
 	
-	if( settings.autoDetect ){
+	if( globals.autoDetect ){
 		autoDetect();
 	}
 }
 
 //--------------------------------------------------------------
-void ConfigView::toSettings( Settings & settings ){
-	settings.autoDetect = autoDetectButton->selected;
-	settings.sampleRate = ofToInt( sampleRatesSelect->selected );
-	settings.bufferSize = ofToInt( bufferSizeSelect->selected );
-	settings.numBuffers = ofToInt( numbuffersSelect->selected );
-	settings.deviceId = selectedSoundCard;
+void ConfigView::toGlobals(){
+	globals.autoDetect = autoDetectButton->selected;
+	globals.sampleRate = ofToInt( sampleRatesSelect->selected );
+	globals.bufferSize = ofToInt( bufferSizeSelect->selected );
+	globals.numBuffers = ofToInt( numbuffersSelect->selected );
+	globals.deviceId = selectedSoundCard;
 }
 
 

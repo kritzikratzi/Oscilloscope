@@ -2,8 +2,8 @@
 #include "util/split.h"
 #include <Poco/Mutex.h>
 #include <Poco/TemporaryFile.h>
-#include "ofxIniSettings.h"
-
+#include "globals.h"
+#include <cctype> 
 Poco::Mutex mutex;
 Poco::Mutex updateMutex;
 
@@ -12,6 +12,7 @@ bool applicationRunning = false;
 
 //--------------------------------------------------------------
 void ofApp::setup(){
+	lastMouseMoved = 0;
 	ofSetVerticalSync(true);
 	ofBackground(0);
 	ofSetBackgroundAuto(false);
@@ -29,10 +30,13 @@ void ofApp::setup(){
 	
 	root = new mui::Root();
 	
-	settings.loadFromFile();
+	globals.loadFromFile();
+	globals.player.loadSound( "konichiwa.wav" );
+	globals.player.setLoop(true);
+	globals.player.stop(); 
 	
 	configView = new ConfigView();
-	configView->fromSettings( settings );
+	configView->fromGlobals();
 	root->add( configView );
 	
 	osciView = new OsciView();
@@ -43,10 +47,12 @@ void ofApp::setup(){
 	right.loop = false;
 
 	
-	if( settings.autoDetect ){
+	if( globals.autoDetect ){
 		startApplication();
 	}
 
+	
+	windowResized(ofGetWidth(), ofGetHeight());
 }
 
 
@@ -57,41 +63,36 @@ void ofApp::startApplication(){
 	left.play();
 	right.play();
 
-	configView->toSettings( settings );
-	osciView->flipXY->selected = settings.flipXY;
-	osciView->invertX->selected = settings.invertX;
-	osciView->invertY->selected = settings.invertY;
-	osciView->scaleSlider->slider->value = settings.scale;
-
-	settings.saveToFile();
+	configView->toGlobals();
+	globals.saveToFile();
 	configView->visible = false;
 	osciView->visible = true;
 	
-	if( settings.autoDetect ){
+	if( globals.autoDetect ){
 		cout << "Running auto-detect for sound cards" << endl;
-		getDefaultRtOutputParams( settings.deviceId, settings.sampleRate, settings.bufferSize, settings.numBuffers );
+		getDefaultRtOutputParams( globals.deviceId, globals.sampleRate, globals.bufferSize, globals.numBuffers );
 	}
 	
 	//if you want to set the device id to be different than the default
 	cout << "Opening Sound Card: " << endl;
-	cout << "    Sample rate: " << settings.sampleRate << endl;
-	cout << "    Buffer size: " << settings.bufferSize << endl;
-	cout << "    Num Buffers: " << settings.numBuffers << endl;
+	cout << "    Sample rate: " << globals.sampleRate << endl;
+	cout << "    Buffer size: " << globals.bufferSize << endl;
+	cout << "    Num Buffers: " << globals.numBuffers << endl;
 	
-	ofSoundPlayer player; 
-//	soundStream.setDeviceID( settings.deviceId );
-	soundStream.setup(this, 2, 0, settings.sampleRate, settings.bufferSize, settings.numBuffers);
-	filePlayer.setupAudioOut(2, settings.sampleRate);
+//	soundStream.setDeviceID( globals.deviceId );
+	soundStream.setup(this, 2, 0, globals.sampleRate, globals.bufferSize, globals.numBuffers);
+	globals.player.setupAudioOut(2, globals.sampleRate);
 }
 
 
 void ofApp::stopApplication(){
-	configView->fromSettings(settings);
-	settings.flipXY = osciView->flipXY->selected;
-	settings.invertX = osciView->invertX->selected;
-	settings.invertY = osciView->invertY->selected;
-	settings.scale = osciView->scaleSlider->slider->value;
-	settings.saveToFile();
+	configView->fromGlobals();
+	globals.flipXY = globals.flipXY;
+	globals.invertX = globals.invertX;
+	globals.invertY = globals.invertY;
+
+	globals.scale = osciView->scaleSlider->value;
+	globals.saveToFile();
 	
 	if( !applicationRunning ) return;
 	applicationRunning = false;
@@ -105,9 +106,23 @@ void ofApp::stopApplication(){
 
 //--------------------------------------------------------------
 void ofApp::update(){
-	root->handleUpdate();
-	if( !applicationRunning ) return;
 	
+	// nasty hack. OF seems to get width+height wrong on the first frame.
+	if( ofGetFrameNum() == 1 ){
+		windowResized(ofGetWidth(), ofGetHeight());
+	}
+	
+/*	if( ofGetElapsedTimeMillis()-lastMouseMoved > 5000 && globals.player.isPlaying ){
+		osciView->visible = false;
+	}*/
+
+	if( !applicationRunning ){
+		ofShowCursor();
+		return;
+	}
+	if( osciView->visible ) ofShowCursor();
+	else ofHideCursor();
+		
 	shapeMesh.clear();
 	shapeMesh.setMode(OF_PRIMITIVE_LINE_STRIP);
 	shapeMesh.enableColors();
@@ -124,7 +139,7 @@ void ofApp::update(){
 		left.peel(512);
 		right.peel(512);
 		
-		float S= ofGetWidth()/2*osciView->scaleSlider->slider->value;
+		float S= ofGetWidth()/2*osciView->scaleSlider->value;
 		float x2 = leftBuffer[1];
 		float y2 = rightBuffer[1];
 		float x1, y1;
@@ -151,18 +166,17 @@ void ofApp::draw(){
 	ofFill();
 	ofRect( 0, 0, ofGetWidth(), ofGetHeight() );
 	
-	ofShowCursor();
 	ofPushMatrix();
 	ofTranslate(ofGetWidth()/2, ofGetHeight()/2 );
 	
 	int scaleX = 1;
 	int scaleY = -1;
-	if( osciView->invertX->selected ) scaleX *= -1;
-	if( osciView->invertY->selected ) scaleY *= -1;
+	if( globals.invertX ) scaleX *= -1;
+	if( globals.invertY ) scaleY *= -1;
 	
 	
 	ofScale( scaleX, scaleY );
-	if( osciView->flipXY->selected ){
+	if( globals.flipXY ){
 		ofRotate(-90);
 		ofScale( -1, 1 );
 	}
@@ -203,8 +217,6 @@ void ofApp::draw(){
 //	ofDisableBlendMode();
 	
 	ofPopMatrix();
-	
-	root->handleDraw();
 }
 
 void ofApp::exit(){
@@ -214,47 +226,59 @@ void ofApp::exit(){
 
 //--------------------------------------------------------------
 void ofApp::keyPressed  (int key){
-	if( root->handleKeyPressed( key ) ) return;
+	lastMouseMoved = ofGetElapsedTimeMillis();
+	key = std::tolower(key);
 	
 	if( key == '\t' && !configView->isVisibleOnScreen()){
 		osciView->visible = !osciView->visible;
 	}
+
+	if( key == 'f' || key == OF_KEY_RETURN || key == OF_KEY_F11 ){
+		// nasty!
+		osciView->fullscreenButton->clickAndNotify(); 
+	}
+	
+	if( key == ' '  ){
+		osciView->playButton->clickAndNotify();
+	}
 }
 
 //--------------------------------------------------------------
-void ofApp::keyReleased  (int key){
-	if( root->handleKeyReleased( key ) ) return;
+void ofApp::keyReleased(int key){
 }
 
 //--------------------------------------------------------------
 void ofApp::mouseMoved(int x, int y ){
-	if( root->handleMouseMoved( x, y ) ) return;
+	lastMouseMoved = ofGetElapsedTimeMillis();
 }
 
 //--------------------------------------------------------------
 void ofApp::mouseDragged(int x, int y, int button){
-	if( root->handleMouseDragged( x, y, button ) ) return;
+	lastMouseMoved = ofGetElapsedTimeMillis();
 }
 
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){
-	if( root->handleMousePressed( x, y, button ) ) return;
+	lastMouseMoved = ofGetElapsedTimeMillis();
 }
 
 
 //--------------------------------------------------------------
 void ofApp::mouseReleased(int x, int y, int button){
-	if( root->handleMouseReleased( x, y, button ) ) return;
 }
 
 //--------------------------------------------------------------
 void ofApp::windowResized(int w, int h){
-
+	osciView->width = min(500,w/mui::MuiConfig::scaleFactor);
+	osciView->height = 160;
+	osciView->x = w/mui::MuiConfig::scaleFactor/2 - osciView->width/2;
+	osciView->y = h/mui::MuiConfig::scaleFactor - osciView->height - 20;
+	osciView->layout();
 }
 
 //--------------------------------------------------------------
 void ofApp::audioIn(float * input, int bufferSize, int nChannels){
-	if( !filePlayer.isLoaded ){
+	if( !globals.player.isLoaded ){
 		left.append(input, bufferSize,2);
 		right.append(input+1,bufferSize,2);
 	}
@@ -262,8 +286,8 @@ void ofApp::audioIn(float * input, int bufferSize, int nChannels){
 
 void ofApp::audioOut( float * output, int bufferSize, int nChannels ){
 	memset(output, 0, bufferSize*nChannels);
-	if( filePlayer.isLoaded ){
-		filePlayer.audioOut(output, bufferSize, nChannels);
+	if( globals.player.isLoaded ){
+		globals.player.audioOut(output, bufferSize, nChannels);
 		left.append(output, bufferSize,2);
 		right.append(output+1,bufferSize,2);
 	}
@@ -290,7 +314,7 @@ void ofApp::dragEvent(ofDragInfo dragInfo){
 	}
 	
 	if( dragInfo.files.size() >= 1 ){
-		filePlayer.loadSound(dragInfo.files[0]); 
+		globals.player.loadSound(dragInfo.files[0]);
 	}
 	
 }

@@ -40,12 +40,10 @@ class ofApp : public ofBaseApp{
 		OsciView * osciView;
 		ofPath path;
 		ofMesh shapeMesh;
-		Settings settings;
 		ofImage dotImage; 
 	
 		MonoSample left;
 		MonoSample right;
 	
-	
-		ofxAvAudioPlayer filePlayer;
+	unsigned long long lastMouseMoved; 
 };

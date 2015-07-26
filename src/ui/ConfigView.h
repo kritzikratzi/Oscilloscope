@@ -1,7 +1,6 @@
 #pragma once
 
 #include "MUI.h"
-#include "../settings.h"
 
 
 class ConfigView : public mui::Container{
@@ -10,7 +9,6 @@ public:
 	
 	virtual void update();
 	virtual void draw();
-	virtual void drawBackground();
 	
 	virtual void touchDown( ofTouchEventArgs &touch );
 	virtual void touchMoved( ofTouchEventArgs &touch );
@@ -24,8 +22,8 @@ public:
 	mui::SegmentedSelect * numbuffersSelect;
 	mui::Button * startButton;
 	
-	void fromSettings( Settings & settings );
-	void toSettings( Settings & settings );
+	void fromGlobals();
+	void toGlobals();
 	
 	void buttonPressed( const void * sender, ofTouchEventArgs & args ); 
 	void selectSoundCard( mui::ToggleButton * card );
