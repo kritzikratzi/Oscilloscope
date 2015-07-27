@@ -78,7 +78,7 @@
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;src\ui;src\util;..\..\..\addons\ofxAvCodec\libs;..\..\..\addons\ofxAvCodec\src;..\..\..\addons\ofxAvCodec\libs\avcodec;..\..\..\addons\ofxAvCodec\libs\avcodec\include;..\..\..\addons\ofxAvCodec\libs\avcodec\lib;..\..\..\addons\ofxAvCodec\libs\avcodec\lib\win32;..\..\..\addons\ofxAvCodec\libs\avcodec\lib\win64;..\..\..\addons\ofxMightyUI\libs;..\..\..\addons\ofxMightyUI\src;..\..\..\addons\ofxMightyUI\src\_fontstash;addons\ofxExtras\src;addons\ofxIniSettings\src;..\..\..\addons\ofxFontAwesomeI\src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;src\ui;src\util;..\..\..\addons\ofxAvCodec\libs;..\..\..\addons\ofxAvCodec\src;..\..\..\addons\ofxAvCodec\libs\avcodec;..\..\..\addons\ofxAvCodec\libs\avcodec\include;..\..\..\addons\ofxAvCodec\libs\avcodec\lib;..\..\..\addons\ofxAvCodec\libs\avcodec\lib\win32;..\..\..\addons\ofxAvCodec\libs\avcodec\lib\win64;..\..\..\addons\ofxMightyUI\libs;..\..\..\addons\ofxMightyUI\src;..\..\..\addons\ofxMightyUI\src\_fontstash;addons\ofxExtras\src;addons\ofxIniSettings\src;..\..\..\addons\ofxFontAwesome\src</AdditionalIncludeDirectories>
       <CompileAs>CompileAsCpp</CompileAs>
       <UseUnicodeForAssemblerListing>
       </UseUnicodeForAssemblerListing>
