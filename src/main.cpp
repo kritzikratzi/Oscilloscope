@@ -2,7 +2,7 @@
 #include "ofApp.h"
 #include "sounddevices.h"
 #include "MUI.h" 
-#include "ofAppGLFWWindow.h"
+#include "ofAppGlutWindow.h"
 #if defined(TARGET_OSX)
 #import <AppKit/AppKit.h>
 #endif
@@ -14,7 +14,7 @@ int main( ){
 	// this kicks off the running of my app
 	// can be OF_WINDOW or OF_FULLSCREEN
 	// pass in width and height too:
-	ofAppGLFWWindow window;
+	ofAppGlutWindow window;
 	cout << "LAUNCH DESKTOP" << endl;
 	ofSetupOpenGL(&window, 1000,1000, OF_WINDOW);
 
