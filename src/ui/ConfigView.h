@@ -27,11 +27,11 @@ public:
 	
 	void buttonPressed( const void * sender, ofTouchEventArgs & args ); 
 	void selectSoundCard( mui::ToggleButton * card );
+	void autoDetect();
 	
 private:
 	
 	void pushLabel( string text, float &x, float &y, float &w, float &h );
-	void autoDetect(); 
 	int selectedSoundCard;
 	vector<mui::ToggleButton*> soundcardButtons;
 };

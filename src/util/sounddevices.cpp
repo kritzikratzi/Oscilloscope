@@ -56,8 +56,13 @@ bool getDefaultRtOutputParams( int &deviceId, int &sampleRate, int &bufferSize, 
 	RtAudio::DeviceInfo info = audioTemp->getDeviceInfo(deviceId);
 	
 	vector<unsigned int> &rates = info.sampleRates;
-	sampleRate = *max_element(rates.begin(), rates.end());
-	
+	if( rates.size() == 0 ){
+		sampleRate = 44100; // safe guess
+	}
+	else{
+		sampleRate = *max_element(rates.begin(), rates.end());
+	}
+
 	#ifdef _WIN32
 		bufferSize = 1024;
 	#elif __APPLE__

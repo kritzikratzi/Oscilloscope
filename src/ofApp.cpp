@@ -37,6 +37,10 @@ void ofApp::setup(){
 	
 	configView = new ConfigView();
 	configView->fromGlobals();
+	if( globals.autoDetect ){
+		configView->autoDetect();
+	}
+
 	root->add( configView );
 	
 	osciView = new OsciView();
@@ -219,8 +223,13 @@ void ofApp::draw(){
 	ofPopMatrix();
 }
 
+void exit_from_c(){
+	exit(0); 
+}
+
 void ofApp::exit(){
 	stopApplication();
+	exit_from_c();
 }
 
 

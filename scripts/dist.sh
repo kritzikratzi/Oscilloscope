@@ -34,7 +34,7 @@ cd dist
 
 
 dest="Oscilloscope-${version}-${platform}.zip"
-zip -r $dest Oscilloscope
+zip --symlinks -r $dest Oscilloscope
 
 echo "----------------------------"
 echo "Generated ${dest}"

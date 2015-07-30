@@ -121,10 +121,6 @@ void ConfigView::fromGlobals(){
 	sampleRatesSelect->commit();
 	bufferSizeSelect->commit();
 	numbuffersSelect->commit();
-	
-	if( globals.autoDetect ){
-		autoDetect();
-	}
 }
 
 //--------------------------------------------------------------

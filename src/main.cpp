@@ -2,10 +2,16 @@
 #include "ofApp.h"
 #include "sounddevices.h"
 #include "MUI.h" 
-#include "ofAppGlutWindow.h"
 #if defined(TARGET_OSX)
 #import <AppKit/AppKit.h>
 #endif
+
+#if defined(__linux__)
+#include "ofAppGlutWindow.h"
+#else
+#include "ofAppGLFWWindow.h"
+#endif
+
 //========================================================================
 int main( ){
 
@@ -14,7 +20,12 @@ int main( ){
 	// this kicks off the running of my app
 	// can be OF_WINDOW or OF_FULLSCREEN
 	// pass in width and height too:
+	// using glut on linux, because http://forum.openframeworks.cc/t/application-wont-start-after-ubuntu-upgrade/17491
+	#if defined(__linux__)
 	ofAppGlutWindow window;
+	#else
+	ofAppGLFWWindow window;
+	#endif
 	cout << "LAUNCH DESKTOP" << endl;
 	ofSetupOpenGL(&window, 1000,1000, OF_WINDOW);
 

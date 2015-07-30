@@ -638,7 +638,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cp -f ../../../libs/fmodex/lib/osx/libfmodex.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS/libfmodex.dylib\"; install_name_tool -change ./libfmodex.dylib @executable_path/libfmodex.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS/$PRODUCT_NAME\";\nmkdir -p \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/Resources/\"\ncp -f \"$ICON_FILE\" \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/Resources/\"\n\ncp -rf ../../../addons/ofxMightyUI/bin/data/ \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/Resources\"\ncp -fR ../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavfilter.5.21.100.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\" 2>/dev/null | echo -n\ncp -fR ../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavutil.54.28.100.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\" 2>/dev/null | echo -n\ncp -fR ../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libswscale.3.1.101.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\" 2>/dev/null | echo -n\ncp -fR ../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavdevice.56.4.100.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\" 2>/dev/null | echo -n\ncp -fR ../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavformat.56.40.100.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\" 2>/dev/null | echo -n\ncp -fR ../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libswresample.1.2.100.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\" 2>/dev/null | echo -n\ncp -fR ../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavcodec.56.47.100.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\" 2>/dev/null | echo -n\ncp -rf ../../../addons/ofxFontAwesome/bin/data/ \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/Resources\"";
+			shellScript = "cp -f ../../../libs/fmodex/lib/osx/libfmodex.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS/libfmodex.dylib\"; install_name_tool -change ./libfmodex.dylib @executable_path/libfmodex.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS/$PRODUCT_NAME\";\nmkdir -p \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/Resources/\"\ncp -f \"$ICON_FILE\" \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/Resources/\"\ncp -fR ../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavfilter.5.27.100.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\" 2>/dev/null | echo -n\ncp -fR ../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavformat.56.40.101.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\" 2>/dev/null | echo -n\ncp -fR ../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavutil.54.28.100.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\" 2>/dev/null | echo -n\ncp -fR ../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libswresample.1.2.101.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\" 2>/dev/null | echo -n\ncp -fR ../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libswscale.3.1.101.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\" 2>/dev/null | echo -n\ncp -fR ../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavcodec.56.52.100.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\" 2>/dev/null | echo -n\ncp -fR ../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavdevice.56.4.100.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\" 2>/dev/null | echo -n\ncp -fR ../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavcodec.56.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\" 2>/dev/null | echo -n\ncp -fR ../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavcodec.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\" 2>/dev/null | echo -n\ncp -fR ../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavfilter.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\" 2>/dev/null | echo -n\ncp -fR ../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavfilter.5.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\" 2>/dev/null | echo -n\ncp -fR ../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libswscale.3.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\" 2>/dev/null | echo -n\ncp -fR ../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libswresample.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\" 2>/dev/null | echo -n\ncp -fR ../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavutil.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\" 2>/dev/null | echo -n\ncp -fR ../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libswscale.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\" 2>/dev/null | echo -n\ncp -fR ../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavdevice.56.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\" 2>/dev/null | echo -n\ncp -fR ../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavformat.56.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\" 2>/dev/null | echo -n\ncp -fR ../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libswresample.1.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\" 2>/dev/null | echo -n\ncp -fR ../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavdevice.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\" 2>/dev/null | echo -n\ncp -fR ../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavutil.54.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\" 2>/dev/null | echo -n\ncp -fR ../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavformat.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\" 2>/dev/null | echo -n\ncp -rf ../../../addons/ofxMightyUI/bin/data/ \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/Resources\"\ncp -rf ../../../addons/ofxFontAwesome/bin/data/ \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/Resources\"";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -657,17 +657,17 @@
 				BA6C703819C620AA00302D3B /* ofxTCPClient.cpp in Sources */,
 				BA70F79219D39DE9008E990B /* ofxIniSettings.cpp in Sources */,
 				BA6C703A19C620AA00302D3B /* ofxTCPServer.cpp in Sources */,
+				BA828D2D1B378E6D002DE63F /* sounddevices.cpp in Sources */,
+				BAEE5D281B5FB3D10038C838 /* ofApp.cpp in Sources */,
+				BA828D2A1B378A7D002DE63F /* Audio.cpp in Sources */,
 				7898EBFAADC6B4F1AF88C0F0 /* fontstash.c in Sources */,
 				98B22DF8BB8BD39414565121 /* ofxFontStash.cpp in Sources */,
 				9094DCC6ABA9625B45207381 /* ofxTrueTypeFontFS.cpp in Sources */,
 				79231EEC98689F0515694AAA /* BarButton.cpp in Sources */,
 				3CFDC0070C0D9DC4C85AF4DC /* Button.cpp in Sources */,
 				B728886FDA83C1DE0C2F5280 /* Container.cpp in Sources */,
-				BA828D2D1B378E6D002DE63F /* sounddevices.cpp in Sources */,
-				BAEE5D281B5FB3D10038C838 /* ofApp.cpp in Sources */,
 				E269825F55A357AABA89E504 /* CppTweener.cpp in Sources */,
 				C05CD71D597596BBE2C35D82 /* EmptyContainer.cpp in Sources */,
-				BA828D2A1B378A7D002DE63F /* Audio.cpp in Sources */,
 				FC6CDE119FD5744ECE7C526F /* Helpers.cpp in Sources */,
 				E237CE8195D6012BF10C266B /* Image.cpp in Sources */,
 				B92EFA79541DC1EA518DC974 /* InternalWindow.cpp in Sources */,
@@ -781,7 +781,6 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_MODEL_TUNING = NONE;
-				ICON = "$(ICON_NAME_DEBUG)";
 				ICON_FILE = "$(ICON_FILE_PATH)$(ICON)";
 				INFOPLIST_FILE = "openFrameworks-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
@@ -851,13 +850,13 @@
 				);
 				OTHER_LDFLAGS = (
 					"$(OF_CORE_LIBS)",
-					../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavfilter.5.21.100.dylib,
+					../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavfilter.5.27.100.dylib,
+					../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavformat.56.40.101.dylib,
 					../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavutil.54.28.100.dylib,
 					../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libswscale.3.1.101.dylib,
 					../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavdevice.56.4.100.dylib,
-					../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavformat.56.40.100.dylib,
-					../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libswresample.1.2.100.dylib,
-					../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavcodec.56.47.100.dylib,
+					../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavcodec.56.52.100.dylib,
+					../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libswresample.1.2.101.dylib,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)Debug";
 				USER_HEADER_SEARCH_PATHS = ../../../addons/ofxAvCodec/libs/avcodec/include;
@@ -878,7 +877,6 @@
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../../libs/glut/lib/osx\"";
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_MODEL_TUNING = NONE;
-				ICON = "$(ICON_NAME_RELEASE)";
 				ICON_FILE = "$(ICON_FILE_PATH)$(ICON)";
 				INFOPLIST_FILE = "openFrameworks-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
@@ -948,13 +946,13 @@
 				);
 				OTHER_LDFLAGS = (
 					"$(OF_CORE_LIBS)",
-					../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavfilter.5.21.100.dylib,
+					../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavfilter.5.27.100.dylib,
+					../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavformat.56.40.101.dylib,
 					../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavutil.54.28.100.dylib,
 					../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libswscale.3.1.101.dylib,
 					../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavdevice.56.4.100.dylib,
-					../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavformat.56.40.100.dylib,
-					../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libswresample.1.2.100.dylib,
-					../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavcodec.56.47.100.dylib,
+					../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavcodec.56.52.100.dylib,
+					../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libswresample.1.2.101.dylib,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				USER_HEADER_SEARCH_PATHS = ../../../addons/ofxAvCodec/libs/avcodec/include;

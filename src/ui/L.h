@@ -14,6 +14,21 @@
 #include "MUI.h"
 
 namespace mui{
+	class ${
+	public:
+		$( mui::Container * target ) : target(target){
+		}
+
+		$ & pos( float x, float y ){
+			target->x = x;
+			target->y = y;
+			return *this;
+		}
+		
+		mui::Container * target;
+	};
+	
+	
 	class L{
 	public:
 		L( mui::Container * target ) : target(target){
