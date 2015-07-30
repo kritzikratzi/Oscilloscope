@@ -1,7 +1,7 @@
 #! /bin/bash
 
-version=$1
-platform=$2
+version=$2
+platform=$1
 
 if [[ -z "$version" || -z "$platform" ]]
 then

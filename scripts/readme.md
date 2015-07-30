@@ -39,13 +39,13 @@ A typical distribution workflow looks like this:
 	cd apps/myApps/Oscilloscope
 	
 	platform=osx
-	version=1.01
+	version=1.0.3
 	
 	dist/clean.sh
 	dist/prepare.sh $platform
 	
 	# now build & test (use xcode on mac, visual studio on windows, run make release on linux)
 	
-	dist/dist.sh $version $platform
+	dist/dist.sh $platform $version
 	
 	
