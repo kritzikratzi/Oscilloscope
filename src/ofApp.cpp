@@ -83,7 +83,7 @@ void ofApp::startApplication(){
 	cout << "    Buffer size: " << globals.bufferSize << endl;
 	cout << "    Num Buffers: " << globals.numBuffers << endl;
 	
-//	soundStream.setDeviceID( globals.deviceId );
+	soundStream.setDeviceID( globals.deviceId );
 	soundStream.setup(this, 2, 0, globals.sampleRate, globals.bufferSize, globals.numBuffers);
 	globals.player.setupAudioOut(2, globals.sampleRate);
 }
