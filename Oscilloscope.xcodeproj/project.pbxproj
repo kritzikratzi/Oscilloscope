@@ -14,7 +14,6 @@
 		59B2636B9FAB86C0A883FC9C /* Layout.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6EE5442F865B09EE4CCDDD94 /* Layout.cpp */; };
 		7898EBFAADC6B4F1AF88C0F0 /* fontstash.c in Sources */ = {isa = PBXBuildFile; fileRef = 955FB1E2E3958B010FC8E803 /* fontstash.c */; };
 		79231EEC98689F0515694AAA /* BarButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3B73C1A3F266BAFE57AA5FCF /* BarButton.cpp */; };
-		7E1BB97B7FC711BC1715EF7E /* LoadWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CDB4697759078C469BF2650 /* LoadWindow.cpp */; };
 		8D9B658B353CDDF212F522BD /* ScrollPane.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61A842419EFF74F93FDBDE5A /* ScrollPane.cpp */; };
 		9094DCC6ABA9625B45207381 /* ofxTrueTypeFontFS.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FF1BC9B01FDBDD43DA0EC5A6 /* ofxTrueTypeFontFS.cpp */; };
 		9397802B10847A2C74111D6E /* TextField.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CA39C804B514C2081D4B78BC /* TextField.cpp */; };
@@ -22,6 +21,8 @@
 		9F6783C22BE58E43DB564213 /* ofxAvAudioPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1CA38CE0608E3BBB595BCDFE /* ofxAvAudioPlayer.cpp */; };
 		B728886FDA83C1DE0C2F5280 /* Container.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94BFEFD547F62B080775EC81 /* Container.cpp */; };
 		B92EFA79541DC1EA518DC974 /* InternalWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDA4DA295FDA8C4CB1406348 /* InternalWindow.cpp */; };
+		BA19B7C81B78074000E3DFD1 /* MuiConfig.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BA19B7C61B78074000E3DFD1 /* MuiConfig.cpp */; };
+		BA19B7CB1B78090100E3DFD1 /* MuiCore.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BA19B7C91B78090100E3DFD1 /* MuiCore.cpp */; };
 		BA54982119F7274C007E9F6A /* ConfigView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BA54981F19F7274C007E9F6A /* ConfigView.cpp */; };
 		BA54982719F740CE007E9F6A /* OsciView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BA54982519F740CE007E9F6A /* OsciView.cpp */; };
 		BA583CA81A8667B800F4BCB6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BABA49661A866519000900B1 /* Images.xcassets */; };
@@ -128,7 +129,6 @@
 		6EE5442F865B09EE4CCDDD94 /* Layout.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Layout.cpp; sourceTree = "<group>"; };
 		787C60702CF6603591BB1CF5 /* TextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextField.h; sourceTree = "<group>"; };
 		7C0A87F469CB1B878188D0EA /* MUI.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MUI.cpp; sourceTree = "<group>"; };
-		7CDB4697759078C469BF2650 /* LoadWindow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LoadWindow.cpp; sourceTree = "<group>"; };
 		843399BC402A86EA35976EA2 /* ofxTrueTypeFontFS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxTrueTypeFontFS.h; sourceTree = "<group>"; };
 		88DC2EDABCBC86DA517F92B3 /* TextureAtlas.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TextureAtlas.cpp; sourceTree = "<group>"; };
 		8D8426D466CDE2C2A87A7DFE /* Image.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Image.cpp; sourceTree = "<group>"; };
@@ -141,7 +141,10 @@
 		9FB101D8E87C0173018F0586 /* TextureAtlas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextureAtlas.h; sourceTree = "<group>"; };
 		A2D54B529EAA008CE50726B8 /* InternalWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InternalWindow.h; sourceTree = "<group>"; };
 		A892B4AE3BEF21789604FEB2 /* stb_truetype.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_truetype.h; sourceTree = "<group>"; };
-		AF04AB2C6BBBA8CED00DB7A0 /* LoadWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadWindow.h; sourceTree = "<group>"; };
+		BA19B7C61B78074000E3DFD1 /* MuiConfig.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MuiConfig.cpp; sourceTree = "<group>"; };
+		BA19B7C71B78074000E3DFD1 /* MuiConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MuiConfig.h; sourceTree = "<group>"; };
+		BA19B7C91B78090100E3DFD1 /* MuiCore.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MuiCore.cpp; sourceTree = "<group>"; };
+		BA19B7CA1B78090100E3DFD1 /* MuiCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MuiCore.h; sourceTree = "<group>"; };
 		BA386CD51B388233004100D4 /* split.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = split.h; sourceTree = "<group>"; };
 		BA54981C19F725C1007E9F6A /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		BA54981F19F7274C007E9F6A /* ConfigView.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ConfigView.cpp; path = ui/ConfigView.cpp; sourceTree = "<group>"; };
@@ -267,10 +270,12 @@
 				BFC86602DFCA82C2E2D534F3 /* Label.h */,
 				6EE5442F865B09EE4CCDDD94 /* Layout.cpp */,
 				28B8E32B7A472D163E9D2DC6 /* Layout.h */,
-				7CDB4697759078C469BF2650 /* LoadWindow.cpp */,
-				AF04AB2C6BBBA8CED00DB7A0 /* LoadWindow.h */,
 				7C0A87F469CB1B878188D0EA /* MUI.cpp */,
 				FE0D3A23EF4A9DC42625DAD2 /* MUI.h */,
+				BA19B7C61B78074000E3DFD1 /* MuiConfig.cpp */,
+				BA19B7C71B78074000E3DFD1 /* MuiConfig.h */,
+				BA19B7C91B78090100E3DFD1 /* MuiCore.cpp */,
+				BA19B7CA1B78090100E3DFD1 /* MuiCore.h */,
 				9439510945C804E7C475C20A /* Root.cpp */,
 				EB80D30EC1B32976167B8FF0 /* Root.h */,
 				61A842419EFF74F93FDBDE5A /* ScrollPane.cpp */,
@@ -668,14 +673,15 @@
 				B728886FDA83C1DE0C2F5280 /* Container.cpp in Sources */,
 				E269825F55A357AABA89E504 /* CppTweener.cpp in Sources */,
 				C05CD71D597596BBE2C35D82 /* EmptyContainer.cpp in Sources */,
+				BA19B7CB1B78090100E3DFD1 /* MuiCore.cpp in Sources */,
 				FC6CDE119FD5744ECE7C526F /* Helpers.cpp in Sources */,
 				E237CE8195D6012BF10C266B /* Image.cpp in Sources */,
 				B92EFA79541DC1EA518DC974 /* InternalWindow.cpp in Sources */,
 				E8255C03191A97CE94F5DF82 /* Label.cpp in Sources */,
 				59B2636B9FAB86C0A883FC9C /* Layout.cpp in Sources */,
-				7E1BB97B7FC711BC1715EF7E /* LoadWindow.cpp in Sources */,
 				40245A0CFD8C8927459D4EBC /* MUI.cpp in Sources */,
 				C746D93FB7F1F1E072BD5073 /* Root.cpp in Sources */,
+				BA19B7C81B78074000E3DFD1 /* MuiConfig.cpp in Sources */,
 				8D9B658B353CDDF212F522BD /* ScrollPane.cpp in Sources */,
 				470A0D8A2290257001EEDC9B /* SegmentedSelect.cpp in Sources */,
 				E5D631D3B05AFF06A387A28C /* Slider.cpp in Sources */,

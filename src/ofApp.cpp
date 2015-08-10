@@ -128,36 +128,53 @@ void ofApp::update(){
 	else ofHideCursor();
 		
 	shapeMesh.clear();
-	shapeMesh.setMode(OF_PRIMITIVE_LINE_STRIP);
+	shapeMesh.setMode(OF_PRIMITIVE_POINTS);
 	shapeMesh.enableColors();
 	
-	static float * leftBuffer = new float[512];
-	static float * rightBuffer = new float[512];
-	
-	while( left.totalLength >= 512 && right.totalLength >= 512 ){
-		memset(leftBuffer,0,512*sizeof(float));
-		memset(rightBuffer,0,512*sizeof(float));
-		
-		left.addTo(leftBuffer, 1, 512);
-		right.addTo(rightBuffer, 1, 512);
-		left.peel(512);
-		right.peel(512);
-		
-		float S= ofGetWidth()/2*osciView->scaleSlider->value;
-		float x2 = leftBuffer[1];
-		float y2 = rightBuffer[1];
-		float x1, y1;
-		if( shapeMesh.getVertices().size() < 2048*4 ){
-			for( int i = 0; i < 512; i++ ){
-				x1 = leftBuffer[i];
-				y1 = rightBuffer[i];
-				
-				float d = ofDist(x1, y1, x2, y2);
-				shapeMesh.addVertex(ofVec3f(x1*S, y1*S,0));
-				shapeMesh.addColor(ofColor(200, 255, 200, 255*(1-powf(d,0.077))));
-	//			shapeMesh.addColor(ofColor(i/2, 255, 255, 255));
-				x2 = x1;
-				y2 = y1;
+	const int bufferSize = 512;
+	static float * leftBuffer = new float[bufferSize];
+	static float * rightBuffer = new float[bufferSize];
+	static ofPoint a, b, ab, p;
+	static ofColor lastColor;
+	float S = MIN(ofGetWidth()/2,ofGetHeight()/2)*globals.scale;
+
+	if( left.totalLength >= bufferSize && right.totalLength >= bufferSize ){
+		while( left.totalLength >= bufferSize && right.totalLength >= bufferSize ){
+			memset(leftBuffer,0,bufferSize*sizeof(float));
+			memset(rightBuffer,0,bufferSize*sizeof(float));
+			
+			left.addTo(leftBuffer, 1, bufferSize);
+			right.addTo(rightBuffer, 1, bufferSize);
+			left.peel(bufferSize);
+			right.peel(bufferSize);
+			
+			float dMax = 0;
+			if( shapeMesh.getVertices().size() < bufferSize*8 ){
+				for( int i = 0; i < bufferSize; i++ ){
+					b = ofPoint( leftBuffer[i], rightBuffer[i] );
+					ab = b-a;
+					// here, have a bunch of magical numbers!
+					float dist = ab.length();
+					const float alph = powf(0.08,0.18);
+					float E = powf(ofClamp( 1-40*dist, 0, 1),40);
+					float alpha = 255*MAX(E,alph);
+					float erosion = 150*E;
+					
+					//lastColor = ofColor( 255, erosion, erosion, 5 );
+					lastColor = ofColor( erosion, 204, 255, 5 );
+					
+					dMax = MAX(dist, dMax);
+
+					float N = 100;
+					for( int j = 0; j < N; j++ ){
+						float alpha = j/(float)N;
+						p = a + ab*alpha;
+						shapeMesh.addVertex(p*S);
+						shapeMesh.addColor(lastColor);
+					}
+					
+					a = b;
+				}
 			}
 		}
 	}
@@ -166,7 +183,7 @@ void ofApp::update(){
 //--------------------------------------------------------------
 void ofApp::draw(){
 	ofEnableAlphaBlending();
-	ofSetColor( 0, 80 );
+	ofSetColor( 0, 40 );
 	ofFill();
 	ofRect( 0, 0, ofGetWidth(), ofGetHeight() );
 	
@@ -188,24 +205,24 @@ void ofApp::draw(){
 	ofSetColor(255, 0, 0, 25);
 	ofLine( -10, 0, 10, 0 );
 	ofLine( 0, -10, 0, 10 );
-
+/*
 	ofSetColor(50, 255, 50, 30);
-	shapeMesh.disableColors();
-	ofSetLineWidth(20.0);
+//	shapeMesh.disableColors();
+	glPointSize(20.0);
 	shapeMesh.draw();
 	
 	ofSetColor(50, 255, 50, 50);
-	shapeMesh.disableColors();
-	ofSetLineWidth(5.0);
+//	shapeMesh.disableColors();
+	glPointSize(5.0);
 	shapeMesh.draw();
 	
 	ofSetColor(75, 255, 75, 50);
-	shapeMesh.disableColors();
-	ofSetLineWidth(2.5);
+//	shapeMesh.disableColors();
+	glPointSize(2.5);
 	shapeMesh.draw();
-	
+	*/
 	shapeMesh.enableColors();
-	ofSetLineWidth(1.0);
+	glPointSize(5*mui::MuiConfig::scaleFactor);
 	shapeMesh.draw();
 	
 /*	vector<ofVec3f> verts = shapeMesh.getVertices();

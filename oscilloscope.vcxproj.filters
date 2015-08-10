@@ -64,9 +64,6 @@
     <ClCompile Include="..\..\..\addons\ofxMightyUI\src\Layout.cpp">
       <Filter>addons\ofxMightyUI\src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\addons\ofxMightyUI\src\LoadWindow.cpp">
-      <Filter>addons\ofxMightyUI\src</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\addons\ofxMightyUI\src\MUI.cpp">
       <Filter>addons\ofxMightyUI\src</Filter>
     </ClCompile>
@@ -102,6 +99,12 @@
     </ClCompile>
     <ClCompile Include="src\globals.cpp">
       <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxMightyUI\src\MuiConfig.cpp">
+      <Filter>addons\ofxMightyUI\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxMightyUI\src\MuiCore.cpp">
+      <Filter>addons\ofxMightyUI\src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -524,9 +527,6 @@
     <ClInclude Include="..\..\..\addons\ofxMightyUI\src\Layout.h">
       <Filter>addons\ofxMightyUI\src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxMightyUI\src\LoadWindow.h">
-      <Filter>addons\ofxMightyUI\src</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\addons\ofxMightyUI\src\MUI.h">
       <Filter>addons\ofxMightyUI\src</Filter>
     </ClInclude>
@@ -574,6 +574,12 @@
     </ClInclude>
     <ClInclude Include="..\..\..\addons\ofxFontAwesome\src\ofxFontAwesome.h">
       <Filter>addons\ofxFontAwesome\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxMightyUI\src\MuiConfig.h">
+      <Filter>addons\ofxMightyUI\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxMightyUI\src\MuiCore.h">
+      <Filter>addons\ofxMightyUI\src</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
