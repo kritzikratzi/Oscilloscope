@@ -139,10 +139,6 @@ void OsciView::update(){
 	static float lastOutputVol = -1;
 	if( !updateSlider(outputVolumeSlider, globals.outputVolume, lastOutputVol) ){
 		globals.outputVolume = outputVolumeSlider->value;
-		globals.player.volume = outputVolumeSlider->value;
-	}
-	else{
-		globals.player.volume = globals.outputVolume;
 	}
 	
 	static float lastScaleVal = -1;

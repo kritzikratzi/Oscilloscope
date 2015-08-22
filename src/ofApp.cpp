@@ -16,9 +16,13 @@ void ofApp::setup(){
 	ofSetVerticalSync(true);
 	ofBackground(0);
 	ofSetBackgroundAuto(false);
+	dotImage.setUseTexture(true);
 	dotImage.allocate(64, 64, OF_IMAGE_COLOR_ALPHA);
+	dotImage.getTextureReference().setTextureWrap(GL_CLAMP_TO_EDGE, GL_CLAMP_TO_EDGE);
 	dotImage.loadImage( "dot.png" );
-	
+	shader.setGeometryOutputCount(4);
+	shaderLoader.setup(&shader, "shaders/osci" );
+	blur.load("shaders/blur");
 	
 	cout << "Available Sound Devices: " << endl;
 	soundStream.listDevices();
@@ -126,12 +130,13 @@ void ofApp::update(){
 	}
 	if( osciView->visible ) ofShowCursor();
 	else ofHideCursor();
-		
+	
+	changed = false;
 	shapeMesh.clear();
 	shapeMesh.setMode(OF_PRIMITIVE_POINTS);
 	shapeMesh.enableColors();
 	
-	const int bufferSize = 512;
+	const int bufferSize = 512*4;
 	static float * leftBuffer = new float[bufferSize];
 	static float * rightBuffer = new float[bufferSize];
 	static ofPoint a, b, ab, p;
@@ -139,6 +144,7 @@ void ofApp::update(){
 	float S = MIN(ofGetWidth()/2,ofGetHeight()/2)*globals.scale;
 
 	if( left.totalLength >= bufferSize && right.totalLength >= bufferSize ){
+		changed = true;
 		while( left.totalLength >= bufferSize && right.totalLength >= bufferSize ){
 			memset(leftBuffer,0,bufferSize*sizeof(float));
 			memset(rightBuffer,0,bufferSize*sizeof(float));
@@ -149,7 +155,7 @@ void ofApp::update(){
 			right.peel(bufferSize);
 			
 			float dMax = 0;
-			if( shapeMesh.getVertices().size() < bufferSize*8 ){
+			if( shapeMesh.getVertices().size() < bufferSize*2 ){
 				for( int i = 0; i < bufferSize; i++ ){
 					b = ofPoint( leftBuffer[i], rightBuffer[i] );
 					ab = b-a;
@@ -161,14 +167,16 @@ void ofApp::update(){
 					float erosion = 150*E;
 					
 					//lastColor = ofColor( 255, erosion, erosion, 5 );
-					lastColor = ofColor( erosion, 204, 255, 5 );
+//					lastColor = ofColor( erosion, 204, 255, 4 );
+					lastColor = ofColor( erosion, 255, erosion, 4 );
 					
 					dMax = MAX(dist, dMax);
-
-					float N = 100;
+					
+					float N = 20;
 					for( int j = 0; j < N; j++ ){
 						float alpha = j/(float)N;
 						p = a + ab*alpha;
+						
 						shapeMesh.addVertex(p*S);
 						shapeMesh.addColor(lastColor);
 					}
@@ -182,62 +190,94 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-	ofEnableAlphaBlending();
-	ofSetColor( 0, 40 );
-	ofFill();
-	ofRect( 0, 0, ofGetWidth(), ofGetHeight() );
+	ofClear(0,255);
 	
-	ofPushMatrix();
-	ofTranslate(ofGetWidth()/2, ofGetHeight()/2 );
-	
-	int scaleX = 1;
-	int scaleY = -1;
-	if( globals.invertX ) scaleX *= -1;
-	if( globals.invertY ) scaleY *= -1;
-	
-	
-	ofScale( scaleX, scaleY );
-	if( globals.flipXY ){
-		ofRotate(-90);
-		ofScale( -1, 1 );
+	if( !fbo.isAllocated() || fbo.getWidth() != ofGetWidth() || fbo.getHeight() != fbo.getHeight() ){
+		fbo.allocate(ofGetWidth(), ofGetHeight());
+		fbb.allocate(ofGetWidth(), ofGetHeight());
 	}
 	
-	ofSetColor(255, 0, 0, 25);
-	ofLine( -10, 0, 10, 0 );
-	ofLine( 0, -10, 0, 10 );
-/*
-	ofSetColor(50, 255, 50, 30);
-//	shapeMesh.disableColors();
-	glPointSize(20.0);
-	shapeMesh.draw();
+	ofFbo &shapeFbo = (ofGetFrameNum() % 2) == 0? fbo : fbb;
+	ofFbo &screenFbo = (ofGetFrameNum() % 2) == 0? fbb : fbo;
+	shapeFbo = fbo;
+	screenFbo = fbb;
 	
-	ofSetColor(50, 255, 50, 50);
-//	shapeMesh.disableColors();
-	glPointSize(5.0);
-	shapeMesh.draw();
-	
-	ofSetColor(75, 255, 75, 50);
-//	shapeMesh.disableColors();
-	glPointSize(2.5);
-	shapeMesh.draw();
-	*/
-	shapeMesh.enableColors();
-	glPointSize(5*mui::MuiConfig::scaleFactor);
-	shapeMesh.draw();
-	
-/*	vector<ofVec3f> verts = shapeMesh.getVertices();
-	vector<ofVec3f>::iterator it = verts.begin();
-	ofSetColor(255,20);
-	int i = 0;
-	while( it != verts.end() ){
-		if( i % 10 == 0 )
-			dotImage.draw((*it).x-dotImage.width/2, (*it).y-dotImage.height/2);
-		++i;
-		++it;
-	}*/
-//	ofDisableBlendMode();
-	
-	ofPopMatrix();
+	if( changed && globals.player.isPlaying ){
+		
+		screenFbo.begin();
+		ofSetColor(255);
+		blur.begin();
+		blur.setUniform1f("blurAmnt", 30);
+	//	glEnable(GL_BLEND);
+	//	glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+		shapeFbo.draw(0,0);
+		blur.end();
+		screenFbo.end();
+		
+		shapeFbo.begin();
+		ofSetColor(255);
+		blur.begin();
+		blur.setUniform1f("blurAmnt", 30);
+		//	glEnable(GL_BLEND);
+		//	glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+		screenFbo.draw(0,0);
+		blur.end();
+		shapeFbo.end();
+
+		
+		
+		shapeFbo.begin();
+		//	glEnable(GL_BLEND);
+		//	glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+		ofSetColor( 0, 15 );
+		ofFill();
+		ofRect( 0, 0, ofGetWidth(), ofGetHeight() );
+		
+		//	ofClear(0,0,0,0);
+		//	glClearColor(0, 0, 0, 0);
+		//	glClear(GL_COLOR_BUFFER_BIT);
+		ofEnableAlphaBlending();
+		
+		ofPushMatrix();
+		ofTranslate(ofGetWidth()/2, ofGetHeight()/2 );
+		int scaleX = 1;
+		int scaleY = -1;
+		if( globals.invertX ) scaleX *= -1;
+		if( globals.invertY ) scaleY *= -1;
+		
+		
+		ofScale( scaleX, scaleY );
+		if( globals.flipXY ){
+			ofRotate(-90);
+			ofScale( -1, 1 );
+		}
+		
+		
+		ofClear(0,255);
+		ofSetColor(255, 0, 0, 25);
+		ofLine( -10, 0, 10, 0 );
+		ofLine( 0, -10, 0, 10 );
+		
+		shapeMesh.enableColors();
+		glPointSize(2*mui::MuiConfig::scaleFactor);
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+		shader.begin();
+		shader.setUniform1f("width", 10.0 );
+		shader.setUniform1f("height", 10.0 );
+		shader.setUniformTexture("tex", dotImage.getTextureReference(), 0);
+		ofSetColor(255);
+		shapeMesh.draw();
+		shader.end();
+		glDisable(GL_BLEND);
+		ofEnableAlphaBlending();
+
+		
+		ofPopMatrix();
+		shapeFbo.end();
+	}
+	shapeFbo.draw(0,0);
+
 }
 
 void exit_from_c(){
@@ -314,8 +354,12 @@ void ofApp::audioOut( float * output, int bufferSize, int nChannels ){
 	memset(output, 0, bufferSize*nChannels);
 	if( globals.player.isLoaded ){
 		globals.player.audioOut(output, bufferSize, nChannels);
+		
 		left.append(output, bufferSize,2);
 		right.append(output+1,bufferSize,2);
+		
+		AudioAlgo::scale(output, globals.outputVolume, nChannels*bufferSize);
+		
 	}
 	else{
 		

@@ -145,6 +145,7 @@
 		BA19B7C71B78074000E3DFD1 /* MuiConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MuiConfig.h; sourceTree = "<group>"; };
 		BA19B7C91B78090100E3DFD1 /* MuiCore.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MuiCore.cpp; sourceTree = "<group>"; };
 		BA19B7CA1B78090100E3DFD1 /* MuiCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MuiCore.h; sourceTree = "<group>"; };
+		BA21C8961B87D58600FBAB8C /* ShaderLoader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShaderLoader.h; sourceTree = "<group>"; };
 		BA386CD51B388233004100D4 /* split.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = split.h; sourceTree = "<group>"; };
 		BA54981C19F725C1007E9F6A /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		BA54981F19F7274C007E9F6A /* ConfigView.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ConfigView.cpp; path = ui/ConfigView.cpp; sourceTree = "<group>"; };
@@ -441,6 +442,7 @@
 				BA828D281B378A7D002DE63F /* Audio.cpp */,
 				BA828D291B378A7D002DE63F /* Audio.h */,
 				BA386CD51B388233004100D4 /* split.h */,
+				BA21C8961B87D58600FBAB8C /* ShaderLoader.h */,
 			);
 			path = util;
 			sourceTree = "<group>";

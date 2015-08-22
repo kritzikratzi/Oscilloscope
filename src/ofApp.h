@@ -2,6 +2,7 @@
 
 #include "ofMain.h"
 #include "util/sounddevices.h"
+#include "util/ShaderLoader.h"
 #include "MUI.h" 
 
 #include "ui/ConfigView.h"
@@ -40,10 +41,17 @@ class ofApp : public ofBaseApp{
 		OsciView * osciView;
 		ofPath path;
 		ofMesh shapeMesh;
-		ofImage dotImage; 
+		ofImage dotImage;
+		ofFbo fbo, fbb;
+		ofShader shader;
+		ShaderLoader shaderLoader;
+	
+		ofShader blur;
 	
 		MonoSample left;
 		MonoSample right;
+	
+	bool changed = false; 
 	
 	unsigned long long lastMouseMoved; 
 };

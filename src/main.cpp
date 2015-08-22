@@ -12,9 +12,10 @@
 #include "ofAppGLFWWindow.h"
 #endif
 
+#include <GL/glew.h>
+
 //========================================================================
 int main( ){
-
 //	ofSetupOpenGL(1024,768, OF_WINDOW);			// <-------- setup the GL context
 
 	// this kicks off the running of my app
@@ -28,6 +29,15 @@ int main( ){
 	#endif
 	cout << "LAUNCH DESKTOP" << endl;
 	ofSetupOpenGL(&window, 1000,1000, OF_WINDOW);
+
+
+	if(!ofGLCheckExtension("GL_ARB_geometry_shader4") &&
+	   !ofGLCheckExtension("GL_EXT_geometry_shader4") &&
+	   !ofIsGLProgrammableRenderer()){
+		ofLogFatalError() << "geometry shaders not supported on this graphics card";
+		return 1;
+	}
+
 
 	#if defined(TARGET_OSX)
 	NSWindow * cocoaWindow = (NSWindow*)window.getCocoaWindow();
