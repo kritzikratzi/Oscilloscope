@@ -59,7 +59,6 @@ void ofApp::setup(){
 		startApplication();
 	}
 
-	
 	windowResized(ofGetWidth(), ofGetHeight());
 }
 
@@ -195,6 +194,12 @@ void ofApp::draw(){
 	if( !fbo.isAllocated() || fbo.getWidth() != ofGetWidth() || fbo.getHeight() != fbo.getHeight() ){
 		fbo.allocate(ofGetWidth(), ofGetHeight());
 		fbb.allocate(ofGetWidth(), ofGetHeight());
+		fbo.begin();
+		ofClear(0,255);
+		fbo.end();
+		fbb.begin();
+		ofClear(0,255);
+		fbb.end(); 
 	}
 	
 	ofFbo &shapeFbo = (ofGetFrameNum() % 2) == 0? fbo : fbb;
@@ -208,8 +213,6 @@ void ofApp::draw(){
 		ofSetColor(255);
 		blur.begin();
 		blur.setUniform1f("blurAmnt", 30);
-	//	glEnable(GL_BLEND);
-	//	glBlendFunc(GL_SRC_ALPHA, GL_ONE);
 		shapeFbo.draw(0,0);
 		blur.end();
 		screenFbo.end();
@@ -217,14 +220,11 @@ void ofApp::draw(){
 		shapeFbo.begin();
 		ofSetColor(255);
 		blur.begin();
-		blur.setUniform1f("blurAmnt", 30);
-		//	glEnable(GL_BLEND);
-		//	glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+		blur.setUniform1f("blurAmnt", 5);
 		screenFbo.draw(0,0);
 		blur.end();
 		shapeFbo.end();
 
-		
 		
 		shapeFbo.begin();
 		//	glEnable(GL_BLEND);
@@ -253,7 +253,6 @@ void ofApp::draw(){
 		}
 		
 		
-		ofClear(0,255);
 		ofSetColor(255, 0, 0, 25);
 		ofLine( -10, 0, 10, 0 );
 		ofLine( 0, -10, 0, 10 );
@@ -290,7 +289,7 @@ void ofApp::exit(){
 }
 
 
-//--------------------------------------------------------------
+//----------------------------------------------------------	----
 void ofApp::keyPressed  (int key){
 	lastMouseMoved = ofGetElapsedTimeMillis();
 	key = std::tolower(key);

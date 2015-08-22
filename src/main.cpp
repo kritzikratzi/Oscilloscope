@@ -27,8 +27,15 @@ int main( ){
 	#else
 	ofAppGLFWWindow window;
 	#endif
+
 	cout << "LAUNCH DESKTOP" << endl;
-	ofSetupOpenGL(&window, 1000,1000, OF_WINDOW);
+	ofSetupOpenGL(&window, 1024, 768, OF_WINDOW);
+	
+	#if defined(TARGET_OSX)
+	NSWindow * cocoaWindow = (NSWindow*)window.getCocoaWindow();
+	[cocoaWindow setFrame:[[NSScreen mainScreen] visibleFrame] display:YES];
+	#endif
+	
 
 
 	if(!ofGLCheckExtension("GL_ARB_geometry_shader4") &&
@@ -38,12 +45,6 @@ int main( ){
 		return 1;
 	}
 
-
-	#if defined(TARGET_OSX)
-	NSWindow * cocoaWindow = (NSWindow*)window.getCocoaWindow();
-	[cocoaWindow setFrame:[[NSScreen mainScreen] visibleFrame] display:YES];
-//	[cocoaWindow setLevel:10];
-	#endif
 
 	mui_init();
 	mui::MuiConfig::font = "mui/fonts/Lato-Regular.ttf";
