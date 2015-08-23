@@ -22,11 +22,13 @@ public:
 	mui::SegmentedSelect * numbuffersSelect;
 	mui::Button * startButton;
 	
+	mui::Container * blocker;
+	
 	void fromGlobals();
 	void toGlobals();
 	
 	void buttonPressed( const void * sender, ofTouchEventArgs & args ); 
-	void selectSoundCard( mui::ToggleButton * card );
+	void selectSoundCard( int deviceId );
 	void autoDetect();
 	
 private:

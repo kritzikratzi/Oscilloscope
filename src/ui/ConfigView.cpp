@@ -53,20 +53,30 @@ ConfigView::ConfigView( float x_, float y_, float width_, float height_)
 	vector<RtAudio::DeviceInfo>::iterator it = infos.begin();
 	while( it != infos.end() ){
 		RtAudio::DeviceInfo info = *it;
-		string name = string(info.name) + ": out=" + ofToString(info.outputChannels) + ",in=" + ofToString(info.inputChannels); 
-		mui::ToggleButton * button = new mui::ToggleButton( name, x, y, w, h );
-		ofAddListener( button->onPress, this, &ConfigView::buttonPressed );
-		button->fg = ofColor( 255 );
-		button->label->horizontalAlign = mui::Left;
-		soundcardButtons.push_back(button);
-		add( button );
-		y += button->height;
+		string name = string(info.name);
+		if( info.outputChannels > 0 ){
+			mui::ToggleButton * button = new mui::ToggleButton( name, x, y, w, h );
+			button->userData = (void*)(it-infos.begin());
+			ofAddListener( button->onPress, this, &ConfigView::buttonPressed );
+			button->fg = ofColor( 255 );
+			button->label->horizontalAlign = mui::Left;
+			soundcardButtons.push_back(button);
+			add( button );
+			y += button->height;
+		}
+		
 		
 		++it;
 	}
 	
 	y += 20;
-
+	
+	float startY  = autoDetectButton->y + autoDetectButton->height;
+	blocker = new mui::Container( x, startY, w, y - startY - 20 );
+	blocker->bg = ofColor(0, 150);
+	blocker->ignoreEvents = false;
+	blocker->opaque = true;
+	add( blocker );
 	
 	startButton = new mui::Button( "Start!", x, y, w, h );
 	ofAddListener( startButton->onPress, this, &ConfigView::buttonPressed );
@@ -77,6 +87,7 @@ ConfigView::ConfigView( float x_, float y_, float width_, float height_)
 
 //--------------------------------------------------------------
 void ConfigView::update(){
+	blocker->visible = autoDetectButton->selected;
 }
 
 
@@ -112,10 +123,10 @@ void ConfigView::fromGlobals(){
 	numbuffersSelect->selected = ofToString( globals.numBuffers );
 
 	if( globals.deviceId < soundcardButtons.size() ){
-		selectSoundCard( soundcardButtons[globals.deviceId] );
+		selectSoundCard( globals.deviceId );
 	}
 	else{
-		selectSoundCard( soundcardButtons[0] );
+		selectSoundCard( -1 );
 	}
 	
 	sampleRatesSelect->commit();
@@ -153,15 +164,20 @@ void ConfigView::buttonPressed( const void * sender, ofTouchEventArgs & args ){
 		app->gotMessage( ofMessage( "start-pressed" ) );
 	}
 	else{
-		selectSoundCard((mui::ToggleButton*)sender);
+		mui::ToggleButton * btn = (mui::ToggleButton*)sender;
+		selectSoundCard((int)btn->userData);
 	}
 }
 
-void ConfigView::selectSoundCard( mui::ToggleButton * card ){
+void ConfigView::selectSoundCard( int deviceId ){
+	if( deviceId < 0 && soundcardButtons.size() > 0 ){
+		deviceId = (int)soundcardButtons.front()->userData;
+	}
+	
 	for( int i = 0; i < soundcardButtons.size(); i++ ){
 		mui::ToggleButton * btn = soundcardButtons[i];
-		if( btn == card ){
-			selectedSoundCard = i;
+		if( (int)btn->userData == deviceId ){
+			selectedSoundCard = deviceId;
 			btn->selected = true;
 		}
 		else{
@@ -177,7 +193,7 @@ void ConfigView::autoDetect(){
 	int bufferSize = 512;
 	int numBuffers = 4;
 	getDefaultRtOutputParams(deviceId, sampleRate, bufferSize, numBuffers);
-	if( deviceId < soundcardButtons.size() ) selectSoundCard(soundcardButtons[deviceId]);
+	if( deviceId < soundcardButtons.size() ) selectSoundCard(deviceId);
 	sampleRatesSelect->selected = ofToString(sampleRate);
 	sampleRatesSelect->commit();
 	bufferSizeSelect->selected = ofToString(bufferSize);
