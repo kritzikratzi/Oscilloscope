@@ -51,7 +51,8 @@ class ofApp : public ofBaseApp{
 		MonoSample left;
 		MonoSample right;
 	
-	bool changed = false; 
+		bool changed;
+		bool clearFbos; 
 	
 	unsigned long long lastMouseMoved; 
 };

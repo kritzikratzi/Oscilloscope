@@ -1,4 +1,5 @@
 #version 120  
+
 uniform sampler2DRect tex;
 varying vec2 texcoord;
 

@@ -6,7 +6,6 @@
 #include <map>
 
 #include "ofMain.h"
-#include "ofxExtras.h"
 
 class ofxIniSettings {
 public:
@@ -68,6 +67,69 @@ public:
     template<typename T> void set(string id, string key, T value) { set(id=="" ? key : (id+"."+key), value); } //returntype void
     template<typename T> void set(string key, T value) { setString(key, ofxToString(value)); } //returntype void
 
+	
+	
+	// getting rid of inter-dependencies to ofxExtras. here's the stuff thats needed:
+	static void ofxExit(string error );
+	static bool ofxFileExists(string filename) ;
+	bool ofxStringEndsWith(string str, string key) ;
+	static string ofxFormatString(string format, int number) ;
+	static string ofxFormatString(string format, string s) ;
+	static string ofxReplaceString(string input, string replace, string by) ;
+	static void ofxSaveString(string filename, string str) ;
+	static void ofxSaveStrings(string filename, vector<string> lines) ;
+	static string ofxTrimStringRight(string str) ;
+	static string ofxTrimStringLeft(string str) ;
+	static string ofxTrimString(string str) ;
+	static string ofxStringBeforeFirst(string str, string key) ;
+	static string ofxStringAfterFirst(string str, string key) ;
+	static string ofxStringAfterLast(string str, string key) ;
+	static string ofxStringBeforeLast(string str, string key) ;
+	static bool ofxContains(vector<string> keys, string key) ;
+	static float ofxDist(float ax, float ay, float az, float bx, float by, float bz) ;
+	static bool ofxColorMatch(ofColor a, ofColor b, int tolerance) ;
+	static void ofxScale(float scale) ;
+	static void ofxSetHexColor(int hexColor, int a);
+	static void ofxSetColor(ofColor c) ;
+	static void ofxSetColorHSB(int h, int s, int b, int a) ;
+	static bool ofxToBoolean(string str);
+	static bool ofxToBoolean(float f) ;
+	static int ofxToInteger(string str) ;
+	static string ofxToString(char ch);
+	static string ofxToString(unsigned char ch);
+	static string ofxToString(string str);
+	static string ofxToString(float f) ;
+	static string ofxToString(bool value);
+	static string ofxToString(int value) ;
+	static string ofxToString(ofRectangle v) ;
+	static ofColor ofxToColor(int hexColor) ;
+	static ofColor ofxToColor(unsigned char r, unsigned char g, unsigned char b) ;
+	static ofColor ofxToColor(ofVec4f v) ;
+	static ofColor ofxToColor(ofVec3f v, int alpha) ;
+	static string ofxToHexString(int value, int digits=6) ;
+	static int ofxToInteger(ofColor c) ;
+	static string ofxToString(ofQuaternion q) ;
+	static ofQuaternion ofxToQuaternion(string str) ;
+	static string ofxToHex(char c) ;
+	static vector<string> ofxToStringVector(string value) ;
+	static void ofxRotate(ofVec3f v) ;
+	static void ofxRotate(ofQuaternion q) ;
+	static void ofxRotate(ofNode &node, ofQuaternion q) ;
+	static void ofxRotate(float angle, ofVec3f v) ;
+	static void ofxTranslate(ofVec3f v) ;
+	static void ofxScale(ofVec3f v) ;
+	static ofVec2f ofxToVec2f(string str) ;
+	static ofVec3f ofxToVec3f(string str) ;
+	static ofVec3f ofxToVec3f(float *a) ;
+	static ofVec4f ofxToVec4f(string str) ;
+	static ofRectangle ofxToRectangle(ofVec4f v) ;
+	static ofRectangle ofxToRectangle(string str) ;
+	static string ofxToString(ofVec2f v) ;
+	static string ofxToString(ofVec3f v, int precision) ;
+	static string ofxToString(ofVec4f v) ;
+	static string ofxToString(ofMatrix4x4 m) ;
+	static ofMatrix4x4 ofxToMatrix4x4(string s) ;
+	static vector<float> ofxToFloatVector(string s, string delimiter) ;
 };
 
 #endif

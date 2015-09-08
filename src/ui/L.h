@@ -66,6 +66,20 @@ namespace mui{
 			return *this;
 		}
 		
+		L & alignRightEdgeTo( mui::Container * dest, float space = 0, mui::HorizontalAlign align = mui::Right ){
+			if( align == mui::Left ){
+				target->x = dest->x - target->width + space;
+			}
+			else if( align == mui::Right ){
+				target->x = dest->x + dest->width - target->width - space;
+			}
+			else if( align == mui::Center ){
+				target->x = dest->x + dest->width/2 - target->width + space;
+			}
+			
+			return *this;
+		}
+		
 		L & maxWidth( float width ){
 			target->width = min(width, target->width);
 			return *this; 

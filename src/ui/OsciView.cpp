@@ -5,6 +5,7 @@
 #include "ofApp.h"
 #include "L.h"
 
+
 OsciView::OsciView( float x_, float y_, float width_, float height_)
 : mui::Container( x_, y_, width_, height_ ){
 	float x = 10, y = 10, w = 400, h = 30;
@@ -18,13 +19,7 @@ OsciView::OsciView( float x_, float y_, float width_, float height_)
 	y += stopButton->height + 10;
 	add( stopButton );
 	
-	scaleLabel = new mui::Label( "Scale", 0, 0, 100, h );
-	scaleLabel->fontSize = 10;
-	scaleLabel->commit();
-	scaleLabel->width = scaleLabel->boundingBox.width;
-	scaleLabel->horizontalAlign = mui::Right;
-	add(scaleLabel);
-	
+	scaleLabel = addLabel( "Scale" );
 	scaleSlider = new mui::Slider( x, y, w, h, 0.1, 2, 1 );
 	y += scaleSlider->height + 10;
 	add( scaleSlider );
@@ -65,25 +60,42 @@ OsciView::OsciView( float x_, float y_, float width_, float height_)
 	add( timeSlider );
 	
 	
-	outputVolumeLabel = new mui::Label( "Volume", 0, 0, 100, h );
-	outputVolumeLabel->fontSize = 10;
-	outputVolumeLabel->commit();
-	outputVolumeLabel->width  = outputVolumeLabel->boundingBox.width;
-	outputVolumeLabel->horizontalAlign = mui::Right;
-
-	add( outputVolumeLabel);
-	
+	outputVolumeLabel = addLabel( "Volume" );
 	outputVolumeSlider = new mui::Slider(0, 0, 100, h, 0, 1, 0.8 );
-	add( outputVolumeSlider);
+	add(outputVolumeSlider);
+	
+	strokeWeightLabel = addLabel( "Stroke Weight" );
+	strokeWeightSlider = new mui::Slider(0, 0, 100, h, 1, 20, 10 );
+	add( strokeWeightSlider );
+	
+	blurLabel = addLabel( "Blur" );
+	blurSlider = new mui::Slider(0,0, 100, h, 0, 255, 30);
+	add(blurSlider);
+	
+	numPtsLabel = addLabel( "Points" );
+	numPtsSlider = new mui::Slider(0,0,100,h, 1, 100, 20);
+	add(numPtsSlider);
+
+	hueLabel = addLabel( "Hue" );
+	hueSlider = new mui::Slider(0,0,100,h,0,360, 0);
+	add(hueSlider);
+	
+	intensityLabel = addLabel( "Intensity" );
+	intensitySlider = new mui::Slider(0,0,100,h,0,1, 0);
+	add(intensitySlider);
+	
+	afterglowLabel = addLabel( "Afterglow" );
+	afterglowSlider = new mui::Slider(0,0,100,h,0,1, 0);
+	add(afterglowSlider);
+	
+	
+	
+
 	
 	layout();
 }
 
 void OsciView::layout(){
-	// make labels same width
-	float w = max(outputVolumeLabel->width, scaleLabel->width);
-	outputVolumeLabel->width = scaleLabel->width = w;
-	
 	mui::L(fullscreenButton).pos(width-30, 0);
 	mui::L(stopButton).leftOf(fullscreenButton,1);
 	
@@ -92,20 +104,34 @@ void OsciView::layout(){
 	
 	mui::L(loadFileButton).below(playButton, 10);
 	mui::L(outputVolumeLabel).rightOf(loadFileButton,20);
+	mui::L(outputVolumeSlider).rightOf(outputVolumeLabel,5).stretchToRightEdgeOf(this,10);
 	
 	mui::L(invertX).below(loadFileButton, 10);
 	mui::L(invertY).rightOf(invertX, 10);
 	mui::L(flipXY).rightOf(invertY,10);
 	mui::L(scaleLabel).rightOf(flipXY,20);
+	mui::L(scaleSlider).rightOf(scaleLabel,5).stretchToRightEdgeOf(this,10);
+	
+	mui::L(strokeWeightLabel).below(scaleLabel).alignRightEdgeTo(scaleLabel);
+	mui::L(strokeWeightSlider).rightOf(strokeWeightLabel,5).stretchToRightEdgeOf(this,10);
+	
+	mui::L(blurLabel).below(strokeWeightLabel).alignRightEdgeTo(strokeWeightLabel);
+	mui::L(blurSlider).rightOf(blurLabel,5).stretchToRightEdgeOf(this,10);
+	
+	mui::L(numPtsLabel).below(blurLabel).alignRightEdgeTo(blurLabel);
+	mui::L(numPtsSlider).rightOf(numPtsLabel,5).stretchToRightEdgeOf(this,10);
+	
+	mui::L(hueLabel).below(numPtsLabel).alignRightEdgeTo(numPtsLabel);
+	mui::L(hueSlider).rightOf(hueLabel,5).stretchToRightEdgeOf(this,10);
+	
+	mui::L(intensityLabel).below(hueLabel).alignRightEdgeTo(hueLabel);
+	mui::L(intensitySlider).rightOf(intensityLabel,5).stretchToRightEdgeOf(this,10);
+	
+	mui::L(afterglowLabel).below(intensityLabel).alignRightEdgeTo(intensityLabel);
+	mui::L(afterglowSlider).rightOf(afterglowLabel,5).stretchToRightEdgeOf(this,10);
 	
 	
-	outputVolumeLabel->x = scaleLabel->x = max( scaleLabel->x, outputVolumeLabel->x );
-	mui::L(outputVolumeSlider).rightOf(outputVolumeLabel,5);
-	mui::L(scaleSlider).rightOf(scaleLabel,5);
-	outputVolumeSlider->x = scaleSlider->x = max( outputVolumeSlider->x, scaleSlider->x );
-	
-	mui::L(outputVolumeSlider).stretchToRightEdgeOf(this,10);
-	mui::L(scaleSlider).stretchToRightEdgeOf(this,10);
+	height = afterglowSlider->y + afterglowSlider->height;
 }
 
 
@@ -151,6 +177,36 @@ void OsciView::update(){
 		playButton->commit();
 	}
 	
+	static float lastStrokeWeightVal = -1;
+	if( !updateSlider(strokeWeightSlider, globals.strokeWeight, lastStrokeWeightVal ) ){
+		globals.strokeWeight = strokeWeightSlider->value;
+	}
+	
+	static float lastBlurVal = -1;
+	if( !updateSlider(blurSlider, globals.blur, lastBlurVal ) ){
+		globals.blur = blurSlider->value;
+	}
+	
+	static float lastNumPtsVal = -1;
+	if( !updateSlider(numPtsSlider, globals.numPts, lastNumPtsVal ) ){
+		globals.numPts = numPtsSlider->value;
+	}
+	
+	static float lastHueVal = -1;
+	if( !updateSlider(hueSlider, globals.hue, lastHueVal ) ){
+		globals.hue = hueSlider->value;
+	}
+	
+	static float lastIntensityVal = -1;
+	if( !updateSlider(intensitySlider, globals.intensity, lastIntensityVal ) ){
+		globals.intensity = intensitySlider->value;
+	}
+	
+	static float lastAfterglowVal = -1;
+	if( !updateSlider(afterglowSlider, globals.afterglow, lastAfterglowVal ) ){
+		globals.afterglow = afterglowSlider->value;
+	}
+	
 	if( globals.invertX != invertX->selected ){
 		invertX->selected = globals.invertX;
 		invertX->commit();
@@ -165,9 +221,6 @@ void OsciView::update(){
 		flipXY->selected = globals.flipXY;
 		flipXY->commit();
 	}
-	
-	
-	
 }
 
 
@@ -194,13 +247,6 @@ void OsciView::touchUp( ofTouchEventArgs &touch ){
 
 //--------------------------------------------------------------
 void OsciView::touchDoubleTap( ofTouchEventArgs &touch ){
-}
-
-//--------------------------------------------------------------
-void OsciView::pushLabel( string text, float &x, float &y, float &w, float &h ){
-	mui::Label * label = new mui::Label( text, x, y, w, h );
-	add( label );
-	y += label->height;
 }
 
 
@@ -237,3 +283,14 @@ void OsciView::buttonPressed( const void * sender, ofTouchEventArgs & args ){
 		}
 	}
 }
+
+mui::Label * OsciView::addLabel( string text ){
+	mui::Label * label = new mui::Label( text, 0, 0, 100, 30 );
+	label->fontSize = 10;
+	label->commit();
+	label->width = label->boundingBox.width;
+	label->horizontalAlign = mui::Right;
+	add( label );
+	return label;
+}
+

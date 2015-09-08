@@ -1,27 +1,30 @@
 #version 120
- 
+#extension GL_ARB_draw_buffers : enable
+#extension GL_ARB_texture_rectangle : enable
+
 uniform sampler2DRect tex0;
-uniform float blurAmnt;
- 
+uniform float blurDist;
+uniform float blurDist;
+
 void main()
 {
     vec4 color;
- 	vec2 texCoordVarying = gl_TexCoord[0].st; 
-    color += 1.0 * texture2DRect(tex0, texCoordVarying + vec2(-blurAmnt, blurAmnt));
-    color += 1.0 * texture2DRect(tex0, texCoordVarying + vec2(        0, blurAmnt));
-    color += 1.0 * texture2DRect(tex0, texCoordVarying + vec2( blurAmnt, blurAmnt));
+ 	vec2 texCoordVarying = gl_TexCoord[0].xy;
+	float weight = (10-9*blurAmnt);
+    color += 1.0 * texture2DRect(tex0, texCoordVarying + vec2(-blurDist, blurDist));
+    color += 1.0 * texture2DRect(tex0, texCoordVarying + vec2(        0, blurDist));
+    color += 1.0 * texture2DRect(tex0, texCoordVarying + vec2( blurDist, blurDist));
 
-    color += 1.0 * texture2DRect(tex0, texCoordVarying + vec2(-blurAmnt, 0.0));
-    color += 1.0 * texture2DRect(tex0, texCoordVarying + vec2(blurAmnt, 0.0));
+    color += 1.0 * texture2DRect(tex0, texCoordVarying + vec2(-blurDist, 0.0));
+    color += 1.0 * texture2DRect(tex0, texCoordVarying + vec2(blurDist, 0.0));
  
-    color += 5.0 * texture2DRect(tex0, texCoordVarying);
+    color += weight * texture2DRect(tex0, texCoordVarying);
  
-    color += 1.0 * texture2DRect(tex0, texCoordVarying + vec2(-blurAmnt,-blurAmnt));
-    color += 1.0 * texture2DRect(tex0, texCoordVarying + vec2(        0,-blurAmnt));
-    color += 1.0 * texture2DRect(tex0, texCoordVarying + vec2( blurAmnt,-blurAmnt));
+    color += 1.0 * texture2DRect(tex0, texCoordVarying + vec2(-blurDist,-blurDist));
+    color += 1.0 * texture2DRect(tex0, texCoordVarying + vec2(        0,-blurDist));
+    color += 1.0 * texture2DRect(tex0, texCoordVarying + vec2( blurDist,-blurDist));
  
-    color /= 13.0;
+    color /= (8+weight);
  
     gl_FragColor = color;
-	gl_FragColor.g = pow(gl_FragColor.g,1.0);
 }

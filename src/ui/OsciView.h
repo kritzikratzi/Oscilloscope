@@ -39,9 +39,26 @@ public:
 	mui::Label * outputVolumeLabel;
 	mui::Slider * outputVolumeSlider;
 	
+	mui::Slider * strokeWeightSlider;
+	mui::Label * strokeWeightLabel;
+	
+	mui::Slider * blurSlider;
+	mui::Label * blurLabel;
+	
+	mui::Slider * numPtsSlider;
+	mui::Label * numPtsLabel;
+	
+	mui::Slider * hueSlider;
+	mui::Label * hueLabel;
+	
+	mui::Slider * intensitySlider;
+	mui::Label * intensityLabel;
+	
+	mui::Slider * afterglowSlider;
+	mui::Label * afterglowLabel;
+	
 	void buttonPressed( const void * sender, ofTouchEventArgs & args );
 	
 private:
-	
-	void pushLabel( string text, float &x, float &y, float &w, float &h );
+	mui::Label * addLabel( string text );
 };

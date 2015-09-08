@@ -8,26 +8,25 @@ Poco::Mutex mutex;
 Poco::Mutex updateMutex;
 
 bool applicationRunning = false;
+ofImage table;
 
 
 //--------------------------------------------------------------
 void ofApp::setup(){
+	table.load("testomat.png");
+	changed = false;
+	clearFbos = false;
 	lastMouseMoved = 0;
 	ofSetVerticalSync(true);
 	ofBackground(0);
 	ofSetBackgroundAuto(false);
 	dotImage.setUseTexture(true);
 	dotImage.allocate(64, 64, OF_IMAGE_COLOR_ALPHA);
-	dotImage.getTextureReference().setTextureWrap(GL_CLAMP_TO_EDGE, GL_CLAMP_TO_EDGE);
-	dotImage.loadImage( "dot.png" );
+	dotImage.getTexture().setTextureWrap(GL_CLAMP_TO_EDGE, GL_CLAMP_TO_EDGE);
+	dotImage.load( "dot.png" );
 	shader.setGeometryOutputCount(4);
 	shaderLoader.setup(&shader, "shaders/osci" );
 	blur.load("shaders/blur");
-	
-	cout << "Available Sound Devices: " << endl;
-	soundStream.listDevices();
-	cout << "=============================" << endl << endl;
-	
 	
 	vector<RtAudio::DeviceInfo> devices = listRtSoundDevices();
 	ofSetFrameRate(60);
@@ -153,6 +152,8 @@ void ofApp::update(){
 			left.peel(bufferSize);
 			right.peel(bufferSize);
 			
+			ofColor col = ofColor::fromHsb(globals.hue*255/360, 255, 255);
+			
 			float dMax = 0;
 			if( shapeMesh.getVertices().size() < bufferSize*2 ){
 				for( int i = 0; i < bufferSize; i++ ){
@@ -163,15 +164,16 @@ void ofApp::update(){
 					const float alph = powf(0.08,0.18);
 					float E = powf(ofClamp( 1-40*dist, 0, 1),40);
 					float alpha = 255*MAX(E,alph);
-					float erosion = 150*E;
+					float erosion = E*20;
 					
 					//lastColor = ofColor( 255, erosion, erosion, 5 );
 //					lastColor = ofColor( erosion, 204, 255, 4 );
-					lastColor = ofColor( erosion, 255, erosion, 4 );
+//					lastColor = ofColor( erosion, 255, erosion, 4 );
+					lastColor = ofColor::fromHsb(globals.hue, 255-erosion, 255, globals.intensity*8);
 					
 					dMax = MAX(dist, dMax);
 					
-					float N = 20;
+					float N = globals.numPts;
 					for( int j = 0; j < N; j++ ){
 						float alpha = j/(float)N;
 						p = a + ab*alpha;
@@ -191,9 +193,9 @@ void ofApp::update(){
 void ofApp::draw(){
 	ofClear(0,255);
 	
-	if( !fbo.isAllocated() || fbo.getWidth() != ofGetWidth() || fbo.getHeight() != fbo.getHeight() ){
-		fbo.allocate(ofGetWidth(), ofGetHeight());
-		fbb.allocate(ofGetWidth(), ofGetHeight());
+	if( !fbo.isAllocated() || fbo.getWidth() != ofGetWidth() || fbo.getHeight() != ofGetHeight() ){
+		fbo.allocate(ofGetWidth(), ofGetHeight(),GL_RGBA,4);
+		fbb.allocate(ofGetWidth(), ofGetHeight(),GL_RGBA,4);
 		fbo.begin();
 		ofClear(0,255);
 		fbo.end();
@@ -202,37 +204,36 @@ void ofApp::draw(){
 		fbb.end(); 
 	}
 	
-	ofFbo &shapeFbo = (ofGetFrameNum() % 2) == 0? fbo : fbb;
-	ofFbo &screenFbo = (ofGetFrameNum() % 2) == 0? fbb : fbo;
-	shapeFbo = fbo;
-	screenFbo = fbb;
-	
 	if( changed && globals.player.isPlaying ){
-		
-		screenFbo.begin();
+		fbb.begin();
+		ofEnableAlphaBlending();
 		ofSetColor(255);
 		blur.begin();
-		blur.setUniform1f("blurAmnt", 30);
-		shapeFbo.draw(0,0);
+		blur.setUniform1f("blurDist", 29);
+		blur.setUniform1f("blurAmnt", globals.blur/255.0);
+		fbo.draw(0,0);
 		blur.end();
-		screenFbo.end();
+		fbb.end();
 		
-		shapeFbo.begin();
+		fbo.begin();
+		ofEnableAlphaBlending();
 		ofSetColor(255);
 		blur.begin();
-		blur.setUniform1f("blurAmnt", 5);
-		screenFbo.draw(0,0);
+		blur.setUniform1f("blurDist", 5);
+		blur.setUniform1f("blurAmnt", globals.blur/255.0);
+		fbb.draw(0,0);
 		blur.end();
-		shapeFbo.end();
-
+		fbo.end();
 		
-		shapeFbo.begin();
+		
+		fbo.begin();
 		//	glEnable(GL_BLEND);
 		//	glBlendFunc(GL_SRC_ALPHA, GL_ONE);
-		ofSetColor( 0, 15 );
+		ofSetColor( 0, (1-globals.afterglow)*50 );
 		ofFill();
-		ofRect( 0, 0, ofGetWidth(), ofGetHeight() );
+		ofDrawRectangle( 0, 0, ofGetWidth(), ofGetHeight() );
 		
+//		fbb.draw(0,0);
 		//	ofClear(0,0,0,0);
 		//	glClearColor(0, 0, 0, 0);
 		//	glClear(GL_COLOR_BUFFER_BIT);
@@ -262,21 +263,21 @@ void ofApp::draw(){
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE);
 		shader.begin();
-		shader.setUniform1f("width", 10.0 );
-		shader.setUniform1f("height", 10.0 );
-		shader.setUniformTexture("tex", dotImage.getTextureReference(), 0);
+		shader.setUniform1f("width", globals.strokeWeight );
+		shader.setUniform1f("height", globals.strokeWeight );
+		shader.setUniformTexture("tex", dotImage.getTextureReference(), 1);
 		ofSetColor(255);
 		shapeMesh.draw();
 		shader.end();
 		glDisable(GL_BLEND);
 		ofEnableAlphaBlending();
-
+		
 		
 		ofPopMatrix();
-		shapeFbo.end();
+		fbo.end();
 	}
-	shapeFbo.draw(0,0);
-
+	
+	fbo.draw(0,0);
 }
 
 void exit_from_c(){
@@ -305,6 +306,10 @@ void ofApp::keyPressed  (int key){
 	
 	if( key == ' '  ){
 		osciView->playButton->clickAndNotify();
+	}
+	
+	if( key == 'r' ){
+		clearFbos = true;
 	}
 }
 
@@ -335,10 +340,9 @@ void ofApp::mouseReleased(int x, int y, int button){
 //--------------------------------------------------------------
 void ofApp::windowResized(int w, int h){
 	osciView->width = min(500,w/mui::MuiConfig::scaleFactor);
-	osciView->height = 160;
+	osciView->layout();
 	osciView->x = w/mui::MuiConfig::scaleFactor/2 - osciView->width/2;
 	osciView->y = h/mui::MuiConfig::scaleFactor - osciView->height - 20;
-	osciView->layout();
 }
 
 //--------------------------------------------------------------
