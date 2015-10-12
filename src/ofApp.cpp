@@ -13,6 +13,7 @@ ofImage table;
 
 //--------------------------------------------------------------
 void ofApp::setup(){
+	dropped ++;
 	table.load("testomat.png");
 	changed = false;
 	clearFbos = false;
@@ -164,12 +165,13 @@ void ofApp::update(){
 					const float alph = powf(0.08,0.18);
 					float E = powf(ofClamp( 1-40*dist, 0, 1),40);
 					float alpha = 255*MAX(E,alph);
-					float erosion = E*20;
+					static float erosion = 0;
+					erosion += (E*150-erosion)/100.0;
 					
 					//lastColor = ofColor( 255, erosion, erosion, 5 );
 //					lastColor = ofColor( erosion, 204, 255, 4 );
 //					lastColor = ofColor( erosion, 255, erosion, 4 );
-					lastColor = ofColor::fromHsb(globals.hue, 255-erosion, 255, globals.intensity*8);
+					lastColor = ofColor::fromHsb(globals.hue, 255-erosion, 255, 255*globals.intensity);
 					
 					dMax = MAX(dist, dMax);
 					
@@ -185,6 +187,9 @@ void ofApp::update(){
 					a = b;
 				}
 			}
+			else{
+				dropped ++;
+			}
 		}
 	}
 }
@@ -194,8 +199,8 @@ void ofApp::draw(){
 	ofClear(0,255);
 	
 	if( !fbo.isAllocated() || fbo.getWidth() != ofGetWidth() || fbo.getHeight() != ofGetHeight() ){
-		fbo.allocate(ofGetWidth(), ofGetHeight(),GL_RGBA,4);
-		fbb.allocate(ofGetWidth(), ofGetHeight(),GL_RGBA,4);
+		fbo.allocate(ofGetWidth(), ofGetHeight(),GL_RGBA);
+		fbb.allocate(ofGetWidth(), ofGetHeight(),GL_RGBA);
 		fbo.begin();
 		ofClear(0,255);
 		fbo.end();
@@ -205,40 +210,49 @@ void ofApp::draw(){
 	}
 	
 	if( changed && globals.player.isPlaying ){
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_COLOR, GL_ONE);
 		fbb.begin();
-		ofEnableAlphaBlending();
-		ofSetColor(255);
-		blur.begin();
-		blur.setUniform1f("blurDist", 29);
-		blur.setUniform1f("blurAmnt", globals.blur/255.0);
-		fbo.draw(0,0);
-		blur.end();
+			ofSetColor(255);
+			blur.begin();
+			blur.setUniform1f("blurDist", 5*globals.blur/255.0);
+			blur.setUniform1f("blurAmnt", 5);
+			fbo.draw(0,0);
+			blur.end();
 		fbb.end();
 		
 		fbo.begin();
-		ofEnableAlphaBlending();
-		ofSetColor(255);
-		blur.begin();
-		blur.setUniform1f("blurDist", 5);
-		blur.setUniform1f("blurAmnt", globals.blur/255.0);
-		fbb.draw(0,0);
-		blur.end();
+			ofSetColor(255);
+			blur.begin();
+			blur.setUniform1f("blurDist", 30*globals.blur/255.0);
+			blur.setUniform1f("blurAmnt", 30);
+			fbb.draw(0,0);
+			blur.end();
 		fbo.end();
+		
+		fbb.begin();
+			glClearColor(0, 0, 0, 0);
+			glClear(GL_COLOR_BUFFER_BIT);
+		fbb.end();
 		
 		
 		fbo.begin();
-		//	glEnable(GL_BLEND);
-		//	glBlendFunc(GL_SRC_ALPHA, GL_ONE);
-		ofSetColor( 0, (1-globals.afterglow)*50 );
-		ofFill();
-		ofDrawRectangle( 0, 0, ofGetWidth(), ofGetHeight() );
+			ofSetColor( 0, (1-globals.afterglow)*255 );
+			ofFill();
+			ofDrawRectangle( 0, 0, ofGetWidth(), ofGetHeight() );
 		
-//		fbb.draw(0,0);
-		//	ofClear(0,0,0,0);
-		//	glClearColor(0, 0, 0, 0);
-		//	glClear(GL_COLOR_BUFFER_BIT);
+			/*ofEnableAlphaBlending();
+			ofSetColor(255); 
+			blur.begin();
+			blur.setUniform1f("blurDist", 100*globals.blur/255.0);
+			blur.setUniform1f("blurAmnt", 5);
+			fbb.draw(0,0);
+			blur.end();*/
+		
+			glDisable(GL_BLEND);
+			ofEnableAlphaBlending();
+			//fbb.draw(0,0);
 		ofEnableAlphaBlending();
-		
 		ofPushMatrix();
 		ofTranslate(ofGetWidth()/2, ofGetHeight()/2 );
 		int scaleX = 1;
@@ -255,17 +269,17 @@ void ofApp::draw(){
 		
 		
 		ofSetColor(255, 0, 0, 25);
-		ofLine( -10, 0, 10, 0 );
-		ofLine( 0, -10, 0, 10 );
+		ofDrawLine( -10, 0, 10, 0 );
+		ofDrawLine( 0, -10, 0, 10 );
 		
 		shapeMesh.enableColors();
 		glPointSize(2*mui::MuiConfig::scaleFactor);
 		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+		glBlendFunc(GL_SRC_ALPHA, GL_DST_ALPHA);
 		shader.begin();
 		shader.setUniform1f("width", globals.strokeWeight );
 		shader.setUniform1f("height", globals.strokeWeight );
-		shader.setUniformTexture("tex", dotImage.getTextureReference(), 1);
+		shader.setUniformTexture("tex", dotImage.getTexture(), 1);
 		ofSetColor(255);
 		shapeMesh.draw();
 		shader.end();
@@ -274,10 +288,13 @@ void ofApp::draw(){
 		
 		
 		ofPopMatrix();
+
 		fbo.end();
 	}
 	
+	ofSetColor(255);
 	fbo.draw(0,0);
+	ofDrawBitmapString("Dropped: " + ofToString(dropped), 10, 20 );
 }
 
 void exit_from_c(){
