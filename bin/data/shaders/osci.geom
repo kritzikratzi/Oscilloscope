@@ -1,41 +1,44 @@
-#extension GL_EXT_geometry_shader4 : enable  
-varying out vec2 texcoord;
+#version 120
+#extension GL_EXT_geometry_shader4 : enable
+#define EPS 1E-6
 
+varying vec3 texcoord;
+uniform float uSize;
+uniform mat3 uMatrix;
 
-//layout(points) in;  
-//layout(quads, max_vertices = 4) out;  
+void main() {
+    mat4 tmatrix = mat4(uMatrix);
+    vec2 p0 = (gl_PositionIn[0]).xy;
+    vec2 p1 = (gl_PositionIn[1]).xy;
+    vec2 dir = p1 - p0;
+    texcoord.z = length(dir);
 
-uniform float height;  
-uniform float width;  
+    if (texcoord.z > EPS) {
+        dir = dir / texcoord.z;
+    } else {
+        dir = vec2(1.0, 0.0);
+    }
 
-void main() {  
-	gl_PositionIn[0];  
-	float w = width*1.0;
-	// shit? !
-	float h = w*16.0/10.0; 
-	
+    vec2 norm = vec2(-dir.y, dir.x);
 
-	texcoord=vec2(0,0);
-	gl_FrontColor = gl_FrontColorIn[0]; 
-	gl_Position = gl_PositionIn[0]+vec4(0,0,0,0);
-	EmitVertex();  
+    gl_FrontColor = gl_FrontColorIn[0];
 
-	texcoord=vec2(0,1);
-	gl_FrontColor = gl_FrontColorIn[0]; 
-	gl_Position = gl_PositionIn[0]+vec4(0,h,0,0);
-	EmitVertex();  
+    dir *= uSize;
+    norm *= uSize;
 
+    texcoord.xy = vec2(-uSize, -uSize);
+    gl_Position = tmatrix * vec4(p0 - dir - norm, 0.0, 1.0);
+    EmitVertex();
 
-	texcoord=vec2(1,0);
-	gl_FrontColor = gl_FrontColorIn[0]; 
-	gl_Position = gl_PositionIn[0]+vec4(w,0,0,0);
-	EmitVertex();  
+    texcoord.xy = vec2(-uSize,  uSize);
+    gl_Position = tmatrix * vec4(p0 - dir + norm, 0.0, 1.0);
+    EmitVertex();
 
-	texcoord=vec2(1,1);
-	gl_FrontColor = gl_FrontColorIn[0]; 
-	gl_Position = gl_PositionIn[0]+vec4(w,h,0,0);
-	EmitVertex();  
+    texcoord.xy = vec2(texcoord.z + uSize, -uSize);
+    gl_Position = tmatrix * vec4(p1 + dir - norm, 0.0, 1.0);
+    EmitVertex();
 
-	// output  
-	EndPrimitive();  
-}  
+    texcoord.xy = vec2(texcoord.z + uSize,  uSize);
+    gl_Position = tmatrix * vec4(p1 + dir + norm, 0.0, 1.0);
+    EmitVertex();
+}

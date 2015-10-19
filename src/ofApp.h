@@ -33,6 +33,8 @@ class ofApp : public ofBaseApp{
 		
 		void audioIn(float * input, int bufferSize, int nChannels);
 		void audioOut( float * output, int bufferSize, int nChannels ); 
+
+		ofMatrix3x3 getViewMatrix();
 	
 		ofSoundStream soundStream;
 
@@ -41,7 +43,6 @@ class ofApp : public ofBaseApp{
 		OsciView * osciView;
 		ofPath path;
 		ofMesh shapeMesh;
-		ofImage dotImage;
 		ofFbo fbo, fbb;
 		ofShader shader;
 		ShaderLoader shaderLoader;

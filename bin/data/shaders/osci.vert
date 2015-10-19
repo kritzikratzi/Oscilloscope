@@ -1,6 +1,7 @@
 #version 110
-void main()  
-{  
-	gl_FrontColor = gl_Color;  
-	gl_Position = gl_ModelViewProjectionMatrix* gl_Vertex;  
-}  
+uniform mat3 uMatrix;
+void main()
+{
+	gl_FrontColor = gl_Color;
+	gl_Position = gl_Vertex;
+}
