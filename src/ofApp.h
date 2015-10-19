@@ -55,5 +55,6 @@ class ofApp : public ofBaseApp{
 		bool clearFbos;
 		int dropped; 
 	
-	unsigned long long lastMouseMoved; 
+	unsigned long long lastMouseMoved;
+	string fileToLoad;
 };

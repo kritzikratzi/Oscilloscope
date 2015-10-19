@@ -1,7 +1,8 @@
 #include "ofMain.h"
+#include "ofGLProgrammableRenderer.h"
 #include "ofApp.h"
 #include "sounddevices.h"
-#include "MUI.h" 
+#include "MUI.h"
 #if defined(TARGET_OSX)
 #import <AppKit/AppKit.h>
 #endif
@@ -16,46 +17,29 @@
 
 //========================================================================
 int main( ){
-//	ofSetupOpenGL(1024,768, OF_WINDOW);			// <-------- setup the GL context
-
-	// this kicks off the running of my app
-	// can be OF_WINDOW or OF_FULLSCREEN
-	// pass in width and height too:
-	// using glut on linux, because http://forum.openframeworks.cc/t/application-wont-start-after-ubuntu-upgrade/17491
-	#if defined(__linux__)
-	ofAppGlutWindow window;
-	#else
-	ofAppGLFWWindow window;
-	#endif
-
-	cout << "LAUNCH DESKTOP" << endl;
-	ofSetupOpenGL(&window, 1024, 768, OF_WINDOW);
+	ofGLWindowSettings settings;
+	settings.setGLVersion(3,2);
+	settings.width = 1400;
+	settings.height = 768;
+	ofCreateWindow(settings);
 	
-	#if defined(TARGET_OSX)
+/*	#if defined(TARGET_OSX)
 	NSWindow * cocoaWindow = (NSWindow*)window.getCocoaWindow();
 	[cocoaWindow setFrame:[[NSScreen mainScreen] visibleFrame] display:YES];
 	#endif
+*/
 	
-
-
-	if(!ofGLCheckExtension("GL_ARB_geometry_shader4") &&
-	   !ofGLCheckExtension("GL_EXT_geometry_shader4") &&
-	   !ofIsGLProgrammableRenderer()){
-		ofLogFatalError() << "geometry shaders not supported on this graphics card";
-		return 1;
-	}
-
-
 	mui_init();
 	mui::MuiConfig::font = "mui/fonts/Lato-Regular.ttf";
+	
 	ofRunApp(new ofApp);
 	
 }
 
 #ifdef _WIN32
 INT WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
-    PSTR lpCmdLine, INT nCmdShow)
+			PSTR lpCmdLine, INT nCmdShow)
 {
-    return main();
+	return main();
 }
 #endif

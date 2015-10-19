@@ -25,8 +25,10 @@ void ofApp::setup(){
 	dotImage.allocate(64, 64, OF_IMAGE_COLOR_ALPHA);
 	dotImage.getTexture().setTextureWrap(GL_CLAMP_TO_EDGE, GL_CLAMP_TO_EDGE);
 	dotImage.load( "dot.png" );
+	shader.setGeometryInputType(GL_LINE_STRIP_ADJACENCY);
+	shader.setGeometryOutputType(GL_TRIANGLE_STRIP);
 	shader.setGeometryOutputCount(4);
-	shaderLoader.setup(&shader, "shaders/osci" );
+	shaderLoader.setup(&shader, "shaders/lines" );
 	blur.load("shaders/blur");
 	
 	vector<RtAudio::DeviceInfo> devices = listRtSoundDevices();
@@ -35,6 +37,7 @@ void ofApp::setup(){
 	root = new mui::Root();
 	
 	globals.loadFromFile();
+	globals.player.forceNativeFormat = true;
 	globals.player.loadSound( "konichiwa.wav" );
 	globals.player.setLoop(true);
 	globals.player.stop(); 
@@ -127,19 +130,18 @@ void ofApp::update(){
 		ofShowCursor();
 		return;
 	}
+	
 	if( osciView->visible ) ofShowCursor();
 	else ofHideCursor();
 	
 	changed = false;
 	shapeMesh.clear();
-	shapeMesh.setMode(OF_PRIMITIVE_POINTS);
-	shapeMesh.enableColors();
+	shapeMesh.setMode(OF_PRIMITIVE_LINE_STRIP_ADJACENCY);
+	shapeMesh.disableColors();
 	
 	const int bufferSize = 512*4;
 	static float * leftBuffer = new float[bufferSize];
 	static float * rightBuffer = new float[bufferSize];
-	static ofPoint a, b, ab, p;
-	static ofColor lastColor;
 	float S = MIN(ofGetWidth()/2,ofGetHeight()/2)*globals.scale;
 
 	if( left.totalLength >= bufferSize && right.totalLength >= bufferSize ){
@@ -152,39 +154,9 @@ void ofApp::update(){
 			right.addTo(rightBuffer, 1, bufferSize);
 			left.peel(bufferSize);
 			right.peel(bufferSize);
-			
-			ofColor col = ofColor::fromHsb(globals.hue*255/360, 255, 255);
-			
-			float dMax = 0;
 			if( shapeMesh.getVertices().size() < bufferSize*2 ){
 				for( int i = 0; i < bufferSize; i++ ){
-					b = ofPoint( leftBuffer[i], rightBuffer[i] );
-					ab = b-a;
-					// here, have a bunch of magical numbers!
-					float dist = ab.length();
-					const float alph = powf(0.08,0.18);
-					float E = powf(ofClamp( 1-40*dist, 0, 1),40);
-					float alpha = 255*MAX(E,alph);
-					static float erosion = 0;
-					erosion += (E*150-erosion)/100.0;
-					
-					//lastColor = ofColor( 255, erosion, erosion, 5 );
-//					lastColor = ofColor( erosion, 204, 255, 4 );
-//					lastColor = ofColor( erosion, 255, erosion, 4 );
-					lastColor = ofColor::fromHsb(globals.hue, 255-erosion, 255, 255*globals.intensity);
-					
-					dMax = MAX(dist, dMax);
-					
-					float N = globals.numPts;
-					for( int j = 0; j < N; j++ ){
-						float alpha = j/(float)N;
-						p = a + ab*alpha;
-						
-						shapeMesh.addVertex(p*S);
-						shapeMesh.addColor(lastColor);
-					}
-					
-					a = b;
+					shapeMesh.addVertex(ofPoint( S*leftBuffer[i], S*rightBuffer[i] ));
 				}
 			}
 			else{
@@ -202,92 +174,53 @@ void ofApp::draw(){
 		fbo.allocate(ofGetWidth(), ofGetHeight(),GL_RGBA);
 		fbb.allocate(ofGetWidth(), ofGetHeight(),GL_RGBA);
 		fbo.begin();
-		ofClear(0,255);
+		ofClear(0,0);
 		fbo.end();
 		fbb.begin();
-		ofClear(0,255);
+		ofClear(0,0);
 		fbb.end(); 
 	}
 	
 	if( changed && globals.player.isPlaying ){
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_COLOR, GL_ONE);
-		fbb.begin();
-			ofSetColor(255);
-			blur.begin();
-			blur.setUniform1f("blurDist", 5*globals.blur/255.0);
-			blur.setUniform1f("blurAmnt", 5);
-			fbo.draw(0,0);
-			blur.end();
-		fbb.end();
-		
-		fbo.begin();
-			ofSetColor(255);
-			blur.begin();
-			blur.setUniform1f("blurDist", 30*globals.blur/255.0);
-			blur.setUniform1f("blurAmnt", 30);
-			fbb.draw(0,0);
-			blur.end();
-		fbo.end();
-		
-		fbb.begin();
-			glClearColor(0, 0, 0, 0);
-			glClear(GL_COLOR_BUFFER_BIT);
-		fbb.end();
-		
+//		glEnable(GL_BLEND);
+//		glBlendFunc(GL_SRC_COLOR, GL_ONE);
 		
 		fbo.begin();
 			ofSetColor( 0, (1-globals.afterglow)*255 );
 			ofFill();
 			ofDrawRectangle( 0, 0, ofGetWidth(), ofGetHeight() );
 		
-			/*ofEnableAlphaBlending();
-			ofSetColor(255); 
-			blur.begin();
-			blur.setUniform1f("blurDist", 100*globals.blur/255.0);
-			blur.setUniform1f("blurAmnt", 5);
-			fbb.draw(0,0);
-			blur.end();*/
+			ofPushMatrix();
+			ofTranslate(ofGetWidth()/2, ofGetHeight()/2 );
+			int scaleX = 1;
+			int scaleY = -1;
+			if( globals.invertX ) scaleX *= -1;
+			if( globals.invertY ) scaleY *= -1;
+			
+			ofScale( scaleX, scaleY );
+			if( globals.flipXY ){
+				ofRotate(-90);
+				ofScale( -1, 1 );
+			}
 		
-			glDisable(GL_BLEND);
-			ofEnableAlphaBlending();
-			//fbb.draw(0,0);
-		ofEnableAlphaBlending();
-		ofPushMatrix();
-		ofTranslate(ofGetWidth()/2, ofGetHeight()/2 );
-		int scaleX = 1;
-		int scaleY = -1;
-		if( globals.invertX ) scaleX *= -1;
-		if( globals.invertY ) scaleY *= -1;
-		
-		
-		ofScale( scaleX, scaleY );
-		if( globals.flipXY ){
-			ofRotate(-90);
-			ofScale( -1, 1 );
-		}
-		
-		
-		ofSetColor(255, 0, 0, 25);
-		ofDrawLine( -10, 0, 10, 0 );
-		ofDrawLine( 0, -10, 0, 10 );
-		
-		shapeMesh.enableColors();
-		glPointSize(2*mui::MuiConfig::scaleFactor);
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_DST_ALPHA);
-		shader.begin();
-		shader.setUniform1f("width", globals.strokeWeight );
-		shader.setUniform1f("height", globals.strokeWeight );
-		shader.setUniformTexture("tex", dotImage.getTexture(), 1);
-		ofSetColor(255);
-		shapeMesh.draw();
-		shader.end();
-		glDisable(GL_BLEND);
-		ofEnableAlphaBlending();
+			ofSetColor(255, 0, 0, 25);
+			ofDrawLine( -10, 0, 10, 0 );
+			ofDrawLine( 0, -10, 0, 10 );
+			
+			glEnable(GL_BLEND);
+			//glBlendFunc(GL_SRC_ALPHA, GL_DST_ALPHA);
+			glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+			ofSetColor(255);
+			shader.begin();
+			shader.setUniformMatrix4f("modelViewMatrix",ofGetCurrentViewMatrix());
+			shader.setUniform1f("lineWidth", globals.strokeWeight*mui::MuiConfig::scaleFactor);
+			shader.setUniform1f("uSize", ofGetMouseX()/100.0);
+			shader.setUniform1f("uIntensity", ofGetMouseY()/100.0);
+			shapeMesh.draw();
+			shader.end();
 		
 		
-		ofPopMatrix();
+			ofPopMatrix();
 
 		fbo.end();
 	}
@@ -372,6 +305,11 @@ void ofApp::audioIn(float * input, int bufferSize, int nChannels){
 
 void ofApp::audioOut( float * output, int bufferSize, int nChannels ){
 	memset(output, 0, bufferSize*nChannels);
+	if( fileToLoad != "" ){
+		globals.player.loadSound(fileToLoad);
+		fileToLoad = "";
+	}
+	
 	if( globals.player.isLoaded ){
 		globals.player.audioOut(output, bufferSize, nChannels);
 		
@@ -379,7 +317,6 @@ void ofApp::audioOut( float * output, int bufferSize, int nChannels ){
 		right.append(output+1,bufferSize,2);
 		
 		AudioAlgo::scale(output, globals.outputVolume, nChannels*bufferSize);
-		
 	}
 	else{
 		
@@ -404,7 +341,9 @@ void ofApp::dragEvent(ofDragInfo dragInfo){
 	}
 	
 	if( dragInfo.files.size() >= 1 ){
-		globals.player.loadSound(dragInfo.files[0]);
+		// this runs on a separate thread.
+		// we have to be careful not to make a mess! 
+		fileToLoad = dragInfo.files[0];
 	}
 	
 }
