@@ -3,7 +3,6 @@ layout(lines_adjacency) in;
 layout(triangle_strip, max_vertices=200) out;
 
 uniform mat4 modelViewProjectionMatrix;
-uniform float lineWidth;
 uniform float uSize;
 
 
@@ -34,7 +33,6 @@ void main()
 	
 	float len = length(cb);
 	uvl.z = len;
-	float lineWidth = uSize;
 	
 	if( len == 0 ){
 		// fuck it. we don't need this!

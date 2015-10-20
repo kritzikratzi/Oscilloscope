@@ -21,15 +21,10 @@ void ofApp::setup(){
 	ofSetVerticalSync(true);
 	ofBackground(0);
 	ofSetBackgroundAuto(false);
-	dotImage.setUseTexture(true);
-	dotImage.allocate(64, 64, OF_IMAGE_COLOR_ALPHA);
-	dotImage.getTexture().setTextureWrap(GL_CLAMP_TO_EDGE, GL_CLAMP_TO_EDGE);
-	dotImage.load( "dot.png" );
 	shader.setGeometryInputType(GL_LINE_STRIP_ADJACENCY);
 	shader.setGeometryOutputType(GL_TRIANGLE_STRIP);
 	shader.setGeometryOutputCount(4);
 	shaderLoader.setup(&shader, "shaders/lines" );
-	blur.load("shaders/blur");
 	
 	vector<RtAudio::DeviceInfo> devices = listRtSoundDevices();
 	ofSetFrameRate(60);
@@ -37,7 +32,7 @@ void ofApp::setup(){
 	root = new mui::Root();
 	
 	globals.loadFromFile();
-	globals.player.forceNativeFormat = true;
+	globals.player.forceNativeFormat = false;
 	globals.player.loadSound( "konichiwa.wav" );
 	globals.player.setLoop(true);
 	globals.player.stop(); 
@@ -172,18 +167,14 @@ void ofApp::draw(){
 	
 	if( !fbo.isAllocated() || fbo.getWidth() != ofGetWidth() || fbo.getHeight() != ofGetHeight() ){
 		fbo.allocate(ofGetWidth(), ofGetHeight(),GL_RGBA);
-		fbb.allocate(ofGetWidth(), ofGetHeight(),GL_RGBA);
 		fbo.begin();
 		ofClear(0,0);
 		fbo.end();
-		fbb.begin();
-		ofClear(0,0);
-		fbb.end(); 
 	}
 	
 	if( changed && globals.player.isPlaying ){
-//		glEnable(GL_BLEND);
-//		glBlendFunc(GL_SRC_COLOR, GL_ONE);
+		//		glEnable(GL_BLEND);
+		//		glBlendFunc(GL_SRC_COLOR, GL_ONE);
 		
 		fbo.begin();
 			ofSetColor( 0, (1-globals.afterglow)*255 );
@@ -213,9 +204,9 @@ void ofApp::draw(){
 			ofSetColor(255);
 			shader.begin();
 			shader.setUniformMatrix4f("modelViewMatrix",ofGetCurrentViewMatrix());
-			shader.setUniform1f("lineWidth", globals.strokeWeight*mui::MuiConfig::scaleFactor);
-			shader.setUniform1f("uSize", ofGetMouseX()/100.0);
-			shader.setUniform1f("uIntensity", ofGetMouseY()/100.0);
+			shader.setUniform1f("uSize", globals.strokeWeight*mui::MuiConfig::scaleFactor);
+			shader.setUniform1f("uIntensity", globals.intensity );
+			shader.setUniform1f("uHue", globals.hue );
 			shapeMesh.draw();
 			shader.end();
 		
@@ -245,13 +236,16 @@ void ofApp::keyPressed  (int key){
 	lastMouseMoved = ofGetElapsedTimeMillis();
 	key = std::tolower(key);
 	
+	if( key == OF_KEY_ESC ){
+		osciView->fullscreenButton->clickAndNotify(false);
+	}
+	
 	if( key == '\t' && !configView->isVisibleOnScreen()){
 		osciView->visible = !osciView->visible;
 	}
 
 	if( key == 'f' || key == OF_KEY_RETURN || key == OF_KEY_F11 ){
-		// nasty!
-		osciView->fullscreenButton->clickAndNotify(); 
+		osciView->fullscreenButton->clickAndNotify();
 	}
 	
 	if( key == ' '  ){

@@ -115,13 +115,18 @@ void OsciView::layout(){
 	mui::L(strokeWeightLabel).below(scaleLabel).alignRightEdgeTo(scaleLabel);
 	mui::L(strokeWeightSlider).rightOf(strokeWeightLabel,5).stretchToRightEdgeOf(this,10);
 	
-	mui::L(blurLabel).below(strokeWeightLabel).alignRightEdgeTo(strokeWeightLabel);
+	/*mui::L(blurLabel).below(strokeWeightLabel).alignRightEdgeTo(strokeWeightLabel);
 	mui::L(blurSlider).rightOf(blurLabel,5).stretchToRightEdgeOf(this,10);
 	
 	mui::L(numPtsLabel).below(blurLabel).alignRightEdgeTo(blurLabel);
-	mui::L(numPtsSlider).rightOf(numPtsLabel,5).stretchToRightEdgeOf(this,10);
+	mui::L(numPtsSlider).rightOf(numPtsLabel,5).stretchToRightEdgeOf(this,10);*/
+	blurLabel->visible = false;
+	blurSlider->visible = false;
+	numPtsLabel->visible = false;
+	numPtsSlider->visible = false;
 	
-	mui::L(hueLabel).below(numPtsLabel).alignRightEdgeTo(numPtsLabel);
+	
+	mui::L(hueLabel).below(strokeWeightLabel).alignRightEdgeTo(strokeWeightLabel);
 	mui::L(hueSlider).rightOf(hueLabel,5).stretchToRightEdgeOf(this,10);
 	
 	mui::L(intensityLabel).below(hueLabel).alignRightEdgeTo(hueLabel);

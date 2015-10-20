@@ -1,4 +1,5 @@
 #version 150
+// based on http://m1el.github.io/woscope-how/
 
 in vec4 in_pos;
 // we're not using this here.

@@ -17,6 +17,8 @@
 
 //========================================================================
 int main( ){
+	ofSetEscapeQuitsApp(false);
+	
 	ofGLWindowSettings settings;
 	settings.setGLVersion(3,2);
 	settings.width = 1400;
