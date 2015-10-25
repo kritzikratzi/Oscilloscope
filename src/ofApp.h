@@ -41,9 +41,12 @@ class ofApp : public ofBaseApp{
 		OsciView * osciView;
 		ofPath path;
 		ofMesh shapeMesh;
-		ofFbo fbo;
+		ofImage dotImage;
+		ofFbo fbo, fbb;
 		ofShader shader;
 		ShaderLoader shaderLoader;
+	
+		ofShader blur;
 	
 		MonoSample left;
 		MonoSample right;
@@ -52,6 +55,5 @@ class ofApp : public ofBaseApp{
 		bool clearFbos;
 		int dropped; 
 	
-	unsigned long long lastMouseMoved;
-	string fileToLoad;
+	unsigned long long lastMouseMoved; 
 };
