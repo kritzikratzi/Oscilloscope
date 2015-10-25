@@ -8,25 +8,20 @@ Poco::Mutex mutex;
 Poco::Mutex updateMutex;
 
 bool applicationRunning = false;
-ofImage table;
-
 
 //--------------------------------------------------------------
 void ofApp::setup(){
 	dropped ++;
-	table.load("testomat.png");
 	changed = false;
 	clearFbos = false;
 	lastMouseMoved = 0;
 	ofSetVerticalSync(true);
 	ofBackground(0);
 	ofSetBackgroundAuto(false);
-	dotImage.setUseTexture(true);
-	dotImage.allocate(64, 64, OF_IMAGE_COLOR_ALPHA);
-	dotImage.getTexture().setTextureWrap(GL_CLAMP_TO_EDGE, GL_CLAMP_TO_EDGE);
-	dotImage.load( "dot.png" );
+	shader.setGeometryInputType(GL_LINES);
+	shader.setGeometryOutputType(GL_QUADS);
 	shader.setGeometryOutputCount(4);
-	shaderLoader.setup(&shader, "shaders/osci" );
+	shader.load("shaders/osci.vert", "shaders/osci.frag", "shaders/osci.geom");
 	blur.load("shaders/blur");
 	
 	vector<RtAudio::DeviceInfo> devices = listRtSoundDevices();
@@ -132,15 +127,12 @@ void ofApp::update(){
 	
 	changed = false;
 	shapeMesh.clear();
-	shapeMesh.setMode(OF_PRIMITIVE_POINTS);
+	shapeMesh.setMode(OF_PRIMITIVE_LINES);
 	shapeMesh.enableColors();
 	
 	const int bufferSize = 512*4;
 	static float * leftBuffer = new float[bufferSize];
 	static float * rightBuffer = new float[bufferSize];
-	static ofPoint a, b, ab, p;
-	static ofColor lastColor;
-	float S = MIN(ofGetWidth()/2,ofGetHeight()/2)*globals.scale;
 
 	if( left.totalLength >= bufferSize && right.totalLength >= bufferSize ){
 		changed = true;
@@ -153,38 +145,14 @@ void ofApp::update(){
 			left.peel(bufferSize);
 			right.peel(bufferSize);
 			
-			ofColor col = ofColor::fromHsb(globals.hue*255/360, 255, 255);
+			ofColor col = ofColor::fromHsb(globals.hue*255/360, 255, 255*globals.intensity);
 			
-			float dMax = 0;
 			if( shapeMesh.getVertices().size() < bufferSize*2 ){
-				for( int i = 0; i < bufferSize; i++ ){
-					b = ofPoint( leftBuffer[i], rightBuffer[i] );
-					ab = b-a;
-					// here, have a bunch of magical numbers!
-					float dist = ab.length();
-					const float alph = powf(0.08,0.18);
-					float E = powf(ofClamp( 1-40*dist, 0, 1),40);
-					float alpha = 255*MAX(E,alph);
-					static float erosion = 0;
-					erosion += (E*150-erosion)/100.0;
-					
-					//lastColor = ofColor( 255, erosion, erosion, 5 );
-//					lastColor = ofColor( erosion, 204, 255, 4 );
-//					lastColor = ofColor( erosion, 255, erosion, 4 );
-					lastColor = ofColor::fromHsb(globals.hue, 255-erosion, 255, 255*globals.intensity);
-					
-					dMax = MAX(dist, dMax);
-					
-					float N = globals.numPts;
-					for( int j = 0; j < N; j++ ){
-						float alpha = j/(float)N;
-						p = a + ab*alpha;
-						
-						shapeMesh.addVertex(p*S);
-						shapeMesh.addColor(lastColor);
-					}
-					
-					a = b;
+				for( int i = 1; i < bufferSize; i++ ){
+					ofPoint a = ofPoint(leftBuffer[i-1], rightBuffer[i-1]);
+					ofPoint b = ofPoint(leftBuffer[i  ], rightBuffer[i  ]);
+					shapeMesh.addVertex(a);
+					shapeMesh.addVertex(b);
 				}
 			}
 			else{
@@ -192,6 +160,40 @@ void ofApp::update(){
 			}
 		}
 	}
+}
+
+ofMatrix3x3 ofApp::getViewMatrix() {
+	ofMatrix3x3 viewMatrix = ofMatrix3x3(
+		globals.scale, 0.0, 0.0,
+		0.0, -globals.scale, 0.0,
+		0.0, 0.0, 1.0);
+
+	if (globals.invertX) viewMatrix[0] *= -1;
+	if (globals.invertY) viewMatrix[4] *= -1;
+
+	if (globals.flipXY) {
+		viewMatrix = ofMatrix3x3(
+			0.0, 1.0, 0.0,
+			1.0, 0.0, 0.0,
+			0.0, 0.0, 1.0) * viewMatrix;
+	}
+
+	ofMatrix3x3 aspectMatrix = ofMatrix3x3(
+		1.0, 0.0, 0.0,
+		0.0, 1.0, 0.0,
+		0.0, 0.0, 1.0);
+
+	{
+		float aspectRatio = float(ofGetWidth()) / float(ofGetHeight());
+		if (aspectRatio > 1.0) {
+			aspectMatrix[0] /= aspectRatio;
+		}
+		else {
+			aspectMatrix[4] *= aspectRatio;
+		}
+	}
+
+	return viewMatrix * aspectMatrix;
 }
 
 //--------------------------------------------------------------
@@ -252,42 +254,28 @@ void ofApp::draw(){
 			glDisable(GL_BLEND);
 			ofEnableAlphaBlending();
 			//fbb.draw(0,0);
+
 		ofEnableAlphaBlending();
-		ofPushMatrix();
-		ofTranslate(ofGetWidth()/2, ofGetHeight()/2 );
-		int scaleX = 1;
-		int scaleY = -1;
-		if( globals.invertX ) scaleX *= -1;
-		if( globals.invertY ) scaleY *= -1;
-		
-		
-		ofScale( scaleX, scaleY );
-		if( globals.flipXY ){
-			ofRotate(-90);
-			ofScale( -1, 1 );
-		}
-		
-		
-		ofSetColor(255, 0, 0, 25);
-		ofDrawLine( -10, 0, 10, 0 );
-		ofDrawLine( 0, -10, 0, 10 );
+
+		ofMatrix3x3 viewMatrix = getViewMatrix();
+
+//      TODO: draw the cross section
+//		ofSetColor(255, 0, 0, 25);
+//		ofDrawLine( -10, 0, 10, 0 );
+//		ofDrawLine( 0, -10, 0, 10 );
 		
 		shapeMesh.enableColors();
-		glPointSize(2*mui::MuiConfig::scaleFactor);
 		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_DST_ALPHA);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE);
 		shader.begin();
-		shader.setUniform1f("width", globals.strokeWeight );
-		shader.setUniform1f("height", globals.strokeWeight );
-		shader.setUniformTexture("tex", dotImage.getTexture(), 1);
+		shader.setUniform1f("uSize", globals.strokeWeight / 1000.0);
+		shader.setUniform1f("uIntensity", globals.intensity);
+		shader.setUniformMatrix3f("uMatrix", viewMatrix);
 		ofSetColor(255);
 		shapeMesh.draw();
 		shader.end();
 		glDisable(GL_BLEND);
 		ofEnableAlphaBlending();
-		
-		
-		ofPopMatrix();
 
 		fbo.end();
 	}
