@@ -9,6 +9,8 @@ class OsciView : public mui::Container{
 public:
 	OsciView( float x_ = 0, float y_ = 0, float width_ = ofGetWidth()/mui::MuiConfig::scaleFactor, float height_ = ofGetHeight()/mui::MuiConfig::scaleFactor );
 	
+	virtual void fromGlobals(); 
+	
 	virtual void update();
 	virtual void draw();
 	virtual void layout(); 
@@ -22,7 +24,7 @@ public:
 	FaButton * loadFileButton; 
 	
 	FaButton * stopButton;
-	mui::Slider * scaleSlider;
+	mui::SliderWithLabel * scaleSlider;
 	
 	FaToggleButton * fullscreenButton; 
 	FaToggleButton * flipXY;
@@ -31,7 +33,7 @@ public:
 	
 	FaToggleButton * playButton;
 	mui::Slider * timeSlider;
-	mui::Slider * volumeSlider;
+	mui::SliderWithLabel * volumeSlider;
 	
 	mui::Label currentTime;
 	mui::Label * scaleLabel;
@@ -39,25 +41,26 @@ public:
 	mui::Label * outputVolumeLabel;
 	mui::Slider * outputVolumeSlider;
 	
-	mui::Slider * strokeWeightSlider;
+	mui::SliderWithLabel * strokeWeightSlider;
 	mui::Label * strokeWeightLabel;
 	
-	mui::Slider * blurSlider;
+	mui::SliderWithLabel * blurSlider;
 	mui::Label * blurLabel;
 	
-	mui::Slider * numPtsSlider;
+	mui::SliderWithLabel * numPtsSlider;
 	mui::Label * numPtsLabel;
 	
-	mui::Slider * hueSlider;
+	mui::SliderWithLabel * hueSlider;
 	mui::Label * hueLabel;
 	
-	mui::Slider * intensitySlider;
+	mui::SliderWithLabel * intensitySlider;
 	mui::Label * intensityLabel;
 	
-	mui::Slider * afterglowSlider;
+	mui::SliderWithLabel * afterglowSlider;
 	mui::Label * afterglowLabel;
 	
 	void buttonPressed( const void * sender, ofTouchEventArgs & args );
+	void sliderChanged( const void * sender, float & value );
 	
 private:
 	mui::Label * addLabel( string text );

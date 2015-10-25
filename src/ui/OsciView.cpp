@@ -20,7 +20,9 @@ OsciView::OsciView( float x_, float y_, float width_, float height_)
 	add( stopButton );
 	
 	scaleLabel = addLabel( "Scale" );
-	scaleSlider = new mui::Slider( x, y, w, h, 0.1, 2, 1 );
+	scaleSlider = new mui::SliderWithLabel( x, y, w, h, 0.1, 2, 1, 2 );
+	scaleSlider->label->fg = ofColor(255);
+	ofAddListener( scaleSlider->slider->onChange, this, &OsciView::sliderChanged );
 	y += scaleSlider->height + 10;
 	add( scaleSlider );
 	
@@ -65,27 +67,39 @@ OsciView::OsciView( float x_, float y_, float width_, float height_)
 	add(outputVolumeSlider);
 	
 	strokeWeightLabel = addLabel( "Stroke Weight" );
-	strokeWeightSlider = new mui::Slider(0, 0, 100, h, 1, 20, 10 );
+	strokeWeightSlider = new mui::SliderWithLabel(0, 0, 100, h, 1, 50, 4, 1 );
+	ofAddListener( strokeWeightSlider->slider->onChange, this, &OsciView::sliderChanged );
+	strokeWeightSlider->label->fg = ofColor(255);
 	add( strokeWeightSlider );
 	
 	blurLabel = addLabel( "Blur" );
-	blurSlider = new mui::Slider(0,0, 100, h, 0, 255, 30);
+	blurSlider = new mui::SliderWithLabel(0,0, 100, h, 0, 255, 30, 0);
+	ofAddListener( blurSlider->slider->onChange, this, &OsciView::sliderChanged );
+	blurSlider->label->fg = ofColor(255);
 	add(blurSlider);
 	
 	numPtsLabel = addLabel( "Points" );
-	numPtsSlider = new mui::Slider(0,0,100,h, 1, 100, 20);
+	numPtsSlider = new mui::SliderWithLabel(0,0,100,h, 1, 100, 20, 0);
+	ofAddListener( numPtsSlider->slider->onChange, this, &OsciView::sliderChanged );
+	numPtsSlider->label->fg = ofColor(255);
 	add(numPtsSlider);
 
 	hueLabel = addLabel( "Hue" );
-	hueSlider = new mui::Slider(0,0,100,h,0,360, 0);
+	hueSlider = new mui::SliderWithLabel(0,0,100,h,0,360, 127, 0);
+	ofAddListener( hueSlider->slider->onChange, this, &OsciView::sliderChanged );
+	hueSlider->label->fg = ofColor(255);
 	add(hueSlider);
 	
 	intensityLabel = addLabel( "Intensity" );
-	intensitySlider = new mui::Slider(0,0,100,h,0,1, 0);
+	intensitySlider = new mui::SliderWithLabel(0,0,100,h,0,1, 0.5, 2);
+	ofAddListener( intensitySlider->slider->onChange, this, &OsciView::sliderChanged );
+	intensitySlider->label->fg = ofColor(255);
 	add(intensitySlider);
 	
 	afterglowLabel = addLabel( "Afterglow" );
-	afterglowSlider = new mui::Slider(0,0,100,h,0,1, 0);
+	afterglowSlider = new mui::SliderWithLabel(0,0,100,h,0,1, 0.3, 2);
+	ofAddListener( afterglowSlider->slider->onChange, this, &OsciView::sliderChanged );
+	afterglowSlider->label->fg = ofColor(255);
 	add(afterglowSlider);
 	
 	
@@ -115,13 +129,17 @@ void OsciView::layout(){
 	mui::L(strokeWeightLabel).below(scaleLabel).alignRightEdgeTo(scaleLabel);
 	mui::L(strokeWeightSlider).rightOf(strokeWeightLabel,5).stretchToRightEdgeOf(this,10);
 	
-	mui::L(blurLabel).below(strokeWeightLabel).alignRightEdgeTo(strokeWeightLabel);
+	/*mui::L(blurLabel).below(strokeWeightLabel).alignRightEdgeTo(strokeWeightLabel);
 	mui::L(blurSlider).rightOf(blurLabel,5).stretchToRightEdgeOf(this,10);
 	
 	mui::L(numPtsLabel).below(blurLabel).alignRightEdgeTo(blurLabel);
-	mui::L(numPtsSlider).rightOf(numPtsLabel,5).stretchToRightEdgeOf(this,10);
+	mui::L(numPtsSlider).rightOf(numPtsLabel,5).stretchToRightEdgeOf(this,10);*/
+	blurLabel->visible = false;
+	blurSlider->visible = false;
+	numPtsLabel->visible = false;
+	numPtsSlider->visible = false;
 	
-	mui::L(hueLabel).below(numPtsLabel).alignRightEdgeTo(numPtsLabel);
+	mui::L(hueLabel).below(strokeWeightLabel).alignRightEdgeTo(strokeWeightLabel);
 	mui::L(hueSlider).rightOf(hueLabel,5).stretchToRightEdgeOf(this,10);
 	
 	mui::L(intensityLabel).below(hueLabel).alignRightEdgeTo(hueLabel);
@@ -162,64 +180,9 @@ void OsciView::update(){
 		globals.player.setPosition(timeSlider->value);
 	}
 
-	static float lastOutputVol = -1;
-	if( !updateSlider(outputVolumeSlider, globals.outputVolume, lastOutputVol) ){
-		globals.outputVolume = outputVolumeSlider->value;
-	}
-	
-	static float lastScaleVal = -1;
-	if( !updateSlider(scaleSlider, globals.scale, lastScaleVal) ){
-		globals.scale = scaleSlider->value;
-	}
-	
 	if( globals.player.isPlaying != playButton->selected ){
 		playButton->selected = globals.player.isPlaying;
 		playButton->commit();
-	}
-	
-	static float lastStrokeWeightVal = -1;
-	if( !updateSlider(strokeWeightSlider, globals.strokeWeight, lastStrokeWeightVal ) ){
-		globals.strokeWeight = strokeWeightSlider->value;
-	}
-	
-	static float lastBlurVal = -1;
-	if( !updateSlider(blurSlider, globals.blur, lastBlurVal ) ){
-		globals.blur = blurSlider->value;
-	}
-	
-	static float lastNumPtsVal = -1;
-	if( !updateSlider(numPtsSlider, globals.numPts, lastNumPtsVal ) ){
-		globals.numPts = numPtsSlider->value;
-	}
-	
-	static float lastHueVal = -1;
-	if( !updateSlider(hueSlider, globals.hue, lastHueVal ) ){
-		globals.hue = hueSlider->value;
-	}
-	
-	static float lastIntensityVal = -1;
-	if( !updateSlider(intensitySlider, globals.intensity, lastIntensityVal ) ){
-		globals.intensity = intensitySlider->value;
-	}
-	
-	static float lastAfterglowVal = -1;
-	if( !updateSlider(afterglowSlider, globals.afterglow, lastAfterglowVal ) ){
-		globals.afterglow = afterglowSlider->value;
-	}
-	
-	if( globals.invertX != invertX->selected ){
-		invertX->selected = globals.invertX;
-		invertX->commit();
-	}
-	
-	if( globals.invertY != invertY->selected ){
-		invertY->selected = globals.invertY;
-		invertY->commit();
-	}
-	
-	if( globals.flipXY != flipXY->selected ){
-		flipXY->selected = globals.flipXY;
-		flipXY->commit();
 	}
 }
 
@@ -249,6 +212,29 @@ void OsciView::touchUp( ofTouchEventArgs &touch ){
 void OsciView::touchDoubleTap( ofTouchEventArgs &touch ){
 }
 
+
+void OsciView::fromGlobals(){
+	outputVolumeSlider->value = globals.outputVolume;
+	
+	if( globals.player.isPlaying != playButton->selected ){
+		playButton->selected = globals.player.isPlaying;
+		playButton->commit();
+	}
+	
+	scaleSlider->slider->value = globals.scale;
+	strokeWeightSlider->slider->value = globals.strokeWeight;
+	blurSlider->slider->value = globals.blur;
+	numPtsSlider->slider->value = globals.numPts;
+	hueSlider->slider->value = globals.hue;
+	intensitySlider->slider->value = globals.intensity;
+	afterglowSlider->slider->value = globals.afterglow;
+	invertX->selected = globals.invertX;
+	invertX->commit();
+	invertY->selected = globals.invertY;
+	invertY->commit();
+	flipXY->selected = globals.flipXY;
+	flipXY->commit();
+}
 
 //--------------------------------------------------------------
 void OsciView::buttonPressed( const void * sender, ofTouchEventArgs & args ){
@@ -283,6 +269,31 @@ void OsciView::buttonPressed( const void * sender, ofTouchEventArgs & args ){
 		}
 	}
 }
+
+void OsciView::sliderChanged( const void * sender, float & value ){
+	if( sender == scaleSlider->slider ){
+		globals.scale = scaleSlider->slider->value;
+	}
+	else if( sender == strokeWeightSlider->slider ){
+		globals.strokeWeight = strokeWeightSlider->slider->value;
+	}
+	else if( sender == blurSlider->slider ){
+		globals.blur = blurSlider->slider->value;
+	}
+	else if( sender == numPtsSlider->slider ){
+		globals.numPts = numPtsSlider->slider->value;
+	}
+	else if( sender == hueSlider->slider ){
+		globals.hue = hueSlider->slider->value;
+	}
+	else if( sender == intensitySlider->slider ){
+		globals.intensity = intensitySlider->slider->value;
+	}
+	else if( sender == afterglowSlider->slider ){
+		globals.afterglow = afterglowSlider->slider->value;
+	}
+}
+
 
 mui::Label * OsciView::addLabel( string text ){
 	mui::Label * label = new mui::Label( text, 0, 0, 100, 30 );

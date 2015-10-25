@@ -11,7 +11,7 @@ bool applicationRunning = false;
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-	dropped ++;
+	dropped = 0;
 	changed = false;
 	clearFbos = false;
 	lastMouseMoved = 0;
@@ -22,7 +22,6 @@ void ofApp::setup(){
 	shader.setGeometryOutputType(GL_QUADS);
 	shader.setGeometryOutputCount(4);
 	shader.load("shaders/osci.vert", "shaders/osci.frag", "shaders/osci.geom");
-	blur.load("shaders/blur");
 	
 	vector<RtAudio::DeviceInfo> devices = listRtSoundDevices();
 	ofSetFrameRate(60);
@@ -68,6 +67,7 @@ void ofApp::startApplication(){
 	configView->toGlobals();
 	globals.saveToFile();
 	configView->visible = false;
+	osciView->fromGlobals();
 	osciView->visible = true;
 	
 	if( globals.autoDetect ){
@@ -93,7 +93,7 @@ void ofApp::stopApplication(){
 	globals.invertX = globals.invertX;
 	globals.invertY = globals.invertY;
 
-	globals.scale = osciView->scaleSlider->value;
+	globals.scale = osciView->scaleSlider->slider->value;
 	globals.saveToFile();
 	
 	if( !applicationRunning ) return;
@@ -202,61 +202,18 @@ void ofApp::draw(){
 	
 	if( !fbo.isAllocated() || fbo.getWidth() != ofGetWidth() || fbo.getHeight() != ofGetHeight() ){
 		fbo.allocate(ofGetWidth(), ofGetHeight(),GL_RGBA);
-		fbb.allocate(ofGetWidth(), ofGetHeight(),GL_RGBA);
 		fbo.begin();
 		ofClear(0,255);
 		fbo.end();
-		fbb.begin();
-		ofClear(0,255);
-		fbb.end(); 
 	}
 	
 	if( changed && globals.player.isPlaying ){
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_COLOR, GL_ONE);
-		fbb.begin();
-			ofSetColor(255);
-			blur.begin();
-			blur.setUniform1f("blurDist", 5*globals.blur/255.0);
-			blur.setUniform1f("blurAmnt", 5);
-			fbo.draw(0,0);
-			blur.end();
-		fbb.end();
-		
 		fbo.begin();
-			ofSetColor(255);
-			blur.begin();
-			blur.setUniform1f("blurDist", 30*globals.blur/255.0);
-			blur.setUniform1f("blurAmnt", 30);
-			fbb.draw(0,0);
-			blur.end();
-		fbo.end();
-		
-		fbb.begin();
-			glClearColor(0, 0, 0, 0);
-			glClear(GL_COLOR_BUFFER_BIT);
-		fbb.end();
-		
-		
-		fbo.begin();
-			ofSetColor( 0, (1-globals.afterglow)*255 );
-			ofFill();
-			ofDrawRectangle( 0, 0, ofGetWidth(), ofGetHeight() );
-		
-			/*ofEnableAlphaBlending();
-			ofSetColor(255); 
-			blur.begin();
-			blur.setUniform1f("blurDist", 100*globals.blur/255.0);
-			blur.setUniform1f("blurAmnt", 5);
-			fbb.draw(0,0);
-			blur.end();*/
-		
-			glDisable(GL_BLEND);
-			ofEnableAlphaBlending();
-			//fbb.draw(0,0);
-
+		ofSetColor( 0, (1-globals.afterglow)*255 );
+		ofFill();
+		ofDrawRectangle( 0, 0, ofGetWidth(), ofGetHeight() );
+	
 		ofEnableAlphaBlending();
-
 		ofMatrix3x3 viewMatrix = getViewMatrix();
 
 //      TODO: draw the cross section
@@ -271,16 +228,16 @@ void ofApp::draw(){
 		shader.setUniform1f("uSize", globals.strokeWeight / 1000.0);
 		shader.setUniform1f("uIntensity", globals.intensity);
 		shader.setUniformMatrix3f("uMatrix", viewMatrix);
+		shader.setUniform1f("uHue", globals.hue );
 		ofSetColor(255);
 		shapeMesh.draw();
 		shader.end();
-		glDisable(GL_BLEND);
 		ofEnableAlphaBlending();
 
 		fbo.end();
 	}
 	
-	ofSetColor(255);
+	ofSetColor(150);
 	fbo.draw(0,0);
 	ofDrawBitmapString("Dropped: " + ofToString(dropped), 10, 20 );
 }
@@ -307,6 +264,10 @@ void ofApp::keyPressed  (int key){
 	if( key == 'f' || key == OF_KEY_RETURN || key == OF_KEY_F11 ){
 		// nasty!
 		osciView->fullscreenButton->clickAndNotify(); 
+	}
+	
+	if( key == OF_KEY_ESC ){
+		osciView->fullscreenButton->clickAndNotify(false);
 	}
 	
 	if( key == ' '  ){

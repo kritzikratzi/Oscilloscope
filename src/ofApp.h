@@ -43,11 +43,9 @@ class ofApp : public ofBaseApp{
 		OsciView * osciView;
 		ofPath path;
 		ofMesh shapeMesh;
-		ofFbo fbo, fbb;
+		ofFbo fbo;
 		ofShader shader;
 		ShaderLoader shaderLoader;
-	
-		ofShader blur;
 	
 		MonoSample left;
 		MonoSample right;

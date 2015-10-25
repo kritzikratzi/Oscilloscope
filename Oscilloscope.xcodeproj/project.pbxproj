@@ -26,7 +26,6 @@
 		BA54982119F7274C007E9F6A /* ConfigView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BA54981F19F7274C007E9F6A /* ConfigView.cpp */; };
 		BA54982719F740CE007E9F6A /* OsciView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BA54982519F740CE007E9F6A /* OsciView.cpp */; };
 		BA583CA81A8667B800F4BCB6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BABA49661A866519000900B1 /* Images.xcassets */; };
-		BA5D0A291B9C92C200D10946 /* blur.vert in Resources */ = {isa = PBXBuildFile; fileRef = BA5D0A281B9C92C200D10946 /* blur.vert */; };
 		BA70F79219D39DE9008E990B /* ofxIniSettings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BA70F79019D39C7F008E990B /* ofxIniSettings.cpp */; };
 		BA828D2A1B378A7D002DE63F /* Audio.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BA828D281B378A7D002DE63F /* Audio.cpp */; };
 		BA828D2D1B378E6D002DE63F /* sounddevices.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BA828D2B1B378E6D002DE63F /* sounddevices.cpp */; };
@@ -148,11 +147,9 @@
 		BA54982019F7274C007E9F6A /* ConfigView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ConfigView.h; path = ui/ConfigView.h; sourceTree = "<group>"; };
 		BA54982519F740CE007E9F6A /* OsciView.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OsciView.cpp; path = ui/OsciView.cpp; sourceTree = "<group>"; };
 		BA54982619F740CE007E9F6A /* OsciView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OsciView.h; path = ui/OsciView.h; sourceTree = "<group>"; };
-		BA5D0A241B9C902300D10946 /* blur.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = blur.frag; sourceTree = "<group>"; };
 		BA5D0A251B9C902300D10946 /* osci.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = osci.frag; sourceTree = "<group>"; };
 		BA5D0A261B9C902300D10946 /* osci.geom */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = osci.geom; sourceTree = "<group>"; };
 		BA5D0A271B9C902300D10946 /* osci.vert */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = osci.vert; sourceTree = "<group>"; };
-		BA5D0A281B9C92C200D10946 /* blur.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = blur.vert; sourceTree = "<group>"; };
 		BA70F78D19D39C7F008E990B /* install.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = install.xml; sourceTree = "<group>"; };
 		BA70F78E19D39C7F008E990B /* README */ = {isa = PBXFileReference; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		BA70F79019D39C7F008E990B /* ofxIniSettings.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ofxIniSettings.cpp; sourceTree = "<group>"; };
@@ -350,8 +347,6 @@
 		BA5D0A231B9C902300D10946 /* shaders */ = {
 			isa = PBXGroup;
 			children = (
-				BA5D0A241B9C902300D10946 /* blur.frag */,
-				BA5D0A281B9C92C200D10946 /* blur.vert */,
 				BA5D0A251B9C902300D10946 /* osci.frag */,
 				BA5D0A261B9C902300D10946 /* osci.geom */,
 				BA5D0A271B9C902300D10946 /* osci.vert */,
@@ -572,7 +567,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BA5D0A291B9C92C200D10946 /* blur.vert in Resources */,
 				BA583CA81A8667B800F4BCB6 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

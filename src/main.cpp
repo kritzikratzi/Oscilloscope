@@ -16,7 +16,7 @@
 
 //========================================================================
 int main( ){
-//	ofSetupOpenGL(1024,768, OF_WINDOW);			// <-------- setup the GL context
+	ofSetEscapeQuitsApp(false);
 
 	// this kicks off the running of my app
 	// can be OF_WINDOW or OF_FULLSCREEN
@@ -31,6 +31,7 @@ int main( ){
 	cout << "LAUNCH DESKTOP" << endl;
 	ofSetupOpenGL(&window, 1024, 768, OF_WINDOW);
 	
+	// go fullscreen in mac osx
 	#if defined(TARGET_OSX)
 	NSWindow * cocoaWindow = (NSWindow*)window.getCocoaWindow();
 	[cocoaWindow setFrame:[[NSScreen mainScreen] visibleFrame] display:YES];
@@ -41,7 +42,8 @@ int main( ){
 	if(!ofGLCheckExtension("GL_ARB_geometry_shader4") &&
 	   !ofGLCheckExtension("GL_EXT_geometry_shader4") &&
 	   !ofIsGLProgrammableRenderer()){
-		ofLogFatalError() << "geometry shaders not supported on this graphics card";
+		ofSystemAlertDialog("Geometry shader extension (GL_EXT_geometry_shader4) not available :(");
+		ofLogFatalError() << "geometry shaders not supported on this graphics card" << endl;
 		return 1;
 	}
 
@@ -53,6 +55,7 @@ int main( ){
 }
 
 #ifdef _WIN32
+// handle windows startup
 INT WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
     PSTR lpCmdLine, INT nCmdShow)
 {
