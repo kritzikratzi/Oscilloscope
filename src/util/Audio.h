@@ -3,12 +3,14 @@
 //
 // Initially created by Hansi on 14.06.14.
 //
+// V1.1, 27.10.2015: addTo returns num copied
 // V1.0, 22.6.2015
 //
 
 #ifndef __AudioAlgo_h__
 #define __AudioAlgo_h__
 
+#include "ofMain.h"
 #include "ofConstants.h"
 #include <iostream>
 #include <vector>
@@ -121,7 +123,7 @@ public:
 	float * peekHead( int &numSamples, int bufferNum=0 );
 	
 	// add the N samples to the *output buffer, skipping with outStride (output must be outStride*N large). this does not remove samples from the internal storage. playback index is increased by N.
-	void addTo( float * output, int outStride, int N );
+	int addTo( float * output, int outStride, int N );
 	
 	bool playing;
 	int playbackIndex;

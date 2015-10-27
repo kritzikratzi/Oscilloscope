@@ -58,7 +58,7 @@ public:
 			if( fragTimeNow != fragTime || vertTimeNow != vertTime || geomTimeNow != geomTime ){
 				cout << "Reload ... " << endl;
 				if( shader->isLoaded() ) shader->unload(); 
-				shader->setGeometryInputType(GL_POINTS);
+				shader->setGeometryInputType(GL_LINES); // LINE_STRIP_ADJACENCY_EXT
 				shader->setGeometryOutputType(GL_QUADS);
 				shader->setGeometryOutputCount(4);
 				shader->load(vertFile, fragFile, geomFile);

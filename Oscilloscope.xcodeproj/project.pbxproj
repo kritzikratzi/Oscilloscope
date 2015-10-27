@@ -31,6 +31,7 @@
 		BA828D2D1B378E6D002DE63F /* sounddevices.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BA828D2B1B378E6D002DE63F /* sounddevices.cpp */; };
 		BA9F97411B6512FA00A453D6 /* globals.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BA9F973F1B6512FA00A453D6 /* globals.cpp */; };
 		BAEE5D281B5FB3D10038C838 /* ofApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BAEE5D261B5FB3D10038C838 /* ofApp.cpp */; };
+		BAFE8DBD1BDE66B4004BA599 /* OsciAvAudioPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BAFE8DBB1BDE66B4004BA599 /* OsciAvAudioPlayer.cpp */; };
 		BBAB23CB13894F3D00AA2426 /* GLUT.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; };
 		C05CD71D597596BBE2C35D82 /* EmptyContainer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 98FCF23F427DE6A108C15AA6 /* EmptyContainer.cpp */; };
 		C746D93FB7F1F1E072BD5073 /* Root.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9439510945C804E7C475C20A /* Root.cpp */; };
@@ -166,6 +167,8 @@
 		BABA49661A866519000900B1 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = assets/Images.xcassets; sourceTree = "<group>"; };
 		BAEE5D261B5FB3D10038C838 /* ofApp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofApp.cpp; sourceTree = "<group>"; };
 		BAEE5D271B5FB3D10038C838 /* ofApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofApp.h; sourceTree = "<group>"; };
+		BAFE8DBB1BDE66B4004BA599 /* OsciAvAudioPlayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OsciAvAudioPlayer.cpp; sourceTree = "<group>"; };
+		BAFE8DBC1BDE66B4004BA599 /* OsciAvAudioPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OsciAvAudioPlayer.h; sourceTree = "<group>"; };
 		BBAB23BE13894E4700AA2426 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = ../../../libs/glut/lib/osx/GLUT.framework; sourceTree = "<group>"; };
 		BFC86602DFCA82C2E2D534F3 /* Label.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Label.h; sourceTree = "<group>"; };
 		C4E6595B0C243ADE291984F7 /* Helpers.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Helpers.cpp; sourceTree = "<group>"; };
@@ -378,6 +381,8 @@
 		BA828D271B378A6E002DE63F /* util */ = {
 			isa = PBXGroup;
 			children = (
+				BAFE8DBB1BDE66B4004BA599 /* OsciAvAudioPlayer.cpp */,
+				BAFE8DBC1BDE66B4004BA599 /* OsciAvAudioPlayer.h */,
 				BA828D2B1B378E6D002DE63F /* sounddevices.cpp */,
 				BA828D2C1B378E6D002DE63F /* sounddevices.h */,
 				BA828D281B378A7D002DE63F /* Audio.cpp */,
@@ -616,6 +621,7 @@
 				B92EFA79541DC1EA518DC974 /* InternalWindow.cpp in Sources */,
 				E8255C03191A97CE94F5DF82 /* Label.cpp in Sources */,
 				59B2636B9FAB86C0A883FC9C /* Layout.cpp in Sources */,
+				BAFE8DBD1BDE66B4004BA599 /* OsciAvAudioPlayer.cpp in Sources */,
 				40245A0CFD8C8927459D4EBC /* MUI.cpp in Sources */,
 				C746D93FB7F1F1E072BD5073 /* Root.cpp in Sources */,
 				BA19B7C81B78074000E3DFD1 /* MuiConfig.cpp in Sources */,

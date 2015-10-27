@@ -18,10 +18,12 @@ void ofApp::setup(){
 	ofSetVerticalSync(true);
 	ofBackground(0);
 	ofSetBackgroundAuto(false);
-	shader.setGeometryInputType(GL_LINES);
-	shader.setGeometryOutputType(GL_QUADS);
-	shader.setGeometryOutputCount(4);
-	shader.load("shaders/osci.vert", "shaders/osci.frag", "shaders/osci.geom");
+	
+	// shaderLoader handles this for us
+//	shader.setGeometryInputType(GL_LINES);
+//	shader.setGeometryOutputType(GL_QUADS);
+//	shader.setGeometryOutputCount(4);
+	shaderLoader.setup(&shader, "shaders/osci");
 	
 	vector<RtAudio::DeviceInfo> devices = listRtSoundDevices();
 	ofSetFrameRate(60);
@@ -114,9 +116,13 @@ void ofApp::update(){
 		windowResized(ofGetWidth(), ofGetHeight());
 	}
 	
-/*	if( ofGetElapsedTimeMillis()-lastMouseMoved > 5000 && globals.player.isPlaying ){
+	if( ofGetElapsedTimeMillis()-lastMouseMoved > 5000 && globals.player.isPlaying ){
 		osciView->visible = false;
-	}*/
+	}
+
+	if( ofGetElapsedTimeMillis()-lastMouseMoved < 5000 && osciView->visible == false ){
+		osciView->visible = true;
+	}
 
 	if( !applicationRunning ){
 		ofShowCursor();
@@ -134,30 +140,47 @@ void ofApp::update(){
 	static float * leftBuffer = new float[bufferSize];
 	static float * rightBuffer = new float[bufferSize];
 
+	// party mode
+	//globals.hue += ofGetMouseX()*100/ofGetWidth();
+	//globals.hue = fmodf(globals.hue,360);
+	
+	MonoSample &left = globals.player.left192;
+	MonoSample &right = globals.player.right192;
+	left.play();
+	right.play();
 	if( left.totalLength >= bufferSize && right.totalLength >= bufferSize ){
 		changed = true;
 		while( left.totalLength >= bufferSize && right.totalLength >= bufferSize ){
 			memset(leftBuffer,0,bufferSize*sizeof(float));
 			memset(rightBuffer,0,bufferSize*sizeof(float));
 			
+			
 			left.addTo(leftBuffer, 1, bufferSize);
 			right.addTo(rightBuffer, 1, bufferSize);
-			left.peel(bufferSize);
-			right.peel(bufferSize);
 			
 			ofColor col = ofColor::fromHsb(globals.hue*255/360, 255, 255*globals.intensity);
 			
-			if( shapeMesh.getVertices().size() < bufferSize*2 ){
+			if( shapeMesh.getVertices().size() < bufferSize*4 ){
+				ofPoint a, b = ofPoint(leftBuffer[0], rightBuffer[0]);
+				shapeMesh.addVertex(last);
+				shapeMesh.addVertex(b);
+				
 				for( int i = 1; i < bufferSize; i++ ){
-					ofPoint a = ofPoint(leftBuffer[i-1], rightBuffer[i-1]);
-					ofPoint b = ofPoint(leftBuffer[i  ], rightBuffer[i  ]);
+					a = ofPoint(leftBuffer[i-1], rightBuffer[i-1]);
+					b = ofPoint(leftBuffer[i  ], rightBuffer[i  ]);
 					shapeMesh.addVertex(a);
 					shapeMesh.addVertex(b);
 				}
+				
+				last = b;
 			}
 			else{
 				dropped ++;
+				cout << "drop!" << endl;
 			}
+			
+			left.peel(bufferSize);
+			right.peel(bufferSize);
 		}
 	}
 }
@@ -221,7 +244,6 @@ void ofApp::draw(){
 //		ofDrawLine( -10, 0, 10, 0 );
 //		ofDrawLine( 0, -10, 0, 10 );
 		
-		shapeMesh.enableColors();
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE);
 		shader.begin();
@@ -254,11 +276,12 @@ void ofApp::exit(){
 
 //----------------------------------------------------------	----
 void ofApp::keyPressed  (int key){
-	lastMouseMoved = ofGetElapsedTimeMillis();
 	key = std::tolower(key);
 	
 	if( key == '\t' && !configView->isVisibleOnScreen()){
 		osciView->visible = !osciView->visible;
+		if( osciView->visible ) lastMouseMoved = ofGetElapsedTimeMillis();
+		else lastMouseMoved = 0;
 	}
 
 	if( key == 'f' || key == OF_KEY_RETURN || key == OF_KEY_F11 ){
@@ -320,15 +343,19 @@ void ofApp::audioIn(float * input, int bufferSize, int nChannels){
 }
 
 void ofApp::audioOut( float * output, int bufferSize, int nChannels ){
+	if( fileToLoad != "" ){
+		globals.player.loadSound(fileToLoad);
+		fileToLoad = "";
+	}
+	
 	memset(output, 0, bufferSize*nChannels);
 	if( globals.player.isLoaded ){
 		globals.player.audioOut(output, bufferSize, nChannels);
 		
-		left.append(output, bufferSize,2);
-		right.append(output+1,bufferSize,2);
+		//left.append(output, bufferSize,2);
+		//right.append(output+1,bufferSize,2);
 		
 		AudioAlgo::scale(output, globals.outputVolume, nChannels*bufferSize);
-		
 	}
 	else{
 		
@@ -353,7 +380,9 @@ void ofApp::dragEvent(ofDragInfo dragInfo){
 	}
 	
 	if( dragInfo.files.size() >= 1 ){
-		globals.player.loadSound(dragInfo.files[0]);
+		// this runs on a separate thread.
+		// we have to be careful not to make a mess!
+		fileToLoad = dragInfo.files[0];
 	}
 	
 }

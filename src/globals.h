@@ -10,7 +10,7 @@
 #define __Oscilloscope__globals__
 
 #include <stdio.h>
-#include "ofxAvAudioPlayer.h"
+#include "OsciAvAudioPlayer.h"
 #include "ofxIniSettings.h"
 
 #define globals (Globals::instance)
@@ -91,7 +91,7 @@ public:
 	
 	
 	// runtime variables (not saved)
-	ofxAvAudioPlayer player;
+	OsciAvAudioPlayer player;
 	
 	
 	// the singleton thing

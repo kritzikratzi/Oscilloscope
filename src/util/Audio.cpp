@@ -161,7 +161,7 @@ float * MonoSample::peekHead( int &numSamples, int bufferNum ){
 
 
 
-void MonoSample::addTo(float *output, int outStride, int N ){
+int MonoSample::addTo(float *output, int outStride, int N ){
 	if( !playing ){
 		return;
 	}
@@ -192,7 +192,7 @@ void MonoSample::addTo(float *output, int outStride, int N ){
 				if( copied >= N ){
 					// done for today!
 					lock.unlock();
-					return;
+					return copied;
 				}
 			}
 			len += sourceN;
@@ -206,9 +206,10 @@ void MonoSample::addTo(float *output, int outStride, int N ){
 				playbackIndex = 0;
 				playing = false; 
 				lock.unlock();
-				return;
+				return copied;
 			}
 		}
 	}
 	lock.unlock();
+	return copied; 
 }

@@ -33,17 +33,19 @@ void main (void)
     vec2 xy = texcoord.xy;
     float alpha;
 
-    float sigma = uSize/4.0;
+    float sigma = uSize/2.0;
     if (len < EPS) {
     // If the beam segment is too short, just calculate intensity at the position.
         alpha = exp(-pow(length(xy),2.0)/(2.0*sigma*sigma))/2.0/sqrt(uSize);
     } else {
     // Otherwise, use analytical integral for accumulated intensity.
-        alpha = erf(xy.x/SQRT2/sigma) - erf((xy.x-len)/SQRT2/sigma);
-        alpha *= exp(-xy.y*xy.y/(2.0*sigma*sigma))/2.0/len*uSize;
+		alpha = erf(xy.x/SQRT2/sigma) - erf((xy.x-len)/SQRT2/sigma);
+		alpha *= exp(-xy.y*xy.y/(2.0*sigma*sigma))/2.0/len*uSize;
     }
 
     alpha *= uIntensity;
+	
+	alpha = alpha*4.0 + 0.01;
 
     //float afterglow = smoothstep(0.0, 0.33, uvl.w/2048.0);
     //alpha *= afterglow * 1.0;

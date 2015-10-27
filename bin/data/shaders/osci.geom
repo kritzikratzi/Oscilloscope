@@ -21,8 +21,6 @@ void main() {
 
     vec2 norm = vec2(-dir.y, dir.x);
 
-    gl_FrontColor = gl_FrontColorIn[0];
-
     dir *= uSize;
     norm *= uSize;
 
