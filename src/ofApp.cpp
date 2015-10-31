@@ -92,12 +92,7 @@ void ofApp::startApplication(){
 
 
 void ofApp::stopApplication(){
-	configView->fromGlobals();
-	globals.flipXY = globals.flipXY;
-	globals.invertX = globals.invertX;
-	globals.invertY = globals.invertY;
-
-	globals.scale = osciView->scaleSlider->slider->value;
+	configView->toGlobals();
 	globals.saveToFile();
 	
 	if( !applicationRunning ) return;
@@ -357,10 +352,6 @@ void ofApp::audioOut( float * output, int bufferSize, int nChannels ){
 	memset(output, 0, bufferSize*nChannels);
 	if( globals.player.isLoaded ){
 		globals.player.audioOut(output, bufferSize, nChannels);
-		
-		//left.append(output, bufferSize,2);
-		//right.append(output+1,bufferSize,2);
-		
 		AudioAlgo::scale(output, globals.outputVolume, nChannels*bufferSize);
 	}
 	else{
@@ -376,11 +367,13 @@ void ofApp::gotMessage(ofMessage msg){
 	else if( msg.message == "stop-pressed" ){
 		stopApplication();
 	}
+	else if( msg.message.substr(0,5) == "load:" ){
+		fileToLoad = msg.message.substr(5);
+	}
 }
 
 //--------------------------------------------------------------
 void ofApp::dragEvent(ofDragInfo dragInfo){
-	cout << "files: " << endl;
 	for( vector<string>::iterator it = dragInfo.files.begin();it != dragInfo.files.end(); ++it ){
 		cout << *it << endl;
 	}

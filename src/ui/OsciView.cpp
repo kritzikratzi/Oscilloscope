@@ -63,7 +63,9 @@ OsciView::OsciView( float x_, float y_, float width_, float height_)
 	
 	
 	outputVolumeLabel = addLabel( "Volume" );
-	outputVolumeSlider = new mui::Slider(0, 0, 100, h, 0, 1, 0.8 );
+	outputVolumeSlider = new mui::SliderWithLabel(0, 0, 100, h, 0, 1, 0.8, 2 );
+	ofAddListener( outputVolumeSlider->slider->onChange, this, &OsciView::sliderChanged );
+	outputVolumeSlider->label->fg = ofColor(255);
 	add(outputVolumeSlider);
 	
 	strokeWeightLabel = addLabel( "Stroke Weight" );
@@ -214,7 +216,7 @@ void OsciView::touchDoubleTap( ofTouchEventArgs &touch ){
 
 
 void OsciView::fromGlobals(){
-	outputVolumeSlider->value = globals.outputVolume;
+	outputVolumeSlider->slider->value = globals.outputVolume;
 	
 	if( globals.player.isPlaying != playButton->selected ){
 		playButton->selected = globals.player.isPlaying;
@@ -274,13 +276,16 @@ void OsciView::buttonPressed( const void * sender, ofTouchEventArgs & args ){
 	else if( sender == loadFileButton ){
 		ofFileDialogResult res = ofSystemLoadDialog("Load audio file", false );
 		if( res.bSuccess ){
-			globals.player.loadSound(res.filePath);
+			ofSendMessage("load:" + res.filePath); 
 		}
 	}
 }
 
 void OsciView::sliderChanged( const void * sender, float & value ){
-	if( sender == scaleSlider->slider ){
+	if( sender == outputVolumeSlider->slider ){
+		globals.outputVolume = outputVolumeSlider->slider->value;
+	}
+	else if( sender == scaleSlider->slider ){
 		globals.scale = scaleSlider->slider->value;
 	}
 	else if( sender == strokeWeightSlider->slider ){
