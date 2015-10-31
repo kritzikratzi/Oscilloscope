@@ -1,5 +1,5 @@
 #include "ofxIniSettings.h"
-#include "ofxIniExtras.cpp"
+#include "ofxIniExtras.h"
 
 bool ofxIniSettings::load(string filename, bool clearFirst, bool setAsOutputFile) {
     if (setAsOutputFile) outputFilename = filename;

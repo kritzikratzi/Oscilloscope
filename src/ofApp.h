@@ -34,7 +34,7 @@ class ofApp : public ofBaseApp{
 		void audioIn(float * input, int bufferSize, int nChannels);
 		void audioOut( float * output, int bufferSize, int nChannels ); 
 
-		ofMatrix3x3 getViewMatrix();
+		ofMatrix4x4 getViewMatrix();
 	
 		ofSoundStream soundStream;
 

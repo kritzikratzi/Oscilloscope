@@ -14,7 +14,7 @@ OsciView::OsciView( float x_, float y_, float width_, float height_)
 
 	string xx = ofxFontAwesome::play; 
 	
-	stopButton = new FaButton( ofxFontAwesome::cogs, x, y, h, h );
+		stopButton = new FaButton( ofxFontAwesome::cogs, x, y, h, h );
 	ofAddListener( stopButton->onPress, this, &OsciView::buttonPressed );
 	y += stopButton->height + 10;
 	add( stopButton );
@@ -261,6 +261,15 @@ void OsciView::buttonPressed( const void * sender, ofTouchEventArgs & args ){
 	}
 	else if( sender == fullscreenButton ){
 		ofSetFullscreen(fullscreenButton->selected);
+		// windows becomes black without this, not sure why...
+		//TODO: check if this is still a problem in of0.9
+		#ifdef _WIN32
+		if(fullscreenButton->selected){
+			int w = ofGetScreenWidth(); 
+			int h = ofGetScreenHeight(); 
+			ofSetWindowShape(w,h); 
+		}
+		#endif
 	}
 	else if( sender == loadFileButton ){
 		ofFileDialogResult res = ofSystemLoadDialog("Load audio file", false );

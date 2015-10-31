@@ -1,4 +1,7 @@
 dist/
+._*
+.DS_Store
+Thumbs.db
 # Created by https://www.gitignore.io
 
 ### Xcode ###

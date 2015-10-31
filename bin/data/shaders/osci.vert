@@ -1,5 +1,5 @@
 #version 110
-uniform mat3 uMatrix;
+uniform mat4 uMatrix;
 void main()
 {
 	gl_Position = gl_Vertex;

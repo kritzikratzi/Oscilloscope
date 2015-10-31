@@ -4,7 +4,7 @@
 
 varying vec3 texcoord;
 uniform float uSize;
-uniform mat3 uMatrix;
+uniform mat4 uMatrix;
 
 void main() {
     mat4 tmatrix = mat4(uMatrix);

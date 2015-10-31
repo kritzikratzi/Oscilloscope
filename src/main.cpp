@@ -16,45 +16,6 @@
 
 //========================================================================
 int main( ){
-	
-	MonoSample test;
-	float val = 0;
-	for( int i = 2; i < 20; i++ ){
-		float data[i];
-		for( int j = 0; j < i; j++ ){
-			data[j] = val;
-			val += 0.1;
-		}
-		test.append(data, i);
-	}
-	
-	// take out 1 at a time.
-	test.play();
-	
-	while( test.totalLength > 0 ){
-		for( int i = 1; i < test.totalLength%2+1; i++ ){
-			float data[i];
-			for( int j = 0; j < i; j++ ){
-				data[j] = val;
-				val += 0.1;
-			}
-			test.append(data, i);
-		}
-		
-
-		test.play();
-		int len = test.totalLength%8+3;
-		float * res = new float[len];
-		memset(res,0,len*sizeof(float));
-		len = test.addTo(res, 1, len);
-		test.peel(len);
-		for( int i = 0; i < len; i++ ){
-			cout << i << ": " << res[i] << endl;
-		}
-		
-		delete res;
-	}
-	
 	ofSetEscapeQuitsApp(false);
 
 	// this kicks off the running of my app
@@ -68,7 +29,7 @@ int main( ){
 	#endif
 
 	cout << "LAUNCH DESKTOP" << endl;
-	ofSetupOpenGL(&window, 1024, 768, OF_WINDOW);
+	ofSetupOpenGL(&window, 1024, 700, OF_WINDOW);
 	
 	// go fullscreen in mac osx
 	#if defined(TARGET_OSX)
@@ -79,8 +40,7 @@ int main( ){
 
 
 	if(!ofGLCheckExtension("GL_ARB_geometry_shader4") &&
-	   !ofGLCheckExtension("GL_EXT_geometry_shader4") &&
-	   !ofIsGLProgrammableRenderer()){
+	   !ofGLCheckExtension("GL_EXT_geometry_shader4") ){
 		ofSystemAlertDialog("Geometry shader extension (GL_EXT_geometry_shader4) not available :(");
 		ofLogFatalError() << "geometry shaders not supported on this graphics card" << endl;
 		return 1;

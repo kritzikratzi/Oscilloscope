@@ -22,7 +22,7 @@ vector<RtAudio::DeviceInfo> listRtSoundDevices(){
 	ofPtr<RtAudio> audioTemp;
 	try {
 		audioTemp = ofPtr<RtAudio>(new RtAudio());
-	} catch (RtAudioError &error) {
+	} catch (RtError &error) {
 		error.printMessage();
 		return infos;
 	}
@@ -34,7 +34,7 @@ vector<RtAudio::DeviceInfo> listRtSoundDevices(){
 		try {
 			info = audioTemp->getDeviceInfo(i);
 			infos.push_back( info );
-		} catch (RtAudioError &error) {
+		} catch (RtError &error) {
 			error.printMessage();
 			break;
 		}
@@ -47,7 +47,7 @@ bool getDefaultRtOutputParams( int &deviceId, int &sampleRate, int &bufferSize, 
 	ofPtr<RtAudio> audioTemp;
 	try {
 		audioTemp = ofPtr<RtAudio>(new RtAudio());
-	} catch (RtAudioError &error) {
+	} catch (RtError &error) {
 		error.printMessage();
 		return false;
 	}

@@ -15,6 +15,7 @@ void ofApp::setup(){
 	changed = false;
 	clearFbos = false;
 	lastMouseMoved = 0;
+	applicationRunning = false; 
 	ofSetVerticalSync(true);
 	ofBackground(0);
 	ofSetBackgroundAuto(false);
@@ -55,6 +56,7 @@ void ofApp::setup(){
 		startApplication();
 	}
 
+
 	windowResized(ofGetWidth(), ofGetHeight());
 }
 
@@ -62,7 +64,7 @@ void ofApp::setup(){
 void ofApp::startApplication(){
 	if( applicationRunning ) return;
 	applicationRunning = true;
-	
+	cout << "starting ..." << endl; 
 	left.play();
 	right.play();
 
@@ -116,18 +118,23 @@ void ofApp::update(){
 		windowResized(ofGetWidth(), ofGetHeight());
 	}
 	
-	if( ofGetElapsedTimeMillis()-lastMouseMoved > 5000 && globals.player.isPlaying ){
-		osciView->visible = false;
+	if( ofGetMousePressed() ){
+		lastMouseMoved = ofGetElapsedTimeMillis(); 
 	}
 
-	if( ofGetElapsedTimeMillis()-lastMouseMoved < 5000 && osciView->visible == false ){
-		osciView->visible = true;
+	if( ofGetElapsedTimeMillis()-lastMouseMoved > 5000 && globals.player.isPlaying ){
+		osciView->visible = false;
 	}
 
 	if( !applicationRunning ){
 		ofShowCursor();
 		return;
 	}
+
+	if( ofGetElapsedTimeMillis()-lastMouseMoved < 5000 && osciView->visible == false ){
+		osciView->visible = true;
+	}
+
 	if( osciView->visible ) ofShowCursor();
 	else ofHideCursor();
 	
@@ -185,35 +192,31 @@ void ofApp::update(){
 	}
 }
 
-ofMatrix3x3 ofApp::getViewMatrix() {
-	ofMatrix3x3 viewMatrix = ofMatrix3x3(
-		globals.scale, 0.0, 0.0,
-		0.0, -globals.scale, 0.0,
-		0.0, 0.0, 1.0);
+ofMatrix4x4 ofApp::getViewMatrix() {
+	ofMatrix4x4 viewMatrix = ofMatrix4x4(
+		globals.scale, 0.0, 0.0, 0.0, 
+		0.0, -globals.scale, 0.0, 0.0, 
+		0.0, 0.0, 1.0, 0.0, 
+		0.0, 0.0, 0.0, 1.0);
 
-	if (globals.invertX) viewMatrix[0] *= -1;
-	if (globals.invertY) viewMatrix[4] *= -1;
+	if (globals.invertX) viewMatrix(0,0) *= -1;
+	if (globals.invertY) viewMatrix(1,1) *= -1;
 
 	if (globals.flipXY) {
-		viewMatrix = ofMatrix3x3(
-			0.0, 1.0, 0.0,
-			1.0, 0.0, 0.0,
-			0.0, 0.0, 1.0) * viewMatrix;
+		viewMatrix = ofMatrix4x4(
+			0.0, 1.0, 0.0, 0.0, 
+			1.0, 0.0, 0.0, 0.0, 
+			0.0, 0.0, 1.0, 0.0, 
+			0.0, 0.0, 0.0, 1.0 ) * viewMatrix;
 	}
 
-	ofMatrix3x3 aspectMatrix = ofMatrix3x3(
-		1.0, 0.0, 0.0,
-		0.0, 1.0, 0.0,
-		0.0, 0.0, 1.0);
-
-	{
-		float aspectRatio = float(ofGetWidth()) / float(ofGetHeight());
-		if (aspectRatio > 1.0) {
-			aspectMatrix[0] /= aspectRatio;
-		}
-		else {
-			aspectMatrix[4] *= aspectRatio;
-		}
+	ofMatrix4x4 aspectMatrix; // identity matrix
+	float aspectRatio = float(ofGetWidth()) / float(ofGetHeight());
+	if (aspectRatio > 1.0) {
+		aspectMatrix(0,0) /= aspectRatio;
+	}
+	else {
+		aspectMatrix(1,1) *= aspectRatio;
 	}
 
 	return viewMatrix * aspectMatrix;
@@ -234,10 +237,10 @@ void ofApp::draw(){
 		fbo.begin();
 		ofSetColor( 0, (1-globals.afterglow)*255 );
 		ofFill();
-		ofDrawRectangle( 0, 0, ofGetWidth(), ofGetHeight() );
+		ofRect( 0, 0, ofGetWidth(), ofGetHeight() );
 	
 		ofEnableAlphaBlending();
-		ofMatrix3x3 viewMatrix = getViewMatrix();
+		ofMatrix4x4 viewMatrix = getViewMatrix();
 
 //      TODO: draw the cross section
 //		ofSetColor(255, 0, 0, 25);
@@ -249,7 +252,7 @@ void ofApp::draw(){
 		shader.begin();
 		shader.setUniform1f("uSize", globals.strokeWeight / 1000.0);
 		shader.setUniform1f("uIntensity", globals.intensity);
-		shader.setUniformMatrix3f("uMatrix", viewMatrix);
+		shader.setUniformMatrix4f("uMatrix", viewMatrix);
 		shader.setUniform1f("uHue", globals.hue );
 		ofSetColor(255);
 		shapeMesh.draw();
@@ -259,8 +262,9 @@ void ofApp::draw(){
 		fbo.end();
 	}
 	
-	ofSetColor(150);
+	ofSetColor(255);
 	fbo.draw(0,0);
+	ofSetColor(100);
 	ofDrawBitmapString("Dropped: " + ofToString(dropped), 10, 20 );
 }
 
@@ -328,10 +332,12 @@ void ofApp::mouseReleased(int x, int y, int button){
 
 //--------------------------------------------------------------
 void ofApp::windowResized(int w, int h){
+	cout << "resize to " << w << "," << h << endl; 
 	osciView->width = min(500,w/mui::MuiConfig::scaleFactor);
 	osciView->layout();
 	osciView->x = w/mui::MuiConfig::scaleFactor/2 - osciView->width/2;
 	osciView->y = h/mui::MuiConfig::scaleFactor - osciView->height - 20;
+	cout << "visible?" << osciView << "::" << osciView->visible << endl; 
 }
 
 //--------------------------------------------------------------

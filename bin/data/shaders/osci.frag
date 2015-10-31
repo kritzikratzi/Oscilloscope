@@ -45,7 +45,7 @@ void main (void)
 
     alpha *= uIntensity;
 	
-	alpha = alpha*4.0 + 0.01;
+	alpha = alpha*1.0 + 0.01;
 
     //float afterglow = smoothstep(0.0, 0.33, uvl.w/2048.0);
     //alpha *= afterglow * 1.0;

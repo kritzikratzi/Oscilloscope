@@ -163,7 +163,7 @@ float * MonoSample::peekHead( int &numSamples, int bufferNum ){
 
 int MonoSample::addTo(float *output, int outStride, int N ){
 	if( !playing ){
-		return;
+		return 0;
 	}
 	
 	lock.lock();

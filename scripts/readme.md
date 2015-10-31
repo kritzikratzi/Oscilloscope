@@ -41,11 +41,11 @@ A typical distribution workflow looks like this:
 	platform=osx
 	version=1.0.3
 	
-	dist/clean.sh
-	dist/prepare.sh $platform
+	scripts/clean.sh
+	scripts/prepare.sh $platform
 	
 	# now build & test (use xcode on mac, visual studio on windows, run make release on linux)
 	
-	dist/dist.sh $platform $version
+	scripts/dist.sh $platform $version
 	
 	
