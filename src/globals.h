@@ -16,7 +16,7 @@
 #define globals (Globals::instance)
 class Globals{
 public:
-	Globals() :  sampleRate(44100), bufferSize(512), numBuffers(4), deviceId(0),scale(1.0),flipXY(false),invertX(false),invertY(false),autoDetect(true), outputVolume(1), inputVolume(1), strokeWeight(10), blur(30), numPts(20), hue(50),intensity(0.4), afterglow(0.5){
+	Globals() :  sampleRate(44100), bufferSize(512), numBuffers(4), deviceId(0),scale(1.0),flipXY(false),invertX(false),invertY(false),autoDetect(true), outputVolume(1), inputVolume(1), strokeWeight(10), blur(30), numPts(20), hue(50),intensity(0.4), afterglow(0.5), exportWidth(1920), exportHeight(1080), exportFrameRate(60){
 	}
 	
 	// audio settings
@@ -43,6 +43,9 @@ public:
 	float outputVolume;
 	float inputVolume;
 	
+	int exportWidth;
+	int exportHeight;
+	int exportFrameRate;
 	
 	void loadFromFile( string settingsFile = ofToDataPath("settings.txt") ){
 		ofxIniSettings settings = ofxIniSettings(settingsFile);
@@ -63,6 +66,9 @@ public:
 		hue = settings.get( "hue", hue );
 		intensity = settings.get( "intensity", intensity );
 		afterglow = settings.get( "afterglow", afterglow );
+		exportFrameRate = settings.get( "exportFrameRate", exportFrameRate );
+		exportWidth = settings.get( "exportWidth", exportWidth );
+		exportHeight = settings.get( "exportHeight", exportHeight );
 	}
 	
 	
@@ -86,6 +92,9 @@ public:
 		settings.set( "hue", hue );
 		settings.set( "intensity", intensity );
 		settings.set( "afterglow", afterglow );
+		settings.set( "exportFrameRate", exportFrameRate );
+		settings.set( "exportWidth", exportWidth );
+		settings.set( "exportHeight", exportHeight );
 	}
 	
 	

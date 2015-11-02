@@ -1,3 +1,6 @@
+exportHeight=1080
+exportWidth=1920
+exportFrameRate=60
 afterglow=0.3
 intensity=0.5
 hue=127

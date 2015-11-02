@@ -53,6 +53,12 @@ class ofApp : public ofBaseApp{
 		bool changed;
 		bool clearFbos;
 		int dropped; 
+		bool showInfo; 
+	
+		int exporting;
+		int exportFrameNum; 
+		string exportDir;
+	
 	
 		unsigned long long lastMouseMoved;
 		string fileToLoad;
