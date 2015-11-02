@@ -56,7 +56,7 @@ ConfigView::ConfigView( float x_, float y_, float width_, float height_)
 		string name = string(info.name);
 		if( info.outputChannels > 0 ){
 			mui::ToggleButton * button = new mui::ToggleButton( name, x, y, w, h );
-			button->userData = (void*)(it-infos.begin());
+			deviceIds[button] = static_cast<int>(it-infos.begin());
 			ofAddListener( button->onPress, this, &ConfigView::buttonPressed );
 			button->fg = ofColor( 255 );
 			button->label->horizontalAlign = mui::Left;
@@ -122,7 +122,7 @@ void ConfigView::fromGlobals(){
 	bufferSizeSelect->selected = ofToString( globals.bufferSize );
 	numbuffersSelect->selected = ofToString( globals.numBuffers );
 
-	if( globals.deviceId < soundcardButtons.size() ){
+	if( (size_t)globals.deviceId < soundcardButtons.size() ){
 		selectSoundCard( globals.deviceId );
 	}
 	else{
@@ -165,18 +165,18 @@ void ConfigView::buttonPressed( const void * sender, ofTouchEventArgs & args ){
 	}
 	else{
 		mui::ToggleButton * btn = (mui::ToggleButton*)sender;
-		selectSoundCard((int)btn->userData);
+		selectSoundCard(deviceIds[btn]);
 	}
 }
 
 void ConfigView::selectSoundCard( int deviceId ){
-	if( deviceId < 0 && soundcardButtons.size() > 0 ){
-		deviceId = (int)soundcardButtons.front()->userData;
+	if( deviceId < 0 && !soundcardButtons.empty() ){
+		deviceId = deviceIds[soundcardButtons.front()];
 	}
 	
-	for( int i = 0; i < soundcardButtons.size(); i++ ){
-		mui::ToggleButton * btn = soundcardButtons[i];
-		if( (int)btn->userData == deviceId ){
+	for( vector<mui::ToggleButton*>::iterator it = soundcardButtons.begin(); it != soundcardButtons.end(); ++it ){
+		mui::ToggleButton * btn = *it;
+		if( deviceIds[btn] == deviceId ){
 			selectedSoundCard = deviceId;
 			btn->selected = true;
 		}
@@ -193,7 +193,7 @@ void ConfigView::autoDetect(){
 	int bufferSize = 512;
 	int numBuffers = 4;
 	getDefaultRtOutputParams(deviceId, sampleRate, bufferSize, numBuffers);
-	if( deviceId < soundcardButtons.size() ) selectSoundCard(deviceId);
+	if( (size_t)deviceId < soundcardButtons.size() ) selectSoundCard(deviceId);
 	sampleRatesSelect->selected = ofToString(sampleRate);
 	sampleRatesSelect->commit();
 	bufferSizeSelect->selected = ofToString(bufferSize);

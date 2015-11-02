@@ -2,7 +2,6 @@
 
 #include "MUI.h"
 
-
 class ConfigView : public mui::Container{
 public:
 	ConfigView( float x_ = 0, float y_ = 0, float width_ = ofGetWidth(), float height_ = ofGetHeight() );
@@ -36,4 +35,5 @@ private:
 	void pushLabel( string text, float &x, float &y, float &w, float &h );
 	int selectedSoundCard;
 	vector<mui::ToggleButton*> soundcardButtons;
+	map<mui::ToggleButton*, int> deviceIds;
 };
