@@ -178,7 +178,6 @@ void ofApp::update(){
 			}
 			else{
 				dropped ++;
-				cout << "drop!" << endl;
 			}
 			
 			left.peel(bufferSize);
@@ -222,10 +221,19 @@ void ofApp::draw(){
 	ofClear(0,255);
 	
 	if( !fbo.isAllocated() || fbo.getWidth() != ofGetWidth() || fbo.getHeight() != ofGetHeight() ){
-		fbo.allocate(ofGetWidth(), ofGetHeight(),GL_RGBA);
-		fbo.begin();
-		ofClear(0,255);
-		fbo.end();
+		int w = ofGetWidth(); 
+		int h = ofGetHeight(); 
+		cout << "W=" << w << " H=" << h << endl; 
+		if( w == 0 || h == 0 ){
+			cout << "not allocating yet, size is 0" << endl;
+		}
+		else{
+			cout << "allocating framebuffer with " << w << ", " << h << endl; 
+			fbo.allocate(ofGetWidth(), ofGetHeight(),GL_RGBA);
+			fbo.begin();
+			ofClear(0,255);
+			fbo.end();
+		}
 	}
 	
 	if( changed && globals.player.isPlaying ){
