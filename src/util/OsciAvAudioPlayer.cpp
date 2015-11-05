@@ -222,6 +222,7 @@ int OsciAvAudioPlayer::audioOut(float *output, int bufferSize, int nChannels){
 	output_expected_buffer_size = bufferSize;
 	if( nChannels != 2 ){
 		// this is fucked up!
+		return 0;
 	}
 	else if( mainOut.totalLength > 0 ){
 		// i'm an idiot, and that's why we have to do this!
@@ -229,7 +230,9 @@ int OsciAvAudioPlayer::audioOut(float *output, int bufferSize, int nChannels){
 		mainOut.play();
 		int res = mainOut.addTo(output, 1, 2*bufferSize);
 		mainOut.peel(res);
+		return res;
 	}
+	return 0; 
 }
 
 int OsciAvAudioPlayer::internalAudioOut(float *output, int bufferSize, int nChannels){
