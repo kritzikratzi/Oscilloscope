@@ -165,21 +165,12 @@ void ofApp::update(){
 		ofClear(0,255);
 		fbo.end();
 		
-		// drain buffers
-		globals.player.left192.clear();
-		globals.player.right192.clear();
-		
 		// reset player
 		exporting = 2;
+		globals.player.beginSync(512);
 		globals.player.setPositionMS(0);
 		globals.player.setLoop(false);
 		globals.player.play();
-		
-		// read a tiny bit of data.
-		// this makes sure libavcodec really sets the right position
-		float output[2];
-		globals.player.audioOut(output, 1, 2);
-		globals.player.setPositionMS(0);
 		exportFrameNum = -1;
 	}
 	
@@ -195,7 +186,7 @@ void ofApp::update(){
 		
 		int len;
 		do{
-			len = globals.player.audioOut(output, bufferSize, 2);
+			len = globals.player.audioOutSync(output, bufferSize, 2);
 		}
 		while( globals.player.getPositionMS() < targetTimeMS && len > 0 );
 		
@@ -207,6 +198,7 @@ void ofApp::update(){
 	}
 	else if( exporting == 3 ){
 		exporting = 0;
+		globals.player.endSync();
 		globals.player.setLoop(true);
 		globals.player.setPositionMS(0);
 	}
@@ -299,12 +291,7 @@ ofMatrix4x4 ofApp::getViewMatrix() {
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-	if( exporting == 0 ){
-		ofClear(0,255);
-	}
-	else{
-		ofClear(255,0,0,255);
-	}
+	ofClear(0,255);
 	
 	if( !fbo.isAllocated() || fbo.getWidth() != ofGetWidth() || fbo.getHeight() != ofGetHeight() ){
 		int w = ofGetWidth(); 
@@ -369,12 +356,23 @@ void ofApp::draw(){
 	}
 	
 	if( showInfo || exporting > 0 ){
-		ofSetColor(100);
+		ofSetColor(exporting>0?255:100);
 		ofDrawBitmapString("Dropped: " + ofToString(dropped), 10, 20 );
 		ofDrawBitmapString("FPS:     " + ofToString(ofGetFrameRate(),0), 10, 40 );
 		
 		if( exporting > 0 ){
-			ofDrawBitmapString("Export:  " + ofToString(exportFrameNum), 10, 60 );
+			unsigned long long totalFrames = 1+globals.player.duration*globals.exportFrameRate/1000;
+			int pct = exportFrameNum*100/totalFrames;
+			ofDrawBitmapString("Format:  " + ofToString(globals.exportWidth) + " x " + ofToString(globals.exportHeight) + " @ " + ofToString(globals.exportFrameRate) + "fps (change in data/settings.txt)", 10, 60);
+			ofDrawBitmapString("Export:  " + ofToString(pct) + "%  (" + ofToString(exportFrameNum) + "/" + ofToString(totalFrames) + ")", 10, 80 );
+			if( (exportFrameNum%10) < 5 ){
+				ofSetColor(255,0,0);
+			}
+			else{
+				ofSetColor(255);
+			}
+			ofFill();
+			ofEllipse(20, 100, 20, 20);
 		}
 	}
 }

@@ -25,6 +25,7 @@ OsciAvAudioPlayer::OsciAvAudioPlayer(){
 	output_num_channels = 2;
 	output_config_changed = false; 
 	volume = 1;
+	wantsAsync = true;
 	
 	forceNativeFormat = false;
 	
@@ -192,25 +193,31 @@ void OsciAvAudioPlayer::unloadSound(){
 	thread->unlock();
 }
 
-OsciAvAudioPlayerThread::OsciAvAudioPlayerThread( OsciAvAudioPlayer & player ) : player(player){
+OsciAvAudioPlayerThread::OsciAvAudioPlayerThread( OsciAvAudioPlayer & player ) : player(player), isAsync(true){
 }
 
 void OsciAvAudioPlayerThread::threadedFunction(){
 	// make sure we always have a bit of buffer ready
 	while( isThreadRunning() ){
 		lock();
-		if( player.next_seekTarget >= 0 ){
-			player.mainOut.clear();
-			player.left192.clear();
-			player.right192.clear();
-		}
-		if( player.mainOut.totalLength < player.output_expected_buffer_size*4 && player.isLoaded ){
-			float * buffer = new float[player.output_expected_buffer_size*2];
-			int numSamples = player.internalAudioOut(buffer, player.output_expected_buffer_size, 2);
-			if( numSamples > 0 ){
-				player.mainOut.append( buffer, 2*numSamples );
+		if( player.wantsAsync ){
+			isAsync = true;
+			if( player.next_seekTarget >= 0 ){
+				player.mainOut.clear();
+				player.left192.clear();
+				player.right192.clear();
 			}
-			delete buffer;
+			if( player.mainOut.totalLength < player.output_expected_buffer_size*4 && player.isLoaded ){
+				float * buffer = new float[player.output_expected_buffer_size*2];
+				int numSamples = player.internalAudioOut(buffer, player.output_expected_buffer_size, 2);
+				if( numSamples > 0 ){
+					player.mainOut.append( buffer, 2*numSamples );
+				}
+				delete buffer;
+			}
+		}
+		else{
+			isAsync = false;
 		}
 		unlock();
 		sleep(1);
@@ -219,20 +226,29 @@ void OsciAvAudioPlayerThread::threadedFunction(){
 }
 
 int OsciAvAudioPlayer::audioOut(float *output, int bufferSize, int nChannels){
-	output_expected_buffer_size = bufferSize;
-	if( nChannels != 2 ){
-		// this is fucked up!
+	if( wantsAsync ){
+		output_expected_buffer_size = bufferSize;
+		if( nChannels != 2 ){
+			// this is fucked up!
+			return 0;
+		}
+		else if( mainOut.totalLength > 0 ){
+			// i'm an idiot, and that's why we have to do this!
+			mainOut.playbackIndex = 0;
+			mainOut.play();
+			int res = mainOut.addTo(output, 1, 2*bufferSize);
+			mainOut.peel(res);
+			return res;
+		}
 		return 0;
 	}
-	else if( mainOut.totalLength > 0 ){
-		// i'm an idiot, and that's why we have to do this!
-		mainOut.playbackIndex = 0;
-		mainOut.play();
-		int res = mainOut.addTo(output, 1, 2*bufferSize);
-		mainOut.peel(res);
-		return res;
+	else{
+		return 0;
 	}
-	return 0; 
+}
+
+int OsciAvAudioPlayer::audioOutSync(float *output, int bufferSize, int nChannels){
+	return internalAudioOut(output, bufferSize, nChannels);
 }
 
 int OsciAvAudioPlayer::internalAudioOut(float *output, int bufferSize, int nChannels){
@@ -491,4 +507,28 @@ map<string,string> OsciAvAudioPlayer::getMetadata(){
 	}
 	
 	return meta; 
+}
+
+void OsciAvAudioPlayer::beginSync( int bufferSize ){
+	if( !isLoaded ) return;
+	
+	wantsAsync = false;
+	while( thread->isAsync ){
+		ofSleepMillis(10);
+	}
+	
+	left192.clear();
+	right192.clear();
+	mainOut.clear();
+	
+	output_expected_buffer_size = bufferSize;
+}
+
+void OsciAvAudioPlayer::endSync(){
+	if( !isLoaded ) return;
+	wantsAsync = true;
+	
+	while( !thread->isAsync ){
+		ofSleepMillis(10);
+	}
 }

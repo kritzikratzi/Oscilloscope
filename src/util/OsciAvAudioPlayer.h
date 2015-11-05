@@ -151,6 +151,12 @@ public:
 	std::string getMetadata( std::string key );
 	std::map<std::string,std::string> getMetadata();
 
+	// osci magic!
+	void beginSync( int bufferSize );
+	int audioOutSync(float *output, int bufferSize, int nChannels); 
+	void endSync();
+	
+	
 	bool decode_next_frame();
 
 	MonoSample mainOut; // interleaved main output
@@ -194,6 +200,7 @@ private:
 	int decoded_buffer_len192;
 	
 	bool output_config_changed;
+	bool wantsAsync;
 	
 	friend class OsciAvAudioPlayerThread;
 	OsciAvAudioPlayerThread * thread;
@@ -206,5 +213,6 @@ public:
 	void threadedFunction();
 	
 	OsciAvAudioPlayer &player;
+	bool isAsync; 
 };
 #endif
