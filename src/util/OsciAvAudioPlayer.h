@@ -20,6 +20,7 @@
 
 #include <math.h>
 #include <map>
+#include "ofMain.h"
 
 extern "C"{
 	#include <libavcodec/avcodec.h>
@@ -38,6 +39,8 @@ extern "C"{
 #define AVCODEC_MAX_AUDIO_FRAME_SIZE (192000)
 #define AVCODEC_AUDIO_INBUF_SIZE (20480)
 #define AVCODEC_AUDIO_REFILL_THRESH (4096*3)
+
+class OsciAvAudioPlayerThread;
 
 class OsciAvAudioPlayer{
 public: 
@@ -150,10 +153,13 @@ public:
 
 	bool decode_next_frame();
 
+	MonoSample mainOut; // interleaved main output
 	MonoSample left192;
 	MonoSample right192;
 	
 private:
+	int internalAudioOut(float *output, int bufferSize, int nChannels);
+	
 	unsigned long long av_time_to_millis( int64_t av_time );
 	int64_t millis_to_av_time( unsigned long long ms );
 	
@@ -175,6 +181,7 @@ private:
 	int output_sample_rate;
 	int64_t output_channel_layout;
 	int output_num_channels;
+	int output_expected_buffer_size;
 	
 	int64_t next_seekTarget;
 	
@@ -187,6 +194,17 @@ private:
 	int decoded_buffer_len192;
 	
 	bool output_config_changed;
+	
+	friend class OsciAvAudioPlayerThread;
+	OsciAvAudioPlayerThread * thread;
 };
 
+
+class OsciAvAudioPlayerThread : public ofThread{
+public:
+	OsciAvAudioPlayerThread( OsciAvAudioPlayer &player );
+	void threadedFunction();
+	
+	OsciAvAudioPlayer &player;
+};
 #endif
