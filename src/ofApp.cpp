@@ -102,6 +102,8 @@ void ofApp::stopApplication(){
 	applicationRunning = false;
 	soundStream.stop();
 	soundStream = ofSoundStream();
+	micStream.stop();
+	globals.micActive = false;
 	configView->visible = true;
 	osciView->visible = false;
 }
@@ -122,7 +124,7 @@ void ofApp::update(){
 
 	/////////////////////////////////////////////////
 	// take care of hiding / showing the ui
-	if( ofGetElapsedTimeMillis()-lastMouseMoved > 3000 && globals.player.isPlaying ){
+	if( ofGetElapsedTimeMillis()-lastMouseMoved > 3000 && ( globals.player.isPlaying || globals.micActive ) ){
 		// this is not the greatest solution, but hey ho, it works ...
 		mui::Container * res = root->findChildAt(ofGetMouseX()/mui::MuiConfig::scaleFactor, ofGetMouseY()/mui::MuiConfig::scaleFactor);
 		bool foundOsciView = false;
@@ -219,8 +221,8 @@ void ofApp::update(){
 	//globals.hue += ofGetMouseX()*100/ofGetWidth();
 	//globals.hue = fmodf(globals.hue,360);
 	
-	MonoSample &left = globals.player.left192;
-	MonoSample &right = globals.player.right192;
+	MonoSample &left = globals.micActive?(this->left):globals.player.left192;
+	MonoSample &right = globals.micActive?(this->right):globals.player.right192;
 	left.play();
 	right.play();
 	if( left.totalLength >= bufferSize && right.totalLength >= bufferSize ){
@@ -315,7 +317,7 @@ void ofApp::draw(){
 		}
 	}
 	
-	if( changed && globals.player.isPlaying ){
+	if( changed && ( globals.player.isPlaying || globals.micActive ) ){
 		fbo.begin();
 		ofEnableBlendMode(OF_BLENDMODE_MULTIPLY);
 		ofSetColor( 0, (1-globals.afterglow)*255 );
@@ -377,13 +379,9 @@ void ofApp::draw(){
 	}
 }
 
-void exit_from_c(){
-	exit(0); 
-}
-
 void ofApp::exit(){
 	stopApplication();
-	exit_from_c();
+	ofExit(); 
 }
 
 
@@ -470,7 +468,7 @@ void ofApp::windowResized(int w, int h){
 
 //--------------------------------------------------------------
 void ofApp::audioIn(float * input, int bufferSize, int nChannels){
-	if( !globals.player.isLoaded ){
+	if( globals.micActive ){
 		left.append(input, bufferSize,2);
 		right.append(input+1,bufferSize,2);
 	}
@@ -483,7 +481,7 @@ void ofApp::audioOut( float * output, int bufferSize, int nChannels ){
 	}
 	
 	memset(output, 0, bufferSize*nChannels);
-	if( globals.player.isLoaded && exporting == 0 ){
+	if( globals.player.isLoaded && exporting == 0 && !globals.micActive ){
 		globals.player.audioOut(output, bufferSize, nChannels);
 		AudioAlgo::scale(output, globals.outputVolume, nChannels*bufferSize);
 	}
@@ -496,6 +494,25 @@ void ofApp::gotMessage(ofMessage msg){
 	}
 	else if( msg.message == "stop-pressed" ){
 		stopApplication();
+	}
+	else if( msg.message == "start-mic" ){
+		if( exporting != 0 ) return;
+		globals.player.stop();
+		
+		if( globals.micActive ){
+			micStream.stop();
+			micStream = ofSoundStream();
+		}
+		
+		micStream.setDeviceID(globals.micDeviceId);
+		micStream.setup(this, 0, 2, globals.sampleRate, globals.bufferSize, globals.numBuffers);
+		micStream.start(); 
+		globals.micActive = true;
+	}
+	else if( msg.message == "stop-mic" ){
+		micStream.stop();
+		micStream = ofSoundStream(); 
+		globals.micActive = false;
 	}
 	else if( msg.message.substr(0,5) == "load:" ){
 		fileToLoad = msg.message.substr(5);

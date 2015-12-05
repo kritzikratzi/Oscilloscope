@@ -11,6 +11,7 @@ OsciView::OsciView( float x_, float y_, float width_, float height_)
 	float x = 10, y = 10, w = 400, h = 30;
 	bg = ofColor(125,50);
 	opaque = true;
+	micMenu = NULL;
 
 	string xx = ofxFontAwesome::play; 
 	
@@ -50,6 +51,10 @@ OsciView::OsciView( float x_, float y_, float width_, float height_)
 	loadFileButton = new FaButton( ofxFontAwesome::folder_open, x, y, h, h );
 	ofAddListener( loadFileButton->onPress, this, &OsciView::buttonPressed );
 	add( loadFileButton );
+	
+	useMicButton = new FaToggleButton( ofxFontAwesome::microphone, ofxFontAwesome::microphone_slash, x, y, h, h );
+	ofAddListener( useMicButton->onPress, this, &OsciView::buttonPressed );
+	add( useMicButton );
 	
 	playButton = new FaToggleButton( ofxFontAwesome::play, ofxFontAwesome::pause, x, y, h, h );
 	ofAddListener( playButton->onPress, this, &OsciView::buttonPressed );
@@ -119,10 +124,11 @@ void OsciView::layout(){
 	mui::L(timeSlider).rightOf(playButton, 10).stretchToRightEdgeOf(this, 10);
 	
 	mui::L(loadFileButton).below(playButton, 10);
-	mui::L(outputVolumeLabel).rightOf(loadFileButton,20);
+	mui::L(useMicButton).rightOf(loadFileButton, 10 );
+	mui::L(outputVolumeLabel).rightOf(useMicButton,20);
 	mui::L(outputVolumeSlider).rightOf(outputVolumeLabel,5).stretchToRightEdgeOf(this,10);
 	
-	mui::L(invertX).below(loadFileButton, 10);
+	mui::L(invertX).below(loadFileButton, 20);
 	mui::L(invertY).rightOf(invertX, 10);
 	mui::L(flipXY).rightOf(invertY,10);
 	mui::L(scaleLabel).rightOf(flipXY,20);
@@ -178,19 +184,28 @@ bool updateSlider( mui::Slider * slider, float targetValue, float &lastValue ){
 //--------------------------------------------------------------
 void OsciView::update(){
 	static float lastTimeVal = -1;
-	if( !updateSlider(timeSlider, globals.player.getPosition(), lastTimeVal ) ){
-		globals.player.setPosition(timeSlider->value);
-	}
+	useMicButton->selected = globals.micActive;
+	timeSlider->visible = !globals.micActive;
+	outputVolumeSlider->visible = !globals.micActive;
+	
+	if( !globals.micActive ){
+		if( !updateSlider(timeSlider, globals.player.getPosition(), lastTimeVal ) ){
+			globals.player.setPosition(timeSlider->value);
+		}
 
-	if( globals.player.isPlaying != playButton->selected ){
-		playButton->selected = globals.player.isPlaying;
-		playButton->commit();
+		if( globals.player.isPlaying != playButton->selected ){
+			playButton->selected = globals.player.isPlaying;
+			playButton->commit();
+		}
 	}
 }
 
 
 //--------------------------------------------------------------
 void OsciView::draw(){
+	ofSetColor(150);
+	ofLine( 10, flipXY->y - 10, width-10, flipXY->y - 10 );
+	ofSetColor(255);
 }
 
 
@@ -240,6 +255,8 @@ void OsciView::fromGlobals(){
 
 //--------------------------------------------------------------
 void OsciView::buttonPressed( const void * sender, ofTouchEventArgs & args ){
+	mui::Container * container = (mui::Container*) sender;
+	
 	if( sender == stopButton ){
 		ofBaseApp * app = ofGetAppPtr();
 		app->gotMessage( ofMessage( "stop-pressed" ) );
@@ -278,6 +295,43 @@ void OsciView::buttonPressed( const void * sender, ofTouchEventArgs & args ){
 		if( res.bSuccess ){
 			ofSendMessage("load:" + res.filePath); 
 		}
+	}
+	else if( sender == useMicButton ){
+		if( globals.micActive ){
+			ofSendMessage("stop-mic");
+		}
+		else{
+			if( micMenu != NULL ){
+				MUI_ROOT->safeRemoveAndDelete(micMenu);
+			}
+			
+			micMenu = new FMenu(0,0,400,0);
+			mui::Button * cancelButton = micMenu->addButton("Cancel");
+			cancelButton->bg = ofColor(100,100);
+			vector<RtAudio::DeviceInfo> infos = listRtSoundDevices();
+			for( int i = 0; i < infos.size(); i++ ){
+				RtAudio::DeviceInfo &info = infos[i];
+				if( info.inputChannels >= 2 ){
+					micMenu->addButton(info.name);
+					micDeviceIds[info.name] = i;
+				}
+			}
+			ofAddListener(micMenu->onPress, this, &OsciView::buttonPressed);
+			micMenu->autoSize();
+			micMenu->bg = ofColor(150);
+			micMenu->opaque = true; 
+			
+			add(micMenu);
+		}
+	}
+	else if( micMenu != NULL && container->parent->parent == micMenu ){
+		map<string,int>::iterator it = micDeviceIds.find(((mui::Button*)sender)->label->text);
+		if( it != micDeviceIds.end() ){
+			globals.micDeviceId = (*it).second;
+			ofSendMessage("start-mic");
+		}
+		MUI_ROOT->safeRemoveAndDelete(micMenu);
+		micMenu = NULL;
 	}
 }
 

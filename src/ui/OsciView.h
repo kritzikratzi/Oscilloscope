@@ -4,6 +4,8 @@
 #include "../globals.h"
 #include "FaButton.h"
 #include "FaToggleButton.h"
+#include "FMenu.h"
+
 
 class OsciView : public mui::Container{
 public:
@@ -20,8 +22,11 @@ public:
 	virtual void touchUp( ofTouchEventArgs &touch );
 	virtual void touchDoubleTap( ofTouchEventArgs &touch );
 	
+	FMenu * micMenu; 
+	map<string,int> micDeviceIds;
 	
 	FaButton * loadFileButton; 
+	FaToggleButton * useMicButton;
 	
 	FaButton * stopButton;
 	mui::SliderWithLabel * scaleSlider;

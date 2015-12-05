@@ -37,6 +37,7 @@ class ofApp : public ofBaseApp{
 		ofMatrix4x4 getViewMatrix();
 	
 		ofSoundStream soundStream;
+		ofSoundStream micStream;
 
 		mui::Root * root;
 		ConfigView * configView;
