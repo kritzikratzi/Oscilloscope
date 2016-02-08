@@ -178,7 +178,7 @@
   <ItemGroup>
     <ClCompile Include="..\..\..\addons\ofxMightyUI\src\MuiConfig.cpp" />
     <ClCompile Include="..\..\..\addons\ofxMightyUI\src\MuiCore.cpp" />
-    <ClCompile Include="addons\ofxExtras\src\ofxExtras.cpp" />
+    <ClCompile Include="addons\ofxIniSettings\src\ofxIniExtras.cpp" />
     <ClCompile Include="addons\ofxIniSettings\src\ofxIniSettings.cpp" />
     <ClCompile Include="src\globals.cpp" />
     <ClCompile Include="src\main.cpp" />
@@ -186,6 +186,7 @@
     <ClCompile Include="src\ui\ConfigView.cpp" />
     <ClCompile Include="src\ui\OsciView.cpp" />
     <ClCompile Include="src\util\Audio.cpp" />
+    <ClCompile Include="src\util\OsciAvAudioPlayer.cpp" />
     <ClCompile Include="src\util\sounddevices.cpp" />
     <ClCompile Include="..\..\..\addons\ofxAvCodec\src\ofxAvAudioPlayer.cpp" />
     <ClCompile Include="..\..\..\addons\ofxMightyUI\src\_fontstash\fontstash.c" />
@@ -215,7 +216,7 @@
     <ClInclude Include="..\..\..\addons\ofxFontAwesome\src\ofxFontAwesome.h" />
     <ClInclude Include="..\..\..\addons\ofxMightyUI\src\MuiConfig.h" />
     <ClInclude Include="..\..\..\addons\ofxMightyUI\src\MuiCore.h" />
-    <ClInclude Include="addons\ofxExtras\src\ofxExtras.h" />
+    <ClInclude Include="addons\ofxIniSettings\src\ofxIniExtras.h" />
     <ClInclude Include="addons\ofxIniSettings\src\ofxIniSettings.h" />
     <ClInclude Include="src\globals.h" />
     <ClInclude Include="src\ofApp.h" />
@@ -225,6 +226,7 @@
     <ClInclude Include="src\ui\L.h" />
     <ClInclude Include="src\ui\OsciView.h" />
     <ClInclude Include="src\util\Audio.h" />
+    <ClInclude Include="src\util\OsciAvAudioPlayer.h" />
     <ClInclude Include="src\util\sounddevices.h" />
     <ClInclude Include="src\util\split.h" />
     <ClInclude Include="..\..\..\addons\ofxAvCodec\src\ofxAvAudioPlayer.h" />

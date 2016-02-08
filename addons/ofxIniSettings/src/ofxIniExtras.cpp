@@ -1,5 +1,5 @@
 #include <sys/stat.h>
-#include "ofMain.h"
+#include "ofxIniExtras.h"
 
 void ofxExit(string error ){
 	cerr << error << endl;
@@ -226,7 +226,7 @@ ofColor ofxToColor(ofVec3f v, int alpha) {
 	return ofColor(v.x,v.y,v.z,alpha);
 }
 
-string ofxToHexString(int value, int digits=6) {
+string ofxToHexString(int value, int digits) {
 	string result;
     char * buf = new char[digits+1];
 	string format = "%0"+ofToString(digits)+"x";

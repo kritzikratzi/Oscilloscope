@@ -94,9 +94,6 @@
     <ClCompile Include="addons\ofxIniSettings\src\ofxIniSettings.cpp">
       <Filter>addons-local\ofxIniSettings</Filter>
     </ClCompile>
-    <ClCompile Include="addons\ofxExtras\src\ofxExtras.cpp">
-      <Filter>addons-local\ofxExtras</Filter>
-    </ClCompile>
     <ClCompile Include="src\globals.cpp">
       <Filter>src</Filter>
     </ClCompile>
@@ -105,6 +102,12 @@
     </ClCompile>
     <ClCompile Include="..\..\..\addons\ofxMightyUI\src\MuiCore.cpp">
       <Filter>addons\ofxMightyUI\src</Filter>
+    </ClCompile>
+    <ClCompile Include="addons\ofxIniSettings\src\ofxIniExtras.cpp">
+      <Filter>addons-local\ofxIniSettings</Filter>
+    </ClCompile>
+    <ClCompile Include="src\util\OsciAvAudioPlayer.cpp">
+      <Filter>src\util</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -167,9 +170,6 @@
     </Filter>
     <Filter Include="addons-local">
       <UniqueIdentifier>{5163c1a2-8afa-4fe3-ab8a-ecd69069bf60}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="addons-local\ofxExtras">
-      <UniqueIdentifier>{2b5655e8-d3f6-4c42-b656-e07055865ead}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons-local\ofxIniSettings">
       <UniqueIdentifier>{235944c3-9408-4dd2-b089-f64a681723c3}</UniqueIdentifier>
@@ -557,9 +557,6 @@
     <ClInclude Include="addons\ofxIniSettings\src\ofxIniSettings.h">
       <Filter>addons-local\ofxIniSettings</Filter>
     </ClInclude>
-    <ClInclude Include="addons\ofxExtras\src\ofxExtras.h">
-      <Filter>addons-local\ofxExtras</Filter>
-    </ClInclude>
     <ClInclude Include="src\globals.h">
       <Filter>src</Filter>
     </ClInclude>
@@ -580,6 +577,12 @@
     </ClInclude>
     <ClInclude Include="..\..\..\addons\ofxMightyUI\src\MuiCore.h">
       <Filter>addons\ofxMightyUI\src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\util\OsciAvAudioPlayer.h">
+      <Filter>src\util</Filter>
+    </ClInclude>
+    <ClInclude Include="addons\ofxIniSettings\src\ofxIniExtras.h">
+      <Filter>addons-local\ofxIniSettings</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

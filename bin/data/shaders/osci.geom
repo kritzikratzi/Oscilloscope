@@ -4,10 +4,10 @@
 
 varying vec3 texcoord;
 uniform float uSize;
-uniform mat3 uMatrix;
+uniform mat4 uMatrix;
 
 void main() {
-    mat4 tmatrix = mat4(uMatrix);
+    mat4 tmatrix = uMatrix;
     vec2 p0 = (gl_PositionIn[0]).xy;
     vec2 p1 = (gl_PositionIn[1]).xy;
     vec2 dir = p1 - p0;
