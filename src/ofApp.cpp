@@ -11,10 +11,14 @@ bool applicationRunning = false;
 
 //--------------------------------------------------------------
 void ofApp::setup(){
+	showInfo = false;
 	dropped = 0;
 	changed = false;
 	clearFbos = false;
 	lastMouseMoved = 0;
+	exporting = 0;
+	
+	applicationRunning = false; 
 	ofSetVerticalSync(true);
 	ofBackground(0);
 	ofSetBackgroundAuto(false);
@@ -55,6 +59,7 @@ void ofApp::setup(){
 		startApplication();
 	}
 
+
 	windowResized(ofGetWidth(), ofGetHeight());
 }
 
@@ -62,7 +67,7 @@ void ofApp::setup(){
 void ofApp::startApplication(){
 	if( applicationRunning ) return;
 	applicationRunning = true;
-	
+	cout << "starting ..." << endl; 
 	left.play();
 	right.play();
 
@@ -90,12 +95,7 @@ void ofApp::startApplication(){
 
 
 void ofApp::stopApplication(){
-	configView->fromGlobals();
-	globals.flipXY = globals.flipXY;
-	globals.invertX = globals.invertX;
-	globals.invertY = globals.invertY;
-
-	globals.scale = osciView->scaleSlider->slider->value;
+	configView->toGlobals();
 	globals.saveToFile();
 	
 	if( !applicationRunning ) return;
@@ -116,27 +116,102 @@ void ofApp::update(){
 		windowResized(ofGetWidth(), ofGetHeight());
 	}
 	
-	if( ofGetElapsedTimeMillis()-lastMouseMoved > 5000 && globals.player.isPlaying ){
-		osciView->visible = false;
+	if( ofGetMousePressed() ){
+		lastMouseMoved = ofGetElapsedTimeMillis(); 
 	}
 
-	if( ofGetElapsedTimeMillis()-lastMouseMoved < 5000 && osciView->visible == false ){
-		osciView->visible = true;
+	/////////////////////////////////////////////////
+	// take care of hiding / showing the ui
+	if( ofGetElapsedTimeMillis()-lastMouseMoved > 3000 && globals.player.isPlaying ){
+		// this is not the greatest solution, but hey ho, it works ...
+		mui::Container * res = root->findChildAt(ofGetMouseX()/mui::MuiConfig::scaleFactor, ofGetMouseY()/mui::MuiConfig::scaleFactor);
+		bool foundOsciView = false;
+		while( res != NULL ){
+			if( res == osciView ){
+				foundOsciView = true;
+				break;
+			}
+			res = res->parent;
+		}
+		if( !foundOsciView ){
+			osciView->visible = false;
+		}
 	}
 
 	if( !applicationRunning ){
 		ofShowCursor();
 		return;
 	}
+
+	if( ofGetElapsedTimeMillis()-lastMouseMoved < 3000 && osciView->visible == false ){
+		osciView->visible = true;
+	}
+
 	if( osciView->visible ) ofShowCursor();
 	else ofHideCursor();
+	
+	/////////////////////////////////////////////////
+	// are we exporting?
+	if( exporting == 1 ){
+		// make sure the audio callback doesn't interfere with us!
+		ofSleepMillis(1000);
+		
+		// reset drop count. this has no purpose, but gives the user a good feeling
+		dropped = 0;
+		
+		// resize&clear fbo
+		fbo.allocate(globals.exportWidth, globals.exportHeight, GL_RGBA);
+		fbo.begin();
+		ofClear(0,255);
+		fbo.end();
+		
+		// reset player
+		exporting = 2;
+		globals.player.beginSync(512);
+		globals.player.setPositionMS(0);
+		globals.player.setLoop(false);
+		globals.player.play();
+		exportFrameNum = -1;
+	}
+	
+	if( exporting == 2 ){
+		// compute target time for this frame, then
+		// we just eat the buffer into nirvana.
+		// our funky player will automatically place
+		exportFrameNum ++;
+		int targetTimeMS = exportFrameNum*1000.0/globals.exportFrameRate;
+		const int bufferSize = 512;
+		static float * output = NULL;
+		if( output == NULL ) output = new float[2*bufferSize];
+		
+		int len;
+		do{
+			len = globals.player.audioOutSync(output, bufferSize, 2);
+		}
+		while( globals.player.getPositionMS() < targetTimeMS && len > 0 );
+		
+		if( len == 0 ){
+			// save this frame, then end it!
+			exporting = 3;
+		}
+		
+	}
+	else if( exporting == 3 ){
+		exporting = 0;
+		globals.player.endSync();
+		globals.player.setLoop(true);
+		globals.player.setPositionMS(0);
+	}
+	
+	/////////////////////////////////////////////////
+	// copy buffer data to the mesh
 	
 	changed = false;
 	shapeMesh.clear();
 	shapeMesh.setMode(OF_PRIMITIVE_LINES);
 	shapeMesh.enableColors();
 	
-	const int bufferSize = 512*4;
+	int bufferSize = (exporting==0?2084:256);
 	static float * leftBuffer = new float[bufferSize];
 	static float * rightBuffer = new float[bufferSize];
 
@@ -160,7 +235,7 @@ void ofApp::update(){
 			
 			ofColor col = ofColor::fromHsb(globals.hue*255/360, 255, 255*globals.intensity);
 			
-			if( shapeMesh.getVertices().size() < bufferSize*4 ){
+			if( shapeMesh.getVertices().size() < bufferSize*4 || exporting ){
 				ofPoint a, b = ofPoint(leftBuffer[0], rightBuffer[0]);
 				shapeMesh.addVertex(last);
 				shapeMesh.addVertex(b);
@@ -176,7 +251,6 @@ void ofApp::update(){
 			}
 			else{
 				dropped ++;
-				cout << "drop!" << endl;
 			}
 			
 			left.peel(bufferSize);
@@ -204,7 +278,7 @@ ofMatrix4x4 ofApp::getViewMatrix() {
 	}
 
 	ofMatrix4x4 aspectMatrix; // identity matrix
-	float aspectRatio = float(ofGetWidth()) / float(ofGetHeight());
+	float aspectRatio = float(fbo.getWidth()) / float(fbo.getHeight());
 	if (aspectRatio > 1.0) {
 		aspectMatrix(0,0) /= aspectRatio;
 	}
@@ -220,17 +294,33 @@ void ofApp::draw(){
 	ofClear(0,255);
 	
 	if( !fbo.isAllocated() || fbo.getWidth() != ofGetWidth() || fbo.getHeight() != ofGetHeight() ){
-		fbo.allocate(ofGetWidth(), ofGetHeight(),GL_RGBA);
-		fbo.begin();
-		ofClear(0,255);
-		fbo.end();
+		int w = ofGetWidth(); 
+		int h = ofGetHeight();
+		if( exporting ){
+			// no need to do anything, fbo is managed by someone else
+		}
+		else if( w == 0 || h == 0 ){
+			//what is happening???
+			while( globals.player.left192.totalLength > 4096 && globals.player.right192.totalLength > 4096 ){
+				globals.player.left192.peel(4096);
+				globals.player.right192.peel(4096);
+			}
+		}
+		else{
+			cout << "allocating framebuffer with " << w << ", " << h << endl; 
+			fbo.allocate(ofGetWidth(), ofGetHeight(),GL_RGBA);
+			fbo.begin();
+			ofClear(0,255);
+			fbo.end();
+		}
 	}
 	
 	if( changed && globals.player.isPlaying ){
 		fbo.begin();
+		ofEnableBlendMode(OF_BLENDMODE_MULTIPLY);
 		ofSetColor( 0, (1-globals.afterglow)*255 );
 		ofFill();
-		ofRect( 0, 0, ofGetWidth(), ofGetHeight() );
+		ofRect( 0, 0, fbo.getWidth(), fbo.getHeight() );
 	
 		ofEnableAlphaBlending();
 		ofMatrix4x4 viewMatrix = getViewMatrix();
@@ -255,9 +345,36 @@ void ofApp::draw(){
 		fbo.end();
 	}
 	
-	ofSetColor(150);
+	ofSetColor(255);
 	fbo.draw(0,0);
-	ofDrawBitmapString("Dropped: " + ofToString(dropped), 10, 20 );
+	
+	if( exporting >= 2 ){
+		string filename = ofToDataPath(exportDir + "/" + ofToString(exportFrameNum, 5, '0') + ".png");
+		ofPixels pixels;
+		fbo.readToPixels(pixels);
+		ofSaveImage(pixels, filename);
+	}
+	
+	if( showInfo || exporting > 0 ){
+		ofSetColor(exporting>0?255:100);
+		ofDrawBitmapString("Dropped: " + ofToString(dropped), 10, 20 );
+		ofDrawBitmapString("FPS:     " + ofToString(ofGetFrameRate(),0), 10, 40 );
+		
+		if( exporting > 0 ){
+			unsigned long long totalFrames = 1+globals.player.duration*globals.exportFrameRate/1000;
+			int pct = exportFrameNum*100/totalFrames;
+			ofDrawBitmapString("Format:  " + ofToString(globals.exportWidth) + " x " + ofToString(globals.exportHeight) + " @ " + ofToString(globals.exportFrameRate) + "fps (change in data/settings.txt)", 10, 60);
+			ofDrawBitmapString("Export:  " + ofToString(pct) + "%  (" + ofToString(exportFrameNum) + "/" + ofToString(totalFrames) + ")", 10, 80 );
+			if( (exportFrameNum%10) < 5 ){
+				ofSetColor(255,0,0);
+			}
+			else{
+				ofSetColor(255);
+			}
+			ofFill();
+			ofEllipse(20, 100, 20, 20);
+		}
+	}
 }
 
 void exit_from_c(){
@@ -296,6 +413,25 @@ void ofApp::keyPressed  (int key){
 	if( key == 'r' ){
 		clearFbos = true;
 	}
+	
+	if( key == 'i' ){
+		showInfo ^= true;
+	}
+	
+	if( key == 'e' && exporting == 0 ){
+		ofFileDialogResult res = ofSystemSaveDialog("images", "Create destination folder" );
+		if( res.bSuccess ){
+			exportDir = res.filePath;
+			ofDirectory dir(exportDir);
+			dir.create();
+			if( dir.exists() && !dir.isDirectory() ){
+				// don't export!
+			}
+			else{
+				exporting = 1;
+			}
+		}
+	}
 }
 
 //--------------------------------------------------------------
@@ -324,10 +460,12 @@ void ofApp::mouseReleased(int x, int y, int button){
 
 //--------------------------------------------------------------
 void ofApp::windowResized(int w, int h){
+	cout << "resize to " << w << "," << h << endl; 
 	osciView->width = min(500,w/mui::MuiConfig::scaleFactor);
 	osciView->layout();
 	osciView->x = w/mui::MuiConfig::scaleFactor/2 - osciView->width/2;
-	osciView->y = h/mui::MuiConfig::scaleFactor - osciView->height - 20;
+	osciView->y = h/mui::MuiConfig::scaleFactor - osciView->height - 60;
+	cout << "visible?" << osciView << "::" << osciView->visible << endl; 
 }
 
 //--------------------------------------------------------------
@@ -345,16 +483,9 @@ void ofApp::audioOut( float * output, int bufferSize, int nChannels ){
 	}
 	
 	memset(output, 0, bufferSize*nChannels);
-	if( globals.player.isLoaded ){
+	if( globals.player.isLoaded && exporting == 0 ){
 		globals.player.audioOut(output, bufferSize, nChannels);
-		
-		//left.append(output, bufferSize,2);
-		//right.append(output+1,bufferSize,2);
-		
 		AudioAlgo::scale(output, globals.outputVolume, nChannels*bufferSize);
-	}
-	else{
-		
 	}
 }
 
@@ -366,11 +497,13 @@ void ofApp::gotMessage(ofMessage msg){
 	else if( msg.message == "stop-pressed" ){
 		stopApplication();
 	}
+	else if( msg.message.substr(0,5) == "load:" ){
+		fileToLoad = msg.message.substr(5);
+	}
 }
 
 //--------------------------------------------------------------
 void ofApp::dragEvent(ofDragInfo dragInfo){
-	cout << "files: " << endl;
 	for( vector<string>::iterator it = dragInfo.files.begin();it != dragInfo.files.end(); ++it ){
 		cout << *it << endl;
 	}

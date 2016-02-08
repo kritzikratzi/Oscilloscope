@@ -11,20 +11,21 @@
 // https://github.com/FFmpeg/FFmpeg/blob/master/doc/examples/decoding_encoding.c
 
 #include "OsciAvAudioPlayer.h"
-#include "ofMain.h"
 #include "Audio.h"
 
 using namespace std;
 
-#define die(msg) { unloadSound(); cerr << msg << endl; return false; }
+#define die(msg) { thread->unlock(); unloadSound(); cerr << msg << endl; return false; }
 
 OsciAvAudioPlayer::OsciAvAudioPlayer(){
 	// default audio settings
+	output_expected_buffer_size = 256;
 	output_channel_layout = av_get_default_channel_layout(2);
 	output_sample_rate = 44100;
 	output_num_channels = 2;
 	output_config_changed = false; 
 	volume = 1;
+	wantsAsync = true;
 	
 	forceNativeFormat = false;
 	
@@ -39,14 +40,25 @@ OsciAvAudioPlayer::OsciAvAudioPlayer(){
 	av_init_packet(&packet);
 	unloadSound();
 	
+	thread = NULL;
 }
 
 OsciAvAudioPlayer::~OsciAvAudioPlayer(){
 	unloadSound();
+	if( thread != NULL ){
+		thread->stopThread();
+		thread = NULL;
+	}
 }
 
 bool OsciAvAudioPlayer::loadSound(string fileName, bool stream){
+	if( thread == NULL ){
+		thread = new OsciAvAudioPlayerThread(*this);
+		thread->startThread(); 
+	}
+	
 	unloadSound();
+	thread->lock();
 	
 	string fileNameAbs = ofToDataPath(fileName,true);
 	const char * input_filename = fileNameAbs.c_str();
@@ -114,6 +126,8 @@ bool OsciAvAudioPlayer::loadSound(string fileName, bool stream){
 	decode_next_frame();
 	duration = av_time_to_millis(container->streams[audio_stream_id]->duration);
 
+	thread->unlock();
+	
 	return true;
 }
 
@@ -133,6 +147,9 @@ bool OsciAvAudioPlayer::setupAudioOut( int numChannels, int sampleRate ){
 
 
 void OsciAvAudioPlayer::unloadSound(){
+	if( !isLoaded ) return;
+	thread->lock();
+	
 	len = 0;
 	isLoaded = false;
 	isPlaying = false;
@@ -172,12 +189,75 @@ void OsciAvAudioPlayer::unloadSound(){
 	
 	left192.clear();
 	right192.clear();
+	
+	thread->unlock();
+}
+
+OsciAvAudioPlayerThread::OsciAvAudioPlayerThread( OsciAvAudioPlayer & player ) : player(player), isAsync(true){
+}
+
+void OsciAvAudioPlayerThread::threadedFunction(){
+	// make sure we always have a bit of buffer ready
+	while( isThreadRunning() ){
+		lock();
+		if( player.wantsAsync ){
+			isAsync = true;
+			if( player.next_seekTarget >= 0 ){
+				player.mainOut.clear();
+				player.left192.clear();
+				player.right192.clear();
+			}
+			if( player.mainOut.totalLength < player.output_expected_buffer_size*4 && player.isLoaded ){
+				float * buffer = new float[player.output_expected_buffer_size*2];
+				int numSamples = player.internalAudioOut(buffer, player.output_expected_buffer_size, 2);
+				if( numSamples > 0 ){
+					player.mainOut.append( buffer, 2*numSamples );
+				}
+				delete buffer;
+			}
+		}
+		else{
+			isAsync = false;
+		}
+		unlock();
+		sleep(1);
+		yield();
+	}
 }
 
 int OsciAvAudioPlayer::audioOut(float *output, int bufferSize, int nChannels){
+	if( wantsAsync ){
+		output_expected_buffer_size = bufferSize;
+		if( nChannels != 2 ){
+			// this is fucked up!
+			return 0;
+		}
+		else if( mainOut.totalLength > 0 ){
+			// i'm an idiot, and that's why we have to do this!
+			mainOut.playbackIndex = 0;
+			mainOut.play();
+			int res = mainOut.addTo(output, 1, 2*bufferSize);
+			mainOut.peel(res);
+			return res;
+		}
+		return 0;
+	}
+	else{
+		return 0;
+	}
+}
+
+int OsciAvAudioPlayer::audioOutSync(float *output, int bufferSize, int nChannels){
+	return internalAudioOut(output, bufferSize, nChannels);
+}
+
+int OsciAvAudioPlayer::internalAudioOut(float *output, int bufferSize, int nChannels){
 	if( !isLoaded ){ return 0; }
 	
 	if( next_seekTarget >= 0 ){
+		mainOut.clear();
+		left192.clear();
+		right192.clear();
 		//av_seek_frame(container,-1,next_seekTarget,AVSEEK_FLAG_ANY);
 		avformat_seek_file(container,audio_stream_id,0,next_seekTarget,next_seekTarget,AVSEEK_FLAG_ANY);
 		next_seekTarget = -1;
@@ -244,7 +324,7 @@ bool OsciAvAudioPlayer::decode_next_frame(){
 	av_free_packet(&packet);
 	int res = av_read_frame(container, &packet);
 	bool didRead = res >= 0;
-
+	
 	if( didRead ){
 		int got_frame = 0;
 		if (!decoded_frame) {
@@ -263,6 +343,10 @@ bool OsciAvAudioPlayer::decode_next_frame(){
 			return false;
 		}
 		
+		if( packet.stream_index != audio_stream_id ){
+			return false;
+		}
+
 		if (got_frame) {
 			
 			if( swr_context != NULL && output_config_changed ){
@@ -382,7 +466,7 @@ float OsciAvAudioPlayer::getPosition(){
 }
 
 void OsciAvAudioPlayer::setPosition(float percent){
-	if(duration>0) setPositionMS(percent*duration);
+	if(duration>0&&isLoaded) setPositionMS(percent*duration);
 }
 
 void OsciAvAudioPlayer::stop(){
@@ -425,3 +509,26 @@ map<string,string> OsciAvAudioPlayer::getMetadata(){
 	return meta; 
 }
 
+void OsciAvAudioPlayer::beginSync( int bufferSize ){
+	if( !isLoaded ) return;
+	
+	wantsAsync = false;
+	while( thread->isAsync ){
+		ofSleepMillis(10);
+	}
+	
+	left192.clear();
+	right192.clear();
+	mainOut.clear();
+	
+	output_expected_buffer_size = bufferSize;
+}
+
+void OsciAvAudioPlayer::endSync(){
+	if( !isLoaded ) return;
+	wantsAsync = true;
+	
+	while( !thread->isAsync ){
+		ofSleepMillis(10);
+	}
+}

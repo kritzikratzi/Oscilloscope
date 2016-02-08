@@ -33,13 +33,12 @@ public:
 	
 	FaToggleButton * playButton;
 	mui::Slider * timeSlider;
-	mui::SliderWithLabel * volumeSlider;
 	
 	mui::Label currentTime;
 	mui::Label * scaleLabel;
 	
 	mui::Label * outputVolumeLabel;
-	mui::Slider * outputVolumeSlider;
+	mui::SliderWithLabel * outputVolumeSlider;
 	
 	mui::SliderWithLabel * strokeWeightSlider;
 	mui::Label * strokeWeightLabel;

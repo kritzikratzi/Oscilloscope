@@ -29,7 +29,7 @@ int main( ){
 	#endif
 
 	cout << "LAUNCH DESKTOP" << endl;
-	ofSetupOpenGL(&window, 1024, 768, OF_WINDOW);
+	ofSetupOpenGL(&window, 1024, 700, OF_WINDOW);
 	
 	// go fullscreen in mac osx
 	#if defined(TARGET_OSX)

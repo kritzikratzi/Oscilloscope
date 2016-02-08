@@ -59,7 +59,7 @@ public:
 				cout << "Reload ... " << endl;
 				if( shader->isLoaded() ) shader->unload(); 
 				shader->setGeometryInputType(GL_LINES); // LINE_STRIP_ADJACENCY_EXT
-				shader->setGeometryOutputType(GL_QUADS);
+				shader->setGeometryOutputType(GL_TRIANGLE_STRIP); // take care, quads dont work on most cards, even with GL2! 
 				shader->setGeometryOutputCount(4);
 				shader->load(vertFile, fragFile, geomFile);
 			}
