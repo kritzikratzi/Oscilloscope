@@ -49,7 +49,7 @@ public:
 	int exportHeight;
 	int exportFrameRate;
 	
-	void loadFromFile( string settingsFile = ofToDataPath("settings.txt") ){
+	void loadFromFile( string settingsFile = ofToDataPath("settings.txt",true) ){
 		ofxIniSettings settings = ofxIniSettings(settingsFile);
 		bufferSize = settings.get( "bufferSize", bufferSize );
 		sampleRate = settings.get("sampleRate",  sampleRate );
@@ -74,7 +74,7 @@ public:
 	}
 	
 	
-	void saveToFile( string settingsFile = ofToDataPath("settings.txt") ){
+	void saveToFile( string settingsFile = ofToDataPath("settings.txt",true) ){
 		ofxIniSettings settings = ofxIniSettings(settingsFile);
 		
 		settings.set( "bufferSize", bufferSize );

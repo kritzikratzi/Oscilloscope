@@ -365,7 +365,6 @@ void OsciView::sliderChanged( const void * sender, float & value ){
 
 mui::Label * OsciView::addLabel( string text ){
 	mui::Label * label = new mui::Label( text, 0, 0, 100, 30 );
-	label->fontSize = 10;
 	label->commit();
 	label->width = label->boundingBox.width;
 	label->horizontalAlign = mui::Right;

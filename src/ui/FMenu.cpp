@@ -114,5 +114,5 @@ void FMenu::touchDoubleTap( ofTouchEventArgs &touch ){
 
 //--------------------------------------------------------------
 void FMenu::buttonPressed( const void * sender, ofTouchEventArgs &args ){
-	onPress( sender, args );
+	onPress.notify( sender, args );
 }

@@ -1,11 +1,3 @@
-# WARNING
-
-Currently transitioning to OF0.9. 
-The next few days will be a bit messy. 
-
----
-
-
 Oscilloscope
 ===
 
@@ -25,11 +17,13 @@ This is the programming documentation. If you are not a programmer please
 
 # Project setup 
 
-1. Download and unzip Openframeworks 0.84
+1. Download and unzip Openframeworks 0.9.2 or newer
 1. Move this project into apps/myApps/oscilloscope
-1. Clone [ofxMightyUI](https://github.com/kritzikratzi/ofxMightyUI) into addons/ofxMightyUI
+1. Clone [ofxMightyUI](https://github.com/kritzikratzi/ofxMightyUI) into addons/ofxMightyUI. Switch to the branch `fs2`! 
 1. Clone [ofxAvCodec](https://github.com/kritzikratzi/ofxAvCodec) into ofxAvCodec. 
 1. (This is seriously painful) Follow the instructions in ofxAvCodec/ffmpeg_src/readme.md and compile shared libraries for your platform
+1. Clone [ofxFontAwesome](https://github.com/kritzikratzi/ofxFontAwesome) into addons/ofxFontAwesome
+1. Clone [ofxFontStash2](https://github.com/armadillu/ofxFontStash2) into addons/ofxFontStash2
 
 
 ### Compiling with XCode
@@ -38,8 +32,11 @@ This is the programming documentation. If you are not a programmer please
 1. run `scripts/prepare.sh osx`
 1. Open apps/myApps/oscilloscope/Oscilloscope.xcodeproject and then Build&Run
 
+You can also build with `make && make run` on the command line. The resulting build will have no icon/no proper name/no retina support. 
 
 ### Compiling with Visual studio
+
+**The visual studio project files are not up to date**
 
 1. run `scripts/clean.sh`
 1. run `scripts/prepare.sh win32`
@@ -53,17 +50,11 @@ This is the programming documentation. If you are not a programmer please
 
 See scripts/readme.md for the full distribution process. 
 
+### Package the software
 
-
-## Openframeworks 0.84 vs 0.9  
-
-This project compiles under Openframeworks 0.84. Only a few tiny changes are required for 0.9RC2: 
-
-* sounddevices.h: Change RtError to RtAudioError
-* ofApp.h: Change ofRect to ofDrawRectangle
-
-
-This project will transition to OF 0.9 as soon as the first stable version is released. 
+* for osx run `scripts/dist.sh $platform $version`
+* platform is one of `osx linux linux64 win32 win64`
+* version is whatever version you want, e.g. `1.0.6`
 
 ## Experimenting with the shaders
 

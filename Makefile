@@ -9,5 +9,12 @@ ifndef OF_ROOT
     OF_ROOT=../../..
 endif
 
+copy_osx_files: 
+	cp -r $(OF_ROOT)/addons/ofxMightyUI/bin/data/ bin/$(APPNAME).app/Contents/Resources/
+	cp -r $(OF_ROOT)/addons/ofxFontAwesome/bin/data/ bin/$(APPNAME).app/Contents/Resources/
+	
+
+PROJECT_AFTER_OSX=make copy_osx_files
+
 # call the project makefile!
 include $(OF_ROOT)/libs/openFrameworksCompiled/project/makefileCommon/compile.project.mk

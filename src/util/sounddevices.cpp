@@ -56,10 +56,12 @@ bool getDefaultRtOutputParams( int &deviceId, int &sampleRate, int &bufferSize, 
 	if( rates.size() == 0 ){
 		sampleRate = 44100; // safe guess
 	}
+	else if( std::find(rates.begin(), rates.end(), 44100) != rates.end()){
+		sampleRate = 44100; 
+	}
 	else{
 		sampleRate = *max_element(rates.begin(), rates.end());
 	}
-
 	#ifdef _WIN32
 		bufferSize = 1024;
 	#elif __APPLE__

@@ -5,7 +5,7 @@ platform=$1
 
 if [[ -z "$version" || -z "$platform" ]]
 then
-	echo "Usage: dist.sh <version> <platform>"
+	echo "Usage: dist.sh <platform> <version>"
 	exit
 fi
 

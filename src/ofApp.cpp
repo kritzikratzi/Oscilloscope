@@ -11,6 +11,7 @@ bool applicationRunning = false;
 
 //--------------------------------------------------------------
 void ofApp::setup(){
+	mui::MuiConfig::fontSize = 16;
 	showInfo = false;
 	dropped = 0;
 	changed = false;
@@ -381,7 +382,7 @@ void ofApp::draw(){
 
 void ofApp::exit(){
 	stopApplication();
-	ofExit(); 
+	std::exit(0);
 }
 
 
