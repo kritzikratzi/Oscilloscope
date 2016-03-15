@@ -1,3 +1,4 @@
 ofxAvCodec
-ofxMightyUI
 ofxFontAwesome
+ofxFontStash2
+ofxMightyUI

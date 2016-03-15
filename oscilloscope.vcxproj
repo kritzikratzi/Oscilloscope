@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -27,24 +27,24 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v110</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v110</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <CharacterSet>Unicode</CharacterSet>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <PlatformToolset>v110</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <CharacterSet>Unicode</CharacterSet>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <PlatformToolset>v110</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
@@ -93,7 +93,10 @@
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;src\ui;src\util;..\..\..\addons\ofxAvCodec\libs;..\..\..\addons\ofxAvCodec\src;..\..\..\addons\ofxAvCodec\libs\avcodec;..\..\..\addons\ofxAvCodec\libs\avcodec\include;..\..\..\addons\ofxAvCodec\libs\avcodec\lib;..\..\..\addons\ofxAvCodec\libs\avcodec\lib\win32;..\..\..\addons\ofxAvCodec\libs\avcodec\lib\win64;..\..\..\addons\ofxMightyUI\libs;..\..\..\addons\ofxMightyUI\src;..\..\..\addons\ofxMightyUI\src\_fontstash;addons\ofxExtras\src;addons\ofxIniSettings\src;..\..\..\addons\ofxFontAwesome\src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src\ui;src\util;..\..\..\addons\ofxAvCodec\libs;..\..\..\addons\ofxAvCodec\src;..\..\..\addons\ofxAvCodec\libs\avcodec;..\..\..\addons\ofxAvCodec\libs\avcodec\include;..\..\..\addons\ofxAvCodec\libs\avcodec\lib;..\..\..\addons\ofxAvCodec\libs\avcodec\lib\win32;..\..\..\addons\ofxAvCodec\libs\avcodec\lib\win64;..\..\..\addons\ofxMightyUI\libs;..\..\..\addons\ofxMightyUI\src;..\..\..\addons\ofxMightyUI\src\_fontstash;addons\ofxExtras\src;addons\ofxIniSettings\src;..\..\..\addons\ofxFontAwesome\src;C:\Users\be\Desktop\of_v0.9.3_vs_release\addons\ofxFontStash2\src;C:\Users\be\Desktop\of_v0.9.3_vs_release\addons\ofxFontStash2\libs\fontstash\src;C:\Users\be\Desktop\of_v0.9.3_vs_release\addons\ofxFontStash2\libs\gumbo-parser\src;libs/gumbo-parser/src;C:\Users\be\Desktop\of_v0.9.3_vs_release\addons\ofxMightyUI\src;
+libs/avcodec/include;
+src;
+libs/avcodec/include-vs</AdditionalIncludeDirectories>
       <CompileAs>CompileAsCpp</CompileAs>
       <UseUnicodeForAssemblerListing>
       </UseUnicodeForAssemblerListing>
@@ -102,9 +105,9 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
+      <AdditionalDependencies>C:\Users\be\Desktop\of_v0.9.3_vs_release\addons\ofxFontStash2\libs\gumbo-parser\lib\vs\Win32\gumbo.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -115,18 +118,22 @@
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;src\ui;src\util;..\..\..\addons\ofxAvCodec\libs;..\..\..\addons\ofxAvCodec\src;..\..\..\addons\ofxAvCodec\libs\avcodec;..\..\..\addons\ofxAvCodec\libs\avcodec\include;..\..\..\addons\ofxAvCodec\libs\avcodec\lib;..\..\..\addons\ofxAvCodec\libs\avcodec\lib\win32;..\..\..\addons\ofxAvCodec\libs\avcodec\lib\win64;..\..\..\addons\ofxMightyUI\libs;..\..\..\addons\ofxMightyUI\src;..\..\..\addons\ofxMightyUI\src\_fontstash;addons\ofxExtras\src;addons\ofxIniSettings\src;..\..\..\addons\ofxFontAwesome\src</AdditionalIncludeDirectories>
       <CompileAs>CompileAsCpp</CompileAs>
       <UseUnicodeForAssemblerListing>
       </UseUnicodeForAssemblerListing>
+      <AdditionalIncludeDirectories>C:\Users\be\Desktop\of_v0.9.3_vs_release\addons\ofxFontStash2\libs\gumbo-parser\lib\vs\x64\gumbo.lib;
+libs/avcodec/include;
+src;
+libs/avcodec/include-vs;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
+      <AdditionalDependencies>%3b
+C:\Users\be\Desktop\of_v0.9.3_vs_release\addons\ofxFontStash2\libs\gumbo-parser\lib\vs\x64\gumbo.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -135,7 +142,10 @@
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;src\ui;src\util;..\..\..\addons\ofxAvCodec\libs;..\..\..\addons\ofxAvCodec\src;..\..\..\addons\ofxAvCodec\libs\avcodec;..\..\..\addons\ofxAvCodec\libs\avcodec\include;..\..\..\addons\ofxAvCodec\libs\avcodec\lib;..\..\..\addons\ofxAvCodec\libs\avcodec\lib\win32;..\..\..\addons\ofxAvCodec\libs\avcodec\lib\win64;..\..\..\addons\ofxMightyUI\libs;..\..\..\addons\ofxMightyUI\src;..\..\..\addons\ofxMightyUI\src\_fontstash;addons\ofxExtras\src;addons\ofxIniSettings\src;..\..\..\addons\ofxFontAwesome\src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src\ui;src\util;..\..\..\addons\ofxAvCodec\libs;..\..\..\addons\ofxAvCodec\src;..\..\..\addons\ofxAvCodec\libs\avcodec;..\..\..\addons\ofxAvCodec\libs\avcodec\include;..\..\..\addons\ofxAvCodec\libs\avcodec\lib;..\..\..\addons\ofxAvCodec\libs\avcodec\lib\win32;..\..\..\addons\ofxAvCodec\libs\avcodec\lib\win64;..\..\..\addons\ofxMightyUI\libs;..\..\..\addons\ofxMightyUI\src;..\..\..\addons\ofxMightyUI\src\_fontstash;addons\ofxExtras\src;addons\ofxIniSettings\src;..\..\..\addons\ofxFontAwesome\src;C:\Users\be\Desktop\of_v0.9.3_vs_release\addons\ofxFontStash2\src;C:\Users\be\Desktop\of_v0.9.3_vs_release\addons\ofxFontStash2\libs\fontstash\src;C:\Users\be\Desktop\of_v0.9.3_vs_release\addons\ofxFontStash2\libs\gumbo-parser\src;libs/gumbo-parser/src;C:\Users\be\Desktop\of_v0.9.3_vs_release\addons\ofxMightyUI\src;
+libs/avcodec/include;
+src;
+libs/avcodec/include-vs</AdditionalIncludeDirectories>
       <CompileAs>CompileAsCpp</CompileAs>
       <UseUnicodeForAssemblerListing>
       </UseUnicodeForAssemblerListing>
@@ -147,9 +157,9 @@
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
+      <AdditionalDependencies>C:\Users\be\Desktop\of_v0.9.3_vs_release\addons\ofxFontStash2\libs\gumbo-parser\lib\vs\Win32\gumbo.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -158,7 +168,10 @@
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;src\ui;src\util;..\..\..\addons\ofxAvCodec\libs;..\..\..\addons\ofxAvCodec\src;..\..\..\addons\ofxAvCodec\libs\avcodec;..\..\..\addons\ofxAvCodec\libs\avcodec\include;..\..\..\addons\ofxAvCodec\libs\avcodec\lib;..\..\..\addons\ofxAvCodec\libs\avcodec\lib\win32;..\..\..\addons\ofxAvCodec\libs\avcodec\lib\win64;..\..\..\addons\ofxMightyUI\libs;..\..\..\addons\ofxMightyUI\src;..\..\..\addons\ofxMightyUI\src\_fontstash;addons\ofxExtras\src;addons\ofxIniSettings\src;..\..\..\addons\ofxFontAwesome\src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src\ui;src\util;..\..\..\addons\ofxAvCodec\libs;..\..\..\addons\ofxAvCodec\src;..\..\..\addons\ofxAvCodec\libs\avcodec;..\..\..\addons\ofxAvCodec\libs\avcodec\include;..\..\..\addons\ofxAvCodec\libs\avcodec\lib;..\..\..\addons\ofxAvCodec\libs\avcodec\lib\win32;..\..\..\addons\ofxAvCodec\libs\avcodec\lib\win64;..\..\..\addons\ofxMightyUI\libs;..\..\..\addons\ofxMightyUI\src;..\..\..\addons\ofxMightyUI\src\_fontstash;addons\ofxExtras\src;addons\ofxIniSettings\src;..\..\..\addons\ofxFontAwesome\src;C:\Users\be\Desktop\of_v0.9.3_vs_release\addons\ofxFontStash2\src;C:\Users\be\Desktop\of_v0.9.3_vs_release\addons\ofxFontStash2\libs\fontstash\src;C:\Users\be\Desktop\of_v0.9.3_vs_release\addons\ofxFontStash2\libs\gumbo-parser\src;libs/gumbo-parser/src;C:\Users\be\Desktop\of_v0.9.3_vs_release\addons\ofxMightyUI\src;
+libs/avcodec/include;
+src;
+libs/avcodec/include-vs</AdditionalIncludeDirectories>
       <CompileAs>CompileAsCpp</CompileAs>
       <UseUnicodeForAssemblerListing>
       </UseUnicodeForAssemblerListing>
@@ -170,28 +183,18 @@
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
+      <AdditionalDependencies>%3b
+C:\Users\be\Desktop\of_v0.9.3_vs_release\addons\ofxFontStash2\libs\gumbo-parser\lib\vs\Win32\gumbo.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\addons\ofxMightyUI\src\MuiConfig.cpp" />
-    <ClCompile Include="..\..\..\addons\ofxMightyUI\src\MuiCore.cpp" />
-    <ClCompile Include="addons\ofxIniSettings\src\ofxIniExtras.cpp" />
-    <ClCompile Include="addons\ofxIniSettings\src\ofxIniSettings.cpp" />
-    <ClCompile Include="src\globals.cpp" />
-    <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\ofApp.cpp" />
-    <ClCompile Include="src\ui\ConfigView.cpp" />
-    <ClCompile Include="src\ui\OsciView.cpp" />
-    <ClCompile Include="src\util\Audio.cpp" />
-    <ClCompile Include="src\util\OsciAvAudioPlayer.cpp" />
-    <ClCompile Include="src\util\sounddevices.cpp" />
     <ClCompile Include="..\..\..\addons\ofxAvCodec\src\ofxAvAudioPlayer.cpp" />
-    <ClCompile Include="..\..\..\addons\ofxMightyUI\src\_fontstash\fontstash.c" />
-    <ClCompile Include="..\..\..\addons\ofxMightyUI\src\_fontstash\ofxFontStash.cpp" />
-    <ClCompile Include="..\..\..\addons\ofxMightyUI\src\_fontstash\ofxTrueTypeFontFS.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxAvCodec\src\ofxAvAudioWriter.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxAvCodec\src\ofxAvUtils.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxFontStash2\src\ofxFontStash2.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxFontStash2\src\ofxFontStashParser.cpp" />
     <ClCompile Include="..\..\..\addons\ofxMightyUI\src\BarButton.cpp" />
     <ClCompile Include="..\..\..\addons\ofxMightyUI\src\Button.cpp" />
     <ClCompile Include="..\..\..\addons\ofxMightyUI\src\Container.cpp" />
@@ -203,6 +206,8 @@
     <ClCompile Include="..\..\..\addons\ofxMightyUI\src\Label.cpp" />
     <ClCompile Include="..\..\..\addons\ofxMightyUI\src\Layout.cpp" />
     <ClCompile Include="..\..\..\addons\ofxMightyUI\src\MUI.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxMightyUI\src\MuiConfig.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxMightyUI\src\MuiCore.cpp" />
     <ClCompile Include="..\..\..\addons\ofxMightyUI\src\Root.cpp" />
     <ClCompile Include="..\..\..\addons\ofxMightyUI\src\ScrollPane.cpp" />
     <ClCompile Include="..\..\..\addons\ofxMightyUI\src\SegmentedSelect.cpp" />
@@ -211,25 +216,20 @@
     <ClCompile Include="..\..\..\addons\ofxMightyUI\src\TextField.cpp" />
     <ClCompile Include="..\..\..\addons\ofxMightyUI\src\TextureAtlas.cpp" />
     <ClCompile Include="..\..\..\addons\ofxMightyUI\src\ToggleButton.cpp" />
+    <ClCompile Include="addons\ofxIniSettings\src\ofxIniExtras.cpp" />
+    <ClCompile Include="addons\ofxIniSettings\src\ofxIniSettings.cpp" />
+    <ClCompile Include="src\globals.cpp" />
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\ofApp.cpp" />
+    <ClCompile Include="src\ui\ConfigView.cpp" />
+    <ClCompile Include="src\ui\FMenu.cpp" />
+    <ClCompile Include="src\ui\OsciView.cpp" />
+    <ClCompile Include="src\util\Audio.cpp" />
+    <ClCompile Include="src\util\OsciAvAudioPlayer.cpp" />
+    <ClCompile Include="src\util\sounddevices.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\addons\ofxFontAwesome\src\ofxFontAwesome.h" />
-    <ClInclude Include="..\..\..\addons\ofxMightyUI\src\MuiConfig.h" />
-    <ClInclude Include="..\..\..\addons\ofxMightyUI\src\MuiCore.h" />
-    <ClInclude Include="addons\ofxIniSettings\src\ofxIniExtras.h" />
-    <ClInclude Include="addons\ofxIniSettings\src\ofxIniSettings.h" />
-    <ClInclude Include="src\globals.h" />
-    <ClInclude Include="src\ofApp.h" />
-    <ClInclude Include="src\ui\ConfigView.h" />
-    <ClInclude Include="src\ui\FaButton.h" />
-    <ClInclude Include="src\ui\FaToggleButton.h" />
-    <ClInclude Include="src\ui\L.h" />
-    <ClInclude Include="src\ui\OsciView.h" />
-    <ClInclude Include="src\util\Audio.h" />
-    <ClInclude Include="src\util\OsciAvAudioPlayer.h" />
-    <ClInclude Include="src\util\sounddevices.h" />
-    <ClInclude Include="src\util\split.h" />
-    <ClInclude Include="..\..\..\addons\ofxAvCodec\src\ofxAvAudioPlayer.h" />
+    <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include-vs\inttypes.h" />
     <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavcodec\avcodec.h" />
     <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavcodec\avfft.h" />
     <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavcodec\d3d11va.h" />
@@ -258,8 +258,8 @@
     <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\adler32.h" />
     <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\aes.h" />
     <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\attributes.h" />
-    <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\audio_fifo.h" />
     <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\audioconvert.h" />
+    <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\audio_fifo.h" />
     <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\avassert.h" />
     <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\avconfig.h" />
     <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\avstring.h" />
@@ -289,7 +289,6 @@
     <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\imgutils.h" />
     <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\intfloat.h" />
     <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\intreadwrite.h" />
-    <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\inttypes.h" />
     <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\lfg.h" />
     <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\log.h" />
     <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\lzo.h" />
@@ -324,10 +323,17 @@
     <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libswresample\version.h" />
     <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libswscale\swscale.h" />
     <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libswscale\version.h" />
-    <ClInclude Include="..\..\..\addons\ofxMightyUI\src\_fontstash\fontstash.h" />
-    <ClInclude Include="..\..\..\addons\ofxMightyUI\src\_fontstash\ofxFontStash.h" />
-    <ClInclude Include="..\..\..\addons\ofxMightyUI\src\_fontstash\ofxTrueTypeFontFS.h" />
-    <ClInclude Include="..\..\..\addons\ofxMightyUI\src\_fontstash\stb_truetype.h" />
+    <ClInclude Include="..\..\..\addons\ofxAvCodec\src\ofxAvAudioPlayer.h" />
+    <ClInclude Include="..\..\..\addons\ofxAvCodec\src\ofxAvAudioWriter.h" />
+    <ClInclude Include="..\..\..\addons\ofxAvCodec\src\ofxAvUtils.h" />
+    <ClInclude Include="..\..\..\addons\ofxFontAwesome\src\ofxFontAwesome.h" />
+    <ClInclude Include="..\..\..\addons\ofxFontStash2\libs\fontstash\src\fontstash.h" />
+    <ClInclude Include="..\..\..\addons\ofxFontStash2\libs\fontstash\src\gl3fontstash.h" />
+    <ClInclude Include="..\..\..\addons\ofxFontStash2\libs\fontstash\src\glfontstash.h" />
+    <ClInclude Include="..\..\..\addons\ofxFontStash2\libs\fontstash\src\stb_truetype.h" />
+    <ClInclude Include="..\..\..\addons\ofxFontStash2\src\ofxFontStash2.h" />
+    <ClInclude Include="..\..\..\addons\ofxFontStash2\src\ofxFontStashParser.h" />
+    <ClInclude Include="..\..\..\addons\ofxFontStash2\src\ofxFontStashStyle.h" />
     <ClInclude Include="..\..\..\addons\ofxMightyUI\src\BarButton.h" />
     <ClInclude Include="..\..\..\addons\ofxMightyUI\src\Button.h" />
     <ClInclude Include="..\..\..\addons\ofxMightyUI\src\Container.h" />
@@ -339,6 +345,8 @@
     <ClInclude Include="..\..\..\addons\ofxMightyUI\src\Label.h" />
     <ClInclude Include="..\..\..\addons\ofxMightyUI\src\Layout.h" />
     <ClInclude Include="..\..\..\addons\ofxMightyUI\src\MUI.h" />
+    <ClInclude Include="..\..\..\addons\ofxMightyUI\src\MuiConfig.h" />
+    <ClInclude Include="..\..\..\addons\ofxMightyUI\src\MuiCore.h" />
     <ClInclude Include="..\..\..\addons\ofxMightyUI\src\Root.h" />
     <ClInclude Include="..\..\..\addons\ofxMightyUI\src\ScrollPane.h" />
     <ClInclude Include="..\..\..\addons\ofxMightyUI\src\SegmentedSelect.h" />
@@ -347,6 +355,20 @@
     <ClInclude Include="..\..\..\addons\ofxMightyUI\src\TextField.h" />
     <ClInclude Include="..\..\..\addons\ofxMightyUI\src\TextureAtlas.h" />
     <ClInclude Include="..\..\..\addons\ofxMightyUI\src\ToggleButton.h" />
+    <ClInclude Include="addons\ofxIniSettings\src\ofxIniExtras.h" />
+    <ClInclude Include="addons\ofxIniSettings\src\ofxIniSettings.h" />
+    <ClInclude Include="src\globals.h" />
+    <ClInclude Include="src\ofApp.h" />
+    <ClInclude Include="src\ui\ConfigView.h" />
+    <ClInclude Include="src\ui\FaButton.h" />
+    <ClInclude Include="src\ui\FaToggleButton.h" />
+    <ClInclude Include="src\ui\FMenu.h" />
+    <ClInclude Include="src\ui\L.h" />
+    <ClInclude Include="src\ui\OsciView.h" />
+    <ClInclude Include="src\util\Audio.h" />
+    <ClInclude Include="src\util\OsciAvAudioPlayer.h" />
+    <ClInclude Include="src\util\sounddevices.h" />
+    <ClInclude Include="src\util\split.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\libs\openFrameworksCompiled\project\vs\openframeworksLib.vcxproj">
@@ -360,13 +382,13 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <Library Include="..\..\..\addons\ofxAvCodec\libs\avcodec\lib\win32\avcodec.lib" />
-    <Library Include="..\..\..\addons\ofxAvCodec\libs\avcodec\lib\win32\avdevice.lib" />
-    <Library Include="..\..\..\addons\ofxAvCodec\libs\avcodec\lib\win32\avfilter.lib" />
-    <Library Include="..\..\..\addons\ofxAvCodec\libs\avcodec\lib\win32\avformat.lib" />
-    <Library Include="..\..\..\addons\ofxAvCodec\libs\avcodec\lib\win32\avutil.lib" />
-    <Library Include="..\..\..\addons\ofxAvCodec\libs\avcodec\lib\win32\swresample.lib" />
-    <Library Include="..\..\..\addons\ofxAvCodec\libs\avcodec\lib\win32\swscale.lib" />
+    <Library Include="..\..\..\addons\ofxAvCodec\libs\avcodec\lib\vs\Win32\avcodec.lib" />
+    <Library Include="..\..\..\addons\ofxAvCodec\libs\avcodec\lib\vs\Win32\avdevice.lib" />
+    <Library Include="..\..\..\addons\ofxAvCodec\libs\avcodec\lib\vs\Win32\avfilter.lib" />
+    <Library Include="..\..\..\addons\ofxAvCodec\libs\avcodec\lib\vs\Win32\avformat.lib" />
+    <Library Include="..\..\..\addons\ofxAvCodec\libs\avcodec\lib\vs\Win32\avutil.lib" />
+    <Library Include="..\..\..\addons\ofxAvCodec\libs\avcodec\lib\vs\Win32\swresample.lib" />
+    <Library Include="..\..\..\addons\ofxAvCodec\libs\avcodec\lib\vs\Win32\swscale.lib" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
 </Project>
