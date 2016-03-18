@@ -17,42 +17,19 @@
 
 using namespace std;
 
-vector<RtAudio::DeviceInfo> listRtSoundDevices(){
-	vector<RtAudio::DeviceInfo> infos;
-	ofPtr<RtAudio> audioTemp;
-	try {
-		audioTemp = ofPtr<RtAudio>(new RtAudio());
-	} catch (std::exception &error) {
-		return infos;
-	}
-	
- 	int devices = audioTemp->getDeviceCount();
-	RtAudio::DeviceInfo info;
-	
-	for (int i=0; i< devices; i++) {
-		try {
-			info = audioTemp->getDeviceInfo(i);
-			infos.push_back( info );
-		} catch (std::exception &error) {
+bool getDefaultRtOutputParams( int &deviceId, int &sampleRate, int &bufferSize, int &numBuffers ){
+	ofSoundStream stream;
+	vector<ofSoundDevice> devices = stream.getDeviceList();
+	ofSoundDevice device;
+	for (auto it = devices.begin(); it != devices.end(); ++it) {
+		device = *it; 
+		if (device.isDefaultOutput) {
 			break;
 		}
 	}
-	
-	return infos; 
-}
+	deviceId = device.deviceID;
 
-bool getDefaultRtOutputParams( int &deviceId, int &sampleRate, int &bufferSize, int &numBuffers ){
-	ofPtr<RtAudio> audioTemp;
-	try {
-		audioTemp = ofPtr<RtAudio>(new RtAudio());
-	} catch (std::exception ex) {
-		return false;
-	}
-	
-	deviceId = audioTemp->getDefaultOutputDevice();
-	RtAudio::DeviceInfo info = audioTemp->getDeviceInfo(deviceId);
-	
-	vector<unsigned int> &rates = info.sampleRates;
+	vector<unsigned int> &rates = device.sampleRates;
 	if( rates.size() == 0 ){
 		sampleRate = 44100; // safe guess
 	}
@@ -63,7 +40,7 @@ bool getDefaultRtOutputParams( int &deviceId, int &sampleRate, int &bufferSize, 
 		sampleRate = *max_element(rates.begin(), rates.end());
 	}
 	#ifdef _WIN32
-		bufferSize = 1024;
+		bufferSize = 512;
 	#elif __APPLE__
 		bufferSize = 512;
 	#else
@@ -71,4 +48,6 @@ bool getDefaultRtOutputParams( int &deviceId, int &sampleRate, int &bufferSize, 
 	#endif
 	
 	numBuffers = 4;
+
+	return true; 
 }

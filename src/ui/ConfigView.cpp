@@ -1,6 +1,6 @@
 #include "ConfigView.h"
 #include <Poco/Delegate.h>
-#include "sounddevices.h"
+#include "../util/sounddevices.h"
 #include "../globals.h"
 
 ConfigView::ConfigView( float x_, float y_, float width_, float height_)
@@ -49,10 +49,10 @@ ConfigView::ConfigView( float x_, float y_, float width_, float height_)
 	y += numbuffersSelect->height + space;
 	
 	pushLabel( "Audio Device", x, y, w, h);
-	vector<RtAudio::DeviceInfo> infos = listRtSoundDevices();
-	vector<RtAudio::DeviceInfo>::iterator it = infos.begin();
+	vector<ofSoundDevice> infos = ofSoundStream().getDeviceList();
+	vector<ofSoundDevice>::iterator it = infos.begin();
 	while( it != infos.end() ){
-		RtAudio::DeviceInfo info = *it;
+		ofSoundDevice info = *it;
 		string name = string(info.name);
 		if( info.outputChannels > 0 ){
 			mui::ToggleButton * button = new mui::ToggleButton( name, x, y, w, h );

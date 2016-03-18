@@ -308,9 +308,9 @@ void OsciView::buttonPressed( const void * sender, ofTouchEventArgs & args ){
 			micMenu = new FMenu(0,0,400,0);
 			mui::Button * cancelButton = micMenu->addButton("Cancel");
 			cancelButton->bg = ofColor(100,100);
-			vector<RtAudio::DeviceInfo> infos = listRtSoundDevices();
+			vector<ofSoundDevice> infos = ofSoundStream().getDeviceList();
 			for( int i = 0; i < infos.size(); i++ ){
-				RtAudio::DeviceInfo &info = infos[i];
+				ofSoundDevice &info = infos[i];
 				if( info.inputChannels >= 2 ){
 					micMenu->addButton(info.name);
 					micDeviceIds[info.name] = i;

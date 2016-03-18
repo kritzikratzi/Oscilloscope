@@ -30,7 +30,6 @@ void ofApp::setup(){
 //	shader.setGeometryOutputCount(4);
 	shaderLoader.setup(&shader, "shaders/osci");
 	
-	vector<RtAudio::DeviceInfo> devices = listRtSoundDevices();
 	ofSetFrameRate(60);
 	
 	root = new mui::Root();

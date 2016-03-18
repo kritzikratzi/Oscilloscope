@@ -15,7 +15,10 @@
 #include <GL/glew.h>
 
 //========================================================================
-int main( ){
+int main(){
+	// asio hack for of0.9: http://pastebin.com/hzdv01iT
+
+
 	ofSetEscapeQuitsApp(false);
 
 	// this kicks off the running of my app
@@ -57,7 +60,7 @@ int main( ){
 // handle windows startup
 INT WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
     PSTR lpCmdLine, INT nCmdShow)
-{
+{	
     return main();
 }
 #endif
