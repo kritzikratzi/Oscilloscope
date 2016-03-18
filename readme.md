@@ -36,11 +36,11 @@ You can also build with `make && make run` on the command line. The resulting bu
 
 ### Compiling with Visual studio
 
-**The visual studio project files are not up to date**
-
 1. run `scripts/clean.sh`
 1. run `scripts/prepare.sh win32`
 1. Open oscilloscope.sln and Build&Run
+
+At this point audio should play through Asio (first choice), or Wasapi. You can follow these instructions to patch OF so you can pick at startup: http://pastebin.com/ZZLZ3jUm
 
 ### Compiling with make in Linux
 

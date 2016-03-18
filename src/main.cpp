@@ -16,8 +16,7 @@
 
 //========================================================================
 int main(){
-	// asio hack for of0.9: http://pastebin.com/hzdv01iT
-
+	// asio/wasapi patch for of0.9x in windows: http://pastebin.com/ZZLZ3jUm
 
 	ofSetEscapeQuitsApp(false);
 
