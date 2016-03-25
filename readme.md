@@ -17,16 +17,19 @@ This is the programming documentation. If you are not a programmer please
 
 # Project setup 
 
-1. Download and unzip Openframeworks 0.9.2 or newer
+Things are moving around a bit at the moment. 
+Make sure to read these instructions before each build. 
+
+1. Download and unzip Openframeworks 0.9.3 or newer
 1. Move this project into apps/myApps/oscilloscope
 1. Clone [ofxMightyUI](https://github.com/kritzikratzi/ofxMightyUI) into addons/ofxMightyUI. Switch to the branch `fs2`! 
 1. Clone [ofxAvCodec](https://github.com/kritzikratzi/ofxAvCodec) into ofxAvCodec. 
-1. (This is seriously painful) Follow the instructions in ofxAvCodec/ffmpeg_src/readme.md and compile shared libraries for your platform
+1. Grab the latest [ffmpeg binaries](https://github.com/kritzikratzi/ofxAvCodec/releases) and copy the lib folder to `addons/ofxAvCodec/libs/avcodec/lib`. 
 1. Clone [ofxFontAwesome](https://github.com/kritzikratzi/ofxFontAwesome) into addons/ofxFontAwesome
-1. Clone [ofxFontStash2](https://github.com/armadillu/ofxFontStash2) into addons/ofxFontStash2
+1. Clone [ofxFontStash2](https://github.com/kritzikratzi/ofxFontStash2) into addons/ofxFontStash2. Switch to the branch 'pugi'
 
 
-### Compiling with XCode
+### Compiling with XCode (OSX10.9+)
 
 1. run `scripts/clean.sh`
 1. run `scripts/prepare.sh osx`
@@ -34,7 +37,9 @@ This is the programming documentation. If you are not a programmer please
 
 You can also build with `make && make run` on the command line. The resulting build will have no icon/no proper name/no retina support. 
 
-### Compiling with Visual studio
+### Compiling with Visual studio 2015
+
+The shell commands can be run from a git bash, cygwin, msys, or any other shell emulator. 
 
 1. run `scripts/clean.sh`
 1. run `scripts/prepare.sh win32`

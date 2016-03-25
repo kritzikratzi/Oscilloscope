@@ -6,6 +6,10 @@ platform=$1
 if [[ -z "$version" || -z "$platform" ]]
 then
 	echo "Usage: dist.sh <platform> <version>"
+	echo ""
+	echo "Platform: One of the following: "
+	echo "          linux, linux64, win32, win64" 
+	echo "Version:  Anything you like"
 	exit
 fi
 
