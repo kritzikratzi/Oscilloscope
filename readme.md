@@ -17,13 +17,15 @@ This is the programming documentation. If you are not a programmer please
 
 # Project setup 
 
+**Dependencies are currently changing a lot. Please make sure to have the right branch of each dependency. Sorry for the inconvenience!**
+
 1. Download and unzip Openframeworks 0.9.2 or newer
 1. Move this project into apps/myApps/oscilloscope
 1. Clone [ofxMightyUI](https://github.com/kritzikratzi/ofxMightyUI) into addons/ofxMightyUI. Switch to the branch `fs2`! 
 1. Clone [ofxAvCodec](https://github.com/kritzikratzi/ofxAvCodec) into ofxAvCodec. 
-1. (This is seriously painful) Follow the instructions in ofxAvCodec/ffmpeg_src/readme.md and compile shared libraries for your platform
+1. (~~This is seriously painful~~) Follow the instructions in ofxAvCodec/readme.md and ~~compile shared libraries for your platform~~ grab the precompiled binaries from the releases section. 
 1. Clone [ofxFontAwesome](https://github.com/kritzikratzi/ofxFontAwesome) into addons/ofxFontAwesome
-1. Clone [ofxFontStash2](https://github.com/armadillu/ofxFontStash2) into addons/ofxFontStash2
+1. Clone [ofxFontStash2](https://github.com/kritzikratzi/ofxFontStash2) into addons/ofxFontStash2 Switch to the branch `pugi`
 
 
 ### Compiling with XCode
@@ -31,10 +33,13 @@ This is the programming documentation. If you are not a programmer please
 1. run `scripts/clean.sh`
 1. run `scripts/prepare.sh osx`
 1. Open apps/myApps/oscilloscope/Oscilloscope.xcodeproject and then Build&Run
+1. (Optional) Code sign by running `scripts/sign-mac.sh bin/Oscilloscope.app "Developer ID Application: Name of your certificate"` (run `security find-identity -v -p codesigning` to get a list of installed certs)
 
 You can also build with `make && make run` on the command line. The resulting build will have no icon/no proper name/no retina support. 
 
 ### Compiling with Visual studio
+
+**Windows project file is out of date. Remove the `ofxFontStash2` plugins and re-add all files from the `pugi` branch.**
 
 1. run `scripts/clean.sh`
 1. run `scripts/prepare.sh win32`
