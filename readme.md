@@ -19,13 +19,15 @@ This is the programming documentation. If you are not a programmer please
 
 **Dependencies are currently changing a lot. Please make sure to have the right branch of each dependency. Sorry for the inconvenience, this project is more about the binaries than the source. **
 
+**Warning: VS files not up to date. ofxMightyUI will be missing some files**
+
 1. Download and unzip Openframeworks 0.9.3 or newer
 1. Move this project into apps/myApps/oscilloscope
-1. Clone [ofxMightyUI](https://github.com/kritzikratzi/ofxMightyUI) into addons/ofxMightyUI. Switch to the branch `fs2`! 
+1. Clone [ofxMightyUI](https://github.com/kritzikratzi/ofxMightyUI) into addons/ofxMightyUI.
 1. Clone [ofxAvCodec](https://github.com/kritzikratzi/ofxAvCodec) into ofxAvCodec. 
 1. (~~This is seriously painful~~) Follow the instructions in ofxAvCodec/readme.md and ~~compile shared libraries for your platform~~ grab the precompiled binaries from the releases section. 
 1. Clone [ofxFontAwesome](https://github.com/kritzikratzi/ofxFontAwesome) into addons/ofxFontAwesome
-1. Clone [ofxFontStash2](https://github.com/kritzikratzi/ofxFontStash2) into addons/ofxFontStash2 Switch to the branch `pugi`
+1. Clone [ofxFontStash2](https://github.com/kritzikratzi/ofxFontStash2) into addons/ofxFontStash2
 
 
 ### Compiling with XCode
