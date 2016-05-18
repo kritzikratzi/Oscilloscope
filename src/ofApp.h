@@ -3,7 +3,7 @@
 #include "ofMain.h"
 #include "util/sounddevices.h"
 #include "util/ShaderLoader.h"
-#include "MUI.h" 
+#include "ofxMightyUI.h"
 
 #include "ui/ConfigView.h"
 #include "ui/OsciView.h"

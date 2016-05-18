@@ -1,6 +1,6 @@
 #pragma once
 
-#include "MUI.h"
+#include "ofxMightyUI.h"
 
 class ConfigView : public mui::Container{
 public:
@@ -16,9 +16,9 @@ public:
 	
 	
 	mui::ToggleButton * autoDetectButton;
-	mui::SegmentedSelect * sampleRatesSelect;
-	mui::SegmentedSelect * bufferSizeSelect;
-	mui::SegmentedSelect * numbuffersSelect;
+	mui::SegmentedSelect<int> * sampleRatesSelect;
+	mui::SegmentedSelect<int> * bufferSizeSelect;
+	mui::SegmentedSelect<int> * numbuffersSelect;
 	mui::Button * startButton;
 	
 	mui::Container * blocker;

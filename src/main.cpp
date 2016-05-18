@@ -1,7 +1,7 @@
 #include "ofMain.h"
 #include "ofApp.h"
 #include "sounddevices.h"
-#include "MUI.h" 
+#include "ofxMightyUI.h"
 #if defined(TARGET_OSX)
 #import <AppKit/AppKit.h>
 #endif
@@ -16,8 +16,9 @@
 
 //========================================================================
 int main(){
-	// asio/wasapi patch for of0.9x in windows: http://pastebin.com/ZZLZ3jUm
+	// please read about the asio/wasapi patch for of0.9x in windows: http://pastebin.com/ZZLZ3jUm
 
+	globals.loadFromFile();
 	ofSetEscapeQuitsApp(false);
 
 	// this kicks off the running of my app
@@ -37,6 +38,9 @@ int main(){
 	#if defined(TARGET_OSX)
 	NSWindow * cocoaWindow = (NSWindow*)window.getCocoaWindow();
 	[cocoaWindow setFrame:[[NSScreen mainScreen] visibleFrame] display:YES];
+	if(globals.alwaysOnTop){
+		[cocoaWindow setLevel: NSStatusWindowLevel];
+	}
 	#endif
 	
 

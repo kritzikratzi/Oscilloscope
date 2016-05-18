@@ -9,7 +9,7 @@
 #ifndef FaToggleButton_h
 #define FaToggleButton_h
 
-#include "MUI.h"
+#include "ofxMightyUI.h"
 #include "ofMain.h"
 
 class FaToggleButton : public mui::ToggleButton{

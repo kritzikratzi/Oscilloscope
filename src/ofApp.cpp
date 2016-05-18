@@ -34,7 +34,6 @@ void ofApp::setup(){
 	
 	root = new mui::Root();
 	
-	globals.loadFromFile();
 	globals.player.loadSound( "konichiwa.wav" );
 	globals.player.setLoop(true);
 	globals.player.stop(); 
@@ -113,18 +112,13 @@ void ofApp::stopApplication(){
 //--------------------------------------------------------------
 void ofApp::update(){
 	
-	// nasty hack. OF seems to get width+height wrong on the first frame.
-	if( ofGetFrameNum() == 1 ){
-		windowResized(ofGetWidth(), ofGetHeight());
-	}
-	
 	if( ofGetMousePressed() ){
 		lastMouseMoved = ofGetElapsedTimeMillis(); 
 	}
 
 	/////////////////////////////////////////////////
 	// take care of hiding / showing the ui
-	if( ofGetElapsedTimeMillis()-lastMouseMoved > 3000 && ( globals.player.isPlaying || globals.micActive ) ){
+	if( ofGetElapsedTimeMillis()-lastMouseMoved > 1500 && ( globals.player.isPlaying || globals.micActive ) ){
 		// this is not the greatest solution, but hey ho, it works ...
 		mui::Container * res = root->findChildAt(ofGetMouseX()/mui::MuiConfig::scaleFactor, ofGetMouseY()/mui::MuiConfig::scaleFactor);
 		bool foundOsciView = false;
@@ -225,15 +219,24 @@ void ofApp::update(){
 	MonoSample &right = globals.micActive?(this->right):globals.player.right192;
 	left.play();
 	right.play();
+	bool isMono = !globals.micActive && globals.player.isMonoFile;
+	
 	if( left.totalLength >= bufferSize && right.totalLength >= bufferSize ){
 		changed = true;
 		while( left.totalLength >= bufferSize && right.totalLength >= bufferSize ){
-			memset(leftBuffer,0,bufferSize*sizeof(float));
-			memset(rightBuffer,0,bufferSize*sizeof(float));
-			
-			
-			left.addTo(leftBuffer, 1, bufferSize);
-			right.addTo(rightBuffer, 1, bufferSize);
+			if(isMono){
+				memset(rightBuffer,0,bufferSize*sizeof(float));
+				right.addTo(rightBuffer, 1, bufferSize);
+				for( int i = 0; i < bufferSize; i++ ){
+					leftBuffer[i] = -1+2*i/(float)bufferSize;
+				}
+			}
+			else{
+				memset(leftBuffer,0,bufferSize*sizeof(float));
+				memset(rightBuffer,0,bufferSize*sizeof(float));
+				left.addTo(leftBuffer, 1, bufferSize);
+				right.addTo(rightBuffer, 1, bufferSize);
+			}
 			
 			ofColor col = ofColor::fromHsb(globals.hue*255/360, 255, 255*globals.intensity);
 			
