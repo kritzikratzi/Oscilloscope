@@ -17,9 +17,9 @@ This is the programming documentation. If you are not a programmer please
 
 # Project setup 
 
-**Dependencies are currently changing a lot. Please make sure to have the right branch of each dependency. Sorry for the inconvenience!**
+**Dependencies are currently changing a lot. Please make sure to have the right branch of each dependency. Sorry for the inconvenience, this project is more about the binaries than the source. **
 
-1. Download and unzip Openframeworks 0.9.2 or newer
+1. Download and unzip Openframeworks 0.9.3 or newer
 1. Move this project into apps/myApps/oscilloscope
 1. Clone [ofxMightyUI](https://github.com/kritzikratzi/ofxMightyUI) into addons/ofxMightyUI. Switch to the branch `fs2`! 
 1. Clone [ofxAvCodec](https://github.com/kritzikratzi/ofxAvCodec) into ofxAvCodec. 
