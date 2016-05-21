@@ -39,7 +39,7 @@ int main(){
 	NSWindow * cocoaWindow = (NSWindow*)window.getCocoaWindow();
 	[cocoaWindow setFrame:[[NSScreen mainScreen] visibleFrame] display:YES];
 	if(globals.alwaysOnTop){
-		[cocoaWindow setLevel: NSStatusWindowLevel];
+		[cocoaWindow setLevel: NSFloatingWindowLevel];
 	}
 	#endif
 	

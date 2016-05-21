@@ -1,3129 +1,955 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-<dict>
-	<key>archiveVersion</key>
-	<string>1</string>
-	<key>classes</key>
-	<dict/>
-	<key>objectVersion</key>
-	<string>46</string>
-	<key>objects</key>
-	<dict>
-		<key>054FED2333CDCBDD33B77B7B</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>9A8EF6C4532FDDF483C69AC2</string>
-				<string>AFAD63D11F806A4597D935C0</string>
-				<string>B010667371FA0B1D276AD141</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>path</key>
-			<string>src</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>068EBEB78E5D92ADAE11095B</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>CppTweener.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>0A70EE869FD27F8A180D6B21</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>3B73C1A3F266BAFE57AA5FCF</string>
-				<string>416FFDAD4F62DFD86041913E</string>
-				<string>18DA2122C2783DB05DEBCE87</string>
-				<string>2F0C07515189549AB21D6C38</string>
-				<string>94BFEFD547F62B080775EC81</string>
-				<string>5DDEC0BDA035194309B83CD4</string>
-				<string>DDC8EC91E48884FFB46E26FB</string>
-				<string>068EBEB78E5D92ADAE11095B</string>
-				<string>98FCF23F427DE6A108C15AA6</string>
-				<string>28FF0CB9970996CA72B6D8AF</string>
-				<string>C4E6595B0C243ADE291984F7</string>
-				<string>161625A0B9B60B3170D39B88</string>
-				<string>8D8426D466CDE2C2A87A7DFE</string>
-				<string>406698A95BD84DAFAA009924</string>
-				<string>EDA4DA295FDA8C4CB1406348</string>
-				<string>A2D54B529EAA008CE50726B8</string>
-				<string>CC377B7E1C1A7594D8F40115</string>
-				<string>BFC86602DFCA82C2E2D534F3</string>
-				<string>6EE5442F865B09EE4CCDDD94</string>
-				<string>28B8E32B7A472D163E9D2DC6</string>
-				<string>85DCEEAD5DD142F981D3956D</string>
-				<string>FD88671DF8B4B266FA2592E9</string>
-				<string>4978426631D37FA3EB1FA547</string>
-				<string>BA474BDD58A8A242D48E3F62</string>
-				<string>0E096E79A1021312BAE600E8</string>
-				<string>0F77523ADC0CAD404B667E1D</string>
-				<string>24D87983B8A48C4385029E52</string>
-				<string>CA27AF5B36F66F2A1AECA205</string>
-				<string>B5E2643A08392C8D41DA1D26</string>
-				<string>747C12409A0AAB8D4B8A11A2</string>
-				<string>9439510945C804E7C475C20A</string>
-				<string>EB80D30EC1B32976167B8FF0</string>
-				<string>61A842419EFF74F93FDBDE5A</string>
-				<string>4FC5B0B6811ACF1E0F875E1C</string>
-				<string>DEB674ED2671AC7658B14059</string>
-				<string>FA798853D6872E5FF721121E</string>
-				<string>1A257ABDA31A9FEA901F6957</string>
-				<string>95B64F47E6BB11684D850782</string>
-				<string>110B722BF8FF24E188B393E0</string>
-				<string>D93805C37AB468ED5C6D7AD9</string>
-				<string>CA39C804B514C2081D4B78BC</string>
-				<string>787C60702CF6603591BB1CF5</string>
-				<string>88DC2EDABCBC86DA517F92B3</string>
-				<string>9FB101D8E87C0173018F0586</string>
-				<string>403378E55FDCA8AA24E8104A</string>
-				<string>31153764B68C60DF6CD8F96D</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>path</key>
-			<string>src</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>0A7F820ED2DDF888076C5862</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>fontstash.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>0E096E79A1021312BAE600E8</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.cpp.cpp</string>
-			<key>path</key>
-			<string>MuiParameterPanel.cpp</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>0F77523ADC0CAD404B667E1D</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>MuiParameterPanel.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>110B722BF8FF24E188B393E0</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.cpp.cpp</string>
-			<key>path</key>
-			<string>SliderWithLabel.cpp</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>161625A0B9B60B3170D39B88</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>Helpers.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>18DA2122C2783DB05DEBCE87</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.cpp.cpp</string>
-			<key>path</key>
-			<string>Button.cpp</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>1A257ABDA31A9FEA901F6957</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.cpp.cpp</string>
-			<key>path</key>
-			<string>Slider.cpp</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>1C385D463F652176C0987363</key>
-		<dict>
-			<key>fileRef</key>
-			<string>24D87983B8A48C4385029E52</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>1CA38CE0608E3BBB595BCDFE</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.cpp.cpp</string>
-			<key>path</key>
-			<string>ofxAvAudioPlayer.cpp</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>1D9645D095F60AB365003B06</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.cpp.cpp</string>
-			<key>path</key>
-			<string>ofxAvUtils.cpp</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>1E0A968A7AAF25AA7B1474D3</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>ofxFontStashStyle.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>1EB81FA280F960EE578AB4BA</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>ofxAvVideoWriter.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>24D87983B8A48C4385029E52</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.cpp.cpp</string>
-			<key>path</key>
-			<string>MuiTextArea.cpp</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>26D59B6F54AD43E7B13D25C2</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.cpp.cpp</string>
-			<key>path</key>
-			<string>ofxFontStash2.cpp</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>28B8E32B7A472D163E9D2DC6</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>Layout.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>28FF0CB9970996CA72B6D8AF</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>EmptyContainer.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>2F0C07515189549AB21D6C38</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>Button.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>31153764B68C60DF6CD8F96D</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>ToggleButton.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>394A722787C901A078FE90F1</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>4B5DE3EE5B91921EE4FDBA84</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>path</key>
-			<string>src</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>3A86737F2DDCF5F34EDDFA6D</key>
-		<dict>
-			<key>fileRef</key>
-			<string>72EC18EA82049D6D25D6304D</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>3B73C1A3F266BAFE57AA5FCF</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.cpp.cpp</string>
-			<key>path</key>
-			<string>BarButton.cpp</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>3CFDC0070C0D9DC4C85AF4DC</key>
-		<dict>
-			<key>fileRef</key>
-			<string>18DA2122C2783DB05DEBCE87</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>40245A0CFD8C8927459D4EBC</key>
-		<dict>
-			<key>fileRef</key>
-			<string>7C0A87F469CB1B878188D0EA</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>403378E55FDCA8AA24E8104A</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.cpp.cpp</string>
-			<key>path</key>
-			<string>ToggleButton.cpp</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>406698A95BD84DAFAA009924</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>Image.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>416FFDAD4F62DFD86041913E</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>BarButton.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>470A0D8A2290257001EEDC9B</key>
-		<dict>
-			<key>fileRef</key>
-			<string>DEB674ED2671AC7658B14059</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>493B67D56AB54D4ACA78745C</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>ofxFontStashParser.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>493DB6A99E6B5FCF052016DD</key>
-		<dict>
-			<key>fileRef</key>
-			<string>4978426631D37FA3EB1FA547</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>4978426631D37FA3EB1FA547</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.cpp.cpp</string>
-			<key>path</key>
-			<string>MuiCore.cpp</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>4B5DE3EE5B91921EE4FDBA84</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>ofxFontAwesome.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>4CE23CB3B062FA59A47BCD2D</key>
-		<dict>
-			<key>fileRef</key>
-			<string>403378E55FDCA8AA24E8104A</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>4FC5B0B6811ACF1E0F875E1C</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>ScrollPane.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>53544AEC636ABA172D1EE1EF</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>816B7782D1F5015B75A364CD</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>path</key>
-			<string>fontstash</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>59B2636B9FAB86C0A883FC9C</key>
-		<dict>
-			<key>fileRef</key>
-			<string>6EE5442F865B09EE4CCDDD94</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>5DDEC0BDA035194309B83CD4</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>Container.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>61A842419EFF74F93FDBDE5A</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.cpp.cpp</string>
-			<key>path</key>
-			<string>ScrollPane.cpp</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>62B8BF3EF72163F11B1D5315</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>9528B28ACC55DD7983834CE9</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>ofxAvCodec</string>
-			<key>path</key>
-			<string>../../../addons/ofxAvCodec</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>69DAF968A1DA7A23073B97F8</key>
-		<dict>
-			<key>fileRef</key>
-			<string>1D9645D095F60AB365003B06</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>6AB175562C7B8DA5977B6A8E</key>
-		<dict>
-			<key>fileRef</key>
-			<string>CBA5266B518AA438E7D47F81</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>6EE5442F865B09EE4CCDDD94</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.cpp.cpp</string>
-			<key>path</key>
-			<string>Layout.cpp</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>72EC18EA82049D6D25D6304D</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.cpp.cpp</string>
-			<key>path</key>
-			<string>ofxAvVideoWriter.cpp</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>747C12409A0AAB8D4B8A11A2</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>ofxMightyUI.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>787C60702CF6603591BB1CF5</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>TextField.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>79139E8FF25B4453D2D2B2FE</key>
-		<dict>
-			<key>fileRef</key>
-			<string>9F97302154C1D4CA51A6EF1F</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>79231EEC98689F0515694AAA</key>
-		<dict>
-			<key>fileRef</key>
-			<string>3B73C1A3F266BAFE57AA5FCF</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>7A7B2AED0F3A3891285C8779</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>394A722787C901A078FE90F1</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>ofxFontAwesome</string>
-			<key>path</key>
-			<string>../../../addons/ofxFontAwesome</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>7C0A87F469CB1B878188D0EA</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.cpp.cpp</string>
-			<key>path</key>
-			<string>MUI.cpp</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>816B7782D1F5015B75A364CD</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>0A7F820ED2DDF888076C5862</string>
-				<string>A743DE8B7465753DB9B7C175</string>
-				<string>D8F6AF6805C3BED2EBA192F9</string>
-				<string>A892B4AE3BEF21789604FEB2</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>path</key>
-			<string>src</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>85CB0724A04F41F450A80AFC</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>ofxFontStash2.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>85DCEEAD5DD142F981D3956D</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.cpp.cpp</string>
-			<key>path</key>
-			<string>MuiConfig.cpp</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>88DC2EDABCBC86DA517F92B3</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.cpp.cpp</string>
-			<key>path</key>
-			<string>TextureAtlas.cpp</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>8D8426D466CDE2C2A87A7DFE</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.cpp.cpp</string>
-			<key>path</key>
-			<string>Image.cpp</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>8D9B658B353CDDF212F522BD</key>
-		<dict>
-			<key>fileRef</key>
-			<string>61A842419EFF74F93FDBDE5A</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>902CE6911AD8C03D2831D34E</key>
-		<dict>
-			<key>fileRef</key>
-			<string>85DCEEAD5DD142F981D3956D</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>9397802B10847A2C74111D6E</key>
-		<dict>
-			<key>fileRef</key>
-			<string>CA39C804B514C2081D4B78BC</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>9439510945C804E7C475C20A</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.cpp.cpp</string>
-			<key>path</key>
-			<string>Root.cpp</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>94BFEFD547F62B080775EC81</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.cpp.cpp</string>
-			<key>path</key>
-			<string>Container.cpp</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>9528B28ACC55DD7983834CE9</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>1CA38CE0608E3BBB595BCDFE</string>
-				<string>9C5EB5FFD6398B191CA9F63D</string>
-				<string>CBA5266B518AA438E7D47F81</string>
-				<string>E4B4338F6049A6B94D4D1837</string>
-				<string>1D9645D095F60AB365003B06</string>
-				<string>BFF17880C7E8BC5D45C87AF0</string>
-				<string>72EC18EA82049D6D25D6304D</string>
-				<string>1EB81FA280F960EE578AB4BA</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>path</key>
-			<string>src</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>95B64F47E6BB11684D850782</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>Slider.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>98FCF23F427DE6A108C15AA6</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.cpp.cpp</string>
-			<key>path</key>
-			<string>EmptyContainer.cpp</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>9A8EF6C4532FDDF483C69AC2</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>pugiconfig.hpp</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>9C5EB5FFD6398B191CA9F63D</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>ofxAvAudioPlayer.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>9F6783C22BE58E43DB564213</key>
-		<dict>
-			<key>fileRef</key>
-			<string>1CA38CE0608E3BBB595BCDFE</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>9F97302154C1D4CA51A6EF1F</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.cpp.cpp</string>
-			<key>path</key>
-			<string>ofxFontStashParser.cpp</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>9FB101D8E87C0173018F0586</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>TextureAtlas.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>A2D54B529EAA008CE50726B8</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>InternalWindow.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>A743DE8B7465753DB9B7C175</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>gl3fontstash.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>A892B4AE3BEF21789604FEB2</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>stb_truetype.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>AFAD63D11F806A4597D935C0</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.cpp.cpp</string>
-			<key>path</key>
-			<string>pugixml.cpp</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>B010667371FA0B1D276AD141</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>pugixml.hpp</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>B5E2643A08392C8D41DA1D26</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.cpp.cpp</string>
-			<key>path</key>
-			<string>ofxMightyUI.cpp</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>B728886FDA83C1DE0C2F5280</key>
-		<dict>
-			<key>fileRef</key>
-			<string>94BFEFD547F62B080775EC81</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>B80AFFAB68D21E40A01A2A96</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>26D59B6F54AD43E7B13D25C2</string>
-				<string>85CB0724A04F41F450A80AFC</string>
-				<string>9F97302154C1D4CA51A6EF1F</string>
-				<string>493B67D56AB54D4ACA78745C</string>
-				<string>1E0A968A7AAF25AA7B1474D3</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>path</key>
-			<string>src</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>B92EFA79541DC1EA518DC974</key>
-		<dict>
-			<key>fileRef</key>
-			<string>EDA4DA295FDA8C4CB1406348</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>BA21C8961B87D58600FBAB8C</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>ShaderLoader.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>BA25EF0E1C8B6E0400C3B60A</key>
-		<dict>
-			<key>fileRef</key>
-			<string>BABA49661A866519000900B1</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>BA2B89131B531A1800E1D9DA</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>dstPath</key>
-			<string></string>
-			<key>dstSubfolderSpec</key>
-			<string>6</string>
-			<key>files</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXCopyFilesBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>BA386CD51B388233004100D4</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>split.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>BA474BDD58A8A242D48E3F62</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>MuiCore.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>BA54981C19F725C1007E9F6A</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.framework</string>
-			<key>name</key>
-			<string>OpenGL.framework</string>
-			<key>path</key>
-			<string>System/Library/Frameworks/OpenGL.framework</string>
-			<key>sourceTree</key>
-			<string>SDKROOT</string>
-		</dict>
-		<key>BA54981E19F7272C007E9F6A</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>BA9F97431B651E6A00A453D6</string>
-				<string>BA9F973E1B65129B00A453D6</string>
-				<string>BA54981F19F7274C007E9F6A</string>
-				<string>BA54982019F7274C007E9F6A</string>
-				<string>BA54982519F740CE007E9F6A</string>
-				<string>BA54982619F740CE007E9F6A</string>
-				<string>BA9F97451B6583D300A453D6</string>
-				<string>BADACB611C12F89100ED221C</string>
-				<string>BADACB621C12F89100ED221C</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>ui</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>BA54981F19F7274C007E9F6A</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.cpp.cpp</string>
-			<key>name</key>
-			<string>ConfigView.cpp</string>
-			<key>path</key>
-			<string>ui/ConfigView.cpp</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>BA54982019F7274C007E9F6A</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>ConfigView.h</string>
-			<key>path</key>
-			<string>ui/ConfigView.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>BA54982119F7274C007E9F6A</key>
-		<dict>
-			<key>fileRef</key>
-			<string>BA54981F19F7274C007E9F6A</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>BA54982519F740CE007E9F6A</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.cpp.cpp</string>
-			<key>name</key>
-			<string>OsciView.cpp</string>
-			<key>path</key>
-			<string>ui/OsciView.cpp</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>BA54982619F740CE007E9F6A</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>OsciView.h</string>
-			<key>path</key>
-			<string>ui/OsciView.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>BA54982719F740CE007E9F6A</key>
-		<dict>
-			<key>fileRef</key>
-			<string>BA54982519F740CE007E9F6A</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>BA583CA71A8667B400F4BCB6</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>BA25EF0E1C8B6E0400C3B60A</string>
-			</array>
-			<key>isa</key>
-			<string>PBXResourcesBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>BA5D0A231B9C902300D10946</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>BA5D0A251B9C902300D10946</string>
-				<string>BA5D0A261B9C902300D10946</string>
-				<string>BA5D0A271B9C902300D10946</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>shaders</string>
-			<key>path</key>
-			<string>bin/data/shaders</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>BA5D0A251B9C902300D10946</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.glsl</string>
-			<key>path</key>
-			<string>osci.frag</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>BA5D0A261B9C902300D10946</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.glsl</string>
-			<key>path</key>
-			<string>osci.geom</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>BA5D0A271B9C902300D10946</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.glsl</string>
-			<key>path</key>
-			<string>osci.vert</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>BA70F78C19D39C7F008E990B</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>BA70F78D19D39C7F008E990B</string>
-				<string>BA70F78E19D39C7F008E990B</string>
-				<string>BA70F78F19D39C7F008E990B</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>ofxIniSettings</string>
-			<key>path</key>
-			<string>addons/ofxIniSettings</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>BA70F78D19D39C7F008E990B</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xml</string>
-			<key>path</key>
-			<string>install.xml</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>BA70F78E19D39C7F008E990B</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text</string>
-			<key>path</key>
-			<string>README</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>BA70F78F19D39C7F008E990B</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>BAA7B2011C69152B0045B34F</string>
-				<string>BAA7B2021C69152B0045B34F</string>
-				<string>BA70F79019D39C7F008E990B</string>
-				<string>BA70F79119D39C7F008E990B</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>path</key>
-			<string>src</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>BA70F79019D39C7F008E990B</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.cpp.cpp</string>
-			<key>path</key>
-			<string>ofxIniSettings.cpp</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>BA70F79119D39C7F008E990B</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>ofxIniSettings.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>BA70F79219D39DE9008E990B</key>
-		<dict>
-			<key>fileRef</key>
-			<string>BA70F79019D39C7F008E990B</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>BA828D271B378A6E002DE63F</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>BAFE8DBB1BDE66B4004BA599</string>
-				<string>BAFE8DBC1BDE66B4004BA599</string>
-				<string>BA828D2B1B378E6D002DE63F</string>
-				<string>BA828D2C1B378E6D002DE63F</string>
-				<string>BA828D281B378A7D002DE63F</string>
-				<string>BA828D291B378A7D002DE63F</string>
-				<string>BA386CD51B388233004100D4</string>
-				<string>BA21C8961B87D58600FBAB8C</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>path</key>
-			<string>util</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>BA828D281B378A7D002DE63F</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.cpp.cpp</string>
-			<key>path</key>
-			<string>Audio.cpp</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>BA828D291B378A7D002DE63F</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>Audio.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>BA828D2A1B378A7D002DE63F</key>
-		<dict>
-			<key>fileRef</key>
-			<string>BA828D281B378A7D002DE63F</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>BA828D2B1B378E6D002DE63F</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.cpp.cpp</string>
-			<key>path</key>
-			<string>sounddevices.cpp</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>BA828D2C1B378E6D002DE63F</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>sounddevices.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>BA828D2D1B378E6D002DE63F</key>
-		<dict>
-			<key>fileRef</key>
-			<string>BA828D2B1B378E6D002DE63F</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>BA9F973E1B65129B00A453D6</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>FaToggleButton.h</string>
-			<key>path</key>
-			<string>ui/FaToggleButton.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>BA9F973F1B6512FA00A453D6</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.cpp.cpp</string>
-			<key>path</key>
-			<string>globals.cpp</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>BA9F97401B6512FA00A453D6</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>globals.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>BA9F97411B6512FA00A453D6</key>
-		<dict>
-			<key>fileRef</key>
-			<string>BA9F973F1B6512FA00A453D6</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>BA9F97431B651E6A00A453D6</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>FaButton.h</string>
-			<key>path</key>
-			<string>ui/FaButton.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>BA9F97451B6583D300A453D6</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>L.h</string>
-			<key>path</key>
-			<string>ui/L.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>BAA7B2011C69152B0045B34F</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.cpp.cpp</string>
-			<key>path</key>
-			<string>ofxIniExtras.cpp</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>BAA7B2021C69152B0045B34F</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>ofxIniExtras.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>BAA7B2031C69152B0045B34F</key>
-		<dict>
-			<key>fileRef</key>
-			<string>BAA7B2011C69152B0045B34F</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>BABA49661A866519000900B1</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>folder.assetcatalog</string>
-			<key>name</key>
-			<string>Images.xcassets</string>
-			<key>path</key>
-			<string>assets/Images.xcassets</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>BADACB611C12F89100ED221C</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.cpp.cpp</string>
-			<key>name</key>
-			<string>FMenu.cpp</string>
-			<key>path</key>
-			<string>ui/FMenu.cpp</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>BADACB621C12F89100ED221C</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>FMenu.h</string>
-			<key>path</key>
-			<string>ui/FMenu.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>BADACB631C12F89100ED221C</key>
-		<dict>
-			<key>fileRef</key>
-			<string>BADACB611C12F89100ED221C</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>BAEE5D261B5FB3D10038C838</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.cpp.cpp</string>
-			<key>path</key>
-			<string>ofApp.cpp</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>BAEE5D271B5FB3D10038C838</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>ofApp.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>BAEE5D281B5FB3D10038C838</key>
-		<dict>
-			<key>fileRef</key>
-			<string>BAEE5D261B5FB3D10038C838</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>BAFE8DBB1BDE66B4004BA599</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.cpp.cpp</string>
-			<key>path</key>
-			<string>OsciAvAudioPlayer.cpp</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>BAFE8DBC1BDE66B4004BA599</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>OsciAvAudioPlayer.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>BAFE8DBD1BDE66B4004BA599</key>
-		<dict>
-			<key>fileRef</key>
-			<string>BAFE8DBB1BDE66B4004BA599</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>BB4B014C10F69532006C3DED</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>BA70F78C19D39C7F008E990B</string>
-				<string>FF67370392D60EB68842FFD2</string>
-				<string>62B8BF3EF72163F11B1D5315</string>
-				<string>7A7B2AED0F3A3891285C8779</string>
-				<string>E1235B8571F836C97F6AC120</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>addons</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>BBAB23BE13894E4700AA2426</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.framework</string>
-			<key>name</key>
-			<string>GLUT.framework</string>
-			<key>path</key>
-			<string>../../../libs/glut/lib/osx/GLUT.framework</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>BBAB23C913894ECA00AA2426</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>E7F985F515E0DE99003869B5</string>
-				<string>E4C2424410CC5A17004149E2</string>
-				<string>E4C2424510CC5A17004149E2</string>
-				<string>E4C2424610CC5A17004149E2</string>
-				<string>E45BE9710E8CC7DD009D7055</string>
-				<string>E45BE9720E8CC7DD009D7055</string>
-				<string>E45BE9730E8CC7DD009D7055</string>
-				<string>E45BE9740E8CC7DD009D7055</string>
-				<string>E45BE9750E8CC7DD009D7055</string>
-				<string>E45BE9760E8CC7DD009D7055</string>
-				<string>E45BE9770E8CC7DD009D7055</string>
-				<string>E45BE9790E8CC7DD009D7055</string>
-				<string>E45BE97A0E8CC7DD009D7055</string>
-				<string>E7E077E415D3B63C0020DFD4</string>
-				<string>E7E077E715D3B6510020DFD4</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>system frameworks</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>BBAB23CA13894EDB00AA2426</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>BBAB23BE13894E4700AA2426</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>3rd party frameworks</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>BBAB23CB13894F3D00AA2426</key>
-		<dict>
-			<key>fileRef</key>
-			<string>BBAB23BE13894E4700AA2426</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>BFC86602DFCA82C2E2D534F3</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>Label.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>BFF17880C7E8BC5D45C87AF0</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>ofxAvUtils.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>C05CD71D597596BBE2C35D82</key>
-		<dict>
-			<key>fileRef</key>
-			<string>98FCF23F427DE6A108C15AA6</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>C4E6595B0C243ADE291984F7</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.cpp.cpp</string>
-			<key>path</key>
-			<string>Helpers.cpp</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>C6E336E9778AC36F296922B4</key>
-		<dict>
-			<key>fileRef</key>
-			<string>0E096E79A1021312BAE600E8</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>C746D93FB7F1F1E072BD5073</key>
-		<dict>
-			<key>fileRef</key>
-			<string>9439510945C804E7C475C20A</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>CA27AF5B36F66F2A1AECA205</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>MuiTextArea.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>CA39C804B514C2081D4B78BC</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.cpp.cpp</string>
-			<key>path</key>
-			<string>TextField.cpp</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>CA75F2B0F73B71281C9D21AE</key>
-		<dict>
-			<key>fileRef</key>
-			<string>110B722BF8FF24E188B393E0</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>CA913EA6DCDD413B74FE5D31</key>
-		<dict>
-			<key>fileRef</key>
-			<string>AFAD63D11F806A4597D935C0</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>CAFA934398F1617B277FA8A1</key>
-		<dict>
-			<key>fileRef</key>
-			<string>26D59B6F54AD43E7B13D25C2</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>CBA5266B518AA438E7D47F81</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.cpp.cpp</string>
-			<key>path</key>
-			<string>ofxAvAudioWriter.cpp</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>CC377B7E1C1A7594D8F40115</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.cpp.cpp</string>
-			<key>path</key>
-			<string>Label.cpp</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>D112FB27050E454F34ABB6B2</key>
-		<dict>
-			<key>fileRef</key>
-			<string>88DC2EDABCBC86DA517F92B3</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>D64C29FDF8347CFEE09FDF92</key>
-		<dict>
-			<key>fileRef</key>
-			<string>B5E2643A08392C8D41DA1D26</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>D8F6AF6805C3BED2EBA192F9</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>glfontstash.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>D93805C37AB468ED5C6D7AD9</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>SliderWithLabel.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>DDC8EC91E48884FFB46E26FB</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.cpp.cpp</string>
-			<key>path</key>
-			<string>CppTweener.cpp</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>DEB674ED2671AC7658B14059</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.cpp.cpp</string>
-			<key>path</key>
-			<string>SegmentedSelect.cpp</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>E1235B8571F836C97F6AC120</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>B80AFFAB68D21E40A01A2A96</string>
-				<string>F109CD115324716C35EB1855</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>ofxFontStash2</string>
-			<key>path</key>
-			<string>../../../addons/ofxFontStash2</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>E237CE8195D6012BF10C266B</key>
-		<dict>
-			<key>fileRef</key>
-			<string>8D8426D466CDE2C2A87A7DFE</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>E269825F55A357AABA89E504</key>
-		<dict>
-			<key>fileRef</key>
-			<string>DDC8EC91E48884FFB46E26FB</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>E4328143138ABC890047C5CB</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.pb-project</string>
-			<key>name</key>
-			<string>openFrameworksLib.xcodeproj</string>
-			<key>path</key>
-			<string>../../../libs/openFrameworksCompiled/project/osx/openFrameworksLib.xcodeproj</string>
-			<key>sourceTree</key>
-			<string>SOURCE_ROOT</string>
-		</dict>
-		<key>E4328144138ABC890047C5CB</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>E4328148138ABC890047C5CB</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Products</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>E4328147138ABC890047C5CB</key>
-		<dict>
-			<key>containerPortal</key>
-			<string>E4328143138ABC890047C5CB</string>
-			<key>isa</key>
-			<string>PBXContainerItemProxy</string>
-			<key>proxyType</key>
-			<string>2</string>
-			<key>remoteGlobalIDString</key>
-			<string>E4B27C1510CBEB8E00536013</string>
-			<key>remoteInfo</key>
-			<string>openFrameworks</string>
-		</dict>
-		<key>E4328148138ABC890047C5CB</key>
-		<dict>
-			<key>fileType</key>
-			<string>archive.ar</string>
-			<key>isa</key>
-			<string>PBXReferenceProxy</string>
-			<key>path</key>
-			<string>openFrameworksDebug.a</string>
-			<key>remoteRef</key>
-			<string>E4328147138ABC890047C5CB</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>E4328149138ABC9F0047C5CB</key>
-		<dict>
-			<key>fileRef</key>
-			<string>E4328148138ABC890047C5CB</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>E45BE5980E8CC70C009D7055</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>BBAB23CA13894EDB00AA2426</string>
-				<string>BBAB23C913894ECA00AA2426</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>frameworks</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>E45BE9710E8CC7DD009D7055</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.framework</string>
-			<key>name</key>
-			<string>AGL.framework</string>
-			<key>path</key>
-			<string>/System/Library/Frameworks/AGL.framework</string>
-			<key>sourceTree</key>
-			<string>&lt;absolute&gt;</string>
-		</dict>
-		<key>E45BE9720E8CC7DD009D7055</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.framework</string>
-			<key>name</key>
-			<string>ApplicationServices.framework</string>
-			<key>path</key>
-			<string>/System/Library/Frameworks/ApplicationServices.framework</string>
-			<key>sourceTree</key>
-			<string>&lt;absolute&gt;</string>
-		</dict>
-		<key>E45BE9730E8CC7DD009D7055</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.framework</string>
-			<key>name</key>
-			<string>AudioToolbox.framework</string>
-			<key>path</key>
-			<string>/System/Library/Frameworks/AudioToolbox.framework</string>
-			<key>sourceTree</key>
-			<string>&lt;absolute&gt;</string>
-		</dict>
-		<key>E45BE9740E8CC7DD009D7055</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.framework</string>
-			<key>name</key>
-			<string>Carbon.framework</string>
-			<key>path</key>
-			<string>/System/Library/Frameworks/Carbon.framework</string>
-			<key>sourceTree</key>
-			<string>&lt;absolute&gt;</string>
-		</dict>
-		<key>E45BE9750E8CC7DD009D7055</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.framework</string>
-			<key>name</key>
-			<string>CoreAudio.framework</string>
-			<key>path</key>
-			<string>/System/Library/Frameworks/CoreAudio.framework</string>
-			<key>sourceTree</key>
-			<string>&lt;absolute&gt;</string>
-		</dict>
-		<key>E45BE9760E8CC7DD009D7055</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.framework</string>
-			<key>name</key>
-			<string>CoreFoundation.framework</string>
-			<key>path</key>
-			<string>/System/Library/Frameworks/CoreFoundation.framework</string>
-			<key>sourceTree</key>
-			<string>&lt;absolute&gt;</string>
-		</dict>
-		<key>E45BE9770E8CC7DD009D7055</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.framework</string>
-			<key>name</key>
-			<string>CoreServices.framework</string>
-			<key>path</key>
-			<string>/System/Library/Frameworks/CoreServices.framework</string>
-			<key>sourceTree</key>
-			<string>&lt;absolute&gt;</string>
-		</dict>
-		<key>E45BE9790E8CC7DD009D7055</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.framework</string>
-			<key>name</key>
-			<string>OpenGL.framework</string>
-			<key>path</key>
-			<string>/System/Library/Frameworks/OpenGL.framework</string>
-			<key>sourceTree</key>
-			<string>&lt;absolute&gt;</string>
-		</dict>
-		<key>E45BE97A0E8CC7DD009D7055</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.framework</string>
-			<key>name</key>
-			<string>QuickTime.framework</string>
-			<key>path</key>
-			<string>/System/Library/Frameworks/QuickTime.framework</string>
-			<key>sourceTree</key>
-			<string>&lt;absolute&gt;</string>
-		</dict>
-		<key>E45BE97B0E8CC7DD009D7055</key>
-		<dict>
-			<key>fileRef</key>
-			<string>E45BE9710E8CC7DD009D7055</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>E45BE97C0E8CC7DD009D7055</key>
-		<dict>
-			<key>fileRef</key>
-			<string>E45BE9720E8CC7DD009D7055</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>E45BE97D0E8CC7DD009D7055</key>
-		<dict>
-			<key>fileRef</key>
-			<string>E45BE9730E8CC7DD009D7055</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>E45BE97E0E8CC7DD009D7055</key>
-		<dict>
-			<key>fileRef</key>
-			<string>E45BE9740E8CC7DD009D7055</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>E45BE97F0E8CC7DD009D7055</key>
-		<dict>
-			<key>fileRef</key>
-			<string>E45BE9750E8CC7DD009D7055</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>E45BE9800E8CC7DD009D7055</key>
-		<dict>
-			<key>fileRef</key>
-			<string>E45BE9760E8CC7DD009D7055</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>E45BE9810E8CC7DD009D7055</key>
-		<dict>
-			<key>fileRef</key>
-			<string>E45BE9770E8CC7DD009D7055</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>E45BE9830E8CC7DD009D7055</key>
-		<dict>
-			<key>fileRef</key>
-			<string>E45BE9790E8CC7DD009D7055</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>E45BE9840E8CC7DD009D7055</key>
-		<dict>
-			<key>fileRef</key>
-			<string>E45BE97A0E8CC7DD009D7055</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>E4B4338F6049A6B94D4D1837</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>ofxAvAudioWriter.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>E4B69B4A0A3A1720003C02F2</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>BA5D0A231B9C902300D10946</string>
-				<string>BABA49661A866519000900B1</string>
-				<string>BA54981C19F725C1007E9F6A</string>
-				<string>E4B6FCAD0C3E899E008CF71C</string>
-				<string>E4EB6923138AFD0F00A09F29</string>
-				<string>E4B69E1C0A3A1BDC003C02F2</string>
-				<string>E4EEC9E9138DF44700A80321</string>
-				<string>BB4B014C10F69532006C3DED</string>
-				<string>E45BE5980E8CC70C009D7055</string>
-				<string>E4B69B5B0A3A1756003C02F2</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>E4B69B4C0A3A1720003C02F2</key>
-		<dict>
-			<key>attributes</key>
-			<dict>
-				<key>LastUpgradeCheck</key>
-				<string>0620</string>
-			</dict>
-			<key>buildConfigurationList</key>
-			<string>E4B69B4D0A3A1720003C02F2</string>
-			<key>compatibilityVersion</key>
-			<string>Xcode 3.2</string>
-			<key>developmentRegion</key>
-			<string>English</string>
-			<key>hasScannedForEncodings</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXProject</string>
-			<key>knownRegions</key>
-			<array>
-				<string>English</string>
-				<string>Japanese</string>
-				<string>French</string>
-				<string>German</string>
-			</array>
-			<key>mainGroup</key>
-			<string>E4B69B4A0A3A1720003C02F2</string>
-			<key>productRefGroup</key>
-			<string>E4B69B4A0A3A1720003C02F2</string>
-			<key>projectDirPath</key>
-			<string></string>
-			<key>projectReferences</key>
-			<array>
-				<dict>
-					<key>ProductGroup</key>
-					<string>E4328144138ABC890047C5CB</string>
-					<key>ProjectRef</key>
-					<string>E4328143138ABC890047C5CB</string>
-				</dict>
-			</array>
-			<key>projectRoot</key>
-			<string></string>
-			<key>targets</key>
-			<array>
-				<string>E4B69B5A0A3A1756003C02F2</string>
-			</array>
-		</dict>
-		<key>E4B69B4D0A3A1720003C02F2</key>
-		<dict>
-			<key>buildConfigurations</key>
-			<array>
-				<string>E4B69B4E0A3A1720003C02F2</string>
-				<string>E4B69B4F0A3A1720003C02F2</string>
-			</array>
-			<key>defaultConfigurationIsVisible</key>
-			<string>0</string>
-			<key>defaultConfigurationName</key>
-			<string>Release</string>
-			<key>isa</key>
-			<string>XCConfigurationList</string>
-		</dict>
-		<key>E4B69B4E0A3A1720003C02F2</key>
-		<dict>
-			<key>baseConfigurationReference</key>
-			<string>E4EB6923138AFD0F00A09F29</string>
-			<key>buildSettings</key>
-			<dict>
-				<key>ARCHS</key>
-				<string>$(NATIVE_ARCH)</string>
-				<key>CONFIGURATION_BUILD_DIR</key>
-				<string>$(SRCROOT)/bin/</string>
-				<key>COPY_PHASE_STRIP</key>
-				<string>NO</string>
-				<key>DEAD_CODE_STRIPPING</key>
-				<string>YES</string>
-				<key>GCC_AUTO_VECTORIZATION</key>
-				<string>YES</string>
-				<key>GCC_ENABLE_SSE3_EXTENSIONS</key>
-				<string>YES</string>
-				<key>GCC_ENABLE_SUPPLEMENTAL_SSE3_INSTRUCTIONS</key>
-				<string>YES</string>
-				<key>GCC_INLINES_ARE_PRIVATE_EXTERN</key>
-				<string>NO</string>
-				<key>GCC_OPTIMIZATION_LEVEL</key>
-				<string>0</string>
-				<key>GCC_SYMBOLS_PRIVATE_EXTERN</key>
-				<string>NO</string>
-				<key>GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS</key>
-				<string>YES</string>
-				<key>GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO</key>
-				<string>NO</string>
-				<key>GCC_WARN_ALLOW_INCOMPLETE_PROTOCOL</key>
-				<string>NO</string>
-				<key>GCC_WARN_UNINITIALIZED_AUTOS</key>
-				<string>NO</string>
-				<key>GCC_WARN_UNUSED_VALUE</key>
-				<string>NO</string>
-				<key>GCC_WARN_UNUSED_VARIABLE</key>
-				<string>NO</string>
-				<key>HEADER_SEARCH_PATHS</key>
-				<array>
-					<string>$(OF_CORE_HEADERS)</string>
-					<string>src</string>
-				</array>
-				<key>MACOSX_DEPLOYMENT_TARGET</key>
-				<string>10.6</string>
-				<key>OTHER_CPLUSPLUSFLAGS</key>
-				<array>
-					<string>-D__MACOSX_CORE__</string>
-					<string>-lpthread</string>
-					<string>-mtune=native</string>
-				</array>
-				<key>SDKROOT</key>
-				<string>macosx</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Debug</string>
-		</dict>
-		<key>E4B69B4F0A3A1720003C02F2</key>
-		<dict>
-			<key>baseConfigurationReference</key>
-			<string>E4EB6923138AFD0F00A09F29</string>
-			<key>buildSettings</key>
-			<dict>
-				<key>ARCHS</key>
-				<string>$(NATIVE_ARCH)</string>
-				<key>CONFIGURATION_BUILD_DIR</key>
-				<string>$(SRCROOT)/bin/</string>
-				<key>COPY_PHASE_STRIP</key>
-				<string>YES</string>
-				<key>DEAD_CODE_STRIPPING</key>
-				<string>YES</string>
-				<key>GCC_AUTO_VECTORIZATION</key>
-				<string>YES</string>
-				<key>GCC_ENABLE_SSE3_EXTENSIONS</key>
-				<string>YES</string>
-				<key>GCC_ENABLE_SUPPLEMENTAL_SSE3_INSTRUCTIONS</key>
-				<string>YES</string>
-				<key>GCC_INLINES_ARE_PRIVATE_EXTERN</key>
-				<string>NO</string>
-				<key>GCC_OPTIMIZATION_LEVEL</key>
-				<string>3</string>
-				<key>GCC_SYMBOLS_PRIVATE_EXTERN</key>
-				<string>NO</string>
-				<key>GCC_UNROLL_LOOPS</key>
-				<string>YES</string>
-				<key>GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS</key>
-				<string>YES</string>
-				<key>GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO</key>
-				<string>NO</string>
-				<key>GCC_WARN_ALLOW_INCOMPLETE_PROTOCOL</key>
-				<string>NO</string>
-				<key>GCC_WARN_UNINITIALIZED_AUTOS</key>
-				<string>NO</string>
-				<key>GCC_WARN_UNUSED_VALUE</key>
-				<string>NO</string>
-				<key>GCC_WARN_UNUSED_VARIABLE</key>
-				<string>NO</string>
-				<key>HEADER_SEARCH_PATHS</key>
-				<array>
-					<string>$(OF_CORE_HEADERS)</string>
-					<string>src</string>
-				</array>
-				<key>MACOSX_DEPLOYMENT_TARGET</key>
-				<string>10.6</string>
-				<key>OTHER_CPLUSPLUSFLAGS</key>
-				<array>
-					<string>-D__MACOSX_CORE__</string>
-					<string>-lpthread</string>
-					<string>-mtune=native</string>
-				</array>
-				<key>SDKROOT</key>
-				<string>macosx</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Release</string>
-		</dict>
-		<key>E4B69B580A3A1756003C02F2</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>BA9F97411B6512FA00A453D6</string>
-				<string>E4B69E200A3A1BDC003C02F2</string>
-				<string>BA54982119F7274C007E9F6A</string>
-				<string>BA54982719F740CE007E9F6A</string>
-				<string>BA70F79219D39DE9008E990B</string>
-				<string>BA828D2D1B378E6D002DE63F</string>
-				<string>BAEE5D281B5FB3D10038C838</string>
-				<string>BA828D2A1B378A7D002DE63F</string>
-				<string>BADACB631C12F89100ED221C</string>
-				<string>BAFE8DBD1BDE66B4004BA599</string>
-				<string>BAA7B2031C69152B0045B34F</string>
-				<string>CAFA934398F1617B277FA8A1</string>
-				<string>79139E8FF25B4453D2D2B2FE</string>
-				<string>CA913EA6DCDD413B74FE5D31</string>
-				<string>9F6783C22BE58E43DB564213</string>
-				<string>6AB175562C7B8DA5977B6A8E</string>
-				<string>69DAF968A1DA7A23073B97F8</string>
-				<string>3A86737F2DDCF5F34EDDFA6D</string>
-				<string>79231EEC98689F0515694AAA</string>
-				<string>3CFDC0070C0D9DC4C85AF4DC</string>
-				<string>B728886FDA83C1DE0C2F5280</string>
-				<string>E269825F55A357AABA89E504</string>
-				<string>C05CD71D597596BBE2C35D82</string>
-				<string>FC6CDE119FD5744ECE7C526F</string>
-				<string>E237CE8195D6012BF10C266B</string>
-				<string>B92EFA79541DC1EA518DC974</string>
-				<string>E8255C03191A97CE94F5DF82</string>
-				<string>59B2636B9FAB86C0A883FC9C</string>
-				<string>902CE6911AD8C03D2831D34E</string>
-				<string>493DB6A99E6B5FCF052016DD</string>
-				<string>C6E336E9778AC36F296922B4</string>
-				<string>1C385D463F652176C0987363</string>
-				<string>D64C29FDF8347CFEE09FDF92</string>
-				<string>C746D93FB7F1F1E072BD5073</string>
-				<string>8D9B658B353CDDF212F522BD</string>
-				<string>470A0D8A2290257001EEDC9B</string>
-				<string>E5D631D3B05AFF06A387A28C</string>
-				<string>CA75F2B0F73B71281C9D21AE</string>
-				<string>9397802B10847A2C74111D6E</string>
-				<string>D112FB27050E454F34ABB6B2</string>
-				<string>4CE23CB3B062FA59A47BCD2D</string>
-			</array>
-			<key>isa</key>
-			<string>PBXSourcesBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>E4B69B590A3A1756003C02F2</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>E7F985F815E0DEA3003869B5</string>
-				<string>E7E077E815D3B6510020DFD4</string>
-				<string>E4EB6799138ADC1D00A09F29</string>
-				<string>E4328149138ABC9F0047C5CB</string>
-				<string>E45BE97B0E8CC7DD009D7055</string>
-				<string>E45BE97C0E8CC7DD009D7055</string>
-				<string>E45BE97D0E8CC7DD009D7055</string>
-				<string>E45BE97E0E8CC7DD009D7055</string>
-				<string>E45BE97F0E8CC7DD009D7055</string>
-				<string>E45BE9800E8CC7DD009D7055</string>
-				<string>E45BE9810E8CC7DD009D7055</string>
-				<string>E45BE9830E8CC7DD009D7055</string>
-				<string>E45BE9840E8CC7DD009D7055</string>
-				<string>E4C2424710CC5A17004149E2</string>
-				<string>E4C2424810CC5A17004149E2</string>
-				<string>E4C2424910CC5A17004149E2</string>
-				<string>E7E077E515D3B63C0020DFD4</string>
-			</array>
-			<key>isa</key>
-			<string>PBXFrameworksBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>E4B69B5A0A3A1756003C02F2</key>
-		<dict>
-			<key>buildConfigurationList</key>
-			<string>E4B69B5F0A3A1757003C02F2</string>
-			<key>buildPhases</key>
-			<array>
-				<string>E4B69B580A3A1756003C02F2</string>
-				<string>E4B69B590A3A1756003C02F2</string>
-				<string>E4B6FFFD0C3F9AB9008CF71C</string>
-				<string>E4C2427710CC5ABF004149E2</string>
-				<string>BA583CA71A8667B400F4BCB6</string>
-				<string>BA2B89131B531A1800E1D9DA</string>
-			</array>
-			<key>buildRules</key>
-			<array/>
-			<key>dependencies</key>
-			<array>
-				<string>E4EEB9AC138B136A00A80321</string>
-			</array>
-			<key>isa</key>
-			<string>PBXNativeTarget</string>
-			<key>name</key>
-			<string>Oscilloscope</string>
-			<key>productName</key>
-			<string>myOFApp</string>
-			<key>productReference</key>
-			<string>E4B69B5B0A3A1756003C02F2</string>
-			<key>productType</key>
-			<string>com.apple.product-type.application</string>
-		</dict>
-		<key>E4B69B5B0A3A1756003C02F2</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>wrapper.application</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>path</key>
-			<string>OscilloscopeDebug.app</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>E4B69B5F0A3A1757003C02F2</key>
-		<dict>
-			<key>buildConfigurations</key>
-			<array>
-				<string>E4B69B600A3A1757003C02F2</string>
-				<string>E4B69B610A3A1757003C02F2</string>
-			</array>
-			<key>defaultConfigurationIsVisible</key>
-			<string>0</string>
-			<key>defaultConfigurationName</key>
-			<string>Release</string>
-			<key>isa</key>
-			<string>XCConfigurationList</string>
-		</dict>
-		<key>E4B69B600A3A1757003C02F2</key>
-		<dict>
-			<key>buildSettings</key>
-			<dict>
-				<key>ALWAYS_SEARCH_USER_PATHS</key>
-				<string>NO</string>
-				<key>ARCHS</key>
-				<string>$(ARCHS_STANDARD_64_BIT)</string>
-				<key>ASSETCATALOG_COMPILER_APPICON_NAME</key>
-				<string>AppIcon</string>
-				<key>COMBINE_HIDPI_IMAGES</key>
-				<string>YES</string>
-				<key>COPY_PHASE_STRIP</key>
-				<string>NO</string>
-				<key>FRAMEWORK_SEARCH_PATHS</key>
-				<array>
-					<string>$(inherited)</string>
-					<string>$(FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1)</string>
-				</array>
-				<key>FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1</key>
-				<string>"$(SRCROOT)/../../../libs/glut/lib/osx"</string>
-				<key>GCC_DYNAMIC_NO_PIC</key>
-				<string>NO</string>
-				<key>GCC_GENERATE_DEBUGGING_SYMBOLS</key>
-				<string>YES</string>
-				<key>GCC_MODEL_TUNING</key>
-				<string>NONE</string>
-				<key>HEADER_SEARCH_PATHS</key>
-				<array>
-					<string>$(OF_CORE_HEADERS)</string>
-					<string>src</string>
-					<string>../../../addons/ofxAvCodec/libs/avcodec/include</string>
-				</array>
-				<key>ICON_FILE</key>
-				<string>$(ICON_FILE_PATH)$(ICON)</string>
-				<key>INFOPLIST_FILE</key>
-				<string>openFrameworks-Info.plist</string>
-				<key>INSTALL_PATH</key>
-				<string>/Applications</string>
-				<key>LIBRARY_SEARCH_PATHS</key>
-				<string>$(inherited)</string>
-				<key>MACOSX_DEPLOYMENT_TARGET</key>
-				<string>10.7</string>
-				<key>OTHER_LDFLAGS</key>
-				<array>
-					<string>$(OF_CORE_FRAMEWORKS)</string>
-					<string>$(OF_CORE_LIBS)</string>
-					<string>../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavcodec.56.dylib</string>
-					<string>../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavcodec.dylib</string>
-					<string>../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavfilter.dylib</string>
-					<string>../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libswresample.1.2.100.dylib</string>
-					<string>../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavfilter.5.dylib</string>
-					<string>../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavcodec.56.47.100.dylib</string>
-					<string>../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libswscale.3.dylib</string>
-					<string>../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libswresample.dylib</string>
-					<string>../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavutil.dylib</string>
-					<string>../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavutil.54.28.100.dylib</string>
-					<string>../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libswscale.dylib</string>
-					<string>../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libswscale.3.1.101.dylib</string>
-					<string>../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavdevice.56.4.100.dylib</string>
-					<string>../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavdevice.56.dylib</string>
-					<string>../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavformat.56.dylib</string>
-					<string>../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libswresample.1.dylib</string>
-					<string>../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavdevice.dylib</string>
-					<string>../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavformat.56.40.100.dylib</string>
-					<string>../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavfilter.5.21.100.dylib</string>
-					<string>../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavutil.54.dylib</string>
-					<string>../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavformat.dylib</string>
-				</array>
-				<key>PRODUCT_NAME</key>
-				<string>$(TARGET_NAME)Debug</string>
-				<key>USER_HEADER_SEARCH_PATHS</key>
-				<array>
-					<string>../../../addons/ofxAvCodec/libs/avcodec/include</string>
-					<string>../../../addons/ofxMightyUI/libs/stb_textedit/include</string>
-				</array>
-				<key>WRAPPER_EXTENSION</key>
-				<string>app</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Debug</string>
-		</dict>
-		<key>E4B69B610A3A1757003C02F2</key>
-		<dict>
-			<key>buildSettings</key>
-			<dict>
-				<key>ALWAYS_SEARCH_USER_PATHS</key>
-				<string>NO</string>
-				<key>ARCHS</key>
-				<string>$(ARCHS_STANDARD_64_BIT)</string>
-				<key>ASSETCATALOG_COMPILER_APPICON_NAME</key>
-				<string>AppIcon</string>
-				<key>COMBINE_HIDPI_IMAGES</key>
-				<string>YES</string>
-				<key>COPY_PHASE_STRIP</key>
-				<string>YES</string>
-				<key>FRAMEWORK_SEARCH_PATHS</key>
-				<array>
-					<string>$(inherited)</string>
-					<string>$(FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1)</string>
-				</array>
-				<key>FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1</key>
-				<string>"$(SRCROOT)/../../../libs/glut/lib/osx"</string>
-				<key>GCC_GENERATE_DEBUGGING_SYMBOLS</key>
-				<string>YES</string>
-				<key>GCC_MODEL_TUNING</key>
-				<string>NONE</string>
-				<key>HEADER_SEARCH_PATHS</key>
-				<array>
-					<string>$(OF_CORE_HEADERS)</string>
-					<string>src</string>
-					<string>../../../addons/ofxAvCodec/libs/avcodec/include</string>
-				</array>
-				<key>ICON_FILE</key>
-				<string>$(ICON_FILE_PATH)$(ICON)</string>
-				<key>INFOPLIST_FILE</key>
-				<string>openFrameworks-Info.plist</string>
-				<key>INSTALL_PATH</key>
-				<string>/Applications</string>
-				<key>LIBRARY_SEARCH_PATHS</key>
-				<string>$(inherited)</string>
-				<key>MACOSX_DEPLOYMENT_TARGET</key>
-				<string>10.7</string>
-				<key>OTHER_LDFLAGS</key>
-				<array>
-					<string>$(OF_CORE_FRAMEWORKS)</string>
-					<string>$(OF_CORE_LIBS)</string>
-					<string>../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavcodec.56.dylib</string>
-					<string>../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavcodec.dylib</string>
-					<string>../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavfilter.dylib</string>
-					<string>../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libswresample.1.2.100.dylib</string>
-					<string>../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavfilter.5.dylib</string>
-					<string>../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavcodec.56.47.100.dylib</string>
-					<string>../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libswscale.3.dylib</string>
-					<string>../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libswresample.dylib</string>
-					<string>../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavutil.dylib</string>
-					<string>../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavutil.54.28.100.dylib</string>
-					<string>../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libswscale.dylib</string>
-					<string>../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libswscale.3.1.101.dylib</string>
-					<string>../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavdevice.56.4.100.dylib</string>
-					<string>../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavdevice.56.dylib</string>
-					<string>../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavformat.56.dylib</string>
-					<string>../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libswresample.1.dylib</string>
-					<string>../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavdevice.dylib</string>
-					<string>../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavformat.56.40.100.dylib</string>
-					<string>../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavfilter.5.21.100.dylib</string>
-					<string>../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavutil.54.dylib</string>
-					<string>../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavformat.dylib</string>
-				</array>
-				<key>PRODUCT_NAME</key>
-				<string>$(TARGET_NAME)</string>
-				<key>USER_HEADER_SEARCH_PATHS</key>
-				<array>
-					<string>../../../addons/ofxAvCodec/libs/avcodec/include</string>
-					<string>../../../addons/ofxMightyUI/libs/stb_textedit/include</string>
-				</array>
-				<key>WRAPPER_EXTENSION</key>
-				<string>app</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Release</string>
-		</dict>
-		<key>E4B69E1C0A3A1BDC003C02F2</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>BA828D271B378A6E002DE63F</string>
-				<string>BA54981E19F7272C007E9F6A</string>
-				<string>E4B69E1D0A3A1BDC003C02F2</string>
-				<string>BAEE5D261B5FB3D10038C838</string>
-				<string>BAEE5D271B5FB3D10038C838</string>
-				<string>BA9F973F1B6512FA00A453D6</string>
-				<string>BA9F97401B6512FA00A453D6</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>path</key>
-			<string>src</string>
-			<key>sourceTree</key>
-			<string>SOURCE_ROOT</string>
-		</dict>
-		<key>E4B69E1D0A3A1BDC003C02F2</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>sourcecode.cpp.objcpp</string>
-			<key>fileEncoding</key>
-			<string>30</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>name</key>
-			<string>main.cpp</string>
-			<key>path</key>
-			<string>src/main.cpp</string>
-			<key>sourceTree</key>
-			<string>SOURCE_ROOT</string>
-		</dict>
-		<key>E4B69E200A3A1BDC003C02F2</key>
-		<dict>
-			<key>fileRef</key>
-			<string>E4B69E1D0A3A1BDC003C02F2</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>E4B6FCAD0C3E899E008CF71C</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>30</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.plist.xml</string>
-			<key>path</key>
-			<string>openFrameworks-Info.plist</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>E4B6FFFD0C3F9AB9008CF71C</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array/>
-			<key>inputPaths</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXShellScriptBuildPhase</string>
-			<key>outputPaths</key>
-			<array/>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-			<key>shellPath</key>
-			<string>/bin/sh</string>
-			<key>shellScript</key>
-			<string>cp -f ../../../libs/fmodex/lib/osx/libfmodex.dylib "$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS/libfmodex.dylib"; install_name_tool -change ./libfmodex.dylib @executable_path/libfmodex.dylib "$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS/$PRODUCT_NAME";
-mkdir -p "$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/Resources/"
-cp -f "$ICON_FILE" "$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/Resources/"
-cp -fR ../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavfilter.5.27.100.dylib "$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS" 2&gt;/dev/null | echo -n
-cp -fR ../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavformat.56.40.101.dylib "$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS" 2&gt;/dev/null | echo -n
-cp -fR ../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavutil.54.28.100.dylib "$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS" 2&gt;/dev/null | echo -n
-cp -fR ../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libswresample.1.2.101.dylib "$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS" 2&gt;/dev/null | echo -n
-cp -fR ../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libswscale.3.1.101.dylib "$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS" 2&gt;/dev/null | echo -n
-cp -fR ../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavcodec.56.52.100.dylib "$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS" 2&gt;/dev/null | echo -n
-cp -fR ../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavdevice.56.4.100.dylib "$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS" 2&gt;/dev/null | echo -n
-cp -fR ../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavcodec.56.dylib "$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS" 2&gt;/dev/null | echo -n
-cp -fR ../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavcodec.dylib "$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS" 2&gt;/dev/null | echo -n
-cp -fR ../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavfilter.dylib "$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS" 2&gt;/dev/null | echo -n
-cp -fR ../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavfilter.5.dylib "$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS" 2&gt;/dev/null | echo -n
-cp -fR ../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libswscale.3.dylib "$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS" 2&gt;/dev/null | echo -n
-cp -fR ../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libswresample.dylib "$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS" 2&gt;/dev/null | echo -n
-cp -fR ../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavutil.dylib "$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS" 2&gt;/dev/null | echo -n
-cp -fR ../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libswscale.dylib "$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS" 2&gt;/dev/null | echo -n
-cp -fR ../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavdevice.56.dylib "$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS" 2&gt;/dev/null | echo -n
-cp -fR ../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavformat.56.dylib "$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS" 2&gt;/dev/null | echo -n
-cp -fR ../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libswresample.1.dylib "$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS" 2&gt;/dev/null | echo -n
-cp -fR ../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavdevice.dylib "$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS" 2&gt;/dev/null | echo -n
-cp -fR ../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavutil.54.dylib "$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS" 2&gt;/dev/null | echo -n
-cp -fR ../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavformat.dylib "$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS" 2&gt;/dev/null | echo -n
-cp -fR ../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libswresample.1.2.100.dylib "$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS" 2&gt;/dev/null | echo -n
-cp -fR ../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavcodec.56.47.100.dylib "$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS" 2&gt;/dev/null | echo -n
-cp -fR ../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavformat.56.40.100.dylib "$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS" 2&gt;/dev/null | echo -n
-cp -fR ../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavfilter.5.21.100.dylib "$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS" 2&gt;/dev/null | echo -n
-cp -rf ../../../addons/ofxFontAwesome/bin/data/ "$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/Resources"
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
 
-cp -rf ../../../addons/ofxMightyUI/bin/data/ "$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/Resources"</string>
-		</dict>
-		<key>E4C2424410CC5A17004149E2</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.framework</string>
-			<key>name</key>
-			<string>AppKit.framework</string>
-			<key>path</key>
-			<string>/System/Library/Frameworks/AppKit.framework</string>
-			<key>sourceTree</key>
-			<string>&lt;absolute&gt;</string>
-		</dict>
-		<key>E4C2424510CC5A17004149E2</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.framework</string>
-			<key>name</key>
-			<string>Cocoa.framework</string>
-			<key>path</key>
-			<string>/System/Library/Frameworks/Cocoa.framework</string>
-			<key>sourceTree</key>
-			<string>&lt;absolute&gt;</string>
-		</dict>
-		<key>E4C2424610CC5A17004149E2</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.framework</string>
-			<key>name</key>
-			<string>IOKit.framework</string>
-			<key>path</key>
-			<string>/System/Library/Frameworks/IOKit.framework</string>
-			<key>sourceTree</key>
-			<string>&lt;absolute&gt;</string>
-		</dict>
-		<key>E4C2424710CC5A17004149E2</key>
-		<dict>
-			<key>fileRef</key>
-			<string>E4C2424410CC5A17004149E2</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>E4C2424810CC5A17004149E2</key>
-		<dict>
-			<key>fileRef</key>
-			<string>E4C2424510CC5A17004149E2</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>E4C2424910CC5A17004149E2</key>
-		<dict>
-			<key>fileRef</key>
-			<string>E4C2424610CC5A17004149E2</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>E4C2427710CC5ABF004149E2</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>dstPath</key>
-			<string></string>
-			<key>dstSubfolderSpec</key>
-			<string>10</string>
-			<key>files</key>
-			<array>
-				<string>BBAB23CB13894F3D00AA2426</string>
-			</array>
-			<key>isa</key>
-			<string>PBXCopyFilesBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>E4EB6799138ADC1D00A09F29</key>
-		<dict>
-			<key>fileRef</key>
-			<string>BBAB23BE13894E4700AA2426</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>E4EB691F138AFCF100A09F29</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>name</key>
-			<string>CoreOF.xcconfig</string>
-			<key>path</key>
-			<string>../../../libs/openFrameworksCompiled/project/osx/CoreOF.xcconfig</string>
-			<key>sourceTree</key>
-			<string>SOURCE_ROOT</string>
-		</dict>
-		<key>E4EB6923138AFD0F00A09F29</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>path</key>
-			<string>Project.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>E4EEB9AB138B136A00A80321</key>
-		<dict>
-			<key>containerPortal</key>
-			<string>E4328143138ABC890047C5CB</string>
-			<key>isa</key>
-			<string>PBXContainerItemProxy</string>
-			<key>proxyType</key>
-			<string>1</string>
-			<key>remoteGlobalIDString</key>
-			<string>E4B27C1410CBEB8E00536013</string>
-			<key>remoteInfo</key>
-			<string>openFrameworks</string>
-		</dict>
-		<key>E4EEB9AC138B136A00A80321</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXTargetDependency</string>
-			<key>name</key>
-			<string>openFrameworks</string>
-			<key>targetProxy</key>
-			<string>E4EEB9AB138B136A00A80321</string>
-		</dict>
-		<key>E4EEC9E9138DF44700A80321</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>E4EB691F138AFCF100A09F29</string>
-				<string>E4328143138ABC890047C5CB</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>openFrameworks</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>E5D631D3B05AFF06A387A28C</key>
-		<dict>
-			<key>fileRef</key>
-			<string>1A257ABDA31A9FEA901F6957</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>E7E077E415D3B63C0020DFD4</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.framework</string>
-			<key>name</key>
-			<string>CoreVideo.framework</string>
-			<key>path</key>
-			<string>/System/Library/Frameworks/CoreVideo.framework</string>
-			<key>sourceTree</key>
-			<string>&lt;absolute&gt;</string>
-		</dict>
-		<key>E7E077E515D3B63C0020DFD4</key>
-		<dict>
-			<key>fileRef</key>
-			<string>E7E077E415D3B63C0020DFD4</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>E7E077E715D3B6510020DFD4</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.framework</string>
-			<key>name</key>
-			<string>QTKit.framework</string>
-			<key>path</key>
-			<string>/System/Library/Frameworks/QTKit.framework</string>
-			<key>sourceTree</key>
-			<string>&lt;absolute&gt;</string>
-		</dict>
-		<key>E7E077E815D3B6510020DFD4</key>
-		<dict>
-			<key>fileRef</key>
-			<string>E7E077E715D3B6510020DFD4</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>E7F985F515E0DE99003869B5</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.framework</string>
-			<key>name</key>
-			<string>Accelerate.framework</string>
-			<key>path</key>
-			<string>/System/Library/Frameworks/Accelerate.framework</string>
-			<key>sourceTree</key>
-			<string>&lt;absolute&gt;</string>
-		</dict>
-		<key>E7F985F815E0DEA3003869B5</key>
-		<dict>
-			<key>fileRef</key>
-			<string>E7F985F515E0DE99003869B5</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>E8255C03191A97CE94F5DF82</key>
-		<dict>
-			<key>fileRef</key>
-			<string>CC377B7E1C1A7594D8F40115</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>EB80D30EC1B32976167B8FF0</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>Root.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>EDA4DA295FDA8C4CB1406348</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.cpp.cpp</string>
-			<key>path</key>
-			<string>InternalWindow.cpp</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>F109CD115324716C35EB1855</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>53544AEC636ABA172D1EE1EF</string>
-				<string>F124F548749FF5DD1AC268B9</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>path</key>
-			<string>libs</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>F124F548749FF5DD1AC268B9</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>054FED2333CDCBDD33B77B7B</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>path</key>
-			<string>pugixml</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>FA798853D6872E5FF721121E</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>SegmentedSelect.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>FC6CDE119FD5744ECE7C526F</key>
-		<dict>
-			<key>fileRef</key>
-			<string>C4E6595B0C243ADE291984F7</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>FD88671DF8B4B266FA2592E9</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>MuiConfig.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>FE0D3A23EF4A9DC42625DAD2</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>MUI.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>FF67370392D60EB68842FFD2</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>0A70EE869FD27F8A180D6B21</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>ofxMightyUI</string>
-			<key>path</key>
-			<string>../../../addons/ofxMightyUI</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-	</dict>
-	<key>rootObject</key>
-	<string>E4B69B4C0A3A1720003C02F2</string>
-</dict>
-</plist>
+/* Begin PBXBuildFile section */
+		1C385D463F652176C0987363 /* MuiTextArea.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 24D87983B8A48C4385029E52 /* MuiTextArea.cpp */; };
+		3A86737F2DDCF5F34EDDFA6D /* ofxAvVideoWriter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 72EC18EA82049D6D25D6304D /* ofxAvVideoWriter.cpp */; };
+		3CFDC0070C0D9DC4C85AF4DC /* Button.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18DA2122C2783DB05DEBCE87 /* Button.cpp */; };
+		470A0D8A2290257001EEDC9B /* SegmentedSelect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DEB674ED2671AC7658B14059 /* SegmentedSelect.cpp */; };
+		493DB6A99E6B5FCF052016DD /* MuiCore.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4978426631D37FA3EB1FA547 /* MuiCore.cpp */; };
+		4CE23CB3B062FA59A47BCD2D /* ToggleButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 403378E55FDCA8AA24E8104A /* ToggleButton.cpp */; };
+		59B2636B9FAB86C0A883FC9C /* Layout.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6EE5442F865B09EE4CCDDD94 /* Layout.cpp */; };
+		69DAF968A1DA7A23073B97F8 /* ofxAvUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1D9645D095F60AB365003B06 /* ofxAvUtils.cpp */; };
+		6AB175562C7B8DA5977B6A8E /* ofxAvAudioWriter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CBA5266B518AA438E7D47F81 /* ofxAvAudioWriter.cpp */; };
+		79139E8FF25B4453D2D2B2FE /* ofxFontStashParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F97302154C1D4CA51A6EF1F /* ofxFontStashParser.cpp */; };
+		79231EEC98689F0515694AAA /* BarButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3B73C1A3F266BAFE57AA5FCF /* BarButton.cpp */; };
+		8D9B658B353CDDF212F522BD /* ScrollPane.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61A842419EFF74F93FDBDE5A /* ScrollPane.cpp */; };
+		902CE6911AD8C03D2831D34E /* MuiConfig.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 85DCEEAD5DD142F981D3956D /* MuiConfig.cpp */; };
+		9397802B10847A2C74111D6E /* TextField.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CA39C804B514C2081D4B78BC /* TextField.cpp */; };
+		9F6783C22BE58E43DB564213 /* ofxAvAudioPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1CA38CE0608E3BBB595BCDFE /* ofxAvAudioPlayer.cpp */; };
+		B728886FDA83C1DE0C2F5280 /* Container.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94BFEFD547F62B080775EC81 /* Container.cpp */; };
+		B92EFA79541DC1EA518DC974 /* InternalWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDA4DA295FDA8C4CB1406348 /* InternalWindow.cpp */; };
+		BA25EF0E1C8B6E0400C3B60A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BABA49661A866519000900B1 /* Images.xcassets */; };
+		BA54982119F7274C007E9F6A /* ConfigView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BA54981F19F7274C007E9F6A /* ConfigView.cpp */; };
+		BA54982719F740CE007E9F6A /* OsciView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BA54982519F740CE007E9F6A /* OsciView.cpp */; };
+		BA70F79219D39DE9008E990B /* ofxIniSettings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BA70F79019D39C7F008E990B /* ofxIniSettings.cpp */; };
+		BA828D2A1B378A7D002DE63F /* Audio.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BA828D281B378A7D002DE63F /* Audio.cpp */; };
+		BA828D2D1B378E6D002DE63F /* sounddevices.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BA828D2B1B378E6D002DE63F /* sounddevices.cpp */; };
+		BA9F97411B6512FA00A453D6 /* globals.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BA9F973F1B6512FA00A453D6 /* globals.cpp */; };
+		BAA7B2031C69152B0045B34F /* ofxIniExtras.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BAA7B2011C69152B0045B34F /* ofxIniExtras.cpp */; };
+		BADACB631C12F89100ED221C /* FMenu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BADACB611C12F89100ED221C /* FMenu.cpp */; };
+		BAEE5D281B5FB3D10038C838 /* ofApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BAEE5D261B5FB3D10038C838 /* ofApp.cpp */; };
+		BAFE8DBD1BDE66B4004BA599 /* OsciAvAudioPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BAFE8DBB1BDE66B4004BA599 /* OsciAvAudioPlayer.cpp */; };
+		C05CD71D597596BBE2C35D82 /* EmptyContainer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 98FCF23F427DE6A108C15AA6 /* EmptyContainer.cpp */; };
+		C6E336E9778AC36F296922B4 /* MuiParameterPanel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0E096E79A1021312BAE600E8 /* MuiParameterPanel.cpp */; };
+		C746D93FB7F1F1E072BD5073 /* Root.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9439510945C804E7C475C20A /* Root.cpp */; };
+		CA75F2B0F73B71281C9D21AE /* SliderWithLabel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 110B722BF8FF24E188B393E0 /* SliderWithLabel.cpp */; };
+		CA913EA6DCDD413B74FE5D31 /* pugixml.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AFAD63D11F806A4597D935C0 /* pugixml.cpp */; };
+		CAFA934398F1617B277FA8A1 /* ofxFontStash2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 26D59B6F54AD43E7B13D25C2 /* ofxFontStash2.cpp */; };
+		D112FB27050E454F34ABB6B2 /* TextureAtlas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88DC2EDABCBC86DA517F92B3 /* TextureAtlas.cpp */; };
+		D64C29FDF8347CFEE09FDF92 /* ofxMightyUI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B5E2643A08392C8D41DA1D26 /* ofxMightyUI.cpp */; };
+		E237CE8195D6012BF10C266B /* Image.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8D8426D466CDE2C2A87A7DFE /* Image.cpp */; };
+		E269825F55A357AABA89E504 /* CppTweener.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DDC8EC91E48884FFB46E26FB /* CppTweener.cpp */; };
+		E4328149138ABC9F0047C5CB /* openFrameworksDebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4328148138ABC890047C5CB /* openFrameworksDebug.a */; };
+		E45BE97B0E8CC7DD009D7055 /* AGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9710E8CC7DD009D7055 /* AGL.framework */; };
+		E45BE97C0E8CC7DD009D7055 /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9720E8CC7DD009D7055 /* ApplicationServices.framework */; };
+		E45BE97D0E8CC7DD009D7055 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9730E8CC7DD009D7055 /* AudioToolbox.framework */; };
+		E45BE97E0E8CC7DD009D7055 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9740E8CC7DD009D7055 /* Carbon.framework */; };
+		E45BE97F0E8CC7DD009D7055 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9750E8CC7DD009D7055 /* CoreAudio.framework */; };
+		E45BE9800E8CC7DD009D7055 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9760E8CC7DD009D7055 /* CoreFoundation.framework */; };
+		E45BE9810E8CC7DD009D7055 /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9770E8CC7DD009D7055 /* CoreServices.framework */; };
+		E45BE9830E8CC7DD009D7055 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9790E8CC7DD009D7055 /* OpenGL.framework */; };
+		E45BE9840E8CC7DD009D7055 /* QuickTime.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE97A0E8CC7DD009D7055 /* QuickTime.framework */; };
+		E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4B69E1D0A3A1BDC003C02F2 /* main.cpp */; };
+		E4C2424710CC5A17004149E2 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4C2424410CC5A17004149E2 /* AppKit.framework */; };
+		E4C2424810CC5A17004149E2 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4C2424510CC5A17004149E2 /* Cocoa.framework */; };
+		E4C2424910CC5A17004149E2 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4C2424610CC5A17004149E2 /* IOKit.framework */; };
+		E4EB6799138ADC1D00A09F29 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; };
+		E5D631D3B05AFF06A387A28C /* Slider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A257ABDA31A9FEA901F6957 /* Slider.cpp */; };
+		E7E077E515D3B63C0020DFD4 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7E077E415D3B63C0020DFD4 /* CoreVideo.framework */; };
+		E7E077E815D3B6510020DFD4 /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7E077E715D3B6510020DFD4 /* QTKit.framework */; };
+		E7F985F815E0DEA3003869B5 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7F985F515E0DE99003869B5 /* Accelerate.framework */; };
+		E8255C03191A97CE94F5DF82 /* Label.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC377B7E1C1A7594D8F40115 /* Label.cpp */; };
+		FC6CDE119FD5744ECE7C526F /* Helpers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C4E6595B0C243ADE291984F7 /* Helpers.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		E4328147138ABC890047C5CB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E4328143138ABC890047C5CB /* openFrameworksLib.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E4B27C1510CBEB8E00536013;
+			remoteInfo = openFrameworks;
+		};
+		E4EEB9AB138B136A00A80321 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E4328143138ABC890047C5CB /* openFrameworksLib.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = E4B27C1410CBEB8E00536013;
+			remoteInfo = openFrameworks;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		BA2B89131B531A1800E1D9DA /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 6;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E4C2427710CC5ABF004149E2 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		068EBEB78E5D92ADAE11095B /* CppTweener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CppTweener.h; sourceTree = "<group>"; };
+		0A7F820ED2DDF888076C5862 /* fontstash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fontstash.h; sourceTree = "<group>"; };
+		0E096E79A1021312BAE600E8 /* MuiParameterPanel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MuiParameterPanel.cpp; sourceTree = "<group>"; };
+		0F77523ADC0CAD404B667E1D /* MuiParameterPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MuiParameterPanel.h; sourceTree = "<group>"; };
+		110B722BF8FF24E188B393E0 /* SliderWithLabel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SliderWithLabel.cpp; sourceTree = "<group>"; };
+		161625A0B9B60B3170D39B88 /* Helpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Helpers.h; sourceTree = "<group>"; };
+		18DA2122C2783DB05DEBCE87 /* Button.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Button.cpp; sourceTree = "<group>"; };
+		1A257ABDA31A9FEA901F6957 /* Slider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Slider.cpp; sourceTree = "<group>"; };
+		1CA38CE0608E3BBB595BCDFE /* ofxAvAudioPlayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxAvAudioPlayer.cpp; sourceTree = "<group>"; };
+		1D9645D095F60AB365003B06 /* ofxAvUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxAvUtils.cpp; sourceTree = "<group>"; };
+		1E0A968A7AAF25AA7B1474D3 /* ofxFontStashStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxFontStashStyle.h; sourceTree = "<group>"; };
+		1EB81FA280F960EE578AB4BA /* ofxAvVideoWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxAvVideoWriter.h; sourceTree = "<group>"; };
+		24D87983B8A48C4385029E52 /* MuiTextArea.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MuiTextArea.cpp; sourceTree = "<group>"; };
+		26D59B6F54AD43E7B13D25C2 /* ofxFontStash2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxFontStash2.cpp; sourceTree = "<group>"; };
+		28B8E32B7A472D163E9D2DC6 /* Layout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Layout.h; sourceTree = "<group>"; };
+		28FF0CB9970996CA72B6D8AF /* EmptyContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmptyContainer.h; sourceTree = "<group>"; };
+		2F0C07515189549AB21D6C38 /* Button.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Button.h; sourceTree = "<group>"; };
+		31153764B68C60DF6CD8F96D /* ToggleButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToggleButton.h; sourceTree = "<group>"; };
+		3B73C1A3F266BAFE57AA5FCF /* BarButton.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BarButton.cpp; sourceTree = "<group>"; };
+		403378E55FDCA8AA24E8104A /* ToggleButton.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ToggleButton.cpp; sourceTree = "<group>"; };
+		406698A95BD84DAFAA009924 /* Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Image.h; sourceTree = "<group>"; };
+		416FFDAD4F62DFD86041913E /* BarButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BarButton.h; sourceTree = "<group>"; };
+		493B67D56AB54D4ACA78745C /* ofxFontStashParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxFontStashParser.h; sourceTree = "<group>"; };
+		4978426631D37FA3EB1FA547 /* MuiCore.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MuiCore.cpp; sourceTree = "<group>"; };
+		4B5DE3EE5B91921EE4FDBA84 /* ofxFontAwesome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxFontAwesome.h; sourceTree = "<group>"; };
+		4FC5B0B6811ACF1E0F875E1C /* ScrollPane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScrollPane.h; sourceTree = "<group>"; };
+		5DDEC0BDA035194309B83CD4 /* Container.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Container.h; sourceTree = "<group>"; };
+		61A842419EFF74F93FDBDE5A /* ScrollPane.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ScrollPane.cpp; sourceTree = "<group>"; };
+		6EE5442F865B09EE4CCDDD94 /* Layout.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Layout.cpp; sourceTree = "<group>"; };
+		72EC18EA82049D6D25D6304D /* ofxAvVideoWriter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxAvVideoWriter.cpp; sourceTree = "<group>"; };
+		747C12409A0AAB8D4B8A11A2 /* ofxMightyUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxMightyUI.h; sourceTree = "<group>"; };
+		787C60702CF6603591BB1CF5 /* TextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextField.h; sourceTree = "<group>"; };
+		85CB0724A04F41F450A80AFC /* ofxFontStash2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxFontStash2.h; sourceTree = "<group>"; };
+		85DCEEAD5DD142F981D3956D /* MuiConfig.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MuiConfig.cpp; sourceTree = "<group>"; };
+		88DC2EDABCBC86DA517F92B3 /* TextureAtlas.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TextureAtlas.cpp; sourceTree = "<group>"; };
+		8D8426D466CDE2C2A87A7DFE /* Image.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Image.cpp; sourceTree = "<group>"; };
+		9439510945C804E7C475C20A /* Root.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Root.cpp; sourceTree = "<group>"; };
+		94BFEFD547F62B080775EC81 /* Container.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Container.cpp; sourceTree = "<group>"; };
+		95B64F47E6BB11684D850782 /* Slider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Slider.h; sourceTree = "<group>"; };
+		98FCF23F427DE6A108C15AA6 /* EmptyContainer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EmptyContainer.cpp; sourceTree = "<group>"; };
+		9A8EF6C4532FDDF483C69AC2 /* pugiconfig.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pugiconfig.hpp; sourceTree = "<group>"; };
+		9C5EB5FFD6398B191CA9F63D /* ofxAvAudioPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxAvAudioPlayer.h; sourceTree = "<group>"; };
+		9F97302154C1D4CA51A6EF1F /* ofxFontStashParser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxFontStashParser.cpp; sourceTree = "<group>"; };
+		9FB101D8E87C0173018F0586 /* TextureAtlas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextureAtlas.h; sourceTree = "<group>"; };
+		A2D54B529EAA008CE50726B8 /* InternalWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InternalWindow.h; sourceTree = "<group>"; };
+		A743DE8B7465753DB9B7C175 /* gl3fontstash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gl3fontstash.h; sourceTree = "<group>"; };
+		A892B4AE3BEF21789604FEB2 /* stb_truetype.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_truetype.h; sourceTree = "<group>"; };
+		AFAD63D11F806A4597D935C0 /* pugixml.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = pugixml.cpp; sourceTree = "<group>"; };
+		B010667371FA0B1D276AD141 /* pugixml.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pugixml.hpp; sourceTree = "<group>"; };
+		B5E2643A08392C8D41DA1D26 /* ofxMightyUI.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxMightyUI.cpp; sourceTree = "<group>"; };
+		BA21C8961B87D58600FBAB8C /* ShaderLoader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShaderLoader.h; sourceTree = "<group>"; };
+		BA386CD51B388233004100D4 /* split.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = split.h; sourceTree = "<group>"; };
+		BA474BDD58A8A242D48E3F62 /* MuiCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MuiCore.h; sourceTree = "<group>"; };
+		BA54981C19F725C1007E9F6A /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		BA54981F19F7274C007E9F6A /* ConfigView.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ConfigView.cpp; path = ui/ConfigView.cpp; sourceTree = "<group>"; };
+		BA54982019F7274C007E9F6A /* ConfigView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ConfigView.h; path = ui/ConfigView.h; sourceTree = "<group>"; };
+		BA54982519F740CE007E9F6A /* OsciView.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OsciView.cpp; path = ui/OsciView.cpp; sourceTree = "<group>"; };
+		BA54982619F740CE007E9F6A /* OsciView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OsciView.h; path = ui/OsciView.h; sourceTree = "<group>"; };
+		BA5D0A251B9C902300D10946 /* osci.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = osci.frag; sourceTree = "<group>"; };
+		BA5D0A261B9C902300D10946 /* osci.geom */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = osci.geom; sourceTree = "<group>"; };
+		BA5D0A271B9C902300D10946 /* osci.vert */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = osci.vert; sourceTree = "<group>"; };
+		BA70F78D19D39C7F008E990B /* install.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = install.xml; sourceTree = "<group>"; };
+		BA70F78E19D39C7F008E990B /* README */ = {isa = PBXFileReference; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
+		BA70F79019D39C7F008E990B /* ofxIniSettings.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ofxIniSettings.cpp; sourceTree = "<group>"; };
+		BA70F79119D39C7F008E990B /* ofxIniSettings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxIniSettings.h; sourceTree = "<group>"; };
+		BA828D281B378A7D002DE63F /* Audio.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Audio.cpp; sourceTree = "<group>"; };
+		BA828D291B378A7D002DE63F /* Audio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Audio.h; sourceTree = "<group>"; };
+		BA828D2B1B378E6D002DE63F /* sounddevices.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sounddevices.cpp; sourceTree = "<group>"; };
+		BA828D2C1B378E6D002DE63F /* sounddevices.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sounddevices.h; sourceTree = "<group>"; };
+		BA9F973E1B65129B00A453D6 /* FaToggleButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FaToggleButton.h; path = ui/FaToggleButton.h; sourceTree = "<group>"; };
+		BA9F973F1B6512FA00A453D6 /* globals.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = globals.cpp; sourceTree = "<group>"; };
+		BA9F97401B6512FA00A453D6 /* globals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = globals.h; sourceTree = "<group>"; };
+		BA9F97431B651E6A00A453D6 /* FaButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FaButton.h; path = ui/FaButton.h; sourceTree = "<group>"; };
+		BA9F97451B6583D300A453D6 /* L.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = L.h; path = ui/L.h; sourceTree = "<group>"; };
+		BAA7B2011C69152B0045B34F /* ofxIniExtras.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxIniExtras.cpp; sourceTree = "<group>"; };
+		BAA7B2021C69152B0045B34F /* ofxIniExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxIniExtras.h; sourceTree = "<group>"; };
+		BABA49661A866519000900B1 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = assets/Images.xcassets; sourceTree = "<group>"; };
+		BADACB611C12F89100ED221C /* FMenu.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FMenu.cpp; path = ui/FMenu.cpp; sourceTree = "<group>"; };
+		BADACB621C12F89100ED221C /* FMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMenu.h; path = ui/FMenu.h; sourceTree = "<group>"; };
+		BAEE5D261B5FB3D10038C838 /* ofApp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofApp.cpp; sourceTree = "<group>"; };
+		BAEE5D271B5FB3D10038C838 /* ofApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofApp.h; sourceTree = "<group>"; };
+		BAFE8DBB1BDE66B4004BA599 /* OsciAvAudioPlayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OsciAvAudioPlayer.cpp; sourceTree = "<group>"; };
+		BAFE8DBC1BDE66B4004BA599 /* OsciAvAudioPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OsciAvAudioPlayer.h; sourceTree = "<group>"; };
+		BBAB23BE13894E4700AA2426 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = ../../../libs/glut/lib/osx/GLUT.framework; sourceTree = "<group>"; };
+		BFC86602DFCA82C2E2D534F3 /* Label.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Label.h; sourceTree = "<group>"; };
+		BFF17880C7E8BC5D45C87AF0 /* ofxAvUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxAvUtils.h; sourceTree = "<group>"; };
+		C4E6595B0C243ADE291984F7 /* Helpers.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Helpers.cpp; sourceTree = "<group>"; };
+		CA27AF5B36F66F2A1AECA205 /* MuiTextArea.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MuiTextArea.h; sourceTree = "<group>"; };
+		CA39C804B514C2081D4B78BC /* TextField.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TextField.cpp; sourceTree = "<group>"; };
+		CBA5266B518AA438E7D47F81 /* ofxAvAudioWriter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxAvAudioWriter.cpp; sourceTree = "<group>"; };
+		CC377B7E1C1A7594D8F40115 /* Label.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Label.cpp; sourceTree = "<group>"; };
+		D8F6AF6805C3BED2EBA192F9 /* glfontstash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glfontstash.h; sourceTree = "<group>"; };
+		D93805C37AB468ED5C6D7AD9 /* SliderWithLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SliderWithLabel.h; sourceTree = "<group>"; };
+		DDC8EC91E48884FFB46E26FB /* CppTweener.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CppTweener.cpp; sourceTree = "<group>"; };
+		DEB674ED2671AC7658B14059 /* SegmentedSelect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SegmentedSelect.cpp; sourceTree = "<group>"; };
+		E4328143138ABC890047C5CB /* openFrameworksLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = openFrameworksLib.xcodeproj; path = ../../../libs/openFrameworksCompiled/project/osx/openFrameworksLib.xcodeproj; sourceTree = SOURCE_ROOT; };
+		E45BE9710E8CC7DD009D7055 /* AGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AGL.framework; path = /System/Library/Frameworks/AGL.framework; sourceTree = "<absolute>"; };
+		E45BE9720E8CC7DD009D7055 /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = /System/Library/Frameworks/ApplicationServices.framework; sourceTree = "<absolute>"; };
+		E45BE9730E8CC7DD009D7055 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = /System/Library/Frameworks/AudioToolbox.framework; sourceTree = "<absolute>"; };
+		E45BE9740E8CC7DD009D7055 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
+		E45BE9750E8CC7DD009D7055 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = /System/Library/Frameworks/CoreAudio.framework; sourceTree = "<absolute>"; };
+		E45BE9760E8CC7DD009D7055 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = /System/Library/Frameworks/CoreFoundation.framework; sourceTree = "<absolute>"; };
+		E45BE9770E8CC7DD009D7055 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = /System/Library/Frameworks/CoreServices.framework; sourceTree = "<absolute>"; };
+		E45BE9790E8CC7DD009D7055 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
+		E45BE97A0E8CC7DD009D7055 /* QuickTime.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickTime.framework; path = /System/Library/Frameworks/QuickTime.framework; sourceTree = "<absolute>"; };
+		E4B4338F6049A6B94D4D1837 /* ofxAvAudioWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxAvAudioWriter.h; sourceTree = "<group>"; };
+		E4B69B5B0A3A1756003C02F2 /* OscilloscopeDebug.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OscilloscopeDebug.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E4B69E1D0A3A1BDC003C02F2 /* main.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 30; name = main.cpp; path = src/main.cpp; sourceTree = SOURCE_ROOT; };
+		E4B6FCAD0C3E899E008CF71C /* openFrameworks-Info.plist */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.plist.xml; path = "openFrameworks-Info.plist"; sourceTree = "<group>"; };
+		E4C2424410CC5A17004149E2 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
+		E4C2424510CC5A17004149E2 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
+		E4C2424610CC5A17004149E2 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = /System/Library/Frameworks/IOKit.framework; sourceTree = "<absolute>"; };
+		E4EB691F138AFCF100A09F29 /* CoreOF.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = CoreOF.xcconfig; path = ../../../libs/openFrameworksCompiled/project/osx/CoreOF.xcconfig; sourceTree = SOURCE_ROOT; };
+		E4EB6923138AFD0F00A09F29 /* Project.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Project.xcconfig; sourceTree = "<group>"; };
+		E7E077E415D3B63C0020DFD4 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = /System/Library/Frameworks/CoreVideo.framework; sourceTree = "<absolute>"; };
+		E7E077E715D3B6510020DFD4 /* QTKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QTKit.framework; path = /System/Library/Frameworks/QTKit.framework; sourceTree = "<absolute>"; };
+		E7F985F515E0DE99003869B5 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = /System/Library/Frameworks/Accelerate.framework; sourceTree = "<absolute>"; };
+		EB80D30EC1B32976167B8FF0 /* Root.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Root.h; sourceTree = "<group>"; };
+		EDA4DA295FDA8C4CB1406348 /* InternalWindow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = InternalWindow.cpp; sourceTree = "<group>"; };
+		FA798853D6872E5FF721121E /* SegmentedSelect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SegmentedSelect.h; sourceTree = "<group>"; };
+		FD88671DF8B4B266FA2592E9 /* MuiConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MuiConfig.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		E4B69B590A3A1756003C02F2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E7F985F815E0DEA3003869B5 /* Accelerate.framework in Frameworks */,
+				E7E077E815D3B6510020DFD4 /* QTKit.framework in Frameworks */,
+				E4EB6799138ADC1D00A09F29 /* GLUT.framework in Frameworks */,
+				E4328149138ABC9F0047C5CB /* openFrameworksDebug.a in Frameworks */,
+				E45BE97B0E8CC7DD009D7055 /* AGL.framework in Frameworks */,
+				E45BE97C0E8CC7DD009D7055 /* ApplicationServices.framework in Frameworks */,
+				E45BE97D0E8CC7DD009D7055 /* AudioToolbox.framework in Frameworks */,
+				E45BE97E0E8CC7DD009D7055 /* Carbon.framework in Frameworks */,
+				E45BE97F0E8CC7DD009D7055 /* CoreAudio.framework in Frameworks */,
+				E45BE9800E8CC7DD009D7055 /* CoreFoundation.framework in Frameworks */,
+				E45BE9810E8CC7DD009D7055 /* CoreServices.framework in Frameworks */,
+				E45BE9830E8CC7DD009D7055 /* OpenGL.framework in Frameworks */,
+				E45BE9840E8CC7DD009D7055 /* QuickTime.framework in Frameworks */,
+				E4C2424710CC5A17004149E2 /* AppKit.framework in Frameworks */,
+				E4C2424810CC5A17004149E2 /* Cocoa.framework in Frameworks */,
+				E4C2424910CC5A17004149E2 /* IOKit.framework in Frameworks */,
+				E7E077E515D3B63C0020DFD4 /* CoreVideo.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		054FED2333CDCBDD33B77B7B /* src */ = {
+			isa = PBXGroup;
+			children = (
+				9A8EF6C4532FDDF483C69AC2 /* pugiconfig.hpp */,
+				AFAD63D11F806A4597D935C0 /* pugixml.cpp */,
+				B010667371FA0B1D276AD141 /* pugixml.hpp */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		0A70EE869FD27F8A180D6B21 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				3B73C1A3F266BAFE57AA5FCF /* BarButton.cpp */,
+				416FFDAD4F62DFD86041913E /* BarButton.h */,
+				18DA2122C2783DB05DEBCE87 /* Button.cpp */,
+				2F0C07515189549AB21D6C38 /* Button.h */,
+				94BFEFD547F62B080775EC81 /* Container.cpp */,
+				5DDEC0BDA035194309B83CD4 /* Container.h */,
+				DDC8EC91E48884FFB46E26FB /* CppTweener.cpp */,
+				068EBEB78E5D92ADAE11095B /* CppTweener.h */,
+				98FCF23F427DE6A108C15AA6 /* EmptyContainer.cpp */,
+				28FF0CB9970996CA72B6D8AF /* EmptyContainer.h */,
+				C4E6595B0C243ADE291984F7 /* Helpers.cpp */,
+				161625A0B9B60B3170D39B88 /* Helpers.h */,
+				8D8426D466CDE2C2A87A7DFE /* Image.cpp */,
+				406698A95BD84DAFAA009924 /* Image.h */,
+				EDA4DA295FDA8C4CB1406348 /* InternalWindow.cpp */,
+				A2D54B529EAA008CE50726B8 /* InternalWindow.h */,
+				CC377B7E1C1A7594D8F40115 /* Label.cpp */,
+				BFC86602DFCA82C2E2D534F3 /* Label.h */,
+				6EE5442F865B09EE4CCDDD94 /* Layout.cpp */,
+				28B8E32B7A472D163E9D2DC6 /* Layout.h */,
+				85DCEEAD5DD142F981D3956D /* MuiConfig.cpp */,
+				FD88671DF8B4B266FA2592E9 /* MuiConfig.h */,
+				4978426631D37FA3EB1FA547 /* MuiCore.cpp */,
+				BA474BDD58A8A242D48E3F62 /* MuiCore.h */,
+				0E096E79A1021312BAE600E8 /* MuiParameterPanel.cpp */,
+				0F77523ADC0CAD404B667E1D /* MuiParameterPanel.h */,
+				24D87983B8A48C4385029E52 /* MuiTextArea.cpp */,
+				CA27AF5B36F66F2A1AECA205 /* MuiTextArea.h */,
+				B5E2643A08392C8D41DA1D26 /* ofxMightyUI.cpp */,
+				747C12409A0AAB8D4B8A11A2 /* ofxMightyUI.h */,
+				9439510945C804E7C475C20A /* Root.cpp */,
+				EB80D30EC1B32976167B8FF0 /* Root.h */,
+				61A842419EFF74F93FDBDE5A /* ScrollPane.cpp */,
+				4FC5B0B6811ACF1E0F875E1C /* ScrollPane.h */,
+				DEB674ED2671AC7658B14059 /* SegmentedSelect.cpp */,
+				FA798853D6872E5FF721121E /* SegmentedSelect.h */,
+				1A257ABDA31A9FEA901F6957 /* Slider.cpp */,
+				95B64F47E6BB11684D850782 /* Slider.h */,
+				110B722BF8FF24E188B393E0 /* SliderWithLabel.cpp */,
+				D93805C37AB468ED5C6D7AD9 /* SliderWithLabel.h */,
+				CA39C804B514C2081D4B78BC /* TextField.cpp */,
+				787C60702CF6603591BB1CF5 /* TextField.h */,
+				88DC2EDABCBC86DA517F92B3 /* TextureAtlas.cpp */,
+				9FB101D8E87C0173018F0586 /* TextureAtlas.h */,
+				403378E55FDCA8AA24E8104A /* ToggleButton.cpp */,
+				31153764B68C60DF6CD8F96D /* ToggleButton.h */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		394A722787C901A078FE90F1 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				4B5DE3EE5B91921EE4FDBA84 /* ofxFontAwesome.h */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		53544AEC636ABA172D1EE1EF /* fontstash */ = {
+			isa = PBXGroup;
+			children = (
+				816B7782D1F5015B75A364CD /* src */,
+			);
+			path = fontstash;
+			sourceTree = "<group>";
+		};
+		62B8BF3EF72163F11B1D5315 /* ofxAvCodec */ = {
+			isa = PBXGroup;
+			children = (
+				9528B28ACC55DD7983834CE9 /* src */,
+			);
+			name = ofxAvCodec;
+			path = ../../../addons/ofxAvCodec;
+			sourceTree = "<group>";
+		};
+		7A7B2AED0F3A3891285C8779 /* ofxFontAwesome */ = {
+			isa = PBXGroup;
+			children = (
+				394A722787C901A078FE90F1 /* src */,
+			);
+			name = ofxFontAwesome;
+			path = ../../../addons/ofxFontAwesome;
+			sourceTree = "<group>";
+		};
+		816B7782D1F5015B75A364CD /* src */ = {
+			isa = PBXGroup;
+			children = (
+				0A7F820ED2DDF888076C5862 /* fontstash.h */,
+				A743DE8B7465753DB9B7C175 /* gl3fontstash.h */,
+				D8F6AF6805C3BED2EBA192F9 /* glfontstash.h */,
+				A892B4AE3BEF21789604FEB2 /* stb_truetype.h */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		9528B28ACC55DD7983834CE9 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				1CA38CE0608E3BBB595BCDFE /* ofxAvAudioPlayer.cpp */,
+				9C5EB5FFD6398B191CA9F63D /* ofxAvAudioPlayer.h */,
+				CBA5266B518AA438E7D47F81 /* ofxAvAudioWriter.cpp */,
+				E4B4338F6049A6B94D4D1837 /* ofxAvAudioWriter.h */,
+				1D9645D095F60AB365003B06 /* ofxAvUtils.cpp */,
+				BFF17880C7E8BC5D45C87AF0 /* ofxAvUtils.h */,
+				72EC18EA82049D6D25D6304D /* ofxAvVideoWriter.cpp */,
+				1EB81FA280F960EE578AB4BA /* ofxAvVideoWriter.h */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		B80AFFAB68D21E40A01A2A96 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				26D59B6F54AD43E7B13D25C2 /* ofxFontStash2.cpp */,
+				85CB0724A04F41F450A80AFC /* ofxFontStash2.h */,
+				9F97302154C1D4CA51A6EF1F /* ofxFontStashParser.cpp */,
+				493B67D56AB54D4ACA78745C /* ofxFontStashParser.h */,
+				1E0A968A7AAF25AA7B1474D3 /* ofxFontStashStyle.h */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		BA54981E19F7272C007E9F6A /* ui */ = {
+			isa = PBXGroup;
+			children = (
+				BA9F97431B651E6A00A453D6 /* FaButton.h */,
+				BA9F973E1B65129B00A453D6 /* FaToggleButton.h */,
+				BA54981F19F7274C007E9F6A /* ConfigView.cpp */,
+				BA54982019F7274C007E9F6A /* ConfigView.h */,
+				BA54982519F740CE007E9F6A /* OsciView.cpp */,
+				BA54982619F740CE007E9F6A /* OsciView.h */,
+				BA9F97451B6583D300A453D6 /* L.h */,
+				BADACB611C12F89100ED221C /* FMenu.cpp */,
+				BADACB621C12F89100ED221C /* FMenu.h */,
+			);
+			name = ui;
+			sourceTree = "<group>";
+		};
+		BA5D0A231B9C902300D10946 /* shaders */ = {
+			isa = PBXGroup;
+			children = (
+				BA5D0A251B9C902300D10946 /* osci.frag */,
+				BA5D0A261B9C902300D10946 /* osci.geom */,
+				BA5D0A271B9C902300D10946 /* osci.vert */,
+			);
+			name = shaders;
+			path = bin/data/shaders;
+			sourceTree = "<group>";
+		};
+		BA70F78C19D39C7F008E990B /* ofxIniSettings */ = {
+			isa = PBXGroup;
+			children = (
+				BA70F78D19D39C7F008E990B /* install.xml */,
+				BA70F78E19D39C7F008E990B /* README */,
+				BA70F78F19D39C7F008E990B /* src */,
+			);
+			name = ofxIniSettings;
+			path = addons/ofxIniSettings;
+			sourceTree = "<group>";
+		};
+		BA70F78F19D39C7F008E990B /* src */ = {
+			isa = PBXGroup;
+			children = (
+				BAA7B2011C69152B0045B34F /* ofxIniExtras.cpp */,
+				BAA7B2021C69152B0045B34F /* ofxIniExtras.h */,
+				BA70F79019D39C7F008E990B /* ofxIniSettings.cpp */,
+				BA70F79119D39C7F008E990B /* ofxIniSettings.h */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		BA828D271B378A6E002DE63F /* util */ = {
+			isa = PBXGroup;
+			children = (
+				BAFE8DBB1BDE66B4004BA599 /* OsciAvAudioPlayer.cpp */,
+				BAFE8DBC1BDE66B4004BA599 /* OsciAvAudioPlayer.h */,
+				BA828D2B1B378E6D002DE63F /* sounddevices.cpp */,
+				BA828D2C1B378E6D002DE63F /* sounddevices.h */,
+				BA828D281B378A7D002DE63F /* Audio.cpp */,
+				BA828D291B378A7D002DE63F /* Audio.h */,
+				BA386CD51B388233004100D4 /* split.h */,
+				BA21C8961B87D58600FBAB8C /* ShaderLoader.h */,
+			);
+			path = util;
+			sourceTree = "<group>";
+		};
+		BB4B014C10F69532006C3DED /* addons */ = {
+			isa = PBXGroup;
+			children = (
+				BA70F78C19D39C7F008E990B /* ofxIniSettings */,
+				FF67370392D60EB68842FFD2 /* ofxMightyUI */,
+				62B8BF3EF72163F11B1D5315 /* ofxAvCodec */,
+				7A7B2AED0F3A3891285C8779 /* ofxFontAwesome */,
+				E1235B8571F836C97F6AC120 /* ofxFontStash2 */,
+			);
+			name = addons;
+			sourceTree = "<group>";
+		};
+		BBAB23C913894ECA00AA2426 /* system frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E7F985F515E0DE99003869B5 /* Accelerate.framework */,
+				E4C2424410CC5A17004149E2 /* AppKit.framework */,
+				E4C2424510CC5A17004149E2 /* Cocoa.framework */,
+				E4C2424610CC5A17004149E2 /* IOKit.framework */,
+				E45BE9710E8CC7DD009D7055 /* AGL.framework */,
+				E45BE9720E8CC7DD009D7055 /* ApplicationServices.framework */,
+				E45BE9730E8CC7DD009D7055 /* AudioToolbox.framework */,
+				E45BE9740E8CC7DD009D7055 /* Carbon.framework */,
+				E45BE9750E8CC7DD009D7055 /* CoreAudio.framework */,
+				E45BE9760E8CC7DD009D7055 /* CoreFoundation.framework */,
+				E45BE9770E8CC7DD009D7055 /* CoreServices.framework */,
+				E45BE9790E8CC7DD009D7055 /* OpenGL.framework */,
+				E45BE97A0E8CC7DD009D7055 /* QuickTime.framework */,
+				E7E077E415D3B63C0020DFD4 /* CoreVideo.framework */,
+				E7E077E715D3B6510020DFD4 /* QTKit.framework */,
+			);
+			name = "system frameworks";
+			sourceTree = "<group>";
+		};
+		BBAB23CA13894EDB00AA2426 /* 3rd party frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BBAB23BE13894E4700AA2426 /* GLUT.framework */,
+			);
+			name = "3rd party frameworks";
+			sourceTree = "<group>";
+		};
+		E1235B8571F836C97F6AC120 /* ofxFontStash2 */ = {
+			isa = PBXGroup;
+			children = (
+				B80AFFAB68D21E40A01A2A96 /* src */,
+				F109CD115324716C35EB1855 /* libs */,
+			);
+			name = ofxFontStash2;
+			path = ../../../addons/ofxFontStash2;
+			sourceTree = "<group>";
+		};
+		E4328144138ABC890047C5CB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E4328148138ABC890047C5CB /* openFrameworksDebug.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E45BE5980E8CC70C009D7055 /* frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BBAB23CA13894EDB00AA2426 /* 3rd party frameworks */,
+				BBAB23C913894ECA00AA2426 /* system frameworks */,
+			);
+			name = frameworks;
+			sourceTree = "<group>";
+		};
+		E4B69B4A0A3A1720003C02F2 = {
+			isa = PBXGroup;
+			children = (
+				BA5D0A231B9C902300D10946 /* shaders */,
+				BABA49661A866519000900B1 /* Images.xcassets */,
+				BA54981C19F725C1007E9F6A /* OpenGL.framework */,
+				E4B6FCAD0C3E899E008CF71C /* openFrameworks-Info.plist */,
+				E4EB6923138AFD0F00A09F29 /* Project.xcconfig */,
+				E4B69E1C0A3A1BDC003C02F2 /* src */,
+				E4EEC9E9138DF44700A80321 /* openFrameworks */,
+				BB4B014C10F69532006C3DED /* addons */,
+				E45BE5980E8CC70C009D7055 /* frameworks */,
+				E4B69B5B0A3A1756003C02F2 /* OscilloscopeDebug.app */,
+			);
+			sourceTree = "<group>";
+		};
+		E4B69E1C0A3A1BDC003C02F2 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				BA828D271B378A6E002DE63F /* util */,
+				BA54981E19F7272C007E9F6A /* ui */,
+				E4B69E1D0A3A1BDC003C02F2 /* main.cpp */,
+				BAEE5D261B5FB3D10038C838 /* ofApp.cpp */,
+				BAEE5D271B5FB3D10038C838 /* ofApp.h */,
+				BA9F973F1B6512FA00A453D6 /* globals.cpp */,
+				BA9F97401B6512FA00A453D6 /* globals.h */,
+			);
+			path = src;
+			sourceTree = SOURCE_ROOT;
+		};
+		E4EEC9E9138DF44700A80321 /* openFrameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E4EB691F138AFCF100A09F29 /* CoreOF.xcconfig */,
+				E4328143138ABC890047C5CB /* openFrameworksLib.xcodeproj */,
+			);
+			name = openFrameworks;
+			sourceTree = "<group>";
+		};
+		F109CD115324716C35EB1855 /* libs */ = {
+			isa = PBXGroup;
+			children = (
+				53544AEC636ABA172D1EE1EF /* fontstash */,
+				F124F548749FF5DD1AC268B9 /* pugixml */,
+			);
+			path = libs;
+			sourceTree = "<group>";
+		};
+		F124F548749FF5DD1AC268B9 /* pugixml */ = {
+			isa = PBXGroup;
+			children = (
+				054FED2333CDCBDD33B77B7B /* src */,
+			);
+			path = pugixml;
+			sourceTree = "<group>";
+		};
+		FF67370392D60EB68842FFD2 /* ofxMightyUI */ = {
+			isa = PBXGroup;
+			children = (
+				0A70EE869FD27F8A180D6B21 /* src */,
+			);
+			name = ofxMightyUI;
+			path = ../../../addons/ofxMightyUI;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		E4B69B5A0A3A1756003C02F2 /* Oscilloscope */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E4B69B5F0A3A1757003C02F2 /* Build configuration list for PBXNativeTarget "Oscilloscope" */;
+			buildPhases = (
+				E4B69B580A3A1756003C02F2 /* Sources */,
+				E4B69B590A3A1756003C02F2 /* Frameworks */,
+				E4B6FFFD0C3F9AB9008CF71C /* ShellScript */,
+				E4C2427710CC5ABF004149E2 /* CopyFiles */,
+				BA583CA71A8667B400F4BCB6 /* Resources */,
+				BA2B89131B531A1800E1D9DA /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E4EEB9AC138B136A00A80321 /* PBXTargetDependency */,
+			);
+			name = Oscilloscope;
+			productName = myOFApp;
+			productReference = E4B69B5B0A3A1756003C02F2 /* OscilloscopeDebug.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		E4B69B4C0A3A1720003C02F2 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0620;
+			};
+			buildConfigurationList = E4B69B4D0A3A1720003C02F2 /* Build configuration list for PBXProject "Oscilloscope" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+			);
+			mainGroup = E4B69B4A0A3A1720003C02F2;
+			productRefGroup = E4B69B4A0A3A1720003C02F2;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = E4328144138ABC890047C5CB /* Products */;
+					ProjectRef = E4328143138ABC890047C5CB /* openFrameworksLib.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				E4B69B5A0A3A1756003C02F2 /* Oscilloscope */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		E4328148138ABC890047C5CB /* openFrameworksDebug.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = openFrameworksDebug.a;
+			remoteRef = E4328147138ABC890047C5CB /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		BA583CA71A8667B400F4BCB6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BA25EF0E1C8B6E0400C3B60A /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		E4B6FFFD0C3F9AB9008CF71C /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ REMOVED_DEPS -ne \"yes\"]\nthen\n# Copy libfmod and change install directory for fmod to run\nrsync -aved ../../../libs/fmodex/lib/osx/libfmodex.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/Frameworks/\";\ninstall_name_tool -change @executable_path/libfmodex.dylib @executable_path/../Frameworks/libfmodex.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS/$PRODUCT_NAME\";\n# Copy GLUT framework (must remove for AppStore submissions)\nrsync -aved ../../../libs/glut/lib/osx/GLUT.framework \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/Frameworks/\"\nfi\n\ncp -fR ../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavfilter.5.27.100.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\" 2>/dev/null | echo -n\ncp -fR ../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavformat.56.40.101.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\" 2>/dev/null | echo -n\ncp -fR ../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavutil.54.28.100.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\" 2>/dev/null | echo -n\ncp -fR ../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libswresample.1.2.101.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\" 2>/dev/null | echo -n\ncp -fR ../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libswscale.3.1.101.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\" 2>/dev/null | echo -n\ncp -fR ../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavcodec.56.52.100.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\" 2>/dev/null | echo -n\ncp -fR ../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavdevice.56.4.100.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\" 2>/dev/null | echo -n\ncp -fR ../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavcodec.56.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\" 2>/dev/null | echo -n\ncp -fR ../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavcodec.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\" 2>/dev/null | echo -n\ncp -fR ../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavfilter.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\" 2>/dev/null | echo -n\ncp -fR ../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavfilter.5.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\" 2>/dev/null | echo -n\ncp -fR ../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libswscale.3.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\" 2>/dev/null | echo -n\ncp -fR ../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libswresample.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\" 2>/dev/null | echo -n\ncp -fR ../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavutil.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\" 2>/dev/null | echo -n\ncp -fR ../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libswscale.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\" 2>/dev/null | echo -n\ncp -fR ../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavdevice.56.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\" 2>/dev/null | echo -n\ncp -fR ../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavformat.56.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\" 2>/dev/null | echo -n\ncp -fR ../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libswresample.1.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\" 2>/dev/null | echo -n\ncp -fR ../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavdevice.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\" 2>/dev/null | echo -n\ncp -fR ../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavutil.54.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\" 2>/dev/null | echo -n\ncp -fR ../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavformat.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\" 2>/dev/null | echo -n\ncp -fR ../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libswresample.1.2.100.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\" 2>/dev/null | echo -n\ncp -fR ../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavcodec.56.47.100.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\" 2>/dev/null | echo -n\ncp -fR ../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavformat.56.40.100.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\" 2>/dev/null | echo -n\ncp -fR ../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavfilter.5.21.100.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\" 2>/dev/null | echo -n\ncp -rf ../../../addons/ofxFontAwesome/bin/data/ \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/Resources\"\n\ncp -rf ../../../addons/ofxMightyUI/bin/data/ \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/Resources\"";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		E4B69B580A3A1756003C02F2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BA9F97411B6512FA00A453D6 /* globals.cpp in Sources */,
+				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
+				BA54982119F7274C007E9F6A /* ConfigView.cpp in Sources */,
+				BA54982719F740CE007E9F6A /* OsciView.cpp in Sources */,
+				BA70F79219D39DE9008E990B /* ofxIniSettings.cpp in Sources */,
+				BA828D2D1B378E6D002DE63F /* sounddevices.cpp in Sources */,
+				BAEE5D281B5FB3D10038C838 /* ofApp.cpp in Sources */,
+				BA828D2A1B378A7D002DE63F /* Audio.cpp in Sources */,
+				BADACB631C12F89100ED221C /* FMenu.cpp in Sources */,
+				BAFE8DBD1BDE66B4004BA599 /* OsciAvAudioPlayer.cpp in Sources */,
+				BAA7B2031C69152B0045B34F /* ofxIniExtras.cpp in Sources */,
+				CAFA934398F1617B277FA8A1 /* ofxFontStash2.cpp in Sources */,
+				79139E8FF25B4453D2D2B2FE /* ofxFontStashParser.cpp in Sources */,
+				CA913EA6DCDD413B74FE5D31 /* pugixml.cpp in Sources */,
+				9F6783C22BE58E43DB564213 /* ofxAvAudioPlayer.cpp in Sources */,
+				6AB175562C7B8DA5977B6A8E /* ofxAvAudioWriter.cpp in Sources */,
+				69DAF968A1DA7A23073B97F8 /* ofxAvUtils.cpp in Sources */,
+				3A86737F2DDCF5F34EDDFA6D /* ofxAvVideoWriter.cpp in Sources */,
+				79231EEC98689F0515694AAA /* BarButton.cpp in Sources */,
+				3CFDC0070C0D9DC4C85AF4DC /* Button.cpp in Sources */,
+				B728886FDA83C1DE0C2F5280 /* Container.cpp in Sources */,
+				E269825F55A357AABA89E504 /* CppTweener.cpp in Sources */,
+				C05CD71D597596BBE2C35D82 /* EmptyContainer.cpp in Sources */,
+				FC6CDE119FD5744ECE7C526F /* Helpers.cpp in Sources */,
+				E237CE8195D6012BF10C266B /* Image.cpp in Sources */,
+				B92EFA79541DC1EA518DC974 /* InternalWindow.cpp in Sources */,
+				E8255C03191A97CE94F5DF82 /* Label.cpp in Sources */,
+				59B2636B9FAB86C0A883FC9C /* Layout.cpp in Sources */,
+				902CE6911AD8C03D2831D34E /* MuiConfig.cpp in Sources */,
+				493DB6A99E6B5FCF052016DD /* MuiCore.cpp in Sources */,
+				C6E336E9778AC36F296922B4 /* MuiParameterPanel.cpp in Sources */,
+				1C385D463F652176C0987363 /* MuiTextArea.cpp in Sources */,
+				D64C29FDF8347CFEE09FDF92 /* ofxMightyUI.cpp in Sources */,
+				C746D93FB7F1F1E072BD5073 /* Root.cpp in Sources */,
+				8D9B658B353CDDF212F522BD /* ScrollPane.cpp in Sources */,
+				470A0D8A2290257001EEDC9B /* SegmentedSelect.cpp in Sources */,
+				E5D631D3B05AFF06A387A28C /* Slider.cpp in Sources */,
+				CA75F2B0F73B71281C9D21AE /* SliderWithLabel.cpp in Sources */,
+				9397802B10847A2C74111D6E /* TextField.cpp in Sources */,
+				D112FB27050E454F34ABB6B2 /* TextureAtlas.cpp in Sources */,
+				4CE23CB3B062FA59A47BCD2D /* ToggleButton.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		E4EEB9AC138B136A00A80321 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = openFrameworks;
+			targetProxy = E4EEB9AB138B136A00A80321 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		E4B69B4E0A3A1720003C02F2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E4EB6923138AFD0F00A09F29 /* Project.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(NATIVE_ARCH)";
+				CONFIGURATION_BUILD_DIR = "$(SRCROOT)/bin/";
+				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
+				GCC_AUTO_VECTORIZATION = YES;
+				GCC_ENABLE_SSE3_EXTENSIONS = YES;
+				GCC_ENABLE_SUPPLEMENTAL_SSE3_INSTRUCTIONS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = YES;
+				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = NO;
+				GCC_WARN_ALLOW_INCOMPLETE_PROTOCOL = NO;
+				GCC_WARN_UNINITIALIZED_AUTOS = NO;
+				GCC_WARN_UNUSED_VALUE = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(OF_CORE_HEADERS)",
+					src,
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				OTHER_CPLUSPLUSFLAGS = (
+					"-D__MACOSX_CORE__",
+					"-lpthread",
+					"-mtune=native",
+				);
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		E4B69B4F0A3A1720003C02F2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E4EB6923138AFD0F00A09F29 /* Project.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(NATIVE_ARCH)";
+				CONFIGURATION_BUILD_DIR = "$(SRCROOT)/bin/";
+				COPY_PHASE_STRIP = YES;
+				DEAD_CODE_STRIPPING = YES;
+				GCC_AUTO_VECTORIZATION = YES;
+				GCC_ENABLE_SSE3_EXTENSIONS = YES;
+				GCC_ENABLE_SUPPLEMENTAL_SSE3_INSTRUCTIONS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_UNROLL_LOOPS = YES;
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = YES;
+				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = NO;
+				GCC_WARN_ALLOW_INCOMPLETE_PROTOCOL = NO;
+				GCC_WARN_UNINITIALIZED_AUTOS = NO;
+				GCC_WARN_UNUSED_VALUE = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(OF_CORE_HEADERS)",
+					src,
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				OTHER_CPLUSPLUSFLAGS = (
+					"-D__MACOSX_CORE__",
+					"-lpthread",
+					"-mtune=native",
+				);
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		E4B69B600A3A1757003C02F2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1)",
+				);
+				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../../libs/glut/lib/osx\"";
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_MODEL_TUNING = NONE;
+				HEADER_SEARCH_PATHS = (
+					"$(OF_CORE_HEADERS)",
+					src,
+					../../../addons/ofxAvCodec/libs/avcodec/include,
+				);
+				ICON_FILE = "$(ICON_FILE_PATH)$(ICON)";
+				INFOPLIST_FILE = "openFrameworks-Info.plist";
+				INSTALL_PATH = /Applications;
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				OTHER_LDFLAGS = (
+					"$(OF_CORE_FRAMEWORKS)",
+					"$(OF_CORE_LIBS)",
+					../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavcodec.56.dylib,
+					../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavcodec.dylib,
+					../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavfilter.dylib,
+					../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libswresample.1.2.100.dylib,
+					../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavfilter.5.dylib,
+					../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavcodec.56.47.100.dylib,
+					../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libswscale.3.dylib,
+					../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libswresample.dylib,
+					../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavutil.dylib,
+					../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavutil.54.28.100.dylib,
+					../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libswscale.dylib,
+					../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libswscale.3.1.101.dylib,
+					../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavdevice.56.4.100.dylib,
+					../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavdevice.56.dylib,
+					../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavformat.56.dylib,
+					../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libswresample.1.dylib,
+					../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavdevice.dylib,
+					../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavformat.56.40.100.dylib,
+					../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavfilter.5.21.100.dylib,
+					../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavutil.54.dylib,
+					../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavformat.dylib,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)Debug";
+				USER_HEADER_SEARCH_PATHS = "../../../addons/ofxAvCodec/libs/avcodec/include ../../../addons/ofxMightyUI/libs/stb_textedit/include";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		E4B69B610A3A1757003C02F2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1)",
+				);
+				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../../libs/glut/lib/osx\"";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_MODEL_TUNING = NONE;
+				HEADER_SEARCH_PATHS = (
+					"$(OF_CORE_HEADERS)",
+					src,
+					../../../addons/ofxAvCodec/libs/avcodec/include,
+				);
+				ICON_FILE = "$(ICON_FILE_PATH)$(ICON)";
+				INFOPLIST_FILE = "openFrameworks-Info.plist";
+				INSTALL_PATH = /Applications;
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				OTHER_LDFLAGS = (
+					"$(OF_CORE_FRAMEWORKS)",
+					"$(OF_CORE_LIBS)",
+					../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavcodec.56.dylib,
+					../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavcodec.dylib,
+					../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavfilter.dylib,
+					../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libswresample.1.2.100.dylib,
+					../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavfilter.5.dylib,
+					../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavcodec.56.47.100.dylib,
+					../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libswscale.3.dylib,
+					../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libswresample.dylib,
+					../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavutil.dylib,
+					../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavutil.54.28.100.dylib,
+					../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libswscale.dylib,
+					../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libswscale.3.1.101.dylib,
+					../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavdevice.56.4.100.dylib,
+					../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavdevice.56.dylib,
+					../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavformat.56.dylib,
+					../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libswresample.1.dylib,
+					../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavdevice.dylib,
+					../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavformat.56.40.100.dylib,
+					../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavfilter.5.21.100.dylib,
+					../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavutil.54.dylib,
+					../../../addons/ofxAvCodec/libs/avcodec/lib/osx/libavformat.dylib,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "../../../addons/ofxAvCodec/libs/avcodec/include ../../../addons/ofxMightyUI/libs/stb_textedit/include";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		E4B69B4D0A3A1720003C02F2 /* Build configuration list for PBXProject "Oscilloscope" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E4B69B4E0A3A1720003C02F2 /* Debug */,
+				E4B69B4F0A3A1720003C02F2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E4B69B5F0A3A1757003C02F2 /* Build configuration list for PBXNativeTarget "Oscilloscope" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E4B69B600A3A1757003C02F2 /* Debug */,
+				E4B69B610A3A1757003C02F2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = E4B69B4C0A3A1720003C02F2 /* Project object */;
+}
