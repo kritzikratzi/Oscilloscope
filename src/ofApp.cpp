@@ -14,7 +14,8 @@ void ofApp::setup(){
 	mui::MuiConfig::fontSize = 16;
 	showInfo = false;
 	dropped = 0;
-	changed = false;
+	changed1 = false;
+	changed2 = false;
 	clearFbos = false;
 	lastMouseMoved = 0;
 	exporting = 0;
@@ -50,8 +51,14 @@ void ofApp::setup(){
 	osciView->visible = false;
 	root->add( osciView );
 	
-	left.loop = false;
-	right.loop = false;
+	TCP = NULL;
+	fetcher = new Fetcher( this );
+	fetcher->startThread();
+	
+	left1.loop = false;
+	right1.loop = false;
+	left2.loop = false;
+	right2.loop = false;
 
 	
 	if( globals.autoDetect ){
@@ -67,8 +74,10 @@ void ofApp::startApplication(){
 	if( applicationRunning ) return;
 	applicationRunning = true;
 	cout << "starting ..." << endl; 
-	left.play();
-	right.play();
+	left1.play();
+	right1.play();
+	left2.play();
+	right2.play();
 
 	configView->toGlobals();
 	globals.saveToFile();
@@ -87,9 +96,12 @@ void ofApp::startApplication(){
 	cout << "    Buffer size: " << globals.bufferSize << endl;
 	cout << "    Num Buffers: " << globals.numBuffers << endl;
 	
-	soundStream.setDeviceID( globals.deviceId );
-	soundStream.setup(this, 2, 0, globals.sampleRate, globals.bufferSize, globals.numBuffers);
+	//soundStream.setDeviceID( globals.deviceId );
+	//soundStream.setup(this, 2, 0, globals.sampleRate, globals.bufferSize, globals.numBuffers);
 	globals.player.setupAudioOut(2, globals.sampleRate);
+	
+	TCP = new ofxTCPServer();
+	TCP->setup(1234,true);
 }
 
 
@@ -99,12 +111,16 @@ void ofApp::stopApplication(){
 	
 	if( !applicationRunning ) return;
 	applicationRunning = false;
-	soundStream.stop();
-	soundStream = ofSoundStream();
+	//soundStream.stop();
+	//soundStream = ofSoundStream();
 	micStream.stop();
 	globals.micActive = false;
 	configView->visible = true;
 	osciView->visible = false;
+	
+	TCP->close();
+	delete TCP;
+	TCP = NULL;
 }
 
 
@@ -118,7 +134,7 @@ void ofApp::update(){
 
 	/////////////////////////////////////////////////
 	// take care of hiding / showing the ui
-	if( ofGetElapsedTimeMillis()-lastMouseMoved > 1500 && ( globals.player.isPlaying || globals.micActive ) ){
+	if( ofGetElapsedTimeMillis()-lastMouseMoved > 1500 ){
 		// this is not the greatest solution, but hey ho, it works ...
 		mui::Container * res = root->findChildAt(ofGetMouseX()/mui::MuiConfig::scaleFactor, ofGetMouseY()/mui::MuiConfig::scaleFactor);
 		bool foundOsciView = false;
@@ -156,10 +172,10 @@ void ofApp::update(){
 		dropped = 0;
 		
 		// resize&clear fbo
-		fbo.allocate(globals.exportWidth, globals.exportHeight, GL_RGBA);
-		fbo.begin();
+		fbo1.allocate(globals.exportWidth, globals.exportHeight, GL_RGBA);
+		fbo1.begin();
 		ofClear(0,255);
-		fbo.end();
+		fbo1.end();
 		
 		// reset player
 		exporting = 2;
@@ -199,15 +215,21 @@ void ofApp::update(){
 		globals.player.setPositionMS(0);
 	}
 	
+	update( shapeMesh1, left1, right1, changed1, last1, 0 );
+	update( shapeMesh2, left2, right2, changed2, last2, 1 );
+}
+
+
+void ofApp::update( ofMesh &shapeMesh, MonoSample &left, MonoSample &right, bool & changed, ofPoint & last, int index ){
 	/////////////////////////////////////////////////
 	// copy buffer data to the mesh
-	
 	changed = false;
+	
 	shapeMesh.clear();
 	shapeMesh.setMode(OF_PRIMITIVE_LINES);
 	shapeMesh.enableColors();
 	
-	int bufferSize = (exporting==0?2084:256);
+	int bufferSize = (exporting==0?2048:256);
 	static float * leftBuffer = new float[bufferSize];
 	static float * rightBuffer = new float[bufferSize];
 
@@ -215,8 +237,6 @@ void ofApp::update(){
 	//globals.hue += ofGetMouseX()*100/ofGetWidth();
 	//globals.hue = fmodf(globals.hue,360);
 	
-	MonoSample &left = globals.micActive?(this->left):globals.player.left192;
-	MonoSample &right = globals.micActive?(this->right):globals.player.right192;
 	left.play();
 	right.play();
 	bool isMono = !globals.micActive && globals.player.isMonoFile;
@@ -283,7 +303,7 @@ ofMatrix4x4 ofApp::getViewMatrix() {
 	}
 
 	ofMatrix4x4 aspectMatrix; // identity matrix
-	float aspectRatio = float(fbo.getWidth()) / float(fbo.getHeight());
+	float aspectRatio = float(fbo1.getWidth()) / float(fbo1.getHeight());
 	if (aspectRatio > 1.0) {
 		aspectMatrix(0,0) /= aspectRatio;
 	}
@@ -297,7 +317,11 @@ ofMatrix4x4 ofApp::getViewMatrix() {
 //--------------------------------------------------------------
 void ofApp::draw(){
 	ofClear(0,255);
-	
+	draw(fbo1, shapeMesh1, changed1);
+	draw(fbo2, shapeMesh2, changed2);
+}
+
+void ofApp::draw(ofFbo & fbo, ofMesh & shapeMesh, bool & changed ){
 	if( !fbo.isAllocated() || fbo.getWidth() != ofGetWidth() || fbo.getHeight() != ofGetHeight() ){
 		int w = ofGetWidth(); 
 		int h = ofGetHeight();
@@ -320,7 +344,7 @@ void ofApp::draw(){
 		}
 	}
 	
-	if( changed && ( globals.player.isPlaying || globals.micActive ) ){
+	if( changed ){
 		fbo.begin();
 		ofEnableBlendMode(OF_BLENDMODE_MULTIPLY);
 		ofSetColor( 0, (1-globals.afterglow)*255 );
@@ -351,7 +375,9 @@ void ofApp::draw(){
 	}
 	
 	ofSetColor(255);
+	ofEnableBlendMode(OF_BLENDMODE_ADD);
 	fbo.draw(0,0);
+	ofEnableAlphaBlending();
 	
 	if( exporting >= 2 ){
 		string filename = ofToDataPath(exportDir + "/" + ofToString(exportFrameNum, 5, '0') + ".png");
@@ -472,8 +498,8 @@ void ofApp::windowResized(int w, int h){
 //--------------------------------------------------------------
 void ofApp::audioIn(float * input, int bufferSize, int nChannels){
 	if( globals.micActive ){
-		left.append(input, bufferSize,2);
-		right.append(input+1,bufferSize,2);
+//		left.append(input, bufferSize,2);
+//		right.append(input+1,bufferSize,2);
 	}
 }
 
@@ -534,4 +560,62 @@ void ofApp::dragEvent(ofDragInfo dragInfo){
 		fileToLoad = dragInfo.files[0];
 	}
 	
+}
+
+
+
+Fetcher::Fetcher( ofApp * app ){
+	this->app = app;
+}
+
+void Fetcher::threadedFunction(){
+	while( isThreadRunning() ){
+		ofxTCPServer * TCP = app->TCP;
+		if( TCP != NULL && TCP->isConnected() ){
+			for( int x = 0; x < 50; x ++ ){
+				for(int i = 0; i < TCP->getLastID(); i++){
+					if( !TCP->isClientConnected(i) ) continue;
+					//string port = ofToString( TCP.getClientPort(i) );
+					string ip   = TCP->getClientIP(i);
+					static float * result = NULL;
+					int len = globals.bufferSize*2*sizeof(float);
+					if( result == NULL ){
+						result = new float[192000*2];
+					}
+					
+					if( ip == "10.0.1.2"){
+						//hansi
+						int received_bytes = 0;
+						int want_bytes = globals.bufferSize*2*sizeof(float);
+						while( want_bytes > 0 ){
+							int len = TCP->receiveRawBytes(i, (char*)(result)+received_bytes, want_bytes );
+							received_bytes += len;
+							want_bytes -= len;
+						}
+						
+						if( app->left2.totalLength < 1024*8 ){
+							app->left2.append(result+0, globals.bufferSize,2);
+							app->right2.append(result+1,globals.bufferSize,2);
+						}
+					}
+					else if( ip == "10.0.1.1"){
+						// jerobeam
+						int received_bytes = 0;
+						int want_bytes = globals.bufferSize*2*sizeof(float);
+						while( want_bytes > 0 ){
+							int len = TCP->receiveRawBytes(i, (char*)(result)+received_bytes, want_bytes );
+							received_bytes += len;
+							want_bytes -= len;
+						}
+						
+						if( app->left1.totalLength < 1024*8 ){
+							app->left1.append(result+0, globals.bufferSize,2);
+							app->right1.append(result+1,globals.bufferSize,2);
+						}
+					}
+				}
+			}
+		}
+		ofSleepMillis(1);
+	}
 }

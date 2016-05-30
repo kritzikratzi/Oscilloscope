@@ -10,6 +10,19 @@
 #include "util/Audio.h"
 #include "ofxAvAudioPlayer.h"
 
+#include "ofxTCPServer.h"
+#include "ofThread.h"
+
+class ofApp;
+class Fetcher : public ofThread{
+public:
+	Fetcher( ofApp * app );
+	void threadedFunction();
+	
+	ofApp * app;
+};
+
+
 class ofApp : public ofBaseApp{
 
 	public:
@@ -18,7 +31,9 @@ class ofApp : public ofBaseApp{
 		void startApplication();
 		void stopApplication();
 		void update();
+		void update( ofMesh &shapeMesh, MonoSample &left, MonoSample &right, bool & changed, ofPoint & last, int index );
 		void draw();
+		void draw(ofFbo & fbo, ofMesh & shapeMesh, bool & changed );
 		void exit();
 
 		void keyPressed  (int key);
@@ -43,15 +58,20 @@ class ofApp : public ofBaseApp{
 		ConfigView * configView;
 		OsciView * osciView;
 		ofPath path;
-		ofMesh shapeMesh;
-		ofFbo fbo;
+		ofMesh shapeMesh1;
+		ofMesh shapeMesh2;
+		ofFbo fbo1;
+		ofFbo fbo2;
 		ofShader shader;
 		ShaderLoader shaderLoader;
 	
-		MonoSample left;
-		MonoSample right;
+		MonoSample left1;
+		MonoSample right1;
+		MonoSample left2;
+		MonoSample right2;
 	
-		bool changed;
+		bool changed1;
+		bool changed2;
 		bool clearFbos;
 		int dropped; 
 		bool showInfo; 
@@ -64,5 +84,10 @@ class ofApp : public ofBaseApp{
 		unsigned long long lastMouseMoved;
 		string fileToLoad;
 	
-		ofPoint last; 
+		ofPoint last1;
+		ofPoint last2;
+	
+		ofxTCPServer * TCP;
+		Fetcher * fetcher;
+
 };
