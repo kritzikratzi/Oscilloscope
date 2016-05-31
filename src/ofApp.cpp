@@ -583,15 +583,20 @@ void Fetcher::threadedFunction(){
 						result = new float[192000*2];
 					}
 					
+					int numTries = 10;
 					if( ip == "10.0.1.2"){
 						//hansi
 						int received_bytes = 0;
 						int want_bytes = globals.bufferSize*2*sizeof(float);
-						while( want_bytes > 0 ){
+						while( want_bytes > 0 && numTries > 0){
 							int len = TCP->receiveRawBytes(i, (char*)(result)+received_bytes, want_bytes );
 							received_bytes += len;
 							want_bytes -= len;
+							ofSleepMillis(1);
+							numTries--;
 						}
+
+						if (want_bytes > 0) continue;
 						
 						if( app->left2.totalLength < 1024*8 ){
 							app->left2.append(result+0, globals.bufferSize,2);
@@ -602,12 +607,17 @@ void Fetcher::threadedFunction(){
 						// jerobeam
 						int received_bytes = 0;
 						int want_bytes = globals.bufferSize*2*sizeof(float);
-						while( want_bytes > 0 ){
+						int numTries = 10; 
+						while( want_bytes > 0 && numTries > 0){
 							int len = TCP->receiveRawBytes(i, (char*)(result)+received_bytes, want_bytes );
 							received_bytes += len;
 							want_bytes -= len;
+							ofSleepMillis(1);
+							numTries --;
 						}
 						
+						if (want_bytes > 0) continue;
+
 						if( app->left1.totalLength < 1024*8 ){
 							app->left1.append(result+0, globals.bufferSize,2);
 							app->right1.append(result+1,globals.bufferSize,2);

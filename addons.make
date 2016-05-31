@@ -3,4 +3,6 @@ ofxFontAwesome
 ofxFontStash2
 ofxMightyUI
 ofxNetwork
+ofxOsc
 ofxRemoteUI
+ofxXmlSettings
