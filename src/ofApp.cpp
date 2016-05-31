@@ -9,6 +9,11 @@ Poco::Mutex updateMutex;
 
 bool applicationRunning = false;
 
+void shareSlider( string name, mui::SliderWithLabel * swl ){
+	mui::Slider * slider = swl->slider;
+	RUI_SHARE_PARAM_WCN( name, slider->value, slider->min, slider->max );
+}
+
 //--------------------------------------------------------------
 void ofApp::setup(){
 	mui::MuiConfig::fontSize = 16;
@@ -67,6 +72,14 @@ void ofApp::setup(){
 
 
 	windowResized(ofGetWidth(), ofGetHeight());
+	RUI_SETUP(1235);
+	ofxRemoteUIServer::instance()->setDrawsNotificationsAutomaticallly(false);
+	ofxRemoteUIServer::instance()->setShowUIDuringEdits(false); 
+	shareSlider("scale1", osciView->scaleSlider1);
+	shareSlider("scale2", osciView->scaleSlider2);
+	shareSlider("hue1", osciView->hueSlider1);
+	shareSlider("hue2", osciView->hueSlider2);
+	shareSlider("spread", osciView->spreadSlider);
 }
 
 
@@ -215,12 +228,12 @@ void ofApp::update(){
 		globals.player.setPositionMS(0);
 	}
 	
-	update( shapeMesh1, left1, right1, changed1, last1, 0 );
-	update( shapeMesh2, left2, right2, changed2, last2, 1 );
+	update( shapeMesh1, left1, right1, changed1, last1, globals.scale1, globals.spread, globals.hue1, 0 );
+	update( shapeMesh2, left2, right2, changed2, last2, globals.scale1, globals.spread, globals.hue2, 1 );
 }
 
 
-void ofApp::update( ofMesh &shapeMesh, MonoSample &left, MonoSample &right, bool & changed, ofPoint & last, int index ){
+void ofApp::update( ofMesh &shapeMesh, MonoSample &left, MonoSample &right, bool & changed, ofPoint & last, float & scale, float & spread, float & hue, int index ){
 	/////////////////////////////////////////////////
 	// copy buffer data to the mesh
 	changed = false;
@@ -258,7 +271,7 @@ void ofApp::update( ofMesh &shapeMesh, MonoSample &left, MonoSample &right, bool
 				right.addTo(rightBuffer, 1, bufferSize);
 			}
 			
-			ofColor col = ofColor::fromHsb(globals.hue*255/360, 255, 255*globals.intensity);
+			ofColor col = ofColor::fromHsb(hue*255/360, 255, 255*globals.intensity);
 			
 			if( shapeMesh.getVertices().size() < bufferSize*4 || exporting ){
 				ofPoint a, b = ofPoint(leftBuffer[0], rightBuffer[0]);
@@ -284,10 +297,13 @@ void ofApp::update( ofMesh &shapeMesh, MonoSample &left, MonoSample &right, bool
 	}
 }
 
-ofMatrix4x4 ofApp::getViewMatrix() {
+ofMatrix4x4 ofApp::getViewMatrix(float scale, int index) {
+	scale = scale*(1-fabsf(globals.spread)*0.5);
+	float vx = globals.spread*0.5*(index==0?-1:1);
+	
 	ofMatrix4x4 viewMatrix = ofMatrix4x4(
-		globals.scale, 0.0, 0.0, 0.0, 
-		0.0, -globals.scale, 0.0, 0.0, 
+		scale, 0.0, 0.0, globals.spread,
+		0.0, -scale, 0.0, 0,
 		0.0, 0.0, 1.0, 0.0, 
 		0.0, 0.0, 0.0, 1.0);
 
@@ -296,7 +312,7 @@ ofMatrix4x4 ofApp::getViewMatrix() {
 
 	if (globals.flipXY) {
 		viewMatrix = ofMatrix4x4(
-			0.0, 1.0, 0.0, 0.0, 
+			0.0, 1.0, 0.0, globals.spread,
 			1.0, 0.0, 0.0, 0.0, 
 			0.0, 0.0, 1.0, 0.0, 
 			0.0, 0.0, 0.0, 1.0 ) * viewMatrix;
@@ -317,11 +333,11 @@ ofMatrix4x4 ofApp::getViewMatrix() {
 //--------------------------------------------------------------
 void ofApp::draw(){
 	ofClear(0,255);
-	draw(fbo1, shapeMesh1, changed1);
-	draw(fbo2, shapeMesh2, changed2);
+	draw(fbo1, shapeMesh1, changed1, globals.scale1, globals.spread, globals.hue1, 0 );
+	draw(fbo2, shapeMesh2, changed2, globals.scale2, globals.spread, globals.hue2, 1 );
 }
 
-void ofApp::draw(ofFbo & fbo, ofMesh & shapeMesh, bool & changed ){
+void ofApp::draw(ofFbo & fbo, ofMesh & shapeMesh, bool & changed, float & scale, float & spread, float & hue, int index ){
 	if( !fbo.isAllocated() || fbo.getWidth() != ofGetWidth() || fbo.getHeight() != ofGetHeight() ){
 		int w = ofGetWidth(); 
 		int h = ofGetHeight();
@@ -352,7 +368,7 @@ void ofApp::draw(ofFbo & fbo, ofMesh & shapeMesh, bool & changed ){
 		ofRect( 0, 0, fbo.getWidth(), fbo.getHeight() );
 	
 		ofEnableAlphaBlending();
-		ofMatrix4x4 viewMatrix = getViewMatrix();
+		ofMatrix4x4 viewMatrix = getViewMatrix(scale,index);
 
 //      TODO: draw the cross section
 //		ofSetColor(255, 0, 0, 25);
@@ -365,7 +381,7 @@ void ofApp::draw(ofFbo & fbo, ofMesh & shapeMesh, bool & changed ){
 		shader.setUniform1f("uSize", globals.strokeWeight / 1000.0);
 		shader.setUniform1f("uIntensity", globals.intensity);
 		shader.setUniformMatrix4f("uMatrix", viewMatrix);
-		shader.setUniform1f("uHue", globals.hue );
+		shader.setUniform1f("uHue", hue );
 		ofSetColor(255);
 		shapeMesh.draw();
 		shader.end();

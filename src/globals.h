@@ -16,7 +16,7 @@
 #define globals (Globals::instance)
 class Globals{
 public:
-	Globals() :  sampleRate(44100), bufferSize(512), numBuffers(4), deviceId(0),scale(1.0),flipXY(false),invertX(false),invertY(false),autoDetect(true), outputVolume(1), inputVolume(1), strokeWeight(10), blur(30), numPts(20), hue(50),intensity(0.4), afterglow(0.5), exportWidth(1920), exportHeight(1080), exportFrameRate(60),micDeviceId(-1),micActive(false),alwaysOnTop(false){
+	Globals() :  sampleRate(44100), bufferSize(512), numBuffers(4), deviceId(0),scale1(1.0),scale2(1.0),flipXY(false),invertX(false),invertY(false),autoDetect(true), outputVolume(1), inputVolume(1), strokeWeight(10), blur(30), numPts(20), hue1(50),hue2(150),intensity(0.4), afterglow(0.5), exportWidth(1920), exportHeight(1080), exportFrameRate(60),micDeviceId(-1),micActive(false),alwaysOnTop(false),spread(0){
 	}
 	
 	// audio settings
@@ -29,7 +29,8 @@ public:
 	bool micActive;
 	
 	// display settings
-	float scale;
+	float scale1;
+	float scale2;
 	bool invertX;
 	bool invertY;
 	bool flipXY;
@@ -40,7 +41,9 @@ public:
 	float afterglow; // 0...1
 	
 	int numPts; // 1...+inf?
-	float hue; // 0...360
+	float hue1; // 0...360
+	float hue2; // 0...360
+	float spread;
 	
 	float outputVolume;
 	float inputVolume;
@@ -57,7 +60,8 @@ public:
 		sampleRate = settings.get("sampleRate",  sampleRate );
 		numBuffers = settings.get( "numBuffers", numBuffers );
 		deviceId = settings.get( "deviceId", deviceId );
-		scale = settings.get( "scale", scale );
+		scale1 = settings.get( "scale1", scale1 );
+		scale2 = settings.get( "scale2", scale2 );
 		flipXY = settings.get( "flipXY", flipXY );
 		invertX = settings.get( "invertX", invertX );
 		invertY = settings.get( "invertY", invertY );
@@ -67,7 +71,9 @@ public:
 		strokeWeight = settings.get( "strokeWeight", strokeWeight );
 		blur = settings.get( "blur", blur );
 		numPts = settings.get( "numPts", numPts );
-		hue = settings.get( "hue", hue );
+		hue1 = settings.get( "hue1", hue1 );
+		hue2 = settings.get( "hue2", hue2 );
+		spread = settings.get( "spread", spread );
 		intensity = settings.get( "intensity", intensity );
 		afterglow = settings.get( "afterglow", afterglow );
 		exportFrameRate = settings.get( "exportFrameRate", exportFrameRate );
@@ -83,7 +89,8 @@ public:
 		settings.set( "sampleRate", sampleRate );
 		settings.set( "numBuffers", numBuffers );
 		settings.set( "deviceId", deviceId );
-		settings.set( "scale", scale );
+		settings.set( "scale1", scale1 );
+		settings.set( "scale2", scale2 );
 		settings.set( "flipXY", flipXY );
 		settings.set( "invertX", invertX );
 		settings.set( "invertY", invertY );
@@ -93,12 +100,14 @@ public:
 		settings.set( "strokeWeight", strokeWeight );
 		settings.set( "blur", blur );
 		settings.set( "numPts", numPts );
-		settings.set( "hue", hue );
+		settings.set( "hue1", hue1 );
+		settings.set( "hue2", hue2 );
 		settings.set( "intensity", intensity );
 		settings.set( "afterglow", afterglow );
 		settings.set( "exportFrameRate", exportFrameRate );
 		settings.set( "exportWidth", exportWidth );
 		settings.set( "exportHeight", exportHeight );
+		settings.set( "spread", spread);
 	}
 	
 	

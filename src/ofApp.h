@@ -12,6 +12,8 @@
 
 #include "ofxTCPServer.h"
 #include "ofThread.h"
+#include "ofxRemoteUIServer.h"
+
 
 class ofApp;
 class Fetcher : public ofThread{
@@ -31,9 +33,9 @@ class ofApp : public ofBaseApp{
 		void startApplication();
 		void stopApplication();
 		void update();
-		void update( ofMesh &shapeMesh, MonoSample &left, MonoSample &right, bool & changed, ofPoint & last, int index );
+		void update( ofMesh &shapeMesh, MonoSample &left, MonoSample &right, bool & changed, ofPoint & last, float & scale, float & spread, float & hue, int index );
 		void draw();
-		void draw(ofFbo & fbo, ofMesh & shapeMesh, bool & changed );
+		void draw(ofFbo & fbo, ofMesh & shapeMesh, bool & changed, float & scale, float & spread, float & hue, int index );
 		void exit();
 
 		void keyPressed  (int key);
@@ -49,7 +51,7 @@ class ofApp : public ofBaseApp{
 		void audioIn(float * input, int bufferSize, int nChannels);
 		void audioOut( float * output, int bufferSize, int nChannels ); 
 
-		ofMatrix4x4 getViewMatrix();
+		ofMatrix4x4 getViewMatrix( float scale, int index );
 	
 		ofSoundStream soundStream;
 		ofSoundStream micStream;

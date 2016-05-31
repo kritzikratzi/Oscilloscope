@@ -21,11 +21,24 @@ OsciView::OsciView( float x_, float y_, float width_, float height_)
 	add( stopButton );
 	
 	scaleLabel = addLabel( "Scale" );
-	scaleSlider = new mui::SliderWithLabel( x, y, w, h, 0.1, 2, 1, 2 );
-	scaleSlider->label->fg = ofColor(255);
-	ofAddListener( scaleSlider->slider->onChange, this, &OsciView::sliderChanged );
-	y += scaleSlider->height + 10;
-	add( scaleSlider );
+	scaleSlider1 = new mui::SliderWithLabel( x, y, w, h, 0.1, 2, 1, 2 );
+	scaleSlider1->label->fg = ofColor(255);
+	ofAddListener( scaleSlider1->slider->onChange, this, &OsciView::sliderChanged );
+	y += scaleSlider1->height + 10;
+	add( scaleSlider1 );
+	
+	scaleSlider2 = new mui::SliderWithLabel( x, y, w, h, 0.1, 2, 1, 2 );
+	scaleSlider2->label->fg = ofColor(255);
+	ofAddListener( scaleSlider2->slider->onChange, this, &OsciView::sliderChanged );
+	y += scaleSlider2->height + 10;
+	add( scaleSlider2 );
+	
+	spreadLabel = addLabel( "Spread" );
+	spreadSlider = new mui::SliderWithLabel( x, y, w, h, -1, 1, 1, 2 );
+	spreadSlider->label->fg = ofColor(255);
+	ofAddListener( spreadSlider->slider->onChange, this, &OsciView::sliderChanged );
+	y += scaleSlider1->height + 10;
+	add( scaleSlider1 );
 	
 	
 	w = 90;
@@ -92,10 +105,15 @@ OsciView::OsciView( float x_, float y_, float width_, float height_)
 	add(numPtsSlider);
 
 	hueLabel = addLabel( "Hue" );
-	hueSlider = new mui::SliderWithLabel(0,0,100,h,0,360, 127, 0);
-	ofAddListener( hueSlider->slider->onChange, this, &OsciView::sliderChanged );
-	hueSlider->label->fg = ofColor(255);
-	add(hueSlider);
+	hueSlider1 = new mui::SliderWithLabel(0,0,100,h,0,360, 127, 0);
+	ofAddListener( hueSlider1->slider->onChange, this, &OsciView::sliderChanged );
+	hueSlider1->label->fg = ofColor(255);
+	add(hueSlider1);
+	
+	hueSlider2 = new mui::SliderWithLabel(0,0,100,h,0,360, 127, 0);
+	ofAddListener( hueSlider2->slider->onChange, this, &OsciView::sliderChanged );
+	hueSlider2->label->fg = ofColor(255);
+	add(hueSlider2);
 	
 	intensityLabel = addLabel( "Intensity" );
 	intensitySlider = new mui::SliderWithLabel(0,0,100,h,0,1, 0.5, 2);
@@ -132,9 +150,9 @@ void OsciView::layout(){
 	mui::L(invertY).rightOf(invertX, 10);
 	mui::L(flipXY).rightOf(invertY,10);
 	mui::L(scaleLabel).rightOf(flipXY,20);
-	mui::L(scaleSlider).rightOf(scaleLabel,5).stretchToRightEdgeOf(this,10);
-	
-	mui::L(strokeWeightLabel).below(scaleLabel).alignRightEdgeTo(scaleLabel);
+	mui::L(scaleSlider1).rightOf(scaleLabel,5).stretchToRightEdgeOf(this,10);
+	mui::L(scaleSlider2).below(scaleSlider2).stretchToRightEdgeOf(this,10);
+	mui::L(strokeWeightLabel).below(scaleSlider2).alignRightEdgeTo(scaleLabel);
 	mui::L(strokeWeightSlider).rightOf(strokeWeightLabel,5).stretchToRightEdgeOf(this,10);
 	
 	/*mui::L(blurLabel).below(strokeWeightLabel).alignRightEdgeTo(strokeWeightLabel);
@@ -148,9 +166,15 @@ void OsciView::layout(){
 	numPtsSlider->visible = false;
 	
 	mui::L(hueLabel).below(strokeWeightLabel).alignRightEdgeTo(strokeWeightLabel);
-	mui::L(hueSlider).rightOf(hueLabel,5).stretchToRightEdgeOf(this,10);
+	mui::L(hueSlider1).rightOf(hueLabel,5).stretchToRightEdgeOf(this,10);
+	mui::L(hueSlider2).below(hueSlider1).stretchToRightEdgeOf(this,10);
 	
-	mui::L(intensityLabel).below(hueLabel).alignRightEdgeTo(hueLabel);
+	mui::L(spreadLabel).below(hueSlider2).alignRightEdgeTo(hueLabel);
+	mui::L(spreadLabel).rightOf(spreadLabel,5).stretchToRightEdgeOf(this,10);
+	
+	
+	
+	mui::L(intensityLabel).below(spreadLabel).alignRightEdgeTo(spreadLabel);
 	mui::L(intensitySlider).rightOf(intensityLabel,5).stretchToRightEdgeOf(this,10);
 	
 	mui::L(afterglowLabel).below(intensityLabel).alignRightEdgeTo(intensityLabel);
@@ -238,11 +262,14 @@ void OsciView::fromGlobals(){
 		playButton->commit();
 	}
 	
-	scaleSlider->slider->value = globals.scale;
+	scaleSlider1->slider->value = globals.scale1;
+	scaleSlider2->slider->value = globals.scale2;
 	strokeWeightSlider->slider->value = globals.strokeWeight;
 	blurSlider->slider->value = globals.blur;
 	numPtsSlider->slider->value = globals.numPts;
-	hueSlider->slider->value = globals.hue;
+	hueSlider1->slider->value = globals.hue1;
+	hueSlider2->slider->value = globals.hue2;
+	spreadSlider->slider->value = globals.spread;
 	intensitySlider->slider->value = globals.intensity;
 	afterglowSlider->slider->value = globals.afterglow;
 	invertX->selected = globals.invertX;
@@ -339,8 +366,14 @@ void OsciView::sliderChanged( const void * sender, float & value ){
 	if( sender == outputVolumeSlider->slider ){
 		globals.outputVolume = outputVolumeSlider->slider->value;
 	}
-	else if( sender == scaleSlider->slider ){
-		globals.scale = scaleSlider->slider->value;
+	else if( sender == scaleSlider1->slider ){
+		globals.scale1 = scaleSlider1->slider->value;
+	}
+	else if( sender == scaleSlider2->slider ){
+		globals.scale2 = scaleSlider2->slider->value;
+	}
+	else if( sender == spreadSlider->slider ){
+		globals.spread = spreadSlider->slider->value;
 	}
 	else if( sender == strokeWeightSlider->slider ){
 		globals.strokeWeight = strokeWeightSlider->slider->value;
@@ -351,8 +384,11 @@ void OsciView::sliderChanged( const void * sender, float & value ){
 	else if( sender == numPtsSlider->slider ){
 		globals.numPts = numPtsSlider->slider->value;
 	}
-	else if( sender == hueSlider->slider ){
-		globals.hue = hueSlider->slider->value;
+	else if( sender == hueSlider1->slider ){
+		globals.hue1 = hueSlider1->slider->value;
+	}
+	else if( sender == hueSlider2->slider ){
+		globals.hue2 = hueSlider2->slider->value;
 	}
 	else if( sender == intensitySlider->slider ){
 		globals.intensity = intensitySlider->slider->value;

@@ -29,7 +29,10 @@ public:
 	FaToggleButton * useMicButton;
 	
 	FaButton * stopButton;
-	mui::SliderWithLabel * scaleSlider;
+	mui::SliderWithLabel * scaleSlider1;
+	mui::SliderWithLabel * scaleSlider2;
+	mui::Label * spreadLabel; 
+	mui::SliderWithLabel * spreadSlider;
 	
 	FaToggleButton * fullscreenButton; 
 	FaToggleButton * flipXY;
@@ -54,7 +57,8 @@ public:
 	mui::SliderWithLabel * numPtsSlider;
 	mui::Label * numPtsLabel;
 	
-	mui::SliderWithLabel * hueSlider;
+	mui::SliderWithLabel * hueSlider1;
+	mui::SliderWithLabel * hueSlider2;
 	mui::Label * hueLabel;
 	
 	mui::SliderWithLabel * intensitySlider;

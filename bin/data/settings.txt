@@ -1,3 +1,8 @@
+spread=0
+hue2=150
+hue1=50
+scale2=1
+scale1=1
 exportHeight=1080
 exportWidth=1920
 exportFrameRate=60
@@ -14,7 +19,7 @@ invertY=false
 invertX=false
 flipXY=false
 scale=1.38506
-deviceId=-842150451
+deviceId=1
 numBuffers=4
 sampleRate=96000
 bufferSize=2048
