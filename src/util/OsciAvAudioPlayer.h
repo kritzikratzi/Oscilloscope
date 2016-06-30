@@ -158,6 +158,7 @@ public:
 	
 	
 	bool decode_next_frame();
+	bool isMonoFile; 
 
 	MonoSample mainOut; // interleaved main output
 	MonoSample left192;

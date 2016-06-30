@@ -14,36 +14,36 @@ ConfigView::ConfigView( float x_, float y_, float width_, float height_)
 	y += autoDetectButton->height + space;
 	
 	pushLabel( "Sample Rate", x, y, w, h);
-	sampleRatesSelect = new mui::SegmentedSelect( x, y, w, h );
-	sampleRatesSelect->addLabel("44100");
-	sampleRatesSelect->addLabel("48000");
-	sampleRatesSelect->addLabel("88200");
-	sampleRatesSelect->addLabel("96000");
-	sampleRatesSelect->addLabel("176400");
-	sampleRatesSelect->addLabel("192000");
+	sampleRatesSelect = new mui::SegmentedSelect<int>( x, y, w, h );
+	sampleRatesSelect->addSegment("44100", 44100);
+	sampleRatesSelect->addSegment("48000", 48000);
+	sampleRatesSelect->addSegment("88200", 88200);
+	sampleRatesSelect->addSegment("96000", 96000);
+	sampleRatesSelect->addSegment("176400", 176400);
+	sampleRatesSelect->addSegment("192000", 192000);
 	sampleRatesSelect->commit();
 	add( sampleRatesSelect );
 	y += sampleRatesSelect->height + space;
 	
 	pushLabel( "Buffer Size", x, y, w, h);
-	bufferSizeSelect = new mui::SegmentedSelect( x, y, w, h );
-	bufferSizeSelect->addLabel("256");
-	bufferSizeSelect->addLabel("512");
-	bufferSizeSelect->addLabel("1024");
-	bufferSizeSelect->addLabel("2048");
-	bufferSizeSelect->addLabel("4096");
+	bufferSizeSelect = new mui::SegmentedSelect<int>( x, y, w, h );
+	bufferSizeSelect->addSegment("256", 256);
+	bufferSizeSelect->addSegment("512", 512);
+	bufferSizeSelect->addSegment("1024", 1024);
+	bufferSizeSelect->addSegment("2048", 2048);
+	bufferSizeSelect->addSegment("4096", 4096);
 	bufferSizeSelect->commit();
 	add( bufferSizeSelect );
 	y += bufferSizeSelect->height + space;
 	
 	pushLabel( "Number of Buffers", x, y, w, h);
-	numbuffersSelect = new mui::SegmentedSelect( x, y, w, h );
-	numbuffersSelect->addLabel("1");
-	numbuffersSelect->addLabel("2");
-	numbuffersSelect->addLabel("3");
-	numbuffersSelect->addLabel("4");
-	numbuffersSelect->addLabel("5");
-	numbuffersSelect->addLabel("6");
+	numbuffersSelect = new mui::SegmentedSelect<int>( x, y, w, h );
+	numbuffersSelect->addSegment("1", 1);
+	numbuffersSelect->addSegment("2", 2);
+	numbuffersSelect->addSegment("3", 3);
+	numbuffersSelect->addSegment("4", 4);
+	numbuffersSelect->addSegment("5", 5);
+	numbuffersSelect->addSegment("6", 6);
 	numbuffersSelect->commit(); 
 	add( numbuffersSelect );
 	y += numbuffersSelect->height + space;
@@ -118,9 +118,9 @@ void ConfigView::touchDoubleTap( ofTouchEventArgs &touch ){
 //--------------------------------------------------------------
 void ConfigView::fromGlobals(){
 	autoDetectButton->selected = globals.autoDetect;
-	sampleRatesSelect->selected = ofToString( globals.sampleRate );
-	bufferSizeSelect->selected = ofToString( globals.bufferSize );
-	numbuffersSelect->selected = ofToString( globals.numBuffers );
+	sampleRatesSelect->setSelected( globals.sampleRate );
+	bufferSizeSelect->setSelected( globals.bufferSize );
+	numbuffersSelect->setSelected(globals.numBuffers );
 
 	if( (size_t)globals.deviceId < soundcardButtons.size() ){
 		selectSoundCard( globals.deviceId );
@@ -137,9 +137,9 @@ void ConfigView::fromGlobals(){
 //--------------------------------------------------------------
 void ConfigView::toGlobals(){
 	globals.autoDetect = autoDetectButton->selected;
-	globals.sampleRate = ofToInt( sampleRatesSelect->selected );
-	globals.bufferSize = ofToInt( bufferSizeSelect->selected );
-	globals.numBuffers = ofToInt( numbuffersSelect->selected );
+	globals.sampleRate = sampleRatesSelect->getSelectedValueOr(44100);
+	globals.bufferSize = bufferSizeSelect->getSelectedValueOr(512);
+	globals.numBuffers = numbuffersSelect->getSelectedValueOr(4);
 	globals.deviceId = selectedSoundCard;
 }
 
@@ -194,10 +194,7 @@ void ConfigView::autoDetect(){
 	int numBuffers = 4;
 	getDefaultRtOutputParams(deviceId, sampleRate, bufferSize, numBuffers);
 	if( (size_t)deviceId < soundcardButtons.size() ) selectSoundCard(deviceId);
-	sampleRatesSelect->selected = ofToString(sampleRate);
-	sampleRatesSelect->commit();
-	bufferSizeSelect->selected = ofToString(bufferSize);
-	bufferSizeSelect->commit();
-	numbuffersSelect->selected = ofToString(numBuffers);
-	numbuffersSelect->commit();
+	sampleRatesSelect->setSelected(sampleRate);
+	bufferSizeSelect->setSelected(bufferSize);
+	numbuffersSelect->setSelected(numBuffers);
 }

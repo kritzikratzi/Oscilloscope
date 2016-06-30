@@ -11,7 +11,7 @@
 #ifndef mui_L_h
 #define mui_L_h
 
-#include "MUI.h"
+#include "ofxMightyUI.h"
 
 namespace mui{
 	class ${

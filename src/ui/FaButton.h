@@ -9,7 +9,7 @@
 #ifndef FaButton_h
 #define FaButton_h
 
-#include "MUI.h"
+#include "ofxMightyUI.h"
 
 class FaButton : public mui::Button{
 public:

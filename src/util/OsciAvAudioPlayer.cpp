@@ -121,7 +121,8 @@ bool OsciAvAudioPlayer::loadSound(string fileName, bool stream){
 	swr_context192 = NULL;
 	isLoaded = true;
 	isPlaying = true;
-	
+	isMonoFile = codec_context->channels == 1;
+
 	// we continue here:
 	decode_next_frame();
 	duration = av_time_to_millis(container->streams[audio_stream_id]->duration);

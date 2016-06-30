@@ -16,7 +16,7 @@
 #define globals (Globals::instance)
 class Globals{
 public:
-	Globals() :  sampleRate(44100), bufferSize(512), numBuffers(4), deviceId(0),scale(1.0),flipXY(false),invertX(false),invertY(false),autoDetect(true), outputVolume(1), inputVolume(1), strokeWeight(10), blur(30), numPts(20), hue(50),intensity(0.4), afterglow(0.5), exportWidth(1920), exportHeight(1080), exportFrameRate(60),micDeviceId(-1),micActive(false){
+	Globals() :  sampleRate(44100), bufferSize(512), numBuffers(4), deviceId(0),scale(1.0),flipXY(false),invertX(false),invertY(false),autoDetect(true), outputVolume(1), inputVolume(1), strokeWeight(10), blur(30), numPts(20), hue(50),intensity(0.4), afterglow(0.5), exportWidth(1920), exportHeight(1080), exportFrameRate(60),micDeviceId(-1),micActive(false),alwaysOnTop(false){
 	}
 	
 	// audio settings
@@ -48,6 +48,8 @@ public:
 	int exportWidth;
 	int exportHeight;
 	int exportFrameRate;
+	
+	bool alwaysOnTop;
 	
 	void loadFromFile( string settingsFile = ofToDataPath("settings.txt",true) ){
 		ofxIniSettings settings = ofxIniSettings(settingsFile);

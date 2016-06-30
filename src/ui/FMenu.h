@@ -11,7 +11,7 @@
 
 #pragma once
 
-#include "MUI.h"
+#include "ofxMightyUI.h"
 
 class FMenu : public mui::Container{
 public:

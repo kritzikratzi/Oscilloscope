@@ -1,6 +1,6 @@
 #pragma once
 
-#include "MUI.h"
+#include "ofxMightyUI.h"
 #include "../globals.h"
 #include "FaButton.h"
 #include "FaToggleButton.h"
