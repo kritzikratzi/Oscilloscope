@@ -34,11 +34,11 @@ OsciView::OsciView( float x_, float y_, float width_, float height_)
 	add( scaleSlider2 );
 	
 	spreadLabel = addLabel( "Spread" );
-	spreadSlider = new mui::SliderWithLabel( x, y, w, h, -1, 1, 1, 2 );
+	spreadSlider = new mui::SliderWithLabel( x, y, w, h, 0, 1, 0, 2 );
 	spreadSlider->label->fg = ofColor(255);
 	ofAddListener( spreadSlider->slider->onChange, this, &OsciView::sliderChanged );
-	y += scaleSlider1->height + 10;
-	add( scaleSlider1 );
+	y += spreadSlider->height + 10;
+	add( spreadSlider );
 	
 	
 	w = 90;
@@ -151,7 +151,7 @@ void OsciView::layout(){
 	mui::L(flipXY).rightOf(invertY,10);
 	mui::L(scaleLabel).rightOf(flipXY,20);
 	mui::L(scaleSlider1).rightOf(scaleLabel,5).stretchToRightEdgeOf(this,10);
-	mui::L(scaleSlider2).below(scaleSlider2).stretchToRightEdgeOf(this,10);
+	mui::L(scaleSlider2).below(scaleSlider1).stretchToRightEdgeOf(this,10);
 	mui::L(strokeWeightLabel).below(scaleSlider2).alignRightEdgeTo(scaleLabel);
 	mui::L(strokeWeightSlider).rightOf(strokeWeightLabel,5).stretchToRightEdgeOf(this,10);
 	
@@ -170,7 +170,7 @@ void OsciView::layout(){
 	mui::L(hueSlider2).below(hueSlider1).stretchToRightEdgeOf(this,10);
 	
 	mui::L(spreadLabel).below(hueSlider2).alignRightEdgeTo(hueLabel);
-	mui::L(spreadLabel).rightOf(spreadLabel,5).stretchToRightEdgeOf(this,10);
+	mui::L(spreadSlider).rightOf(spreadLabel,5).stretchToRightEdgeOf(this,10);
 	
 	
 	
@@ -222,6 +222,13 @@ void OsciView::update(){
 			playButton->commit();
 		}
 	}
+
+	if (scaleSlider1->singleTouchId < 0) globals.scale1 = scaleSlider1->slider->value;
+	if (scaleSlider2->singleTouchId < 0) globals.scale2 = scaleSlider2->slider->value;
+	if (hueSlider1->singleTouchId < 0) globals.hue1 = hueSlider1->slider->value;
+	if (hueSlider2->singleTouchId < 0) globals.hue2 = hueSlider2->slider->value;
+	if (spreadSlider->singleTouchId < 0) globals.spread = spreadSlider->slider->value;
+	if (afterglowSlider->singleTouchId < 0) globals.afterglow = afterglowSlider->slider->value; 
 }
 
 

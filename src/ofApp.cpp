@@ -80,6 +80,7 @@ void ofApp::setup(){
 	shareSlider("hue1", osciView->hueSlider1);
 	shareSlider("hue2", osciView->hueSlider2);
 	shareSlider("spread", osciView->spreadSlider);
+	shareSlider("afterglow", osciView->afterglowSlider); 
 }
 
 
@@ -299,10 +300,10 @@ void ofApp::update( ofMesh &shapeMesh, MonoSample &left, MonoSample &right, bool
 
 ofMatrix4x4 ofApp::getViewMatrix(float scale, int index) {
 	scale = scale*(1-fabsf(globals.spread)*0.5);
-	float vx = globals.spread*0.5*(index==0?-1:1);
+	float vx = globals.spread*0.5*(index==0?1:-1);
 	
 	ofMatrix4x4 viewMatrix = ofMatrix4x4(
-		scale, 0.0, 0.0, globals.spread,
+		scale, 0.0, 0.0, 0,
 		0.0, -scale, 0.0, 0,
 		0.0, 0.0, 1.0, 0.0, 
 		0.0, 0.0, 0.0, 1.0);
@@ -312,7 +313,7 @@ ofMatrix4x4 ofApp::getViewMatrix(float scale, int index) {
 
 	if (globals.flipXY) {
 		viewMatrix = ofMatrix4x4(
-			0.0, 1.0, 0.0, globals.spread,
+			0.0, 1.0, 0.0, 0,
 			1.0, 0.0, 0.0, 0.0, 
 			0.0, 0.0, 1.0, 0.0, 
 			0.0, 0.0, 0.0, 1.0 ) * viewMatrix;
@@ -326,6 +327,7 @@ ofMatrix4x4 ofApp::getViewMatrix(float scale, int index) {
 	else {
 		aspectMatrix(1,1) *= aspectRatio;
 	}
+	aspectMatrix.translate(vx, 0, 0); 
 
 	return viewMatrix * aspectMatrix;
 }
@@ -352,7 +354,6 @@ void ofApp::draw(ofFbo & fbo, ofMesh & shapeMesh, bool & changed, float & scale,
 			}
 		}
 		else{
-			cout << "allocating framebuffer with " << w << ", " << h << endl; 
 			fbo.allocate(ofGetWidth(), ofGetHeight(),GL_RGBA);
 			fbo.begin();
 			ofClear(0,255);
@@ -368,6 +369,7 @@ void ofApp::draw(ofFbo & fbo, ofMesh & shapeMesh, bool & changed, float & scale,
 		ofRect( 0, 0, fbo.getWidth(), fbo.getHeight() );
 	
 		ofEnableAlphaBlending();
+		cout << index << ":" << scale << endl; 
 		ofMatrix4x4 viewMatrix = getViewMatrix(scale,index);
 
 //      TODO: draw the cross section
