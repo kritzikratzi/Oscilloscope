@@ -79,6 +79,12 @@ OsciView::OsciView( float x_, float y_, float width_, float height_)
 	strokeWeightSlider->label->fg = ofColor(255);
 	add( strokeWeightSlider );
 	
+	timeStretchLabel = addLabel( "Time Stretch" );
+	timeStretchSlider = new mui::SliderWithLabel(0, 0, 100, h, 0.25, 20, 1, 2 );
+	ofAddListener( timeStretchSlider->slider->onChange, this, &OsciView::sliderChanged );
+	timeStretchSlider->label->fg = ofColor(255);
+	add( timeStretchSlider );
+	
 	blurLabel = addLabel( "Blur" );
 	blurSlider = new mui::SliderWithLabel(0,0, 100, h, 0, 255, 30, 0);
 	ofAddListener( blurSlider->slider->onChange, this, &OsciView::sliderChanged );
@@ -98,7 +104,7 @@ OsciView::OsciView( float x_, float y_, float width_, float height_)
 	add(hueSlider);
 	
 	intensityLabel = addLabel( "Intensity" );
-	intensitySlider = new mui::SliderWithLabel(0,0,100,h,0,1, 0.5, 2);
+	intensitySlider = new mui::SliderWithLabel(0,0,100,h,0,2, 0.5, 2);
 	ofAddListener( intensitySlider->slider->onChange, this, &OsciView::sliderChanged );
 	intensitySlider->label->fg = ofColor(255);
 	add(intensitySlider);
@@ -137,6 +143,9 @@ void OsciView::layout(){
 	mui::L(strokeWeightLabel).below(scaleLabel).alignRightEdgeTo(scaleLabel);
 	mui::L(strokeWeightSlider).rightOf(strokeWeightLabel,5).stretchToRightEdgeOf(this,10);
 	
+	mui::L(timeStretchLabel).below(strokeWeightLabel).alignRightEdgeTo(scaleLabel);
+	mui::L(timeStretchSlider).rightOf(timeStretchLabel,5).stretchToRightEdgeOf(this,10);
+	
 	/*mui::L(blurLabel).below(strokeWeightLabel).alignRightEdgeTo(strokeWeightLabel);
 	mui::L(blurSlider).rightOf(blurLabel,5).stretchToRightEdgeOf(this,10);
 	
@@ -147,7 +156,7 @@ void OsciView::layout(){
 	numPtsLabel->visible = false;
 	numPtsSlider->visible = false;
 	
-	mui::L(hueLabel).below(strokeWeightLabel).alignRightEdgeTo(strokeWeightLabel);
+	mui::L(hueLabel).below(timeStretchLabel).alignRightEdgeTo(strokeWeightLabel);
 	mui::L(hueSlider).rightOf(hueLabel,5).stretchToRightEdgeOf(this,10);
 	
 	mui::L(intensityLabel).below(hueLabel).alignRightEdgeTo(hueLabel);
@@ -240,6 +249,7 @@ void OsciView::fromGlobals(){
 	
 	scaleSlider->slider->value = globals.scale;
 	strokeWeightSlider->slider->value = globals.strokeWeight;
+	timeStretchSlider->slider->value = globals.timeStretch;
 	blurSlider->slider->value = globals.blur;
 	numPtsSlider->slider->value = globals.numPts;
 	hueSlider->slider->value = globals.hue;
@@ -344,6 +354,9 @@ void OsciView::sliderChanged( const void * sender, float & value ){
 	}
 	else if( sender == strokeWeightSlider->slider ){
 		globals.strokeWeight = strokeWeightSlider->slider->value;
+	}
+	else if( sender == timeStretchSlider->slider ){
+		globals.timeStretch = timeStretchSlider->slider->value;
 	}
 	else if( sender == blurSlider->slider ){
 		globals.blur = blurSlider->slider->value;

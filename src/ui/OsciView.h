@@ -48,6 +48,9 @@ public:
 	mui::SliderWithLabel * strokeWeightSlider;
 	mui::Label * strokeWeightLabel;
 	
+	mui::SliderWithLabel * timeStretchSlider;
+	mui::Label * timeStretchLabel;
+	
 	mui::SliderWithLabel * blurSlider;
 	mui::Label * blurLabel;
 	

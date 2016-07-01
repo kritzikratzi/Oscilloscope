@@ -35,6 +35,7 @@ public:
 	bool flipXY;
 	
 	float strokeWeight; // 1...20
+	float timeStretch; // 0.1-2.0
 	float blur; // 0...255
 	float intensity; // 0...1
 	float afterglow; // 0...1
@@ -65,6 +66,7 @@ public:
 		outputVolume = settings.get( "outputVolume", outputVolume );
 		inputVolume = settings.get( "inputVolume", inputVolume );
 		strokeWeight = settings.get( "strokeWeight", strokeWeight );
+		timeStretch = settings.get( "timeStretch", timeStretch );
 		blur = settings.get( "blur", blur );
 		numPts = settings.get( "numPts", numPts );
 		hue = settings.get( "hue", hue );
@@ -91,6 +93,7 @@ public:
 		settings.set( "outputVolume", outputVolume );
 		settings.set( "inputVolume", inputVolume );
 		settings.set( "strokeWeight", strokeWeight );
+		settings.set( "timeStretch", timeStretch );
 		settings.set( "blur", blur );
 		settings.set( "numPts", numPts );
 		settings.set( "hue", hue );

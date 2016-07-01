@@ -147,6 +147,13 @@ void ofApp::update(){
 	else ofHideCursor();
 	
 	/////////////////////////////////////////////////
+	
+	// are we not export?
+	if( exporting == 0 ){
+		int rate = max(globals.sampleRate/4,(int)std::round(globals.sampleRate*globals.timeStretch));
+		globals.player.setupAudioOut(2, rate);
+	}
+
 	// are we exporting?
 	if( exporting == 1 ){
 		// make sure the audio callback doesn't interfere with us!
@@ -199,6 +206,7 @@ void ofApp::update(){
 		globals.player.setPositionMS(0);
 	}
 	
+
 	/////////////////////////////////////////////////
 	// copy buffer data to the mesh
 	
