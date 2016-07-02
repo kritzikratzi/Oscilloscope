@@ -7,7 +7,12 @@ echo "----------------------------"
 cd ..
 platform=$1
 
-if [[ "$platform" == "osx" ]]; then
+if [ "$platform" == "" ]; then
+	echo "Usage: scripts/prepare.sh <platform>"
+	echo ""
+	echo "Platform: One of the following: "
+	echo "          linux, linux64, win32, win64" 
+elif [[ "$platform" == "osx" ]]; then
 	echo XCode-build manages it all. Done!
 	echo "----------------------------"
 elif [[ "$platform" == "linux" ]]; then
@@ -34,7 +39,7 @@ elif [[ "$platform" == "win32" ]]; then
 	echo "Windows (32bit)"
 	echo "----------------------------"
 	echo Copying avcodec libs ... 
-	cp -R ../../../addons/ofxAvCodec/libs/avcodec/lib/win32/* bin/
+	cp -R ../../../addons/ofxAvCodec/libs/avcodec/lib/vs/Win32/*.dll bin/
 	echo Copying mightyUI data ...
 	cp -R ../../../addons/ofxMightyUI/bin/data/* bin/data/
 	echo Copying fontawsome data ...
@@ -43,7 +48,7 @@ elif [[ "$platform" == "win64" ]]; then
 	echo "Windows (64bit)"
 	echo "----------------------------"
 	echo Copying avcodec libs ... 
-	cp -R ../../../addons/ofxAvCodec/libs/avcodec/lib/win64/* bin/
+	cp -R ../../../addons/ofxAvCodec/libs/avcodec/lib/vs/x64/*.dll bin/
 	echo Copying mightyUI data ...
 	cp -R ../../../addons/ofxMightyUI/bin/data/* bin/data/
 	echo Copying fontawsome data ...

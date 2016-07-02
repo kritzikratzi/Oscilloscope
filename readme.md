@@ -17,9 +17,8 @@ This is the programming documentation. If you are not a programmer please
 
 # Project setup 
 
-**Dependencies are currently changing a lot. Please make sure to have the right branch of each dependency. Sorry for the inconvenience, this project is more about the binaries than the source. **
-
-**Warning: VS files not up to date. ofxMightyUI will be missing some files**
+Things are moving around a bit at the moment. 
+Make sure to read these instructions before each build. 
 
 1. Download and unzip Openframeworks 0.9.3 or newer
 1. Move this project into apps/myApps/oscilloscope
@@ -30,7 +29,7 @@ This is the programming documentation. If you are not a programmer please
 1. Clone [ofxFontStash2](https://github.com/kritzikratzi/ofxFontStash2) into addons/ofxFontStash2
 
 
-### Compiling with XCode
+### Compiling with XCode (OSX10.9+)
 
 1. run `scripts/clean.sh`
 1. run `scripts/prepare.sh osx`
@@ -39,7 +38,9 @@ This is the programming documentation. If you are not a programmer please
 
 You can also build with `make && make run` on the command line. The resulting build will have no icon/no proper name/no retina support. 
 
-### Compiling with Visual studio
+### Compiling with Visual studio 2015
+
+The shell commands can be run from a git bash, cygwin, msys, or any other shell emulator. 
 
 **Windows project file is out of date. Remove the `ofxFontStash2` plugins and re-add all files from the `pugi` branch.**
 
