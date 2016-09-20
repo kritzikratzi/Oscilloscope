@@ -7,6 +7,7 @@ uniform float uIntensity;
 uniform float uHue;
 
 varying vec3 texcoord;
+varying vec2 pos;
 
 float gaussian(float x, float sigma) {
     return exp(-(x * x) / (2.0 * sigma * sigma)) / (TAUR * sigma);
@@ -33,7 +34,7 @@ void main (void)
     vec2 xy = texcoord.xy;
     float alpha;
 
-    float sigma = uSize/2.0;
+    float sigma = uSize/(2.0+2.0*1000.0*uSize/50.0+0.0*pow(uIntensity,2.0));
     if (len < EPS) {
     // If the beam segment is too short, just calculate intensity at the position.
         alpha = exp(-pow(length(xy),2.0)/(2.0*sigma*sigma))/2.0/sqrt(uSize);
@@ -43,10 +44,12 @@ void main (void)
 		alpha *= exp(-xy.y*xy.y/(2.0*sigma*sigma))/2.0/len*uSize;
     }
 
-    alpha *= uIntensity;
-	
-	alpha = alpha*1.0 + 0.005;
-
+    //alpha *= uIntensity;
+//	float maxIntensity = max(0.004,min(0.7, 1.0 - pow(1000.0*uSize/25.0,1.0)*5.0)); 
+//	float intens = min(uIntensity,maxIntensity); 
+	float intens = max(0.0,uIntensity-0.4)*0.7-1000.0*uSize/500.0; 
+	alpha = pow(alpha,1.0-intens)*(0.01+min(0.99,uIntensity*3.0));
+//	alpha = min(alpha,0.03); 
     //float afterglow = smoothstep(0.0, 0.33, uvl.w/2048.0);
     //alpha *= afterglow * 1.0;
 

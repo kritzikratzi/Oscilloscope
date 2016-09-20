@@ -50,6 +50,8 @@ public:
 	
 	// call this first after create the player
 	bool setupAudioOut( int numChannels, int sampleRate );
+	bool setupVisualSampleRate( int visualSampleRate );
+	
 	// call this from the audioOut callback.
 	// returns the number of frames (0...bufferSize) that were played. 
 	int audioOut( float * output, int bufferSize, int nChannels );
@@ -185,6 +187,9 @@ private:
 
 	SwrContext * swr_context;
 	SwrContext * swr_context192;
+	
+	int visual_sample_rate;
+	bool visual_sample_rate_auto; 
 	int output_sample_rate;
 	int64_t output_channel_layout;
 	int output_num_channels;
@@ -201,6 +206,7 @@ private:
 	int decoded_buffer_len192;
 	
 	bool output_config_changed;
+	bool visual_config_changed;
 	bool wantsAsync;
 	
 	friend class OsciAvAudioPlayerThread;

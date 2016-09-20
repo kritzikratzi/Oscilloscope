@@ -12,7 +12,9 @@
 
 #include "OsciAvAudioPlayer.h"
 #include "Audio.h"
-
+extern "C"{
+	#include <libavutil/opt.h>
+}
 using namespace std;
 
 #define die(msg) { thread->unlock(); unloadSound(); cerr << msg << endl; return false; }
@@ -22,6 +24,8 @@ OsciAvAudioPlayer::OsciAvAudioPlayer(){
 	output_expected_buffer_size = 256;
 	output_channel_layout = av_get_default_channel_layout(2);
 	output_sample_rate = 44100;
+	visual_sample_rate = 192000;
+	visual_config_changed = false;
 	output_num_channels = 2;
 	output_config_changed = false; 
 	volume = 1;
@@ -145,6 +149,14 @@ bool OsciAvAudioPlayer::setupAudioOut( int numChannels, int sampleRate ){
 	
 	return true;
 }
+
+bool OsciAvAudioPlayer::setupVisualSampleRate( int visualSampleRate ){
+	if( visualSampleRate != visual_sample_rate ){
+		visual_sample_rate = visualSampleRate;
+		visual_config_changed = true;
+	}
+}
+
 
 
 void OsciAvAudioPlayer::unloadSound(){
@@ -300,8 +312,8 @@ int OsciAvAudioPlayer::internalAudioOut(float *output, int bufferSize, int nChan
 			num_samples_read += samples;
 			
 			// find copy points in 192k buffer
-			int a = (decoded_buffer_pos-samples)*192000/output_sample_rate;
-			int b = (decoded_buffer_pos)*192000/output_sample_rate;
+			int a = (decoded_buffer_pos-samples)*(long)visual_sample_rate/output_sample_rate;
+			int b = (decoded_buffer_pos)*(long)visual_sample_rate/output_sample_rate;
 			a = a - (a%2);
 			b = MIN(b - (b%2), decoded_buffer_len192);
 			if( b-a > 0 ){
@@ -374,19 +386,34 @@ bool OsciAvAudioPlayer::decode_next_frame(){
 					fprintf(stderr, "Could not allocate resampler context\n");
 					return false;
 				}
+				
+				int next_v_rate = output_sample_rate;
+				if( next_v_rate != visual_sample_rate ){
+					visual_sample_rate = next_v_rate;
+					visual_config_changed = true;
+				}
+			}
+			
+			if( swr_context192 != NULL && visual_config_changed ){
+				swr_close(swr_context192);
+				swr_free(&swr_context192);
+				swr_context192 = NULL;
 			}
 			
 			if( swr_context192 == NULL ){
+				visual_config_changed = false;
 				int input_channel_layout = decoded_frame->channel_layout;
 				if( input_channel_layout == 0 ){
 					input_channel_layout = av_get_default_channel_layout( codec_context->channels );
 				}
 				swr_context192 = swr_alloc_set_opts(NULL,
-												 av_get_default_channel_layout(2), AV_SAMPLE_FMT_FLT, 192000,
+												 av_get_default_channel_layout(2), AV_SAMPLE_FMT_FLT, visual_sample_rate,
 												 input_channel_layout, (AVSampleFormat)decoded_frame->format, decoded_frame->sample_rate,
 												 0, NULL);
+				av_opt_set_int(swr_context192, "filter_size", 1, 0);
+				av_opt_set_int(swr_context192, "linear_interp", 1, 0);
+//				av_opt_set_int(swr_context192, "dither_scale", 0, 0);
 				swr_init(swr_context192);
-				
 				if (!swr_context192){
 					fprintf(stderr, "Could not allocate resampler-192k context\n");
 					return false;
@@ -394,6 +421,14 @@ bool OsciAvAudioPlayer::decode_next_frame(){
 			}
 			
 			/* if a frame has been decoded, resample to desired rate */
+			uint8_t * out192 = (uint8_t*)decoded_buffer192;
+			int samples_converted192 = swr_convert(swr_context192,
+												   (uint8_t**)&out192, AVCODEC_MAX_AUDIO_FRAME_SIZE/2,
+												   (const uint8_t**)decoded_frame->extended_data, decoded_frame->nb_samples);
+			
+			decoded_buffer_len192 = samples_converted192*output_num_channels;
+			decoded_buffer_pos192 = 0;
+			
 			int samples_per_channel = AVCODEC_MAX_AUDIO_FRAME_SIZE/output_num_channels;
 			//samples_per_channel = 512;
 			uint8_t * out = (uint8_t*)decoded_buffer;
@@ -403,13 +438,6 @@ bool OsciAvAudioPlayer::decode_next_frame(){
 			decoded_buffer_len = samples_converted*output_num_channels;
 			decoded_buffer_pos = 0;
 			
-			uint8_t * out192 = (uint8_t*)decoded_buffer192;
-			int samples_converted192 = swr_convert(swr_context192,
-												(uint8_t**)&out192, AVCODEC_MAX_AUDIO_FRAME_SIZE/2,
-												(const uint8_t**)decoded_frame->extended_data, decoded_frame->nb_samples);
-
-			decoded_buffer_len192 = samples_converted192*output_num_channels;
-			decoded_buffer_pos192 = 0;
 		}
 
 		packet.size -= len;

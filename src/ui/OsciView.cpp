@@ -80,7 +80,7 @@ OsciView::OsciView( float x_, float y_, float width_, float height_)
 	add( strokeWeightSlider );
 	
 	timeStretchLabel = addLabel( "Time Stretch" );
-	timeStretchSlider = new mui::SliderWithLabel(0, 0, 100, h, 0.25, 20, 1, 2 );
+	timeStretchSlider = new mui::SliderWithLabel(0, 0, 100, h, 0.25, 100, 1, 2 );
 	ofAddListener( timeStretchSlider->slider->onChange, this, &OsciView::sliderChanged );
 	timeStretchSlider->label->fg = ofColor(255);
 	add( timeStretchSlider );
@@ -104,7 +104,7 @@ OsciView::OsciView( float x_, float y_, float width_, float height_)
 	add(hueSlider);
 	
 	intensityLabel = addLabel( "Intensity" );
-	intensitySlider = new mui::SliderWithLabel(0,0,100,h,0,2, 0.5, 2);
+	intensitySlider = new mui::SliderWithLabel(0,0,100,h,0,1, 0.5, 2);
 	ofAddListener( intensitySlider->slider->onChange, this, &OsciView::sliderChanged );
 	intensitySlider->label->fg = ofColor(255);
 	add(intensitySlider);

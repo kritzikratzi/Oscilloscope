@@ -3,6 +3,7 @@
 #define EPS 1E-6
 
 varying vec3 texcoord;
+varying vec2 pos;
 uniform float uSize;
 uniform mat4 uMatrix;
 
@@ -26,6 +27,7 @@ void main() {
 
     texcoord.xy = vec2(-uSize, -uSize);
     gl_Position = tmatrix * vec4(p0 - dir - norm, 0.0, 1.0);
+	pos = p0;
     EmitVertex();
 
     texcoord.xy = vec2(-uSize,  uSize);
