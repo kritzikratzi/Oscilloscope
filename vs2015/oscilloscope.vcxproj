@@ -369,7 +369,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="..\icon.rc">
+    <ResourceCompile Include="resources\icon.rc">
       <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">/D_DEBUG %(AdditionalOptions)</AdditionalOptions>
       <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">/D_DEBUG %(AdditionalOptions)</AdditionalOptions>
       <AdditionalIncludeDirectories>$(OF_ROOT)\libs\openFrameworksCompiled\project\vs</AdditionalIncludeDirectories>
@@ -387,7 +387,7 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties RESOURCE_FILE="..\icon.rc" />
+      <UserProperties RESOURCE_FILE="resources\icon.rc" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

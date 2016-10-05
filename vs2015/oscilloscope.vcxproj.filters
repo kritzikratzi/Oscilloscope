@@ -646,7 +646,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="..\icon.rc" />
+    <ResourceCompile Include="resources\icon.rc" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\lib\vs\Win32\avcodec.lib">
