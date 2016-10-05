@@ -155,6 +155,8 @@ bool OsciAvAudioPlayer::setupVisualSampleRate( int visualSampleRate ){
 		visual_sample_rate = visualSampleRate;
 		visual_config_changed = true;
 	}
+
+	return true;
 }
 
 
