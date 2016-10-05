@@ -206,7 +206,7 @@
     <ClCompile Include="..\..\..\addons\ofxMightyUI\src\InternalWindow.cpp" />
     <ClCompile Include="..\..\..\addons\ofxMightyUI\src\Label.cpp" />
     <ClCompile Include="..\..\..\addons\ofxMightyUI\src\Layout.cpp" />
-    <ClCompile Include="..\..\..\addons\ofxMightyUI\src\MUI.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxMightyUI\src\ofxMightyUI.cpp" />
     <ClCompile Include="..\..\..\addons\ofxMightyUI\src\MuiConfig.cpp" />
     <ClCompile Include="..\..\..\addons\ofxMightyUI\src\MuiCore.cpp" />
     <ClCompile Include="..\..\..\addons\ofxMightyUI\src\Root.cpp" />
@@ -351,7 +351,7 @@
     <ClInclude Include="..\..\..\addons\ofxMightyUI\src\InternalWindow.h" />
     <ClInclude Include="..\..\..\addons\ofxMightyUI\src\Label.h" />
     <ClInclude Include="..\..\..\addons\ofxMightyUI\src\Layout.h" />
-    <ClInclude Include="..\..\..\addons\ofxMightyUI\src\MUI.h" />
+    <ClInclude Include="..\..\..\addons\ofxMightyUI\src\ofxMightyUI.h" />
     <ClInclude Include="..\..\..\addons\ofxMightyUI\src\MuiConfig.h" />
     <ClInclude Include="..\..\..\addons\ofxMightyUI\src\MuiCore.h" />
     <ClInclude Include="..\..\..\addons\ofxMightyUI\src\Root.h" />
