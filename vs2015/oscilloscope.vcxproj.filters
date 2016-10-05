@@ -1,673 +1,673 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="src\ofApp.cpp">
+    <ClCompile Include="..\src\ofApp.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\main.cpp">
+    <ClCompile Include="..\src\main.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\globals.cpp">
+    <ClCompile Include="..\src\globals.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\main.cpp">
+    <ClCompile Include="..\src\main.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\ofApp.cpp">
+    <ClCompile Include="..\src\ofApp.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\ofxIniSettings\ofxIniExtras.cpp">
+    <ClCompile Include="..\src\ofxIniSettings\ofxIniExtras.cpp">
       <Filter>src\ofxIniSettings</Filter>
     </ClCompile>
-    <ClCompile Include="src\ofxIniSettings\ofxIniSettings.cpp">
+    <ClCompile Include="..\src\ofxIniSettings\ofxIniSettings.cpp">
       <Filter>src\ofxIniSettings</Filter>
     </ClCompile>
-    <ClCompile Include="src\ui\ConfigView.cpp">
+    <ClCompile Include="..\src\ui\ConfigView.cpp">
       <Filter>src\ui</Filter>
     </ClCompile>
-    <ClCompile Include="src\ui\FMenu.cpp">
+    <ClCompile Include="..\src\ui\FMenu.cpp">
       <Filter>src\ui</Filter>
     </ClCompile>
-    <ClCompile Include="src\ui\OsciView.cpp">
+    <ClCompile Include="..\src\ui\OsciView.cpp">
       <Filter>src\ui</Filter>
     </ClCompile>
-    <ClCompile Include="src\util\Audio.cpp">
+    <ClCompile Include="..\src\util\Audio.cpp">
       <Filter>src\util</Filter>
     </ClCompile>
-    <ClCompile Include="src\util\OsciAvAudioPlayer.cpp">
+    <ClCompile Include="..\src\util\OsciAvAudioPlayer.cpp">
       <Filter>src\util</Filter>
     </ClCompile>
-    <ClCompile Include="src\util\sounddevices.cpp">
+    <ClCompile Include="..\src\util\sounddevices.cpp">
       <Filter>src\util</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\addons\ofxAvCodec\src\ofxAvAudioPlayer.cpp">
+    <ClCompile Include="..\..\..\..\addons\ofxAvCodec\src\ofxAvAudioPlayer.cpp">
       <Filter>addons\ofxAvCodec\src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\addons\ofxAvCodec\src\ofxAvAudioWriter.cpp">
+    <ClCompile Include="..\..\..\..\addons\ofxAvCodec\src\ofxAvAudioWriter.cpp">
       <Filter>addons\ofxAvCodec\src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\addons\ofxAvCodec\src\ofxAvUtils.cpp">
+    <ClCompile Include="..\..\..\..\addons\ofxAvCodec\src\ofxAvUtils.cpp">
       <Filter>addons\ofxAvCodec\src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\addons\ofxFontStash2\src\ofxFontStash2.cpp">
+    <ClCompile Include="..\..\..\..\addons\ofxFontStash2\src\ofxFontStash2.cpp">
       <Filter>addons\ofxFontStash2\src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\addons\ofxFontStash2\src\ofxFontStashParser.cpp">
+    <ClCompile Include="..\..\..\..\addons\ofxFontStash2\src\ofxFontStashParser.cpp">
       <Filter>addons\ofxFontStash2\src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\addons\ofxFontStash2\libs\pugixml\src\pugixml.cpp">
+    <ClCompile Include="..\..\..\..\addons\ofxFontStash2\libs\pugixml\src\pugixml.cpp">
       <Filter>addons\ofxFontStash2\libs\pugixml\src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\addons\ofxMightyUI\src\BarButton.cpp">
+    <ClCompile Include="..\..\..\..\addons\ofxMightyUI\src\BarButton.cpp">
       <Filter>addons\ofxMightyUI\src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\addons\ofxMightyUI\src\Button.cpp">
+    <ClCompile Include="..\..\..\..\addons\ofxMightyUI\src\Button.cpp">
       <Filter>addons\ofxMightyUI\src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\addons\ofxMightyUI\src\Container.cpp">
+    <ClCompile Include="..\..\..\..\addons\ofxMightyUI\src\Container.cpp">
       <Filter>addons\ofxMightyUI\src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\addons\ofxMightyUI\src\CppTweener.cpp">
+    <ClCompile Include="..\..\..\..\addons\ofxMightyUI\src\CppTweener.cpp">
       <Filter>addons\ofxMightyUI\src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\addons\ofxMightyUI\src\EmptyContainer.cpp">
+    <ClCompile Include="..\..\..\..\addons\ofxMightyUI\src\EmptyContainer.cpp">
       <Filter>addons\ofxMightyUI\src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\addons\ofxMightyUI\src\Helpers.cpp">
+    <ClCompile Include="..\..\..\..\addons\ofxMightyUI\src\Helpers.cpp">
       <Filter>addons\ofxMightyUI\src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\addons\ofxMightyUI\src\Image.cpp">
+    <ClCompile Include="..\..\..\..\addons\ofxMightyUI\src\Image.cpp">
       <Filter>addons\ofxMightyUI\src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\addons\ofxMightyUI\src\InternalWindow.cpp">
+    <ClCompile Include="..\..\..\..\addons\ofxMightyUI\src\InternalWindow.cpp">
       <Filter>addons\ofxMightyUI\src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\addons\ofxMightyUI\src\Label.cpp">
+    <ClCompile Include="..\..\..\..\addons\ofxMightyUI\src\Label.cpp">
       <Filter>addons\ofxMightyUI\src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\addons\ofxMightyUI\src\Layout.cpp">
+    <ClCompile Include="..\..\..\..\addons\ofxMightyUI\src\Layout.cpp">
       <Filter>addons\ofxMightyUI\src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\addons\ofxMightyUI\src\MUI.cpp">
+    <ClCompile Include="..\..\..\..\addons\ofxMightyUI\src\MUI.cpp">
       <Filter>addons\ofxMightyUI\src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\addons\ofxMightyUI\src\MuiConfig.cpp">
+    <ClCompile Include="..\..\..\..\addons\ofxMightyUI\src\MuiConfig.cpp">
       <Filter>addons\ofxMightyUI\src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\addons\ofxMightyUI\src\MuiCore.cpp">
+    <ClCompile Include="..\..\..\..\addons\ofxMightyUI\src\MuiCore.cpp">
       <Filter>addons\ofxMightyUI\src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\addons\ofxMightyUI\src\Root.cpp">
+    <ClCompile Include="..\..\..\..\addons\ofxMightyUI\src\Root.cpp">
       <Filter>addons\ofxMightyUI\src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\addons\ofxMightyUI\src\ScrollPane.cpp">
+    <ClCompile Include="..\..\..\..\addons\ofxMightyUI\src\ScrollPane.cpp">
       <Filter>addons\ofxMightyUI\src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\addons\ofxMightyUI\src\SegmentedSelect.cpp">
+    <ClCompile Include="..\..\..\..\addons\ofxMightyUI\src\SegmentedSelect.cpp">
       <Filter>addons\ofxMightyUI\src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\addons\ofxMightyUI\src\Slider.cpp">
+    <ClCompile Include="..\..\..\..\addons\ofxMightyUI\src\Slider.cpp">
       <Filter>addons\ofxMightyUI\src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\addons\ofxMightyUI\src\SliderWithLabel.cpp">
+    <ClCompile Include="..\..\..\..\addons\ofxMightyUI\src\SliderWithLabel.cpp">
       <Filter>addons\ofxMightyUI\src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\addons\ofxMightyUI\src\TextField.cpp">
+    <ClCompile Include="..\..\..\..\addons\ofxMightyUI\src\TextField.cpp">
       <Filter>addons\ofxMightyUI\src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\addons\ofxMightyUI\src\TextureAtlas.cpp">
+    <ClCompile Include="..\..\..\..\addons\ofxMightyUI\src\TextureAtlas.cpp">
       <Filter>addons\ofxMightyUI\src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\addons\ofxMightyUI\src\ToggleButton.cpp">
+    <ClCompile Include="..\..\..\..\addons\ofxMightyUI\src\ToggleButton.cpp">
       <Filter>addons\ofxMightyUI\src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="src">
+    <Filter Include="..\src">
       <UniqueIdentifier>{d8376475-7454-4a24-b08a-aac121d3ad6f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\ofxIniSettings">
+    <Filter Include="..\src\ofxIniSettings">
       <UniqueIdentifier>{81E6696B-6E0B-7439-21BB-8F17}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\ui">
+    <Filter Include="..\src\ui">
       <UniqueIdentifier>{34F0B3B1-2BDA-A36D-9F63-1753}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\util">
+    <Filter Include="..\src\util">
       <UniqueIdentifier>{FB45A860-9118-060C-662F-B289}</UniqueIdentifier>
     </Filter>
-    <Filter Include="addons">
+    <Filter Include="..\addons">
       <UniqueIdentifier>{71834F65-F3A9-211E-73B8-DC85}</UniqueIdentifier>
     </Filter>
-    <Filter Include="addons\ofxAvCodec">
+    <Filter Include="..\addons\ofxAvCodec">
       <UniqueIdentifier>{6E648148-4057-32DB-8154-4ACF}</UniqueIdentifier>
     </Filter>
-    <Filter Include="addons\ofxAvCodec\src">
+    <Filter Include="..\addons\ofxAvCodec\src">
       <UniqueIdentifier>{3B870A8F-969D-AE20-2776-F122}</UniqueIdentifier>
     </Filter>
-    <Filter Include="addons\ofxAvCodec\libs">
+    <Filter Include="..\addons\ofxAvCodec\libs">
       <UniqueIdentifier>{70F074F5-420E-672C-5112-24E8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="addons\ofxAvCodec\libs\avcodec">
+    <Filter Include="..\addons\ofxAvCodec\libs\avcodec">
       <UniqueIdentifier>{1AB1FB92-789F-705F-42D6-42B6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="addons\ofxAvCodec\libs\avcodec\include">
+    <Filter Include="..\addons\ofxAvCodec\libs\avcodec\include">
       <UniqueIdentifier>{FE65E56F-DC11-6A34-0C64-0924}</UniqueIdentifier>
     </Filter>
-    <Filter Include="addons\ofxAvCodec\libs\avcodec\include\libavcodec">
+    <Filter Include="..\addons\ofxAvCodec\libs\avcodec\include\libavcodec">
       <UniqueIdentifier>{9B468A6A-FA08-D999-ECC0-1DB4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="addons\ofxAvCodec\libs\avcodec\include\libavdevice">
+    <Filter Include="..\addons\ofxAvCodec\libs\avcodec\include\libavdevice">
       <UniqueIdentifier>{0A71A2CF-109F-B562-4F6B-C291}</UniqueIdentifier>
     </Filter>
-    <Filter Include="addons\ofxAvCodec\libs\avcodec\include\libavfilter">
+    <Filter Include="..\addons\ofxAvCodec\libs\avcodec\include\libavfilter">
       <UniqueIdentifier>{37EABC06-6D3A-AA0E-E91E-4BED}</UniqueIdentifier>
     </Filter>
-    <Filter Include="addons\ofxAvCodec\libs\avcodec\include\libavformat">
+    <Filter Include="..\addons\ofxAvCodec\libs\avcodec\include\libavformat">
       <UniqueIdentifier>{76FF9D5A-2592-4666-2A45-B916}</UniqueIdentifier>
     </Filter>
-    <Filter Include="addons\ofxAvCodec\libs\avcodec\include\libavutil">
+    <Filter Include="..\addons\ofxAvCodec\libs\avcodec\include\libavutil">
       <UniqueIdentifier>{B4AD8553-71C4-EA38-5CB3-9F8A}</UniqueIdentifier>
     </Filter>
-    <Filter Include="addons\ofxAvCodec\libs\avcodec\include\libswresample">
+    <Filter Include="..\addons\ofxAvCodec\libs\avcodec\include\libswresample">
       <UniqueIdentifier>{21B79191-28FC-10CD-D955-04EC}</UniqueIdentifier>
     </Filter>
-    <Filter Include="addons\ofxAvCodec\libs\avcodec\include\libswscale">
+    <Filter Include="..\addons\ofxAvCodec\libs\avcodec\include\libswscale">
       <UniqueIdentifier>{05D062B1-D8C2-2B58-5011-6E42}</UniqueIdentifier>
     </Filter>
-    <Filter Include="addons\ofxAvCodec\libs\avcodec\include-vs">
+    <Filter Include="..\addons\ofxAvCodec\libs\avcodec\include-vs">
       <UniqueIdentifier>{5822F7DE-4973-156A-5F4D-A68E}</UniqueIdentifier>
     </Filter>
-    <Filter Include="addons\ofxFontAwesome">
+    <Filter Include="..\addons\ofxFontAwesome">
       <UniqueIdentifier>{B2153DF0-D381-6690-9706-88F8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="addons\ofxFontAwesome\src">
+    <Filter Include="..\addons\ofxFontAwesome\src">
       <UniqueIdentifier>{B5B83E40-20CE-A711-2603-806E}</UniqueIdentifier>
     </Filter>
-    <Filter Include="addons\ofxFontStash2">
+    <Filter Include="..\addons\ofxFontStash2">
       <UniqueIdentifier>{32F91E1F-4864-0138-9D35-01CE}</UniqueIdentifier>
     </Filter>
-    <Filter Include="addons\ofxFontStash2\src">
+    <Filter Include="..\addons\ofxFontStash2\src">
       <UniqueIdentifier>{69A1D09B-BD53-14E8-1AC9-FA7D}</UniqueIdentifier>
     </Filter>
-    <Filter Include="addons\ofxFontStash2\libs">
+    <Filter Include="..\addons\ofxFontStash2\libs">
       <UniqueIdentifier>{C107B561-96CC-1EC0-296F-D027}</UniqueIdentifier>
     </Filter>
-    <Filter Include="addons\ofxFontStash2\libs\fontstash">
+    <Filter Include="..\addons\ofxFontStash2\libs\fontstash">
       <UniqueIdentifier>{1F7238B9-ED5A-EECB-BB9C-2BAD}</UniqueIdentifier>
     </Filter>
-    <Filter Include="addons\ofxFontStash2\libs\fontstash\src">
+    <Filter Include="..\addons\ofxFontStash2\libs\fontstash\src">
       <UniqueIdentifier>{4551A630-703E-81E5-764F-9490}</UniqueIdentifier>
     </Filter>
-    <Filter Include="addons\ofxFontStash2\libs\pugixml">
+    <Filter Include="..\addons\ofxFontStash2\libs\pugixml">
       <UniqueIdentifier>{9AE7D064-175C-5F1C-8328-4D7E}</UniqueIdentifier>
     </Filter>
-    <Filter Include="addons\ofxFontStash2\libs\pugixml\src">
+    <Filter Include="..\addons\ofxFontStash2\libs\pugixml\src">
       <UniqueIdentifier>{79A54AB5-66FC-74A6-9DB3-6E59}</UniqueIdentifier>
     </Filter>
-    <Filter Include="addons\ofxMightyUI">
+    <Filter Include="..\addons\ofxMightyUI">
       <UniqueIdentifier>{87AE3ACB-E335-BC82-C3D7-5F4F}</UniqueIdentifier>
     </Filter>
-    <Filter Include="addons\ofxMightyUI\src">
+    <Filter Include="..\addons\ofxMightyUI\src">
       <UniqueIdentifier>{C8E6E662-2080-A88C-9A10-84A1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\ofApp.h">
+    <ClInclude Include="..\src\ofApp.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="src\globals.h">
+    <ClInclude Include="..\src\globals.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="src\ofApp.h">
+    <ClInclude Include="..\src\ofApp.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="src\ofxIniSettings\ofxIniExtras.h">
+    <ClInclude Include="..\src\ofxIniSettings\ofxIniExtras.h">
       <Filter>src\ofxIniSettings</Filter>
     </ClInclude>
-    <ClInclude Include="src\ofxIniSettings\ofxIniSettings.h">
+    <ClInclude Include="..\src\ofxIniSettings\ofxIniSettings.h">
       <Filter>src\ofxIniSettings</Filter>
     </ClInclude>
-    <ClInclude Include="src\ui\ConfigView.h">
+    <ClInclude Include="..\src\ui\ConfigView.h">
       <Filter>src\ui</Filter>
     </ClInclude>
-    <ClInclude Include="src\ui\FaButton.h">
+    <ClInclude Include="..\src\ui\FaButton.h">
       <Filter>src\ui</Filter>
     </ClInclude>
-    <ClInclude Include="src\ui\FaToggleButton.h">
+    <ClInclude Include="..\src\ui\FaToggleButton.h">
       <Filter>src\ui</Filter>
     </ClInclude>
-    <ClInclude Include="src\ui\FMenu.h">
+    <ClInclude Include="..\src\ui\FMenu.h">
       <Filter>src\ui</Filter>
     </ClInclude>
-    <ClInclude Include="src\ui\L.h">
+    <ClInclude Include="..\src\ui\L.h">
       <Filter>src\ui</Filter>
     </ClInclude>
-    <ClInclude Include="src\ui\OsciView.h">
+    <ClInclude Include="..\src\ui\OsciView.h">
       <Filter>src\ui</Filter>
     </ClInclude>
-    <ClInclude Include="src\util\Audio.h">
+    <ClInclude Include="..\src\util\Audio.h">
       <Filter>src\util</Filter>
     </ClInclude>
-    <ClInclude Include="src\util\OsciAvAudioPlayer.h">
+    <ClInclude Include="..\src\util\OsciAvAudioPlayer.h">
       <Filter>src\util</Filter>
     </ClInclude>
-    <ClInclude Include="src\util\ShaderLoader.h">
+    <ClInclude Include="..\src\util\ShaderLoader.h">
       <Filter>src\util</Filter>
     </ClInclude>
-    <ClInclude Include="src\util\sounddevices.h">
+    <ClInclude Include="..\src\util\sounddevices.h">
       <Filter>src\util</Filter>
     </ClInclude>
-    <ClInclude Include="src\util\split.h">
+    <ClInclude Include="..\src\util\split.h">
       <Filter>src\util</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxAvCodec\src\ofxAvAudioPlayer.h">
+    <ClInclude Include="..\..\..\..\addons\ofxAvCodec\src\ofxAvAudioPlayer.h">
       <Filter>addons\ofxAvCodec\src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxAvCodec\src\ofxAvAudioWriter.h">
+    <ClInclude Include="..\..\..\..\addons\ofxAvCodec\src\ofxAvAudioWriter.h">
       <Filter>addons\ofxAvCodec\src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxAvCodec\src\ofxAvUtils.h">
+    <ClInclude Include="..\..\..\..\addons\ofxAvCodec\src\ofxAvUtils.h">
       <Filter>addons\ofxAvCodec\src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavcodec\avcodec.h">
+    <ClInclude Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavcodec\avcodec.h">
       <Filter>addons\ofxAvCodec\libs\avcodec\include\libavcodec</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavcodec\avfft.h">
+    <ClInclude Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavcodec\avfft.h">
       <Filter>addons\ofxAvCodec\libs\avcodec\include\libavcodec</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavcodec\d3d11va.h">
+    <ClInclude Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavcodec\d3d11va.h">
       <Filter>addons\ofxAvCodec\libs\avcodec\include\libavcodec</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavcodec\dv_profile.h">
+    <ClInclude Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavcodec\dv_profile.h">
       <Filter>addons\ofxAvCodec\libs\avcodec\include\libavcodec</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavcodec\dxva2.h">
+    <ClInclude Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavcodec\dxva2.h">
       <Filter>addons\ofxAvCodec\libs\avcodec\include\libavcodec</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavcodec\old_codec_ids.h">
+    <ClInclude Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavcodec\old_codec_ids.h">
       <Filter>addons\ofxAvCodec\libs\avcodec\include\libavcodec</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavcodec\qsv.h">
+    <ClInclude Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavcodec\qsv.h">
       <Filter>addons\ofxAvCodec\libs\avcodec\include\libavcodec</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavcodec\vaapi.h">
+    <ClInclude Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavcodec\vaapi.h">
       <Filter>addons\ofxAvCodec\libs\avcodec\include\libavcodec</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavcodec\vda.h">
+    <ClInclude Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavcodec\vda.h">
       <Filter>addons\ofxAvCodec\libs\avcodec\include\libavcodec</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavcodec\vdpau.h">
+    <ClInclude Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavcodec\vdpau.h">
       <Filter>addons\ofxAvCodec\libs\avcodec\include\libavcodec</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavcodec\version.h">
+    <ClInclude Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavcodec\version.h">
       <Filter>addons\ofxAvCodec\libs\avcodec\include\libavcodec</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavcodec\vorbis_parser.h">
+    <ClInclude Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavcodec\vorbis_parser.h">
       <Filter>addons\ofxAvCodec\libs\avcodec\include\libavcodec</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavcodec\xvmc.h">
+    <ClInclude Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavcodec\xvmc.h">
       <Filter>addons\ofxAvCodec\libs\avcodec\include\libavcodec</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavdevice\avdevice.h">
+    <ClInclude Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavdevice\avdevice.h">
       <Filter>addons\ofxAvCodec\libs\avcodec\include\libavdevice</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavdevice\version.h">
+    <ClInclude Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavdevice\version.h">
       <Filter>addons\ofxAvCodec\libs\avcodec\include\libavdevice</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavfilter\asrc_abuffer.h">
+    <ClInclude Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavfilter\asrc_abuffer.h">
       <Filter>addons\ofxAvCodec\libs\avcodec\include\libavfilter</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavfilter\avcodec.h">
+    <ClInclude Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavfilter\avcodec.h">
       <Filter>addons\ofxAvCodec\libs\avcodec\include\libavfilter</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavfilter\avfilter.h">
+    <ClInclude Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavfilter\avfilter.h">
       <Filter>addons\ofxAvCodec\libs\avcodec\include\libavfilter</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavfilter\avfiltergraph.h">
+    <ClInclude Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavfilter\avfiltergraph.h">
       <Filter>addons\ofxAvCodec\libs\avcodec\include\libavfilter</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavfilter\buffersink.h">
+    <ClInclude Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavfilter\buffersink.h">
       <Filter>addons\ofxAvCodec\libs\avcodec\include\libavfilter</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavfilter\buffersrc.h">
+    <ClInclude Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavfilter\buffersrc.h">
       <Filter>addons\ofxAvCodec\libs\avcodec\include\libavfilter</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavfilter\version.h">
+    <ClInclude Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavfilter\version.h">
       <Filter>addons\ofxAvCodec\libs\avcodec\include\libavfilter</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavformat\avformat.h">
+    <ClInclude Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavformat\avformat.h">
       <Filter>addons\ofxAvCodec\libs\avcodec\include\libavformat</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavformat\avio.h">
+    <ClInclude Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavformat\avio.h">
       <Filter>addons\ofxAvCodec\libs\avcodec\include\libavformat</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavformat\version.h">
+    <ClInclude Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavformat\version.h">
       <Filter>addons\ofxAvCodec\libs\avcodec\include\libavformat</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\adler32.h">
+    <ClInclude Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\adler32.h">
       <Filter>addons\ofxAvCodec\libs\avcodec\include\libavutil</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\aes.h">
+    <ClInclude Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\aes.h">
       <Filter>addons\ofxAvCodec\libs\avcodec\include\libavutil</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\attributes.h">
+    <ClInclude Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\attributes.h">
       <Filter>addons\ofxAvCodec\libs\avcodec\include\libavutil</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\audioconvert.h">
+    <ClInclude Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\audioconvert.h">
       <Filter>addons\ofxAvCodec\libs\avcodec\include\libavutil</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\audio_fifo.h">
+    <ClInclude Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\audio_fifo.h">
       <Filter>addons\ofxAvCodec\libs\avcodec\include\libavutil</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\avassert.h">
+    <ClInclude Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\avassert.h">
       <Filter>addons\ofxAvCodec\libs\avcodec\include\libavutil</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\avconfig.h">
+    <ClInclude Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\avconfig.h">
       <Filter>addons\ofxAvCodec\libs\avcodec\include\libavutil</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\avstring.h">
+    <ClInclude Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\avstring.h">
       <Filter>addons\ofxAvCodec\libs\avcodec\include\libavutil</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\avutil.h">
+    <ClInclude Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\avutil.h">
       <Filter>addons\ofxAvCodec\libs\avcodec\include\libavutil</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\base64.h">
+    <ClInclude Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\base64.h">
       <Filter>addons\ofxAvCodec\libs\avcodec\include\libavutil</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\blowfish.h">
+    <ClInclude Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\blowfish.h">
       <Filter>addons\ofxAvCodec\libs\avcodec\include\libavutil</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\bprint.h">
+    <ClInclude Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\bprint.h">
       <Filter>addons\ofxAvCodec\libs\avcodec\include\libavutil</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\bswap.h">
+    <ClInclude Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\bswap.h">
       <Filter>addons\ofxAvCodec\libs\avcodec\include\libavutil</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\buffer.h">
+    <ClInclude Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\buffer.h">
       <Filter>addons\ofxAvCodec\libs\avcodec\include\libavutil</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\camellia.h">
+    <ClInclude Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\camellia.h">
       <Filter>addons\ofxAvCodec\libs\avcodec\include\libavutil</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\cast5.h">
+    <ClInclude Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\cast5.h">
       <Filter>addons\ofxAvCodec\libs\avcodec\include\libavutil</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\channel_layout.h">
+    <ClInclude Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\channel_layout.h">
       <Filter>addons\ofxAvCodec\libs\avcodec\include\libavutil</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\common.h">
+    <ClInclude Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\common.h">
       <Filter>addons\ofxAvCodec\libs\avcodec\include\libavutil</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\cpu.h">
+    <ClInclude Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\cpu.h">
       <Filter>addons\ofxAvCodec\libs\avcodec\include\libavutil</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\crc.h">
+    <ClInclude Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\crc.h">
       <Filter>addons\ofxAvCodec\libs\avcodec\include\libavutil</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\dict.h">
+    <ClInclude Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\dict.h">
       <Filter>addons\ofxAvCodec\libs\avcodec\include\libavutil</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\display.h">
+    <ClInclude Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\display.h">
       <Filter>addons\ofxAvCodec\libs\avcodec\include\libavutil</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\downmix_info.h">
+    <ClInclude Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\downmix_info.h">
       <Filter>addons\ofxAvCodec\libs\avcodec\include\libavutil</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\error.h">
+    <ClInclude Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\error.h">
       <Filter>addons\ofxAvCodec\libs\avcodec\include\libavutil</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\eval.h">
+    <ClInclude Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\eval.h">
       <Filter>addons\ofxAvCodec\libs\avcodec\include\libavutil</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\ffversion.h">
+    <ClInclude Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\ffversion.h">
       <Filter>addons\ofxAvCodec\libs\avcodec\include\libavutil</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\fifo.h">
+    <ClInclude Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\fifo.h">
       <Filter>addons\ofxAvCodec\libs\avcodec\include\libavutil</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\file.h">
+    <ClInclude Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\file.h">
       <Filter>addons\ofxAvCodec\libs\avcodec\include\libavutil</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\frame.h">
+    <ClInclude Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\frame.h">
       <Filter>addons\ofxAvCodec\libs\avcodec\include\libavutil</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\hash.h">
+    <ClInclude Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\hash.h">
       <Filter>addons\ofxAvCodec\libs\avcodec\include\libavutil</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\hmac.h">
+    <ClInclude Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\hmac.h">
       <Filter>addons\ofxAvCodec\libs\avcodec\include\libavutil</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\imgutils.h">
+    <ClInclude Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\imgutils.h">
       <Filter>addons\ofxAvCodec\libs\avcodec\include\libavutil</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\intfloat.h">
+    <ClInclude Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\intfloat.h">
       <Filter>addons\ofxAvCodec\libs\avcodec\include\libavutil</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\intreadwrite.h">
+    <ClInclude Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\intreadwrite.h">
       <Filter>addons\ofxAvCodec\libs\avcodec\include\libavutil</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\lfg.h">
+    <ClInclude Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\lfg.h">
       <Filter>addons\ofxAvCodec\libs\avcodec\include\libavutil</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\log.h">
+    <ClInclude Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\log.h">
       <Filter>addons\ofxAvCodec\libs\avcodec\include\libavutil</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\lzo.h">
+    <ClInclude Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\lzo.h">
       <Filter>addons\ofxAvCodec\libs\avcodec\include\libavutil</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\macros.h">
+    <ClInclude Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\macros.h">
       <Filter>addons\ofxAvCodec\libs\avcodec\include\libavutil</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\mathematics.h">
+    <ClInclude Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\mathematics.h">
       <Filter>addons\ofxAvCodec\libs\avcodec\include\libavutil</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\md5.h">
+    <ClInclude Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\md5.h">
       <Filter>addons\ofxAvCodec\libs\avcodec\include\libavutil</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\mem.h">
+    <ClInclude Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\mem.h">
       <Filter>addons\ofxAvCodec\libs\avcodec\include\libavutil</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\motion_vector.h">
+    <ClInclude Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\motion_vector.h">
       <Filter>addons\ofxAvCodec\libs\avcodec\include\libavutil</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\murmur3.h">
+    <ClInclude Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\murmur3.h">
       <Filter>addons\ofxAvCodec\libs\avcodec\include\libavutil</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\old_pix_fmts.h">
+    <ClInclude Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\old_pix_fmts.h">
       <Filter>addons\ofxAvCodec\libs\avcodec\include\libavutil</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\opt.h">
+    <ClInclude Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\opt.h">
       <Filter>addons\ofxAvCodec\libs\avcodec\include\libavutil</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\parseutils.h">
+    <ClInclude Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\parseutils.h">
       <Filter>addons\ofxAvCodec\libs\avcodec\include\libavutil</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\pixdesc.h">
+    <ClInclude Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\pixdesc.h">
       <Filter>addons\ofxAvCodec\libs\avcodec\include\libavutil</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\pixelutils.h">
+    <ClInclude Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\pixelutils.h">
       <Filter>addons\ofxAvCodec\libs\avcodec\include\libavutil</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\pixfmt.h">
+    <ClInclude Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\pixfmt.h">
       <Filter>addons\ofxAvCodec\libs\avcodec\include\libavutil</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\random_seed.h">
+    <ClInclude Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\random_seed.h">
       <Filter>addons\ofxAvCodec\libs\avcodec\include\libavutil</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\rational.h">
+    <ClInclude Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\rational.h">
       <Filter>addons\ofxAvCodec\libs\avcodec\include\libavutil</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\replaygain.h">
+    <ClInclude Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\replaygain.h">
       <Filter>addons\ofxAvCodec\libs\avcodec\include\libavutil</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\ripemd.h">
+    <ClInclude Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\ripemd.h">
       <Filter>addons\ofxAvCodec\libs\avcodec\include\libavutil</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\samplefmt.h">
+    <ClInclude Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\samplefmt.h">
       <Filter>addons\ofxAvCodec\libs\avcodec\include\libavutil</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\sha.h">
+    <ClInclude Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\sha.h">
       <Filter>addons\ofxAvCodec\libs\avcodec\include\libavutil</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\sha512.h">
+    <ClInclude Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\sha512.h">
       <Filter>addons\ofxAvCodec\libs\avcodec\include\libavutil</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\stereo3d.h">
+    <ClInclude Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\stereo3d.h">
       <Filter>addons\ofxAvCodec\libs\avcodec\include\libavutil</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\threadmessage.h">
+    <ClInclude Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\threadmessage.h">
       <Filter>addons\ofxAvCodec\libs\avcodec\include\libavutil</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\time.h">
+    <ClInclude Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\time.h">
       <Filter>addons\ofxAvCodec\libs\avcodec\include\libavutil</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\timecode.h">
+    <ClInclude Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\timecode.h">
       <Filter>addons\ofxAvCodec\libs\avcodec\include\libavutil</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\timestamp.h">
+    <ClInclude Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\timestamp.h">
       <Filter>addons\ofxAvCodec\libs\avcodec\include\libavutil</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\twofish.h">
+    <ClInclude Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\twofish.h">
       <Filter>addons\ofxAvCodec\libs\avcodec\include\libavutil</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\version.h">
+    <ClInclude Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\version.h">
       <Filter>addons\ofxAvCodec\libs\avcodec\include\libavutil</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\xtea.h">
+    <ClInclude Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\include\libavutil\xtea.h">
       <Filter>addons\ofxAvCodec\libs\avcodec\include\libavutil</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libswresample\swresample.h">
+    <ClInclude Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\include\libswresample\swresample.h">
       <Filter>addons\ofxAvCodec\libs\avcodec\include\libswresample</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libswresample\version.h">
+    <ClInclude Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\include\libswresample\version.h">
       <Filter>addons\ofxAvCodec\libs\avcodec\include\libswresample</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libswscale\swscale.h">
+    <ClInclude Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\include\libswscale\swscale.h">
       <Filter>addons\ofxAvCodec\libs\avcodec\include\libswscale</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include\libswscale\version.h">
+    <ClInclude Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\include\libswscale\version.h">
       <Filter>addons\ofxAvCodec\libs\avcodec\include\libswscale</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxAvCodec\libs\avcodec\include-vs\inttypes.h">
+    <ClInclude Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\include-vs\inttypes.h">
       <Filter>addons\ofxAvCodec\libs\avcodec\include-vs</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxFontAwesome\src\ofxFontAwesome.h">
+    <ClInclude Include="..\..\..\..\addons\ofxFontAwesome\src\ofxFontAwesome.h">
       <Filter>addons\ofxFontAwesome\src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxFontStash2\src\ofxFontStash2.h">
+    <ClInclude Include="..\..\..\..\addons\ofxFontStash2\src\ofxFontStash2.h">
       <Filter>addons\ofxFontStash2\src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxFontStash2\src\ofxFontStashParser.h">
+    <ClInclude Include="..\..\..\..\addons\ofxFontStash2\src\ofxFontStashParser.h">
       <Filter>addons\ofxFontStash2\src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxFontStash2\src\ofxFontStashStyle.h">
+    <ClInclude Include="..\..\..\..\addons\ofxFontStash2\src\ofxFontStashStyle.h">
       <Filter>addons\ofxFontStash2\src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxFontStash2\libs\fontstash\src\fontstash.h">
+    <ClInclude Include="..\..\..\..\addons\ofxFontStash2\libs\fontstash\src\fontstash.h">
       <Filter>addons\ofxFontStash2\libs\fontstash\src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxFontStash2\libs\fontstash\src\gl3fontstash.h">
+    <ClInclude Include="..\..\..\..\addons\ofxFontStash2\libs\fontstash\src\gl3fontstash.h">
       <Filter>addons\ofxFontStash2\libs\fontstash\src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxFontStash2\libs\fontstash\src\glfontstash.h">
+    <ClInclude Include="..\..\..\..\addons\ofxFontStash2\libs\fontstash\src\glfontstash.h">
       <Filter>addons\ofxFontStash2\libs\fontstash\src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxFontStash2\libs\fontstash\src\stb_truetype.h">
+    <ClInclude Include="..\..\..\..\addons\ofxFontStash2\libs\fontstash\src\stb_truetype.h">
       <Filter>addons\ofxFontStash2\libs\fontstash\src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxFontStash2\libs\pugixml\src\pugiconfig.hpp">
+    <ClInclude Include="..\..\..\..\addons\ofxFontStash2\libs\pugixml\src\pugiconfig.hpp">
       <Filter>addons\ofxFontStash2\libs\pugixml\src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxFontStash2\libs\pugixml\src\pugixml.hpp">
+    <ClInclude Include="..\..\..\..\addons\ofxFontStash2\libs\pugixml\src\pugixml.hpp">
       <Filter>addons\ofxFontStash2\libs\pugixml\src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxMightyUI\src\BarButton.h">
+    <ClInclude Include="..\..\..\..\addons\ofxMightyUI\src\BarButton.h">
       <Filter>addons\ofxMightyUI\src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxMightyUI\src\Button.h">
+    <ClInclude Include="..\..\..\..\addons\ofxMightyUI\src\Button.h">
       <Filter>addons\ofxMightyUI\src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxMightyUI\src\Container.h">
+    <ClInclude Include="..\..\..\..\addons\ofxMightyUI\src\Container.h">
       <Filter>addons\ofxMightyUI\src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxMightyUI\src\CppTweener.h">
+    <ClInclude Include="..\..\..\..\addons\ofxMightyUI\src\CppTweener.h">
       <Filter>addons\ofxMightyUI\src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxMightyUI\src\EmptyContainer.h">
+    <ClInclude Include="..\..\..\..\addons\ofxMightyUI\src\EmptyContainer.h">
       <Filter>addons\ofxMightyUI\src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxMightyUI\src\Helpers.h">
+    <ClInclude Include="..\..\..\..\addons\ofxMightyUI\src\Helpers.h">
       <Filter>addons\ofxMightyUI\src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxMightyUI\src\Image.h">
+    <ClInclude Include="..\..\..\..\addons\ofxMightyUI\src\Image.h">
       <Filter>addons\ofxMightyUI\src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxMightyUI\src\InternalWindow.h">
+    <ClInclude Include="..\..\..\..\addons\ofxMightyUI\src\InternalWindow.h">
       <Filter>addons\ofxMightyUI\src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxMightyUI\src\Label.h">
+    <ClInclude Include="..\..\..\..\addons\ofxMightyUI\src\Label.h">
       <Filter>addons\ofxMightyUI\src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxMightyUI\src\Layout.h">
+    <ClInclude Include="..\..\..\..\addons\ofxMightyUI\src\Layout.h">
       <Filter>addons\ofxMightyUI\src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxMightyUI\src\MUI.h">
+    <ClInclude Include="..\..\..\..\addons\ofxMightyUI\src\MUI.h">
       <Filter>addons\ofxMightyUI\src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxMightyUI\src\MuiConfig.h">
+    <ClInclude Include="..\..\..\..\addons\ofxMightyUI\src\MuiConfig.h">
       <Filter>addons\ofxMightyUI\src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxMightyUI\src\MuiCore.h">
+    <ClInclude Include="..\..\..\..\addons\ofxMightyUI\src\MuiCore.h">
       <Filter>addons\ofxMightyUI\src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxMightyUI\src\Root.h">
+    <ClInclude Include="..\..\..\..\addons\ofxMightyUI\src\Root.h">
       <Filter>addons\ofxMightyUI\src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxMightyUI\src\ScrollPane.h">
+    <ClInclude Include="..\..\..\..\addons\ofxMightyUI\src\ScrollPane.h">
       <Filter>addons\ofxMightyUI\src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxMightyUI\src\SegmentedSelect.h">
+    <ClInclude Include="..\..\..\..\addons\ofxMightyUI\src\SegmentedSelect.h">
       <Filter>addons\ofxMightyUI\src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxMightyUI\src\Slider.h">
+    <ClInclude Include="..\..\..\..\addons\ofxMightyUI\src\Slider.h">
       <Filter>addons\ofxMightyUI\src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxMightyUI\src\SliderWithLabel.h">
+    <ClInclude Include="..\..\..\..\addons\ofxMightyUI\src\SliderWithLabel.h">
       <Filter>addons\ofxMightyUI\src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxMightyUI\src\TextField.h">
+    <ClInclude Include="..\..\..\..\addons\ofxMightyUI\src\TextField.h">
       <Filter>addons\ofxMightyUI\src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxMightyUI\src\TextureAtlas.h">
+    <ClInclude Include="..\..\..\..\addons\ofxMightyUI\src\TextureAtlas.h">
       <Filter>addons\ofxMightyUI\src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\addons\ofxMightyUI\src\ToggleButton.h">
+    <ClInclude Include="..\..\..\..\addons\ofxMightyUI\src\ToggleButton.h">
       <Filter>addons\ofxMightyUI\src</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="icon.rc" />
+    <ResourceCompile Include="..\icon.rc" />
   </ItemGroup>
   <ItemGroup>
-    <Library Include="..\..\..\addons\ofxAvCodec\libs\avcodec\lib\vs\Win32\avcodec.lib">
+    <Library Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\lib\vs\Win32\avcodec.lib">
       <Filter>addons\ofxAvCodec</Filter>
     </Library>
-    <Library Include="..\..\..\addons\ofxAvCodec\libs\avcodec\lib\vs\Win32\avdevice.lib">
+    <Library Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\lib\vs\Win32\avdevice.lib">
       <Filter>addons\ofxAvCodec</Filter>
     </Library>
-    <Library Include="..\..\..\addons\ofxAvCodec\libs\avcodec\lib\vs\Win32\avfilter.lib">
+    <Library Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\lib\vs\Win32\avfilter.lib">
       <Filter>addons\ofxAvCodec</Filter>
     </Library>
-    <Library Include="..\..\..\addons\ofxAvCodec\libs\avcodec\lib\vs\Win32\avformat.lib">
+    <Library Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\lib\vs\Win32\avformat.lib">
       <Filter>addons\ofxAvCodec</Filter>
     </Library>
-    <Library Include="..\..\..\addons\ofxAvCodec\libs\avcodec\lib\vs\Win32\avutil.lib">
+    <Library Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\lib\vs\Win32\avutil.lib">
       <Filter>addons\ofxAvCodec</Filter>
     </Library>
-    <Library Include="..\..\..\addons\ofxAvCodec\libs\avcodec\lib\vs\Win32\swresample.lib">
+    <Library Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\lib\vs\Win32\swresample.lib">
       <Filter>addons\ofxAvCodec</Filter>
     </Library>
-    <Library Include="..\..\..\addons\ofxAvCodec\libs\avcodec\lib\vs\Win32\swscale.lib">
+    <Library Include="..\..\..\..\addons\ofxAvCodec\libs\avcodec\lib\vs\Win32\swscale.lib">
       <Filter>addons\ofxAvCodec</Filter>
     </Library>
   </ItemGroup>
