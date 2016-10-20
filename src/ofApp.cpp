@@ -34,7 +34,7 @@ void ofApp::setup(){
 	
 	root = new mui::Root();
 	
-	globals.player.loadSound( "konichiwa.wav" );
+	globals.player.loadSound( ofxToReadonlyDataPath("konichiwa.wav") );
 	globals.player.setLoop(true);
 	globals.player.stop(); 
 	
@@ -376,7 +376,7 @@ void ofApp::draw(){
 		if( exporting > 0 ){
 			unsigned long long totalFrames = 1+globals.player.duration*globals.exportFrameRate/1000;
 			int pct = exportFrameNum*100/totalFrames;
-			ofDrawBitmapString("Format:  " + ofToString(globals.exportWidth) + " x " + ofToString(globals.exportHeight) + " @ " + ofToString(globals.exportFrameRate) + "fps (change in data/settings.txt)", 10, 60);
+			ofDrawBitmapString("Format:  " + ofToString(globals.exportWidth) + " x " + ofToString(globals.exportHeight) + " @ " + ofToString(globals.exportFrameRate) + "fps (change in " + ofxToReadWriteableDataPath(")settings.txt") + ")", 10, 60);
 			ofDrawBitmapString("Export:  " + ofToString(pct) + "%  (" + ofToString(exportFrameNum) + "/" + ofToString(totalFrames) + ")", 10, 80 );
 			if( (exportFrameNum%10) < 5 ){
 				ofSetColor(255,0,0);
@@ -385,7 +385,7 @@ void ofApp::draw(){
 				ofSetColor(255);
 			}
 			ofFill();
-			ofEllipse(20, 100, 20, 20);
+			ofDrawEllipse(20, 100, 20, 20);
 		}
 	}
 }
@@ -488,6 +488,7 @@ void ofApp::audioIn(float * input, int bufferSize, int nChannels){
 void ofApp::audioOut( float * output, int bufferSize, int nChannels ){
 	if( fileToLoad != "" ){
 		globals.player.loadSound(fileToLoad);
+		setWindowRepresentedFilename(fileToLoad);
 		fileToLoad = "";
 	}
 	

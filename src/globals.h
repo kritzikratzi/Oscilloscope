@@ -13,10 +13,14 @@
 #include "OsciAvAudioPlayer.h"
 #include "ofxIniSettings.h"
 
+extern string ofxToReadWriteableDataPath( string filename );
+extern string ofxToReadonlyDataPath( string filename );
+extern void setWindowRepresentedFilename( string filename );
+
 #define globals (Globals::instance)
 class Globals{
 public:
-	Globals() :  sampleRate(44100), bufferSize(512), numBuffers(4), deviceId(0),scale(1.0),flipXY(false),invertX(false),invertY(false),autoDetect(true), outputVolume(1), inputVolume(1), strokeWeight(10), blur(30), numPts(20), hue(50),intensity(0.4), afterglow(0.5), exportWidth(1920), exportHeight(1080), exportFrameRate(60),micDeviceId(-1),micActive(false),alwaysOnTop(false){
+	Globals() :  sampleRate(44100), bufferSize(512), numBuffers(4), deviceId(0),scale(1.0),flipXY(false),invertX(false),invertY(false),autoDetect(true), outputVolume(1), inputVolume(1), strokeWeight(10), blur(30), numPts(20), hue(50),intensity(0.4), afterglow(0.5), exportWidth(1920), exportHeight(1080), exportFrameRate(60),micDeviceId(-1),micActive(false),alwaysOnTop(false),timeStretch(1){
 	}
 	
 	// audio settings
@@ -52,7 +56,7 @@ public:
 	
 	bool alwaysOnTop;
 	
-	void loadFromFile( string settingsFile = ofToDataPath("settings.txt",true) ){
+	void loadFromFile( string settingsFile = ofxToReadWriteableDataPath("settings.txt") ){
 		ofxIniSettings settings = ofxIniSettings(settingsFile);
 		bufferSize = settings.get( "bufferSize", bufferSize );
 		sampleRate = settings.get("sampleRate",  sampleRate );
@@ -78,7 +82,13 @@ public:
 	}
 	
 	
-	void saveToFile( string settingsFile = ofToDataPath("settings.txt",true) ){
+	void saveToFile( string settingsFile = ofxToReadWriteableDataPath("settings.txt") ){
+		if(!ofFile(settingsFile, ofFile::Reference).exists()){
+			ofFile file(settingsFile, ofFile::WriteOnly);
+			file << endl;
+			file.close();
+		}
+
 		ofxIniSettings settings = ofxIniSettings(settingsFile);
 		
 		settings.set( "bufferSize", bufferSize );

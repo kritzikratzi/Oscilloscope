@@ -410,9 +410,13 @@ bool OsciAvAudioPlayer::decode_next_frame(){
 												 av_get_default_channel_layout(2), AV_SAMPLE_FMT_FLT, visual_sample_rate,
 												 input_channel_layout, (AVSampleFormat)decoded_frame->format, decoded_frame->sample_rate,
 												 0, NULL);
-				av_opt_set_int(swr_context192, "filter_size", 1, 0);
-				av_opt_set_int(swr_context192, "linear_interp", 1, 0);
-//				av_opt_set_int(swr_context192, "dither_scale", 0, 0);
+
+				//enable these two to disable interpolation
+				//av_opt_set_int(swr_context192, "filter_size", 1, 0);
+				//av_opt_set_int(swr_context192, "linear_interp", 1, 0);
+
+				
+				//				av_opt_set_int(swr_context192, "dither_scale", 0, 0);
 				swr_init(swr_context192);
 				if (!swr_context192){
 					fprintf(stderr, "Could not allocate resampler-192k context\n");

@@ -17,6 +17,7 @@
 
 #include <string>
 #include "ofMain.h"
+#include "../globals.h"
 
 class ShaderLoader{
 	string fragFile;
@@ -37,9 +38,9 @@ public:
 	
 	void setup( ofShader * shader, string baseName ){
 		this->shader = shader; 
-		fragFile = ofToDataPath(baseName + ".frag", true);
-		vertFile = ofToDataPath(baseName + ".vert", true);
-		geomFile = ofToDataPath(baseName + ".geom", true);
+		fragFile = ofxToReadonlyDataPath(baseName + ".frag");
+		vertFile = ofxToReadonlyDataPath(baseName + ".vert");
+		geomFile = ofxToReadonlyDataPath(baseName + ".geom");
 		
 		ofAddListener( ofEvents().update, this, &ShaderLoader::of_update, OF_EVENT_ORDER_BEFORE_APP );
 		ofAddListener( ofEvents().draw, this, &ShaderLoader::of_draw, OF_EVENT_ORDER_AFTER_APP );

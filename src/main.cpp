@@ -33,11 +33,13 @@ int main(){
 
 	cout << "LAUNCH DESKTOP" << endl;
 	ofSetupOpenGL(&window, 1024, 700, OF_WINDOW);
+	window.setWindowTitle("Oscilloscope");
 	
 	// go fullscreen in mac osx
 	#if defined(TARGET_OSX)
 	NSWindow * cocoaWindow = (NSWindow*)window.getCocoaWindow();
 	[cocoaWindow setFrame:[[NSScreen mainScreen] visibleFrame] display:YES];
+	[cocoaWindow setTitle:@"Oscilloscope"];
 	if(globals.alwaysOnTop){
 		[cocoaWindow setLevel: NSFloatingWindowLevel];
 	}
@@ -67,3 +69,76 @@ INT WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
     return main();
 }
 #endif
+
+
+void setWindowRepresentedFilename( string filename ){
+#if defined(TARGET_OSX)
+	NSWindow * cocoaWindow = (NSWindow*)(ofGetWindowPtr()->getCocoaWindow());
+	if(filename == ""){
+		[cocoaWindow setRepresentedFilename:@""];
+		[cocoaWindow setTitle:@"Oscilloscope"];
+	}
+	else{
+		NSString * file = [NSString stringWithUTF8String:filename.c_str()];
+		NSString * filename = [file pathComponents].lastObject;
+		[cocoaWindow setTitle:filename];
+		[cocoaWindow setRepresentedFilename:file];
+	}
+#else
+	ofGetWindowPtr()->setWindowTitle(filename);
+#endif
+	
+}
+
+
+// returns a path where the application can only read.
+// for osx this is the "resources" folder residing inside the application bundle,
+// for windows it is still the data folder.
+string ofxToReadonlyDataPath( string filename ){
+#ifdef TARGET_OSX
+	// http://www.cocoabuilder.com/archive/cocoa/193451-finding-out-executable-location-from-c-program.html
+	CFBundleRef bundle = CFBundleGetMainBundle();
+	CFURLRef    url  = CFBundleCopyResourcesDirectoryURL(bundle);
+	CFURLRef absolute = CFURLCopyAbsoluteURL(url);
+	Boolean abs;
+	CFStringRef path  = CFURLCopyFileSystemPath(absolute,kCFURLPOSIXPathStyle);
+	CFIndex    maxLength = CFStringGetMaximumSizeOfFileSystemRepresentation(path);
+	char        *result = (char*)malloc(maxLength);
+	
+	if(result) {
+		if(!CFStringGetFileSystemRepresentation(path,result, maxLength)) {
+			free(result);
+			result = NULL;
+		}
+	}
+	
+	string realResult = string([[NSString stringWithUTF8String:result] stringByAppendingPathComponent:[NSString stringWithUTF8String:filename.c_str()]].UTF8String );
+	
+	CFRelease(path);
+	CFRelease(url);
+	CFRelease(absolute);
+	
+	return realResult;
+#else
+	return ofToDataPath(filename,true);
+#endif
+}
+
+
+// returns a path where the application can safely read+write data.
+// this is great for settings files and the like.
+// for osx this is the application support directory (without sandboxing)
+// or ~/Library/Containers/<bundle-identifier>/
+// for windows it is still the data folder.
+string ofxToReadWriteableDataPath( string filename ){
+#ifdef TARGET_OSX
+	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES);
+	NSString *appName=[[[NSBundle mainBundle] infoDictionary]  objectForKey:(id)kCFBundleIdentifierKey];
+	NSString *applicationSupportDirectory = [[paths firstObject] stringByAppendingPathComponent:appName];
+	NSString *path = [applicationSupportDirectory stringByAppendingPathComponent:[NSString stringWithUTF8String:filename.c_str()]];
+	string result([path UTF8String]);
+	return result;
+#else
+	return ofToDataPath(filename,true);
+#endif
+}
