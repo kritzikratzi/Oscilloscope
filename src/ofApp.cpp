@@ -333,7 +333,7 @@ void ofApp::draw(){
 		ofEnableBlendMode(OF_BLENDMODE_MULTIPLY);
 		ofSetColor( 0, (1-globals.afterglow)*255 );
 		ofFill();
-		ofRect( 0, 0, fbo.getWidth(), fbo.getHeight() );
+		ofDrawRectangle( 0, 0, fbo.getWidth(), fbo.getHeight() );
 	
 		ofEnableAlphaBlending();
 		ofMatrix4x4 viewMatrix = getViewMatrix();
@@ -385,7 +385,7 @@ void ofApp::draw(){
 				ofSetColor(255);
 			}
 			ofFill();
-			ofEllipse(20, 100, 20, 20);
+			ofDrawEllipse(20, 100, 20, 20);
 		}
 	}
 }
