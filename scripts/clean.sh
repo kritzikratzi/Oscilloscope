@@ -1,7 +1,7 @@
 #! /bin/bash
-
-pushd `pwd`/../bin/
-echo "Cleaning out bin folder ... "
+basedir=$(dirname $0)
+pushd $basedir/../bin
+echo "Cleaning out $basedir folder ... "
 
 echo "----------------------------"
 git clean -ndx .

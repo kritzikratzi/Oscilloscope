@@ -21,18 +21,16 @@ Things are moving around a bit at the moment.
 Make sure to read these instructions before each build. 
 
 1. Download and unzip Openframeworks 0.9.3 or newer
-1. Move this project into apps/myApps/oscilloscope
-1. Clone [ofxMightyUI](https://github.com/kritzikratzi/ofxMightyUI) into addons/ofxMightyUI.
-1. Clone [ofxAvCodec](https://github.com/kritzikratzi/ofxAvCodec) into ofxAvCodec. 
-1. (~~This is seriously painful~~) Follow the instructions in ofxAvCodec/readme.md and ~~compile shared libraries for your platform~~ grab the precompiled binaries from the releases section. 
-1. Clone [ofxFontAwesome](https://github.com/kritzikratzi/ofxFontAwesome) into addons/ofxFontAwesome
-1. Clone [ofxFontStash2](https://github.com/kritzikratzi/ofxFontStash2) into addons/ofxFontStash2
+1. Open the folder apps/myApps/
+1. Clone the repository with submodules: `git clone --recursive https://github.com/kritzikratzi/Oscilloscope.git`
+1. Download the binary release for ofxAvCodec from [https://github.com/kritzikratzi/ofxAvCodec/releases/tag/0.1](https://github.com/kritzikratzi/ofxAvCodec/releases/tag/0.1)
+1. Replace the addons/ofxAvCodec/libs with the libs folder from the download
 
 
-### Compiling with XCode (OSX10.9+)
+### Compiling with XCode (OSX10.10+)
 
-1. run `scripts/clean.sh`
-1. run `scripts/prepare.sh osx`
+1. (optional) run `scripts/clean.sh`
+1. (optional) run `scripts/prepare.sh osx`
 1. Open apps/myApps/oscilloscope/Oscilloscope.xcodeproject and then Build&Run
 1. (Optional) Code sign by running `scripts/sign-mac.sh bin/Oscilloscope.app "Developer ID Application: Name of your certificate"` (run `security find-identity -v -p codesigning` to get a list of installed certs)
 
@@ -40,9 +38,9 @@ You can also build with `make && make run` on the command line. The resulting bu
 
 ### Compiling with Visual studio 2015
 
-The shell commands can be run from a git bash, cygwin, msys, or any other shell emulator. 
+**VS Project file is not up to date, 
 
-**Windows project file is out of date. Remove the `ofxFontStash2` plugins and re-add all files from the `pugi` branch.**
+The shell commands can be run from a git bash, cygwin, msys, or any other shell emulator. 
 
 1. run `scripts/clean.sh`
 1. run `scripts/prepare.sh win32`
