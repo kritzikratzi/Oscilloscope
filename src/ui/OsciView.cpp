@@ -213,7 +213,7 @@ void OsciView::update(){
 //--------------------------------------------------------------
 void OsciView::draw(){
 	ofSetColor(150);
-	ofLine( 10, flipXY->y - 10, width-10, flipXY->y - 10 );
+	ofDrawLine( 10, flipXY->y - 10, width-10, flipXY->y - 10 );
 	ofSetColor(255);
 }
 

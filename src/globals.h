@@ -20,41 +20,40 @@ extern void setWindowRepresentedFilename( string filename );
 #define globals (Globals::instance)
 class Globals{
 public:
-	Globals() :  sampleRate(44100), bufferSize(512), numBuffers(4), deviceId(0),scale(1.0),flipXY(false),invertX(false),invertY(false),autoDetect(true), outputVolume(1), inputVolume(1), strokeWeight(10), blur(30), numPts(20), hue(50),intensity(0.4), afterglow(0.5), exportWidth(1920), exportHeight(1080), exportFrameRate(60),micDeviceId(-1),micActive(false),alwaysOnTop(false),timeStretch(1){
-	}
+	Globals(){}
 	
 	// audio settings
-	bool autoDetect;
-	int sampleRate;
-	int bufferSize;
-	int numBuffers;
-	int deviceId;
-	int micDeviceId;
-	bool micActive;
+	bool autoDetect{true};
+	int sampleRate{44100};
+	int bufferSize{512};
+	int numBuffers{4};
+	int deviceId{0};
+	int micDeviceId{-1};
+	bool micActive{false};
 	
 	// display settings
-	float scale;
-	bool invertX;
-	bool invertY;
-	bool flipXY;
+	float scale{1.0};
+	bool invertX{false};
+	bool invertY{false};
+	bool flipXY{false};
 	
-	float strokeWeight; // 1...20
-	float timeStretch; // 0.1-2.0
-	float blur; // 0...255
-	float intensity; // 0...1
-	float afterglow; // 0...1
+	float strokeWeight{10}; // 1...20
+	float timeStretch{1}; // 0.1-2.0
+	float blur{30}; // 0...255
+	float intensity{0.4}; // 0...1
+	float afterglow{0.5}; // 0...1
 	
-	int numPts; // 1...+inf?
-	float hue; // 0...360
+	int numPts{20}; // 1...+inf?
+	float hue{50}; // 0...360
 	
-	float outputVolume;
-	float inputVolume;
+	float outputVolume{1};
+	float inputVolume{1};
 	
-	int exportWidth;
-	int exportHeight;
-	int exportFrameRate;
+	int exportWidth{1920};
+	int exportHeight{1080};
+	int exportFrameRate{60};
 	
-	bool alwaysOnTop;
+	bool alwaysOnTop{false};
 	
 	void loadFromFile( string settingsFile = ofxToReadWriteableDataPath("settings.txt") ){
 		ofxIniSettings settings = ofxIniSettings(settingsFile);
