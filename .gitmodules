@@ -1,3 +1,12 @@
-[submodule "ofxMightyUI"]
-	path = ofxMightyUI
-	url = git@github.com:kritzikratzi/ofxMightyUI.git
+[submodule "addons/ofxMightyUI"]
+	path = addons/ofxMightyUI
+	url = https://github.com/kritzikratzi/ofxMightyUI
+[submodule "addons/ofxAvCodec"]
+	path = addons/ofxAvCodec
+	url = https://github.com/kritzikratzi/ofxAvCodec
+[submodule "addons/ofxFontAwesome"]
+	path = addons/ofxFontAwesome
+	url = https://github.com/kritzikratzi/ofxFontAwesome
+[submodule "addons/ofxFontStash2"]
+	path = addons/ofxFontStash2
+	url = https://github.com/kritzikratzi/ofxFontStash2
