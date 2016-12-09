@@ -47,14 +47,6 @@ int main(){
 	
 
 
-	if(!ofGLCheckExtension("GL_ARB_geometry_shader4") &&
-	   !ofGLCheckExtension("GL_EXT_geometry_shader4") ){
-		ofSystemAlertDialog("Geometry shader extension (GL_EXT_geometry_shader4) not available :(");
-		ofLogFatalError() << "geometry shaders not supported on this graphics card" << endl;
-		return 1;
-	}
-
-
 	mui_init();
 	mui::MuiConfig::font = "mui/fonts/Lato-Regular.ttf";
 	ofRunApp(new ofApp);

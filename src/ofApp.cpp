@@ -9,6 +9,8 @@ Poco::Mutex updateMutex;
 
 bool applicationRunning = false;
 
+#define EPS 1E-6
+
 //--------------------------------------------------------------
 void ofApp::setup(){
 	mui::MuiConfig::fontSize = 16;
@@ -212,7 +214,7 @@ void ofApp::update(){
 	
 	changed = false;
 	shapeMesh.clear();
-	shapeMesh.setMode(OF_PRIMITIVE_LINES);
+	shapeMesh.setMode(OF_PRIMITIVE_TRIANGLES);
 	shapeMesh.enableColors();
 	
 	int bufferSize = (exporting==0?2084:256);
@@ -231,6 +233,43 @@ void ofApp::update(){
 	
 	if( left.totalLength >= bufferSize && right.totalLength >= bufferSize ){
 		changed = true;
+		/*shapeMesh.addVertex(lastA0Vert);
+		shapeMesh.addColor(lastA0Col);
+		shapeMesh.addVertex(lastA1Vert);
+		shapeMesh.addColor(lastA1Col);*/
+		
+		float uSize = globals.strokeWeight / 1000.0;
+		auto addPt = [&]( ofVec2f p0, ofVec2f p1 ){
+			ofVec2f dir = p1 - p0;
+			float z = dir.length();
+			if (z > EPS) dir /= z;
+			else dir = ofVec2f(1.0, 0.0);
+			
+			dir *= uSize;
+			ofVec2f norm(-dir.y, dir.x);
+			ofVec2f xy(-uSize, -uSize);
+			
+			shapeMesh.addVertex(ofVec3f(p0-dir-norm));
+			shapeMesh.addColor(ofFloatColor(-uSize, -uSize, z));
+			
+			shapeMesh.addVertex(ofVec3f(p0-dir+norm));
+			shapeMesh.addColor(ofFloatColor(-uSize, uSize, z));
+			
+			shapeMesh.addVertex(ofVec3f(p1+dir-norm));
+			shapeMesh.addColor(ofFloatColor(z+uSize, -uSize, z));
+			
+			
+			
+			shapeMesh.addVertex(ofVec3f(p0-dir+norm));
+			shapeMesh.addColor(ofFloatColor(-uSize, uSize, z));
+			
+			shapeMesh.addVertex(ofVec3f(p1+dir-norm));
+			shapeMesh.addColor(ofFloatColor(z+uSize, -uSize, z));
+			
+			shapeMesh.addVertex(ofVec3f(p1+dir+norm));
+			shapeMesh.addColor(ofFloatColor(z+uSize, +uSize, z));
+		};
+		
 		while( left.totalLength >= bufferSize && right.totalLength >= bufferSize ){
 			if(isMono){
 				memset(rightBuffer,0,bufferSize*sizeof(float));
@@ -247,24 +286,24 @@ void ofApp::update(){
 			}
 			
 			ofColor col = ofColor::fromHsb(globals.hue*255/360, 255, 255*globals.intensity);
+			auto toColor = [](const ofVec3f pos){ return ofFloatColor(pos.x, pos.y, pos.z); };
 			
 			if( shapeMesh.getVertices().size() < bufferSize*4 || exporting ){
-				ofPoint a, b = ofPoint(leftBuffer[0], rightBuffer[0]);
-				shapeMesh.addVertex(last);
-				shapeMesh.addVertex(b);
+				
+				addPt(last,{leftBuffer[0],rightBuffer[0]});
+				last = {leftBuffer[bufferSize-1],rightBuffer[bufferSize-1]};
 				
 				for( int i = 1; i < bufferSize; i++ ){
-					a = ofPoint(leftBuffer[i-1], rightBuffer[i-1]);
-					b = ofPoint(leftBuffer[i  ], rightBuffer[i  ]);
-					shapeMesh.addVertex(a);
-					shapeMesh.addVertex(b);
+					ofVec2f p0(leftBuffer[i-1], rightBuffer[i-1]);
+					ofVec2f p1(leftBuffer[i  ], rightBuffer[i  ]);
+					addPt(p0,p1);
 				}
 				
-				last = b;
 			}
 			else{
 				dropped ++;
 			}
+			
 			
 			left.peel(bufferSize);
 			right.peel(bufferSize);
@@ -487,7 +526,9 @@ void ofApp::audioIn(float * input, int bufferSize, int nChannels){
 
 void ofApp::audioOut( float * output, int bufferSize, int nChannels ){
 	if( fileToLoad != "" ){
+		globals.timeStretch = 1.0;
 		globals.player.loadSound(fileToLoad);
+		osciView->timeStretchSlider->slider->value = 1.0; 
 		setWindowRepresentedFilename(fileToLoad);
 		fileToLoad = "";
 	}

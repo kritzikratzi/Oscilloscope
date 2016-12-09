@@ -5,9 +5,7 @@
 uniform float uSize;
 uniform float uIntensity;
 uniform float uHue;
-
-varying vec3 texcoord;
-varying vec2 pos;
+varying vec4 color;
 
 float gaussian(float x, float sigma) {
     return exp(-(x * x) / (2.0 * sigma * sigma)) / (TAUR * sigma);
@@ -30,8 +28,8 @@ vec3 hsv2rgb(vec3 c)
 
 void main (void)
 {
-    float len = texcoord.z;
-    vec2 xy = texcoord.xy;
+    float len = color.z; // we pass in length ...
+    vec2 xy = color.xy; // and xy through color
     float alpha;
 
     float sigma = uSize/(2.0+2.0*1000.0*uSize/50.0+0.0*pow(uIntensity,2.0));

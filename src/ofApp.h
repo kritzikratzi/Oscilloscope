@@ -64,5 +64,5 @@ class ofApp : public ofBaseApp{
 		unsigned long long lastMouseMoved;
 		string fileToLoad;
 	
-		ofPoint last; 
+		ofVec2f last;
 };

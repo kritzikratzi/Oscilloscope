@@ -69,7 +69,7 @@ public:
 		outputVolume = settings.get( "outputVolume", outputVolume );
 		inputVolume = settings.get( "inputVolume", inputVolume );
 		strokeWeight = settings.get( "strokeWeight", strokeWeight );
-		timeStretch = settings.get( "timeStretch", timeStretch );
+		//timeStretch = settings.get( "timeStretch", timeStretch ); // never load timestretch!
 		blur = settings.get( "blur", blur );
 		numPts = settings.get( "numPts", numPts );
 		hue = settings.get( "hue", hue );
@@ -102,7 +102,7 @@ public:
 		settings.set( "outputVolume", outputVolume );
 		settings.set( "inputVolume", inputVolume );
 		settings.set( "strokeWeight", strokeWeight );
-		settings.set( "timeStretch", timeStretch );
+		// settings.set( "timeStretch", timeStretch ); // never save timestretch!
 		settings.set( "blur", blur );
 		settings.set( "numPts", numPts );
 		settings.set( "hue", hue );
