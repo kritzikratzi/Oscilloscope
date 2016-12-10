@@ -49,7 +49,7 @@ public:
 	~OsciAvAudioPlayer(); 
 	
 	// call this first after create the player
-	bool setupAudioOut( int numChannels, int sampleRate );
+	bool setupAudioOut( int numChannels, int sampleRate, bool interpolate );
 	bool setupVisualSampleRate( int visualSampleRate );
 	
 	// call this from the audioOut callback.
@@ -208,6 +208,8 @@ private:
 	bool output_config_changed;
 	bool visual_config_changed;
 	bool wantsAsync;
+	
+	bool interpolate{true};
 	
 	friend class OsciAvAudioPlayerThread;
 	OsciAvAudioPlayerThread * thread;

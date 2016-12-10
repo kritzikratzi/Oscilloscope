@@ -136,11 +136,12 @@ bool OsciAvAudioPlayer::loadSound(string fileName, bool stream){
 	return true;
 }
 
-bool OsciAvAudioPlayer::setupAudioOut( int numChannels, int sampleRate ){
-	if( numChannels != output_num_channels || sampleRate != output_sample_rate ){
+bool OsciAvAudioPlayer::setupAudioOut( int numChannels, int sampleRate, bool inter ){
+	if( numChannels != output_num_channels || sampleRate != output_sample_rate || inter != interpolate ){
 		output_channel_layout = av_get_default_channel_layout(numChannels);
 		output_sample_rate = sampleRate;
 		output_num_channels = numChannels;
+		interpolate = inter; 
 		
 		if( swr_context != NULL ){
 			output_config_changed = true;
@@ -389,7 +390,7 @@ bool OsciAvAudioPlayer::decode_next_frame(){
 				
 				int next_v_rate = output_sample_rate;
 				if( next_v_rate != visual_sample_rate ){
-					visual_sample_rate = next_v_rate;
+					visual_sample_rate = max(192000,next_v_rate);
 					visual_config_changed = true;
 				}
 			}
@@ -412,8 +413,10 @@ bool OsciAvAudioPlayer::decode_next_frame(){
 												 0, NULL);
 
 				//enable these two to disable interpolation
-				//av_opt_set_int(swr_context192, "filter_size", 1, 0);
-				//av_opt_set_int(swr_context192, "linear_interp", 1, 0);
+				if(!interpolate){
+					av_opt_set_int(swr_context192, "filter_size", 4, 0);
+					av_opt_set_int(swr_context192, "linear_interp", 1, 0);
+				}
 
 				
 				//				av_opt_set_int(swr_context192, "dither_scale", 0, 0);

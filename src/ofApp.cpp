@@ -91,7 +91,7 @@ void ofApp::startApplication(){
 	
 	soundStream.setDeviceID( globals.deviceId );
 	soundStream.setup(this, 2, 0, globals.sampleRate, globals.bufferSize, globals.numBuffers);
-	globals.player.setupAudioOut(2, globals.sampleRate);
+	globals.player.setupAudioOut(2, globals.sampleRate, true);
 }
 
 
@@ -153,7 +153,7 @@ void ofApp::update(){
 	// are we not export?
 	if( exporting == 0 ){
 		int rate = max(globals.sampleRate/4,(int)std::round(globals.sampleRate*globals.timeStretch));
-		globals.player.setupAudioOut(2, rate);
+		globals.player.setupAudioOut(2, rate, globals.timeStretch == 1);
 	}
 
 	// are we exporting?
@@ -285,9 +285,6 @@ void ofApp::update(){
 				right.addTo(rightBuffer, 1, bufferSize);
 			}
 			
-			ofColor col = ofColor::fromHsb(globals.hue*255/360, 255, 255*globals.intensity);
-			auto toColor = [](const ofVec3f pos){ return ofFloatColor(pos.x, pos.y, pos.z); };
-			
 			if( shapeMesh.getVertices().size() < bufferSize*4 || exporting ){
 				
 				addPt(last,{leftBuffer[0],rightBuffer[0]});
@@ -386,7 +383,7 @@ void ofApp::draw(){
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE);
 		shader.begin();
 		shader.setUniform1f("uSize", globals.strokeWeight / 1000.0);
-		shader.setUniform1f("uIntensity", globals.intensity);
+		shader.setUniform1f("uIntensity", globals.intensity/sqrtf(globals.timeStretch));
 		shader.setUniformMatrix4f("uMatrix", viewMatrix);
 		shader.setUniform1f("uHue", globals.hue );
 		ofSetColor(255);
@@ -528,7 +525,7 @@ void ofApp::audioOut( float * output, int bufferSize, int nChannels ){
 	if( fileToLoad != "" ){
 		globals.timeStretch = 1.0;
 		globals.player.loadSound(fileToLoad);
-		osciView->timeStretchSlider->slider->value = 1.0; 
+		osciView->timeStretchSlider->slider->value = 1.0;
 		setWindowRepresentedFilename(fileToLoad);
 		fileToLoad = "";
 	}

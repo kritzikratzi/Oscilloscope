@@ -81,6 +81,7 @@ OsciView::OsciView( float x_, float y_, float width_, float height_)
 	
 	timeStretchLabel = addLabel( "Time Stretch" );
 	timeStretchSlider = new mui::SliderWithLabel(0, 0, 100, h, 0.25, 100, 1, 2 );
+	timeStretchSlider->slider->valueMapper = make_shared<mui::Slider::MapperLog>(6000);
 	ofAddListener( timeStretchSlider->slider->onChange, this, &OsciView::sliderChanged );
 	timeStretchSlider->label->fg = ofColor(255);
 	add( timeStretchSlider );
@@ -118,6 +119,8 @@ OsciView::OsciView( float x_, float y_, float width_, float height_)
 	
 	
 
+	// make labels the same width
+	outputVolumeSlider->label->width = timeStretchSlider->label->width;
 	
 	layout();
 }
@@ -134,7 +137,10 @@ void OsciView::layout(){
 	mui::L(outputVolumeLabel).rightOf(useMicButton,20);
 	mui::L(outputVolumeSlider).rightOf(outputVolumeLabel,5).stretchToRightEdgeOf(this,10);
 	
-	mui::L(invertX).below(loadFileButton, 20);
+	mui::L(timeStretchLabel).below(outputVolumeLabel).alignRightEdgeTo(outputVolumeLabel);
+	mui::L(timeStretchSlider).rightOf(timeStretchLabel,5).stretchToRightEdgeOf(this,10);
+	
+	mui::L(invertX).below(timeStretchLabel, 20).alignLeftEdgeTo(loadFileButton);
 	mui::L(invertY).rightOf(invertX, 10);
 	mui::L(flipXY).rightOf(invertY,10);
 	mui::L(scaleLabel).rightOf(flipXY,20);
@@ -142,9 +148,6 @@ void OsciView::layout(){
 	
 	mui::L(strokeWeightLabel).below(scaleLabel).alignRightEdgeTo(scaleLabel);
 	mui::L(strokeWeightSlider).rightOf(strokeWeightLabel,5).stretchToRightEdgeOf(this,10);
-	
-	mui::L(timeStretchLabel).below(strokeWeightLabel).alignRightEdgeTo(scaleLabel);
-	mui::L(timeStretchSlider).rightOf(timeStretchLabel,5).stretchToRightEdgeOf(this,10);
 	
 	/*mui::L(blurLabel).below(strokeWeightLabel).alignRightEdgeTo(strokeWeightLabel);
 	mui::L(blurSlider).rightOf(blurLabel,5).stretchToRightEdgeOf(this,10);
@@ -156,7 +159,7 @@ void OsciView::layout(){
 	numPtsLabel->visible = false;
 	numPtsSlider->visible = false;
 	
-	mui::L(hueLabel).below(timeStretchLabel).alignRightEdgeTo(strokeWeightLabel);
+	mui::L(hueLabel).below(strokeWeightLabel).alignRightEdgeTo(strokeWeightLabel);
 	mui::L(hueSlider).rightOf(hueLabel,5).stretchToRightEdgeOf(this,10);
 	
 	mui::L(intensityLabel).below(hueLabel).alignRightEdgeTo(hueLabel);
