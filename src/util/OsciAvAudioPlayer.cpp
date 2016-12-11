@@ -156,6 +156,7 @@ bool OsciAvAudioPlayer::setupVisualSampleRate( int visualSampleRate ){
 		visual_sample_rate = visualSampleRate;
 		visual_config_changed = true;
 	}
+	return true; 
 }
 
 
@@ -283,7 +284,6 @@ int OsciAvAudioPlayer::internalAudioOut(float *output, int bufferSize, int nChan
 	
 	
 	int max_read_packets = 4;
-	if( decoded_frame && decoded_frame);
 	// number of samples read per channel (up to bufferSize)
 	int num_samples_read = 0;
 	

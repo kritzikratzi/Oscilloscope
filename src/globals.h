@@ -40,8 +40,8 @@ public:
 	float strokeWeight{10}; // 1...20
 	float timeStretch{1}; // 0.1-2.0
 	float blur{30}; // 0...255
-	float intensity{0.4}; // 0...1
-	float afterglow{0.5}; // 0...1
+	float intensity{0.4f}; // 0...1
+	float afterglow{0.5f}; // 0...1
 	
 	int numPts{20}; // 1...+inf?
 	float hue{50}; // 0...360
