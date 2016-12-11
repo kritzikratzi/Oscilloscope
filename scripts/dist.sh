@@ -1,7 +1,7 @@
 #! /bin/bash
 
-version=$2
 platform=$1
+version=$2
 
 if [[ -z "$version" || -z "$platform" ]]
 then
@@ -43,6 +43,8 @@ then
 	echo "Deleting unused DLL files: $dlls "
 	echo "Make sure they are specified as 'delay loaded DLLs' in the linker settings"
 	rm $dlls
+	mkdir dlls
+	mv *.dll dlls
 	cd ..
 fi
 
