@@ -87,6 +87,7 @@ void setWindowRepresentedFilename( string filename ){
 // returns a path where the application can only read.
 // for osx this is the "resources" folder residing inside the application bundle,
 // for windows it is still the data folder.
+// if the file does not exist in the application bundle, the data folder is returned.
 string ofxToReadonlyDataPath( string filename ){
 #ifdef TARGET_OSX
 	// http://www.cocoabuilder.com/archive/cocoa/193451-finding-out-executable-location-from-c-program.html
@@ -111,7 +112,12 @@ string ofxToReadonlyDataPath( string filename ){
 	CFRelease(url);
 	CFRelease(absolute);
 	
-	return realResult;
+	if( ofFile(realResult, ofFile::Reference).exists() ){
+		return realResult;
+	}
+	else{
+		return ofToDataPath(filename,true); 
+	}
 #else
 	return ofToDataPath(filename,true);
 #endif

@@ -177,10 +177,6 @@
 		BA9F97431B651E6A00A453D6 /* FaButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FaButton.h; path = ui/FaButton.h; sourceTree = "<group>"; };
 		BA9F97451B6583D300A453D6 /* L.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = L.h; path = ui/L.h; sourceTree = "<group>"; };
 		BABA49661A866519000900B1 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = assets/Images.xcassets; sourceTree = "<group>"; };
-		BAD3942A1DF67A7F003F32D8 /* konichiwa.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = konichiwa.wav; sourceTree = "<group>"; };
-		BAD3942C1DF67A7F003F32D8 /* osci.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = osci.frag; sourceTree = "<group>"; };
-		BAD3942D1DF67A7F003F32D8 /* osci.geom */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = osci.geom; sourceTree = "<group>"; };
-		BAD3942E1DF67A7F003F32D8 /* osci.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = osci.vert; sourceTree = "<group>"; };
 		BADACB611C12F89100ED221C /* FMenu.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FMenu.cpp; path = ui/FMenu.cpp; sourceTree = "<group>"; };
 		BADACB621C12F89100ED221C /* FMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMenu.h; path = ui/FMenu.h; sourceTree = "<group>"; };
 		BAEE5D261B5FB3D10038C838 /* ofApp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofApp.cpp; sourceTree = "<group>"; };
@@ -448,25 +444,6 @@
 			path = util;
 			sourceTree = "<group>";
 		};
-		BAD394291DF67A7F003F32D8 /* data-internal */ = {
-			isa = PBXGroup;
-			children = (
-				BAD3942A1DF67A7F003F32D8 /* konichiwa.wav */,
-				BAD3942B1DF67A7F003F32D8 /* shaders */,
-			);
-			path = "data-internal";
-			sourceTree = "<group>";
-		};
-		BAD3942B1DF67A7F003F32D8 /* shaders */ = {
-			isa = PBXGroup;
-			children = (
-				BAD3942C1DF67A7F003F32D8 /* osci.frag */,
-				BAD3942D1DF67A7F003F32D8 /* osci.geom */,
-				BAD3942E1DF67A7F003F32D8 /* osci.vert */,
-			);
-			path = shaders;
-			sourceTree = "<group>";
-		};
 		BB4B014C10F69532006C3DED /* addons */ = {
 			isa = PBXGroup;
 			children = (
@@ -549,7 +526,6 @@
 		E4B69B4A0A3A1720003C02F2 = {
 			isa = PBXGroup;
 			children = (
-				BAD394291DF67A7F003F32D8 /* data-internal */,
 				BABA49661A866519000900B1 /* Images.xcassets */,
 				BA54981C19F725C1007E9F6A /* OpenGL.framework */,
 				E4B6FCAD0C3E899E008CF71C /* openFrameworks-Info.plist */,
@@ -686,7 +662,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "rsync -aved \"data-internal/\" \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/Resources/\"\n\nif [ REMOVED_DEPS -ne \"yes\"]\nthen\n# Copy libfmod and change install directory for fmod to run\nrsync -aved ../../../libs/fmodex/lib/osx/libfmodex.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/Frameworks/\";\ninstall_name_tool -change @executable_path/libfmodex.dylib @executable_path/../Frameworks/libfmodex.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS/$PRODUCT_NAME\";\n# Copy GLUT framework (must remove for AppStore submissions)\nrsync -aved ../../../libs/glut/lib/osx/GLUT.framework \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/Frameworks/\"\nfi\n\nrsync -aved addons/ofxFontAwesome/bin/data/ \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/Resources\"\nrsync -aved addons/ofxMightyUI/bin/data/ \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/Resources\"\nrsync -aved addons/ofxAvCodec/libs/avcodec/lib/osx/libswscale.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\"\nrsync -aved addons/ofxAvCodec/libs/avcodec/lib/osx/libswscale.3.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\"\nrsync -aved addons/ofxAvCodec/libs/avcodec/lib/osx/libswresample.1.2.100.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\"\nrsync -aved addons/ofxAvCodec/libs/avcodec/lib/osx/libavfilter.5.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\"\nrsync -aved addons/ofxAvCodec/libs/avcodec/lib/osx/libavformat.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\"\nrsync -aved addons/ofxAvCodec/libs/avcodec/lib/osx/libavcodec.56.47.100.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\"\nrsync -aved addons/ofxAvCodec/libs/avcodec/lib/osx/libavdevice.56.4.100.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\"\nrsync -aved addons/ofxAvCodec/libs/avcodec/lib/osx/libswscale.3.1.101.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\"\nrsync -aved addons/ofxAvCodec/libs/avcodec/lib/osx/libavfilter.5.21.100.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\"\nrsync -aved addons/ofxAvCodec/libs/avcodec/lib/osx/libavutil.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\"\nrsync -aved addons/ofxAvCodec/libs/avcodec/lib/osx/libavutil.54.28.100.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\"\nrsync -aved addons/ofxAvCodec/libs/avcodec/lib/osx/libswresample.1.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\"\nrsync -aved addons/ofxAvCodec/libs/avcodec/lib/osx/libavfilter.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\"\nrsync -aved addons/ofxAvCodec/libs/avcodec/lib/osx/libavutil.54.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\"\nrsync -aved addons/ofxAvCodec/libs/avcodec/lib/osx/libavdevice.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\"\nrsync -aved addons/ofxAvCodec/libs/avcodec/lib/osx/libavcodec.56.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\"\nrsync -aved addons/ofxAvCodec/libs/avcodec/lib/osx/libswresample.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\"\nrsync -aved addons/ofxAvCodec/libs/avcodec/lib/osx/libavformat.56.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\"\nrsync -aved addons/ofxAvCodec/libs/avcodec/lib/osx/libavformat.56.40.100.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\"\nrsync -aved addons/ofxAvCodec/libs/avcodec/lib/osx/libavcodec.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\"\nrsync -aved addons/ofxAvCodec/libs/avcodec/lib/osx/libavdevice.56.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\"";
+			shellScript = "if [ REMOVED_DEPS -ne \"yes\"]\nthen\n# Copy libfmod and change install directory for fmod to run\nrsync -aved ../../../libs/fmodex/lib/osx/libfmodex.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/Frameworks/\";\ninstall_name_tool -change @executable_path/libfmodex.dylib @executable_path/../Frameworks/libfmodex.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS/$PRODUCT_NAME\";\n# Copy GLUT framework (must remove for AppStore submissions)\nrsync -aved ../../../libs/glut/lib/osx/GLUT.framework \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/Frameworks/\"\nfi\n\nrsync -aved addons/ofxFontAwesome/bin/data/ \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/Resources\"\nrsync -aved addons/ofxMightyUI/bin/data/ \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/Resources\"\nrsync -aved addons/ofxAvCodec/libs/avcodec/lib/osx/libswscale.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\"\nrsync -aved addons/ofxAvCodec/libs/avcodec/lib/osx/libswscale.3.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\"\nrsync -aved addons/ofxAvCodec/libs/avcodec/lib/osx/libswresample.1.2.100.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\"\nrsync -aved addons/ofxAvCodec/libs/avcodec/lib/osx/libavfilter.5.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\"\nrsync -aved addons/ofxAvCodec/libs/avcodec/lib/osx/libavformat.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\"\nrsync -aved addons/ofxAvCodec/libs/avcodec/lib/osx/libavcodec.56.47.100.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\"\nrsync -aved addons/ofxAvCodec/libs/avcodec/lib/osx/libavdevice.56.4.100.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\"\nrsync -aved addons/ofxAvCodec/libs/avcodec/lib/osx/libswscale.3.1.101.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\"\nrsync -aved addons/ofxAvCodec/libs/avcodec/lib/osx/libavfilter.5.21.100.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\"\nrsync -aved addons/ofxAvCodec/libs/avcodec/lib/osx/libavutil.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\"\nrsync -aved addons/ofxAvCodec/libs/avcodec/lib/osx/libavutil.54.28.100.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\"\nrsync -aved addons/ofxAvCodec/libs/avcodec/lib/osx/libswresample.1.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\"\nrsync -aved addons/ofxAvCodec/libs/avcodec/lib/osx/libavfilter.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\"\nrsync -aved addons/ofxAvCodec/libs/avcodec/lib/osx/libavutil.54.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\"\nrsync -aved addons/ofxAvCodec/libs/avcodec/lib/osx/libavdevice.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\"\nrsync -aved addons/ofxAvCodec/libs/avcodec/lib/osx/libavcodec.56.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\"\nrsync -aved addons/ofxAvCodec/libs/avcodec/lib/osx/libswresample.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\"\nrsync -aved addons/ofxAvCodec/libs/avcodec/lib/osx/libavformat.56.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\"\nrsync -aved addons/ofxAvCodec/libs/avcodec/lib/osx/libavformat.56.40.100.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\"\nrsync -aved addons/ofxAvCodec/libs/avcodec/lib/osx/libavcodec.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\"\nrsync -aved addons/ofxAvCodec/libs/avcodec/lib/osx/libavdevice.56.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\"";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -838,7 +814,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(OF_CORE_HEADERS)",
 					src,
-					../../../addons/ofxAvCodec/libs/avcodec/include,
+					addons/ofxAvCodec/libs/avcodec/include,
 				);
 				ICON_FILE = "$(ICON_FILE_PATH)$(ICON)";
 				INFOPLIST_FILE = "openFrameworks-Info.plist";
@@ -894,7 +870,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(OF_CORE_HEADERS)",
 					src,
-					../../../addons/ofxAvCodec/libs/avcodec/include,
+					addons/ofxAvCodec/libs/avcodec/include,
 				);
 				ICON_FILE = "$(ICON_FILE_PATH)$(ICON)";
 				INFOPLIST_FILE = "openFrameworks-Info.plist";

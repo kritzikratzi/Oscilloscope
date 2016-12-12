@@ -62,10 +62,6 @@ See scripts/readme.md for the full distribution process.
 * platform is one of `osx linux linux64 win32 win64`
 * version is whatever version you want, e.g. `1.0.6`
 
-## Experimenting with the shaders
-
-Once you have a running version (either compiled or a binary release) you can manipulate the shaders on the fly. The shaders will be reloaded automatically when they're saved. Please note that you're bound to OpenGL2 / GLSL 1.2 (shader 120 with gl_ext_geometry_shader)
-
 
 ## License/Source code
 

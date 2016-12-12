@@ -1,3 +1,72 @@
+#Oscilloscope - Packaging notes
+
+===
+
+These are my own notes how to bundle up the app for each platform so that i don't forget. 
+
+# OSX
+
+
+1. Open apps/myApps/oscilloscope/Oscilloscope.xcodeproject
+1. Select the binary target and update the version info
+1. Delete oscilloscope.app in finder, to make sure you have a fresh build
+1. Build&Run
+1. Code sign: `scripts/sign-mac.sh bin/Oscilloscope.app "Developer ID Application: Name of your certificate"` (run `security find-identity -v -p codesigning` to get a list of installed certs)
+1. Create a zip in finder (don't use terminal, that creates a different zip i think)
+
+You can also build with `make && make run` on the command line. The resulting build will have no icon/no proper name/no retina support. 
+
+First patch OF to get rid of glut and fmodex: https://forum.openframeworks.cc/t/bundling-osx-app-without-glut-and-without-fmodex-nasty/23503
+
+## Windows (Visual studio 2015)
+
+1. run `scripts/clean.sh`
+1. run `scripts/prepare.sh win32`
+1. Open oscilloscope.sln
+1. Open icon.rc, update the version info section
+1. build
+1. Run scripts/dist.sh win32 1.0.x
+
+At this point audio should play through Asio (first choice), or Wasapi. You can follow these instructions to patch OF so you can pick at startup: http://pastebin.com/ZZLZ3jUm
+
+
+### VS Project file 
+
+#### Delay Load DLLs 
+
+Configuration: Win32 / Release
+Go to `Linker>All Options>Delay Load Dlls` and enter: 
+
+
+	assimp.dll
+	glut32.dll
+	libeay32.dll
+	ssleay32.dll
+	swscale-3.dll
+	Zlib.dll
+	FreeType.dll
+	fmodex.dll
+	fmodexL.dll
+
+None of these are actually used, ever. Specifying them as delay loaded allows you to just delete them. 
+
+
+
+### Compiling with make in Linux
+
+1. run `scripts/clean.sh`
+1. run `scripts/prepare.sh linux64`
+1. run `make && make run` ? [subwolf knows, i haven't done this in ages!]
+
+See scripts/readme.md for the full distribution process. 
+
+### Package the software
+
+* for osx run `scripts/dist.sh $platform $version`
+* platform is one of `osx linux linux64 win32 win64`
+* version is whatever version you want, e.g. `1.0.6`
+
+
 Helper Scripts
 ===
 
