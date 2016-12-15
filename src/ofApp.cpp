@@ -285,7 +285,7 @@ void ofApp::update(){
 				right.addTo(rightBuffer, 1, bufferSize);
 			}
 			
-			if( shapeMesh.getVertices().size() < bufferSize*4 || exporting ){
+			if( shapeMesh.getVertices().size() < bufferSize*16 || exporting ){
 				
 				addPt(last,{leftBuffer[0],rightBuffer[0]});
 				last = {leftBuffer[bufferSize-1],rightBuffer[bufferSize-1]};
