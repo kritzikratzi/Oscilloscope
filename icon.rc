@@ -3,9 +3,9 @@
 #include <windows.h>
 #include "resource.h"
 /////////////////////////////////////////////////////////////////////////////
-// German (Austria) resources
+// English (United States) resources
 
-#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEA)
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
 LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
 #pragma code_page(1252)
 
@@ -50,8 +50,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 1,0,6,0
- PRODUCTVERSION 1,0,6,0
+ FILEVERSION 1,0,7,0
+ PRODUCTVERSION 1,0,7,0
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -68,12 +68,12 @@ BEGIN
         BEGIN
             VALUE "CompanyName", "Hansi Raber"
             VALUE "FileDescription", "Software Oscilloscope based on openFrameworks and FFmpeg"
-            VALUE "FileVersion", "1.0.6"
+            VALUE "FileVersion", "1.0.7"
             VALUE "InternalName", "Oscilloscope.exe"
             VALUE "LegalCopyright", "Copyleft 2016, https://github.com/kritzikratzi/Oscilloscope"
             VALUE "OriginalFilename", "Oscilloscope.exe"
             VALUE "ProductName", "Oscilloscope"
-            VALUE "ProductVersion", "1.0.6"
+            VALUE "ProductVersion", "1.0.7"
         END
     END
     BLOCK "VarFileInfo"
@@ -82,7 +82,7 @@ BEGIN
     END
 END
 
-#endif    // German (Austria) resources
+#endif    // English (United States) resources
 /////////////////////////////////////////////////////////////////////////////
 
 
