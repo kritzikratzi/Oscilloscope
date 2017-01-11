@@ -379,11 +379,20 @@ void ofApp::draw(){
 //		ofDrawLine( -10, 0, 10, 0 );
 //		ofDrawLine( 0, -10, 0, 10 );
 		
+		ofFloatColor color = ofFloatColor::fromHsb(globals.hue/360.0, 1, 1);
+		float uSize = globals.strokeWeight/1000.0;
+		float uIntensity = globals.intensity/sqrtf(globals.timeStretch);
+		float uIntensityBase = max(0.0f,uIntensity-0.4f)*0.7f-1000.0f*uSize/500.0f;
+
+
+		
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE);
 		shader.begin();
+		shader.setUniform3f("uRgb", ofVec3f(color.r, color.g, color.b));
 		shader.setUniform1f("uSize", globals.strokeWeight / 1000.0);
-		shader.setUniform1f("uIntensity", globals.intensity/sqrtf(globals.timeStretch));
+		shader.setUniform1f("uIntensity", uIntensity);
+		shader.setUniform1f("uIntensityBase", uIntensityBase);
 		shader.setUniformMatrix4f("uMatrix", viewMatrix);
 		shader.setUniform1f("uHue", globals.hue );
 		ofSetColor(255);
