@@ -198,7 +198,9 @@ void OsciView::update(){
 	static float lastTimeVal = -1;
 	useMicButton->selected = globals.micActive;
 	timeSlider->visible = !globals.micActive;
+	outputVolumeLabel->visible = !globals.micActive;
 	outputVolumeSlider->visible = !globals.micActive;
+	playButton->visible = !globals.micActive;
 	
 	if( !globals.micActive ){
 		if( !updateSlider(timeSlider, globals.player.getPosition(), lastTimeVal ) ){

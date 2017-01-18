@@ -34,6 +34,9 @@ class ofApp : public ofBaseApp{
 		void audioIn(float * input, int bufferSize, int nChannels);
 		void audioOut( float * output, int bufferSize, int nChannels ); 
 
+	
+		void stopMic();
+	
 		ofMatrix4x4 getViewMatrix();
 	
 		ofSoundStream soundStream;
@@ -62,6 +65,7 @@ class ofApp : public ofBaseApp{
 	
 	
 		unsigned long long lastMouseMoved;
+		ofVec2f mousePosBeforeHiding;
 		string fileToLoad;
 	
 		ofVec2f last;

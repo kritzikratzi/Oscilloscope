@@ -213,6 +213,7 @@ private:
 	
 	friend class OsciAvAudioPlayerThread;
 	OsciAvAudioPlayerThread * thread;
+	atomic<int64_t> lastPts{0};
 };
 
 
@@ -222,6 +223,6 @@ public:
 	void threadedFunction();
 	
 	OsciAvAudioPlayer &player;
-	bool isAsync; 
+	bool isAsync;
 };
 #endif

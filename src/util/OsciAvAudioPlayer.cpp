@@ -352,6 +352,7 @@ bool OsciAvAudioPlayer::decode_next_frame(){
 		}
 		
 		len = avcodec_decode_audio4(codec_context, decoded_frame, &got_frame, &packet);
+		
 		if (len < 0) {
 			// no data
 			return false;
@@ -362,6 +363,8 @@ bool OsciAvAudioPlayer::decode_next_frame(){
 		}
 
 		if (got_frame) {
+			
+			lastPts = decoded_frame->pkt_pts;
 			
 			if( swr_context != NULL && output_config_changed ){
 				output_config_changed = false;
@@ -493,8 +496,7 @@ void OsciAvAudioPlayer::setPositionMS(int ms){
 
 int OsciAvAudioPlayer::getPositionMS(){
 	if( !isLoaded ) return 0;
-	int64_t ts = packet.pts;
-	return av_time_to_millis( ts );
+	return av_time_to_millis( lastPts );
 }
 
 float OsciAvAudioPlayer::getPosition(){

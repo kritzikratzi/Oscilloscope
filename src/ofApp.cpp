@@ -27,9 +27,6 @@ void ofApp::setup(){
 	ofSetBackgroundAuto(false);
 	
 	// shaderLoader handles this for us
-//	shader.setGeometryInputType(GL_LINES);
-//	shader.setGeometryOutputType(GL_QUADS);
-//	shader.setGeometryOutputCount(4);
 	shaderLoader.setup(&shader, "shaders/osci");
 	
 	ofSetFrameRate(60);
@@ -120,19 +117,13 @@ void ofApp::update(){
 
 	/////////////////////////////////////////////////
 	// take care of hiding / showing the ui
-	if( ofGetElapsedTimeMillis()-lastMouseMoved > 1500 && ( globals.player.isPlaying || globals.micActive ) ){
+	if( ofGetElapsedTimeMillis()-lastMouseMoved > 1000 ){
 		// this is not the greatest solution, but hey ho, it works ...
-		mui::Container * res = root->findChildAt(ofGetMouseX()/mui::MuiConfig::scaleFactor, ofGetMouseY()/mui::MuiConfig::scaleFactor);
-		bool foundOsciView = false;
-		while( res != NULL ){
-			if( res == osciView ){
-				foundOsciView = true;
-				break;
-			}
-			res = res->parent;
-		}
-		if( !foundOsciView ){
+		bool hovering = osciView->isMouseOver();
+		if( !hovering ){
 			osciView->visible = false;
+			mousePosBeforeHiding.x = ofGetMouseX();
+			mousePosBeforeHiding.y = ofGetMouseY();
 		}
 	}
 
@@ -141,11 +132,17 @@ void ofApp::update(){
 		return;
 	}
 
-	if( ofGetElapsedTimeMillis()-lastMouseMoved < 3000 && osciView->visible == false ){
-		osciView->visible = true;
+	ofVec2f mousePos(ofGetMouseX(), ofGetMouseY());
+	bool insideWindow = ofRectangle(0,0,ofGetWidth(),ofGetHeight()).inside(mousePos);
+	if( ofGetElapsedTimeMillis()-lastMouseMoved < 1000 && osciView->visible == false ){
+		bool movedEnough = mousePos.distance(mousePosBeforeHiding) > 10*mui::MuiConfig::scaleFactor;
+		if( insideWindow && movedEnough ){
+			// okay, we moved enough!
+			osciView->visible = true;
+		}
 	}
 
-	if( osciView->visible ) ofShowCursor();
+	if( osciView->visible || !insideWindow) ofShowCursor();
 	else ofHideCursor();
 	
 	/////////////////////////////////////////////////
@@ -233,11 +230,7 @@ void ofApp::update(){
 	
 	if( left.totalLength >= bufferSize && right.totalLength >= bufferSize ){
 		changed = true;
-		/*shapeMesh.addVertex(lastA0Vert);
-		shapeMesh.addColor(lastA0Col);
-		shapeMesh.addVertex(lastA1Vert);
-		shapeMesh.addColor(lastA1Col);*/
-		
+				
 		float uSize = globals.strokeWeight / 1000.0;
 		auto addPt = [&]( ofVec2f p0, ofVec2f p1 ){
 			ofVec2f dir = p1 - p0;
@@ -447,8 +440,14 @@ void ofApp::keyPressed  (int key){
 	
 	if( key == '\t' && !configView->isVisibleOnScreen()){
 		osciView->visible = !osciView->visible;
-		if( osciView->visible ) lastMouseMoved = ofGetElapsedTimeMillis();
-		else lastMouseMoved = 0;
+		if( osciView->visible ){
+			lastMouseMoved = ofGetElapsedTimeMillis();
+		}
+		else{
+			lastMouseMoved = 0;
+			mousePosBeforeHiding.x = ofGetMouseX();
+			mousePosBeforeHiding.y = ofGetMouseY();
+		}
 	}
 
 	if( key == 'f' || key == OF_KEY_RETURN || key == OF_KEY_F11 ){
@@ -514,12 +513,10 @@ void ofApp::mouseReleased(int x, int y, int button){
 
 //--------------------------------------------------------------
 void ofApp::windowResized(int w, int h){
-	cout << "resize to " << w << "," << h << endl; 
 	osciView->width = min(500,w/mui::MuiConfig::scaleFactor);
 	osciView->layout();
 	osciView->x = w/mui::MuiConfig::scaleFactor/2 - osciView->width/2;
 	osciView->y = h/mui::MuiConfig::scaleFactor - osciView->height - 60;
-	cout << "visible?" << osciView << "::" << osciView->visible << endl; 
 }
 
 //--------------------------------------------------------------
@@ -533,7 +530,10 @@ void ofApp::audioIn(float * input, int bufferSize, int nChannels){
 void ofApp::audioOut( float * output, int bufferSize, int nChannels ){
 	if( fileToLoad != "" ){
 		globals.timeStretch = 1.0;
-		globals.player.loadSound(fileToLoad);
+		bool res = globals.player.loadSound(fileToLoad);
+		if(!res){
+			ofSystemAlertDialog("Could not load the file :(");
+		}
 		osciView->timeStretchSlider->slider->value = 1.0;
 		setWindowRepresentedFilename(fileToLoad);
 		fileToLoad = "";
@@ -569,11 +569,10 @@ void ofApp::gotMessage(ofMessage msg){
 		globals.micActive = true;
 	}
 	else if( msg.message == "stop-mic" ){
-		micStream.stop();
-		micStream = ofSoundStream(); 
-		globals.micActive = false;
+		stopMic();
 	}
 	else if( msg.message.substr(0,5) == "load:" ){
+		stopMic();
 		fileToLoad = msg.message.substr(5);
 	}
 }
@@ -587,7 +586,16 @@ void ofApp::dragEvent(ofDragInfo dragInfo){
 	if( dragInfo.files.size() >= 1 ){
 		// this runs on a separate thread.
 		// we have to be careful not to make a mess!
+		stopMic();
 		fileToLoad = dragInfo.files[0];
 	}
 	
+}
+
+void ofApp::stopMic(){
+	if(globals.micActive){
+		micStream.stop();
+		micStream = ofSoundStream();
+		globals.micActive = false;
+	}
 }
