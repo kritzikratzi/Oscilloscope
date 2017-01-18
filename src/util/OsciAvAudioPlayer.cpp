@@ -204,6 +204,8 @@ void OsciAvAudioPlayer::unloadSound(){
 	
 	left192.clear();
 	right192.clear();
+	left2_192.clear();
+	right2_192.clear();
 	
 	thread->unlock();
 }
@@ -219,6 +221,8 @@ void OsciAvAudioPlayerThread::threadedFunction(){
 			isAsync = true;
 			if( player.next_seekTarget >= 0 ){
 				player.mainOut.clear();
+				player.left192.clear();
+				player.right192.clear();
 				player.left192.clear();
 				player.right192.clear();
 			}
@@ -273,6 +277,8 @@ int OsciAvAudioPlayer::internalAudioOut(float *output, int bufferSize, int nChan
 		mainOut.clear();
 		left192.clear();
 		right192.clear();
+		left2_192.clear();
+		right2_192.clear();
 		//av_seek_frame(container,-1,next_seekTarget,AVSEEK_FLAG_ANY);
 		avformat_seek_file(container,audio_stream_id,0,next_seekTarget,next_seekTarget,AVSEEK_FLAG_ANY);
 		next_seekTarget = -1;
@@ -317,9 +323,15 @@ int OsciAvAudioPlayer::internalAudioOut(float *output, int bufferSize, int nChan
 			int b = (decoded_buffer_pos)*(long)visual_sample_rate/output_sample_rate;
 			a = a - (a%2);
 			b = MIN(b - (b%2), decoded_buffer_len192);
+			
+			int numChannels192 = isQuadFile?4:2;
 			if( b-a > 0 ){
-				left192.append( decoded_buffer192+a, (b-a)/2, 2 );
-				right192.append( decoded_buffer192+1+a, (b-a)/2, 2 );
+				left192.append( decoded_buffer192+a, (b-a)/numChannels192, numChannels192 );
+				right192.append( decoded_buffer192+1+a, (b-a)/numChannels192, numChannels192 );
+				if(numChannels192 == 4){
+					left2_192.append( decoded_buffer192+2+a, (b-a)/numChannels192, numChannels192 );
+					right2_192.append( decoded_buffer192+3+a, (b-a)/numChannels192, numChannels192 );
+				}
 			}
 		}
 		
@@ -401,6 +413,9 @@ bool OsciAvAudioPlayer::decode_next_frame(){
 				swr_context192 = NULL;
 			}
 			
+			int numChannels192 = av_frame_get_channels(decoded_frame) == 4?4:2;
+			isQuadFile = numChannels192 == 4;
+			
 			if( swr_context192 == NULL ){
 				visual_config_changed = false;
 				int input_channel_layout = decoded_frame->channel_layout;
@@ -408,7 +423,7 @@ bool OsciAvAudioPlayer::decode_next_frame(){
 					input_channel_layout = av_get_default_channel_layout( codec_context->channels );
 				}
 				swr_context192 = swr_alloc_set_opts(NULL,
-												 av_get_default_channel_layout(2), AV_SAMPLE_FMT_FLT, visual_sample_rate,
+												 av_get_default_channel_layout(numChannels192), AV_SAMPLE_FMT_FLT, visual_sample_rate,
 												 input_channel_layout, (AVSampleFormat)decoded_frame->format, decoded_frame->sample_rate,
 												 0, NULL);
 
@@ -427,13 +442,14 @@ bool OsciAvAudioPlayer::decode_next_frame(){
 				}
 			}
 			
+			
 			/* if a frame has been decoded, resample to desired rate */
 			uint8_t * out192 = (uint8_t*)decoded_buffer192;
 			int samples_converted192 = swr_convert(swr_context192,
 												   (uint8_t**)&out192, AVCODEC_MAX_AUDIO_FRAME_SIZE/2,
 												   (const uint8_t**)decoded_frame->extended_data, decoded_frame->nb_samples);
 			
-			decoded_buffer_len192 = samples_converted192*output_num_channels;
+			decoded_buffer_len192 = samples_converted192*numChannels192;
 			decoded_buffer_pos192 = 0;
 			
 			int samples_per_channel = AVCODEC_MAX_AUDIO_FRAME_SIZE/output_num_channels;
@@ -555,6 +571,8 @@ void OsciAvAudioPlayer::beginSync( int bufferSize ){
 	
 	left192.clear();
 	right192.clear();
+	left2_192.clear();
+	right2_192.clear();
 	mainOut.clear();
 	
 	output_expected_buffer_size = bufferSize;

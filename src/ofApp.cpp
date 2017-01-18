@@ -9,10 +9,10 @@ Poco::Mutex updateMutex;
 
 bool applicationRunning = false;
 
-#define EPS 1E-6
-
 //--------------------------------------------------------------
 void ofApp::setup(){
+	OsciMesh::init();
+	
 	mui::MuiConfig::fontSize = 16;
 	showInfo = false;
 	dropped = 0;
@@ -25,12 +25,6 @@ void ofApp::setup(){
 	ofSetVerticalSync(true);
 	ofBackground(0);
 	ofSetBackgroundAuto(false);
-	
-	// shaderLoader handles this for us
-//	shader.setGeometryInputType(GL_LINES);
-//	shader.setGeometryOutputType(GL_QUADS);
-//	shader.setGeometryOutputCount(4);
-	shaderLoader.setup(&shader, "shaders/osci");
 	
 	ofSetFrameRate(60);
 	
@@ -213,9 +207,8 @@ void ofApp::update(){
 	// copy buffer data to the mesh
 	
 	changed = false;
-	shapeMesh.clear();
-	shapeMesh.setMode(OF_PRIMITIVE_TRIANGLES);
-	shapeMesh.enableColors();
+	mesh.clear();
+	mesh2.clear();
 	
 	int bufferSize = (exporting==0?2084:256);
 	static float * leftBuffer = new float[bufferSize];
@@ -230,6 +223,7 @@ void ofApp::update(){
 	left.play();
 	right.play();
 	bool isMono = !globals.micActive && globals.player.isMonoFile;
+	bool isQuad = !globals.micActive && globals.player.isQuadFile;
 	
 	if( left.totalLength >= bufferSize && right.totalLength >= bufferSize ){
 		changed = true;
@@ -239,36 +233,6 @@ void ofApp::update(){
 		shapeMesh.addColor(lastA1Col);*/
 		
 		float uSize = globals.strokeWeight / 1000.0;
-		auto addPt = [&]( ofVec2f p0, ofVec2f p1 ){
-			ofVec2f dir = p1 - p0;
-			float z = dir.length();
-			if (z > EPS) dir /= z;
-			else dir = ofVec2f(1.0, 0.0);
-			
-			dir *= uSize;
-			ofVec2f norm(-dir.y, dir.x);
-			ofVec2f xy(-uSize, -uSize);
-			
-			shapeMesh.addVertex(ofVec3f(p0-dir-norm));
-			shapeMesh.addColor(ofFloatColor(-uSize, -uSize, z));
-			
-			shapeMesh.addVertex(ofVec3f(p0-dir+norm));
-			shapeMesh.addColor(ofFloatColor(-uSize, uSize, z));
-			
-			shapeMesh.addVertex(ofVec3f(p1+dir-norm));
-			shapeMesh.addColor(ofFloatColor(z+uSize, -uSize, z));
-			
-			
-			
-			shapeMesh.addVertex(ofVec3f(p0-dir+norm));
-			shapeMesh.addColor(ofFloatColor(-uSize, uSize, z));
-			
-			shapeMesh.addVertex(ofVec3f(p1+dir-norm));
-			shapeMesh.addColor(ofFloatColor(z+uSize, -uSize, z));
-			
-			shapeMesh.addVertex(ofVec3f(p1+dir+norm));
-			shapeMesh.addColor(ofFloatColor(z+uSize, +uSize, z));
-		};
 		
 		while( left.totalLength >= bufferSize && right.totalLength >= bufferSize ){
 			if(isMono){
@@ -285,17 +249,26 @@ void ofApp::update(){
 				right.addTo(rightBuffer, 1, bufferSize);
 			}
 			
-			if( shapeMesh.getVertices().size() < bufferSize*16 || exporting ){
+			if( mesh.mesh.getVertices().size() < bufferSize*16 || exporting ){
+				mesh.addLines(leftBuffer, rightBuffer, bufferSize);
 				
-				addPt(last,{leftBuffer[0],rightBuffer[0]});
-				last = {leftBuffer[bufferSize-1],rightBuffer[bufferSize-1]};
-				
-				for( int i = 1; i < bufferSize; i++ ){
-					ofVec2f p0(leftBuffer[i-1], rightBuffer[i-1]);
-					ofVec2f p1(leftBuffer[i  ], rightBuffer[i  ]);
-					addPt(p0,p1);
+				if(isQuad && globals.player.right2_192.totalLength > bufferSize){
+					globals.player.left2_192.playbackIndex = 0;
+					globals.player.right2_192.playbackIndex = 0;
+					globals.player.left2_192.play();
+					globals.player.right2_192.play();
+					memset(leftBuffer,0,bufferSize*sizeof(float));
+					memset(rightBuffer,0,bufferSize*sizeof(float));
+					globals.player.left2_192.addTo(leftBuffer, 1, bufferSize);
+					globals.player.right2_192.addTo(rightBuffer, 1, bufferSize);
+					mesh2.addLines(leftBuffer, rightBuffer, bufferSize);
+					globals.player.left2_192.peel(bufferSize);
+					globals.player.right2_192.peel(bufferSize);
 				}
-				
+				else{
+					globals.player.left2_192.clear();
+					globals.player.right2_192.clear();
+				}
 			}
 			else{
 				dropped ++;
@@ -304,39 +277,12 @@ void ofApp::update(){
 			
 			left.peel(bufferSize);
 			right.peel(bufferSize);
+			
 		}
 	}
 }
 
-ofMatrix4x4 ofApp::getViewMatrix() {
-	ofMatrix4x4 viewMatrix = ofMatrix4x4(
-		globals.scale, 0.0, 0.0, 0.0, 
-		0.0, -globals.scale, 0.0, 0.0, 
-		0.0, 0.0, 1.0, 0.0, 
-		0.0, 0.0, 0.0, 1.0);
 
-	if (globals.invertX) viewMatrix(0,0) *= -1;
-	if (globals.invertY) viewMatrix(1,1) *= -1;
-
-	if (globals.flipXY) {
-		viewMatrix = ofMatrix4x4(
-			0.0, 1.0, 0.0, 0.0, 
-			1.0, 0.0, 0.0, 0.0, 
-			0.0, 0.0, 1.0, 0.0, 
-			0.0, 0.0, 0.0, 1.0 ) * viewMatrix;
-	}
-
-	ofMatrix4x4 aspectMatrix; // identity matrix
-	float aspectRatio = float(fbo.getWidth()) / float(fbo.getHeight());
-	if (aspectRatio > 1.0) {
-		aspectMatrix(0,0) /= aspectRatio;
-	}
-	else {
-		aspectMatrix(1,1) *= aspectRatio;
-	}
-
-	return viewMatrix * aspectMatrix;
-}
 
 //--------------------------------------------------------------
 void ofApp::draw(){
@@ -372,33 +318,26 @@ void ofApp::draw(){
 		ofDrawRectangle( 0, 0, fbo.getWidth(), fbo.getHeight() );
 	
 		ofEnableAlphaBlending();
-		ofMatrix4x4 viewMatrix = getViewMatrix();
-
-//      TODO: draw the cross section
-//		ofSetColor(255, 0, 0, 25);
-//		ofDrawLine( -10, 0, 10, 0 );
-//		ofDrawLine( 0, -10, 0, 10 );
 		
+		ofMatrix4x4 viewMatrix = getViewMatrix(); 
 		ofFloatColor color = ofFloatColor::fromHsb(globals.hue/360.0, 1, 1);
-		float uSize = globals.strokeWeight/1000.0;
-		float uIntensity = globals.intensity/sqrtf(globals.timeStretch);
-		float uIntensityBase = max(0.0f,uIntensity-0.4f)*0.7f-1000.0f*uSize/500.0f;
 
-
+		mesh.uSize = globals.strokeWeight/1000.0;
+		mesh.uIntensityBase = max(0.0f,mesh.uIntensity-0.4f)*0.7f-1000.0f*mesh.uSize/500.0f;
+		mesh.uIntensity = globals.intensity/sqrtf(globals.timeStretch);
+		mesh.uHue = globals.hue;
+		mesh.uRgb = ofVec3f(color.r,color.g,color.b);
+		mesh.draw(viewMatrix);
 		
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE);
-		shader.begin();
-		shader.setUniform3f("uRgb", ofVec3f(color.r, color.g, color.b));
-		shader.setUniform1f("uSize", globals.strokeWeight / 1000.0);
-		shader.setUniform1f("uIntensity", uIntensity);
-		shader.setUniform1f("uIntensityBase", uIntensityBase);
-		shader.setUniformMatrix4f("uMatrix", viewMatrix);
-		shader.setUniform1f("uHue", globals.hue );
-		ofSetColor(255);
-		shapeMesh.draw();
-		shader.end();
-		ofEnableAlphaBlending();
+		if(mesh2.mesh.getNumVertices() > 0){
+			mesh2.uSize = mesh.uSize;
+			mesh2.uIntensityBase = mesh.uIntensityBase;
+			mesh2.uIntensity = mesh.uIntensity;
+			mesh2.uHue = globals.hue;
+			mesh2.uRgb = ofVec3f(0,1,0);
+			mesh2.draw(viewMatrix);
+		}
+		
 
 		fbo.end();
 	}
@@ -589,5 +528,35 @@ void ofApp::dragEvent(ofDragInfo dragInfo){
 		// we have to be careful not to make a mess!
 		fileToLoad = dragInfo.files[0];
 	}
+}
+
+//--------------------------------------------------------------
+ofMatrix4x4 ofApp::getViewMatrix() {
+	ofMatrix4x4 viewMatrix = ofMatrix4x4(
+										 globals.scale, 0.0, 0.0, 0.0,
+										 0.0, -globals.scale, 0.0, 0.0,
+										 0.0, 0.0, 1.0, 0.0,
+										 0.0, 0.0, 0.0, 1.0);
 	
+	if (globals.invertX) viewMatrix(0,0) *= -1;
+	if (globals.invertY) viewMatrix(1,1) *= -1;
+	
+	if (globals.flipXY) {
+		viewMatrix = ofMatrix4x4(
+								 0.0, 1.0, 0.0, 0.0,
+								 1.0, 0.0, 0.0, 0.0,
+								 0.0, 0.0, 1.0, 0.0,
+								 0.0, 0.0, 0.0, 1.0 ) * viewMatrix;
+	}
+	
+	ofMatrix4x4 aspectMatrix; // identity matrix
+	float aspectRatio = float(fbo.getWidth()) / float(fbo.getHeight());
+	if (aspectRatio > 1.0) {
+		aspectMatrix(0,0) /= aspectRatio;
+	}
+	else {
+		aspectMatrix(1,1) *= aspectRatio;
+	}
+	
+	return viewMatrix * aspectMatrix;
 }

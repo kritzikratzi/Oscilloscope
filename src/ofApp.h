@@ -9,6 +9,7 @@
 #include "ui/OsciView.h"
 #include "util/Audio.h"
 #include "ofxAvAudioPlayer.h"
+#include "OsciMesh.h"
 
 class ofApp : public ofBaseApp{
 
@@ -42,11 +43,9 @@ class ofApp : public ofBaseApp{
 		mui::Root * root;
 		ConfigView * configView;
 		OsciView * osciView;
-		ofPath path;
-		ofMesh shapeMesh;
+		OsciMesh mesh;
+		OsciMesh mesh2;  // for stereoscopic viewing
 		ofFbo fbo;
-		ofShader shader;
-		ShaderLoader shaderLoader;
 	
 		MonoSample left;
 		MonoSample right;
@@ -59,7 +58,6 @@ class ofApp : public ofBaseApp{
 		int exporting;
 		int exportFrameNum; 
 		string exportDir;
-	
 	
 		unsigned long long lastMouseMoved;
 		string fileToLoad;

@@ -25,6 +25,7 @@
 		B728886FDA83C1DE0C2F5280 /* Container.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94BFEFD547F62B080775EC81 /* Container.cpp */; };
 		B92EFA79541DC1EA518DC974 /* InternalWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDA4DA295FDA8C4CB1406348 /* InternalWindow.cpp */; };
 		BA25EF0E1C8B6E0400C3B60A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BABA49661A866519000900B1 /* Images.xcassets */; };
+		BA4B3C691E2841D3005FD94B /* OsciMesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BA4B3C671E2841D3005FD94B /* OsciMesh.cpp */; };
 		BA54982119F7274C007E9F6A /* ConfigView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BA54981F19F7274C007E9F6A /* ConfigView.cpp */; };
 		BA54982719F740CE007E9F6A /* OsciView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BA54982519F740CE007E9F6A /* OsciView.cpp */; };
 		BA5EE4CF1D560E4800499D80 /* ofxIniExtras.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BA5EE4CB1D560E4800499D80 /* ofxIniExtras.cpp */; };
@@ -158,6 +159,8 @@
 		BA21C8961B87D58600FBAB8C /* ShaderLoader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShaderLoader.h; sourceTree = "<group>"; };
 		BA386CD51B388233004100D4 /* split.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = split.h; sourceTree = "<group>"; };
 		BA474BDD58A8A242D48E3F62 /* MuiCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MuiCore.h; sourceTree = "<group>"; };
+		BA4B3C671E2841D3005FD94B /* OsciMesh.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OsciMesh.cpp; sourceTree = "<group>"; };
+		BA4B3C681E2841D3005FD94B /* OsciMesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OsciMesh.h; sourceTree = "<group>"; };
 		BA54981C19F725C1007E9F6A /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		BA54981F19F7274C007E9F6A /* ConfigView.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ConfigView.cpp; path = ui/ConfigView.cpp; sourceTree = "<group>"; };
 		BA54982019F7274C007E9F6A /* ConfigView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ConfigView.h; path = ui/ConfigView.h; sourceTree = "<group>"; };
@@ -550,6 +553,8 @@
 				BAEE5D271B5FB3D10038C838 /* ofApp.h */,
 				BA9F973F1B6512FA00A453D6 /* globals.cpp */,
 				BA9F97401B6512FA00A453D6 /* globals.h */,
+				BA4B3C671E2841D3005FD94B /* OsciMesh.cpp */,
+				BA4B3C681E2841D3005FD94B /* OsciMesh.h */,
 			);
 			path = src;
 			sourceTree = SOURCE_ROOT;
@@ -709,6 +714,7 @@
 				D112FB27050E454F34ABB6B2 /* TextureAtlas.cpp in Sources */,
 				4CE23CB3B062FA59A47BCD2D /* ToggleButton.cpp in Sources */,
 				9F6783C22BE58E43DB564213 /* ofxAvAudioPlayer.cpp in Sources */,
+				BA4B3C691E2841D3005FD94B /* OsciMesh.cpp in Sources */,
 				6AB175562C7B8DA5977B6A8E /* ofxAvAudioWriter.cpp in Sources */,
 				69DAF968A1DA7A23073B97F8 /* ofxAvUtils.cpp in Sources */,
 				A5FFDE0A56A147BD0EA4E314 /* ofxAvVideoPlayer.cpp in Sources */,

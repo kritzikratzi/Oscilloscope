@@ -160,11 +160,14 @@ public:
 	
 	
 	bool decode_next_frame();
-	bool isMonoFile; 
+	bool isMonoFile{false};
+	bool isQuadFile{false};
 
 	MonoSample mainOut; // interleaved main output
 	MonoSample left192;
 	MonoSample right192;
+	MonoSample left2_192;
+	MonoSample right2_192;
 	
 private:
 	int internalAudioOut(float *output, int bufferSize, int nChannels);
