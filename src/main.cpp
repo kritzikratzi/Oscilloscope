@@ -71,6 +71,10 @@ void setWindowRepresentedFilename( string filename ){
 		[cocoaWindow setRepresentedFilename:@""];
 		[cocoaWindow setTitle:@"Oscilloscope"];
 	}
+	else if(filename[0] != '/'){
+		[cocoaWindow setRepresentedFilename:@""];
+		[cocoaWindow setTitle:[NSString stringWithUTF8String:filename.c_str()]];
+	}
 	else{
 		NSString * file = [NSString stringWithUTF8String:filename.c_str()];
 		NSString * filename = [file pathComponents].lastObject;

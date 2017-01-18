@@ -67,6 +67,8 @@ class ofApp : public ofBaseApp{
 		unsigned long long lastMouseMoved;
 		ofVec2f mousePosBeforeHiding;
 		string fileToLoad;
+		string currentFilename{"Oscilloscope"};
+		string nextWindowTitle;
 	
 		ofVec2f last;
 };

@@ -111,6 +111,11 @@ void ofApp::stopApplication(){
 //--------------------------------------------------------------
 void ofApp::update(){
 	
+	if( nextWindowTitle != "" ){
+		setWindowRepresentedFilename(nextWindowTitle);
+		nextWindowTitle = ""; 
+	}
+	
 	if( ofGetMousePressed() ){
 		lastMouseMoved = ofGetElapsedTimeMillis(); 
 	}
@@ -230,7 +235,7 @@ void ofApp::update(){
 	
 	if( left.totalLength >= bufferSize && right.totalLength >= bufferSize ){
 		changed = true;
-				
+		
 		float uSize = globals.strokeWeight / 1000.0;
 		auto addPt = [&]( ofVec2f p0, ofVec2f p1 ){
 			ofVec2f dir = p1 - p0;
@@ -535,7 +540,8 @@ void ofApp::audioOut( float * output, int bufferSize, int nChannels ){
 			ofSystemAlertDialog("Could not load the file :(");
 		}
 		osciView->timeStretchSlider->slider->value = 1.0;
-		setWindowRepresentedFilename(fileToLoad);
+		nextWindowTitle = fileToLoad; // back to ui thread ^^
+		currentFilename = fileToLoad;
 		fileToLoad = "";
 	}
 	
@@ -565,8 +571,13 @@ void ofApp::gotMessage(ofMessage msg){
 		
 		micStream.setDeviceID(globals.micDeviceId);
 		micStream.setup(this, 0, 2, globals.sampleRate, globals.bufferSize, globals.numBuffers);
-		micStream.start(); 
+		micStream.start();
 		globals.micActive = true;
+		
+		auto devs = micStream.getDeviceList();
+		if(globals.micDeviceId<devs.size()){
+			nextWindowTitle = devs[globals.micDeviceId].name + " @ " + ofToString(globals.sampleRate) + "Hz";
+		}
 	}
 	else if( msg.message == "stop-mic" ){
 		stopMic();
@@ -597,5 +608,6 @@ void ofApp::stopMic(){
 		micStream.stop();
 		micStream = ofSoundStream();
 		globals.micActive = false;
+		nextWindowTitle = currentFilename; // back to the previous window title
 	}
 }
