@@ -17,6 +17,7 @@
 #include <string>
 #include <iostream>
 #include "Audio.h"
+#include <atomic>
 
 #include <math.h>
 #include <map>
