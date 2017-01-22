@@ -17,6 +17,8 @@ extern string ofxToReadWriteableDataPath( string filename );
 extern string ofxToReadonlyDataPath( string filename );
 extern void setWindowRepresentedFilename( string filename );
 
+string ofxFormatTime(double seconds); 
+
 #define globals (Globals::instance)
 class Globals{
 public:

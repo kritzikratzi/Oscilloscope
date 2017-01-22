@@ -30,7 +30,8 @@ void ofApp::setup(){
 	
 	root = new mui::Root();
 	
-	globals.player.loadSound( ofxToReadonlyDataPath("konichiwa.wav") );
+//	globals.player.loadSound(ofxToReadonlyDataPath("konichiwa.wav"));
+	globals.player.loadSound(ofxToReadonlyDataPath("c:\\Users\\hansi\\Desktop\\demo01234.wav"));
 	globals.player.setLoop(true);
 	globals.player.stop(); 
 	
@@ -210,7 +211,7 @@ void ofApp::update(){
 	mesh.clear();
 	mesh2.clear();
 	
-	int bufferSize = (exporting==0?2084:256);
+	int bufferSize = (exporting==0?2048:256);
 	static float * leftBuffer = new float[bufferSize];
 	static float * rightBuffer = new float[bufferSize];
 
@@ -249,25 +250,12 @@ void ofApp::update(){
 				right.addTo(rightBuffer, 1, bufferSize);
 			}
 			
-			if( mesh.mesh.getVertices().size() < bufferSize*16 || exporting ){
-				mesh.addLines(leftBuffer, rightBuffer, bufferSize);
+			if( mesh.mesh.getVertices().size() < bufferSize*32 || exporting ){
+				int stride = isQuad ? 2 : 1; 
+				mesh.addLines(leftBuffer, rightBuffer, bufferSize, stride);
 				
-				if(isQuad && globals.player.right2_192.totalLength > bufferSize){
-					globals.player.left2_192.playbackIndex = 0;
-					globals.player.right2_192.playbackIndex = 0;
-					globals.player.left2_192.play();
-					globals.player.right2_192.play();
-					memset(leftBuffer,0,bufferSize*sizeof(float));
-					memset(rightBuffer,0,bufferSize*sizeof(float));
-					globals.player.left2_192.addTo(leftBuffer, 1, bufferSize);
-					globals.player.right2_192.addTo(rightBuffer, 1, bufferSize);
-					mesh2.addLines(leftBuffer, rightBuffer, bufferSize);
-					globals.player.left2_192.peel(bufferSize);
-					globals.player.right2_192.peel(bufferSize);
-				}
-				else{
-					globals.player.left2_192.clear();
-					globals.player.right2_192.clear();
+				if(isQuad){
+					mesh2.addLines(leftBuffer+1, rightBuffer+1, bufferSize, stride);
 				}
 			}
 			else{
@@ -327,6 +315,7 @@ void ofApp::draw(){
 		mesh.uIntensity = globals.intensity/sqrtf(globals.timeStretch);
 		mesh.uHue = globals.hue;
 		mesh.uRgb = ofVec3f(color.r,color.g,color.b);
+		mesh.uRgb = ofVec3f(1, 0, 0); 
 		mesh.draw(viewMatrix);
 		
 		if(mesh2.mesh.getNumVertices() > 0){
@@ -334,7 +323,7 @@ void ofApp::draw(){
 			mesh2.uIntensityBase = mesh.uIntensityBase;
 			mesh2.uIntensity = mesh.uIntensity;
 			mesh2.uHue = globals.hue;
-			mesh2.uRgb = ofVec3f(0,1,0);
+			mesh2.uRgb = ofVec3f(0,1,1);
 			mesh2.draw(viewMatrix);
 		}
 		
@@ -346,7 +335,7 @@ void ofApp::draw(){
 	fbo.draw(0,0);
 	
 	if( exporting >= 2 ){
-		string filename = ofToDataPath(exportDir + "/" + ofToString(exportFrameNum, 5, '0') + ".png");
+		string filename = ofToDataPath(exportDir + "/" + ofToString(exportFrameNum, 5, '0') + ".tiff");
 		ofPixels pixels;
 		fbo.readToPixels(pixels);
 		ofSaveImage(pixels, filename);
@@ -356,12 +345,12 @@ void ofApp::draw(){
 		ofSetColor(exporting>0?255:100);
 		ofDrawBitmapString("Dropped: " + ofToString(dropped), 10, 20 );
 		ofDrawBitmapString("FPS:     " + ofToString(ofGetFrameRate(),0), 10, 40 );
-		
+		ofDrawBitmapString("T: " + ofxFormatTime(globals.player.getPositionMS() / 1000.0), 10, 60); 
 		if( exporting > 0 ){
 			unsigned long long totalFrames = 1+globals.player.duration*globals.exportFrameRate/1000;
 			int pct = exportFrameNum*100/totalFrames;
-			ofDrawBitmapString("Format:  " + ofToString(globals.exportWidth) + " x " + ofToString(globals.exportHeight) + " @ " + ofToString(globals.exportFrameRate) + "fps (change in " + ofxToReadWriteableDataPath(")settings.txt") + ")", 10, 60);
-			ofDrawBitmapString("Export:  " + ofToString(pct) + "%  (" + ofToString(exportFrameNum) + "/" + ofToString(totalFrames) + ")", 10, 80 );
+			ofDrawBitmapString("Format:  " + ofToString(globals.exportWidth) + " x " + ofToString(globals.exportHeight) + " @ " + ofToString(globals.exportFrameRate) + "fps (change in " + ofxToReadWriteableDataPath(")settings.txt") + ")", 10, 80);
+			ofDrawBitmapString("Export:  " + ofToString(pct) + "%  (" + ofToString(exportFrameNum) + "/" + ofToString(totalFrames) + ")", 10, 100 );
 			if( (exportFrameNum%10) < 5 ){
 				ofSetColor(255,0,0);
 			}

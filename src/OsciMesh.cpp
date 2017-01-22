@@ -17,12 +17,12 @@ OsciMesh::OsciMesh(){
 	shaderLoader.setup(&shader, "shaders/osci");
 }
 
-void OsciMesh::addLines( float * left, float * right, int N ){
+void OsciMesh::addLines( float * left, float * right, int N, int stride ){
 	addLine(last,{left[0],right[0]});
-	last = {left[N-1],right[N-1]};
+	last = {left[N-stride],right[N-stride]};
 	
-	for( int i = 1; i < N; i++ ){
-		ofVec2f p0(left[i-1], right[i-1]);
+	for( int i = stride; i < N; i+= stride ){
+		ofVec2f p0(left[i-stride], right[i-stride]);
 		ofVec2f p1(left[i  ], right[i  ]);
 		addLine(p0,p1);
 	}

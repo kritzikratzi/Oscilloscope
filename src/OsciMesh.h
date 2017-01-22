@@ -18,7 +18,7 @@ public:
 	
 	static void init();
 	
-	void addLines( float * left, float * right, int N);
+	void addLines( float * left, float * right, int N, int stride);
 	inline void addLine( ofVec2f a, ofVec2f b);
 	
 	void draw(ofMatrix4x4 & viewMatrix);

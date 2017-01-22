@@ -186,6 +186,7 @@
     <ClCompile Include="src\globals.cpp" />
     <ClCompile Include="src\ofxIniSettings\ofxIniExtras.cpp" />
     <ClCompile Include="src\ofxIniSettings\ofxIniSettings.cpp" />
+    <ClCompile Include="src\OsciMesh.cpp" />
     <ClCompile Include="src\ui\ConfigView.cpp" />
     <ClCompile Include="src\ui\FMenu.cpp" />
     <ClCompile Include="src\ui\OsciView.cpp" />
@@ -226,6 +227,7 @@
     <ClInclude Include="src\globals.h" />
     <ClInclude Include="src\ofxIniSettings\ofxIniExtras.h" />
     <ClInclude Include="src\ofxIniSettings\ofxIniSettings.h" />
+    <ClInclude Include="src\OsciMesh.h" />
     <ClInclude Include="src\ui\ConfigView.h" />
     <ClInclude Include="src\ui\FaButton.h" />
     <ClInclude Include="src\ui\FaToggleButton.h" />
