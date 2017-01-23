@@ -30,8 +30,8 @@ void ofApp::setup(){
 	
 	root = new mui::Root();
 	
-//	globals.player.loadSound(ofxToReadonlyDataPath("konichiwa.wav"));
-	globals.player.loadSound(ofxToReadonlyDataPath("c:\\Users\\hansi\\Desktop\\demo01234.wav"));
+	globals.player.loadSound(ofxToReadonlyDataPath("konichiwa.wav"));
+//	globals.player.loadSound(ofxToReadonlyDataPath("c:\\Users\\hansi\\Desktop\\3dbounce.wav"));
 	globals.player.setLoop(true);
 	globals.player.stop(); 
 	
@@ -160,7 +160,7 @@ void ofApp::update(){
 		dropped = 0;
 		
 		// resize&clear fbo
-		fbo.allocate(globals.exportWidth, globals.exportHeight, GL_RGBA);
+		fbo.allocate(globals.exportWidth*(osciView->sideBySide->selected?2:1), globals.exportHeight, GL_RGBA);
 		fbo.begin();
 		ofClear(0,255);
 		fbo.end();
@@ -225,6 +225,8 @@ void ofApp::update(){
 	right.play();
 	bool isMono = !globals.micActive && globals.player.isMonoFile;
 	bool isQuad = !globals.micActive && globals.player.isQuadFile;
+	osciView->sideBySide->visible = isQuad; 
+	osciView->flip3d->visible = isQuad; 
 	
 	if( left.totalLength >= bufferSize && right.totalLength >= bufferSize ){
 		changed = true;
@@ -307,15 +309,19 @@ void ofApp::draw(){
 	
 		ofEnableAlphaBlending();
 		
-		ofMatrix4x4 viewMatrix = getViewMatrix(); 
+		bool sideBySide = osciView->sideBySide->selected;
+		bool flip3d = osciView->flip3d->selected;
+		ofMatrix4x4 viewMatrix = getViewMatrix(flip3d?1:0,globals.player.isQuadFile);
 		ofFloatColor color = ofFloatColor::fromHsb(globals.hue/360.0, 1, 1);
 
 		mesh.uSize = globals.strokeWeight/1000.0;
 		mesh.uIntensityBase = max(0.0f,mesh.uIntensity-0.4f)*0.7f-1000.0f*mesh.uSize/500.0f;
 		mesh.uIntensity = globals.intensity/sqrtf(globals.timeStretch);
 		mesh.uHue = globals.hue;
-		mesh.uRgb = ofVec3f(color.r,color.g,color.b);
-		mesh.uRgb = ofVec3f(1, 0, 0); 
+		mesh.uRgb = globals.player.isQuadFile && !sideBySide?
+			(flip3d?ofVec3f(0,1,1):ofVec3f(1,0,0)):
+			ofVec3f(color.r,color.g,color.b);
+		mesh.uRgb = ofVec3f(1, 1, 1); 
 		mesh.draw(viewMatrix);
 		
 		if(mesh2.mesh.getNumVertices() > 0){
@@ -323,8 +329,8 @@ void ofApp::draw(){
 			mesh2.uIntensityBase = mesh.uIntensityBase;
 			mesh2.uIntensity = mesh.uIntensity;
 			mesh2.uHue = globals.hue;
-			mesh2.uRgb = ofVec3f(0,1,1);
-			mesh2.draw(viewMatrix);
+			mesh2.uRgb = sideBySide ? mesh.uRgb : (flip3d ? ofVec3f(1, 0, 0) : ofVec3f(0, 1, 1)); 
+			mesh2.draw(sideBySide?getViewMatrix(flip3d?0:1,globals.player.isQuadFile):viewMatrix);
 		}
 		
 
@@ -349,7 +355,7 @@ void ofApp::draw(){
 		if( exporting > 0 ){
 			unsigned long long totalFrames = 1+globals.player.duration*globals.exportFrameRate/1000;
 			int pct = exportFrameNum*100/totalFrames;
-			ofDrawBitmapString("Format:  " + ofToString(globals.exportWidth) + " x " + ofToString(globals.exportHeight) + " @ " + ofToString(globals.exportFrameRate) + "fps (change in " + ofxToReadWriteableDataPath(")settings.txt") + ")", 10, 80);
+			ofDrawBitmapString("Format:  " + ofToString(fbo.getWidth()) + " x " + ofToString(fbo.getHeight()) + " @ " + ofToString(globals.exportFrameRate) + "fps (change in " + ofxToReadWriteableDataPath(")settings.txt") + ")", 10, 80);
 			ofDrawBitmapString("Export:  " + ofToString(pct) + "%  (" + ofToString(exportFrameNum) + "/" + ofToString(totalFrames) + ")", 10, 100 );
 			if( (exportFrameNum%10) < 5 ){
 				ofSetColor(255,0,0);
@@ -520,32 +526,37 @@ void ofApp::dragEvent(ofDragInfo dragInfo){
 }
 
 //--------------------------------------------------------------
-ofMatrix4x4 ofApp::getViewMatrix() {
-	ofMatrix4x4 viewMatrix = ofMatrix4x4(
-										 globals.scale, 0.0, 0.0, 0.0,
-										 0.0, -globals.scale, 0.0, 0.0,
-										 0.0, 0.0, 1.0, 0.0,
-										 0.0, 0.0, 0.0, 1.0);
-	
-	if (globals.invertX) viewMatrix(0,0) *= -1;
-	if (globals.invertY) viewMatrix(1,1) *= -1;
+ofMatrix4x4 ofApp::getViewMatrix(int i, bool isQuad) {
+
+	float gw = fbo.getWidth();
+	float gh = fbo.getHeight();
+	float w = gw*(osciView->sideBySide->selected && isQuad? 0.5 : 1);
+	float h = gh;
+	float aspectRatio = float(gw) / float(gh);
+	float scale = min(w / gw, h / gh)*globals.scale;
+
+	float dx = 0;
+	if (osciView->sideBySide->selected && isQuad) {
+		dx = i == 0 ? -0.5 : 0.5;
+	}
+
+	if (aspectRatio < 1.0) scale *= aspectRatio;
+	ofMatrix4x4 result = ofMatrix4x4(
+		scale/aspectRatio, 0.0, 0.0, 0.0,
+		0.0, -scale, 0.0, 0.0,
+		0.0, 0.0, 1.0, 0.0,
+		dx, 1.0 - h/gh, 0.0, 1.0);
+
+	if (globals.invertX) result(0,0) *= -1;
+	if (globals.invertY) result(1,1) *= -1;
 	
 	if (globals.flipXY) {
-		viewMatrix = ofMatrix4x4(
+		result = ofMatrix4x4(
 								 0.0, 1.0, 0.0, 0.0,
 								 1.0, 0.0, 0.0, 0.0,
 								 0.0, 0.0, 1.0, 0.0,
-								 0.0, 0.0, 0.0, 1.0 ) * viewMatrix;
+								 0.0, 0.0, 0.0, 1.0 ) * result;
 	}
 	
-	ofMatrix4x4 aspectMatrix; // identity matrix
-	float aspectRatio = float(fbo.getWidth()) / float(fbo.getHeight());
-	if (aspectRatio > 1.0) {
-		aspectMatrix(0,0) /= aspectRatio;
-	}
-	else {
-		aspectMatrix(1,1) *= aspectRatio;
-	}
-	
-	return viewMatrix * aspectMatrix;
+	return result;
 }
