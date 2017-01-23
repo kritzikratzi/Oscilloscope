@@ -329,8 +329,9 @@ void ofApp::draw(){
 			mesh2.uIntensityBase = mesh.uIntensityBase;
 			mesh2.uIntensity = mesh.uIntensity;
 			mesh2.uHue = globals.hue;
-			mesh2.uRgb = sideBySide ? mesh.uRgb : (flip3d ? ofVec3f(1, 0, 0) : ofVec3f(0, 1, 1)); 
-			mesh2.draw(sideBySide?getViewMatrix(flip3d?0:1,globals.player.isQuadFile):viewMatrix);
+			mesh2.uRgb = sideBySide ? mesh.uRgb : (flip3d ? ofVec3f(1, 0, 0) : ofVec3f(0, 1, 1));
+			if(sideBySide) viewMatrix = getViewMatrix(flip3d?0:1,globals.player.isQuadFile);
+			mesh2.draw(viewMatrix);
 		}
 		
 
