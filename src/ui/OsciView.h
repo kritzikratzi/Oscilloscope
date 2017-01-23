@@ -35,6 +35,8 @@ public:
 	FaToggleButton * flipXY;
 	FaToggleButton * invertX;
 	FaToggleButton * invertY;
+	FaToggleButton * sideBySide;
+	FaToggleButton * flip3d; 
 	
 	FaToggleButton * playButton;
 	mui::Slider * timeSlider;

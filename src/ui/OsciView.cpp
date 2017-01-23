@@ -60,6 +60,16 @@ OsciView::OsciView( float x_, float y_, float width_, float height_)
 	ofAddListener( playButton->onPress, this, &OsciView::buttonPressed );
 	add( playButton );
 	
+	sideBySide = new FaToggleButton(ofxFontAwesome::cube, ofxFontAwesome::cube, 10, 1, h, h);
+	ofAddListener(sideBySide->onPress, this, &OsciView::buttonPressed);
+	add(sideBySide);
+
+	flip3d = new FaToggleButton(ofxFontAwesome::exchange, ofxFontAwesome::exchange, 10, 1, h, h);
+	ofAddListener(flip3d->onPress, this, &OsciView::buttonPressed);
+	add(flip3d);
+
+
+
 	x = 10;
 	y += invertY->height + 10;
 	
@@ -128,7 +138,10 @@ OsciView::OsciView( float x_, float y_, float width_, float height_)
 void OsciView::layout(){
 	mui::L(fullscreenButton).pos(width-30, 0);
 	mui::L(stopButton).leftOf(fullscreenButton,1);
-	
+	mui::L(sideBySide).leftOf(stopButton, 10);
+	mui::L(flip3d).leftOf(sideBySide, 1);
+
+
 	mui::L(playButton).pos(10,40);
 	mui::L(timeSlider).rightOf(playButton, 10).stretchToRightEdgeOf(this, 10);
 	
@@ -167,7 +180,6 @@ void OsciView::layout(){
 	
 	mui::L(afterglowLabel).below(intensityLabel).alignRightEdgeTo(intensityLabel);
 	mui::L(afterglowSlider).rightOf(afterglowLabel,5).stretchToRightEdgeOf(this,10);
-	
 	
 	height = afterglowSlider->y + afterglowSlider->height;
 }

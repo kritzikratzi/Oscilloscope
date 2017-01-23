@@ -121,6 +121,9 @@
     <ClCompile Include="addons\ofxMightyUI\src\ofxMightyUI.cpp">
       <Filter>addons\ofxMightyUI\src</Filter>
     </ClCompile>
+    <ClCompile Include="src\OsciMesh.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -645,6 +648,9 @@
       <Filter>addons\ofxMightyUI\src</Filter>
     </ClInclude>
     <ClInclude Include="resource.h" />
+    <ClInclude Include="src\OsciMesh.h">
+      <Filter>src</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="icon.rc" />

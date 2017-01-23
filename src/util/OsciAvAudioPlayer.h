@@ -161,7 +161,8 @@ public:
 	
 	
 	bool decode_next_frame();
-	bool isMonoFile; 
+	bool isMonoFile{false};
+	bool isQuadFile{false};
 
 	MonoSample mainOut; // interleaved main output
 	MonoSample left192;

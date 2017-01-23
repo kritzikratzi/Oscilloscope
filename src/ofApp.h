@@ -9,6 +9,7 @@
 #include "ui/OsciView.h"
 #include "util/Audio.h"
 #include "ofxAvAudioPlayer.h"
+#include "OsciMesh.h"
 
 class ofApp : public ofBaseApp{
 
@@ -34,10 +35,8 @@ class ofApp : public ofBaseApp{
 		void audioIn(float * input, int bufferSize, int nChannels);
 		void audioOut( float * output, int bufferSize, int nChannels ); 
 
-	
 		void stopMic();
-	
-		ofMatrix4x4 getViewMatrix();
+		ofMatrix4x4 getViewMatrix(int i, bool isQuad); 
 	
 		ofSoundStream soundStream;
 		ofSoundStream micStream;
@@ -45,11 +44,9 @@ class ofApp : public ofBaseApp{
 		mui::Root * root;
 		ConfigView * configView;
 		OsciView * osciView;
-		ofPath path;
-		ofMesh shapeMesh;
+		OsciMesh mesh;
+		OsciMesh mesh2;  // for stereoscopic viewing
 		ofFbo fbo;
-		ofShader shader;
-		ShaderLoader shaderLoader;
 	
 		MonoSample left;
 		MonoSample right;
@@ -62,7 +59,6 @@ class ofApp : public ofBaseApp{
 		int exporting;
 		int exportFrameNum; 
 		string exportDir;
-	
 	
 		unsigned long long lastMouseMoved;
 		ofVec2f mousePosBeforeHiding;

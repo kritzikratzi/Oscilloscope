@@ -221,6 +221,8 @@ void OsciAvAudioPlayerThread::threadedFunction(){
 				player.mainOut.clear();
 				player.left192.clear();
 				player.right192.clear();
+				player.left192.clear();
+				player.right192.clear();
 			}
 			if( player.mainOut.totalLength < player.output_expected_buffer_size*4 && player.isLoaded ){
 				float * buffer = new float[player.output_expected_buffer_size*2];
@@ -298,7 +300,9 @@ int OsciAvAudioPlayer::internalAudioOut(float *output, int bufferSize, int nChan
 		int available_samples = decoded_buffer_len - decoded_buffer_pos;
 		if( missing_samples > 0 && available_samples > 0 ){
 			int samples = min( missing_samples, available_samples );
-			
+			// uh...
+			//samples -= samples % 4; 
+
 			if( volume != 0 ){
 				memcpy(output+num_samples_read, decoded_buffer+decoded_buffer_pos, samples*sizeof(float) );
 			}
@@ -309,17 +313,22 @@ int OsciAvAudioPlayer::internalAudioOut(float *output, int bufferSize, int nChan
 				}
 			}
 			
+			int numChannels192 = isQuadFile ? 4 : 2;
+			int samples192 = samples - (samples % numChannels192);
 			decoded_buffer_pos += samples;
 			num_samples_read += samples;
-			
+
 			// find copy points in 192k buffer
-			int a = (decoded_buffer_pos-samples)*(long)visual_sample_rate/output_sample_rate;
-			int b = (decoded_buffer_pos)*(long)visual_sample_rate/output_sample_rate;
-			a = a - (a%2);
-			b = MIN(b - (b%2), decoded_buffer_len192);
+			int a = (decoded_buffer_pos-samples)*(int64_t)visual_sample_rate/output_sample_rate;
+			int b = (decoded_buffer_pos)*(int64_t)visual_sample_rate/output_sample_rate;
+			a *= numChannels192 / 2; 
+			b *= numChannels192 / 2; 
+			a = a - (a%numChannels192);
+			b = MIN(b - (b%numChannels192), decoded_buffer_len192);
+			//cout << a << "\t" << b << "\t\t" << decoded_buffer_len192 << "\t\t\t" << samples << "\t" << decoded_buffer_len << endl; 
 			if( b-a > 0 ){
-				left192.append( decoded_buffer192+a, (b-a)/2, 2 );
-				right192.append( decoded_buffer192+1+a, (b-a)/2, 2 );
+				left192.append( decoded_buffer192+a, (b-a)/2, 2);
+				right192.append( decoded_buffer192+1+a, (b-a)/2, 2);
 			}
 		}
 		
@@ -404,6 +413,9 @@ bool OsciAvAudioPlayer::decode_next_frame(){
 				swr_context192 = NULL;
 			}
 			
+			int numChannels192 = av_frame_get_channels(decoded_frame) == 4?4:2;
+			isQuadFile = numChannels192 == 4;
+			
 			if( swr_context192 == NULL ){
 				visual_config_changed = false;
 				int input_channel_layout = decoded_frame->channel_layout;
@@ -411,15 +423,15 @@ bool OsciAvAudioPlayer::decode_next_frame(){
 					input_channel_layout = av_get_default_channel_layout( codec_context->channels );
 				}
 				swr_context192 = swr_alloc_set_opts(NULL,
-												 av_get_default_channel_layout(2), AV_SAMPLE_FMT_FLT, visual_sample_rate,
+												 av_get_default_channel_layout(numChannels192), AV_SAMPLE_FMT_FLT, visual_sample_rate,
 												 input_channel_layout, (AVSampleFormat)decoded_frame->format, decoded_frame->sample_rate,
 												 0, NULL);
 
 				//enable these two to disable interpolation
-				if(!interpolate){
-					av_opt_set_int(swr_context192, "filter_size", 4, 0);
-					av_opt_set_int(swr_context192, "linear_interp", 1, 0);
-				}
+				//if(!interpolate){
+				//	av_opt_set_int(swr_context192, "filter_size", 4, 0);
+				//	av_opt_set_int(swr_context192, "linear_interp", 1, 0);
+				//}
 
 				
 				//				av_opt_set_int(swr_context192, "dither_scale", 0, 0);
@@ -430,15 +442,26 @@ bool OsciAvAudioPlayer::decode_next_frame(){
 				}
 			}
 			
+			
 			/* if a frame has been decoded, resample to desired rate */
 			uint8_t * out192 = (uint8_t*)decoded_buffer192;
 			int samples_converted192 = swr_convert(swr_context192,
-												   (uint8_t**)&out192, AVCODEC_MAX_AUDIO_FRAME_SIZE/2,
+												   (uint8_t**)&out192, AVCODEC_MAX_AUDIO_FRAME_SIZE/4,
 												   (const uint8_t**)decoded_frame->extended_data, decoded_frame->nb_samples);
 			
-			decoded_buffer_len192 = samples_converted192*output_num_channels;
+			// do a funny little check ^^ 
+			auto check = [&](int i, int delta) {
+				return fabsf(decoded_buffer192[4*i+delta] - delta/10.0f) >= 0.0001; 
+			}; 
+			/*for (int i = 0; i < samples_converted192; i++) {
+				if (check(i,0) || check(i,1) || check(i,2) || check(i,3)){
+					cout << "this is wrong" << endl; 
+				}
+			}*/
+			decoded_buffer_len192 = samples_converted192*numChannels192;
 			decoded_buffer_pos192 = 0;
-			
+
+
 			int samples_per_channel = AVCODEC_MAX_AUDIO_FRAME_SIZE/output_num_channels;
 			//samples_per_channel = 512;
 			uint8_t * out = (uint8_t*)decoded_buffer;
