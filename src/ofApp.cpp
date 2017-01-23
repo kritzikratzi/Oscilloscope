@@ -321,7 +321,7 @@ void ofApp::draw(){
 		mesh.uRgb = globals.player.isQuadFile && !sideBySide?
 			(flip3d?ofVec3f(0,1,1):ofVec3f(1,0,0)):
 			ofVec3f(color.r,color.g,color.b);
-		mesh.uRgb = ofVec3f(1, 1, 1); 
+		//mesh.uRgb = ofVec3f(1, 1, 1); 
 		mesh.draw(viewMatrix);
 		
 		if(mesh2.mesh.getNumVertices() > 0){
