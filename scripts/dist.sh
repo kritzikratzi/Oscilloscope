@@ -45,8 +45,6 @@ then
 	echo "Deleting unused DLL files: $dlls "
 	echo "Make sure they are specified as 'delay loaded DLLs' in the linker settings"
 	rm $dlls
-	mkdir dlls
-	mv *.dll dlls
 	cd ..
 elif [ "$platform" = "osx" ]
 then

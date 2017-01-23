@@ -50,8 +50,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 1,0,7,0
- PRODUCTVERSION 1,0,7,0
+ FILEVERSION 1,0,8,0
+ PRODUCTVERSION 1,0,8,0
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -67,13 +67,13 @@ BEGIN
         BLOCK "000904b0"
         BEGIN
             VALUE "CompanyName", "Hansi Raber"
-            VALUE "FileDescription", "Software Oscilloscope based on openFrameworks and FFmpeg"
-            VALUE "FileVersion", "1.0.7"
+            VALUE "FileDescription", "Oscilloscope"
+            VALUE "FileVersion", "1.0.8"
             VALUE "InternalName", "Oscilloscope.exe"
             VALUE "LegalCopyright", "Copyleft 2016, https://github.com/kritzikratzi/Oscilloscope"
             VALUE "OriginalFilename", "Oscilloscope.exe"
             VALUE "ProductName", "Oscilloscope"
-            VALUE "ProductVersion", "1.0.7"
+            VALUE "ProductVersion", "1.0.8"
         END
     END
     BLOCK "VarFileInfo"
