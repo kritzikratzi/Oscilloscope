@@ -143,6 +143,16 @@ void ofApp::update(){
 	if( osciView->visible ) ofShowCursor();
 	else ofHideCursor();
 	
+	// center the ui
+	if (osciView->sideBySide->selected && globals.player.isQuadFile) {
+		osciView->x = ofGetWidth() / mui::MuiConfig::scaleFactor * 1 / 4.0f - osciView->width / 2;
+	}
+	else {
+		osciView->x = ofGetWidth() / mui::MuiConfig::scaleFactor / 2 - osciView->width / 2;
+	}
+	osciView->y = ofGetHeight() / mui::MuiConfig::scaleFactor - osciView->height - 60;
+
+
 	/////////////////////////////////////////////////
 	
 	// are we not export?
@@ -160,7 +170,7 @@ void ofApp::update(){
 		dropped = 0;
 		
 		// resize&clear fbo
-		fbo.allocate(globals.exportWidth*(osciView->sideBySide->selected?2:1), globals.exportHeight, GL_RGBA);
+		fbo.allocate(globals.exportWidth, globals.exportHeight, GL_RGBA);
 		fbo.begin();
 		ofClear(0,255);
 		fbo.end();
@@ -452,8 +462,6 @@ void ofApp::windowResized(int w, int h){
 	cout << "resize to " << w << "," << h << endl; 
 	osciView->width = min(500,w/mui::MuiConfig::scaleFactor);
 	osciView->layout();
-	osciView->x = w/mui::MuiConfig::scaleFactor/2 - osciView->width/2;
-	osciView->y = h/mui::MuiConfig::scaleFactor - osciView->height - 60;
 	cout << "visible?" << osciView << "::" << osciView->visible << endl; 
 }
 
@@ -543,7 +551,7 @@ ofMatrix4x4 ofApp::getViewMatrix(int i, bool isQuad) {
 
 	if (aspectRatio < 1.0) scale *= aspectRatio;
 	ofMatrix4x4 result = ofMatrix4x4(
-		scale/aspectRatio, 0.0, 0.0, 0.0,
+		scale/aspectRatio*(osciView->sideBySide->selected?0.5:1), 0.0, 0.0, 0.0,
 		0.0, -scale, 0.0, 0.0,
 		0.0, 0.0, 1.0, 0.0,
 		dx, 1.0 - h/gh, 0.0, 1.0);
