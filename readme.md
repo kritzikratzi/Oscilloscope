@@ -64,7 +64,8 @@ See scripts/readme.md for the full distribution process.
 
 
 ## License/Source code
-
-* [Openframeworks](http://openframeworks.cc). A creative coding library. The larger part of it is licensed as MIT/BSD. 
-* [FFmpeg](http://www.ffmpeg.org/) and [ofxAvCodec](https://github.com/kritzikratzi/ofxAvCodec). FFmpeg is _the_ encoder/decoder library and licensed under the gpl/lgpl 2.1. The binaries included here were compiled to comply with the lgpl. A copy of the LGPL together with instructions how the library was compiled for each platform can be found in the `legal` folder. 
-* The sourcecode for this application is freely available on [github](https://github.com/kritzikratzi/Oscilloscope). 
+* See [LICENSE](LICENSE) for more information.
+* The sourcecode for this application is freely available on [github](https://github.com/kritzikratzi/Oscilloscope) under the WTFPL license. 
+* Based on [Openframeworks](http://openframeworks.cc). A creative coding library. The larger part of it is licensed as MIT/BSD. 
+* Uses [FFmpeg](http://www.ffmpeg.org/) _(the encoder/decoder library)_ and [ofxAvCodec](https://github.com/kritzikratzi/ofxAvCodec) to encode/decode video/audio files.
+* [FFmpeg](http://www.ffmpeg.org/) is licensed under the gpl/lgpl 2.1. The shared libraries included here were compiled to comply with the lgpl. A copy of the LGPL together with instructions how the library was compiled for each platform can be found in the [docs/ffmpeg](docs/ffmpeg) folder. Alternatively (or if the files were not included by accident) you can find online versions of the compilation instructions and the LGPL as part of the ofxAvCodec project. 
