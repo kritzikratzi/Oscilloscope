@@ -80,8 +80,10 @@ ConfigView::ConfigView( float x_, float y_, float width_, float height_)
 	
 	startButton = new mui::Button( "Start!", x, y, w, h );
 	ofAddListener( startButton->onPress, this, &ConfigView::buttonPressed );
-	y += startButton->height; 
+
+	y += startButton->height;
 	add( startButton );
+	startButton->requestKeyboardFocus();
 }
 
 
@@ -168,6 +170,14 @@ void ConfigView::buttonPressed( const void * sender, ofTouchEventArgs & args ){
 		selectSoundCard(deviceIds[btn]);
 	}
 }
+
+//--------------------------------------------------------------
+bool ConfigView::keyPressed( ofKeyEventArgs &key){
+	if(key.key == OF_KEY_RETURN){
+		startButton->clickAndNotify();
+	}
+}
+
 
 void ConfigView::selectSoundCard( int deviceId ){
 	if( deviceId < 0 && !soundcardButtons.empty() ){

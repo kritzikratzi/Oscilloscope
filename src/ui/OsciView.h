@@ -37,9 +37,11 @@ public:
 	FaToggleButton * invertY;
 	FaToggleButton * sideBySide;
 	FaToggleButton * flip3d; 
-	
+
 	FaToggleButton * playButton;
 	mui::Slider * timeSlider;
+	mui::Button * timeLabelButton;
+	int timeLabelMode = 0; 
 	
 	mui::Label currentTime;
 	mui::Label * scaleLabel;

@@ -4,6 +4,8 @@
 #include <Poco/TemporaryFile.h>
 #include "globals.h"
 #include <cctype> 
+#include "ofxNative.h"
+
 Poco::Mutex mutex;
 Poco::Mutex updateMutex;
 
@@ -87,6 +89,8 @@ void ofApp::startApplication(){
 	soundStream.setDeviceID( globals.deviceId );
 	soundStream.setup(this, 2, 0, globals.sampleRate, globals.bufferSize, globals.numBuffers);
 	globals.player.setupAudioOut(2, globals.sampleRate, true);
+	
+	lastMouseMoved = ofGetElapsedTimeMillis();
 }
 
 
@@ -108,19 +112,35 @@ void ofApp::stopApplication(){
 
 //--------------------------------------------------------------
 void ofApp::update(){
-	
+	lastUpdateTime = ofGetElapsedTimeMillis(); 
 	if( nextWindowTitle != "" ){
 		setWindowRepresentedFilename(nextWindowTitle);
 		nextWindowTitle = ""; 
 	}
 	
 	if( ofGetMousePressed() ){
-		lastMouseMoved = ofGetElapsedTimeMillis(); 
+		lastMouseMoved = lastUpdateTime;
+	}
+	
+	// reload settings when we went from not focused->focused state
+	if(ofGetFrameNum()%30 == 0){
+		ofAppGLFWWindow * win = dynamic_cast<ofAppGLFWWindow*>(ofGetWindowPtr());
+		if(win){
+			bool focused = glfwGetWindowAttrib(win->getGLFWWindow(), GLFW_FOCUSED);
+			if(focused && !hadWindowFocus){
+				globals.loadFromFile();
+				osciView->fromGlobals();
+			}
+			else if(!focused && hadWindowFocus){
+				globals.saveToFile(); 
+			}
+			hadWindowFocus = focused;
+		}
 	}
 
 	/////////////////////////////////////////////////
 	// take care of hiding / showing the ui
-	if( ofGetElapsedTimeMillis()-lastMouseMoved > 1000 ){
+	if( lastUpdateTime-lastMouseMoved > globals.secondsBeforeHidingMenu*1000 ){
 		// this is not the greatest solution, but hey ho, it works ...
 		bool hovering = osciView->isMouseOver();
 		if( !hovering ){
@@ -137,7 +157,7 @@ void ofApp::update(){
 
 	ofVec2f mousePos(ofGetMouseX(), ofGetMouseY());
 	bool insideWindow = ofRectangle(0,0,ofGetWidth(),ofGetHeight()).inside(mousePos);
-	if( ofGetElapsedTimeMillis()-lastMouseMoved < 1000 && osciView->visible == false ){
+	if( lastUpdateTime-lastMouseMoved < globals.secondsBeforeHidingMenu*1000 && osciView->visible == false ){
 		bool movedEnough = mousePos.distance(mousePosBeforeHiding) > 10*mui::MuiConfig::scaleFactor;
 		if( insideWindow && movedEnough ){
 			// okay, we moved enough!
@@ -243,42 +263,56 @@ void ofApp::update(){
 	osciView->sideBySide->visible = isQuad; 
 	osciView->flip3d->visible = isQuad; 
 	
+	
+	static double T0 = ofGetElapsedTimeMillis();
+	double T1 = ofGetElapsedTimeMillis();
+	double dt = T1-T0;
+	static double avgDt = 0;
+	avgDt = MAX(0.95*avgDt,dt);
+	double expectedDt = 1000/(float)ofGetTargetFrameRate();
+	T0 = T1;
+	static uint64_t totalFramesPlayed = 0;
+	
 	if( left.totalLength >= bufferSize && right.totalLength >= bufferSize ){
 		changed = true;
 		
 		float uSize = globals.strokeWeight / 1000.0;
 		
 		while( left.totalLength >= bufferSize && right.totalLength >= bufferSize ){
-			if(isMono){
-				memset(rightBuffer,0,bufferSize*sizeof(float));
-				right.addTo(rightBuffer, 1, bufferSize);
-				for( int i = 0; i < bufferSize; i++ ){
-					leftBuffer[i] = -1+2*i/(float)bufferSize;
-				}
+			
+			int maxVerts = MIN(1,expectedDt/avgDt)*bufferSize*32*ofMap(totalFramesPlayed,0,60,0,1,true);
+			totalFramesPlayed ++;
+
+			if( mesh.mesh.getVertices().size() >= maxVerts && !exporting ){
+				dropped ++;
+				left.clear();
+				right.clear();
 			}
 			else{
-				memset(leftBuffer,0,bufferSize*sizeof(float));
-				memset(rightBuffer,0,bufferSize*sizeof(float));
-				left.addTo(leftBuffer, 1, bufferSize);
-				right.addTo(rightBuffer, 1, bufferSize);
-			}
+				if(isMono){
+					memset(rightBuffer,0,bufferSize*sizeof(float));
+					right.addTo(rightBuffer, 1, bufferSize);
+					for( int i = 0; i < bufferSize; i++ ){
+						leftBuffer[i] = -1+2*i/(float)bufferSize;
+					}
+				}
+				else{
+					memset(leftBuffer,0,bufferSize*sizeof(float));
+					memset(rightBuffer,0,bufferSize*sizeof(float));
+					left.addTo(leftBuffer, 1, bufferSize);
+					right.addTo(rightBuffer, 1, bufferSize);
+				}
 			
-			if( mesh.mesh.getVertices().size() < bufferSize*32 || exporting ){
-				int stride = isQuad ? 2 : 1; 
+				int stride = isQuad ? 2 : 1;
 				mesh.addLines(leftBuffer, rightBuffer, bufferSize, stride);
 				
 				if(isQuad){
 					mesh2.addLines(leftBuffer+1, rightBuffer+1, bufferSize, stride);
 				}
+				
+				left.peel(bufferSize);
+				right.peel(bufferSize);
 			}
-			else{
-				dropped ++;
-			}
-			
-			
-			left.peel(bufferSize);
-			right.peel(bufferSize);
-			
 		}
 	}
 }
@@ -290,24 +324,26 @@ void ofApp::draw(){
 	ofClear(0,255);
 	
 	if( !fbo.isAllocated() || fbo.getWidth() != ofGetWidth() || fbo.getHeight() != ofGetHeight() ){
-		int w = ofGetWidth(); 
+		int w = ofGetWidth();
 		int h = ofGetHeight();
 		if( exporting ){
 			// no need to do anything, fbo is managed by someone else
 		}
-		else if( w == 0 || h == 0 ){
-			//what is happening???
-			while( globals.player.left192.totalLength > 4096 && globals.player.right192.totalLength > 4096 ){
-				globals.player.left192.peel(4096);
-				globals.player.right192.peel(4096);
-			}
-		}
 		else{
-			cout << "allocating framebuffer with " << w << ", " << h << endl; 
-			fbo.allocate(ofGetWidth(), ofGetHeight(),GL_RGBA);
-			fbo.begin();
-			ofClear(0,255);
-			fbo.end();
+			if( w == 0 || h == 0 ){
+				//what is happening???
+				while( globals.player.left192.totalLength > 4096 && globals.player.right192.totalLength > 4096 ){
+					globals.player.left192.peel(4096);
+					globals.player.right192.peel(4096);
+				}
+			}
+			else{
+				cout << "allocating framebuffer with " << w << ", " << h << endl; 
+				fbo.allocate(ofGetWidth(), ofGetHeight(),GL_RGBA);
+				fbo.begin();
+				ofClear(0,255);
+				fbo.end();
+			}
 		}
 	}
 	
@@ -379,6 +415,46 @@ void ofApp::draw(){
 			ofDrawEllipse(20, 100, 20, 20);
 		}
 	}
+	
+	float waitBefore = 1;
+	float extra = 0.2;
+	float remainingTime = -(lastUpdateTime/1000.0f)+globals.secondsBeforeHidingMenu+lastMouseMoved/1000.0f;
+	if(remainingTime>-extra && !osciView->isMouseOver()){
+		float t = ofMap(remainingTime, -extra, MAX(0.1,globals.secondsBeforeHidingMenu-waitBefore), 1, 0);
+		if(t<0 || t>1){
+			// nothing to draw
+		}
+		else{
+			float T0 = -extra;
+			float T1 = 0;
+			float T2 = globals.secondsBeforeHidingMenu;
+
+			t = MIN(t,1);
+			float alpha = ofMap(remainingTime,T1,T2,1,0,true)*pow(ofMap(remainingTime,-extra,0.2,0,1,true),2);
+			float w = ofMap(t,0.2,1,0,1,true); 
+			ofSetColor(255, 255*alpha);
+			ofPushMatrix();
+			float s = mui::MuiConfig::scaleFactor;
+			float W = ofGetWidth();
+			float H = ofGetHeight();
+			float mx = ofClamp(ofGetMouseX(), 0, W);
+			float my = ofClamp(ofGetMouseY(), 0, W);
+			float magicX = ofMap(mx,0,W,+1,-1,true);
+			float magicY = ofMap(my,0,H,+1,-1,true);
+			ofVec2f v = ofVec2f(magicX,magicY).getNormalized()*s*50;
+			ofTranslate(mx+v.x, my+v.y);
+			ofScale(mui::MuiConfig::scaleFactor, mui::MuiConfig::scaleFactor);
+			ofRotateZ(atan2(magicY,magicX)*RAD_TO_DEG);
+			v = ofVec2f(1+10*pow(t,2));
+			float l = 1/s;
+			ofDrawRectangle(50*sqrt(t)-v.x,-l,2*v.x,2*l);
+			//ofDrawRectangle(-l,-v.y,2*l,2*v.y);
+//			ofTranslate(osciView->x, osciView->y+osciView->height);
+//			ofDrawRectangle(0, 0, w*osciView->width, 1);
+			ofSetColor(255);
+			ofPopMatrix();
+		}
+	}
 }
 
 void ofApp::exit(){
@@ -403,7 +479,7 @@ void ofApp::keyPressed  (int key){
 		}
 	}
 
-	if( key == 'f' || key == OF_KEY_RETURN || key == OF_KEY_F11 ){
+	if( key == 'f' || (ofGetKeyPressed(OF_KEY_ALT) && key == OF_KEY_RETURN) || key == OF_KEY_F11 ){
 		// nasty!
 		osciView->fullscreenButton->clickAndNotify(); 
 	}
@@ -437,6 +513,19 @@ void ofApp::keyPressed  (int key){
 				exporting = 1;
 			}
 		}
+	}
+	
+	if( ofGetKeyPressed(MUI_KEY_ACTION) && key == ',' ){
+		ofSystemAlertDialog("All settings are in the editable file '" + ofxToReadWriteableDataPath("settings.txt") + "' \n"
+							"\n"
+							"1. Edit settings.txt\n"
+							"2. Switch back to the oscilloscope application"
+							);
+		ofxNative::showFile(ofxToReadWriteableDataPath("settings.txt"));
+	}
+	if( ofGetKeyPressed(MUI_KEY_ACTION) && key == 'r'){
+		globals.loadFromFile();
+		osciView->fromGlobals();
 	}
 }
 
@@ -532,6 +621,9 @@ void ofApp::gotMessage(ofMessage msg){
 	else if( msg.message.substr(0,5) == "load:" ){
 		stopMic();
 		fileToLoad = msg.message.substr(5);
+	}
+	else if( msg.message == "next-timecode-style"){
+		
 	}
 }
 

@@ -55,6 +55,8 @@ public:
 	int exportHeight{1080};
 	int exportFrameRate{60};
 	
+	float secondsBeforeHidingMenu{3};
+	
 	bool alwaysOnTop{false};
 	
 	void loadFromFile( string settingsFile = ofxToReadWriteableDataPath("settings.txt") ){
@@ -80,6 +82,7 @@ public:
 		exportFrameRate = settings.get( "exportFrameRate", exportFrameRate );
 		exportWidth = settings.get( "exportWidth", exportWidth );
 		exportHeight = settings.get( "exportHeight", exportHeight );
+		secondsBeforeHidingMenu = settings.get( "secondsBeforeHidingMenu", secondsBeforeHidingMenu );
 	}
 	
 	
@@ -113,6 +116,7 @@ public:
 		settings.set( "exportFrameRate", exportFrameRate );
 		settings.set( "exportWidth", exportWidth );
 		settings.set( "exportHeight", exportHeight );
+		settings.set( "secondsBeforeHidingMenu", secondsBeforeHidingMenu );
 	}
 	
 	

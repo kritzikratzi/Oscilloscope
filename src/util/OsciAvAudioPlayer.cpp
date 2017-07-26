@@ -372,8 +372,8 @@ bool OsciAvAudioPlayer::decode_next_frame(){
 		}
 
 		if (got_frame) {
-			
-			lastPts = decoded_frame->pkt_pts;
+			lastPts = av_frame_get_best_effort_timestamp(decoded_frame);
+//			lastPts = decoded_frame->pkt_pts;
 			
 			if( swr_context != NULL && output_config_changed ){
 				output_config_changed = false;
@@ -385,13 +385,13 @@ bool OsciAvAudioPlayer::decode_next_frame(){
 			}
 			
 			if( swr_context == NULL ){
-				int input_channel_layout = decoded_frame->channel_layout;
+				int input_channel_layout = av_frame_get_channel_layout(decoded_frame);
 				if( input_channel_layout == 0 ){
-					input_channel_layout = av_get_default_channel_layout( codec_context->channels );
+					input_channel_layout = av_get_default_channel_layout( av_frame_get_channels(decoded_frame) );
 				}
 				swr_context = swr_alloc_set_opts(NULL,
 												 output_channel_layout, AV_SAMPLE_FMT_FLT, output_sample_rate,
-												 input_channel_layout, (AVSampleFormat)decoded_frame->format, decoded_frame->sample_rate,
+												 input_channel_layout, (AVSampleFormat)decoded_frame->format, av_frame_get_sample_rate(decoded_frame),
 												 0, NULL);
 				swr_init(swr_context);
 				
@@ -418,13 +418,13 @@ bool OsciAvAudioPlayer::decode_next_frame(){
 			
 			if( swr_context192 == NULL ){
 				visual_config_changed = false;
-				int input_channel_layout = decoded_frame->channel_layout;
+				int input_channel_layout = av_frame_get_channel_layout(decoded_frame);
 				if( input_channel_layout == 0 ){
-					input_channel_layout = av_get_default_channel_layout( codec_context->channels );
+					input_channel_layout = av_get_default_channel_layout( av_frame_get_channels(decoded_frame) );
 				}
 				swr_context192 = swr_alloc_set_opts(NULL,
 												 av_get_default_channel_layout(numChannels192), AV_SAMPLE_FMT_FLT, visual_sample_rate,
-												 input_channel_layout, (AVSampleFormat)decoded_frame->format, decoded_frame->sample_rate,
+												 input_channel_layout, (AVSampleFormat)decoded_frame->format, av_frame_get_sample_rate(decoded_frame),
 												 0, NULL);
 
 				//enable these two to disable interpolation

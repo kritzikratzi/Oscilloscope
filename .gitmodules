@@ -10,3 +10,6 @@
 [submodule "addons/ofxFontStash2"]
 	path = addons/ofxFontStash2
 	url = https://github.com/kritzikratzi/ofxFontStash2
+[submodule "addons/ofxNative"]
+	path = addons/ofxNative
+	url = https://github.com/kritzikratzi/ofxNative.git

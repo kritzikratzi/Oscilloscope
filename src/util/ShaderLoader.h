@@ -25,7 +25,7 @@ class ShaderLoader{
 	string geomFile;
 	ofShader * shader;
 	
-	long fragTime;
+	long fragTime = 0;
 	long vertTime;
 	long geomTime;
 	
@@ -52,7 +52,7 @@ public:
 	}
 	
 	void of_update( ofEventArgs &args ){
-		if( ofGetFrameNum() % 50 == 0 ){
+		if( ofGetFrameNum() % 50 == 0 || fragTime == 0){
 			time_t fragTimeNow = mtime(fragFile);
 			time_t vertTimeNow = mtime(vertFile);
 			time_t geomTimeNow = mtime(geomFile);

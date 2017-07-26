@@ -6,6 +6,8 @@
 #include "L.h"
 
 
+static string timestring(double t);
+
 OsciView::OsciView( float x_, float y_, float width_, float height_)
 : mui::Container( x_, y_, width_, height_ ){
 	float x = 10, y = 10, w = 400, h = 30;
@@ -76,6 +78,10 @@ OsciView::OsciView( float x_, float y_, float width_, float height_)
 	timeSlider = new mui::Slider( 0, 0, w, h );
 	add( timeSlider );
 	
+	timeLabelButton = new mui::Button("-00:00:00", 0,0, 30,30);
+	timeLabelButton->fitWidthToLabel(3);
+	ofAddListener(timeLabelButton->onPress, this, &OsciView::buttonPressed);
+	add(timeLabelButton);
 	
 	outputVolumeLabel = addLabel( "Volume" );
 	outputVolumeSlider = new mui::SliderWithLabel(0, 0, 100, h, 0, 1, 0.8, 2 );
@@ -143,7 +149,8 @@ void OsciView::layout(){
 
 
 	mui::L(playButton).pos(10,40);
-	mui::L(timeSlider).rightOf(playButton, 10).stretchToRightEdgeOf(this, 10);
+	mui::L(timeLabelButton).pos(width-10-timeLabelButton->width,playButton->y);
+	mui::L(timeSlider).rightOf(playButton, 10).stretchToRightEdgeOf(this, width-(timeLabelButton->x-10));
 	
 	mui::L(loadFileButton).below(playButton, 10);
 	mui::L(useMicButton).rightOf(loadFileButton, 10 );
@@ -224,6 +231,22 @@ void OsciView::update(){
 			playButton->commit();
 		}
 	}
+	
+	
+	double currentTime = globals.player.getPositionMS()/1000.0;
+	double duration = globals.player.duration/1000.0;
+	
+	if( timeLabelMode == 0 ){
+		timeLabelButton->label->text = timestring(currentTime);
+		timeLabelButton->bg = ofColor(0,0);
+		timeLabelButton->label->fg = ofColor(255);
+	}
+	else if( timeLabelMode == 1 ){
+		timeLabelButton->label->text = "-" + timestring(duration - currentTime);
+		timeLabelButton->bg = ofColor(0,0);
+		timeLabelButton->label->fg = ofColor(255);
+	}
+	timeLabelButton->label->commit();
 }
 
 
@@ -351,6 +374,9 @@ void OsciView::buttonPressed( const void * sender, ofTouchEventArgs & args ){
 			add(micMenu);
 		}
 	}
+	else if( sender == timeLabelButton){
+		timeLabelMode = (1+timeLabelMode)%2;
+	}
 	else if( micMenu != NULL && container->parent->parent == micMenu ){
 		map<string,int>::iterator it = micDeviceIds.find(((mui::Button*)sender)->label->text);
 		if( it != micDeviceIds.end() ){
@@ -402,3 +428,21 @@ mui::Label * OsciView::addLabel( string text ){
 	return label;
 }
 
+
+string timestring( double secs ){
+	int64_t t = secs*1000;
+	int millis = t%1000;
+	t/=1000;
+	
+	int seconds = t%60;
+	t/=60;
+	
+	int minutes = t%60;
+	t/=60;
+	
+	stringstream str;
+	str << setfill('0') << setw(2) << minutes <<
+	":" << setfill('0') << setw(2) << seconds <<
+	":" << setfill('0') << setw(2) << (millis/10);
+	return str.str();
+}

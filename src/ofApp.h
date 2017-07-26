@@ -60,11 +60,14 @@ class ofApp : public ofBaseApp{
 		int exportFrameNum; 
 		string exportDir;
 	
-		unsigned long long lastMouseMoved;
+		uint64_t lastMouseMoved{0};
+		uint64_t lastUpdateTime{0};
 		ofVec2f mousePosBeforeHiding;
 		string fileToLoad;
 		string currentFilename{"Oscilloscope"};
 		string nextWindowTitle;
 	
 		ofVec2f last;
+		bool hadWindowFocus = true;
+	
 };

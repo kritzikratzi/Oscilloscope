@@ -26,7 +26,8 @@ public:
 	void fromGlobals();
 	void toGlobals();
 	
-	void buttonPressed( const void * sender, ofTouchEventArgs & args ); 
+	void buttonPressed( const void * sender, ofTouchEventArgs & args );
+	bool keyPressed( ofKeyEventArgs &touch);
 	void selectSoundCard( int deviceId );
 	void autoDetect();
 	
