@@ -6,7 +6,8 @@
 #include "ofxMightyUI.h"
 
 #include "ui/ConfigView.h"
-#include "ui/OsciView.h"
+#include "ui/PlayerOverlay.h"
+#include "ui/Playlist.h"
 #include "util/Audio.h"
 #include "ofxAvAudioPlayer.h"
 #include "OsciMesh.h"
@@ -43,7 +44,8 @@ class ofApp : public ofBaseApp{
 
 		mui::Root * root;
 		ConfigView * configView;
-		OsciView * osciView;
+		PlayerOverlay * osciView;
+		Playlist * playlist; 
 		OsciMesh mesh;
 		OsciMesh mesh2;  // for stereoscopic viewing
 		ofFbo fbo;
@@ -53,7 +55,7 @@ class ofApp : public ofBaseApp{
 	
 		bool changed;
 		bool clearFbos;
-		int dropped; 
+		int dropped;
 		bool showInfo; 
 	
 		int exporting;
@@ -69,5 +71,4 @@ class ofApp : public ofBaseApp{
 	
 		ofVec2f last;
 		bool hadWindowFocus = true;
-	
 };

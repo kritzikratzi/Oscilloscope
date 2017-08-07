@@ -7,9 +7,9 @@
 #include "FMenu.h"
 
 
-class OsciView : public mui::Container{
+class PlayerOverlay : public mui::Container{
 public:
-	OsciView( float x_ = 0, float y_ = 0, float width_ = ofGetWidth()/mui::MuiConfig::scaleFactor, float height_ = ofGetHeight()/mui::MuiConfig::scaleFactor );
+	PlayerOverlay( float x_ = 0, float y_ = 0, float width_ = ofGetWidth()/mui::MuiConfig::scaleFactor, float height_ = ofGetHeight()/mui::MuiConfig::scaleFactor );
 	
 	virtual void fromGlobals(); 
 	

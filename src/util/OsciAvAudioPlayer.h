@@ -159,6 +159,10 @@ public:
 	int audioOutSync(float *output, int bufferSize, int nChannels); 
 	void endSync();
 	
+	// callback when the file ended. note this might be called from a random thread,
+	// make sure you don't have any expectations! 
+	function<void()> onEnd = [](){};
+	
 	
 	bool decode_next_frame();
 	bool isMonoFile{false};
@@ -188,6 +192,7 @@ private:
 	AVFormatContext* container;
 
 	SwrContext * swr_context;
+	int swr_context_channels = 0; 
 	SwrContext * swr_context192;
 	
 	int visual_sample_rate;

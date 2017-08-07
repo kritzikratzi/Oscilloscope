@@ -123,6 +123,7 @@ public:
 	
 	// runtime variables (not saved)
 	OsciAvAudioPlayer player;
+	size_t currentlyPlayingItem = 0;
 	
 	
 	// the singleton thing

@@ -11,7 +11,7 @@
 #else
 #include "ofAppGLFWWindow.h"
 #endif
-
+#include "ofxNative.h"
 
 #include <GL/glew.h>
 
@@ -37,9 +37,11 @@ int main(){
 	window.setWindowTitle("Oscilloscope");
 	
 	// go fullscreen in mac osx
+	ofxNative::maximizeWindow(window);
+	
 	#if defined(TARGET_OSX)
 	NSWindow * cocoaWindow = (NSWindow*)window.getCocoaWindow();
-	[cocoaWindow setFrame:[[NSScreen mainScreen] visibleFrame] display:YES];
+//	[cocoaWindow setFrame:[[NSScreen mainScreen] visibleFrame] display:YES];
 	[cocoaWindow setTitle:@"Oscilloscope"];
 	if(globals.alwaysOnTop){
 		[cocoaWindow setLevel: NSFloatingWindowLevel];

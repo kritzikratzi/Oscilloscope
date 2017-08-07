@@ -17,7 +17,7 @@ extern "C"{
 }
 using namespace std;
 
-#define die(msg) { thread->unlock(); unloadSound(); cerr << msg << endl; return false; }
+#define die(msg) { thread->unlock(); unloadSound(); cerr << msg << endl; onEnd(); return false; }
 
 OsciAvAudioPlayer::OsciAvAudioPlayer(){
 	// default audio settings
@@ -95,6 +95,8 @@ bool OsciAvAudioPlayer::loadSound(string fileName, bool stream){
  
 	// Find the apropriate codec and open it
 	codec_context = container->streams[audio_stream_id]->codec;
+	
+
 	if( forceNativeFormat ){
 		output_sample_rate = codec_context->sample_rate;
 		output_channel_layout = codec_context->channel_layout;
@@ -375,6 +377,10 @@ bool OsciAvAudioPlayer::decode_next_frame(){
 			lastPts = av_frame_get_best_effort_timestamp(decoded_frame);
 //			lastPts = decoded_frame->pkt_pts;
 			
+			int frame_channels = av_frame_get_channels(decoded_frame);
+			if(frame_channels != swr_context_channels ){
+				output_config_changed = true;
+			}
 			if( swr_context != NULL && output_config_changed ){
 				output_config_changed = false;
 				if( swr_context ){
@@ -384,11 +390,13 @@ bool OsciAvAudioPlayer::decode_next_frame(){
 				}
 			}
 			
+			
 			if( swr_context == NULL ){
 				int input_channel_layout = av_frame_get_channel_layout(decoded_frame);
 				if( input_channel_layout == 0 ){
 					input_channel_layout = av_get_default_channel_layout( av_frame_get_channels(decoded_frame) );
 				}
+				swr_context_channels = av_frame_get_channels(decoded_frame);
 				swr_context = swr_alloc_set_opts(NULL,
 												 output_channel_layout, AV_SAMPLE_FMT_FLT, output_sample_rate,
 												 input_channel_layout, (AVSampleFormat)decoded_frame->format, av_frame_get_sample_rate(decoded_frame),
@@ -490,8 +498,9 @@ bool OsciAvAudioPlayer::decode_next_frame(){
 			avcodec_flush_buffers(codec_context);
 			decode_next_frame();
 		}
-		else{
+		else if(isPlaying){
 			isPlaying = false;
+			onEnd();
 		}
 		
 		return false;

@@ -34,8 +34,23 @@ void ofApp::setup(){
 	
 	globals.player.loadSound(ofxToReadonlyDataPath("konichiwa.wav"));
 //	globals.player.loadSound(ofxToReadonlyDataPath("c:\\Users\\hansi\\Desktop\\3dbounce.wav"));
-	globals.player.setLoop(true);
-	globals.player.stop(); 
+	globals.player.setLoop(false);
+	globals.player.stop();
+	globals.player.onEnd = [&](){
+		// see if we have a "next" item
+		//git-forbid do this on the right thread!
+		auto next = playlist->getNextItem(globals.currentlyPlayingItem);
+		if(next.first > 0){
+			fileToLoad = next.second;
+			globals.currentlyPlayingItem = next.first;
+		}
+		else if(globals.currentlyPlayingItem == 0){
+			globals.player.setPositionMS(0);
+		}
+		else{
+			globals.currentlyPlayingItem = 0;
+		}
+	};
 	
 	configView = new ConfigView();
 	configView->fromGlobals();
@@ -45,9 +60,18 @@ void ofApp::setup(){
 
 	root->add( configView );
 	
-	osciView = new OsciView();
+	osciView = new PlayerOverlay();
 	osciView->visible = false;
 	root->add( osciView );
+	
+	playlist = new Playlist();
+	root->add(playlist);
+	{
+		ifstream in(ofxToReadWriteableDataPath("playlist.txt"));
+		playlist->load(in);
+		in.close();
+	}
+	
 	
 	left.loop = false;
 	right.loop = false;
@@ -97,7 +121,6 @@ void ofApp::startApplication(){
 void ofApp::stopApplication(){
 	configView->toGlobals();
 	globals.saveToFile();
-	
 	if( !applicationRunning ) return;
 	applicationRunning = false;
 	soundStream.stop();
@@ -112,13 +135,16 @@ void ofApp::stopApplication(){
 
 //--------------------------------------------------------------
 void ofApp::update(){
-	lastUpdateTime = ofGetElapsedTimeMillis(); 
+	lastUpdateTime = ofGetElapsedTimeMillis();
 	if( nextWindowTitle != "" ){
 		setWindowRepresentedFilename(nextWindowTitle);
 		nextWindowTitle = ""; 
 	}
 	
-	if( ofGetMousePressed() ){
+	playlist->visible = osciView->visible;
+	
+	bool anythingGoingOn = globals.player.isPlaying || exporting>0;
+	if( ofGetMousePressed() || !anythingGoingOn){
 		lastMouseMoved = lastUpdateTime;
 	}
 	
@@ -142,7 +168,7 @@ void ofApp::update(){
 	// take care of hiding / showing the ui
 	if( lastUpdateTime-lastMouseMoved > globals.secondsBeforeHidingMenu*1000 ){
 		// this is not the greatest solution, but hey ho, it works ...
-		bool hovering = osciView->isMouseOver();
+		bool hovering = osciView->isMouseOver() || playlist->isMouseOver();
 		if( !hovering ){
 			osciView->visible = false;
 			mousePosBeforeHiding.x = ofGetMouseX();
@@ -419,7 +445,8 @@ void ofApp::draw(){
 	float waitBefore = 1;
 	float extra = 0.2;
 	float remainingTime = -(lastUpdateTime/1000.0f)+globals.secondsBeforeHidingMenu+lastMouseMoved/1000.0f;
-	if(remainingTime>-extra && !osciView->isMouseOver()){
+	bool hovering = osciView->isMouseOver() || playlist->isMouseOver();
+	if(remainingTime>-extra && !hovering){
 		float t = ofMap(remainingTime, -extra, MAX(0.1,globals.secondsBeforeHidingMenu-waitBefore), 1, 0);
 		if(t<0 || t>1){
 			// nothing to draw
@@ -442,15 +469,21 @@ void ofApp::draw(){
 			float magicX = ofMap(mx,0,W,+1,-1,true);
 			float magicY = ofMap(my,0,H,+1,-1,true);
 			ofVec2f v = ofVec2f(magicX,magicY).getNormalized()*s*50;
-			ofTranslate(mx+v.x, my+v.y);
+			
+			ofPath path;
+			float size = ofMap(sqrt(t),0,0.2,0,1,true)*ofMap(t,0,1,30,3,true);
+			ofTranslate(mx, my);
 			ofScale(mui::MuiConfig::scaleFactor, mui::MuiConfig::scaleFactor);
 			ofRotateZ(atan2(magicY,magicX)*RAD_TO_DEG);
-			v = ofVec2f(1+10*pow(t,2));
-			float l = 1/s;
-			ofDrawRectangle(50*sqrt(t)-v.x,-l,2*v.x,2*l);
-			//ofDrawRectangle(-l,-v.y,2*l,2*v.y);
-//			ofTranslate(osciView->x, osciView->y+osciView->height);
-//			ofDrawRectangle(0, 0, w*osciView->width, 1);
+			path.arc({0,0}, size, size, ofMap(t,0.5,1,0,359,true), ofMap(t,0,0.5,1,360,true));
+			path.close();
+			path.setFillColor(ofColor(255,150*alpha));
+//			path.setFilled(false);
+//			path.setStrokeWidth(1);
+			//			float alpha = ofMap(t,0,0.1,0,1,true)*ofMap(t,0.9,1,1,0,true);
+//			path.setStrokeColor(ofColor(255,alpha*255));
+			path.draw();
+
 			ofSetColor(255);
 			ofPopMatrix();
 		}
@@ -459,6 +492,9 @@ void ofApp::draw(){
 
 void ofApp::exit(){
 	stopApplication();
+	ofstream out(ofxToReadWriteableDataPath("playlist.txt"));
+	playlist->save(out);
+	out.close();
 	std::exit(0);
 }
 
@@ -556,7 +592,7 @@ void ofApp::mouseReleased(int x, int y, int button){
 //--------------------------------------------------------------
 void ofApp::windowResized(int w, int h){
 	if (w == 0 || h == 0) return; 
-	osciView->width = min(500,w/mui::MuiConfig::scaleFactor);
+	osciView->width = min(500.0f,w/mui::MuiConfig::scaleFactor);
 	osciView->layout();
 }
 
@@ -575,10 +611,12 @@ void ofApp::audioOut( float * output, int bufferSize, int nChannels ){
 		if(!res){
 			ofSystemAlertDialog("Could not load the file :(");
 		}
-		osciView->timeStretchSlider->slider->value = 1.0;
-		nextWindowTitle = fileToLoad; // back to ui thread ^^
-		currentFilename = fileToLoad;
-		fileToLoad = "";
+		else{
+			osciView->timeStretchSlider->slider->value = 1.0;
+			nextWindowTitle = fileToLoad; // back to ui thread ^^
+			currentFilename = fileToLoad;
+			fileToLoad = "";
+		}
 	}
 	
 	memset(output, 0, bufferSize*nChannels);
@@ -621,6 +659,11 @@ void ofApp::gotMessage(ofMessage msg){
 	else if( msg.message.substr(0,5) == "load:" ){
 		stopMic();
 		fileToLoad = msg.message.substr(5);
+	}
+	else if(msg.message.substr(0,8) == "load-id:"){
+		size_t itemId = atoll(msg.message.substr(8).c_str());
+		fileToLoad = playlist->getItemPath(itemId);
+		globals.currentlyPlayingItem = itemId; 
 	}
 	else if( msg.message == "next-timecode-style"){
 		

@@ -23,18 +23,12 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>0A7F820ED2DDF888076C5862</key>
+		<key>07D6D9625AD1F090C0F3D542</key>
 		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
+			<key>fileRef</key>
+			<string>8C5B0240EF06968D6CE38AF4</string>
 			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>fontstash.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
+			<string>PBXBuildFile</string>
 		</dict>
 		<key>0E096E79A1021312BAE600E8</key>
 		<dict>
@@ -75,6 +69,19 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
+		<key>14951F8BB6BCF96099B0D5A7</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>MuiEvents.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
 		<key>161625A0B9B60B3170D39B88</key>
 		<dict>
 			<key>fileEncoding</key>
@@ -107,9 +114,9 @@
 			<array>
 				<string>34BC7FEF3D7A02714426AB6E</string>
 				<string>AB8D3C50F77BA495EBC9E737</string>
-				<string>2B1CA612779C815E85E81F8F</string>
 				<string>7B30A4B1E18298FFE3EE8C09</string>
 				<string>BEBE0263D24865594EA632CB</string>
+				<string>2B1CA612779C815E85E81F8F</string>
 			</array>
 			<key>isa</key>
 			<string>PBXGroup</string>
@@ -231,6 +238,9 @@
 				<string>FD88671DF8B4B266FA2592E9</string>
 				<string>4978426631D37FA3EB1FA547</string>
 				<string>BA474BDD58A8A242D48E3F62</string>
+				<string>8C5B0240EF06968D6CE38AF4</string>
+				<string>14951F8BB6BCF96099B0D5A7</string>
+				<string>31823381208E9CE633B88D86</string>
 				<string>0E096E79A1021312BAE600E8</string>
 				<string>0F77523ADC0CAD404B667E1D</string>
 				<string>24D87983B8A48C4385029E52</string>
@@ -371,6 +381,19 @@
 			<string>sourcecode.c.h</string>
 			<key>path</key>
 			<string>ToggleButton.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>31823381208E9CE633B88D86</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>MuiL.h</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -625,10 +648,10 @@
 		<dict>
 			<key>children</key>
 			<array>
-				<string>0A7F820ED2DDF888076C5862</string>
 				<string>A743DE8B7465753DB9B7C175</string>
 				<string>D8F6AF6805C3BED2EBA192F9</string>
-				<string>A892B4AE3BEF21789604FEB2</string>
+				<string>C1DD6D6308CED30C36C23FF9</string>
+				<string>C406BFDF220C05D4249A1D8C</string>
 			</array>
 			<key>isa</key>
 			<string>PBXGroup</string>
@@ -702,6 +725,19 @@
 			<string>sourcecode.cpp.cpp</string>
 			<key>path</key>
 			<string>TextureAtlas.cpp</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>8C5B0240EF06968D6CE38AF4</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.cpp.cpp</string>
+			<key>path</key>
+			<string>MuiEvents.cpp</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -922,19 +958,6 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>A892B4AE3BEF21789604FEB2</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>stb_truetype.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
 		<key>A9E96655959BAB99B1725087</key>
 		<dict>
 			<key>children</key>
@@ -1074,6 +1097,43 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
+		<key>BA400F731F36281E0095D99F</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.cpp.cpp</string>
+			<key>name</key>
+			<string>Playlist.cpp</string>
+			<key>path</key>
+			<string>ui/Playlist.cpp</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>BA400F741F36281E0095D99F</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>Playlist.h</string>
+			<key>path</key>
+			<string>ui/Playlist.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>BA400F751F36281E0095D99F</key>
+		<dict>
+			<key>fileRef</key>
+			<string>BA400F731F36281E0095D99F</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
 		<key>BA474BDD58A8A242D48E3F62</key>
 		<dict>
 			<key>fileEncoding</key>
@@ -1143,9 +1203,10 @@
 				<string>BA54982019F7274C007E9F6A</string>
 				<string>BA54982519F740CE007E9F6A</string>
 				<string>BA54982619F740CE007E9F6A</string>
-				<string>BA9F97451B6583D300A453D6</string>
 				<string>BADACB611C12F89100ED221C</string>
 				<string>BADACB621C12F89100ED221C</string>
+				<string>BA400F731F36281E0095D99F</string>
+				<string>BA400F741F36281E0095D99F</string>
 			</array>
 			<key>isa</key>
 			<string>PBXGroup</string>
@@ -1200,9 +1261,9 @@
 			<key>lastKnownFileType</key>
 			<string>sourcecode.cpp.cpp</string>
 			<key>name</key>
-			<string>OsciView.cpp</string>
+			<string>PlayerOverlay.cpp</string>
 			<key>path</key>
-			<string>ui/OsciView.cpp</string>
+			<string>ui/PlayerOverlay.cpp</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -1215,9 +1276,9 @@
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.h</string>
 			<key>name</key>
-			<string>OsciView.h</string>
+			<string>PlayerOverlay.h</string>
 			<key>path</key>
-			<string>ui/OsciView.h</string>
+			<string>ui/PlayerOverlay.h</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -1472,21 +1533,6 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>BA9F97451B6583D300A453D6</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>L.h</string>
-			<key>path</key>
-			<string>ui/L.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
 		<key>BABA49661A866519000900B1</key>
 		<dict>
 			<key>isa</key>
@@ -1714,6 +1760,32 @@
 			<string>98FCF23F427DE6A108C15AA6</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
+		</dict>
+		<key>C1DD6D6308CED30C36C23FF9</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>ofx_fontstash.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>C406BFDF220C05D4249A1D8C</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>ofx_stb_truetype.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
 		</dict>
 		<key>C4E6595B0C243ADE291984F7</key>
 		<dict>
@@ -2433,12 +2505,14 @@
 				<string>BA54982119F7274C007E9F6A</string>
 				<string>BA54982719F740CE007E9F6A</string>
 				<string>BA828D2D1B378E6D002DE63F</string>
+				<string>BA400F751F36281E0095D99F</string>
 				<string>BAEE5D281B5FB3D10038C838</string>
 				<string>BA828D2A1B378A7D002DE63F</string>
 				<string>BADACB631C12F89100ED221C</string>
 				<string>BAFE8DBD1BDE66B4004BA599</string>
 				<string>BA5EE4CF1D560E4800499D80</string>
 				<string>BA5EE4D01D560E4800499D80</string>
+				<string>BA4B3C691E2841D3005FD94B</string>
 				<string>CAFA934398F1617B277FA8A1</string>
 				<string>79139E8FF25B4453D2D2B2FE</string>
 				<string>CA913EA6DCDD413B74FE5D31</string>
@@ -2454,6 +2528,7 @@
 				<string>59B2636B9FAB86C0A883FC9C</string>
 				<string>902CE6911AD8C03D2831D34E</string>
 				<string>493DB6A99E6B5FCF052016DD</string>
+				<string>07D6D9625AD1F090C0F3D542</string>
 				<string>C6E336E9778AC36F296922B4</string>
 				<string>1C385D463F652176C0987363</string>
 				<string>D64C29FDF8347CFEE09FDF92</string>
@@ -2465,13 +2540,12 @@
 				<string>9397802B10847A2C74111D6E</string>
 				<string>D112FB27050E454F34ABB6B2</string>
 				<string>4CE23CB3B062FA59A47BCD2D</string>
-				<string>BA4B3C691E2841D3005FD94B</string>
+				<string>2AA5ACC250C335ED2D4D7718</string>
+				<string>A0B8F23CF210B84E4C2EE17B</string>
 				<string>9F6783C22BE58E43DB564213</string>
 				<string>6AB175562C7B8DA5977B6A8E</string>
 				<string>69DAF968A1DA7A23073B97F8</string>
 				<string>A5FFDE0A56A147BD0EA4E314</string>
-				<string>2AA5ACC250C335ED2D4D7718</string>
-				<string>A0B8F23CF210B84E4C2EE17B</string>
 			</array>
 			<key>isa</key>
 			<string>PBXSourcesBuildPhase</string>
@@ -2638,6 +2712,9 @@
 				<string>$(TARGET_NAME)Debug</string>
 				<key>USER_HEADER_SEARCH_PATHS</key>
 				<array>
+					<string>addons/ofxFontStash2/libs/fontstash/src</string>
+					<string>addons/ofxFontStash2/libs/pugixml/src</string>
+					<string>addons/ofxMightyUI/libs/stb_textedit/include</string>
 					<string>addons/ofxAvCodec/libs/avcodec/include</string>
 				</array>
 				<key>WRAPPER_EXTENSION</key>
@@ -2720,6 +2797,9 @@
 				<string>$(TARGET_NAME)</string>
 				<key>USER_HEADER_SEARCH_PATHS</key>
 				<array>
+					<string>addons/ofxFontStash2/libs/fontstash/src</string>
+					<string>addons/ofxFontStash2/libs/pugixml/src</string>
+					<string>addons/ofxMightyUI/libs/stb_textedit/include</string>
 					<string>addons/ofxAvCodec/libs/avcodec/include</string>
 				</array>
 				<key>WRAPPER_EXTENSION</key>
@@ -2815,7 +2895,6 @@ fi
 
 rsync -aved addons/ofxFontAwesome/bin/data/ "$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/Resources"
 rsync -aved addons/ofxMightyUI/bin/data/ "$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/Resources"
-
 rsync -aved addons/ofxAvCodec/libs/avcodec/lib/osx/libavutil.55.34.100.dylib "$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS"
 rsync -aved addons/ofxAvCodec/libs/avcodec/lib/osx/libswscale.4.dylib "$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS"
 rsync -aved addons/ofxAvCodec/libs/avcodec/lib/osx/libavformat.57.56.100.dylib "$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS"
