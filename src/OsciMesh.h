@@ -18,8 +18,15 @@ public:
 	
 	static void init();
 	
-	void addLines( float * left, float * right, int N, int stride);
-	inline void addLine( ofVec2f a, ofVec2f b);
+	// adds a lot of lines.
+	// left: x coordinates (ranged -1..1)
+	// right: y coordinates (ranged -1..1)
+	// zMod: brightness control (ranged 0..1), nullable
+	// stride: stride for left and right (doesn't apply to bright!)
+	void addLines( float * left, float * right, float * bright, int N, int stride);
+	
+	// adds a line from a to b (xy = -1..1), with the brightness bright (0..1)
+	inline void addLine( ofVec2f a, ofVec2f b, const float bright );
 	
 	void draw(ofMatrix4x4 & viewMatrix);
 	void clear(); 

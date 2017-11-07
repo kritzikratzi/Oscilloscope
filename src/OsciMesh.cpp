@@ -17,18 +17,30 @@ OsciMesh::OsciMesh(){
 	shaderLoader.setup(&shader, "shaders/osci");
 }
 
-void OsciMesh::addLines( float * left, float * right, int N, int stride ){
-	addLine(last,{left[0],right[0]});
+void OsciMesh::addLines( float * left, float * right, float * bright, int N, int stride ){
+	// no work? go home watch tv or something
+	if(N==0) return;
+	
+	addLine(last,{left[0],right[0]}, bright==nullptr?1:bright[0]);
 	last = {left[N-stride],right[N-stride]};
 	
-	for( int i = stride; i < N; i+= stride ){
-		ofVec2f p0(left[i-stride], right[i-stride]);
-		ofVec2f p1(left[i  ], right[i  ]);
-		addLine(p0,p1);
+	if(bright==nullptr){
+		for( int i = stride; i < N; i+= stride ){
+			ofVec2f p0(left[i-stride], right[i-stride]);
+			ofVec2f p1(left[i  ], right[i  ]);
+			addLine(p0,p1, 1);
+		}
+	}
+	else{
+		for( int i = stride; i < N; i+= stride ){
+			ofVec2f p0(left[i-stride], right[i-stride]);
+			ofVec2f p1(left[i  ], right[i  ]);
+			addLine(p0,p1, bright[i]);
+		}
 	}
 }
 
-inline void OsciMesh::addLine(ofVec2f p0, ofVec2f p1){
+inline void OsciMesh::addLine(ofVec2f p0, ofVec2f p1, const float bright){
 	ofVec2f dir = p1 - p0;
 	float z = dir.length();
 	if (z > EPS) dir /= z;
@@ -38,23 +50,26 @@ inline void OsciMesh::addLine(ofVec2f p0, ofVec2f p1){
 	ofVec2f norm(-dir.y, dir.x);
 	ofVec2f xy(-uSize, -uSize);
 	
-	mesh.addVertex(ofVec3f(p0-dir-norm));
+	//make vec3 from vec2+float
+	const auto vec3 = [bright](const ofVec2f & xy, const float & z){ return ofVec3f(xy.x,xy.y,bright); };
+
+	mesh.addVertex(vec3(p0-dir-norm, bright));
 	mesh.addColor(ofFloatColor(-uSize, -uSize, z));
 	
-	mesh.addVertex(ofVec3f(p0-dir+norm));
+	mesh.addVertex(vec3(p0-dir+norm, bright));
 	mesh.addColor(ofFloatColor(-uSize, uSize, z));
 	
-	mesh.addVertex(ofVec3f(p1+dir-norm));
+	mesh.addVertex(vec3(p1+dir-norm, bright));
 	mesh.addColor(ofFloatColor(z+uSize, -uSize, z));
 	
 	
-	mesh.addVertex(ofVec3f(p0-dir+norm));
+	mesh.addVertex(vec3(p0-dir+norm, bright));
 	mesh.addColor(ofFloatColor(-uSize, uSize, z));
 	
-	mesh.addVertex(ofVec3f(p1+dir-norm));
+	mesh.addVertex(vec3(p1+dir-norm, bright));
 	mesh.addColor(ofFloatColor(z+uSize, -uSize, z));
 	
-	mesh.addVertex(ofVec3f(p1+dir+norm));
+	mesh.addVertex(vec3(p1+dir+norm, bright));
 	mesh.addColor(ofFloatColor(z+uSize, +uSize, z));
 };
 

@@ -127,7 +127,7 @@ bool OsciAvAudioPlayer::loadSound(string fileName, bool stream){
 	swr_context192 = NULL;
 	isLoaded = true;
 	isPlaying = true;
-	isMonoFile = codec_context->channels == 1;
+	fileType = STEREO; 
 
 	// we continue here:
 	decode_next_frame();
@@ -206,6 +206,7 @@ void OsciAvAudioPlayer::unloadSound(){
 	
 	left192.clear();
 	right192.clear();
+	zMod192.clear();
 	
 	thread->unlock();
 }
@@ -223,8 +224,7 @@ void OsciAvAudioPlayerThread::threadedFunction(){
 				player.mainOut.clear();
 				player.left192.clear();
 				player.right192.clear();
-				player.left192.clear();
-				player.right192.clear();
+				player.zMod192.clear();
 			}
 			if( player.mainOut.totalLength < player.output_expected_buffer_size*4 && player.isLoaded ){
 				float * buffer = new float[player.output_expected_buffer_size*2];
@@ -277,6 +277,7 @@ int OsciAvAudioPlayer::internalAudioOut(float *output, int bufferSize, int nChan
 		mainOut.clear();
 		left192.clear();
 		right192.clear();
+		zMod192.clear();
 		//av_seek_frame(container,-1,next_seekTarget,AVSEEK_FLAG_ANY);
 		avformat_seek_file(container,audio_stream_id,0,next_seekTarget,next_seekTarget,AVSEEK_FLAG_ANY);
 		next_seekTarget = -1;
@@ -315,7 +316,6 @@ int OsciAvAudioPlayer::internalAudioOut(float *output, int bufferSize, int nChan
 				}
 			}
 			
-			int numChannels192 = isQuadFile ? 4 : 2;
 			int samples192 = samples - (samples % numChannels192);
 			decoded_buffer_pos += samples;
 			num_samples_read += samples;
@@ -329,8 +329,17 @@ int OsciAvAudioPlayer::internalAudioOut(float *output, int bufferSize, int nChan
 			b = MIN(b - (b%numChannels192), decoded_buffer_len192);
 			//cout << a << "\t" << b << "\t\t" << decoded_buffer_len192 << "\t\t\t" << samples << "\t" << decoded_buffer_len << endl; 
 			if( b-a > 0 ){
-				left192.append( decoded_buffer192+a, (b-a)/2, 2);
-				right192.append( decoded_buffer192+1+a, (b-a)/2, 2);
+				switch(fileType){
+					case STEREO_ZMODULATED:
+						left192.append( decoded_buffer192+a, (b-a)/3, 3);
+						right192.append( decoded_buffer192+1+a, (b-a)/3, 3);
+						zMod192.append( decoded_buffer192+2+a, (b-a)/3, 3);
+						break;
+					default:
+						left192.append( decoded_buffer192+a, (b-a)/2, 2);
+						right192.append( decoded_buffer192+1+a, (b-a)/2, 2);
+						break;
+				}
 			}
 		}
 		
@@ -421,8 +430,33 @@ bool OsciAvAudioPlayer::decode_next_frame(){
 				swr_context192 = NULL;
 			}
 			
-			int numChannels192 = av_frame_get_channels(decoded_frame) == 4?4:2;
-			isQuadFile = numChannels192 == 4;
+			switch(av_frame_get_channels(decoded_frame)){
+				case 1:
+					// mono file, make it stereo!
+					numChannels192 = 2;
+					fileType = MONO;
+					break;
+				case 2:
+					// stereo file, all is well
+					numChannels192 = 2;
+					fileType = STEREO;
+					break;
+				case 3:
+					// stereo+zmod
+					numChannels192 = 3;
+					fileType = STEREO_ZMODULATED;
+					break;
+				case 4:
+					// quad (2x stereo)
+					numChannels192 = 4;
+					fileType = QUAD;
+					break;
+				default:
+					// no clue, fuck it... stereo it is!
+					numChannels192 = 2;
+					fileType = STEREO;
+					break;
+			}
 			
 			if( swr_context192 == NULL ){
 				visual_config_changed = false;
@@ -457,15 +491,6 @@ bool OsciAvAudioPlayer::decode_next_frame(){
 												   (uint8_t**)&out192, AVCODEC_MAX_AUDIO_FRAME_SIZE/4,
 												   (const uint8_t**)decoded_frame->extended_data, decoded_frame->nb_samples);
 			
-			// do a funny little check ^^ 
-			auto check = [&](int i, int delta) {
-				return fabsf(decoded_buffer192[4*i+delta] - delta/10.0f) >= 0.0001; 
-			}; 
-			/*for (int i = 0; i < samples_converted192; i++) {
-				if (check(i,0) || check(i,1) || check(i,2) || check(i,3)){
-					cout << "this is wrong" << endl; 
-				}
-			}*/
 			decoded_buffer_len192 = samples_converted192*numChannels192;
 			decoded_buffer_pos192 = 0;
 
@@ -589,6 +614,7 @@ void OsciAvAudioPlayer::beginSync( int bufferSize ){
 	
 	left192.clear();
 	right192.clear();
+	zMod192.clear();
 	mainOut.clear();
 	
 	output_expected_buffer_size = bufferSize;

@@ -165,12 +165,23 @@ public:
 	
 	
 	bool decode_next_frame();
-	bool isMonoFile{false};
-	bool isQuadFile{false};
+	
+	// the next three options are mutually exclusive
+	typedef enum FileType{
+		MONO, // mono file. to be displayed on the y axis, with a sawtooth driving the x axis
+		STEREO, // stereo file. to be displayed as x-y signal
+		STEREO_ZMODULATED, // stereo file + z modulation
+		QUAD // 2 x stereo file
+	};
+	
+	// type of the loaded file. this is kinda important so you know how to
+	// interpret the left/right/zMod buffers
+	FileType fileType;
 
 	MonoSample mainOut; // interleaved main output
-	MonoSample left192;
-	MonoSample right192;
+	MonoSample left192; // left output (in quad mode both of the left channels interleaved)
+	MonoSample right192; // right output (in quad mode both the right channels interleaved)
+	MonoSample zMod192; // z modulation
 	
 private:
 	int internalAudioOut(float *output, int bufferSize, int nChannels);
@@ -211,6 +222,7 @@ private:
 	float decoded_buffer192[AVCODEC_MAX_AUDIO_FRAME_SIZE];
 	int decoded_buffer_pos192;
 	int decoded_buffer_len192;
+	int numChannels192;
 	
 	bool output_config_changed;
 	bool visual_config_changed;

@@ -50,6 +50,7 @@ class ofApp : public ofBaseApp{
 		OsciMesh mesh2;  // for stereoscopic viewing
 		ofFbo fbo;
 	
+		// storage for mic buffers
 		MonoSample left;
 		MonoSample right;
 	

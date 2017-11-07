@@ -195,7 +195,7 @@ void ofApp::update(){
 	else ofHideCursor();
 	
 	// center the ui
-	if (osciView->sideBySide->selected && globals.player.isQuadFile) {
+	if (osciView->sideBySide->selected && globals.player.fileType == OsciAvAudioPlayer::QUAD ) {
 		osciView->x = ofGetWidth() / mui::MuiConfig::scaleFactor * 1 / 4.0f - osciView->width / 2;
 	}
 	else {
@@ -273,8 +273,9 @@ void ofApp::update(){
 	mesh2.clear();
 	
 	int bufferSize = (exporting==0?2048:256);
-	static float * leftBuffer = new float[bufferSize];
-	static float * rightBuffer = new float[bufferSize];
+	static float * leftBuffer = new float[2048];
+	static float * rightBuffer = new float[2048];
+	static float * zmodBuffer = new float[2048];
 
 	// party mode
 	//globals.hue += ofGetMouseX()*100/ofGetWidth();
@@ -282,10 +283,15 @@ void ofApp::update(){
 	
 	MonoSample &left = globals.micActive?(this->left):globals.player.left192;
 	MonoSample &right = globals.micActive?(this->right):globals.player.right192;
+	MonoSample &zMod = globals.player.zMod192; // not available for mic anyways
+	
 	left.play();
 	right.play();
-	bool isMono = !globals.micActive && globals.player.isMonoFile;
-	bool isQuad = !globals.micActive && globals.player.isQuadFile;
+	
+	bool isMono = !globals.micActive && globals.player.fileType == OsciAvAudioPlayer::MONO;
+	bool isZModulated = !globals.micActive && globals.player.fileType == OsciAvAudioPlayer::STEREO_ZMODULATED;
+	bool isQuad = !globals.micActive && globals.player.fileType == OsciAvAudioPlayer::QUAD;
+	
 	osciView->sideBySide->visible = isQuad; 
 	osciView->flip3d->visible = isQuad; 
 	
@@ -330,14 +336,26 @@ void ofApp::update(){
 				}
 			
 				int stride = isQuad ? 2 : 1;
-				mesh.addLines(leftBuffer, rightBuffer, bufferSize, stride);
 				
-				if(isQuad){
-					mesh2.addLines(leftBuffer+1, rightBuffer+1, bufferSize, stride);
+				if(isZModulated){
+					memset(zmodBuffer,0,bufferSize*sizeof(float));
+					zMod.addTo(zmodBuffer,0,bufferSize*sizeof(float));
+					
+					mesh.addLines(leftBuffer, rightBuffer, zmodBuffer, bufferSize, stride);
+					if(isQuad){
+						mesh2.addLines(leftBuffer+1, rightBuffer+1, zmodBuffer, bufferSize, stride);
+					}
+				}
+				else{
+					mesh.addLines(leftBuffer, rightBuffer, nullptr, bufferSize, stride);
+					if(isQuad){
+						mesh2.addLines(leftBuffer+1, rightBuffer+1, nullptr, bufferSize, stride);
+					}
 				}
 				
 				left.peel(bufferSize);
 				right.peel(bufferSize);
+				if(isZModulated) zMod.peel(bufferSize);
 			}
 		}
 	}
@@ -384,14 +402,14 @@ void ofApp::draw(){
 		
 		bool sideBySide = osciView->sideBySide->selected;
 		bool flip3d = osciView->flip3d->selected;
-		ofMatrix4x4 viewMatrix = getViewMatrix(flip3d?1:0,globals.player.isQuadFile);
+		ofMatrix4x4 viewMatrix = getViewMatrix(flip3d?1:0,globals.player.fileType == OsciAvAudioPlayer::QUAD);
 		ofFloatColor color = ofFloatColor::fromHsb(globals.hue/360.0, 1, 1);
 
 		mesh.uSize = globals.strokeWeight/1000.0;
 		mesh.uIntensityBase = max(0.0f,mesh.uIntensity-0.4f)*0.7f-1000.0f*mesh.uSize/500.0f;
 		mesh.uIntensity = globals.intensity/sqrtf(globals.timeStretch);
 		mesh.uHue = globals.hue;
-		mesh.uRgb = globals.player.isQuadFile && !sideBySide?
+		mesh.uRgb = globals.player.fileType == OsciAvAudioPlayer::QUAD && !sideBySide?
 			(flip3d?ofVec3f(0,1,1):ofVec3f(1,0,0)):
 			ofVec3f(color.r,color.g,color.b);
 		//mesh.uRgb = ofVec3f(1, 1, 1); 
@@ -403,7 +421,7 @@ void ofApp::draw(){
 			mesh2.uIntensity = mesh.uIntensity;
 			mesh2.uHue = globals.hue;
 			mesh2.uRgb = sideBySide ? mesh.uRgb : (flip3d ? ofVec3f(1, 0, 0) : ofVec3f(0, 1, 1));
-			if(sideBySide) viewMatrix = getViewMatrix(flip3d?0:1,globals.player.isQuadFile);
+			if(sideBySide) viewMatrix = getViewMatrix(flip3d?0:1,globals.player.fileType == OsciAvAudioPlayer::QUAD);
 			mesh2.draw(viewMatrix);
 		}
 		
@@ -609,7 +627,9 @@ void ofApp::audioOut( float * output, int bufferSize, int nChannels ){
 		globals.timeStretch = 1.0;
 		bool res = globals.player.loadSound(fileToLoad);
 		if(!res){
-			ofSystemAlertDialog("Could not load the file :(");
+			currentFilename = fileToLoad;
+			fileToLoad = "";
+			globals.player.onEnd();
 		}
 		else{
 			osciView->timeStretchSlider->slider->value = 1.0;
