@@ -12,6 +12,7 @@
 #include "ofxAvAudioPlayer.h"
 #include "OsciMesh.h"
 
+
 class ofApp : public ofBaseApp{
 
 	public:
@@ -45,7 +46,8 @@ class ofApp : public ofBaseApp{
 		mui::Root * root;
 		ConfigView * configView;
 		PlayerOverlay * osciView;
-		Playlist * playlist; 
+		Playlist * playlist;
+		bool playlistEnable = false;
 		OsciMesh mesh;
 		OsciMesh mesh2;  // for stereoscopic viewing
 		ofFbo fbo;

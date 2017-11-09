@@ -39,16 +39,22 @@ void ofApp::setup(){
 	globals.player.onEnd = [&](){
 		// see if we have a "next" item
 		//git-forbid do this on the right thread!
-		auto next = playlist->getNextItem(globals.currentlyPlayingItem);
-		if(next.first > 0){
-			fileToLoad = next.second;
-			globals.currentlyPlayingItem = next.first;
-		}
-		else if(globals.currentlyPlayingItem == 0){
-			globals.player.setPositionMS(0);
+		if(playlistEnable){
+			auto next = playlist->getNextItem(globals.currentlyPlayingItem);
+			if(next.first > 0){
+				fileToLoad = next.second;
+				globals.currentlyPlayingItem = next.first;
+			}
+			else if(globals.currentlyPlayingItem == 0){
+				globals.player.setPositionMS(0);
+			}
+			else{
+				globals.currentlyPlayingItem = 0;
+			}
 		}
 		else{
-			globals.currentlyPlayingItem = 0;
+			globals.player.setPositionMS(0);
+			globals.player.play();
 		}
 	};
 	
@@ -141,7 +147,7 @@ void ofApp::update(){
 		nextWindowTitle = ""; 
 	}
 	
-	playlist->visible = osciView->visible;
+	playlist->visible = osciView->visible && playlistEnable;
 	
 	bool anythingGoingOn = globals.player.isPlaying || exporting>0;
 	if( ofGetMousePressed() || !anythingGoingOn){
@@ -287,13 +293,15 @@ void ofApp::update(){
 	
 	left.play();
 	right.play();
+	zMod.play();
 	
 	bool isMono = !globals.micActive && globals.player.fileType == OsciAvAudioPlayer::MONO;
 	bool isZModulated = !globals.micActive && globals.player.fileType == OsciAvAudioPlayer::STEREO_ZMODULATED;
 	bool isQuad = !globals.micActive && globals.player.fileType == OsciAvAudioPlayer::QUAD;
 	
 	osciView->sideBySide->visible = isQuad; 
-	osciView->flip3d->visible = isQuad; 
+	osciView->flip3d->visible = isQuad;
+	osciView->zModulation->visible = isZModulated;
 	
 	
 	static double T0 = ofGetElapsedTimeMillis();
@@ -317,8 +325,10 @@ void ofApp::update(){
 
 			if( mesh.mesh.getVertices().size() >= maxVerts && !exporting ){
 				dropped ++;
-				left.clear();
-				right.clear();
+				int N = left.totalLength;
+				left.peel(N);
+				right.peel(N);
+				zMod.peel(N);
 			}
 			else{
 				if(isMono){
@@ -337,25 +347,23 @@ void ofApp::update(){
 			
 				int stride = isQuad ? 2 : 1;
 				
-				if(isZModulated){
+				float * zBuffer = nullptr;
+				if(isZModulated && globals.zModulation){
 					memset(zmodBuffer,0,bufferSize*sizeof(float));
-					zMod.addTo(zmodBuffer,0,bufferSize*sizeof(float));
-					
-					mesh.addLines(leftBuffer, rightBuffer, zmodBuffer, bufferSize, stride);
-					if(isQuad){
-						mesh2.addLines(leftBuffer+1, rightBuffer+1, zmodBuffer, bufferSize, stride);
-					}
+					zMod.addTo(zmodBuffer,1,bufferSize);
+					zBuffer = zmodBuffer; 
 				}
-				else{
-					mesh.addLines(leftBuffer, rightBuffer, nullptr, bufferSize, stride);
-					if(isQuad){
-						mesh2.addLines(leftBuffer+1, rightBuffer+1, nullptr, bufferSize, stride);
-					}
+					
+				mesh.addLines(leftBuffer, rightBuffer, zBuffer, bufferSize, stride);
+				if(isQuad){
+					mesh2.addLines(leftBuffer+1, rightBuffer+1, zBuffer, bufferSize, stride);
 				}
 				
 				left.peel(bufferSize);
 				right.peel(bufferSize);
-				if(isZModulated) zMod.peel(bufferSize);
+				if(isZModulated){
+					zMod.peel(bufferSize);
+				}
 			}
 		}
 	}
@@ -379,6 +387,7 @@ void ofApp::draw(){
 				while( globals.player.left192.totalLength > 4096 && globals.player.right192.totalLength > 4096 ){
 					globals.player.left192.peel(4096);
 					globals.player.right192.peel(4096);
+					globals.player.zMod192.peel(4096); 
 				}
 			}
 			else{
@@ -569,6 +578,10 @@ void ofApp::keyPressed  (int key){
 		}
 	}
 	
+	if( key == 'p' ){
+		playlistEnable ^= true;
+	}
+	
 	if( ofGetKeyPressed(MUI_KEY_ACTION) && key == ',' ){
 		ofSystemAlertDialog("All settings are in the editable file '" + ofxToReadWriteableDataPath("settings.txt") + "' \n"
 							"\n"
@@ -692,14 +705,11 @@ void ofApp::gotMessage(ofMessage msg){
 
 //--------------------------------------------------------------
 void ofApp::dragEvent(ofDragInfo dragInfo){
-	for( vector<string>::iterator it = dragInfo.files.begin();it != dragInfo.files.end(); ++it ){
-		cout << *it << endl;
-	}
-	
 	if( dragInfo.files.size() >= 1 ){
 		// this runs on a separate thread.
 		// we have to be careful not to make a mess!
 		stopMic();
+		playlistEnable = false;
 		fileToLoad = dragInfo.files[0];
 	}
 }

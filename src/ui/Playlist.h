@@ -21,10 +21,11 @@ public:
 	void draw() override;
 	void update() override;
 	void layout() override;
-	bool handleFileDragged( ofDragInfo & args ) override;
+	bool fileDragged( ofDragInfo & args ) override;
 	bool keyPressed(ofKeyEventArgs & args) override;
 	
 	void addFile(ofFile file, double duration = -2 );
+	void removeAllFiles();
 	
 	void save(ostream & out);
 	void load(istream & in);

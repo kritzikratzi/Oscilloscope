@@ -35,7 +35,7 @@ void OsciMesh::addLines( float * left, float * right, float * bright, int N, int
 		for( int i = stride; i < N; i+= stride ){
 			ofVec2f p0(left[i-stride], right[i-stride]);
 			ofVec2f p1(left[i  ], right[i  ]);
-			addLine(p0,p1, bright[i]);
+			addLine(p0,p1, bright[i]);	
 		}
 	}
 }

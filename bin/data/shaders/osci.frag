@@ -9,6 +9,7 @@ uniform float uHue;
 uniform vec3 uRgb; 
 uniform float uIntensityBase;
 varying vec4 color;
+varying float brightness;
 
 float erf(float x) {
 	float s = sign(x), a = abs(x);
@@ -35,7 +36,6 @@ void main (void)
 //	}
 
 	alpha = pow(alpha,1.0-uIntensityBase)*(0.01+min(0.99,uIntensity*3.0));
-	
-	gl_FragColor = vec4(uRgb, alpha);
+	gl_FragColor = vec4(uRgb, alpha*brightness);
 	
 }

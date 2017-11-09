@@ -38,6 +38,7 @@ public:
 	bool invertX{false};
 	bool invertY{false};
 	bool flipXY{false};
+	bool zModulation{true}; 
 	
 	float strokeWeight{10}; // 1...20
 	float timeStretch{1}; // 0.1-2.0
@@ -67,6 +68,7 @@ public:
 		deviceId = settings.get( "deviceId", deviceId );
 		scale = settings.get( "scale", scale );
 		flipXY = settings.get( "flipXY", flipXY );
+		zModulation = settings.get( "zModulation", zModulation );
 		invertX = settings.get( "invertX", invertX );
 		invertY = settings.get( "invertY", invertY );
 		autoDetect = settings.get( "autoDetect", autoDetect );
@@ -101,6 +103,7 @@ public:
 		settings.set( "deviceId", deviceId );
 		settings.set( "scale", scale );
 		settings.set( "flipXY", flipXY );
+		settings.set( "zModulation", zModulation );
 		settings.set( "invertX", invertX );
 		settings.set( "invertY", invertY );
 		settings.set( "autoDetect", autoDetect );

@@ -73,7 +73,7 @@ void Playlist::layout(){
 	
 }
 
-bool Playlist::handleFileDragged( ofDragInfo & args ){
+bool Playlist::fileDragged( ofDragInfo & args ){
 	for( auto & file : args.files ){
 		addFile(ofFile(file, ofFile::Reference));
 	}
@@ -178,6 +178,15 @@ void Playlist::addFile( ofFile file, double duration ){
 			filenames[nextItemId] = file.getAbsolutePath();
 			PlaylistItem * item = new PlaylistItem(nextItemId++, file);
 			scroller->view->add(item);
+		}
+	}
+}
+
+void Playlist::removeAllFiles(){
+	for( auto el : scroller->view->children ){
+		PlaylistItem * item = dynamic_cast<PlaylistItem*>(el);
+		if(item){
+			MUI_ROOT->safeRemoveAndDelete(item);
 		}
 	}
 }

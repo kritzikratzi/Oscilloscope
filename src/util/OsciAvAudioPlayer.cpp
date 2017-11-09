@@ -331,9 +331,9 @@ int OsciAvAudioPlayer::internalAudioOut(float *output, int bufferSize, int nChan
 			if( b-a > 0 ){
 				switch(fileType){
 					case STEREO_ZMODULATED:
+						zMod192.append( decoded_buffer192+2+a, (b-a)/3, 3);
 						left192.append( decoded_buffer192+a, (b-a)/3, 3);
 						right192.append( decoded_buffer192+1+a, (b-a)/3, 3);
-						zMod192.append( decoded_buffer192+2+a, (b-a)/3, 3);
 						break;
 					default:
 						left192.append( decoded_buffer192+a, (b-a)/2, 2);

@@ -70,7 +70,9 @@ PlayerOverlay::PlayerOverlay( float x_, float y_, float width_, float height_)
 	ofAddListener(flip3d->onPress, this, &PlayerOverlay::buttonPressed);
 	add(flip3d);
 
-
+	zModulation = new FaToggleButton(ofxFontAwesome::adjust, ofxFontAwesome::adjust, 10, 1, h, h);
+	ofAddListener(zModulation->onPress, this, &PlayerOverlay::buttonPressed);
+	add(zModulation);
 
 	x = 10;
 	y += invertY->height + 10;
@@ -142,10 +144,8 @@ PlayerOverlay::PlayerOverlay( float x_, float y_, float width_, float height_)
 }
 
 void PlayerOverlay::layout(){
-	mui::L(fullscreenButton).pos(width-30, 0);
-	mui::L(stopButton).leftOf(fullscreenButton,1);
-	mui::L(sideBySide).leftOf(stopButton, 10);
-	mui::L(flip3d).leftOf(sideBySide, 1);
+	mui::L({fullscreenButton,stopButton}).columnsFromRight({width-30, 0},1);
+	mui::L({zModulation,flip3d,sideBySide,stopButton,fullscreenButton}).columnsFromRight({stopButton->x-10,0},1);
 
 
 	mui::L(playButton).pos(10,40);
@@ -301,6 +301,7 @@ void PlayerOverlay::fromGlobals(){
 	invertY->commit();
 	flipXY->selected = globals.flipXY;
 	flipXY->commit();
+	zModulation->selected = globals.zModulation;
 }
 
 //--------------------------------------------------------------
@@ -327,6 +328,9 @@ void PlayerOverlay::buttonPressed( const void * sender, ofTouchEventArgs & args 
 	}
 	else if( sender == flipXY ){
 		globals.flipXY = flipXY->selected;
+	}
+	else if( sender == zModulation ){
+		globals.zModulation = zModulation->selected;
 	}
 	else if( sender == fullscreenButton ){
 		ofSetFullscreen(fullscreenButton->selected);
