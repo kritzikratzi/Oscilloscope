@@ -53,8 +53,10 @@ class ofApp : public ofBaseApp{
 		ofFbo fbo;
 	
 		// storage for mic buffers
-		MonoSample left;
-		MonoSample right;
+		int micChannels = 2;
+		MonoSample micLeft;
+		MonoSample micRight;
+		MonoSample micZMod;
 	
 		bool changed;
 		bool clearFbos;

@@ -79,8 +79,9 @@ void ofApp::setup(){
 	}
 	
 	
-	left.loop = false;
-	right.loop = false;
+	micLeft.loop = false;
+	micRight.loop = false;
+	micZMod.loop = false;
 
 	
 	if( globals.autoDetect ){
@@ -96,8 +97,9 @@ void ofApp::startApplication(){
 	if( applicationRunning ) return;
 	applicationRunning = true;
 	cout << "starting ..." << endl; 
-	left.playFrom(0);
-	right.playFrom(0);
+	micLeft.playFrom(0);
+	micRight.playFrom(0);
+	micZMod.playFrom(0);
 
 	configView->toGlobals();
 	globals.saveToFile();
@@ -287,16 +289,20 @@ void ofApp::update(){
 	//globals.hue += ofGetMouseX()*100/ofGetWidth();
 	//globals.hue = fmodf(globals.hue,360);
 	
-	MonoSample &left = globals.micActive?(this->left):globals.player.left192;
-	MonoSample &right = globals.micActive?(this->right):globals.player.right192;
-	MonoSample &zMod = globals.player.zMod192; // not available for mic anyways
+	MonoSample &left = globals.micActive?micLeft:globals.player.left192;
+	MonoSample &right = globals.micActive?micRight:globals.player.right192;
+	MonoSample &zMod = globals.micActive?micZMod:globals.player.zMod192;
 	
 	left.playFrom(0);
 	right.playFrom(0);
 	zMod.playFrom(0);
 	
-	bool isMono = !globals.micActive && globals.player.fileType == OsciAvAudioPlayer::MONO;
-	bool isZModulated = !globals.micActive && globals.player.fileType == OsciAvAudioPlayer::STEREO_ZMODULATED;
+	bool isMono =
+		(!globals.micActive && globals.player.fileType == OsciAvAudioPlayer::MONO) ||
+		(globals.micActive && micChannels == 1);
+	bool isZModulated =
+		(!globals.micActive && globals.player.fileType == OsciAvAudioPlayer::STEREO_ZMODULATED) ||
+		(globals.micActive && micChannels == 3);
 	bool isQuad = !globals.micActive && globals.player.fileType == OsciAvAudioPlayer::QUAD;
 	
 	osciView->sideBySide->visible = isQuad; 
@@ -627,8 +633,25 @@ void ofApp::windowResized(int w, int h){
 //--------------------------------------------------------------
 void ofApp::audioIn(float * input, int bufferSize, int nChannels){
 	if( globals.micActive ){
-		left.append(input, bufferSize,2);
-		right.append(input+1,bufferSize,2);
+		switch(nChannels){
+			case 1:
+				micLeft.append(input, bufferSize,1);
+				micRight.append(input,bufferSize,1);
+				break;
+			case 2:
+				micLeft.append(input, bufferSize,2);
+				micRight.append(input+1,bufferSize,2);
+				break;
+			case 3:
+				micLeft.append(input, bufferSize,3);
+				micRight.append(input+1,bufferSize,3);
+				micZMod.append(input+2,bufferSize,3);
+				break;
+			default: // wtf :D
+				micLeft.append(input, bufferSize,nChannels);
+				micRight.append(input+1,bufferSize,nChannels);
+				break;
+		}
 	}
 }
 
@@ -664,8 +687,14 @@ void ofApp::gotMessage(ofMessage msg){
 	else if( msg.message == "stop-pressed" ){
 		stopApplication();
 	}
-	else if( msg.message == "start-mic" ){
+	else if( msg.message.rfind("start-mic:",0) == 0 ){
 		if( exporting != 0 ) return;
+		
+		int numChannels = ofToInt(msg.message.substr(10));
+		auto devs = micStream.getDeviceList();
+		numChannels = max(numChannels,1);
+		numChannels = min(numChannels,(int)devs[globals.micDeviceId].inputChannels);
+		
 		globals.player.stop();
 		
 		if( globals.micActive ){
@@ -674,13 +703,13 @@ void ofApp::gotMessage(ofMessage msg){
 		}
 		
 		micStream.setDeviceID(globals.micDeviceId);
-		micStream.setup(this, 0, 2, globals.sampleRate, globals.bufferSize, globals.numBuffers);
+		micStream.setup(this, 0, numChannels, globals.sampleRate, globals.bufferSize, globals.numBuffers);
 		micStream.start();
 		globals.micActive = true;
+		micChannels = numChannels;
 		
-		auto devs = micStream.getDeviceList();
 		if(globals.micDeviceId<devs.size()){
-			nextWindowTitle = devs[globals.micDeviceId].name + " @ " + ofToString(globals.sampleRate) + "Hz";
+			nextWindowTitle = devs[globals.micDeviceId].name + ofToString(numChannels) + "ch @ " + ofToString(globals.sampleRate) + "Hz";
 		}
 	}
 	else if( msg.message == "stop-mic" ){

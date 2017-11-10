@@ -385,7 +385,12 @@ void PlayerOverlay::buttonPressed( const void * sender, ofTouchEventArgs & args 
 		map<string,int>::iterator it = micDeviceIds.find(((mui::Button*)sender)->label->text);
 		if( it != micDeviceIds.end() ){
 			globals.micDeviceId = (*it).second;
-			ofSendMessage("start-mic");
+			if(ofGetKeyPressed(OF_KEY_SHIFT)){
+				ofSendMessage("start-mic:3");
+			}
+			else{
+				ofSendMessage("start-mic:2");
+			}
 		}
 		MUI_ROOT->safeRemoveAndDelete(micMenu);
 		micMenu = NULL;
