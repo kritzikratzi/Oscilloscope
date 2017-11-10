@@ -15,8 +15,9 @@ using namespace std;
 #endif
 
 MonoSample::MonoSample(){
-	playbackIndex = 0; 
-	totalLength = 0; 
+	attackDecayEnv = 0;
+	playbackIndex = 0;
+	totalLength = 0;
 	velocity = 1;
 	loop = false;
 }
@@ -24,22 +25,36 @@ MonoSample::MonoSample(){
 
 MonoSample::~MonoSample(){
 	while(!bufferData.empty()) {
-        delete[] bufferData.back();
-        bufferData.pop_back();
+		delete[] bufferData.back();
+		bufferData.pop_back();
 		bufferSizes.pop_back();
-    }
+	}
 }
 
 void MonoSample::play(){
 	lock.lock();
-	playing = true; 
+	playing = true;
 	lock.unlock();
 }
 
-void MonoSample::skip( int numSamples ){
-	lock.lock(); 
-	_skip(numSamples);
+void MonoSample::playFrom(int position){
+	lock.lock();
+	playing = true;
+	playbackIndex = 0;
+	lock.unlock();
+}
+
+void MonoSample::setPosition( int position ){
+	lock.lock();
+	playbackIndex = position;
 	lock.unlock(); 
+}
+
+
+void MonoSample::skip( int numSamples ){
+	lock.lock();
+	_skip(numSamples);
+	lock.unlock();
 }
 
 void MonoSample::_skip( int numSamples ){
@@ -48,7 +63,7 @@ void MonoSample::_skip( int numSamples ){
 	}
 	else{
 		playbackIndex = (playbackIndex+numSamples)%totalLength;
-		if( playbackIndex < 0 ) playbackIndex += totalLength; 
+		if( playbackIndex < 0 ) playbackIndex += totalLength;
 	}
 }
 
@@ -72,7 +87,7 @@ void MonoSample::append(float * buffer, int N, int srcStride){
 	lock.unlock();
 }
 
-void MonoSample::removeHead(){
+float * MonoSample::removeHead(bool deleteBuffer){
 	lock.lock();
 	if( bufferData.size() > 0 ){
 		float * first = bufferData[0];
@@ -81,9 +96,18 @@ void MonoSample::removeHead(){
 		bufferData.erase(bufferData.begin());
 		bufferSizes.erase(bufferSizes.begin());
 		
-		delete[] first;
+		lock.unlock();
+		
+		if( deleteBuffer){
+			delete[] first;
+			return NULL;
+		}
+		else{
+			return first;
+		}
 	}
 	lock.unlock();
+	return NULL;
 }
 
 void MonoSample::clear(){
@@ -92,21 +116,21 @@ void MonoSample::clear(){
 		removeHead();
 	}
 	playbackIndex = 0;
-	playing = false; 
+	playing = false;
 	lock.unlock();
 }
 
 void MonoSample::peel(int N){
 	lock.lock();
-	N = MIN(N,totalLength); 
+	N = MIN(N,totalLength);
 	int NN = N;
 	while( N > 0 && totalLength > 0 ){
 		if( bufferSizes[0] <= N ){
-			N -= bufferSizes[0]; 
+			N -= bufferSizes[0];
 			removeHead();
 		}
 		else{
-			// todo: this has some problems it seems. 
+			// todo: this has some problems it seems.
 			int remaining = bufferSizes[0]-N;
 			float * buffer = new float[remaining];
 			memcpy(buffer, &bufferData[0][N], remaining*sizeof(float));
@@ -117,10 +141,10 @@ void MonoSample::peel(int N){
 			
 			_skip(-N);
 			totalLength -= N;
-			break; 
+			break;
 		}
 	}
-
+	
 	lock.unlock();
 }
 
@@ -171,6 +195,8 @@ int MonoSample::addTo(float *output, int outStride, int N ){
 	// find the right index...
 	int copied = 0;
 	
+	int envEnd = totalLength - attackDecayEnv - 1; // we don't take care of buffers shorter than 2*attack_decay_env!
+	
 	while( copied < N ){
 		// find the right buffer...
 		int len = 0;
@@ -184,11 +210,16 @@ int MonoSample::addTo(float *output, int outStride, int N ){
 				int copyN = MIN( sourceN, N - copied );
 				
 				for( int j = sourceStart; j < copyN; j++ ){
-					output[outStride*copied] += source[j]*velocity;
+					// this could be more optimal? not sure!
+					float env =
+					playbackIndex>envEnd?ofMap(playbackIndex-envEnd, 0, attackDecayEnv, 1, 0):
+					(playbackIndex<attackDecayEnv?ofMap(playbackIndex,0,attackDecayEnv,0,1):1);
+					
+					output[outStride*copied] += source[j]*velocity*env;
 					copied ++;
+					playbackIndex ++;
 				}
 				
-				playbackIndex += copyN;
 				if( copied >= N ){
 					// done for today!
 					lock.unlock();
@@ -204,12 +235,107 @@ int MonoSample::addTo(float *output, int outStride, int N ){
 			}
 			else{
 				playbackIndex = 0;
-				playing = false; 
+				playing = false;
 				lock.unlock();
 				return copied;
 			}
 		}
 	}
 	lock.unlock();
-	return copied; 
+	return copied;
+}
+
+
+
+int MonoSample::copyTo(float *output, int outStride, int N ){
+	int copied = 0;
+	int envEnd = totalLength - attackDecayEnv - 1; // we don't take care of buffers shorter than 2*attack_decay_env!
+	
+	if( !playing ){
+		goto zeroPad;
+	}
+	
+	lock.lock();
+	
+	
+	while( copied < N ){
+		// find the right buffer...
+		int len = 0;
+		for( int i = 0; i < bufferData.size(); i++ ){
+			int sourceN = bufferSizes[i];
+			
+			if( len + sourceN > playbackIndex ){
+				// good, we have something to copy ...
+				float * source = bufferData[i];
+				int  sourceStart = playbackIndex - len;
+				int copyN = MIN( sourceN, N - copied );
+				
+				for( int j = sourceStart; j < copyN; j++ ){
+					// this could be more optimal? not sure!
+					float env =
+					playbackIndex>envEnd?ofMap(playbackIndex-envEnd, 0, attackDecayEnv, 1, 0):
+					(playbackIndex<attackDecayEnv?ofMap(playbackIndex,0,attackDecayEnv,0,1):1);
+					
+					output[outStride*copied] = source[j]*velocity*env;
+					copied ++;
+					playbackIndex ++;
+				}
+				
+				if( copied >= N ){
+					// done for today!
+					lock.unlock();
+					return copied;
+				}
+			}
+			len += sourceN;
+		}
+		
+		if( playbackIndex >= len ){
+			if( loop == true && totalLength > 0 ){
+				playbackIndex = 0;
+			}
+			else{
+				playbackIndex = 0;
+				playing = false;
+				lock.unlock();
+				return copied;
+			}
+		}
+	}
+	lock.unlock();
+	
+zeroPad:
+	for( int i = copied; i < N; i++ ){
+		output[i*outStride] = 0;
+	}
+	return copied;
+}
+
+void MonoSample::normalize(float max){
+	lock.lock();
+	float maxFound = 0;
+	for( int i = 0; i < bufferSizes.size(); i++ ){
+		float val = AudioAlgo::max_abs(bufferData[i], bufferSizes[i] );
+		if( val > maxFound ) maxFound = val;
+	}
+	if( maxFound > 0 ){
+		float factor = max/maxFound;
+		for( int i = 0; i < bufferSizes.size(); i++ ){
+			AudioAlgo::scale(bufferData[i], factor, bufferSizes[i] );
+		}
+	}
+	lock.unlock();
+}
+
+float * MonoSample::toArray(){
+	lock.lock();
+	float * result = new float[totalLength];
+	int pos = 0;
+	for( int i = 0; i < bufferData.size(); i++ ){
+		memcpy(result+pos, bufferData[i], bufferSizes[i]*sizeof(float));
+		pos += bufferSizes[i];
+	}
+	lock.unlock();
+	
+	return result;
 }

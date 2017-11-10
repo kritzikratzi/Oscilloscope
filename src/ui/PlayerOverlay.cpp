@@ -144,8 +144,8 @@ PlayerOverlay::PlayerOverlay( float x_, float y_, float width_, float height_)
 }
 
 void PlayerOverlay::layout(){
-	mui::L({fullscreenButton,stopButton}).columnsFromRight({width-30, 0},1);
-	mui::L({zModulation,flip3d,sideBySide,stopButton,fullscreenButton}).columnsFromRight({stopButton->x-10,0},1);
+	mui::L({stopButton,fullscreenButton}).columnsFromRight({width, 0},1);
+	mui::L({zModulation,flip3d,sideBySide}).columnsFromRight({stopButton->x-10,0},1);
 
 
 	mui::L(playButton).pos(10,40);
@@ -424,9 +424,9 @@ void PlayerOverlay::sliderChanged( const void * sender, float & value ){
 
 
 mui::Label * PlayerOverlay::addLabel( string text ){
-	mui::Label * label = new mui::Label( text, 0, 0, 100, 30 );
+	mui::Label * label = new mui::Label( text, 0, 0, 120, 30 );
 	label->commit();
-	label->width = label->boundingBox.width;
+	label->width = ceil(label->boundingBox.width);
 	label->horizontalAlign = mui::Right;
 	add( label );
 	return label;

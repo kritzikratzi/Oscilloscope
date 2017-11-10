@@ -96,8 +96,8 @@ void ofApp::startApplication(){
 	if( applicationRunning ) return;
 	applicationRunning = true;
 	cout << "starting ..." << endl; 
-	left.play();
-	right.play();
+	left.playFrom(0);
+	right.playFrom(0);
 
 	configView->toGlobals();
 	globals.saveToFile();
@@ -291,9 +291,9 @@ void ofApp::update(){
 	MonoSample &right = globals.micActive?(this->right):globals.player.right192;
 	MonoSample &zMod = globals.player.zMod192; // not available for mic anyways
 	
-	left.play();
-	right.play();
-	zMod.play();
+	left.playFrom(0);
+	right.playFrom(0);
+	zMod.playFrom(0);
 	
 	bool isMono = !globals.micActive && globals.player.fileType == OsciAvAudioPlayer::MONO;
 	bool isZModulated = !globals.micActive && globals.player.fileType == OsciAvAudioPlayer::STEREO_ZMODULATED;
@@ -332,25 +332,21 @@ void ofApp::update(){
 			}
 			else{
 				if(isMono){
-					memset(rightBuffer,0,bufferSize*sizeof(float));
-					right.addTo(rightBuffer, 1, bufferSize);
+					right.copyTo(rightBuffer, 1, bufferSize);
 					for( int i = 0; i < bufferSize; i++ ){
 						leftBuffer[i] = -1+2*i/(float)bufferSize;
 					}
 				}
 				else{
-					memset(leftBuffer,0,bufferSize*sizeof(float));
-					memset(rightBuffer,0,bufferSize*sizeof(float));
-					left.addTo(leftBuffer, 1, bufferSize);
-					right.addTo(rightBuffer, 1, bufferSize);
+					left.copyTo(leftBuffer, 1, bufferSize);
+					right.copyTo(rightBuffer, 1, bufferSize);
 				}
 			
 				int stride = isQuad ? 2 : 1;
 				
 				float * zBuffer = nullptr;
 				if(isZModulated && globals.zModulation){
-					memset(zmodBuffer,0,bufferSize*sizeof(float));
-					zMod.addTo(zmodBuffer,1,bufferSize);
+					zMod.copyTo(zmodBuffer,1,bufferSize);
 					zBuffer = zmodBuffer; 
 				}
 					
@@ -363,6 +359,7 @@ void ofApp::update(){
 				right.peel(bufferSize);
 				if(isZModulated){
 					zMod.peel(bufferSize);
+					zMod.setPosition(0); 
 				}
 			}
 		}

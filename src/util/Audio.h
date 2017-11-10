@@ -2,7 +2,13 @@
 // Audio.h
 //
 // Initially created by Hansi on 14.06.14.
-//
+// V1.7, 10.11.2017: added playFrom, fixed a copy bug in the zero-padding in copyTo
+// V1.6, 4.7.2016: added copyTo, implemented the missing setPosition()
+// V1.5  30.6.2016: Default attack/decay envelope to 0. this is too unexpected! 
+// V1.4b, 09.01.2016: Added symmetric attack/decay envelope to MonoSample. Defaults to 128 samples (2ms at 44kHz)
+// V1.4a, 4.1.2015: Fixed a bug in mean_abs (result was not initialized)
+// V1.3, 23.12.2015: Added normalize and toArray() to monosample. Added clip to AudioAlgo
+// V1.2, 18.12.2015: removeHead has a "deleteBuffer" option. defaults to true.
 // V1.1, 27.10.2015: addTo returns num copied
 // V1.0, 22.6.2015
 //
@@ -40,7 +46,7 @@ class AudioAlgo{
 public:
 	// absolute value mean
 	static float mean_abs( float * buffer, int N ){
-		float result;
+		float result = 0;
 #ifdef USE_ACCELERATE
 		vDSP_meamgv( buffer, 1, &result, N );
 #else
@@ -75,6 +81,18 @@ public:
 #endif
 	}
 	
+	
+	static void clip( float * destination, float low, float high, int N ){
+#ifdef USE_ACCELERATE
+		vDSP_vclip( destination, 1, &low, &high, destination, 1, N );
+#else
+		for( int i = N-1; i >= 0; i--){
+			const float val = destination[i];
+			destination[i] = (val<low?low:(val>high?high:val));
+		}
+#endif
+	}
+	
 	static void scale( float * destination, float factor, int N ){
 #ifdef USE_BLAS
 		cblas_sscal( N, factor, destination, 1 );
@@ -104,6 +122,7 @@ public:
 	~MonoSample();
 	
 	void play();
+	void playFrom(int position);
 	void setPosition( int position );
 	void skip( int samples );
 	
@@ -112,7 +131,9 @@ public:
 	// append an array of N floats, using a stride (the array must be N*srcStride elements long)
 	void append( float * buffer, int N, int srcStride );
 	// remove the top most float buffer from the internal storage (no matter it's size)
-	void removeHead();
+	// if deleteBuffer=true then null is returned.
+	// if deleteBuffer=false, then you need to manually delete[] the returned buffer.
+	float * removeHead(bool deleteBuffer=true);
 	// clear out all buffers. reset playback index to -1.
 	void clear();
 	// remove N samples from internal storage
@@ -125,11 +146,23 @@ public:
 	// add the N samples to the *output buffer, skipping with outStride (output must be outStride*N large). this does not remove samples from the internal storage. playback index is increased by N.
 	int addTo( float * output, int outStride, int N );
 	
+	
+	// add the N samples to the *output buffer, skipping with outStride (output must be outStride*N large). this does not remove samples from the internal storage. playback index is increased by N.
+	// if there are not enough samples, the rest of output will be filled with zeros.
+	int copyTo( float * output, int outStride, int N );
+	
+	// normalizes across all buffers
+	void normalize(float max=1.0);
+	
+	// flattens the entire thing and turns it into a float buffer
+	float * toArray();
+	
 	bool playing;
 	int playbackIndex;
 	int totalLength;
 	bool loop;
 	float velocity;
+	int attackDecayEnv;
 	
 	std::vector<float*> bufferData;
 	std::vector<int> bufferSizes;

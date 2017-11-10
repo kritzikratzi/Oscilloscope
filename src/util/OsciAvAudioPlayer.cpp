@@ -12,6 +12,8 @@
 
 #include "OsciAvAudioPlayer.h"
 #include "Audio.h"
+#include "ofxNative.h"
+
 extern "C"{
 	#include <libavutil/opt.h>
 }
@@ -215,6 +217,7 @@ OsciAvAudioPlayerThread::OsciAvAudioPlayerThread( OsciAvAudioPlayer & player ) :
 }
 
 void OsciAvAudioPlayerThread::threadedFunction(){
+	ofxNative::setThreadName("Player-Fetcher"); 
 	// make sure we always have a bit of buffer ready
 	while( isThreadRunning() ){
 		lock();
@@ -252,9 +255,7 @@ int OsciAvAudioPlayer::audioOut(float *output, int bufferSize, int nChannels){
 			return 0;
 		}
 		else if( mainOut.totalLength > 0 ){
-			// i'm an idiot, and that's why we have to do this!
-			mainOut.playbackIndex = 0;
-			mainOut.play();
+			mainOut.playFrom(0);
 			int res = mainOut.addTo(output, 1, 2*bufferSize);
 			mainOut.peel(res);
 			return res;
@@ -316,18 +317,16 @@ int OsciAvAudioPlayer::internalAudioOut(float *output, int bufferSize, int nChan
 				}
 			}
 			
-			int samples192 = samples - (samples % numChannels192);
+
 			decoded_buffer_pos += samples;
 			num_samples_read += samples;
 
 			// find copy points in 192k buffer
-			int a = (decoded_buffer_pos-samples)*(int64_t)visual_sample_rate/output_sample_rate;
-			int b = (decoded_buffer_pos)*(int64_t)visual_sample_rate/output_sample_rate;
-			a *= numChannels192 / 2; 
-			b *= numChannels192 / 2; 
+			int a = ((decoded_buffer_pos-samples)*(int64_t)decoded_buffer_len192)/(decoded_buffer_len);
+			int b = ((decoded_buffer_pos)*(int64_t)decoded_buffer_len192)/(decoded_buffer_len);
 			a = a - (a%numChannels192);
 			b = MIN(b - (b%numChannels192), decoded_buffer_len192);
-			//cout << a << "\t" << b << "\t\t" << decoded_buffer_len192 << "\t\t\t" << samples << "\t" << decoded_buffer_len << endl; 
+			//cout << a << "\t" << b << "\t\t" << decoded_buffer_len192 << "\t\t\t" << samples << "\t" << decoded_buffer_len << endl;
 			if( b-a > 0 ){
 				switch(fileType){
 					case STEREO_ZMODULATED:
