@@ -28,9 +28,6 @@
     <ClCompile Include="src\ui\FMenu.cpp">
       <Filter>src\ui</Filter>
     </ClCompile>
-    <ClCompile Include="src\ui\OsciView.cpp">
-      <Filter>src\ui</Filter>
-    </ClCompile>
     <ClCompile Include="src\util\Audio.cpp">
       <Filter>src\util</Filter>
     </ClCompile>
@@ -57,6 +54,18 @@
     </ClCompile>
     <ClCompile Include="addons\ofxFontStash2\libs\pugixml\src\pugixml.cpp">
       <Filter>addons\ofxFontStash2\libs\pugixml\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OsciMesh.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ui\PlayerOverlay.cpp">
+      <Filter>src\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="addons\ofxNative\src\ofxNative_win.cpp">
+      <Filter>addons\ofxNative\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ui\Playlist.cpp">
+      <Filter>src\ui</Filter>
     </ClCompile>
     <ClCompile Include="addons\ofxMightyUI\src\BarButton.cpp">
       <Filter>addons\ofxMightyUI\src</Filter>
@@ -94,6 +103,18 @@
     <ClCompile Include="addons\ofxMightyUI\src\MuiCore.cpp">
       <Filter>addons\ofxMightyUI\src</Filter>
     </ClCompile>
+    <ClCompile Include="addons\ofxMightyUI\src\MuiEvents.cpp">
+      <Filter>addons\ofxMightyUI\src</Filter>
+    </ClCompile>
+    <ClCompile Include="addons\ofxMightyUI\src\MuiParameterPanel.cpp">
+      <Filter>addons\ofxMightyUI\src</Filter>
+    </ClCompile>
+    <ClCompile Include="addons\ofxMightyUI\src\MuiTextArea.cpp">
+      <Filter>addons\ofxMightyUI\src</Filter>
+    </ClCompile>
+    <ClCompile Include="addons\ofxMightyUI\src\ofxMightyUI.cpp">
+      <Filter>addons\ofxMightyUI\src</Filter>
+    </ClCompile>
     <ClCompile Include="addons\ofxMightyUI\src\Root.cpp">
       <Filter>addons\ofxMightyUI\src</Filter>
     </ClCompile>
@@ -117,12 +138,6 @@
     </ClCompile>
     <ClCompile Include="addons\ofxMightyUI\src\ToggleButton.cpp">
       <Filter>addons\ofxMightyUI\src</Filter>
-    </ClCompile>
-    <ClCompile Include="addons\ofxMightyUI\src\ofxMightyUI.cpp">
-      <Filter>addons\ofxMightyUI\src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\OsciMesh.cpp">
-      <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -213,6 +228,21 @@
     <Filter Include="addons\ofxMightyUI\src">
       <UniqueIdentifier>{C8E6E662-2080-A88C-9A10-84A1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="addons\ofxNative">
+      <UniqueIdentifier>{aada972c-6450-40aa-b93e-d64237e47a6f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxNative\src">
+      <UniqueIdentifier>{a5e95c0e-3fd9-4fd8-93e0-f0c312672e3b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxMightyUI\libs">
+      <UniqueIdentifier>{8f36c2c7-2dbc-4a2e-9295-0a5306e8f66e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxMightyUI\libs\stb_textedit">
+      <UniqueIdentifier>{339ca615-0802-4cbe-b7ec-db275fa3577a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxMightyUI\libs\stb_textedit\include">
+      <UniqueIdentifier>{c9026445-14d8-45ac-83af-cad760930495}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\ofApp.h">
@@ -243,9 +273,6 @@
       <Filter>src\ui</Filter>
     </ClInclude>
     <ClInclude Include="src\ui\L.h">
-      <Filter>src\ui</Filter>
-    </ClInclude>
-    <ClInclude Include="src\ui\OsciView.h">
       <Filter>src\ui</Filter>
     </ClInclude>
     <ClInclude Include="src\util\Audio.h">
@@ -584,6 +611,19 @@
     <ClInclude Include="addons\ofxFontStash2\libs\pugixml\src\pugixml.hpp">
       <Filter>addons\ofxFontStash2\libs\pugixml\src</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="src\OsciMesh.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ui\PlayerOverlay.h">
+      <Filter>src\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="addons\ofxNative\src\ofxNative.h">
+      <Filter>addons\ofxNative\src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ui\Playlist.h">
+      <Filter>src\ui</Filter>
+    </ClInclude>
     <ClInclude Include="addons\ofxMightyUI\src\BarButton.h">
       <Filter>addons\ofxMightyUI\src</Filter>
     </ClInclude>
@@ -620,6 +660,21 @@
     <ClInclude Include="addons\ofxMightyUI\src\MuiCore.h">
       <Filter>addons\ofxMightyUI\src</Filter>
     </ClInclude>
+    <ClInclude Include="addons\ofxMightyUI\src\muievents.h">
+      <Filter>addons\ofxMightyUI\src</Filter>
+    </ClInclude>
+    <ClInclude Include="addons\ofxMightyUI\src\MuiL.h">
+      <Filter>addons\ofxMightyUI\src</Filter>
+    </ClInclude>
+    <ClInclude Include="addons\ofxMightyUI\src\MuiParameterPanel.h">
+      <Filter>addons\ofxMightyUI\src</Filter>
+    </ClInclude>
+    <ClInclude Include="addons\ofxMightyUI\src\MuiTextArea.h">
+      <Filter>addons\ofxMightyUI\src</Filter>
+    </ClInclude>
+    <ClInclude Include="addons\ofxMightyUI\src\ofxMightyUI.h">
+      <Filter>addons\ofxMightyUI\src</Filter>
+    </ClInclude>
     <ClInclude Include="addons\ofxMightyUI\src\Root.h">
       <Filter>addons\ofxMightyUI\src</Filter>
     </ClInclude>
@@ -644,12 +699,8 @@
     <ClInclude Include="addons\ofxMightyUI\src\ToggleButton.h">
       <Filter>addons\ofxMightyUI\src</Filter>
     </ClInclude>
-    <ClInclude Include="addons\ofxMightyUI\src\ofxMightyUI.h">
-      <Filter>addons\ofxMightyUI\src</Filter>
-    </ClInclude>
-    <ClInclude Include="resource.h" />
-    <ClInclude Include="src\OsciMesh.h">
-      <Filter>src</Filter>
+    <ClInclude Include="addons\ofxMightyUI\libs\stb_textedit\include\stb_textedit\stb_textedit.h">
+      <Filter>addons\ofxMightyUI\libs\stb_textedit\include</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -21,7 +21,7 @@ public:
 	void draw() override;
 	void update() override;
 	void layout() override;
-	bool fileDragged( ofDragInfo & args ) override;
+	bool fileDragged(ofDragInfo & args) override; 
 	bool keyPressed(ofKeyEventArgs & args) override;
 	
 	void addFile(ofFile file, double duration = -2 );
