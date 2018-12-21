@@ -397,6 +397,9 @@ void PlayerOverlay::buttonPressed( const void * sender, ofTouchEventArgs & args 
 		MUI_ROOT->safeRemoveAndDelete(micMenu);
 		micMenu = NULL;
 	}
+	else if (sender == showPlaylistToggle) {
+		ofSendMessage(ofMessage("toggle-playlist"));
+	}
 }
 
 void PlayerOverlay::sliderChanged( const void * sender, float & value ){

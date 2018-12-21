@@ -39,22 +39,10 @@ Playlist::Playlist() : mui::Container(0,0,300,500){
 		btn->label->commit(); 
 	};
 
-	loopModeSelect = new mui::SegmentedSelect<LoopMode>(0,0,60*5,30);
-	loopModeSelect->equallySizedButtons = true; 
-	loopModeSelect->buttonSeparatorColor = ofColor(125, 50);
-	loopModeSelect->buttonBgDefault = ofColor(128, 50);
-	loopModeSelect->buttonBgSelected = ofColor(255);
-	loopModeSelect->buttonFgDefault = ofColor(255);
-	loopModeSelect->buttonFgSelected = ofColor(0); 
-	loopModeSelect->buttonFontName = "";
-//	tweak(loopModeSelect->addSegment(ofxFontAwesome4::sort_alpha_asc, LoopMode::ONCE), ofxFontAwesome4::_filename);
-//	tweak(loopModeSelect->addSegment(ofxFontAwesome4::repeat, LoopMode::ALL), ofxFontAwesome4::_filename);
-	tweak(loopModeSelect->addSegment("abcd", LoopMode::abcd), "");
-	tweak(loopModeSelect->addSegment("abab", LoopMode::abab), "");
-	tweak(loopModeSelect->addSegment("a", LoopMode::a), "");
-	tweak(loopModeSelect->addSegment("aaaa", LoopMode::aaaa), "");
-	tweak(loopModeSelect->addSegment("????", LoopMode::random), "");
-	add(loopModeSelect);
+	loopModeButton = new FaButton(ofxFontAwesome::sort_alpha_asc,0,0, 30, 30);
+	ofAddListener(loopModeButton->onPress, this, &Playlist::buttonPressed);
+	add(loopModeButton);
+	setLoopMode(LoopMode::all_repeat);
 
 
 	shuffleToggle = new FaToggleButton(ofxFontAwesome::random, ofxFontAwesome::random, 0, 0, 30, 30);
@@ -119,8 +107,8 @@ void Playlist::layout(){
 	mui::L(header).posTL(0,-header->height).stretchToRightEdgeOfParent();
 	mui::L(addFileButton).below(header, 1);
 	mui::L(clearButton).rightOf(addFileButton, 1);
-	mui::L(loopModeSelect).rightOf(clearButton, 15);
-	mui::L(shuffleToggle).rightOf(loopModeSelect, 15);
+	mui::L(loopModeButton).rightOf(clearButton, 15);
+	mui::L(shuffleToggle).rightOf(loopModeButton, 1);
 
 	mui::L(scroller).below(addFileButton).stretchToRightEdgeOfParent().stretchToBottomEdgeOfParent(30);
 	
@@ -291,29 +279,31 @@ pair<size_t, string> Playlist::getNextItem(size_t itemId) {
 }
 
 pair<size_t, string> Playlist::getNextItemInPlaylist( size_t itemId ){
-	switch (loopModeSelect->getSelectedValueOr(LoopMode::abcd)) {
-	case LoopMode::abcd: {
+	LoopMode * btnMode = loopModeButton->getProperty<LoopMode>("loop_mode");
+	LoopMode mode = btnMode ? *btnMode : LoopMode::all_repeat; 
+
+
+	if (shuffleToggle->selected && mode != LoopMode::one_repeat) {
+		auto & children = scroller->view->children;
+		if (children.size() == 0) return{ 0,"" };
+
+		auto idx = rand() % children.size();
+		auto item = dynamic_cast<PlaylistItem*>(children[idx]);
+		if (item) return{ item->itemId, filenames.find(item->itemId)->second };
+		else return{ 0, "" };
+	}
+
+	switch (mode) {
+	case LoopMode::all_once: {
 		return getNextItem(itemId);
 	}
-	case LoopMode::abab: {
+	case LoopMode::all_repeat: {
 		auto res = getNextItem(itemId);
 		if (res.first == 0) res = getNextItem(res.first);
 		return res;
 	}
-	case LoopMode::a: {
-		return{ 0,"" };
-	}
-	case LoopMode::aaaa: {
+	case LoopMode::one_repeat: {
 		return{ itemId,getItemPath(itemId) };
-	}
-	case LoopMode::random: {
-		auto & children = scroller->view->children; 
-		if (children.size() == 0) return{ 0,"" };
-		
-		auto idx = rand() % children.size(); 
-		auto item = dynamic_cast<PlaylistItem*>(children[idx]);
-		if (item) return{ item->itemId, filenames.find(item->itemId)->second };
-		else return {0, ""};
 	}
 	}
 
@@ -326,6 +316,25 @@ string Playlist::getItemPath( size_t itemId ){
 	return it == filenames.end()? "":it->second;
 }
 
+void Playlist::setLoopMode(LoopMode mode) {
+	loopModeButton->setProperty("loop_mode", mode);
+
+	switch (mode) {
+	case LoopMode::all_once:
+		loopModeButton->label->fontName = ofxFontAwesome4::_filename;
+		loopModeButton->label->setText(ofxFontAwesome4::sort_alpha_asc);
+		break;
+	case LoopMode::all_repeat:
+		loopModeButton->label->fontName = ofxFontAwesome4::_filename;
+		loopModeButton->label->setText(ofxFontAwesome4::repeat);
+		break;
+	case LoopMode::one_repeat:
+		loopModeButton->label->fontName = "";
+		loopModeButton->label->setText("1");
+		break;
+	}
+}
+
 void Playlist::buttonPressed(const void * sender, ofTouchEventArgs & args) {
 	if (sender == clearButton) {
 		removeAllFiles();
@@ -334,6 +343,16 @@ void Playlist::buttonPressed(const void * sender, ofTouchEventArgs & args) {
 		auto res = ofSystemLoadDialog("Add Folder", true);
 		if (res.bSuccess) {
 			addFile(ofFile(res.filePath, ofFile::ReadOnly));
+		}
+	}
+	else if (sender == loopModeButton) {
+		LoopMode * btnMode = loopModeButton->getProperty<LoopMode>("loop_mode");
+		LoopMode mode = btnMode ? *btnMode : LoopMode::all_repeat;
+
+		switch (mode) {
+		case LoopMode::all_once: setLoopMode(LoopMode::all_repeat); break;
+		case LoopMode::all_repeat: setLoopMode(LoopMode::one_repeat); break;
+		case LoopMode::one_repeat: setLoopMode(LoopMode::all_once); break;
 		}
 	}
 }

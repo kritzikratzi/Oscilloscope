@@ -39,11 +39,12 @@ public:
 	pair<size_t, string> getNextItemInPlaylist(size_t id);
 	string getItemPath(size_t id); 
 
-	enum class LoopMode { abcd, abab, a, aaaa, random };
+	enum class LoopMode { all_once, all_repeat, one_repeat };
 
 private:
 	pair<size_t, string> getNextItem(size_t id);
 
+	void setLoopMode(LoopMode mode); 
 	void buttonPressed(const void * sender, ofTouchEventArgs & args); 
 
 	mui::Label * header;
@@ -52,9 +53,8 @@ private:
 	size_t nextItemId = 1;
 	map<size_t, string> filenames; 
 
-	mui::SegmentedSelect<LoopMode> * loopModeSelect; 
+	FaButton * loopModeButton; 
 	FaToggleButton * shuffleToggle; 
-	FaToggleButton * loopButton; 
 	FaToggleButton * onlyOneButton; 
 
 	FaButton * clearButton;

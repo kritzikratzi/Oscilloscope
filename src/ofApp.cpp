@@ -424,7 +424,7 @@ void ofApp::draw(){
 	
 		ofEnableAlphaBlending();
 		
-		bool sideBySide = osciView->sideBySideToggle->selected;
+		bool sideBySide = osciView->sideBySideToggle->selected && globals.player.fileType == OsciAvAudioPlayer::QUAD;
 		bool flip3d = osciView->flip3dToggle->selected;
 		ofMatrix4x4 viewMatrix = getViewMatrix(flip3d?1:0,globals.player.fileType == OsciAvAudioPlayer::QUAD);
 		ofFloatColor color = ofFloatColor::fromHsb(globals.hue/360.0, 1, 1);
@@ -591,7 +591,7 @@ void ofApp::keyPressed  (int key){
 	}
 	
 	if( key == 'p' ){
-		playlistEnable ^= true;
+		gotMessage(ofMessage("toggle-playlist"));
 	}
 	
 	if( ofGetKeyPressed(MUI_KEY_ACTION) && key == ',' ){
@@ -736,6 +736,10 @@ void ofApp::gotMessage(ofMessage msg){
 	else if( msg.message == "next-timecode-style"){
 		
 	}
+	else if (msg.message == "toggle-playlist") {
+		playlistEnable ^= true; 
+		osciView->showPlaylistToggle->selected = playlistEnable;
+	}
 }
 
 //--------------------------------------------------------------
@@ -776,7 +780,7 @@ ofMatrix4x4 ofApp::getViewMatrix(int i, bool isQuad) {
 
 	if (aspectRatio < 1.0) scale *= aspectRatio;
 	ofMatrix4x4 result = ofMatrix4x4(
-		scale/aspectRatio*(osciView->sideBySideToggle->selected?0.5:1), 0.0, 0.0, 0.0,
+		scale/aspectRatio*((isQuad && osciView->sideBySideToggle->selected)?0.5:1), 0.0, 0.0, 0.0,
 		0.0, -scale, 0.0, 0.0,
 		0.0, 0.0, 1.0, 0.0,
 		dx, 1.0 - h/gh, 0.0, 1.0);
