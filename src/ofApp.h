@@ -11,7 +11,7 @@
 #include "util/Audio.h"
 #include "ofxAvAudioPlayer.h"
 #include "OsciMesh.h"
-
+#include "ofxSpout.h"
 
 class ofApp : public ofBaseApp{
 
@@ -50,7 +50,9 @@ class ofApp : public ofBaseApp{
 		bool playlistEnable = false;
 		OsciMesh mesh;
 		OsciMesh mesh2;  // for stereoscopic viewing
+		
 		ofFbo fbo;
+		ofxSpout::Sender spoutSender; 
 	
 		// storage for mic buffers
 		int micChannels = 2;

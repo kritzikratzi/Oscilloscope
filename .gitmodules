@@ -13,3 +13,6 @@
 [submodule "addons/ofxNative"]
 	path = addons/ofxNative
 	url = https://github.com/kritzikratzi/ofxNative.git
+[submodule "addons/ofxSpout"]
+	path = addons/ofxSpout
+	url = https://github.com/elliotwoods/ofxSpout.git

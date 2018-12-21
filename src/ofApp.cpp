@@ -15,6 +15,7 @@ bool applicationRunning = false;
 void ofApp::setup(){
 	OsciMesh::init();
 	
+	spoutSender.init("Oscilloscope"); 
 	mui::MuiConfig::fontSize = 16;
 	showInfo = false;
 	dropped = 0;
@@ -40,7 +41,7 @@ void ofApp::setup(){
 		// see if we have a "next" item
 		//git-forbid do this on the right thread!
 		if(playlistEnable){
-			auto next = playlist->getNextItem(globals.currentlyPlayingItem);
+			auto next = playlist->getNextItemInPlaylist(globals.currentlyPlayingItem);
 			if(next.first > 0){
 				fileToLoad = next.second;
 				globals.currentlyPlayingItem = next.first;
@@ -203,7 +204,7 @@ void ofApp::update(){
 	else ofHideCursor();
 	
 	// center the ui
-	if (osciView->sideBySide->selected && globals.player.fileType == OsciAvAudioPlayer::QUAD ) {
+	if (osciView->sideBySideToggle->selected && globals.player.fileType == OsciAvAudioPlayer::QUAD ) {
 		osciView->x = ofGetWidth() / mui::MuiConfig::scaleFactor * 1 / 4.0f - osciView->width / 2;
 	}
 	else {
@@ -211,6 +212,17 @@ void ofApp::update(){
 	}
 	osciView->y = ofGetHeight() / mui::MuiConfig::scaleFactor - osciView->height - 60;
 
+	// layout playlist
+	{
+		playlist->x = osciView->x + osciView->width + 5;
+		playlist->y = osciView->y;
+		float w = max(10.0f, muiGetWidth() - playlist->x - 30);
+		if (playlist->width != w) {
+			playlist->width = w; 
+			playlist->height = osciView->height; 
+			playlist->handleLayout(); 
+		}
+	}
 
 	/////////////////////////////////////////////////
 	
@@ -305,9 +317,9 @@ void ofApp::update(){
 		(globals.micActive && micChannels == 3);
 	bool isQuad = !globals.micActive && globals.player.fileType == OsciAvAudioPlayer::QUAD;
 	
-	osciView->sideBySide->visible = isQuad; 
-	osciView->flip3d->visible = isQuad;
-	osciView->zModulation->visible = isZModulated;
+	osciView->sideBySideToggle->visible = isQuad;
+	osciView->flip3dToggle->visible = isQuad;
+	osciView->zModulationToggle->visible = isZModulated;
 	
 	
 	static double T0 = ofGetElapsedTimeMillis();
@@ -412,8 +424,8 @@ void ofApp::draw(){
 	
 		ofEnableAlphaBlending();
 		
-		bool sideBySide = osciView->sideBySide->selected;
-		bool flip3d = osciView->flip3d->selected;
+		bool sideBySide = osciView->sideBySideToggle->selected;
+		bool flip3d = osciView->flip3dToggle->selected;
 		ofMatrix4x4 viewMatrix = getViewMatrix(flip3d?1:0,globals.player.fileType == OsciAvAudioPlayer::QUAD);
 		ofFloatColor color = ofFloatColor::fromHsb(globals.hue/360.0, 1, 1);
 
@@ -443,7 +455,8 @@ void ofApp::draw(){
 	
 	ofSetColor(255);
 	fbo.draw(0,0);
-	
+	spoutSender.send(fbo.getTexture()); 
+
 	if( exporting >= 2 ){
 		string filename = ofToDataPath(exportDir + "/" + ofToString(exportFrameNum, 5, '0') + ".tiff");
 		ofPixels pixels;
@@ -508,10 +521,6 @@ void ofApp::draw(){
 			path.arc({0,0}, size, size, ofMap(t,0.5,1,0,359,true), ofMap(t,0,0.5,1,360,true));
 			path.close();
 			path.setFillColor(ofColor(255,150*alpha));
-//			path.setFilled(false);
-//			path.setStrokeWidth(1);
-			//			float alpha = ofMap(t,0,0.1,0,1,true)*ofMap(t,0.9,1,1,0,true);
-//			path.setStrokeColor(ofColor(255,alpha*255));
 			path.draw();
 
 			ofSetColor(255);
@@ -547,11 +556,11 @@ void ofApp::keyPressed  (int key){
 
 	if( key == 'f' || (ofGetKeyPressed(OF_KEY_ALT) && key == OF_KEY_RETURN) || key == OF_KEY_F11 ){
 		// nasty!
-		osciView->fullscreenButton->clickAndNotify(); 
+		osciView->fullscreenToggle->clickAndNotify();
 	}
 	
 	if( key == OF_KEY_ESC ){
-		osciView->fullscreenButton->clickAndNotify(false);
+		osciView->fullscreenToggle->clickAndNotify(false);
 	}
 	
 	if( key == ' '  ){
@@ -755,19 +764,19 @@ ofMatrix4x4 ofApp::getViewMatrix(int i, bool isQuad) {
 
 	float gw = fbo.getWidth();
 	float gh = fbo.getHeight();
-	float w = gw*(osciView->sideBySide->selected && isQuad? 0.5 : 1);
+	float w = gw*(osciView->sideBySideToggle->selected && isQuad? 0.5 : 1);
 	float h = gh;
 	float aspectRatio = float(gw) / float(gh);
 	float scale = min(w / gw, h / gh)*globals.scale;
 
 	float dx = 0;
-	if (osciView->sideBySide->selected && isQuad) {
+	if (osciView->sideBySideToggle->selected && isQuad) {
 		dx = i == 0 ? -0.5 : 0.5;
 	}
 
 	if (aspectRatio < 1.0) scale *= aspectRatio;
 	ofMatrix4x4 result = ofMatrix4x4(
-		scale/aspectRatio*(osciView->sideBySide->selected?0.5:1), 0.0, 0.0, 0.0,
+		scale/aspectRatio*(osciView->sideBySideToggle->selected?0.5:1), 0.0, 0.0, 0.0,
 		0.0, -scale, 0.0, 0.0,
 		0.0, 0.0, 1.0, 0.0,
 		dx, 1.0 - h/gh, 0.0, 1.0);

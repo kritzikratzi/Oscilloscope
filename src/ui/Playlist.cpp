@@ -10,13 +10,19 @@
 #include "MuiL.h"
 #include "ofxAvUtils.h"
 #include "../globals.h"
+#include "ofxFontAwesome.h"
+#include "FaButton.h"
+#include "FaToggleButton.h"
 
 Playlist::Playlist() : mui::Container(0,0,300,500){
 	name = "playlist";
-	
+	bg = ofColor(125, 50);
+	opaque = true;
+
 	header = new mui::Label("Playlist");
 	header->fontSize = 20;
-	header->sizeToFitHeight();
+	header->height = 30;
+	header->commit(); 
 	add(header);
 	
 	scroller = new mui::ScrollPane();
@@ -24,6 +30,48 @@ Playlist::Playlist() : mui::Container(0,0,300,500){
 	scroller->canScrollY = true;
 	scroller->view->layoutHandler = new mui::RowLayout(1);
 	add(scroller);
+
+	
+	auto tweak = [](mui::SegmentedButton<LoopMode> * btn, const string & filename ) {
+		btn->label->fontName = filename;
+		//btn->label->verticalAlignUseBaseline = false;
+		btn->label->fontSize = 8; 
+		btn->label->commit(); 
+	};
+
+	loopModeSelect = new mui::SegmentedSelect<LoopMode>(0,0,60*5,30);
+	loopModeSelect->equallySizedButtons = true; 
+	loopModeSelect->buttonSeparatorColor = ofColor(125, 50);
+	loopModeSelect->buttonBgDefault = ofColor(128, 50);
+	loopModeSelect->buttonBgSelected = ofColor(255);
+	loopModeSelect->buttonFgDefault = ofColor(255);
+	loopModeSelect->buttonFgSelected = ofColor(0); 
+	loopModeSelect->buttonFontName = "";
+//	tweak(loopModeSelect->addSegment(ofxFontAwesome4::sort_alpha_asc, LoopMode::ONCE), ofxFontAwesome4::_filename);
+//	tweak(loopModeSelect->addSegment(ofxFontAwesome4::repeat, LoopMode::ALL), ofxFontAwesome4::_filename);
+	tweak(loopModeSelect->addSegment("abcd", LoopMode::abcd), "");
+	tweak(loopModeSelect->addSegment("abab", LoopMode::abab), "");
+	tweak(loopModeSelect->addSegment("a", LoopMode::a), "");
+	tweak(loopModeSelect->addSegment("aaaa", LoopMode::aaaa), "");
+	tweak(loopModeSelect->addSegment("????", LoopMode::random), "");
+	add(loopModeSelect);
+
+
+	shuffleToggle = new FaToggleButton(ofxFontAwesome::random, ofxFontAwesome::random, 0, 0, 30, 30);
+	ofAddListener(shuffleToggle->onPress, this, &Playlist::buttonPressed);
+	add(shuffleToggle);
+
+	clearButton = new FaButton(ofxFontAwesome::trash,0,0,30,30);
+	clearButton->label->inset.top = -4;
+	ofAddListener(clearButton->onPress, this, &Playlist::buttonPressed);
+	add(clearButton); 
+
+	addFileButton = new FaButton(ofxFontAwesome::folder_open,0,0,30,30);
+	addFileButton->label->inset.top = -2;
+	addFileButton->label->inset.left = 2;
+	ofAddListener(addFileButton->onPress, this, &Playlist::buttonPressed);
+	add(addFileButton); 
+
 }
 
 Playlist::~Playlist(){
@@ -68,8 +116,15 @@ void Playlist::draw(){
 }
 
 void Playlist::layout(){
-	mui::L(header).posTL(0,0).stretchToRightEdgeOfParent();
-	mui::L(scroller).below(header).stretchToRightEdgeOfParent().stretchToBottomEdgeOfParent();
+	mui::L(header).posTL(0,-header->height).stretchToRightEdgeOfParent();
+	mui::L(addFileButton).below(header, 1);
+	mui::L(clearButton).rightOf(addFileButton, 1);
+	mui::L(loopModeSelect).rightOf(clearButton, 15);
+	mui::L(shuffleToggle).rightOf(loopModeSelect, 15);
+
+	mui::L(scroller).below(addFileButton).stretchToRightEdgeOfParent().stretchToBottomEdgeOfParent(30);
+	
+
 	
 }
 
@@ -213,30 +268,55 @@ void Playlist::load(istream & in){
 	scroller->commit();
 }
 
+pair<size_t, string> Playlist::getNextItem(size_t itemId) {
+	bool takeNext = false; 
 
-pair<size_t, string> Playlist::getNextItem( size_t itemId ){
-	size_t bestItemId = 0;
-	size_t bestId = 0;
-	
-	bool takeNext = false;
-	size_t firstId = 0;
-	string firstPath = "";
-	
-	for( auto el : scroller->view->children ){
+	for (auto el : scroller->view->children) {
 		PlaylistItem * item = dynamic_cast<PlaylistItem*>(el);
-		if(item){
-			if(itemId == 0){
-				return {item->itemId, item->file.getAbsolutePath()};
+		if (item) {
+			if (itemId == 0) {
+				return{ item->itemId, item->file.getAbsolutePath() };
 			}
-			
-			if(item->itemId == itemId){
+
+			if (item->itemId == itemId) {
 				takeNext = true;
 			}
-			else if(takeNext){
-				return {item->itemId, item->file.getAbsolutePath()};
+			else if (takeNext) {
+				return{ item->itemId, item->file.getAbsolutePath() };
 			}
 		}
 	}
+
+	return{ 0,"" };
+}
+
+pair<size_t, string> Playlist::getNextItemInPlaylist( size_t itemId ){
+	switch (loopModeSelect->getSelectedValueOr(LoopMode::abcd)) {
+	case LoopMode::abcd: {
+		return getNextItem(itemId);
+	}
+	case LoopMode::abab: {
+		auto res = getNextItem(itemId);
+		if (res.first == 0) res = getNextItem(res.first);
+		return res;
+	}
+	case LoopMode::a: {
+		return{ 0,"" };
+	}
+	case LoopMode::aaaa: {
+		return{ itemId,getItemPath(itemId) };
+	}
+	case LoopMode::random: {
+		auto & children = scroller->view->children; 
+		if (children.size() == 0) return{ 0,"" };
+		
+		auto idx = rand() % children.size(); 
+		auto item = dynamic_cast<PlaylistItem*>(children[idx]);
+		if (item) return{ item->itemId, filenames.find(item->itemId)->second };
+		else return {0, ""};
+	}
+	}
+
 	
 	return {0,""};
 }
@@ -246,13 +326,30 @@ string Playlist::getItemPath( size_t itemId ){
 	return it == filenames.end()? "":it->second;
 }
 
+void Playlist::buttonPressed(const void * sender, ofTouchEventArgs & args) {
+	if (sender == clearButton) {
+		removeAllFiles();
+	}
+	else if (sender == addFileButton) {
+		auto res = ofSystemLoadDialog("Add Folder", true);
+		if (res.bSuccess) {
+			addFile(ofFile(res.filePath, ofFile::ReadOnly));
+		}
+	}
+}
+
+
+
+
+
+
 
 
 PlaylistItem::PlaylistItem(size_t itemId, ofFile file, double duration) : mui::Label(file.getFileName()), itemId(itemId), file(file){
 	opaque = true;
 	ignoreEvents = false;
 	fontSize = 10;
-	inset.left = 5;
+	inset.left = 25;
 	
 	if(duration >= 0){
 		this->duration = duration;
