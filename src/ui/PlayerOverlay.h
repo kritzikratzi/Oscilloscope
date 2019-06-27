@@ -31,13 +31,14 @@ public:
 	FaButton * stopButton;
 	mui::SliderWithLabel * scaleSlider;
 	
-	FaToggleButton * fullscreenButton; // toggle fs
-	FaToggleButton * flipXY; // flip x with y axis
-	FaToggleButton * invertX; // mirror around x axis
-	FaToggleButton * invertY; // mirror around y axis
-	FaToggleButton * sideBySide; // for 3d: toggle side by side mode and anagylph3d mode
-	FaToggleButton * flip3d; // for 3d: swap left and right channels
-	FaToggleButton * zModulation; // enable variable brightness control in 3 channel files
+	FaToggleButton * fullscreenToggle; // toggle fs
+	FaToggleButton * flipXYToggle; // flip x with y axis
+	FaToggleButton * invertXToggle; // mirror around x axis
+	FaToggleButton * invertYToggle; // mirror around y axis
+	FaToggleButton * sideBySideToggle; // for 3d: toggle side by side mode and anagylph3d mode
+	FaToggleButton * flip3dToggle; // for 3d: swap left and right channels
+	FaToggleButton * zModulationToggle; // enable variable brightness control in 3 channel files
+	FaToggleButton * showPlaylistToggle; // show playlist
 
 	FaToggleButton * playButton;
 	mui::Slider * timeSlider;

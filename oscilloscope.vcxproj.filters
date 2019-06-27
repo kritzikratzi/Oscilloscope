@@ -28,9 +28,6 @@
     <ClCompile Include="src\ui\FMenu.cpp">
       <Filter>src\ui</Filter>
     </ClCompile>
-    <ClCompile Include="src\ui\OsciView.cpp">
-      <Filter>src\ui</Filter>
-    </ClCompile>
     <ClCompile Include="src\util\Audio.cpp">
       <Filter>src\util</Filter>
     </ClCompile>
@@ -57,6 +54,18 @@
     </ClCompile>
     <ClCompile Include="addons\ofxFontStash2\libs\pugixml\src\pugixml.cpp">
       <Filter>addons\ofxFontStash2\libs\pugixml\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OsciMesh.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ui\PlayerOverlay.cpp">
+      <Filter>src\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="addons\ofxNative\src\ofxNative_win.cpp">
+      <Filter>addons\ofxNative\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ui\Playlist.cpp">
+      <Filter>src\ui</Filter>
     </ClCompile>
     <ClCompile Include="addons\ofxMightyUI\src\BarButton.cpp">
       <Filter>addons\ofxMightyUI\src</Filter>
@@ -94,6 +103,18 @@
     <ClCompile Include="addons\ofxMightyUI\src\MuiCore.cpp">
       <Filter>addons\ofxMightyUI\src</Filter>
     </ClCompile>
+    <ClCompile Include="addons\ofxMightyUI\src\MuiEvents.cpp">
+      <Filter>addons\ofxMightyUI\src</Filter>
+    </ClCompile>
+    <ClCompile Include="addons\ofxMightyUI\src\MuiParameterPanel.cpp">
+      <Filter>addons\ofxMightyUI\src</Filter>
+    </ClCompile>
+    <ClCompile Include="addons\ofxMightyUI\src\MuiTextArea.cpp">
+      <Filter>addons\ofxMightyUI\src</Filter>
+    </ClCompile>
+    <ClCompile Include="addons\ofxMightyUI\src\ofxMightyUI.cpp">
+      <Filter>addons\ofxMightyUI\src</Filter>
+    </ClCompile>
     <ClCompile Include="addons\ofxMightyUI\src\Root.cpp">
       <Filter>addons\ofxMightyUI\src</Filter>
     </ClCompile>
@@ -109,20 +130,47 @@
     <ClCompile Include="addons\ofxMightyUI\src\SliderWithLabel.cpp">
       <Filter>addons\ofxMightyUI\src</Filter>
     </ClCompile>
-    <ClCompile Include="addons\ofxMightyUI\src\TextField.cpp">
-      <Filter>addons\ofxMightyUI\src</Filter>
-    </ClCompile>
     <ClCompile Include="addons\ofxMightyUI\src\TextureAtlas.cpp">
       <Filter>addons\ofxMightyUI\src</Filter>
     </ClCompile>
     <ClCompile Include="addons\ofxMightyUI\src\ToggleButton.cpp">
       <Filter>addons\ofxMightyUI\src</Filter>
     </ClCompile>
-    <ClCompile Include="addons\ofxMightyUI\src\ofxMightyUI.cpp">
-      <Filter>addons\ofxMightyUI\src</Filter>
+    <ClCompile Include="addons\ofxSpout\src\ofxSpout\Sender.cpp">
+      <Filter>addons\ofxSpout\src\ofxSpout</Filter>
     </ClCompile>
-    <ClCompile Include="src\OsciMesh.cpp">
-      <Filter>src</Filter>
+    <ClCompile Include="addons\ofxSpout\src\ofxSpout\Utils.cpp">
+      <Filter>addons\ofxSpout\src\ofxSpout</Filter>
+    </ClCompile>
+    <ClCompile Include="addons\ofxSpout\src\ofxSpout\Receiver.cpp">
+      <Filter>addons\ofxSpout\src\ofxSpout</Filter>
+    </ClCompile>
+    <ClCompile Include="addons\ofxSpout\libs\SpoutSDK\src\SpoutMemoryShare.cpp">
+      <Filter>addons\ofxSpout\libs\SpoutSDK\src</Filter>
+    </ClCompile>
+    <ClCompile Include="addons\ofxSpout\libs\SpoutSDK\src\SpoutReceiver.cpp">
+      <Filter>addons\ofxSpout\libs\SpoutSDK\src</Filter>
+    </ClCompile>
+    <ClCompile Include="addons\ofxSpout\libs\SpoutSDK\src\SpoutSDK.cpp">
+      <Filter>addons\ofxSpout\libs\SpoutSDK\src</Filter>
+    </ClCompile>
+    <ClCompile Include="addons\ofxSpout\libs\SpoutSDK\src\SpoutSender.cpp">
+      <Filter>addons\ofxSpout\libs\SpoutSDK\src</Filter>
+    </ClCompile>
+    <ClCompile Include="addons\ofxSpout\libs\SpoutSDK\src\SpoutSenderNames.cpp">
+      <Filter>addons\ofxSpout\libs\SpoutSDK\src</Filter>
+    </ClCompile>
+    <ClCompile Include="addons\ofxSpout\libs\SpoutSDK\src\SpoutSharedMemory.cpp">
+      <Filter>addons\ofxSpout\libs\SpoutSDK\src</Filter>
+    </ClCompile>
+    <ClCompile Include="addons\ofxSpout\libs\SpoutSDK\src\SpoutDirectX.cpp">
+      <Filter>addons\ofxSpout\libs\SpoutSDK\src</Filter>
+    </ClCompile>
+    <ClCompile Include="addons\ofxSpout\libs\SpoutSDK\src\SpoutGLDXinterop.cpp">
+      <Filter>addons\ofxSpout\libs\SpoutSDK\src</Filter>
+    </ClCompile>
+    <ClCompile Include="addons\ofxSpout\libs\SpoutSDK\src\SpoutGLextensions.cpp">
+      <Filter>addons\ofxSpout\libs\SpoutSDK\src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -213,6 +261,39 @@
     <Filter Include="addons\ofxMightyUI\src">
       <UniqueIdentifier>{C8E6E662-2080-A88C-9A10-84A1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="addons\ofxNative">
+      <UniqueIdentifier>{aada972c-6450-40aa-b93e-d64237e47a6f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxNative\src">
+      <UniqueIdentifier>{a5e95c0e-3fd9-4fd8-93e0-f0c312672e3b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxMightyUI\libs">
+      <UniqueIdentifier>{8f36c2c7-2dbc-4a2e-9295-0a5306e8f66e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxMightyUI\libs\stb_textedit">
+      <UniqueIdentifier>{339ca615-0802-4cbe-b7ec-db275fa3577a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxMightyUI\libs\stb_textedit\include">
+      <UniqueIdentifier>{c9026445-14d8-45ac-83af-cad760930495}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxSpout">
+      <UniqueIdentifier>{e7cdbb62-96db-47c8-82dd-78dd108f68a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxSpout\src">
+      <UniqueIdentifier>{ccafc47b-beb7-4b43-86ad-1fd7bca5dfa5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxSpout\src\ofxSpout">
+      <UniqueIdentifier>{554b2960-3a2e-4ece-a72e-f9b7c5136cac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxSpout\libs">
+      <UniqueIdentifier>{24de2205-889e-4294-99ef-06189bb6c844}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxSpout\libs\SpoutSDK">
+      <UniqueIdentifier>{d332f333-ee75-400a-8477-d3bede1ae142}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxSpout\libs\SpoutSDK\src">
+      <UniqueIdentifier>{9c6a3d2e-8132-4773-9eb5-8f4f06b8b07f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\ofApp.h">
@@ -243,9 +324,6 @@
       <Filter>src\ui</Filter>
     </ClInclude>
     <ClInclude Include="src\ui\L.h">
-      <Filter>src\ui</Filter>
-    </ClInclude>
-    <ClInclude Include="src\ui\OsciView.h">
       <Filter>src\ui</Filter>
     </ClInclude>
     <ClInclude Include="src\util\Audio.h">
@@ -584,6 +662,19 @@
     <ClInclude Include="addons\ofxFontStash2\libs\pugixml\src\pugixml.hpp">
       <Filter>addons\ofxFontStash2\libs\pugixml\src</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="src\OsciMesh.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ui\PlayerOverlay.h">
+      <Filter>src\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="addons\ofxNative\src\ofxNative.h">
+      <Filter>addons\ofxNative\src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ui\Playlist.h">
+      <Filter>src\ui</Filter>
+    </ClInclude>
     <ClInclude Include="addons\ofxMightyUI\src\BarButton.h">
       <Filter>addons\ofxMightyUI\src</Filter>
     </ClInclude>
@@ -620,6 +711,21 @@
     <ClInclude Include="addons\ofxMightyUI\src\MuiCore.h">
       <Filter>addons\ofxMightyUI\src</Filter>
     </ClInclude>
+    <ClInclude Include="addons\ofxMightyUI\src\muievents.h">
+      <Filter>addons\ofxMightyUI\src</Filter>
+    </ClInclude>
+    <ClInclude Include="addons\ofxMightyUI\src\MuiL.h">
+      <Filter>addons\ofxMightyUI\src</Filter>
+    </ClInclude>
+    <ClInclude Include="addons\ofxMightyUI\src\MuiParameterPanel.h">
+      <Filter>addons\ofxMightyUI\src</Filter>
+    </ClInclude>
+    <ClInclude Include="addons\ofxMightyUI\src\MuiTextArea.h">
+      <Filter>addons\ofxMightyUI\src</Filter>
+    </ClInclude>
+    <ClInclude Include="addons\ofxMightyUI\src\ofxMightyUI.h">
+      <Filter>addons\ofxMightyUI\src</Filter>
+    </ClInclude>
     <ClInclude Include="addons\ofxMightyUI\src\Root.h">
       <Filter>addons\ofxMightyUI\src</Filter>
     </ClInclude>
@@ -635,21 +741,65 @@
     <ClInclude Include="addons\ofxMightyUI\src\SliderWithLabel.h">
       <Filter>addons\ofxMightyUI\src</Filter>
     </ClInclude>
-    <ClInclude Include="addons\ofxMightyUI\src\TextField.h">
-      <Filter>addons\ofxMightyUI\src</Filter>
-    </ClInclude>
     <ClInclude Include="addons\ofxMightyUI\src\TextureAtlas.h">
       <Filter>addons\ofxMightyUI\src</Filter>
     </ClInclude>
     <ClInclude Include="addons\ofxMightyUI\src\ToggleButton.h">
       <Filter>addons\ofxMightyUI\src</Filter>
     </ClInclude>
-    <ClInclude Include="addons\ofxMightyUI\src\ofxMightyUI.h">
-      <Filter>addons\ofxMightyUI\src</Filter>
+    <ClInclude Include="addons\ofxMightyUI\libs\stb_textedit\include\stb_textedit\stb_textedit.h">
+      <Filter>addons\ofxMightyUI\libs\stb_textedit\include</Filter>
     </ClInclude>
-    <ClInclude Include="resource.h" />
-    <ClInclude Include="src\OsciMesh.h">
-      <Filter>src</Filter>
+    <ClInclude Include="addons\ofxSpout\src\ofxSpout.h">
+      <Filter>addons\ofxSpout\src</Filter>
+    </ClInclude>
+    <ClInclude Include="addons\ofxSpout\src\ofxSpout\Receiver.h">
+      <Filter>addons\ofxSpout\src\ofxSpout</Filter>
+    </ClInclude>
+    <ClInclude Include="addons\ofxSpout\src\ofxSpout\Sender.h">
+      <Filter>addons\ofxSpout\src\ofxSpout</Filter>
+    </ClInclude>
+    <ClInclude Include="addons\ofxSpout\src\ofxSpout\Utils.h">
+      <Filter>addons\ofxSpout\src\ofxSpout</Filter>
+    </ClInclude>
+    <ClInclude Include="addons\ofxSpout\libs\SpoutSDK\src\SpoutGLextensions.h">
+      <Filter>addons\ofxSpout\libs\SpoutSDK\src</Filter>
+    </ClInclude>
+    <ClInclude Include="addons\ofxSpout\libs\SpoutSDK\src\SpoutMemoryShare.h">
+      <Filter>addons\ofxSpout\libs\SpoutSDK\src</Filter>
+    </ClInclude>
+    <ClInclude Include="addons\ofxSpout\libs\SpoutSDK\src\SpoutReceiver.h">
+      <Filter>addons\ofxSpout\libs\SpoutSDK\src</Filter>
+    </ClInclude>
+    <ClInclude Include="addons\ofxSpout\libs\SpoutSDK\src\SpoutSDK.h">
+      <Filter>addons\ofxSpout\libs\SpoutSDK\src</Filter>
+    </ClInclude>
+    <ClInclude Include="addons\ofxSpout\libs\SpoutSDK\src\SpoutSender.h">
+      <Filter>addons\ofxSpout\libs\SpoutSDK\src</Filter>
+    </ClInclude>
+    <ClInclude Include="addons\ofxSpout\libs\SpoutSDK\src\SpoutSenderNames.h">
+      <Filter>addons\ofxSpout\libs\SpoutSDK\src</Filter>
+    </ClInclude>
+    <ClInclude Include="addons\ofxSpout\libs\SpoutSDK\src\SpoutSharedMemory.h">
+      <Filter>addons\ofxSpout\libs\SpoutSDK\src</Filter>
+    </ClInclude>
+    <ClInclude Include="addons\ofxSpout\libs\SpoutSDK\src\Spout.h">
+      <Filter>addons\ofxSpout\libs\SpoutSDK\src</Filter>
+    </ClInclude>
+    <ClInclude Include="addons\ofxSpout\libs\SpoutSDK\src\SpoutCommon.h">
+      <Filter>addons\ofxSpout\libs\SpoutSDK\src</Filter>
+    </ClInclude>
+    <ClInclude Include="addons\ofxSpout\libs\SpoutSDK\src\SpoutDirectX.h">
+      <Filter>addons\ofxSpout\libs\SpoutSDK\src</Filter>
+    </ClInclude>
+    <ClInclude Include="addons\ofxSpout\libs\SpoutSDK\src\SpoutGLDXinterop.h">
+      <Filter>addons\ofxSpout\libs\SpoutSDK\src</Filter>
+    </ClInclude>
+    <ClInclude Include="addons\ofxFontAwesome\src\ofxFontAwesome4.h">
+      <Filter>addons\ofxFontAwesome\src</Filter>
+    </ClInclude>
+    <ClInclude Include="addons\ofxFontAwesome\src\ofxFontAwesome5.h">
+      <Filter>addons\ofxFontAwesome\src</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

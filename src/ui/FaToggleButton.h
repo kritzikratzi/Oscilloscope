@@ -4,7 +4,8 @@
 //
 //  Created by Hansi on 04.04.15.
 //
-//
+// 20.12.2018: added optional fontName argument. this makes it easy to use with multiple versions of fontawesome
+
 
 #ifndef FaToggleButton_h
 #define FaToggleButton_h
@@ -14,11 +15,11 @@
 
 class FaToggleButton : public mui::ToggleButton{
 public:
-	FaToggleButton( string icon, string selectedIcon, float x = 0, float y = 0, float width = 100, float height = 20 ) :
+	FaToggleButton( string icon, string selectedIcon, float x = 0, float y = 0, float width = 100, float height = 20, const string & fontName = "fontawesome-webfont.ttf" ) :
 	mui::ToggleButton(icon, x, y, width, height ), wasSelected(false){
 		this->icon = icon;
 		this->selectedIcon = selectedIcon;
-		this->label->fontName = "fontawesome-webfont.ttf";
+		this->label->fontName = fontName;
 		this->label->commit();
 		this->fg = ofColor(255); 
 		

@@ -11,6 +11,7 @@
 #include "util/Audio.h"
 #include "ofxAvAudioPlayer.h"
 #include "OsciMesh.h"
+#include "util/TexShare.h"
 
 class ExportScreen;
 enum class ExportFormat;
@@ -58,7 +59,9 @@ class ofApp : public ofBaseApp{
 		bool playlistEnable = false;
 		OsciMesh mesh;
 		OsciMesh mesh2;  // for stereoscopic viewing
+		
 		ofFbo fbo;
+		TexShare texSender;
 	
 		// storage for mic buffers
 		int micChannels = 2;

@@ -175,7 +175,9 @@ void ConfigView::buttonPressed( const void * sender, ofTouchEventArgs & args ){
 bool ConfigView::keyPressed( ofKeyEventArgs &key){
 	if(key.key == OF_KEY_RETURN){
 		startButton->clickAndNotify();
+		return true; 
 	}
+	else return false; 
 }
 
 

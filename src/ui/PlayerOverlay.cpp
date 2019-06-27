@@ -15,9 +15,7 @@ PlayerOverlay::PlayerOverlay( float x_, float y_, float width_, float height_)
 	opaque = true;
 	micMenu = NULL;
 
-	string xx = ofxFontAwesome::play; 
-	
-		stopButton = new FaButton( ofxFontAwesome::cogs, x, y, h, h );
+	stopButton = new FaButton( ofxFontAwesome::cogs, x, y, h, h );
 	ofAddListener( stopButton->onPress, this, &PlayerOverlay::buttonPressed );
 	y += stopButton->height + 10;
 	add( stopButton );
@@ -31,24 +29,24 @@ PlayerOverlay::PlayerOverlay( float x_, float y_, float width_, float height_)
 	
 	
 	w = 90;
-	flipXY = new FaToggleButton( ofxFontAwesome::repeat, ofxFontAwesome::repeat, x, y, h, h );
-	ofAddListener( flipXY->onPress, this, &PlayerOverlay::buttonPressed );
-	add( flipXY );
+	flipXYToggle = new FaToggleButton( ofxFontAwesome::repeat, ofxFontAwesome::repeat, x, y, h, h );
+	ofAddListener( flipXYToggle->onPress, this, &PlayerOverlay::buttonPressed );
+	add( flipXYToggle);
 	x += 100;
 	
-	invertX = new FaToggleButton( ofxFontAwesome::arrows_h, ofxFontAwesome::arrows_h, x, y, h, h );
-	ofAddListener( invertX->onPress, this, &PlayerOverlay::buttonPressed );
-	add( invertX );
+	invertXToggle = new FaToggleButton( ofxFontAwesome::arrows_h, ofxFontAwesome::arrows_h, x, y, h, h );
+	ofAddListener( invertXToggle->onPress, this, &PlayerOverlay::buttonPressed );
+	add( invertXToggle);
 	x += 100;
 	
-	invertY = new FaToggleButton( ofxFontAwesome::arrows_v, ofxFontAwesome::arrows_v, x, y, h, h );
-	ofAddListener( invertY->onPress, this, &PlayerOverlay::buttonPressed );
-	add( invertY );
+	invertYToggle = new FaToggleButton( ofxFontAwesome::arrows_v, ofxFontAwesome::arrows_v, x, y, h, h );
+	ofAddListener( invertYToggle->onPress, this, &PlayerOverlay::buttonPressed );
+	add( invertYToggle);
 	x += 100;
 	
-	fullscreenButton = new FaToggleButton( ofxFontAwesome::expand, ofxFontAwesome::compress, x, y, h, h );
-	ofAddListener( fullscreenButton->onPress, this, &PlayerOverlay::buttonPressed );
-	add( fullscreenButton );
+	fullscreenToggle = new FaToggleButton( ofxFontAwesome::expand, ofxFontAwesome::compress, x, y, h, h );
+	ofAddListener( fullscreenToggle->onPress, this, &PlayerOverlay::buttonPressed );
+	add( fullscreenToggle);
 	
 	loadFileButton = new FaButton( ofxFontAwesome::folder_open, x, y, h, h );
 	ofAddListener( loadFileButton->onPress, this, &PlayerOverlay::buttonPressed );
@@ -62,20 +60,24 @@ PlayerOverlay::PlayerOverlay( float x_, float y_, float width_, float height_)
 	ofAddListener( playButton->onPress, this, &PlayerOverlay::buttonPressed );
 	add( playButton );
 	
-	sideBySide = new FaToggleButton(ofxFontAwesome::cube, ofxFontAwesome::cube, 10, 1, h, h);
-	ofAddListener(sideBySide->onPress, this, &PlayerOverlay::buttonPressed);
-	add(sideBySide);
+	sideBySideToggle = new FaToggleButton(ofxFontAwesome::cube, ofxFontAwesome::cube, 10, 1, h, h);
+	ofAddListener(sideBySideToggle->onPress, this, &PlayerOverlay::buttonPressed);
+	add(sideBySideToggle);
 
-	flip3d = new FaToggleButton(ofxFontAwesome::exchange, ofxFontAwesome::exchange, 10, 1, h, h);
-	ofAddListener(flip3d->onPress, this, &PlayerOverlay::buttonPressed);
-	add(flip3d);
+	flip3dToggle = new FaToggleButton(ofxFontAwesome::exchange, ofxFontAwesome::exchange, 10, 1, h, h);
+	ofAddListener(flip3dToggle->onPress, this, &PlayerOverlay::buttonPressed);
+	add(flip3dToggle);
 
-	zModulation = new FaToggleButton(ofxFontAwesome::adjust, ofxFontAwesome::adjust, 10, 1, h, h);
-	ofAddListener(zModulation->onPress, this, &PlayerOverlay::buttonPressed);
-	add(zModulation);
+	zModulationToggle = new FaToggleButton(ofxFontAwesome::adjust, ofxFontAwesome::adjust, 10, 1, h, h);
+	ofAddListener(zModulationToggle->onPress, this, &PlayerOverlay::buttonPressed);
+	add(zModulationToggle);
+
+	showPlaylistToggle  = new FaToggleButton(ofxFontAwesome::list, ofxFontAwesome::list, 10, 1, h, h);
+	ofAddListener(showPlaylistToggle->onPress, this, &PlayerOverlay::buttonPressed);
+	add(showPlaylistToggle);
 
 	x = 10;
-	y += invertY->height + 10;
+	y += invertYToggle->height + 10;
 	
 	timeSlider = new mui::Slider( 0, 0, w, h );
 	add( timeSlider );
@@ -144,8 +146,8 @@ PlayerOverlay::PlayerOverlay( float x_, float y_, float width_, float height_)
 }
 
 void PlayerOverlay::layout(){
-	mui::L({stopButton,fullscreenButton}).columnsFromRight({width, 0},1);
-	mui::L({zModulation,flip3d,sideBySide}).columnsFromRight({stopButton->x-10,0},1);
+	mui::L({stopButton,fullscreenToggle, showPlaylistToggle }).columnsFromRight({width, 0},1);
+	mui::L({zModulationToggle,flip3dToggle,sideBySideToggle }).columnsFromRight({stopButton->x-10,0},1);
 
 
 	mui::L(playButton).pos(10,40);
@@ -160,10 +162,10 @@ void PlayerOverlay::layout(){
 	mui::L(timeStretchLabel).below(outputVolumeLabel).alignRightEdgeTo(outputVolumeLabel);
 	mui::L(timeStretchSlider).rightOf(timeStretchLabel,5).stretchToRightEdgeOfParent(10);
 	
-	mui::L(invertX).below(timeStretchLabel, 20).alignLeftEdgeTo(loadFileButton);
-	mui::L(invertY).rightOf(invertX, 10);
-	mui::L(flipXY).rightOf(invertY,10);
-	mui::L(scaleLabel).rightOf(flipXY,20);
+	mui::L(invertXToggle).below(timeStretchLabel, 20).alignLeftEdgeTo(loadFileButton);
+	mui::L(invertYToggle).rightOf(invertXToggle, 10);
+	mui::L(flipXYToggle).rightOf(invertYToggle,10);
+	mui::L(scaleLabel).rightOf(flipXYToggle,20);
 	mui::L(scaleSlider).rightOf(scaleLabel,5).stretchToRightEdgeOfParent(10);
 	
 	mui::L(strokeWeightLabel).below(scaleLabel).alignRightEdgeTo(scaleLabel);
@@ -253,7 +255,7 @@ void PlayerOverlay::update(){
 //--------------------------------------------------------------
 void PlayerOverlay::draw(){
 	ofSetColor(150);
-	ofDrawLine( 10, flipXY->y - 10, width-10, flipXY->y - 10 );
+	ofDrawLine( 10, flipXYToggle->y - 10, width-10, flipXYToggle->y - 10 );
 	ofSetColor(255);
 }
 
@@ -295,13 +297,13 @@ void PlayerOverlay::fromGlobals(){
 	hueSlider->slider->value = globals.hue;
 	intensitySlider->slider->value = globals.intensity;
 	afterglowSlider->slider->value = globals.afterglow;
-	invertX->selected = globals.invertX;
-	invertX->commit();
-	invertY->selected = globals.invertY;
-	invertY->commit();
-	flipXY->selected = globals.flipXY;
-	flipXY->commit();
-	zModulation->selected = globals.zModulation;
+	invertXToggle->selected = globals.invertX;
+	invertXToggle->commit();
+	invertYToggle->selected = globals.invertY;
+	invertYToggle->commit();
+	flipXYToggle->selected = globals.flipXY;
+	flipXYToggle->commit();
+	zModulationToggle->selected = globals.zModulation;
 }
 
 //--------------------------------------------------------------
@@ -320,24 +322,24 @@ void PlayerOverlay::buttonPressed( const void * sender, ofTouchEventArgs & args 
 			globals.player.play();
 		}
 	}
-	else if( sender == invertX ){
-		globals.invertX = invertX->selected;
+	else if( sender == invertXToggle){
+		globals.invertX = invertXToggle->selected;
 	}
-	else if( sender == invertY ){
-		globals.invertY = invertY->selected;
+	else if( sender == invertYToggle){
+		globals.invertY = invertYToggle->selected;
 	}
-	else if( sender == flipXY ){
-		globals.flipXY = flipXY->selected;
+	else if( sender == flipXYToggle){
+		globals.flipXY = flipXYToggle->selected;
 	}
-	else if( sender == zModulation ){
-		globals.zModulation = zModulation->selected;
+	else if( sender == zModulationToggle){
+		globals.zModulation = zModulationToggle->selected;
 	}
-	else if( sender == fullscreenButton ){
-		ofSetFullscreen(fullscreenButton->selected);
+	else if( sender == fullscreenToggle){
+		ofSetFullscreen(fullscreenToggle->selected);
 		// windows becomes black without this, not sure why...
 		//TODO: check if this is still a problem in of0.9
 		#ifdef _WIN32
-		if(fullscreenButton->selected){
+		if(fullscreenToggle->selected){
 			int w = ofGetScreenWidth(); 
 			int h = ofGetScreenHeight(); 
 			ofSetWindowShape(w,h); 
@@ -394,6 +396,9 @@ void PlayerOverlay::buttonPressed( const void * sender, ofTouchEventArgs & args 
 		}
 		MUI_ROOT->safeRemoveAndDelete(micMenu);
 		micMenu = NULL;
+	}
+	else if (sender == showPlaylistToggle) {
+		ofSendMessage(ofMessage("toggle-playlist"));
 	}
 }
 

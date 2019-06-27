@@ -10,6 +10,9 @@
 #include "MuiL.h"
 #include "ofxAvUtils.h"
 #include "../globals.h"
+#include "ofxFontAwesome.h"
+#include "FaButton.h"
+#include "FaToggleButton.h"
 
 namespace natural_sort{
 	int compare(const string & a, const string & b);
@@ -17,10 +20,13 @@ namespace natural_sort{
 
 Playlist::Playlist() : mui::Container(0,0,300,500){
 	name = "playlist";
-	
+	bg = ofColor(125, 50);
+	opaque = true;
+
 	header = new mui::Label("Playlist");
 	header->fontSize = 20;
-	header->sizeToFitHeight();
+	header->height = 30;
+	header->commit(); 
 	add(header);
 	
 	scroller = new mui::ScrollPane();
@@ -28,6 +34,36 @@ Playlist::Playlist() : mui::Container(0,0,300,500){
 	scroller->canScrollY = true;
 	scroller->view->layoutHandler = new mui::RowLayout(1);
 	add(scroller);
+
+	
+	auto tweak = [](mui::SegmentedButton<LoopMode> * btn, const string & filename ) {
+		btn->label->fontName = filename;
+		//btn->label->verticalAlignUseBaseline = false;
+		btn->label->fontSize = 8; 
+		btn->label->commit(); 
+	};
+
+	loopModeButton = new FaButton(ofxFontAwesome::sort_alpha_asc,0,0, 30, 30);
+	ofAddListener(loopModeButton->onPress, this, &Playlist::buttonPressed);
+	add(loopModeButton);
+	setLoopMode(LoopMode::all_repeat);
+
+
+	shuffleToggle = new FaToggleButton(ofxFontAwesome::random, ofxFontAwesome::random, 0, 0, 30, 30);
+	ofAddListener(shuffleToggle->onPress, this, &Playlist::buttonPressed);
+	add(shuffleToggle);
+
+	clearButton = new FaButton(ofxFontAwesome::trash,0,0,30,30);
+	clearButton->label->inset.top = -4;
+	ofAddListener(clearButton->onPress, this, &Playlist::buttonPressed);
+	add(clearButton); 
+
+	addFileButton = new FaButton(ofxFontAwesome::folder_open,0,0,30,30);
+	addFileButton->label->inset.top = -2;
+	addFileButton->label->inset.left = 2;
+	ofAddListener(addFileButton->onPress, this, &Playlist::buttonPressed);
+	add(addFileButton); 
+
 }
 
 Playlist::~Playlist(){
@@ -72,8 +108,15 @@ void Playlist::draw(){
 }
 
 void Playlist::layout(){
-	mui::L(header).posTL(0,0).stretchToRightEdgeOfParent();
-	mui::L(scroller).below(header).stretchToRightEdgeOfParent().stretchToBottomEdgeOfParent();
+	mui::L(header).posTL(0,-header->height).stretchToRightEdgeOfParent();
+	mui::L(addFileButton).below(header, 1);
+	mui::L(clearButton).rightOf(addFileButton, 1);
+	mui::L(loopModeButton).rightOf(clearButton, 15);
+	mui::L(shuffleToggle).rightOf(loopModeButton, 1);
+
+	mui::L(scroller).below(addFileButton).stretchToRightEdgeOfParent().stretchToBottomEdgeOfParent(30);
+	
+
 	
 }
 
@@ -222,30 +265,57 @@ void Playlist::load(istream & in){
 	scroller->commit();
 }
 
+pair<size_t, string> Playlist::getNextItem(size_t itemId) {
+	bool takeNext = false; 
 
-pair<size_t, string> Playlist::getNextItem( size_t itemId ){
-	size_t bestItemId = 0;
-	size_t bestId = 0;
-	
-	bool takeNext = false;
-	size_t firstId = 0;
-	string firstPath = "";
-	
-	for( auto el : scroller->view->children ){
+	for (auto el : scroller->view->children) {
 		PlaylistItem * item = dynamic_cast<PlaylistItem*>(el);
-		if(item){
-			if(itemId == 0){
-				return {item->itemId, item->file.getAbsolutePath()};
+		if (item) {
+			if (itemId == 0) {
+				return{ item->itemId, item->file.getAbsolutePath() };
 			}
-			
-			if(item->itemId == itemId){
+
+			if (item->itemId == itemId) {
 				takeNext = true;
 			}
-			else if(takeNext){
-				return {item->itemId, item->file.getAbsolutePath()};
+			else if (takeNext) {
+				return{ item->itemId, item->file.getAbsolutePath() };
 			}
 		}
 	}
+
+	return{ 0,"" };
+}
+
+pair<size_t, string> Playlist::getNextItemInPlaylist( size_t itemId ){
+	LoopMode * btnMode = loopModeButton->getProperty<LoopMode>("loop_mode");
+	LoopMode mode = btnMode ? *btnMode : LoopMode::all_repeat; 
+
+
+	if (shuffleToggle->selected && mode != LoopMode::one_repeat) {
+		auto & children = scroller->view->children;
+		if (children.size() == 0) return{ 0,"" };
+
+		auto idx = rand() % children.size();
+		auto item = dynamic_cast<PlaylistItem*>(children[idx]);
+		if (item) return{ item->itemId, filenames.find(item->itemId)->second };
+		else return{ 0, "" };
+	}
+
+	switch (mode) {
+	case LoopMode::all_once: {
+		return getNextItem(itemId);
+	}
+	case LoopMode::all_repeat: {
+		auto res = getNextItem(itemId);
+		if (res.first == 0) res = getNextItem(res.first);
+		return res;
+	}
+	case LoopMode::one_repeat: {
+		return{ itemId,getItemPath(itemId) };
+	}
+	}
+
 	
 	return {0,""};
 }
@@ -255,13 +325,59 @@ string Playlist::getItemPath( size_t itemId ){
 	return it == filenames.end()? "":it->second;
 }
 
+void Playlist::setLoopMode(LoopMode mode) {
+	loopModeButton->setProperty("loop_mode", mode);
+
+	switch (mode) {
+	case LoopMode::all_once:
+		loopModeButton->label->fontName = ofxFontAwesome4::_filename;
+		loopModeButton->label->setText(ofxFontAwesome4::sort_alpha_asc);
+		break;
+	case LoopMode::all_repeat:
+		loopModeButton->label->fontName = ofxFontAwesome4::_filename;
+		loopModeButton->label->setText(ofxFontAwesome4::repeat);
+		break;
+	case LoopMode::one_repeat:
+		loopModeButton->label->fontName = "";
+		loopModeButton->label->setText("1");
+		break;
+	}
+}
+
+void Playlist::buttonPressed(const void * sender, ofTouchEventArgs & args) {
+	if (sender == clearButton) {
+		removeAllFiles();
+	}
+	else if (sender == addFileButton) {
+		auto res = ofSystemLoadDialog("Add Folder", true);
+		if (res.bSuccess) {
+			addFile(ofFile(res.filePath, ofFile::ReadOnly));
+		}
+	}
+	else if (sender == loopModeButton) {
+		LoopMode * btnMode = loopModeButton->getProperty<LoopMode>("loop_mode");
+		LoopMode mode = btnMode ? *btnMode : LoopMode::all_repeat;
+
+		switch (mode) {
+		case LoopMode::all_once: setLoopMode(LoopMode::all_repeat); break;
+		case LoopMode::all_repeat: setLoopMode(LoopMode::one_repeat); break;
+		case LoopMode::one_repeat: setLoopMode(LoopMode::all_once); break;
+		}
+	}
+}
+
+
+
+
+
+
 
 
 PlaylistItem::PlaylistItem(size_t itemId, ofFile file, double duration) : mui::Label(file.getFileName()), itemId(itemId), file(file){
 	opaque = true;
 	ignoreEvents = false;
 	fontSize = 10;
-	inset.left = 5;
+	inset.left = 25;
 	
 	if(duration >= 0){
 		this->duration = duration;

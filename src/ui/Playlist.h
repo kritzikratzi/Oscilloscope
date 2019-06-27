@@ -12,6 +12,8 @@
 #include "ofxMightyUI.h"
 
 class PlaylistItem;
+class FaButton; 
+class FaToggleButton; 
 
 class Playlist : public mui::Container{
 public:
@@ -21,7 +23,7 @@ public:
 	void draw() override;
 	void update() override;
 	void layout() override;
-	bool fileDragged( ofDragInfo & args ) override;
+	bool fileDragged(ofDragInfo & args) override; 
 	bool keyPressed(ofKeyEventArgs & args) override;
 	
 	void addFile(ofFile file, double duration = -2 );
@@ -34,14 +36,29 @@ public:
 	// finds the next item in the playlist
 	// if id=0, the first item is returned.
 	// returns: {0,""} if there is no further item, otherwise returns the thing you want.
-	pair<size_t, string> getNextItem(size_t id);
+	pair<size_t, string> getNextItemInPlaylist(size_t id);
 	string getItemPath(size_t id); 
+
+	enum class LoopMode { all_once, all_repeat, one_repeat };
+
 private:
+	pair<size_t, string> getNextItem(size_t id);
+
+	void setLoopMode(LoopMode mode); 
+	void buttonPressed(const void * sender, ofTouchEventArgs & args); 
+
 	mui::Label * header;
 	mui::ScrollPane * scroller;
 	bool checkNewFiles = false;
 	size_t nextItemId = 1;
 	map<size_t, string> filenames; 
+
+	FaButton * loopModeButton; 
+	FaToggleButton * shuffleToggle; 
+	FaToggleButton * onlyOneButton; 
+
+	FaButton * clearButton;
+	FaButton * addFileButton;
 };
 
 

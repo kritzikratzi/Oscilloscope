@@ -3,3 +3,4 @@ ofxFontAwesome
 ofxFontStash2
 ofxMightyUI
 ofxNative
+ofxSyphon
