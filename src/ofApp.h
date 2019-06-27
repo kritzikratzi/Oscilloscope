@@ -12,6 +12,9 @@
 #include "ofxAvAudioPlayer.h"
 #include "OsciMesh.h"
 
+class ExportScreen;
+enum class ExportFormat;
+
 
 class ofApp : public ofBaseApp{
 
@@ -37,6 +40,9 @@ class ofApp : public ofBaseApp{
 		void audioIn(float * input, int bufferSize, int nChannels);
 		void audioOut( float * output, int bufferSize, int nChannels ); 
 
+		void beginExport(const ofFile & file);
+		void playlistItemEnded();
+	
 		void stopMic();
 		ofMatrix4x4 getViewMatrix(int i, bool isQuad); 
 	
@@ -45,6 +51,8 @@ class ofApp : public ofBaseApp{
 
 		mui::Root * root;
 		ConfigView * configView;
+		ExportScreen * exportScreen;
+	
 		PlayerOverlay * osciView;
 		Playlist * playlist;
 		bool playlistEnable = false;
@@ -64,7 +72,8 @@ class ofApp : public ofBaseApp{
 		bool showInfo; 
 	
 		int exporting;
-		int exportFrameNum; 
+		int exportFrameNum;
+		ExportFormat exportFormat; 
 		string exportDir;
 	
 		uint64_t lastMouseMoved{0};
@@ -76,4 +85,8 @@ class ofApp : public ofBaseApp{
 	
 		ofVec2f last;
 		bool hadWindowFocus = true;
+		bool applicationRunning = false;
+	
+		mutex mainThreadMutex;
+		queue<function<void()>> mainThreadTasks;
 };

@@ -21,7 +21,6 @@
 		79231EEC98689F0515694AAA /* BarButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3B73C1A3F266BAFE57AA5FCF /* BarButton.cpp */; };
 		8D9B658B353CDDF212F522BD /* ScrollPane.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61A842419EFF74F93FDBDE5A /* ScrollPane.cpp */; };
 		902CE6911AD8C03D2831D34E /* MuiConfig.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 85DCEEAD5DD142F981D3956D /* MuiConfig.cpp */; };
-		9397802B10847A2C74111D6E /* TextField.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CA39C804B514C2081D4B78BC /* TextField.cpp */; };
 		9F6783C22BE58E43DB564213 /* ofxAvAudioPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1CA38CE0608E3BBB595BCDFE /* ofxAvAudioPlayer.cpp */; };
 		A0B8F23CF210B84E4C2EE17B /* ofxNative_win.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2A618F7AA67182032C4D48B3 /* ofxNative_win.cpp */; };
 		A5FFDE0A56A147BD0EA4E314 /* ofxAvVideoPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DE20CC7E93C234CAC12A58AF /* ofxAvVideoPlayer.cpp */; };
@@ -34,6 +33,9 @@
 		BA54982719F740CE007E9F6A /* PlayerOverlay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BA54982519F740CE007E9F6A /* PlayerOverlay.cpp */; };
 		BA5EE4CF1D560E4800499D80 /* ofxIniExtras.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BA5EE4CB1D560E4800499D80 /* ofxIniExtras.cpp */; };
 		BA5EE4D01D560E4800499D80 /* ofxIniSettings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BA5EE4CD1D560E4800499D80 /* ofxIniSettings.cpp */; };
+		BA602F1F20BE07F800295D24 /* MuiFilePicker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BA602F1D20BE07F800295D24 /* MuiFilePicker.cpp */; };
+		BA602F2220BE3EA400295D24 /* ExportScreen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BA602F2020BE3EA400295D24 /* ExportScreen.cpp */; };
+		BA7EF1D620C8839100C62301 /* OsciVideoWriter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BA7EF1D420C8839100C62301 /* OsciVideoWriter.cpp */; };
 		BA828D2D1B378E6D002DE63F /* sounddevices.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BA828D2B1B378E6D002DE63F /* sounddevices.cpp */; };
 		BA9F97411B6512FA00A453D6 /* globals.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BA9F973F1B6512FA00A453D6 /* globals.cpp */; };
 		BADACB631C12F89100ED221C /* FMenu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BADACB611C12F89100ED221C /* FMenu.cpp */; };
@@ -147,7 +149,6 @@
 		61A842419EFF74F93FDBDE5A /* ScrollPane.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ScrollPane.cpp; sourceTree = "<group>"; };
 		6EE5442F865B09EE4CCDDD94 /* Layout.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Layout.cpp; sourceTree = "<group>"; };
 		747C12409A0AAB8D4B8A11A2 /* ofxMightyUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxMightyUI.h; sourceTree = "<group>"; };
-		787C60702CF6603591BB1CF5 /* TextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextField.h; sourceTree = "<group>"; };
 		85CB0724A04F41F450A80AFC /* ofxFontStash2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxFontStash2.h; sourceTree = "<group>"; };
 		85DCEEAD5DD142F981D3956D /* MuiConfig.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MuiConfig.cpp; sourceTree = "<group>"; };
 		88DC2EDABCBC86DA517F92B3 /* TextureAtlas.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TextureAtlas.cpp; sourceTree = "<group>"; };
@@ -168,7 +169,6 @@
 		B059EF63ED53AFDF7D454F78 /* ofxNative_osx.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ofxNative_osx.mm; sourceTree = "<group>"; };
 		B5E2643A08392C8D41DA1D26 /* ofxMightyUI.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxMightyUI.cpp; sourceTree = "<group>"; };
 		BA21C8961B87D58600FBAB8C /* ShaderLoader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShaderLoader.h; sourceTree = "<group>"; };
-		BA386CD51B388233004100D4 /* split.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = split.h; sourceTree = "<group>"; };
 		BA400F731F36281E0095D99F /* Playlist.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Playlist.cpp; path = ui/Playlist.cpp; sourceTree = "<group>"; };
 		BA400F741F36281E0095D99F /* Playlist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Playlist.h; path = ui/Playlist.h; sourceTree = "<group>"; };
 		BA474BDD58A8A242D48E3F62 /* MuiCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MuiCore.h; sourceTree = "<group>"; };
@@ -183,6 +183,12 @@
 		BA5EE4CC1D560E4800499D80 /* ofxIniExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxIniExtras.h; sourceTree = "<group>"; };
 		BA5EE4CD1D560E4800499D80 /* ofxIniSettings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxIniSettings.cpp; sourceTree = "<group>"; };
 		BA5EE4CE1D560E4800499D80 /* ofxIniSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxIniSettings.h; sourceTree = "<group>"; };
+		BA602F1D20BE07F800295D24 /* MuiFilePicker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MuiFilePicker.cpp; sourceTree = "<group>"; };
+		BA602F1E20BE07F800295D24 /* MuiFilePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MuiFilePicker.h; sourceTree = "<group>"; };
+		BA602F2020BE3EA400295D24 /* ExportScreen.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ExportScreen.cpp; path = ui/ExportScreen.cpp; sourceTree = "<group>"; };
+		BA602F2120BE3EA400295D24 /* ExportScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ExportScreen.h; path = ui/ExportScreen.h; sourceTree = "<group>"; };
+		BA7EF1D420C8839100C62301 /* OsciVideoWriter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OsciVideoWriter.cpp; sourceTree = "<group>"; };
+		BA7EF1D520C8839100C62301 /* OsciVideoWriter.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = OsciVideoWriter.hpp; sourceTree = "<group>"; };
 		BA828D2B1B378E6D002DE63F /* sounddevices.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sounddevices.cpp; sourceTree = "<group>"; };
 		BA828D2C1B378E6D002DE63F /* sounddevices.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sounddevices.h; sourceTree = "<group>"; };
 		BA9F973E1B65129B00A453D6 /* FaToggleButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FaToggleButton.h; path = ui/FaToggleButton.h; sourceTree = "<group>"; };
@@ -208,7 +214,6 @@
 		C406BFDF220C05D4249A1D8C /* ofx_stb_truetype.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofx_stb_truetype.h; sourceTree = "<group>"; };
 		C4E6595B0C243ADE291984F7 /* Helpers.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Helpers.cpp; sourceTree = "<group>"; };
 		CA27AF5B36F66F2A1AECA205 /* MuiTextArea.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MuiTextArea.h; sourceTree = "<group>"; };
-		CA39C804B514C2081D4B78BC /* TextField.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TextField.cpp; sourceTree = "<group>"; };
 		CBA5266B518AA438E7D47F81 /* ofxAvAudioWriter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxAvAudioWriter.cpp; sourceTree = "<group>"; };
 		CC377B7E1C1A7594D8F40115 /* Label.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Label.cpp; sourceTree = "<group>"; };
 		D8F6AF6805C3BED2EBA192F9 /* glfontstash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glfontstash.h; sourceTree = "<group>"; };
@@ -331,12 +336,12 @@
 				95B64F47E6BB11684D850782 /* Slider.h */,
 				110B722BF8FF24E188B393E0 /* SliderWithLabel.cpp */,
 				D93805C37AB468ED5C6D7AD9 /* SliderWithLabel.h */,
-				CA39C804B514C2081D4B78BC /* TextField.cpp */,
-				787C60702CF6603591BB1CF5 /* TextField.h */,
 				88DC2EDABCBC86DA517F92B3 /* TextureAtlas.cpp */,
 				9FB101D8E87C0173018F0586 /* TextureAtlas.h */,
 				403378E55FDCA8AA24E8104A /* ToggleButton.cpp */,
 				31153764B68C60DF6CD8F96D /* ToggleButton.h */,
+				BA602F1D20BE07F800295D24 /* MuiFilePicker.cpp */,
+				BA602F1E20BE07F800295D24 /* MuiFilePicker.h */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -449,6 +454,8 @@
 				BADACB621C12F89100ED221C /* FMenu.h */,
 				BA400F731F36281E0095D99F /* Playlist.cpp */,
 				BA400F741F36281E0095D99F /* Playlist.h */,
+				BA602F2020BE3EA400295D24 /* ExportScreen.cpp */,
+				BA602F2120BE3EA400295D24 /* ExportScreen.h */,
 			);
 			name = ui;
 			sourceTree = "<group>";
@@ -471,10 +478,11 @@
 				BAFE8DBC1BDE66B4004BA599 /* OsciAvAudioPlayer.h */,
 				BA828D2B1B378E6D002DE63F /* sounddevices.cpp */,
 				BA828D2C1B378E6D002DE63F /* sounddevices.h */,
-				BA386CD51B388233004100D4 /* split.h */,
 				BA21C8961B87D58600FBAB8C /* ShaderLoader.h */,
 				BAE9A8161FB53D4100107443 /* Audio.cpp */,
 				BAE9A8171FB53D4100107443 /* Audio.h */,
+				BA7EF1D420C8839100C62301 /* OsciVideoWriter.cpp */,
+				BA7EF1D520C8839100C62301 /* OsciVideoWriter.hpp */,
 			);
 			path = util;
 			sourceTree = "<group>";
@@ -737,15 +745,18 @@
 				BA54982119F7274C007E9F6A /* ConfigView.cpp in Sources */,
 				BA54982719F740CE007E9F6A /* PlayerOverlay.cpp in Sources */,
 				BA828D2D1B378E6D002DE63F /* sounddevices.cpp in Sources */,
+				BA602F1F20BE07F800295D24 /* MuiFilePicker.cpp in Sources */,
 				BA400F751F36281E0095D99F /* Playlist.cpp in Sources */,
 				BAEE5D281B5FB3D10038C838 /* ofApp.cpp in Sources */,
 				BADACB631C12F89100ED221C /* FMenu.cpp in Sources */,
 				BAFE8DBD1BDE66B4004BA599 /* OsciAvAudioPlayer.cpp in Sources */,
 				BA5EE4CF1D560E4800499D80 /* ofxIniExtras.cpp in Sources */,
 				BA5EE4D01D560E4800499D80 /* ofxIniSettings.cpp in Sources */,
+				BA7EF1D620C8839100C62301 /* OsciVideoWriter.cpp in Sources */,
 				BA4B3C691E2841D3005FD94B /* OsciMesh.cpp in Sources */,
 				CAFA934398F1617B277FA8A1 /* ofxFontStash2.cpp in Sources */,
 				79139E8FF25B4453D2D2B2FE /* ofxFontStashParser.cpp in Sources */,
+				BA602F2220BE3EA400295D24 /* ExportScreen.cpp in Sources */,
 				CA913EA6DCDD413B74FE5D31 /* pugixml.cpp in Sources */,
 				79231EEC98689F0515694AAA /* BarButton.cpp in Sources */,
 				3CFDC0070C0D9DC4C85AF4DC /* Button.cpp in Sources */,
@@ -769,7 +780,6 @@
 				470A0D8A2290257001EEDC9B /* SegmentedSelect.cpp in Sources */,
 				E5D631D3B05AFF06A387A28C /* Slider.cpp in Sources */,
 				CA75F2B0F73B71281C9D21AE /* SliderWithLabel.cpp in Sources */,
-				9397802B10847A2C74111D6E /* TextField.cpp in Sources */,
 				D112FB27050E454F34ABB6B2 /* TextureAtlas.cpp in Sources */,
 				4CE23CB3B062FA59A47BCD2D /* ToggleButton.cpp in Sources */,
 				2AA5ACC250C335ED2D4D7718 /* ofxNative_osx.mm in Sources */,

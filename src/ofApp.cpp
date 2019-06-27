@@ -1,15 +1,12 @@
 #include "ofApp.h"
-#include "util/split.h"
 #include <Poco/Mutex.h>
 #include <Poco/TemporaryFile.h>
 #include "globals.h"
 #include <cctype> 
 #include "ofxNative.h"
+#include "ui/ExportScreen.h"
 
-Poco::Mutex mutex;
-Poco::Mutex updateMutex;
 
-bool applicationRunning = false;
 
 //--------------------------------------------------------------
 void ofApp::setup(){
@@ -37,25 +34,8 @@ void ofApp::setup(){
 	globals.player.setLoop(false);
 	globals.player.stop();
 	globals.player.onEnd = [&](){
-		// see if we have a "next" item
-		//git-forbid do this on the right thread!
-		if(playlistEnable){
-			auto next = playlist->getNextItem(globals.currentlyPlayingItem);
-			if(next.first > 0){
-				fileToLoad = next.second;
-				globals.currentlyPlayingItem = next.first;
-			}
-			else if(globals.currentlyPlayingItem == 0){
-				globals.player.setPositionMS(0);
-			}
-			else{
-				globals.currentlyPlayingItem = 0;
-			}
-		}
-		else{
-			globals.player.setPositionMS(0);
-			globals.player.play();
-		}
+		lock_guard<mutex> lock(mainThreadMutex);
+		mainThreadTasks.push([&](){playlistItemEnded();});
 	};
 	
 	configView = new ConfigView();
@@ -63,8 +43,11 @@ void ofApp::setup(){
 	if( globals.autoDetect ){
 		configView->autoDetect();
 	}
-
 	root->add( configView );
+	
+	exportScreen = new ExportScreen();
+	exportScreen->visible = false;
+	root->add( exportScreen );
 	
 	osciView = new PlayerOverlay();
 	osciView->visible = false;
@@ -150,6 +133,15 @@ void ofApp::update(){
 	}
 	
 	playlist->visible = osciView->visible && playlistEnable;
+	
+	// process tasks
+	{
+		lock_guard<mutex> lock(mainThreadMutex);
+		while(mainThreadTasks.size()>0){
+			mainThreadTasks.front()();
+			mainThreadTasks.pop();
+		}
+	}
 	
 	bool anythingGoingOn = globals.player.isPlaying || exporting>0;
 	if( ofGetMousePressed() || !anythingGoingOn){
@@ -445,7 +437,17 @@ void ofApp::draw(){
 	fbo.draw(0,0);
 	
 	if( exporting >= 2 ){
-		string filename = ofToDataPath(exportDir + "/" + ofToString(exportFrameNum, 5, '0') + ".tiff");
+		
+		string ext;
+		switch(exportFormat){
+			case ExportFormat::H264: ext = "tiff"; break; // tbd
+			case ExportFormat::IMAGE_SEQUENCE_TIFF: ext = "tiff"; break;
+			case ExportFormat::IMAGE_SEQUENCE_PNG: ext = "png"; break;
+			default: ext = "tiff"; break;
+		}
+		
+		string filename	= ofToDataPath(exportDir + "/" + ofToString(exportFrameNum, 5, '0') + "." + ext);
+		
 		ofPixels pixels;
 		fbo.readToPixels(pixels);
 		ofSaveImage(pixels, filename);
@@ -567,18 +569,19 @@ void ofApp::keyPressed  (int key){
 	}
 	
 	if( key == 'e' && exporting == 0 ){
-		ofFileDialogResult res = ofSystemSaveDialog("images", "Create destination folder" );
-		if( res.bSuccess ){
-			exportDir = res.filePath;
-			ofDirectory dir(exportDir);
-			dir.create();
-			if( dir.exists() && !dir.isDirectory() ){
-				// don't export!
-			}
-			else{
-				exporting = 1;
-			}
+		if(globals.micActive){
+			ofSystemAlertDialog("Cannot export when microphone is active");
 		}
+		else if(exportScreen->visible){
+			exportScreen->visible = false;
+		}
+		else{
+			globals.player.stop();
+			exportScreen->show(ofFile(globals.player.getFilename(),ofFile::Reference));
+			exportScreen->setBounds(0,0,MUI_ROOT->width, MUI_ROOT->height);
+			exportScreen->toFront();
+		}
+		return;
 	}
 	
 	if( key == 'p' ){
@@ -662,7 +665,7 @@ void ofApp::audioOut( float * output, int bufferSize, int nChannels ){
 		if(!res){
 			currentFilename = fileToLoad;
 			fileToLoad = "";
-			globals.player.onEnd();
+			playlistItemEnded(); 
 		}
 		else{
 			osciView->timeStretchSlider->slider->value = 1.0;
@@ -727,6 +730,9 @@ void ofApp::gotMessage(ofMessage msg){
 	else if( msg.message == "next-timecode-style"){
 		
 	}
+	else if( msg.message == "begin-export"){
+		beginExport(ofFile(exportScreen->getFile(),ofFile::Reference));
+	}
 }
 
 //--------------------------------------------------------------
@@ -737,6 +743,48 @@ void ofApp::dragEvent(ofDragInfo dragInfo){
 		stopMic();
 		playlistEnable = false;
 		fileToLoad = dragInfo.files[0];
+	}
+}
+
+//--------------------------------------------------------------
+void ofApp::beginExport(const ofFile & file){
+	if(exporting) return;
+	
+	exportFormat = globals.exportFormat;
+	exportDir = file.getAbsolutePath();
+	ofDirectory dir(exportDir);
+	dir.create();
+	if( dir.exists() && !dir.isDirectory() ){
+		// don't export!
+		ofSystemAlertDialog("Something went wrong while trying to create export directory. Sorry?");
+	}
+	else{
+		exporting = 1;
+	}
+}
+
+//--------------------------------------------------------------
+void ofApp::playlistItemEnded(){
+	// see if we have a "next" item
+	if(exporting){
+		// do nothing, let it end.
+	}
+	else if(playlistEnable){
+		auto next = playlist->getNextItem(globals.currentlyPlayingItem);
+		if(next.first > 0){
+			fileToLoad = next.second;
+			globals.currentlyPlayingItem = next.first;
+		}
+		else if(globals.currentlyPlayingItem == 0){
+			globals.player.setPositionMS(0);
+		}
+		else{
+			globals.currentlyPlayingItem = 0;
+		}
+	}
+	else{
+		globals.player.setPositionMS(0);
+		globals.player.play();
 	}
 }
 

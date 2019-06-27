@@ -70,6 +70,7 @@ public:
 	/// \param stream set "true" to enable streaming from disk (for large files).
 	// hansi: currently stream is always yes
 	bool loadSound(std::string fileName, bool stream = true);
+	string getFilename();
 	
 	/// \brief Stops and unloads the current sound.
 	void unloadSound();
@@ -190,6 +191,7 @@ private:
 	int64_t millis_to_av_time( unsigned long long ms );
 	
 	// i think these could be useful public, rarely, but still ...
+	string loadedFilename;
 	AVPacket packet;
 	int packet_data_size;
 	int buffer_size; 

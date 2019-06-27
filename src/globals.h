@@ -19,6 +19,8 @@ extern void setWindowRepresentedFilename( string filename );
 
 string ofxFormatTime(double seconds); 
 
+enum class ExportFormat{H264=1,IMAGE_SEQUENCE_PNG=2,IMAGE_SEQUENCE_TIFF=3};
+
 #define globals (Globals::instance)
 class Globals{
 public:
@@ -55,6 +57,7 @@ public:
 	int exportWidth{1920};
 	int exportHeight{1080};
 	int exportFrameRate{60};
+	ExportFormat exportFormat{ExportFormat::IMAGE_SEQUENCE_PNG};
 	
 	float secondsBeforeHidingMenu{3};
 	
@@ -84,6 +87,7 @@ public:
 		exportFrameRate = settings.get( "exportFrameRate", exportFrameRate );
 		exportWidth = settings.get( "exportWidth", exportWidth );
 		exportHeight = settings.get( "exportHeight", exportHeight );
+		exportFormat = (ExportFormat)settings.get("exportFormat", (int)exportFormat);
 		secondsBeforeHidingMenu = settings.get( "secondsBeforeHidingMenu", secondsBeforeHidingMenu );
 	}
 	
@@ -119,6 +123,7 @@ public:
 		settings.set( "exportFrameRate", exportFrameRate );
 		settings.set( "exportWidth", exportWidth );
 		settings.set( "exportHeight", exportHeight );
+		settings.set( "exportFormat", (int)exportFormat );
 		settings.set( "secondsBeforeHidingMenu", secondsBeforeHidingMenu );
 	}
 	
@@ -127,8 +132,7 @@ public:
 	// runtime variables (not saved)
 	OsciAvAudioPlayer player;
 	size_t currentlyPlayingItem = 0;
-	
-	
+
 	// the singleton thing
 	static Globals instance;
 };

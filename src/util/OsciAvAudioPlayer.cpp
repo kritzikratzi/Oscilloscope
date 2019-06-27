@@ -26,7 +26,7 @@ OsciAvAudioPlayer::OsciAvAudioPlayer(){
 	output_expected_buffer_size = 256;
 	output_channel_layout = av_get_default_channel_layout(2);
 	output_sample_rate = 44100;
-	visual_sample_rate = 192000;
+	visual_sample_rate = 192000*2;
 	visual_config_changed = false;
 	output_num_channels = 2;
 	output_config_changed = false; 
@@ -65,8 +65,8 @@ bool OsciAvAudioPlayer::loadSound(string fileName, bool stream){
 	
 	unloadSound();
 	thread->lock();
-	
 	string fileNameAbs = ofToDataPath(fileName,true);
+	loadedFilename = fileNameAbs;
 	const char * input_filename = fileNameAbs.c_str();
 	// the first finds the right codec, following  https://blinkingblip.wordpress.com/2011/10/08/decoding-and-playing-an-audio-stream-using-libavcodec-libavformat-and-libao/
 	container = 0;
@@ -138,6 +138,10 @@ bool OsciAvAudioPlayer::loadSound(string fileName, bool stream){
 	thread->unlock();
 	
 	return true;
+}
+
+string OsciAvAudioPlayer::getFilename(){
+	return loadedFilename;
 }
 
 bool OsciAvAudioPlayer::setupAudioOut( int numChannels, int sampleRate, bool inter ){
