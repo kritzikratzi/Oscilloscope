@@ -194,6 +194,7 @@
     <ClCompile Include="addons\ofxMightyUI\src\MuiConfig.cpp" />
     <ClCompile Include="addons\ofxMightyUI\src\MuiCore.cpp" />
     <ClCompile Include="addons\ofxMightyUI\src\MuiEvents.cpp" />
+    <ClCompile Include="addons\ofxMightyUI\src\MuiFilePicker.cpp" />
     <ClCompile Include="addons\ofxMightyUI\src\MuiParameterPanel.cpp" />
     <ClCompile Include="addons\ofxMightyUI\src\MuiTextArea.cpp" />
     <ClCompile Include="addons\ofxMightyUI\src\ofxMightyUI.cpp" />
@@ -224,6 +225,7 @@
     <ClCompile Include="src\ofxIniSettings\ofxIniSettings.cpp" />
     <ClCompile Include="src\OsciMesh.cpp" />
     <ClCompile Include="src\ui\ConfigView.cpp" />
+    <ClCompile Include="src\ui\ExportScreen.cpp" />
     <ClCompile Include="src\ui\FMenu.cpp" />
     <ClCompile Include="src\ui\PlayerOverlay.cpp" />
     <ClCompile Include="src\ui\Playlist.cpp" />
@@ -236,6 +238,7 @@
     <ClCompile Include="addons\ofxFontStash2\src\ofxFontStash2.cpp" />
     <ClCompile Include="addons\ofxFontStash2\src\ofxFontStashParser.cpp" />
     <ClCompile Include="addons\ofxFontStash2\libs\pugixml\src\pugixml.cpp" />
+    <ClCompile Include="src\util\TexShare.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="addons\ofxFontAwesome\src\ofxFontAwesome4.h" />
@@ -254,6 +257,7 @@
     <ClInclude Include="addons\ofxMightyUI\src\MuiConfig.h" />
     <ClInclude Include="addons\ofxMightyUI\src\MuiCore.h" />
     <ClInclude Include="addons\ofxMightyUI\src\muievents.h" />
+    <ClInclude Include="addons\ofxMightyUI\src\MuiFilePicker.h" />
     <ClInclude Include="addons\ofxMightyUI\src\MuiL.h" />
     <ClInclude Include="addons\ofxMightyUI\src\MuiParameterPanel.h" />
     <ClInclude Include="addons\ofxMightyUI\src\MuiTextArea.h" />
@@ -288,6 +292,7 @@
     <ClInclude Include="src\ofxIniSettings\ofxIniSettings.h" />
     <ClInclude Include="src\OsciMesh.h" />
     <ClInclude Include="src\ui\ConfigView.h" />
+    <ClInclude Include="src\ui\ExportScreen.h" />
     <ClInclude Include="src\ui\FaButton.h" />
     <ClInclude Include="src\ui\FaToggleButton.h" />
     <ClInclude Include="src\ui\FMenu.h" />
@@ -406,6 +411,7 @@
     <ClInclude Include="addons\ofxFontStash2\libs\fontstash\src\stb_truetype.h" />
     <ClInclude Include="addons\ofxFontStash2\libs\pugixml\src\pugiconfig.hpp" />
     <ClInclude Include="addons\ofxFontStash2\libs\pugixml\src\pugixml.hpp" />
+    <ClInclude Include="src\util\TexShare.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="$(OF_ROOT)\libs\openFrameworksCompiled\project\vs\openframeworksLib.vcxproj">

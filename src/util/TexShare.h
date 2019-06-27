@@ -9,6 +9,7 @@
 #ifndef SharedTex_hpp
 #define SharedTex_hpp
 
+#include <memory>
 #include <string>
 class ofTexture;
 

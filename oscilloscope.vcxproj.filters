@@ -172,6 +172,15 @@
     <ClCompile Include="addons\ofxSpout\libs\SpoutSDK\src\SpoutGLextensions.cpp">
       <Filter>addons\ofxSpout\libs\SpoutSDK\src</Filter>
     </ClCompile>
+    <ClCompile Include="src\util\TexShare.cpp">
+      <Filter>src\util</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ui\ExportScreen.cpp">
+      <Filter>src\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="addons\ofxMightyUI\src\MuiFilePicker.cpp">
+      <Filter>addons\ofxMightyUI\src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -800,6 +809,15 @@
     </ClInclude>
     <ClInclude Include="addons\ofxFontAwesome\src\ofxFontAwesome5.h">
       <Filter>addons\ofxFontAwesome\src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\util\TexShare.h">
+      <Filter>src\util</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ui\ExportScreen.h">
+      <Filter>src\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="addons\ofxMightyUI\src\MuiFilePicker.h">
+      <Filter>addons\ofxMightyUI\src</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

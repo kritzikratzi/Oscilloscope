@@ -48,7 +48,7 @@ ExportScreen::ExportScreen() : mui::Container(){
 	
 	formatSelectLabel = makeLabel("Format");
 	formatSelect = new mui::SegmentedSelect<ExportFormat>();
-	formatSelect->addSegment("h264", ExportFormat::H264);
+	//formatSelect->addSegment("h264", ExportFormat::H264);
 	formatSelect->addSegment("png", ExportFormat::IMAGE_SEQUENCE_PNG);
 	formatSelect->addSegment("tiff", ExportFormat::IMAGE_SEQUENCE_TIFF);
 	formatSelect->setSelected(globals.exportFormat);
@@ -68,6 +68,7 @@ ExportScreen::ExportScreen() : mui::Container(){
 		text->bg = ofColor(50);
 		text->opaque = true;
 		text->selectAllOnFocus = true;
+		text->multiLine = false; 
 		text->onCharacterAdded.add([](uint32_t & ch){
 			return ch >= '0' && ch <= '9';
 		});

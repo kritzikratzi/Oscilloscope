@@ -486,49 +486,6 @@ void ofApp::draw(){
 			ofDrawEllipse(20, 100, 20, 20);
 		}
 	}
-	
-	float waitBefore = 1;
-	float extra = 0.2;
-	float remainingTime = -(lastUpdateTime/1000.0f)+globals.secondsBeforeHidingMenu+lastMouseMoved/1000.0f;
-	bool hovering = osciView->isMouseOver() || playlist->isMouseOver();
-	if(remainingTime>-extra && !hovering){
-		float t = ofMap(remainingTime, -extra, MAX(0.1,globals.secondsBeforeHidingMenu-waitBefore), 1, 0);
-		if(t<0 || t>1){
-			// nothing to draw
-		}
-		else{
-			float T0 = -extra;
-			float T1 = 0;
-			float T2 = globals.secondsBeforeHidingMenu;
-
-			t = MIN(t,1);
-			float alpha = ofMap(remainingTime,T1,T2,1,0,true)*pow(ofMap(remainingTime,-extra,0.2,0,1,true),2);
-			float w = ofMap(t,0.2,1,0,1,true); 
-			ofSetColor(255, 255*alpha);
-			ofPushMatrix();
-			float s = mui::MuiConfig::scaleFactor;
-			float W = ofGetWidth();
-			float H = ofGetHeight();
-			float mx = ofClamp(ofGetMouseX(), 0, W);
-			float my = ofClamp(ofGetMouseY(), 0, W);
-			float magicX = ofMap(mx,0,W,+1,-1,true);
-			float magicY = ofMap(my,0,H,+1,-1,true);
-			ofVec2f v = ofVec2f(magicX,magicY).getNormalized()*s*50;
-			
-			ofPath path;
-			float size = ofMap(sqrt(t),0,0.2,0,1,true)*ofMap(t,0,1,30,3,true);
-			ofTranslate(mx, my);
-			ofScale(mui::MuiConfig::scaleFactor, mui::MuiConfig::scaleFactor);
-			ofRotateZ(atan2(magicY,magicX)*RAD_TO_DEG);
-			path.arc({0,0}, size, size, ofMap(t,0.5,1,0,359,true), ofMap(t,0,0.5,1,360,true));
-			path.close();
-			path.setFillColor(ofColor(255,150*alpha));
-			path.draw();
-
-			ofSetColor(255);
-			ofPopMatrix();
-		}
-	}
 }
 
 void ofApp::exit(){

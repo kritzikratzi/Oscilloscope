@@ -59,7 +59,7 @@ public:
 	int exportFrameRate{60};
 	ExportFormat exportFormat{ExportFormat::IMAGE_SEQUENCE_PNG};
 	
-	float secondsBeforeHidingMenu{3};
+	float secondsBeforeHidingMenu{1.5};
 	
 	bool alwaysOnTop{false};
 	

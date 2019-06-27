@@ -7,7 +7,6 @@
 //
 
 #include "TexShare.h"
-#include <memory>
 #include "ofMain.h"
 
 #ifdef TARGET_OSX
