@@ -1,17 +1,20 @@
+#define MINIAUDIO_IMPLEMENTATION
+#include "util/miniaudio.h"
+#undef MINIAUDIO_IMPLEMENTATION
+
 #include "ofApp.h"
-#include <Poco/Mutex.h>
-#include <Poco/TemporaryFile.h>
 #include "globals.h"
 #include <cctype> 
 #include "ofxNative.h"
 #include "ui/ExportScreen.h"
-
-
+#include "MuiL.h"
 
 //--------------------------------------------------------------
 void ofApp::setup(){
 	OsciMesh::init();
-	
+	ma_zero_object(&playDevice);
+	ma_zero_object(&micDevice);
+
 	texSender.setup("Oscilloscope");
 	mui::MuiConfig::fontSize = 16;
 	showInfo = false;
@@ -41,18 +44,15 @@ void ofApp::setup(){
 	
 	configView = new ConfigView();
 	configView->fromGlobals();
-	if( globals.autoDetect ){
-		configView->autoDetect();
-	}
 	root->add( configView );
 	
 	exportScreen = new ExportScreen();
 	exportScreen->visible = false;
 	root->add( exportScreen );
 	
-	osciView = new PlayerOverlay();
-	osciView->visible = false;
-	root->add( osciView );
+	playerOverlay = new PlayerOverlay();
+	playerOverlay->visible = false;
+	root->add( playerOverlay );
 	
 	playlist = new Playlist();
 	root->add(playlist);
@@ -67,17 +67,15 @@ void ofApp::setup(){
 	micRight.loop = false;
 	micZMod.loop = false;
 
-	
-	if( globals.autoDetect ){
-		startApplication();
-	}
-
-
+	initComplete = true; 
+	startApplication();
 	windowResized(ofGetWidth(), ofGetHeight());
 }
 
 
 void ofApp::startApplication(){
+	if (!initComplete) return; 
+	if (globals.micActive) return; 
 	if( applicationRunning ) return;
 	applicationRunning = true;
 	cout << "starting ..." << endl; 
@@ -85,42 +83,101 @@ void ofApp::startApplication(){
 	micRight.playFrom(0);
 	micZMod.playFrom(0);
 
-	configView->toGlobals();
 	globals.saveToFile();
-	configView->visible = false;
-	osciView->fromGlobals();
-	osciView->visible = true;
-	
-	if( globals.autoDetect ){
+	playerOverlay->fromGlobals();
+	playerOverlay->visible = true;
+
+	/*if( globals.autoDetect ){
 		cout << "Running auto-detect for sound cards" << endl;
 		getDefaultRtOutputParams( globals.deviceId, globals.sampleRate, globals.bufferSize, globals.numBuffers );
-	}
+	}*/
 	
 	//if you want to set the device id to be different than the default
 	cout << "Opening Sound Card: " << endl;
-	cout << "    Sample rate: " << globals.sampleRate << endl;
-	cout << "    Buffer size: " << globals.bufferSize << endl;
-	cout << "    Num Buffers: " << globals.numBuffers << endl;
-	
-	soundStream.setDeviceID( globals.deviceId );
-	soundStream.setup(this, 2, 0, globals.sampleRate, globals.bufferSize, globals.numBuffers);
-	globals.player.setupAudioOut(2, globals.sampleRate, true);
-	
+	cout << "    Sample rate: " << globals.out_requested.sampleRate << endl;
+	cout << "    Buffer size: " << globals.out_requested.bufferSize << endl;
+	cout << "    Name: " << globals.out_requested.name << endl;
+
+	playDeviceConfig = ma_device_config_init(ma_device_type_playback);
+	playDeviceConfig.playback.format = ma_format_f32;
+	playDeviceConfig.playback.channels = 2;
+	playDeviceConfig.bufferSizeInFrames = globals.out_requested.bufferSize;
+	playDeviceConfig.sampleRate = 0;
+	playDeviceConfig.dataCallback = [](ma_device* device, void* pOutput, const void* pInput, ma_uint32 frameCount) {
+		ofApp * app = (ofApp*)device->pUserData;
+		globals.out_actual.sampleRate = device->sampleRate;
+		globals.out_actual.bufferSize = frameCount;
+		globals.out_actual.name = device->playback.name;
+
+		globals.player.setupAudioOut(2, globals.out_actual.sampleRate, true);
+		app->audioOut((float*)pOutput, frameCount, device->playback.channels);
+	};
+
+	playDeviceConfig.stopCallback = [](ma_device* device) {
+		ofApp * app = (ofApp*)device->pUserData; 
+		lock_guard<mutex> lock(app->mainThreadMutex);
+		app->mainThreadTasks.push([app]() {app->startApplication(); });
+
+	};
+	playDeviceConfig.pUserData = this;
+	//playDeviceConfig.playback.pDeviceID = globals.deviceId;
+
+	do{ // just "do" to be able to break
+		ma_context context;
+		ma_device_info* pPlaybackDeviceInfos;
+		ma_uint32 playbackDeviceCount;
+		ma_device_info* pCaptureDeviceInfos;
+		ma_uint32 captureDeviceCount;
+		ma_uint32 iDevice;
+		ma_result result;
+
+		if (ma_context_init(NULL, 0, NULL, &context) != MA_SUCCESS) {
+			printf("Failed to initialize context.\n");
+			break;
+		}
+
+		result = ma_context_get_devices(&context, &pPlaybackDeviceInfos, &playbackDeviceCount, &pCaptureDeviceInfos, &captureDeviceCount);
+		if (result != MA_SUCCESS) {
+			printf("Failed to retrieve device information.\n");
+		}
+
+
+		for (iDevice = 0; iDevice < playbackDeviceCount; ++iDevice) {
+			ma_device_info dev = pPlaybackDeviceInfos[iDevice];
+			if (dev.name == globals.out_requested.name) {
+				//git-forbid ouch!!!
+				playDeviceConfig.playback.pDeviceID = new ma_device_id();
+				memcpy(playDeviceConfig.playback.pDeviceID, &dev.id, sizeof(ma_device_id));
+			}
+		}
+
+		ma_context_uninit(&context);
+
+	} while (false);
+
+
+	if (ma_device_init(NULL, &playDeviceConfig, &playDevice) != MA_SUCCESS) {
+		printf("Failed to open playback device.\n");
+		stopApplication(); 
+	}
+
+	if (ma_device_start(&playDevice) != MA_SUCCESS) {
+		printf("Failed to start playback device.\n");
+		stopApplication(); 
+	}
+
 	lastMouseMoved = ofGetElapsedTimeMillis();
 }
 
 
 void ofApp::stopApplication(){
-	configView->toGlobals();
-	globals.saveToFile();
 	if( !applicationRunning ) return;
 	applicationRunning = false;
-	soundStream.stop();
-	soundStream = ofSoundStream();
-	micStream.stop();
+	ma_device_stop(&playDevice);
+	ma_device_uninit(&playDevice);
+	ma_device_uninit(&micDevice); 
+
 	globals.micActive = false;
-	configView->visible = true;
-	osciView->visible = false;
 }
 
 
@@ -133,8 +190,9 @@ void ofApp::update(){
 		nextWindowTitle = ""; 
 	}
 	
-	playlist->visible = osciView->visible && playlistEnable;
-	
+	configView->visible = playerOverlay->visible && playerOverlay->configButton->selected; 
+	playlist->visible = playerOverlay->visible && playlistEnable;
+
 	// process tasks
 	{
 		lock_guard<mutex> lock(mainThreadMutex);
@@ -156,7 +214,7 @@ void ofApp::update(){
 			bool focused = glfwGetWindowAttrib(win->getGLFWWindow(), GLFW_FOCUSED);
 			if(focused && !hadWindowFocus){
 				globals.loadFromFile();
-				osciView->fromGlobals();
+				playerOverlay->fromGlobals();
 			}
 			else if(!focused && hadWindowFocus){
 				globals.saveToFile(); 
@@ -169,49 +227,52 @@ void ofApp::update(){
 	// take care of hiding / showing the ui
 	if( lastUpdateTime-lastMouseMoved > globals.secondsBeforeHidingMenu*1000 ){
 		// this is not the greatest solution, but hey ho, it works ...
-		bool hovering = osciView->isMouseOver() || playlist->isMouseOver();
+		auto c = MUI_ROOT->findChildAt(muiGetMouseX(), muiGetMouseY()); 
+		bool hovering = c != MUI_ROOT;
 		if( !hovering ){
-			osciView->visible = false;
+			playerOverlay->visible = false;
 			mousePosBeforeHiding.x = ofGetMouseX();
 			mousePosBeforeHiding.y = ofGetMouseY();
 		}
 	}
 
-	if( !applicationRunning ){
+	if( !applicationRunning && !globals.micActive){
 		ofShowCursor();
 		return;
 	}
 
 	ofVec2f mousePos(ofGetMouseX(), ofGetMouseY());
 	bool insideWindow = ofRectangle(0,0,ofGetWidth(),ofGetHeight()).inside(mousePos);
-	if( lastUpdateTime-lastMouseMoved < globals.secondsBeforeHidingMenu*1000 && osciView->visible == false ){
+	if( lastUpdateTime-lastMouseMoved < globals.secondsBeforeHidingMenu*1000 && playerOverlay->visible == false ){
 		bool movedEnough = mousePos.distance(mousePosBeforeHiding) > 10*mui::MuiConfig::scaleFactor;
 		if( insideWindow && movedEnough ){
 			// okay, we moved enough!
-			osciView->visible = true;
+			playerOverlay->visible = true;
 		}
 	}
 
-	if( osciView->visible || !insideWindow) ofShowCursor();
+	if( playerOverlay->visible || !insideWindow) ofShowCursor();
 	else ofHideCursor();
 	
 	// center the ui
-	if (osciView->sideBySideToggle->selected && globals.player.fileType == OsciAvAudioPlayer::QUAD ) {
-		osciView->x = ofGetWidth() / mui::MuiConfig::scaleFactor * 1 / 4.0f - osciView->width / 2;
+	if (playerOverlay->sideBySideToggle->selected && globals.player.fileType == OsciAvAudioPlayer::QUAD ) {
+		playerOverlay->x = ofGetWidth() / mui::MuiConfig::scaleFactor * 1 / 4.0f - playerOverlay->width / 2;
 	}
 	else {
-		osciView->x = ofGetWidth() / mui::MuiConfig::scaleFactor / 2 - osciView->width / 2;
+		playerOverlay->x = ofGetWidth() / mui::MuiConfig::scaleFactor / 2 - playerOverlay->width / 2;
 	}
-	osciView->y = ofGetHeight() / mui::MuiConfig::scaleFactor - osciView->height - 60;
+	playerOverlay->y = ofGetHeight() / mui::MuiConfig::scaleFactor - playerOverlay->height - 60;
+
+	mui::L(configView).above(playerOverlay, 5);
 
 	// layout playlist
 	{
-		playlist->x = osciView->x + osciView->width + 5;
-		playlist->y = osciView->y;
+		playlist->x = playerOverlay->x + playerOverlay->width + 5;
+		playlist->y = playerOverlay->y;
 		float w = max(10.0f, muiGetWidth() - playlist->x - 30);
 		if (playlist->width != w) {
 			playlist->width = w; 
-			playlist->height = osciView->height; 
+			playlist->height = playerOverlay->height; 
 			playlist->handleLayout(); 
 		}
 	}
@@ -220,7 +281,7 @@ void ofApp::update(){
 	
 	// are we not export?
 	if( exporting == 0 ){
-		int rate = max(globals.sampleRate/4,(int)std::round(globals.sampleRate*globals.timeStretch));
+		int rate = max(globals.out_actual.sampleRate/4,(int)std::round(globals.out_actual.sampleRate*globals.timeStretch));
 		globals.player.setupAudioOut(2, rate, globals.timeStretch == 1);
 	}
 
@@ -306,12 +367,12 @@ void ofApp::update(){
 		(globals.micActive && micChannels == 1);
 	bool isZModulated =
 		(!globals.micActive && globals.player.fileType == OsciAvAudioPlayer::STEREO_ZMODULATED) ||
-		(globals.micActive && micChannels == 3);
+		(globals.micActive && micChannels >= 3);
 	bool isQuad = !globals.micActive && globals.player.fileType == OsciAvAudioPlayer::QUAD;
 	
-	osciView->sideBySideToggle->visible = isQuad;
-	osciView->flip3dToggle->visible = isQuad;
-	osciView->zModulationToggle->visible = isZModulated;
+	playerOverlay->sideBySideToggle->visible = isQuad;
+	playerOverlay->flip3dToggle->visible = isQuad;
+	playerOverlay->zModulationToggle->visible = isZModulated;
 	
 	
 	static double T0 = ofGetElapsedTimeMillis();
@@ -416,14 +477,16 @@ void ofApp::draw(){
 	
 		ofEnableAlphaBlending();
 		
-		bool sideBySide = osciView->sideBySideToggle->selected && globals.player.fileType == OsciAvAudioPlayer::QUAD;
-		bool flip3d = osciView->flip3dToggle->selected;
+		bool sideBySide = playerOverlay->sideBySideToggle->selected && globals.player.fileType == OsciAvAudioPlayer::QUAD;
+		bool flip3d = playerOverlay->flip3dToggle->selected;
 		ofMatrix4x4 viewMatrix = getViewMatrix(flip3d?1:0,globals.player.fileType == OsciAvAudioPlayer::QUAD);
 		ofFloatColor color = ofFloatColor::fromHsb(globals.hue/360.0, 1, 1);
 
+		float intensityScale = (globals.micActive ? 2 * 192000.0/max(8000,globals.in_actual.sampleRate) : 1);
+
 		mesh.uSize = globals.strokeWeight/1000.0;
 		mesh.uIntensityBase = max(0.0f,mesh.uIntensity-0.4f)*0.7f-1000.0f*mesh.uSize/500.0f;
-		mesh.uIntensity = globals.intensity/sqrtf(globals.timeStretch);
+		mesh.uIntensity = globals.intensity/sqrtf(globals.timeStretch)*intensityScale;
 		mesh.uHue = globals.hue;
 		mesh.uRgb = globals.player.fileType == OsciAvAudioPlayer::QUAD && !sideBySide?
 			(flip3d?ofVec3f(0,1,1):ofVec3f(1,0,0)):
@@ -502,8 +565,8 @@ void ofApp::keyPressed  (int key){
 	key = std::tolower(key);
 	
 	if( key == '\t' && !configView->isVisibleOnScreen()){
-		osciView->visible = !osciView->visible;
-		if( osciView->visible ){
+		playerOverlay->visible = !playerOverlay->visible;
+		if( playerOverlay->visible ){
 			lastMouseMoved = ofGetElapsedTimeMillis();
 		}
 		else{
@@ -515,15 +578,15 @@ void ofApp::keyPressed  (int key){
 
 	if( key == 'f' || (ofGetKeyPressed(OF_KEY_ALT) && key == OF_KEY_RETURN) || key == OF_KEY_F11 ){
 		// nasty!
-		osciView->fullscreenToggle->clickAndNotify();
+		playerOverlay->fullscreenToggle->clickAndNotify();
 	}
 	
 	if( key == OF_KEY_ESC ){
-		osciView->fullscreenToggle->clickAndNotify(false);
+		playerOverlay->fullscreenToggle->clickAndNotify(false);
 	}
 	
 	if( key == ' '  ){
-		osciView->playButton->clickAndNotify();
+		playerOverlay->playButton->clickAndNotify();
 	}
 	
 	if( key == 'r' ){
@@ -564,8 +627,33 @@ void ofApp::keyPressed  (int key){
 	}
 	if( ofGetKeyPressed(MUI_KEY_ACTION) && key == 'r'){
 		globals.loadFromFile();
-		osciView->fromGlobals();
+		playerOverlay->fromGlobals();
 	}
+
+	if (key == 'n') {
+		ofFile file("notes.txt", ofFile::Append);
+		file << currentFilename << " normalize" << endl;
+		file.close();
+	}
+
+	if (key == 'd') {
+		ofFile file("notes.txt", ofFile::Append);
+		file << currentFilename << " delete" << endl;
+		file.close();
+	}
+
+	if (key == 't') {
+		ofFile file("notes.txt", ofFile::Append);
+		file << currentFilename << " trim" << endl;
+		file.close();
+	}
+
+	if (key == 'c') {
+		ofFile file("notes.txt", ofFile::Append);
+		file << currentFilename << " cut " << globals.player.getPositionMS()/1000.0 << endl;
+		file.close();
+	}
+
 }
 
 //--------------------------------------------------------------
@@ -595,14 +683,16 @@ void ofApp::mouseReleased(int x, int y, int button){
 //--------------------------------------------------------------
 void ofApp::windowResized(int w, int h){
 	if (w == 0 || h == 0) return; 
-	osciView->width = min(500.0f,w/mui::MuiConfig::scaleFactor);
-	osciView->layout();
+	playerOverlay->width = min(500.0f,w/mui::MuiConfig::scaleFactor);
+	playerOverlay->layout();
 }
 
 //--------------------------------------------------------------
 void ofApp::audioIn(float * input, int bufferSize, int nChannels){
 	if( globals.micActive ){
 		switch(nChannels){
+			case 0: 
+				break; 
 			case 1:
 				micLeft.append(input, bufferSize,1);
 				micRight.append(input,bufferSize,1);
@@ -619,6 +709,7 @@ void ofApp::audioIn(float * input, int bufferSize, int nChannels){
 			default: // wtf :D
 				micLeft.append(input, bufferSize,nChannels);
 				micRight.append(input+1,bufferSize,nChannels);
+				micZMod.append(input + 2, bufferSize, nChannels);
 				break;
 		}
 	}
@@ -634,7 +725,7 @@ void ofApp::audioOut( float * output, int bufferSize, int nChannels ){
 			playlistItemEnded(); 
 		}
 		else{
-			osciView->timeStretchSlider->slider->value = 1.0;
+			playerOverlay->timeStretchSlider->slider->value = 1.0;
 			nextWindowTitle = fileToLoad; // back to ui thread ^^
 			currentFilename = fileToLoad;
 			fileToLoad = "";
@@ -656,30 +747,20 @@ void ofApp::gotMessage(ofMessage msg){
 	else if( msg.message == "stop-pressed" ){
 		stopApplication();
 	}
+	else if (msg.message == "config-pressed") {
+		// nothing to do, hurray :) see ::update()
+	}
+	else if (msg.message == "out-choice-changed") {
+		configView->toGlobals(); 
+		stopApplication(); 
+		startApplication(); 
+	}
 	else if( msg.message.rfind("start-mic:",0) == 0 ){
 		if( exporting != 0 ) return;
-		
-		int numChannels = ofToInt(msg.message.substr(10));
-		auto devs = micStream.getDeviceList();
-		numChannels = max(numChannels,1);
-		numChannels = min(numChannels,(int)devs[globals.micDeviceId].inputChannels);
-		
 		globals.player.stop();
 		
-		if( globals.micActive ){
-			micStream.stop();
-			micStream = ofSoundStream();
-		}
-		
-		micStream.setDeviceID(globals.micDeviceId);
-		micStream.setup(this, 0, numChannels, globals.sampleRate, globals.bufferSize, globals.numBuffers);
-		micStream.start();
-		globals.micActive = true;
-		micChannels = numChannels;
-		
-		if(globals.micDeviceId<devs.size()){
-			nextWindowTitle = devs[globals.micDeviceId].name + ofToString(numChannels) + "ch @ " + ofToString(globals.sampleRate) + "Hz";
-		}
+		startMic(); 
+
 	}
 	else if( msg.message == "stop-mic" ){
 		stopMic();
@@ -701,7 +782,7 @@ void ofApp::gotMessage(ofMessage msg){
 	}
 	else if (msg.message == "toggle-playlist") {
 		playlistEnable ^= true; 
-		osciView->showPlaylistToggle->selected = playlistEnable;
+		playerOverlay->showPlaylistToggle->selected = playlistEnable;
 	}
 }
 
@@ -759,12 +840,63 @@ void ofApp::playlistItemEnded(){
 }
 
 //--------------------------------------------------------------
+void ofApp::startMic() {
+	stopMic(); 
+	stopApplication(); 
+
+	micDeviceConfig = ma_device_config_init(ma_device_type_capture);
+	micDeviceConfig.capture.format = ma_format_f32;
+	micDeviceConfig.capture.channels = 0;
+	micDeviceConfig.bufferSizeInFrames = 0;
+	micDeviceConfig.sampleRate = 0;
+	micDeviceConfig.dataCallback = [](ma_device* device, void* pOutput, const void* pInput, ma_uint32 frameCount) {
+		ofApp * app = (ofApp*)device->pUserData;
+		app->micChannels = device->capture.channels;
+		globals.in_actual.sampleRate = device->sampleRate;
+		globals.in_actual.bufferSize = frameCount;
+		globals.in_actual.name = device->playback.name;
+
+		app->audioIn((float*)pInput, frameCount, device->capture.channels);
+	};
+
+	micDeviceConfig.stopCallback = [](ma_device* device) {
+		ofApp * app = (ofApp*)device->pUserData;
+		lock_guard<mutex> lock(app->mainThreadMutex);
+		if (globals.micActive) {
+			app->mainThreadTasks.push([app]() {app->startMic(); });
+		}
+	};
+	micDeviceConfig.pUserData = this;
+	//playDeviceConfig.playback.pDeviceID = globals.deviceId;
+
+	if (!micDeviceConfig.capture.pDeviceID) micDeviceConfig.capture.pDeviceID = new ma_device_id(); 
+	*micDeviceConfig.capture.pDeviceID = playerOverlay->getSelectedMicDeviceInfo().id;
+
+
+	if (ma_device_init(NULL, &micDeviceConfig, &micDevice) != MA_SUCCESS) {
+		printf("Failed to open capture device.\n");
+		stopMic();
+	}
+
+	if (ma_device_start(&micDevice) != MA_SUCCESS) {
+		printf("Failed to start capture device.\n");
+		stopMic();
+	}
+
+
+	globals.micActive = true; 
+	lastMouseMoved = ofGetElapsedTimeMillis();
+
+}
+//--------------------------------------------------------------
 void ofApp::stopMic(){
+	globals.micActive = false;
+	ma_device_uninit(&micDevice);
 	if (globals.micActive) {
-		micStream.stop();
+		/*micStream.stop();
 		micStream = ofSoundStream();
 		globals.micActive = false;
-		nextWindowTitle = currentFilename; // back to the previous window title
+		nextWindowTitle = currentFilename; // back to the previous window title*/
 	}
 }
 
@@ -773,19 +905,19 @@ ofMatrix4x4 ofApp::getViewMatrix(int i, bool isQuad) {
 
 	float gw = fbo.getWidth();
 	float gh = fbo.getHeight();
-	float w = gw*(osciView->sideBySideToggle->selected && isQuad? 0.5 : 1);
+	float w = gw*(playerOverlay->sideBySideToggle->selected && isQuad? 0.5 : 1);
 	float h = gh;
 	float aspectRatio = float(gw) / float(gh);
 	float scale = min(w / gw, h / gh)*globals.scale;
 
 	float dx = 0;
-	if (osciView->sideBySideToggle->selected && isQuad) {
+	if (playerOverlay->sideBySideToggle->selected && isQuad) {
 		dx = i == 0 ? -0.5 : 0.5;
 	}
 
 	if (aspectRatio < 1.0) scale *= aspectRatio;
 	ofMatrix4x4 result = ofMatrix4x4(
-		scale/aspectRatio*((isQuad && osciView->sideBySideToggle->selected)?0.5:1), 0.0, 0.0, 0.0,
+		scale/aspectRatio*((isQuad && playerOverlay->sideBySideToggle->selected)?0.5:1), 0.0, 0.0, 0.0,
 		0.0, -scale, 0.0, 0.0,
 		0.0, 0.0, 1.0, 0.0,
 		dx, 1.0 - h/gh, 0.0, 1.0);

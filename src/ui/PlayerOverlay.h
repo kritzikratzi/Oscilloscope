@@ -5,7 +5,7 @@
 #include "FaButton.h"
 #include "FaToggleButton.h"
 #include "FMenu.h"
-
+#include "../util/miniaudio.h"
 
 class PlayerOverlay : public mui::Container{
 public:
@@ -22,13 +22,12 @@ public:
 	virtual void touchUp( ofTouchEventArgs &touch );
 	virtual void touchDoubleTap( ofTouchEventArgs &touch );
 	
-	FMenu * micMenu; 
-	map<string,int> micDeviceIds;
-	
+	void populateMicMenu(FMenu<string> * menu); 
+
 	FaButton * loadFileButton; 
 	FaToggleButton * useMicButton;
 	
-	FaButton * stopButton;
+	FaToggleButton * configButton;
 	mui::SliderWithLabel * scaleSlider;
 	
 	FaToggleButton * fullscreenToggle; // toggle fs
@@ -72,9 +71,12 @@ public:
 	mui::SliderWithLabel * afterglowSlider;
 	mui::Label * afterglowLabel;
 	
-	void buttonPressed( const void * sender, ofTouchEventArgs & args );
+	void buttonPressed(const void * sender, ofTouchEventArgs & args);
+	void inputSelected(const void * sender, FMenu<string>::Option & opt);
 	void sliderChanged( const void * sender, float & value );
 	
+	ma_device_info getSelectedMicDeviceInfo(); 
 private:
 	mui::Label * addLabel( string text );
+	ma_device_info selectedMicDeviceInfo; 
 };

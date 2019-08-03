@@ -34,9 +34,6 @@
     <ClCompile Include="src\util\OsciAvAudioPlayer.cpp">
       <Filter>src\util</Filter>
     </ClCompile>
-    <ClCompile Include="src\util\sounddevices.cpp">
-      <Filter>src\util</Filter>
-    </ClCompile>
     <ClCompile Include="addons\ofxAvCodec\src\ofxAvAudioPlayer.cpp">
       <Filter>addons\ofxAvCodec\src</Filter>
     </ClCompile>
@@ -181,6 +178,9 @@
     <ClCompile Include="addons\ofxMightyUI\src\MuiFilePicker.cpp">
       <Filter>addons\ofxMightyUI\src</Filter>
     </ClCompile>
+    <ClCompile Include="src\util\OsciResampler.cpp">
+      <Filter>src\util</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -303,6 +303,21 @@
     <Filter Include="addons\ofxSpout\libs\SpoutSDK\src">
       <UniqueIdentifier>{9c6a3d2e-8132-4773-9eb5-8f4f06b8b07f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="addons\ofxLibsamplerate">
+      <UniqueIdentifier>{95d734a9-2de4-4e7b-b135-6bb25e15e8f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxLibsamplerate\libs">
+      <UniqueIdentifier>{a9dd72d1-d231-44ca-91c7-bb80efcc5773}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxLibsamplerate\libs\libsamplerate">
+      <UniqueIdentifier>{a5ca67ae-cc0b-46ad-b757-0ee1e5f8abc7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxLibsamplerate\libs\libsamplerate\include">
+      <UniqueIdentifier>{b08a774a-d909-42a2-997f-7fba14749772}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxLibsamplerate\libs\libsamplerate\lib">
+      <UniqueIdentifier>{b1085152-75e8-4f7a-a782-0d852c635ed8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\ofApp.h">
@@ -342,9 +357,6 @@
       <Filter>src\util</Filter>
     </ClInclude>
     <ClInclude Include="src\util\ShaderLoader.h">
-      <Filter>src\util</Filter>
-    </ClInclude>
-    <ClInclude Include="src\util\sounddevices.h">
       <Filter>src\util</Filter>
     </ClInclude>
     <ClInclude Include="src\util\split.h">
@@ -819,6 +831,15 @@
     <ClInclude Include="addons\ofxMightyUI\src\MuiFilePicker.h">
       <Filter>addons\ofxMightyUI\src</Filter>
     </ClInclude>
+    <ClInclude Include="src\util\miniaudio.h">
+      <Filter>src\util</Filter>
+    </ClInclude>
+    <ClInclude Include="src\util\OsciResampler.h">
+      <Filter>src\util</Filter>
+    </ClInclude>
+    <ClInclude Include="addons\ofxLibsamplerate\libs\libsamplerate\include\samplerate.h">
+      <Filter>addons\ofxLibsamplerate\libs\libsamplerate\include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="icon.rc" />
@@ -844,6 +865,9 @@
     </Library>
     <Library Include="addons\ofxAvCodec\libs\avcodec\lib\vs\Win32\swscale.lib">
       <Filter>addons\ofxAvCodec</Filter>
+    </Library>
+    <Library Include="addons\ofxLibsamplerate\libs\libsamplerate\lib\vs\x64\libsamplerate.lib">
+      <Filter>addons\ofxLibsamplerate\libs\libsamplerate\lib</Filter>
     </Library>
   </ItemGroup>
   <ItemGroup>

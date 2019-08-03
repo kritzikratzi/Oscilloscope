@@ -26,15 +26,20 @@ class Globals{
 public:
 	Globals(){}
 	
+	struct AudioConfig {
+		string name; 
+		int bufferSize; 
+		int sampleRate; 
+	};
+
 	// audio settings
-	bool autoDetect{true};
-	int sampleRate{44100};
-	int bufferSize{512};
-	int numBuffers{4};
-	int deviceId{0};
-	int micDeviceId{-1};
-	bool micActive{false};
+	AudioConfig out_requested{ "",0, 0 };
+	AudioConfig out_actual{ "",512, 44100 };
 	
+	bool micActive{ false };
+	AudioConfig in_requested{ "",0, 0 };
+	AudioConfig in_actual{ "",512, 44100 };
+
 	// display settings
 	float scale{1.0};
 	bool invertX{false};
@@ -65,16 +70,18 @@ public:
 	
 	void loadFromFile( string settingsFile = ofxToReadWriteableDataPath("settings.txt") ){
 		ofxIniSettings settings = ofxIniSettings(settingsFile);
-		bufferSize = settings.get( "bufferSize", bufferSize );
-		sampleRate = settings.get("sampleRate",  sampleRate );
-		numBuffers = settings.get( "numBuffers", numBuffers );
-		deviceId = settings.get( "deviceId", deviceId );
+		out_requested.bufferSize = settings.get("out_bufferSize", out_requested.bufferSize);
+		out_requested.sampleRate = settings.get("out_sampleRate", out_requested.sampleRate);
+		out_requested.name = settings.get("out_deviceName", out_requested.name);
+		in_requested.bufferSize = settings.get("in_bufferSize", in_requested.sampleRate);
+		in_requested.sampleRate = settings.get("in_sampleRate", in_requested.sampleRate);
+		in_requested.name = settings.get("in_deviceName", in_requested.name);
+
 		scale = settings.get( "scale", scale );
 		flipXY = settings.get( "flipXY", flipXY );
 		zModulation = settings.get( "zModulation", zModulation );
 		invertX = settings.get( "invertX", invertX );
 		invertY = settings.get( "invertY", invertY );
-		autoDetect = settings.get( "autoDetect", autoDetect );
 		outputVolume = settings.get( "outputVolume", outputVolume );
 		inputVolume = settings.get( "inputVolume", inputVolume );
 		strokeWeight = settings.get( "strokeWeight", strokeWeight );
@@ -101,16 +108,17 @@ public:
 
 		ofxIniSettings settings = ofxIniSettings(settingsFile);
 		
-		settings.set( "bufferSize", bufferSize );
-		settings.set( "sampleRate", sampleRate );
-		settings.set( "numBuffers", numBuffers );
-		settings.set( "deviceId", deviceId );
+		settings.set("out_bufferSize", out_requested.bufferSize);
+		settings.set("out_sampleRate", out_requested.sampleRate);
+		settings.set("out_deviceName", out_requested.name);
+		settings.set("in_bufferSize", in_requested.bufferSize);
+		settings.set("in_sampleRate", in_requested.sampleRate);
+		settings.set("in_deviceName", in_requested.name);
 		settings.set( "scale", scale );
 		settings.set( "flipXY", flipXY );
 		settings.set( "zModulation", zModulation );
 		settings.set( "invertX", invertX );
 		settings.set( "invertY", invertY );
-		settings.set( "autoDetect", autoDetect );
 		settings.set( "outputVolume", outputVolume );
 		settings.set( "inputVolume", inputVolume );
 		settings.set( "strokeWeight", strokeWeight );

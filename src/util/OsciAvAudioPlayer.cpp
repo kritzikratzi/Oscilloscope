@@ -167,6 +167,10 @@ bool OsciAvAudioPlayer::setupVisualSampleRate( int visualSampleRate ){
 	return true; 
 }
 
+int OsciAvAudioPlayer::getVisualSampleRate() {
+	return visual_sample_rate; 
+}
+
 
 
 void OsciAvAudioPlayer::unloadSound(){
@@ -223,6 +227,7 @@ OsciAvAudioPlayerThread::OsciAvAudioPlayerThread( OsciAvAudioPlayer & player ) :
 void OsciAvAudioPlayerThread::threadedFunction(){
 	ofxNative::setThreadName("Player-Fetcher"); 
 	// make sure we always have a bit of buffer ready
+	vector<float> data; 
 	while( isThreadRunning() ){
 		lock();
 		if( player.wantsAsync ){
@@ -234,12 +239,11 @@ void OsciAvAudioPlayerThread::threadedFunction(){
 				player.zMod192.clear();
 			}
 			if( player.mainOut.totalLength < player.output_expected_buffer_size*4 && player.isLoaded ){
-				float * buffer = new float[player.output_expected_buffer_size*2];
-				int numSamples = player.internalAudioOut(buffer, player.output_expected_buffer_size, 2);
+				data.resize(player.output_expected_buffer_size * 2); 
+				int numSamples = player.internalAudioOut(data.data(), player.output_expected_buffer_size, 2);
 				if( numSamples > 0 ){
-					player.mainOut.append( buffer, 2*numSamples );
+					player.mainOut.append( data.data(), 2*numSamples );
 				}
-				delete buffer;
 			}
 		}
 		else{
@@ -254,6 +258,9 @@ void OsciAvAudioPlayerThread::threadedFunction(){
 int OsciAvAudioPlayer::audioOut(float *output, int bufferSize, int nChannels){
 	if( wantsAsync ){
 		output_expected_buffer_size = bufferSize;
+		if (bufferSize <= 10) {
+			cout << "WTF" << endl; 
+		}
 		if( nChannels != 2 ){
 			// this is fucked up!
 			return 0;

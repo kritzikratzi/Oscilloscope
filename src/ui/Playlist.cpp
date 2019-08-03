@@ -13,6 +13,8 @@
 #include "ofxFontAwesome.h"
 #include "FaButton.h"
 #include "FaToggleButton.h"
+#include "FMenu.h"
+#include "ofxNative.h"
 
 namespace natural_sort{
 	int compare(const string & a, const string & b);
@@ -398,7 +400,24 @@ void PlaylistItem::updateDuration(bool & alreadyScanned, bool & shouldRemove ){
 
 
 void PlaylistItem::touchDown(ofTouchEventArgs & args){
-	ofSendMessage("load-id:" + ofToString(itemId));
+	if (muiIsContextClick()) {
+		auto menu = new FMenu<string>(0, 0, 300, 0);
+		menu->opaque = true;
+		menu->onAfterRemove.add([](mui::Container * menu, mui::Container * parent) {
+			MUI_ROOT->safeDelete(menu);
+		});
+		
+		string path = file.getAbsolutePath(); 
+		menu->addOption("Show file", "show-file", [menu,path]() {
+			ofxNative::showFile(path); 
+			MUI_ROOT->removePopup(menu); 
+		}); 
+
+		MUI_ROOT->showPopupMenu(menu, this, args.x, args.y, mui::Left, mui::Bottom);
+	}
+	else {
+		ofSendMessage("load-id:" + ofToString(itemId));
+	}
 }
 
 void PlaylistItem::touchUp(ofTouchEventArgs & args){

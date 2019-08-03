@@ -1,6 +1,5 @@
 #include "ofMain.h"
 #include "ofApp.h"
-#include "sounddevices.h"
 #include "ofxMightyUI.h"
 #if defined(TARGET_OSX)
 #import <AppKit/AppKit.h>
@@ -134,16 +133,7 @@ string ofxToReadonlyDataPath( string filename ){
 // this is great for settings files and the like.
 // for osx this is the application support directory (without sandboxing)
 // or ~/Library/Containers/<bundle-identifier>/
-// for windows it is still the data folder.
+// for windows this is in %APPDATA%
 string ofxToReadWriteableDataPath( string filename ){
-#ifdef TARGET_OSX
-	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES);
-	NSString *appName=[[[NSBundle mainBundle] infoDictionary]  objectForKey:(id)kCFBundleIdentifierKey];
-	NSString *applicationSupportDirectory = [[paths firstObject] stringByAppendingPathComponent:appName];
-	NSString *path = [applicationSupportDirectory stringByAppendingPathComponent:[NSString stringWithUTF8String:filename.c_str()]];
-	string result([path UTF8String]);
-	return result;
-#else
-	return ofToDataPath(filename,true);
-#endif
+	return ofxNative::getSystemDataFolder() + "/" + filename;
 }

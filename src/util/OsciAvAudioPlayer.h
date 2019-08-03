@@ -52,7 +52,8 @@ public:
 	// call this first after create the player
 	bool setupAudioOut( int numChannels, int sampleRate, bool interpolate );
 	bool setupVisualSampleRate( int visualSampleRate );
-	
+	int getVisualSampleRate(); 
+
 	// call this from the audioOut callback.
 	// returns the number of frames (0...bufferSize) that were played. 
 	int audioOut( float * output, int bufferSize, int nChannels );

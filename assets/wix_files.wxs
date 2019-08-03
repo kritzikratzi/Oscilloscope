@@ -1,0 +1,149 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+    <Fragment>
+        <DirectoryRef Id="INSTALLDIR">
+            <Directory Id="dir38903B42FECED7D073B27F29CA029A00" Name="data" />
+            <Directory Id="dir8E9D00FDC34F6E00C590CB5DF48507C0" Name="docs" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <ComponentGroup Id="CGROUP">
+            <Component Id="cmpFEF9FEF52C61FCBD01D0D459BE1414CA" Directory="INSTALLDIR" Guid="*">
+                <File Id="filBE8ECB1927212D075972FFF61D93E86B" KeyPath="yes" Source="SourceDir\avcodec-57.dll" />
+            </Component>
+            <Component Id="cmp73AF7F9251F1AC8531339157139B9724" Directory="INSTALLDIR" Guid="*">
+                <File Id="fil1A53A244F1C4702398A8DD5A77634295" KeyPath="yes" Source="SourceDir\avdevice-57.dll" />
+            </Component>
+            <Component Id="cmp040DFAF66467FE1AFA0ACE846C661FE9" Directory="INSTALLDIR" Guid="*">
+                <File Id="filDE568F0FD7F281E5785ABEF29A7DFF33" KeyPath="yes" Source="SourceDir\avfilter-6.dll" />
+            </Component>
+            <Component Id="cmp82043FA544FFABE8136DE934E521AB45" Directory="INSTALLDIR" Guid="*">
+                <File Id="fil1D0C64EDC242BD9A6C499A134E9DF06B" KeyPath="yes" Source="SourceDir\avformat-57.dll" />
+            </Component>
+            <Component Id="cmp059E2C34E04BDF46435D912B0789D1CE" Directory="INSTALLDIR" Guid="*">
+                <File Id="fil45BA00B7366D9E3AF3C42BC2E00C2154" KeyPath="yes" Source="SourceDir\avutil-55.dll" />
+            </Component>
+            <Component Id="cmp6BEDFC45835F103122456A715E3BE0B6" Directory="INSTALLDIR" Guid="*">
+                <File Id="fil839236659903CBC6FBF532D8DECB1E34" KeyPath="yes" Source="SourceDir\fmodex64.dll" />
+            </Component>
+            <Component Id="cmpC1BC96C420CB883BD3935FB6D1D41307" Directory="INSTALLDIR" Guid="*">
+                <File Id="fil33C6E17A3B07BF8D9B120BD926B6CBD6" KeyPath="yes" Source="SourceDir\fmodexL64.dll" />
+            </Component>
+            <Component Id="cmpE2C55B43D0FED97798C06B30CE496064" Directory="INSTALLDIR" Guid="*">
+                <File Id="filC35A102B270ECA1F210D000296E527AD" KeyPath="yes" Source="SourceDir\FreeImage.dll" />
+            </Component>
+            <Component Id="cmpAD3D7C5366B0EE75F9A1FC4B40188186" Directory="INSTALLDIR" Guid="*">
+                <File Id="fil93A808E5891A09DC03421F6DA54303DF" KeyPath="yes" Source="SourceDir\Oscilloscope.exe" />
+            </Component>
+            <Component Id="cmp61E9D6B1CA24B85697C2B37A9401B7A4" Directory="INSTALLDIR" Guid="*">
+                <File Id="fil573EDFAF553808E4B0021F612613FC79" KeyPath="yes" Source="SourceDir\Oscilloscope.exp" />
+            </Component>
+            <Component Id="cmpE175ACDF5003956AE140B7D3065DFD47" Directory="INSTALLDIR" Guid="*">
+                <File Id="fil2AE966B60CF417407AE647FDE9D82D17" KeyPath="yes" Source="SourceDir\Oscilloscope.iobj" />
+            </Component>
+            <Component Id="cmpF777BD7F65BB02F6621AFF241A190235" Directory="INSTALLDIR" Guid="*">
+                <File Id="filDA48AD64D196D37AC6E8A1AD51B0FBB5" KeyPath="yes" Source="SourceDir\Oscilloscope.ipdb" />
+            </Component>
+            <Component Id="cmp49309094AF8FD3D45F21623FD992642E" Directory="INSTALLDIR" Guid="*">
+                <File Id="fil5E65DACD24DDA0B0292A35FA46287592" KeyPath="yes" Source="SourceDir\Oscilloscope.lib" />
+            </Component>
+            <Component Id="cmpDC7F48DD28A0D80FEA836A855CA5EB58" Directory="INSTALLDIR" Guid="*">
+                <File Id="fil452CA0E39955DFA63BF24E07F0129A0B" KeyPath="yes" Source="SourceDir\Oscilloscope_debug.exe" />
+            </Component>
+            <Component Id="cmp57DEB2B00B8D7803222265810F465DE2" Directory="INSTALLDIR" Guid="*">
+                <File Id="fil17440531BB6EB0C9A72A2B13E2930FF4" KeyPath="yes" Source="SourceDir\Oscilloscope_debug.exp" />
+            </Component>
+            <Component Id="cmp6D125379A5CF9AAA797C567275667941" Directory="INSTALLDIR" Guid="*">
+                <File Id="fil0E7CBF7DD7B11506F76B4A12A8F685BF" KeyPath="yes" Source="SourceDir\Oscilloscope_debug.lib" />
+            </Component>
+            <Component Id="cmpB575DEE3616684D2007E8FB79C17D67B" Directory="INSTALLDIR" Guid="*">
+                <File Id="filE750EF6DF92E89418BECB4A1B5BC9033" KeyPath="yes" Source="SourceDir\Oscilloscope_debug.pdb" />
+            </Component>
+            <Component Id="cmpAD9B223F4F4855E37C90BCB9A78AEE8E" Directory="INSTALLDIR" Guid="*">
+                <File Id="fil01DA9B885539B33CA87883D04A8157AF" KeyPath="yes" Source="SourceDir\readme.md" />
+            </Component>
+            <Component Id="cmp7A18521991D2C646F7AA6958351E6004" Directory="INSTALLDIR" Guid="*">
+                <File Id="fil02888CB0F247766124E93F991DB7A7F3" KeyPath="yes" Source="SourceDir\swresample-2.dll" />
+            </Component>
+            <Component Id="cmp28C46CA8A9FE2E719B42985FDE9D396F" Directory="dir38903B42FECED7D073B27F29CA029A00" Guid="*">
+                <File Id="fil35E43B77A82DF490FF19CD4915CB55B1" KeyPath="yes" Source="SourceDir\data\fa-regular-400.ttf" />
+            </Component>
+            <Component Id="cmp311844FB02BAB65424EC43B7DB52EF92" Directory="dir38903B42FECED7D073B27F29CA029A00" Guid="*">
+                <File Id="filC302DE22FB7ED2A2F516327426AD499B" KeyPath="yes" Source="SourceDir\data\fa-solid-900.ttf" />
+            </Component>
+            <Component Id="cmpAD65FC93668DCB785F14C32DF7E1DDE4" Directory="dir38903B42FECED7D073B27F29CA029A00" Guid="*">
+                <File Id="fil488B0E82A921B52A93D1A98A4552E8ED" KeyPath="yes" Source="SourceDir\data\fontawesome-webfont-license.txt" />
+            </Component>
+            <Component Id="cmp07D2644E665476504A34C66E647B33BA" Directory="dir38903B42FECED7D073B27F29CA029A00" Guid="*">
+                <File Id="fil1FFB2B6F0A30F55C338A5B57357C1F47" KeyPath="yes" Source="SourceDir\data\fontawesome-webfont.ttf" />
+            </Component>
+            <Component Id="cmp447D25701D8D49FE9441FD156F331BEB" Directory="dir38903B42FECED7D073B27F29CA029A00" Guid="*">
+                <File Id="fil4018D0DA5708533D44573EAAF149E69A" KeyPath="yes" Source="SourceDir\data\konichiwa.wav" />
+            </Component>
+            <Component Id="cmpAE2BEE46CF7445085B1197B908D07BD6" Directory="dir38903B42FECED7D073B27F29CA029A00" Guid="*">
+                <File Id="fil211360C50612E0B6572D6345D74C443F" KeyPath="yes" Source="SourceDir\data\playlist.txt" />
+            </Component>
+            <Component Id="cmpEE68F42FDD280E76D3E8D5AC2F427DE7" Directory="dir38903B42FECED7D073B27F29CA029A00" Guid="*">
+                <File Id="filFF053DDAD2F1A56BF84F28EFD574BE69" KeyPath="yes" Source="SourceDir\data\settings.txt" />
+            </Component>
+            <Component Id="cmp187F75D04F657A31B676EE4A892522EB" Directory="dirC13EFD2462B99BC4181CF9269158442E" Guid="*">
+                <File Id="fil7E77D5C4FC484809C45AD6D93F684684" KeyPath="yes" Source="SourceDir\data\mui\atlas\ui.png" />
+            </Component>
+            <Component Id="cmp0868A8E0A72A95AA4824EDF71B75B98A" Directory="dirC13EFD2462B99BC4181CF9269158442E" Guid="*">
+                <File Id="filED62C894EA395513C10ED24C3F654131" KeyPath="yes" Source="SourceDir\data\mui\atlas\ui.xml" />
+            </Component>
+            <Component Id="cmp7C13BEC52E9835DA2BC88679D95E2323" Directory="dirBDECADFF2F2257147AD9E2FAB07690C4" Guid="*">
+                <File Id="fil8554FB105D6B3687A3B558C3B7F4489D" KeyPath="yes" Source="SourceDir\data\mui\fonts\Lato-Regular.ttf" />
+            </Component>
+            <Component Id="cmpE4126B379897F42B8B7B1BE9E857D0D1" Directory="dirBDECADFF2F2257147AD9E2FAB07690C4" Guid="*">
+                <File Id="fil3B445C2E2E7FB0B493EDA0D8FE4F19E7" KeyPath="yes" Source="SourceDir\data\mui\fonts\OFL.txt" />
+            </Component>
+            <Component Id="cmpDE9B8F91D09AB02F53E7727F5C1846E5" Directory="dirF60576E23114DF60A3737A8164F86CBB" Guid="*">
+                <File Id="fil4046BC4FE1662621EC0A4BC8BB31FFC5" KeyPath="yes" Source="SourceDir\data\shaders\osci.frag" />
+            </Component>
+            <Component Id="cmp69B0D365C0E2B2291AC2A790C72266DD" Directory="dirF60576E23114DF60A3737A8164F86CBB" Guid="*">
+                <File Id="fil65F4DB0D471F54D63185D905F8F8DEAB" KeyPath="yes" Source="SourceDir\data\shaders\osci.geom" />
+            </Component>
+            <Component Id="cmp66B6D2B05F0E5A859691AE4A54A58AF9" Directory="dirF60576E23114DF60A3737A8164F86CBB" Guid="*">
+                <File Id="fil6DE30EECBB9C3D520D6089B86ED73B2B" KeyPath="yes" Source="SourceDir\data\shaders\osci.vert" />
+            </Component>
+            <Component Id="cmpB51C099D343AA50CBEA8C39EFC3FAEAA" Directory="dir8E9D00FDC34F6E00C590CB5DF48507C0" Guid="*">
+                <File Id="fil1C37E91295EF138CB6C61AD60565C311" KeyPath="yes" Source="SourceDir\docs\screenshot.png" />
+            </Component>
+            <Component Id="cmpF0A06270D8C62B0046AF6BF6A1720B9C" Directory="dir7A6431DFB74F7A321C2FC0552780D339" Guid="*">
+                <File Id="filDB724C185C42C1D5E5528CA468E5AC5B" KeyPath="yes" Source="SourceDir\docs\ffmpeg\license.md" />
+            </Component>
+            <Component Id="cmpA34A9ED1B1E498AADFE65570C532DED6" Directory="dir7A6431DFB74F7A321C2FC0552780D339" Guid="*">
+                <File Id="fil82770C3A4B4A58857CC600822F669042" KeyPath="yes" Source="SourceDir\docs\ffmpeg\notes.md" />
+            </Component>
+            <Component Id="cmpA6713309B656FB64B1070658471F93B4" Directory="dir7A6431DFB74F7A321C2FC0552780D339" Guid="*">
+                <File Id="fil09AED1EF00F0610066DA629A2D5FB3A2" KeyPath="yes" Source="SourceDir\docs\ffmpeg\readme.md" />
+            </Component>
+        </ComponentGroup>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir8E9D00FDC34F6E00C590CB5DF48507C0">
+            <Directory Id="dir7A6431DFB74F7A321C2FC0552780D339" Name="ffmpeg" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirDEF9E09604C16F9CC21EB06E2338D988">
+            <Directory Id="dirBDECADFF2F2257147AD9E2FAB07690C4" Name="fonts" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirDEF9E09604C16F9CC21EB06E2338D988">
+            <Directory Id="dirC13EFD2462B99BC4181CF9269158442E" Name="atlas" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir38903B42FECED7D073B27F29CA029A00">
+            <Directory Id="dirDEF9E09604C16F9CC21EB06E2338D988" Name="mui" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir38903B42FECED7D073B27F29CA029A00">
+            <Directory Id="dirF60576E23114DF60A3737A8164F86CBB" Name="shaders" />
+        </DirectoryRef>
+    </Fragment>
+</Wix>

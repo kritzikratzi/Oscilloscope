@@ -95,7 +95,7 @@
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;src\ofxIniSettings;src\ui;src\util;addons\ofxAvCodec\libs\avcodec\include;addons\ofxAvCodec\src;addons\ofxAvCodec\libs\avcodec\include-vs;addons\ofxFontAwesome\src;addons\ofxFontStash2\libs;addons\ofxFontStash2\libs\fontstash;addons\ofxFontStash2\libs\fontstash\src;addons\ofxFontStash2\libs\pugixml;addons\ofxFontStash2\libs\pugixml\src;addons\ofxFontStash2\src;addons\ofxMightyUI\src;addons\ofxNative\src;addons\ofxSpout\src;addons\ofxSpout\libs\SpoutSDK\src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;src\ofxIniSettings;src\ui;src\util;addons\ofxAvCodec\libs\avcodec\include;addons\ofxAvCodec\src;addons\ofxAvCodec\libs\avcodec\include-vs;addons\ofxFontAwesome\src;addons\ofxFontStash2\libs;addons\ofxFontStash2\libs\fontstash;addons\ofxFontStash2\libs\fontstash\src;addons\ofxFontStash2\libs\pugixml;addons\ofxFontStash2\libs\pugixml\src;addons\ofxFontStash2\src;addons\ofxMightyUI\src;addons\ofxNative\src;addons\ofxSpout\src;addons\ofxSpout\libs\SpoutSDK\src;addons\ofxLibsamplerate\libs\libsamplerate\include</AdditionalIncludeDirectories>
       <CompileAs>CompileAsCpp</CompileAs>
     </ClCompile>
     <Link>
@@ -116,7 +116,7 @@
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;src\ofxIniSettings;src\ui;src\util;addons\ofxAvCodec\libs\avcodec\include;addons\ofxAvCodec\src;addons\ofxAvCodec\libs\avcodec\include-vs;addons\ofxFontAwesome\src;addons\ofxFontStash2\libs;addons\ofxFontStash2\libs\fontstash;addons\ofxFontStash2\libs\fontstash\src;addons\ofxFontStash2\libs\pugixml;addons\ofxFontStash2\libs\pugixml\src;addons\ofxFontStash2\src;addons\ofxMightyUI\src;addons\ofxNative\src;addons\ofxSpout\src;addons\ofxSpout\libs\SpoutSDK\src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;src\ofxIniSettings;src\ui;src\util;addons\ofxAvCodec\libs\avcodec\include;addons\ofxAvCodec\src;addons\ofxAvCodec\libs\avcodec\include-vs;addons\ofxFontAwesome\src;addons\ofxFontStash2\libs;addons\ofxFontStash2\libs\fontstash;addons\ofxFontStash2\libs\fontstash\src;addons\ofxFontStash2\libs\pugixml;addons\ofxFontStash2\libs\pugixml\src;addons\ofxFontStash2\src;addons\ofxMightyUI\src;addons\ofxNative\src;addons\ofxSpout\src;addons\ofxSpout\libs\SpoutSDK\src;addons\ofxLibsamplerate\libs\libsamplerate\include</AdditionalIncludeDirectories>
       <CompileAs>CompileAsCpp</CompileAs>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
@@ -125,7 +125,7 @@
       <SubSystem>Console</SubSystem>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
       <AdditionalDependencies>avcodec.lib;avdevice.lib;avfilter.lib;avformat.lib;avutil.lib;swresample.lib;swscale.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);addons\ofxAvCodec\libs\avcodec\lib\vs\x64</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);addons\ofxAvCodec\libs\avcodec\lib\vs\x64;addons\ofxLibsamplerate\libs\libsamplerate\lib\vs\x64</AdditionalLibraryDirectories>
       <SetChecksum>true</SetChecksum>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
     </Link>
@@ -137,7 +137,7 @@
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;src\ofxIniSettings;src\ui;src\util;addons\ofxAvCodec\libs\avcodec\include;addons\ofxAvCodec\src;addons\ofxAvCodec\libs\avcodec\include-vs;addons\ofxFontAwesome\src;addons\ofxFontStash2\libs;addons\ofxFontStash2\libs\fontstash;addons\ofxFontStash2\libs\fontstash\src;addons\ofxFontStash2\libs\pugixml;addons\ofxFontStash2\libs\pugixml\src;addons\ofxFontStash2\src;addons\ofxMightyUI\src;addons\ofxNative\src;addons\ofxSpout\src;addons\ofxSpout\libs\SpoutSDK\src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;src\ofxIniSettings;src\ui;src\util;addons\ofxAvCodec\libs\avcodec\include;addons\ofxAvCodec\src;addons\ofxAvCodec\libs\avcodec\include-vs;addons\ofxFontAwesome\src;addons\ofxFontStash2\libs;addons\ofxFontStash2\libs\fontstash;addons\ofxFontStash2\libs\fontstash\src;addons\ofxFontStash2\libs\pugixml;addons\ofxFontStash2\libs\pugixml\src;addons\ofxFontStash2\src;addons\ofxMightyUI\src;addons\ofxNative\src;addons\ofxSpout\src;addons\ofxSpout\libs\SpoutSDK\src;addons\ofxLibsamplerate\libs\libsamplerate\include</AdditionalIncludeDirectories>
       <CompileAs>CompileAsCpp</CompileAs>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
@@ -162,7 +162,7 @@
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;src\ofxIniSettings;src\ui;src\util;addons\ofxAvCodec\libs\avcodec\include;addons\ofxAvCodec\src;addons\ofxAvCodec\libs\avcodec\include-vs;addons\ofxFontAwesome\src;addons\ofxFontStash2\libs;addons\ofxFontStash2\libs\fontstash;addons\ofxFontStash2\libs\fontstash\src;addons\ofxFontStash2\libs\pugixml;addons\ofxFontStash2\libs\pugixml\src;addons\ofxFontStash2\src;addons\ofxMightyUI\src;addons\ofxNative\src;addons\ofxSpout\src;addons\ofxSpout\libs\SpoutSDK\src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;src\ofxIniSettings;src\ui;src\util;addons\ofxAvCodec\libs\avcodec\include;addons\ofxAvCodec\src;addons\ofxAvCodec\libs\avcodec\include-vs;addons\ofxFontAwesome\src;addons\ofxFontStash2\libs;addons\ofxFontStash2\libs\fontstash;addons\ofxFontStash2\libs\fontstash\src;addons\ofxFontStash2\libs\pugixml;addons\ofxFontStash2\libs\pugixml\src;addons\ofxFontStash2\src;addons\ofxMightyUI\src;addons\ofxNative\src;addons\ofxSpout\src;addons\ofxSpout\libs\SpoutSDK\src;addons\ofxLibsamplerate\libs\libsamplerate\include</AdditionalIncludeDirectories>
       <CompileAs>CompileAsCpp</CompileAs>
     </ClCompile>
     <Link>
@@ -173,7 +173,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
       <AdditionalDependencies>avcodec.lib;avdevice.lib;avfilter.lib;avformat.lib;avutil.lib;swresample.lib;swscale.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);addons\ofxAvCodec\libs\avcodec\lib\vs\x64</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);addons\ofxAvCodec\libs\avcodec\lib\vs\x64;addons\ofxLibsamplerate\libs\libsamplerate\lib\vs\x64</AdditionalLibraryDirectories>
       <SetChecksum>true</SetChecksum>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
       <DelayLoadDLLs>assimp.dll;glut32.dll;libeay32.dll;ssleay32.dll;swscale-3.dll;Zlib.dll;FreeType.dll;fmodex.dll;fmodexL.dll;%(DelayLoadDLLs)</DelayLoadDLLs>
@@ -231,18 +231,19 @@
     <ClCompile Include="src\ui\Playlist.cpp" />
     <ClCompile Include="src\util\Audio.cpp" />
     <ClCompile Include="src\util\OsciAvAudioPlayer.cpp" />
-    <ClCompile Include="src\util\sounddevices.cpp" />
     <ClCompile Include="addons\ofxAvCodec\src\ofxAvAudioPlayer.cpp" />
     <ClCompile Include="addons\ofxAvCodec\src\ofxAvAudioWriter.cpp" />
     <ClCompile Include="addons\ofxAvCodec\src\ofxAvUtils.cpp" />
     <ClCompile Include="addons\ofxFontStash2\src\ofxFontStash2.cpp" />
     <ClCompile Include="addons\ofxFontStash2\src\ofxFontStashParser.cpp" />
     <ClCompile Include="addons\ofxFontStash2\libs\pugixml\src\pugixml.cpp" />
+    <ClCompile Include="src\util\OsciResampler.cpp" />
     <ClCompile Include="src\util\TexShare.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="addons\ofxFontAwesome\src\ofxFontAwesome4.h" />
     <ClInclude Include="addons\ofxFontAwesome\src\ofxFontAwesome5.h" />
+    <ClInclude Include="addons\ofxLibsamplerate\libs\libsamplerate\include\samplerate.h" />
     <ClInclude Include="addons\ofxMightyUI\libs\stb_textedit\include\stb_textedit\stb_textedit.h" />
     <ClInclude Include="addons\ofxMightyUI\src\BarButton.h" />
     <ClInclude Include="addons\ofxMightyUI\src\Button.h" />
@@ -300,9 +301,10 @@
     <ClInclude Include="src\ui\PlayerOverlay.h" />
     <ClInclude Include="src\ui\Playlist.h" />
     <ClInclude Include="src\util\Audio.h" />
+    <ClInclude Include="src\util\miniaudio.h" />
     <ClInclude Include="src\util\OsciAvAudioPlayer.h" />
+    <ClInclude Include="src\util\OsciResampler.h" />
     <ClInclude Include="src\util\ShaderLoader.h" />
-    <ClInclude Include="src\util\sounddevices.h" />
     <ClInclude Include="src\util\split.h" />
     <ClInclude Include="addons\ofxAvCodec\src\ofxAvAudioPlayer.h" />
     <ClInclude Include="addons\ofxAvCodec\src\ofxAvAudioWriter.h" />
@@ -441,6 +443,7 @@
     <Library Include="addons\ofxAvCodec\libs\avcodec\lib\vs\Win32\avutil.lib" />
     <Library Include="addons\ofxAvCodec\libs\avcodec\lib\vs\Win32\swresample.lib" />
     <Library Include="addons\ofxAvCodec\libs\avcodec\lib\vs\Win32\swscale.lib" />
+    <Library Include="addons\ofxLibsamplerate\libs\libsamplerate\lib\vs\x64\libsamplerate.lib" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="icon.ico" />

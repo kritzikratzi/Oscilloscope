@@ -1,10 +1,8 @@
 #include "PlayerOverlay.h"
 #include <Poco/Delegate.h>
-#include "sounddevices.h"
 #include "ofxFontAwesome.h"
 #include "ofApp.h"
 #include "MuiL.h"
-
 
 static string timestring(double t);
 
@@ -13,12 +11,11 @@ PlayerOverlay::PlayerOverlay( float x_, float y_, float width_, float height_)
 	float x = 10, y = 10, w = 400, h = 30;
 	bg = ofColor(125,50);
 	opaque = true;
-	micMenu = NULL;
 
-	stopButton = new FaButton( ofxFontAwesome::cogs, x, y, h, h );
-	ofAddListener( stopButton->onPress, this, &PlayerOverlay::buttonPressed );
-	y += stopButton->height + 10;
-	add( stopButton );
+	configButton = new FaToggleButton( ofxFontAwesome::cogs, ofxFontAwesome::cogs, x, y, h, h );
+	ofAddListener( configButton->onPress, this, &PlayerOverlay::buttonPressed );
+	y += configButton->height + 10;
+	add( configButton );
 	
 	scaleLabel = addLabel( "Scale" );
 	scaleSlider = new mui::SliderWithLabel( x, y, w, h, 0.1, 2, 1, 2 );
@@ -146,8 +143,8 @@ PlayerOverlay::PlayerOverlay( float x_, float y_, float width_, float height_)
 }
 
 void PlayerOverlay::layout(){
-	mui::L({stopButton,fullscreenToggle, showPlaylistToggle }).columnsFromRight({width, 0},1);
-	mui::L({zModulationToggle,flip3dToggle,sideBySideToggle }).columnsFromRight({stopButton->x-10,0},1);
+	mui::L({configButton,fullscreenToggle, showPlaylistToggle }).columnsFromRight({width, 0},1);
+	mui::L({zModulationToggle,flip3dToggle,sideBySideToggle }).columnsFromRight({configButton->x-10,0},1);
 
 
 	mui::L(playButton).pos(10,40);
@@ -310,9 +307,9 @@ void PlayerOverlay::fromGlobals(){
 void PlayerOverlay::buttonPressed( const void * sender, ofTouchEventArgs & args ){
 	mui::Container * container = (mui::Container*) sender;
 	
-	if( sender == stopButton ){
+	if( sender == configButton ){
 		ofBaseApp * app = ofGetAppPtr();
-		app->gotMessage( ofMessage( "stop-pressed" ) );
+		app->gotMessage( ofMessage( "config-pressed" ) );
 	}
 	else if( sender == playButton ){
 		if( globals.player.isPlaying ){
@@ -357,49 +354,46 @@ void PlayerOverlay::buttonPressed( const void * sender, ofTouchEventArgs & args 
 			ofSendMessage("stop-mic");
 		}
 		else{
-			if( micMenu != NULL ){
-				MUI_ROOT->safeRemoveAndDelete(micMenu);
-			}
-			
-			micMenu = new FMenu(0,0,400,0);
-			mui::Button * cancelButton = micMenu->addButton("Cancel");
-			cancelButton->bg = ofColor(100,100);
-			vector<ofSoundDevice> infos = ofSoundStream().getDeviceList();
-			for( int i = 0; i < infos.size(); i++ ){
-				ofSoundDevice &info = infos[i];
-				if( info.inputChannels >= 2 ){
-					micMenu->addButton(info.name);
-					micDeviceIds[info.name] = i;
-				}
-			}
-			ofAddListener(micMenu->onPress, this, &PlayerOverlay::buttonPressed);
-			micMenu->autoSize();
-			micMenu->bg = ofColor(150);
+			auto micMenu = new FMenu<string>(0,0,400,0);
+			micMenu->onAfterRemove.add([](mui::Container * menu, mui::Container * parent) {
+				MUI_ROOT->safeDelete(menu); 
+			});
+			populateMicMenu(micMenu); 
+
+			ofAddListener(micMenu->onSelectOption, this, &PlayerOverlay::inputSelected);
 			micMenu->opaque = true; 
 			
-			add(micMenu);
+			MUI_ROOT->showPopupMenu(micMenu, useMicButton, 0, 0, mui::Left, mui::Bottom); 
 		}
 	}
 	else if( sender == timeLabelButton){
 		timeLabelMode = (1+timeLabelMode)%2;
 	}
-	else if( micMenu != NULL && container->parent->parent == micMenu ){
-		map<string,int>::iterator it = micDeviceIds.find(((mui::Button*)sender)->label->text);
-		if( it != micDeviceIds.end() ){
-			globals.micDeviceId = (*it).second;
-			if(ofGetKeyPressed(OF_KEY_SHIFT)){
-				ofSendMessage("start-mic:3");
-			}
-			else{
-				ofSendMessage("start-mic:2");
-			}
-		}
-		MUI_ROOT->safeRemoveAndDelete(micMenu);
-		micMenu = NULL;
-	}
 	else if (sender == showPlaylistToggle) {
 		ofSendMessage(ofMessage("toggle-playlist"));
 	}
+}
+
+void PlayerOverlay::inputSelected(const void * sender, FMenu<string>::Option & opt) {
+	auto menu = opt.button->findParentOfType<FMenu<string>>();
+	auto config_ref = opt.button->getProperty<ma_device_info>("ma_device_info"); 
+	bool withZ = menu->view->findChildrenOfType<mui::ToggleButton>()[0]->selected; 
+	if (config_ref) {
+		selectedMicDeviceInfo = *config_ref; 
+		//globals.micDeviceId = (*it).second;
+		if (withZ) {
+			ofSendMessage("start-mic:3");
+		}
+		else {
+			ofSendMessage("start-mic:2");
+		}
+	}
+
+	MUI_ROOT->safeRemove(menu);
+}
+
+ma_device_info PlayerOverlay::getSelectedMicDeviceInfo() {
+	return selectedMicDeviceInfo; 
 }
 
 void PlayerOverlay::sliderChanged( const void * sender, float & value ){
@@ -459,4 +453,51 @@ string timestring( double secs ){
 	":" << setfill('0') << setw(2) << seconds <<
 	":" << setfill('0') << setw(2) << (millis/10);
 	return str.str();
+}
+
+bool filter_mic_menu(const void * sender, bool & value) {
+	const mui::ToggleButton * me = (mui::ToggleButton*)sender; 
+	return true; 
+}
+
+void PlayerOverlay::populateMicMenu(FMenu<string> * menu) {
+
+	mui::ToggleButton * withZ = new mui::ToggleButton("3-channel mode (z-modulation)");
+	withZ->label->horizontalAlign = mui::Left; 
+	ofAddListener(withZ->onChange, filter_mic_menu);
+	withZ->checkbox = true; 
+	menu->view->add(withZ); 
+
+	ma_result result;
+	ma_context context;
+	ma_device_info* pPlaybackDeviceInfos;
+	ma_uint32 playbackDeviceCount;
+	ma_device_info* pCaptureDeviceInfos;
+	ma_uint32 captureDeviceCount;
+	ma_uint32 iDevice;
+
+	if (ma_context_init(NULL, 0, NULL, &context) != MA_SUCCESS) {
+		printf("Failed to initialize context.\n");
+		return;
+	}
+
+	result = ma_context_get_devices(&context, &pPlaybackDeviceInfos, &playbackDeviceCount, &pCaptureDeviceInfos, &captureDeviceCount);
+	if (result != MA_SUCCESS) {
+		printf("Failed to retrieve device information.\n");
+		return;
+	}
+
+	printf("Capture Devices\n");
+	for (iDevice = 0; iDevice < captureDeviceCount; ++iDevice) {
+		ma_device_info dev = pCaptureDeviceInfos[iDevice];
+		ma_context_get_device_info(&context, ma_device_type_capture, &dev.id, ma_share_mode_shared, &dev);
+		int ch = max(1, (int)max(dev.minChannels, dev.maxChannels ));
+		auto btn = menu->addOption("[" + ofToString(ch) + " ch] " + string(dev.name),dev.name)->button;
+		btn->setProperty<ma_device_info>(string("ma_device_info"), move(dev));
+		btn->label->fontSize--;
+		printf("    %u: %s\n", iDevice, pCaptureDeviceInfos[iDevice].name);
+	}
+
+
+	ma_context_uninit(&context);
 }
