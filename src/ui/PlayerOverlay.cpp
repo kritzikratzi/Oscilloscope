@@ -1,4 +1,4 @@
-#include "PlayerOverlay.h"
+﻿#include "PlayerOverlay.h"
 #include <Poco/Delegate.h>
 #include "ofxFontAwesome.h"
 #include "ofApp.h"
@@ -96,7 +96,7 @@ PlayerOverlay::PlayerOverlay( float x_, float y_, float width_, float height_)
 	strokeWeightSlider->label->fg = ofColor(255);
 	add( strokeWeightSlider );
 	
-	timeStretchLabel = addLabel( "Time Stretch" );
+	timeStretchLabel = addLabel( "Playback Speed" );
 	timeStretchSlider = new mui::SliderWithLabel(0, 0, 100, h, 0.25, 100, 1, 2 );
 	timeStretchSlider->slider->valueMapper = make_shared<mui::Slider::MapperLog>(6000);
 	ofAddListener( timeStretchSlider->slider->onChange, this, &PlayerOverlay::sliderChanged );
@@ -487,30 +487,30 @@ void PlayerOverlay::populateMicMenu(FMenu<string> * menu) {
 		return;
 	}
 
-  printf("Capture Devices\n");
-  for (iDevice = 0; iDevice < captureDeviceCount; ++iDevice) {
-    ma_device_info dev = pCaptureDeviceInfos[iDevice];
-    ma_context_get_device_info(&context, ma_device_type_capture, &dev.id, ma_share_mode_shared, &dev);
-    int ch = max(1, (int)max(dev.minChannels, dev.maxChannels));
-    auto btn = menu->addOption("[" + ofToString(ch) + " ch] " + string(dev.name), dev.name)->button;
-    btn->setProperty<ma_device_info>(string("ma_device_info"), move(dev));
-    btn->setProperty<bool>(string("ma_loopback"), true);
-    btn->label->fontSize--;
-    printf("    %u: %s\n", iDevice, pCaptureDeviceInfos[iDevice].name);
-  }
+	printf("Capture Devices\n");
+	for (iDevice = 0; iDevice < captureDeviceCount; ++iDevice) {
+		ma_device_info dev = pCaptureDeviceInfos[iDevice];
+		ma_context_get_device_info(&context, ma_device_type_capture, &dev.id, ma_share_mode_shared, &dev);
+		int ch = max(1, (int)max(dev.minChannels, dev.maxChannels));
+		auto btn = menu->addOption("[" + ofToString(ch) + " ch] " + string(dev.name), dev.name)->button;
+		btn->setProperty<ma_device_info>(string("ma_device_info"), move(dev));
+		btn->setProperty<bool>(string("ma_loopback"), true);
+		btn->label->fontSize--;
+		printf("    %u: %s\n", iDevice, pCaptureDeviceInfos[iDevice].name);
+	}
 
 
-  printf("Playback Devices\n");
-  for (iDevice = 0; iDevice < playbackDeviceCount; ++iDevice) {
-    ma_device_info dev = pPlaybackDeviceInfos[iDevice];
-    ma_context_get_device_info(&context, ma_device_type_capture, &dev.id, ma_share_mode_shared, &dev);
-    dev.loopback = MA_TRUE;
-    int ch = max(1, (int)max(dev.minChannels, dev.maxChannels));
-    auto btn = menu->addOption("[" + ofToString(ch) + " ch] LOOPBACK" + string(dev.name), dev.name)->button;
-    btn->setProperty<ma_device_info>(string("ma_device_info"), move(dev));
-    btn->label->fontSize--;
-    printf("    %u: %s\n", iDevice, pPlaybackDeviceInfos[iDevice].name);
-  }
+	printf("Playback Devices\n");
+	for (iDevice = 0; iDevice < playbackDeviceCount; ++iDevice) {
+		ma_device_info dev = pPlaybackDeviceInfos[iDevice];
+		ma_context_get_device_info(&context, ma_device_type_capture, &dev.id, ma_share_mode_shared, &dev);
+		dev.loopback = MA_TRUE;
+		int ch = max(1, (int)max(dev.minChannels, dev.maxChannels));
+		auto btn = menu->addOption("[" + ofToString(ch) + " ch loopback] " + string(dev.name), dev.name)->button;
+		btn->setProperty<ma_device_info>(string("ma_device_info"), move(dev));
+		btn->label->fontSize--;
+		printf("    %u: %s\n", iDevice, pPlaybackDeviceInfos[iDevice].name);
+	}
 
 
 	ma_context_uninit(&context);

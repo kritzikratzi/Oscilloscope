@@ -7584,7 +7584,7 @@ typedef struct
     ma_bool32 usingDefaultSampleRate;
     ma_bool32 usingDefaultChannelMap;
     ma_share_mode shareMode;
-    DWORD streamFlagsIn;
+    DWORD streamFlagsIn = 0;
 
     /* Output. */
     ma_IAudioClient* pAudioClient;

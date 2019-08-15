@@ -11,7 +11,7 @@ ConfigView::ConfigView()
 	ofAddListener(ofEvents().messageEvent, this, &ConfigView::gotMessage);
 
 //	pushLabel( "Sample Rate");
-	sampleRatePicker= new FDropdown<int>(0,0,80,30);
+	sampleRatePicker= new FDropdown<int>(0,0,100,30);
 	sampleRatePicker->addOption("Auto", 0);
 	sampleRatePicker->addOption("44100", 44100);
 	sampleRatePicker->addOption("48000", 48000);
@@ -28,15 +28,11 @@ ConfigView::ConfigView()
 		addDeviceOptions(); 
 	}; 
 	outDevicePicker->dataDisplay = [&](string name, string & value) {
-		if (value == "") return string("Auto"); 
+		if (value == "") return string("Default Output"); 
 		else return value; 
 	}; 
 	ofAddListener(outDevicePicker->menu->onSelectValue, this, &ConfigView::outDevicePickerChanged); 
 	add(outDevicePicker);
-
-	closeButton = new mui::Button( "Done", 0, 0, 100, 30 );
-	ofAddListener( closeButton->onPress, this, &ConfigView::buttonPressed );
-	add(closeButton); 
 }
 
 
@@ -51,8 +47,7 @@ void ConfigView::draw(){
 
 //--------------------------------------------------------------
 void ConfigView::layout() {
-	mui::L(closeButton).posTR(5,5); 
-	mui::L(sampleRatePicker).leftOf(closeButton, 10); 
+	mui::L(sampleRatePicker).posTR(5,5); 
 	mui::L(outDevicePicker).leftOf(sampleRatePicker, 10).stretchToLeftEdgeOfParent(5);
 }
 
@@ -99,9 +94,6 @@ void ConfigView::pushLabel( string text ){
 
 //--------------------------------------------------------------
 void ConfigView::buttonPressed( const void * sender, ofTouchEventArgs & args ){
-	if( sender == closeButton ){
-		visible = false; 
-	}
 }
 
 //--------------------------------------------------------------
@@ -138,7 +130,7 @@ void ConfigView::addDeviceOptions() {
 		return;
 	}
 
-	outDevicePicker->addOption("Auto", ""); 
+	outDevicePicker->addOption("Default Output", ""); 
 
 	printf("Playback Devices\n");
 	for (iDevice = 0; iDevice < playbackDeviceCount; ++iDevice) {

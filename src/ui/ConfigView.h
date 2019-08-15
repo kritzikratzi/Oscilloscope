@@ -20,8 +20,6 @@ public:
 	FDropdown<string> * outDevicePicker; 
 	FDropdown<int> * sampleRatePicker;
 
-	mui::Button * closeButton;
-	
 	void fromGlobals();
 	void toGlobals();
 	
