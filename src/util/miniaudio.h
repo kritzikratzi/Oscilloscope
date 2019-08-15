@@ -1880,6 +1880,7 @@ typedef struct
     ma_uint32 maxChannels;
     ma_uint32 minSampleRate;
     ma_uint32 maxSampleRate;
+    ma_bool8 loopback;
 } ma_device_info;
 
 typedef union
@@ -1914,6 +1915,7 @@ typedef struct
         ma_uint32 channels;
         ma_channel channelMap[MA_MAX_CHANNELS];
         ma_share_mode shareMode;
+        ma_bool8 loopback;
     } capture;
 
     struct
@@ -7582,6 +7584,7 @@ typedef struct
     ma_bool32 usingDefaultSampleRate;
     ma_bool32 usingDefaultChannelMap;
     ma_share_mode shareMode;
+    DWORD streamFlagsIn;
 
     /* Output. */
     ma_IAudioClient* pAudioClient;
@@ -7732,7 +7735,7 @@ ma_result ma_device_init_internal__wasapi(ma_context* pContext, ma_device_type d
         */
         hr = E_FAIL;
         for (;;) {
-            hr = ma_IAudioClient_Initialize((ma_IAudioClient*)pData->pAudioClient, shareMode, MA_AUDCLNT_STREAMFLAGS_EVENTCALLBACK, bufferDuration, bufferDuration, (WAVEFORMATEX*)&wf, NULL);
+            hr = ma_IAudioClient_Initialize((ma_IAudioClient*)pData->pAudioClient, shareMode, pData->streamFlagsIn | MA_AUDCLNT_STREAMFLAGS_EVENTCALLBACK, bufferDuration, bufferDuration, (WAVEFORMATEX*)&wf, NULL);
             if (hr == MA_AUDCLNT_E_INVALID_DEVICE_PERIOD) {
                 if (bufferDuration > 500*10000) {
                     break;
@@ -7765,7 +7768,7 @@ ma_result ma_device_init_internal__wasapi(ma_context* pContext, ma_device_type d
             #endif
 
                 if (SUCCEEDED(hr)) {
-                    hr = ma_IAudioClient_Initialize((ma_IAudioClient*)pData->pAudioClient, shareMode, MA_AUDCLNT_STREAMFLAGS_EVENTCALLBACK, bufferDuration, bufferDuration, (WAVEFORMATEX*)&wf, NULL);
+                    hr = ma_IAudioClient_Initialize((ma_IAudioClient*)pData->pAudioClient, shareMode, pData->streamFlagsIn | MA_AUDCLNT_STREAMFLAGS_EVENTCALLBACK, bufferDuration, bufferDuration, (WAVEFORMATEX*)&wf, NULL);
                 }
             }
         }
@@ -7807,7 +7810,7 @@ ma_result ma_device_init_internal__wasapi(ma_context* pContext, ma_device_type d
 
                 /* If the client requested a largish buffer than we don't actually want to use low latency shared mode because it forces small buffers. */
                 if (actualPeriodInFrames >= desiredPeriodInFrames) {
-                    hr = ma_IAudioClient3_InitializeSharedAudioStream(pAudioClient3, MA_AUDCLNT_STREAMFLAGS_EVENTCALLBACK, actualPeriodInFrames, (WAVEFORMATEX*)&wf, NULL);
+                    hr = ma_IAudioClient3_InitializeSharedAudioStream(pAudioClient3, pData->streamFlagsIn | MA_AUDCLNT_STREAMFLAGS_EVENTCALLBACK, actualPeriodInFrames, (WAVEFORMATEX*)&wf, NULL);
                     if (SUCCEEDED(hr)) {
                         wasInitializedUsingIAudioClient3 = MA_TRUE;
                         pData->periodSizeInFramesOut = actualPeriodInFrames;
@@ -7824,7 +7827,7 @@ ma_result ma_device_init_internal__wasapi(ma_context* pContext, ma_device_type d
         /* If we don't have an IAudioClient3 then we need to use the normal initialization routine. */
         if (!wasInitializedUsingIAudioClient3) {
             MA_REFERENCE_TIME bufferDuration = bufferDurationInMicroseconds*10;
-            hr = ma_IAudioClient_Initialize((ma_IAudioClient*)pData->pAudioClient, shareMode, MA_AUDCLNT_STREAMFLAGS_EVENTCALLBACK, bufferDuration, 0, (WAVEFORMATEX*)&wf, NULL);
+            hr = ma_IAudioClient_Initialize((ma_IAudioClient*)pData->pAudioClient, shareMode, pData->streamFlagsIn | MA_AUDCLNT_STREAMFLAGS_EVENTCALLBACK, bufferDuration, 0, (WAVEFORMATEX*)&wf, NULL);
             if (FAILED(hr)) {
                 if (hr == E_ACCESSDENIED) {
                     errorMsg = "[WASAPI] Failed to initialize device. Access denied.", result = MA_ACCESS_DENIED;
@@ -8056,6 +8059,7 @@ ma_result ma_device_init__wasapi(ma_context* pContext, const ma_device_config* p
         data.bufferSizeInFramesIn       = pConfig->bufferSizeInFrames;
         data.bufferSizeInMillisecondsIn = pConfig->bufferSizeInMilliseconds;
         data.periodsIn                  = pConfig->periods;
+        data.streamFlagsIn              = pConfig->capture.loopback ? MA_AUDCLNT_STREAMFLAGS_LOOPBACK : 0;
 
         result = ma_device_init_internal__wasapi(pDevice->pContext, ma_device_type_capture, pConfig->capture.pDeviceID, &data);
         if (result != MA_SUCCESS) {

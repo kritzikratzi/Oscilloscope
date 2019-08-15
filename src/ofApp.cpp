@@ -869,8 +869,10 @@ void ofApp::startMic() {
 	micDeviceConfig.pUserData = this;
 	//playDeviceConfig.playback.pDeviceID = globals.deviceId;
 
-	if (!micDeviceConfig.capture.pDeviceID) micDeviceConfig.capture.pDeviceID = new ma_device_id(); 
-	*micDeviceConfig.capture.pDeviceID = playerOverlay->getSelectedMicDeviceInfo().id;
+	if (!micDeviceConfig.capture.pDeviceID) micDeviceConfig.capture.pDeviceID = new ma_device_id();
+  auto micDeviceInfo = playerOverlay->getSelectedMicDeviceInfo();
+  *micDeviceConfig.capture.pDeviceID = micDeviceInfo.id;
+  micDeviceConfig.capture.loopback = micDeviceInfo.loopback;
 
 
 	if (ma_device_init(NULL, &micDeviceConfig, &micDevice) != MA_SUCCESS) {
