@@ -1,5 +1,4 @@
-﻿#include "PlayerOverlay.h"
-#include <Poco/Delegate.h>
+#include "PlayerOverlay.h"
 #include "ofxFontAwesome.h"
 #include "ofApp.h"
 #include "MuiL.h"

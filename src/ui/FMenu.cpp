@@ -81,7 +81,7 @@ typename FMenu<T>::Option * FMenu<T>::addOption(string title, T value) {
 }
 
 template<typename T>
-void FMenu<T>::removeAllOptions(FMenuNotify when = FMenuNotify::always) {
+void FMenu<T>::removeAllOptions(FMenuNotify when) {
 	posY = 0;
 	for (Option * option : items) {
 		view->remove(option->button);
@@ -123,7 +123,7 @@ typename FMenu<T>::Option * FMenu<T>::getOptionByValue(const T & value) {
 }
 
 template<typename T>
-typename FMenu<T>::Option * FMenu<T>::setSelected(typename FMenu<T>::Option * option, FMenuNotify when = FMenuNotify::always) {
+typename FMenu<T>::Option * FMenu<T>::setSelected(typename FMenu<T>::Option * option, FMenuNotify when) {
 	bool same =
 		(option == nullptr && selected != nullptr) ||
 		(option != nullptr && selected == nullptr) ||
@@ -142,7 +142,7 @@ typename FMenu<T>::Option * FMenu<T>::setSelected(typename FMenu<T>::Option * op
 }
 
 template<typename T>
-typename FMenu<T>::Option * FMenu<T>::setSelectedValue(T value, FMenuNotify when = FMenuNotify::always) {
+typename FMenu<T>::Option * FMenu<T>::setSelectedValue(T value, FMenuNotify when ) {
 	for (auto & item : items) {
 		if (item->value == value) {
 			return setSelected(item, when); 
@@ -153,7 +153,7 @@ typename FMenu<T>::Option * FMenu<T>::setSelectedValue(T value, FMenuNotify when
 }
 
 template<typename T>
-typename FMenu<T>::Option * FMenu<T>::setSelectedIndex(int index, FMenuNotify when = FMenuNotify::always) {
+typename FMenu<T>::Option * FMenu<T>::setSelectedIndex(int index, FMenuNotify when) {
 	if (items.size() == 0) {
 		return setSelected(nullptr, when);
 	}
@@ -213,12 +213,12 @@ void FMenu<T>::handleDraw() {
 
 	ofMesh mesh;
 	mesh.setMode(OF_PRIMITIVE_LINE_STRIP);
-	mesh.addVertex({ x, y });
-	mesh.addVertex({ x, y + height - 1 });
-	mesh.addVertex({ x + width - 1, y + height - 1 });
-	mesh.addVertex({ x + width - 1, y });
-	if(topBorderWidth==-1) mesh.addVertex({ x, y });
-	else if (topBorderWidth >= 0) mesh.addVertex({x + topBorderWidth, y});
+	mesh.addVertex({ x, y, 0 });
+	mesh.addVertex({ x, y + height - 1, 0 });
+	mesh.addVertex({ x + width - 1, y + height - 1, 0 });
+	mesh.addVertex({ x + width - 1, y, 0 });
+	if(topBorderWidth==-1) mesh.addVertex({ x, y, 0 });
+	else if (topBorderWidth >= 0) mesh.addVertex({x + topBorderWidth, y, 0});
 
 	ofPushMatrix();
 	ofTranslate(.5f, 0.5f);
@@ -372,25 +372,25 @@ const T & FDropdown<T>::getSelectedValueOr(const T & defaultValue) const {
 }
 
 template<typename T>
-typename FMenu<T>::Option * FDropdown<T>::setSelected(typename FMenu<T>::Option * option, FMenuNotify when = FMenuNotify::always) {
+typename FMenu<T>::Option * FDropdown<T>::setSelected(typename FMenu<T>::Option * option, FMenuNotify when) {
 	needsUpdate = true; 
 	return menu->setSelected(option, when);
 }
 
 template<typename T>
-typename FMenu<T>::Option * FDropdown<T>::setSelectedValue(T value, FMenuNotify when = FMenuNotify::always) {
+typename FMenu<T>::Option * FDropdown<T>::setSelectedValue(T value, FMenuNotify when ) {
 	needsUpdate = true;
 	return menu->setSelectedValue(value, when);
 }
 
 template<typename T>
-typename FMenu<T>::Option * FDropdown<T>::setSelectedIndex(int index, FMenuNotify when = FMenuNotify::always) {
+typename FMenu<T>::Option * FDropdown<T>::setSelectedIndex(int index, FMenuNotify when) {
 	needsUpdate = true;
 	return menu->setSelectedIndex(index, when);
 }
 
 template<typename T>
-void FDropdown<T>::removeAllOptions(FMenuNotify when = FMenuNotify::always) {
+void FDropdown<T>::removeAllOptions(FMenuNotify when) {
 	needsUpdate = true;
 	menu->removeAllOptions(when);
 }

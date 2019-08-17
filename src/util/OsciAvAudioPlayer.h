@@ -174,7 +174,7 @@ public:
 		STEREO, // stereo file. to be displayed as x-y signal
 		STEREO_ZMODULATED, // stereo file + z modulation
 		QUAD // 2 x stereo file
-	};
+	} FileType;
 	
 	// type of the loaded file. this is kinda important so you know how to
 	// interpret the left/right/zMod buffers

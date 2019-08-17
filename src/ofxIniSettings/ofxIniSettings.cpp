@@ -219,10 +219,6 @@ bool ofxIniSettings::ofxColorMatch(ofColor a, ofColor b, int tolerance) {
 	//return if (c->color.r==rgb.r && c->color.g==rgb.g && c->color.b==rgb.b) return c;
 }
 
-void ofxIniSettings::ofxScale(float scale) {
-	ofScale(scale,scale,scale);
-}
-
 void ofxIniSettings::ofxSetHexColor(int hexColor, int a) { //alpha between 0..255
 	int r = (hexColor >> 16) & 0xff;
 	int g = (hexColor >> 8) & 0xff;
@@ -339,7 +335,7 @@ string ofxIniSettings::ofxToHexString(int value, int digits) {
 	string format = "%0"+ofToString(digits)+"x";
 	sprintf(buf,format.c_str(),value);
 	result = buf;
-	delete buf;
+	delete [] buf;
 	return result;
 }
 
@@ -369,36 +365,6 @@ vector<string> ofxIniSettings::ofxToStringVector(string value) {
 	vector<string> lines;
 	lines.push_back(value);
 	return lines;
-}
-
-void ofxIniSettings::ofxRotate(ofVec3f v) {
-	glRotatef(v.x,1,0,0);
-	glRotatef(v.y,0,1,0);
-	glRotatef(v.z,0,0,1);
-}
-
-void ofxIniSettings::ofxRotate(ofQuaternion q) {
-	//rotation
-	float angle;
-	ofVec3f axis;
-	q.getRotate(angle, axis);
-	ofRotate(angle/TWO_PI*360,axis.x,axis.y,axis.z);
-}
-
-void ofxIniSettings::ofxRotate(ofNode &node, ofQuaternion q) {
-	node.setOrientation(node.getOrientationQuat() * q);
-}
-
-void ofxIniSettings::ofxRotate(float angle, ofVec3f v) {
-	glRotatef(angle,v.x,v.y,v.z);
-}
-
-void ofxIniSettings::ofxTranslate(ofVec3f v) {
-	glTranslatef(v.x,v.y,v.z);
-}
-
-void ofxIniSettings::ofxScale(ofVec3f v) {
-	glScalef(v.x,v.y,v.z);
 }
 
 ofVec2f ofxIniSettings::ofxToVec2f(string str) {

@@ -46,7 +46,6 @@ ofQuaternion ofxToQuaternion(string str);
 string ofxToHex(char c);
 void ofxRotate(ofVec3f v);
 void ofxRotate(ofQuaternion q);
-void ofxRotate(ofNode &node, ofQuaternion q);
 void ofxRotate(float angle, ofVec3f v);
 void ofxTranslate(ofVec3f v);
 void ofxScale(ofVec3f v);

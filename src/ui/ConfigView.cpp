@@ -27,7 +27,7 @@ ConfigView::ConfigView()
 	outDevicePicker->dataProvider = [&](FDropdown<string> * menu) {
 		addDeviceOptions(); 
 	}; 
-	outDevicePicker->dataDisplay = [&](string name, string & value) {
+	outDevicePicker->dataDisplay = [&](string name, string value) {
 		if (value == "") return string("Default Output"); 
 		else return value; 
 	}; 

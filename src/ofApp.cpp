@@ -9,6 +9,8 @@
 #include "ui/ExportScreen.h"
 #include "MuiL.h"
 
+#include "GLFW/glfw3.h"
+
 //--------------------------------------------------------------
 void ofApp::setup(){
 	OsciMesh::init();
@@ -556,7 +558,6 @@ void ofApp::exit(){
 	ofstream out(ofxToReadWriteableDataPath("playlist.txt"));
 	playlist->save(out);
 	out.close();
-	std::exit(0);
 }
 
 

@@ -112,12 +112,6 @@ public:
 	static ofQuaternion ofxToQuaternion(string str) ;
 	static string ofxToHex(char c) ;
 	static vector<string> ofxToStringVector(string value) ;
-	static void ofxRotate(ofVec3f v) ;
-	static void ofxRotate(ofQuaternion q) ;
-	static void ofxRotate(ofNode &node, ofQuaternion q) ;
-	static void ofxRotate(float angle, ofVec3f v) ;
-	static void ofxTranslate(ofVec3f v) ;
-	static void ofxScale(ofVec3f v) ;
 	static ofVec2f ofxToVec2f(string str) ;
 	static ofVec3f ofxToVec3f(string str) ;
 	static ofVec3f ofxToVec3f(float *a) ;
