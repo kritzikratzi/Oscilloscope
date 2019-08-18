@@ -354,6 +354,7 @@ void Playlist::buttonPressed(const void * sender, ofTouchEventArgs & args) {
 		auto res = ofSystemLoadDialog("Add Folder", true);
 		if (res.bSuccess) {
 			addFile(ofFile(res.filePath, ofFile::ReadOnly));
+			handleLayout(); 
 		}
 	}
 	else if (sender == loopModeButton) {

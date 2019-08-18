@@ -1,17 +1,15 @@
 #include "ofMain.h"
 #include "ofApp.h"
 #include "ofxMightyUI.h"
+
 #if defined(TARGET_OSX)
 #import <AppKit/AppKit.h>
+#elif defined(TARGET_WIN32)
+#include "../resource.h"
 #endif
 
-#if defined(__linux__)
-#include "ofAppGlutWindow.h"
-#else
 #include "ofAppGLFWWindow.h"
-#endif
 #include "ofxNative.h"
-
 #include <GL/glew.h>
 
 //========================================================================
@@ -46,8 +44,12 @@ int main(){
 		[cocoaWindow setLevel: NSFloatingWindowLevel];
 	}
 	#endif
-	
 
+	#if defined(TARGET_WIN32)
+	HWND hwnd = ofGetWin32Window();
+	HICON hMyIcon = LoadIcon(GetModuleHandle(NULL), MAKEINTRESOURCE(MAIN_ICON));
+	SendMessage(hwnd, WM_SETICON, ICON_BIG, (LPARAM)hMyIcon);
+	#endif
 
 	mui_init();
 	mui::MuiConfig::font = "mui/fonts/Lato-Regular.ttf";

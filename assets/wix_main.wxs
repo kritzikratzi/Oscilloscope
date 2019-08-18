@@ -31,7 +31,7 @@
 						<Shortcut Id="ApplicationStartMenuShortcut" 
 								  Name="$(var.MyProductName)"
 								  Description="$(var.MyProductName)"
-								  Target="[#fil52D03754AFC314F5BF8BDE6A7A4BDF6F]"
+								  Target="[#$(var.MyExeId)]"
 								  WorkingDirectory="$(var.MyExeWorkingDir)"
 								  />
 					<RemoveFolder Id='ApplicationProgramsFolder' On='uninstall' />

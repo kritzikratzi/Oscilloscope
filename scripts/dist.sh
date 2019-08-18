@@ -44,10 +44,12 @@ if [ "$platform" = "win32" ] || [ "$platform" = "win64" ]
 then
 	pushd
 	cd "$distDir"
-	dlls="assimp.dll glut32.dll libeay32.dll ssleay32.dll swscale-4.dll Zlib.dll FreeType.dll fmodex.dll fmodexL.dll"
+	dlls="assimp.dll Zlib.dll glut32.dll libeay32.dll ssleay32.dll swscale-4.dll Zlib.dll FreeType.dll fmodex64.dll fmodex64L.dll"
 	echo "Deleting unused DLL files: $dlls "
 	echo "Make sure they are specified as 'delay loaded DLLs' in the linker settings"
 	rm $dlls
+	rm Oscilloscope_debug.*
+	
 	popd
 	
 	if [ ! -x "$(command -v candle)" ]
@@ -98,6 +100,12 @@ EOF
 	echo "  * Cleaning up"
 	rm *.wixobj
 	rm dist/*.wixpdb
+	
+	echo "  * Creating portable zip"
+	cd dist
+	zipTarget="$(basename "$distDir").zip"
+	zip -r "$zipTarget" "$(basename "$distDir")" 
+	cd ..
 
 elif [ "$platform" = "osx" ]
 then
