@@ -64,7 +64,7 @@ public:
 	int exportFrameRate{60};
 	ExportFormat exportFormat{ExportFormat::IMAGE_SEQUENCE_PNG};
 	
-	float secondsBeforeHidingMenu{1.5};
+	float secondsBeforeHidingMenu{0.5};
 	
 	bool alwaysOnTop{false};
 	
@@ -95,7 +95,7 @@ public:
 		exportWidth = settings.get( "exportWidth", exportWidth );
 		exportHeight = settings.get( "exportHeight", exportHeight );
 		exportFormat = (ExportFormat)settings.get("exportFormat", (int)exportFormat);
-		secondsBeforeHidingMenu = settings.get( "secondsBeforeHidingMenu", secondsBeforeHidingMenu );
+		//secondsBeforeHidingMenu = settings.get( "secondsBeforeHidingMenu", secondsBeforeHidingMenu );
 	}
 	
 	
@@ -108,11 +108,11 @@ public:
 
 		ofxIniSettings settings = ofxIniSettings(settingsFile);
 		
-		settings.set("out_bufferSize", out_requested.bufferSize);
-		settings.set("out_sampleRate", out_requested.sampleRate);
+		//settings.set("out_bufferSize", out_requested.bufferSize);
+		//settings.set("out_sampleRate", out_requested.sampleRate);
 		settings.set("out_deviceName", out_requested.name);
-		settings.set("in_bufferSize", in_requested.bufferSize);
-		settings.set("in_sampleRate", in_requested.sampleRate);
+		//settings.set("in_bufferSize", in_requested.bufferSize);
+		//settings.set("in_sampleRate", in_requested.sampleRate);
 		settings.set("in_deviceName", in_requested.name);
 		settings.set( "scale", scale );
 		settings.set( "flipXY", flipXY );
@@ -132,7 +132,7 @@ public:
 		settings.set( "exportWidth", exportWidth );
 		settings.set( "exportHeight", exportHeight );
 		settings.set( "exportFormat", (int)exportFormat );
-		settings.set( "secondsBeforeHidingMenu", secondsBeforeHidingMenu );
+		// settings.set( "secondsBeforeHidingMenu", secondsBeforeHidingMenu );
 	}
 	
 	

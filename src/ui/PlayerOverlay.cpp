@@ -503,6 +503,9 @@ void PlayerOverlay::populateMicMenu(FMenu<string> * menu) {
 	for (iDevice = 0; iDevice < playbackDeviceCount; ++iDevice) {
 		ma_device_info dev = pPlaybackDeviceInfos[iDevice];
 		ma_context_get_device_info(&context, ma_device_type_capture, &dev.id, ma_share_mode_shared, &dev);
+		// for now only allow loopbacks in wasapi
+		if(context.backend != ma_backend_wasapi) continue;
+		
 		dev.loopback = MA_TRUE;
 		int ch = max(1, (int)max(dev.minChannels, dev.maxChannels));
 		auto btn = menu->addOption("[" + ofToString(ch) + " ch loopback] " + string(dev.name), dev.name)->button;

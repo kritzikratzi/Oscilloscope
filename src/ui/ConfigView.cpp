@@ -9,18 +9,6 @@ ConfigView::ConfigView()
 	opaque = true;
 
 	ofAddListener(ofEvents().messageEvent, this, &ConfigView::gotMessage);
-
-//	pushLabel( "Sample Rate");
-	sampleRatePicker= new FDropdown<int>(0,0,100,30);
-	sampleRatePicker->addOption("Auto", 0);
-	sampleRatePicker->addOption("44100", 44100);
-	sampleRatePicker->addOption("48000", 48000);
-	sampleRatePicker->addOption("88200", 88200);
-	sampleRatePicker->addOption("96000", 96000);
-	sampleRatePicker->addOption("176400", 176400);
-	sampleRatePicker->addOption("192000", 192000);
-	ofAddListener(sampleRatePicker->menu->onSelectValue, this, &ConfigView::sampleRatePickerChanged);
-	add(sampleRatePicker);
 	
 //	pushLabel( "Audio Device");
 	outDevicePicker = new FDropdown<string>(0, 0, 300, 30); 
@@ -46,9 +34,8 @@ void ConfigView::draw(){
 }
 
 //--------------------------------------------------------------
-void ConfigView::layout() {
-	mui::L(sampleRatePicker).posTR(5,5); 
-	mui::L(outDevicePicker).leftOf(sampleRatePicker, 10).stretchToLeftEdgeOfParent(5);
+void ConfigView::layout(){
+	mui::L(outDevicePicker).posTL(5,5).stretchToRightEdgeOfParent(5);
 }
 
 
@@ -74,12 +61,10 @@ void ConfigView::touchDoubleTap( ofTouchEventArgs &touch ){
 //--------------------------------------------------------------
 void ConfigView::fromGlobals(){
 	outDevicePicker->setSelectedValue( globals.out_requested.name ); 
-	sampleRatePicker->setSelectedValue( globals.out_requested.sampleRate );
 }
 
 //--------------------------------------------------------------
 void ConfigView::toGlobals(){
-	globals.out_requested.sampleRate = sampleRatePicker->getSelectedValueOr(44100);
 	globals.out_requested.name = outDevicePicker->getSelectedValueOr("");
 }
 
@@ -99,10 +84,6 @@ void ConfigView::buttonPressed( const void * sender, ofTouchEventArgs & args ){
 //--------------------------------------------------------------
 void ConfigView::outDevicePickerChanged(const void * sender, string & value) {
 	ofSendMessage("out-choice-changed"); 
-}
-
-void ConfigView::sampleRatePickerChanged(const void * sender, int & value) {
-	ofSendMessage("out-choice-changed");
 }
 
 void ConfigView::gotMessage(const void * sender, ofMessage & msg) {

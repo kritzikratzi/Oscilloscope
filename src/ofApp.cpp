@@ -97,8 +97,6 @@ void ofApp::startApplication(){
 	
 	//if you want to set the device id to be different than the default
 	cout << "Opening Sound Card: " << endl;
-	cout << "    Sample rate: " << globals.out_requested.sampleRate << endl;
-	cout << "    Buffer size: " << globals.out_requested.bufferSize << endl;
 	cout << "    Name: " << globals.out_requested.name << endl;
 
 	playDeviceConfig = ma_device_config_init(ma_device_type_playback);
@@ -148,7 +146,7 @@ void ofApp::startApplication(){
 		for (iDevice = 0; iDevice < playbackDeviceCount; ++iDevice) {
 			ma_device_info dev = pPlaybackDeviceInfos[iDevice];
 			if (dev.name == globals.out_requested.name) {
-				//git-forbid ouch!!!
+				//it's a tiny leak, but it works. we accept it as it is, give it a little hug, and move on.
 				playDeviceConfig.playback.pDeviceID = new ma_device_id();
 				memcpy(playDeviceConfig.playback.pDeviceID, &dev.id, sizeof(ma_device_id));
 			}
