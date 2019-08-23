@@ -64,7 +64,7 @@ then
 	echo "    $code"
 
 	echo "  * Building file list for heat..."
-	heat dir "$distDir" -sreg -srd -ag -dr INSTALLDIR -cg CGROUP -out assets/wix_files.wxs 1>/dev/null
+	heat dir "$distDir" -sreg -srd -ag -dr INSTALLDIR -cg CGROUP -t assets/wix_heat.xslt -out assets/wix_files.wxs 1>/dev/null
 
 	echo "  * Preparing assets/wix_config.wxi ..."
 	# in case you are some random person on the internet: 

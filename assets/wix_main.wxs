@@ -8,7 +8,7 @@
         Language='1033' Codepage='1252' Version='$(var.MyAppVersion)'>
 		<Package Id='*' Keywords='Installer' Description="$(var.MyProductName) $(var.MyAppVersion) installer"
 			Comments='${var.MyAppPackageComment}' Manufacturer='$(var.MyManufacturer)'
-			InstallerVersion='100' Languages='1033' Compressed='yes' SummaryCodepage='1252' />
+			InstallerVersion='200' Platform='x64' Languages='1033' Compressed='yes' SummaryCodepage='1252' />
 
 		<MajorUpgrade AllowDowngrades="yes" />
 		<Media Id='1' Cabinet='Sample.cab' EmbedCab='yes' DiskPrompt="CD-ROM #1" />
@@ -18,7 +18,7 @@
 		<Property Id="ARPPRODUCTICON" Value="MyIcon" />
 
 		<Directory Id="TARGETDIR" Name="SourceDir">
-		  <Directory Id="ProgramFilesFolder">
+		  <Directory Id="ProgramFiles64Folder">
 			<Directory Id="INSTALLDIR" Name="$(var.MyProductName)"/>
 		  </Directory>
 		  <Directory Id="ProgramMenuFolder" Name="Programs">
@@ -27,7 +27,7 @@
 		</Directory>
 		
 			<DirectoryRef Id="ApplicationProgramsFolder">
-			  <Component Id="ProgramMenuDir" Guid="$(var.MyProgramMenuGuid)">
+			  <Component Id="ProgramMenuDir" Guid="$(var.MyProgramMenuGuid)" Win64="yes">
 						<Shortcut Id="ApplicationStartMenuShortcut" 
 								  Name="$(var.MyProductName)"
 								  Description="$(var.MyProductName)"
