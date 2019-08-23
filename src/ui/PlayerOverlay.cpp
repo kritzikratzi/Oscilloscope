@@ -504,7 +504,7 @@ void PlayerOverlay::populateMicMenu(FMenu<string> * menu) {
 		ma_device_info dev = pCaptureDeviceInfos[iDevice];
 		ma_context_get_device_info(&context, ma_device_type_capture, &dev.id, ma_share_mode_shared, &dev);
 		int ch = max(1, (int)max(dev.minChannels, dev.maxChannels));
-		addDevice("[" + ofToString(ch) + " ch loopback] " + string(dev.name), dev.name, dev, ma_device_type_loopback);
+		addDevice("[" + ofToString(ch) + " ch] " + string(dev.name), dev.name, dev, ma_device_type_loopback);
 	}
 
 
