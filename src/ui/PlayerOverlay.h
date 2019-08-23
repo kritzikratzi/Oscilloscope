@@ -75,8 +75,12 @@ public:
 	void inputSelected(const void * sender, FMenu<string>::Option & opt);
 	void sliderChanged( const void * sender, float & value );
 	
-	ma_device_info getSelectedMicDeviceInfo(); 
+	struct mic_info{
+		ma_device_info info; 
+		ma_device_type type; 
+	};
+	mic_info getSelectedMicDeviceInfo(); 
 private:
 	mui::Label * addLabel( string text );
-	ma_device_info selectedMicDeviceInfo; 
+	mic_info selectedMicDeviceInfo; 
 };

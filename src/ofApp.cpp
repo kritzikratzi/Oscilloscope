@@ -764,6 +764,7 @@ void ofApp::gotMessage(ofMessage msg){
 	}
 	else if( msg.message == "stop-mic" ){
 		stopMic();
+		startApplication(); 
 	}
 	else if( msg.message.substr(0,5) == "load:" ){
 		stopMic();
@@ -844,7 +845,8 @@ void ofApp::startMic() {
 	stopMic(); 
 	stopApplication(); 
 
-	micDeviceConfig = ma_device_config_init(ma_device_type_capture);
+	auto info = playerOverlay->getSelectedMicDeviceInfo();
+	micDeviceConfig = ma_device_config_init(info.type);
 	micDeviceConfig.capture.format = ma_format_f32;
 	micDeviceConfig.capture.channels = 0;
 	micDeviceConfig.bufferSizeInFrames = 0;
@@ -870,9 +872,7 @@ void ofApp::startMic() {
 	//playDeviceConfig.playback.pDeviceID = globals.deviceId;
 
 	if (!micDeviceConfig.capture.pDeviceID) micDeviceConfig.capture.pDeviceID = new ma_device_id();
-  auto micDeviceInfo = playerOverlay->getSelectedMicDeviceInfo();
-  *micDeviceConfig.capture.pDeviceID = micDeviceInfo.id;
-  micDeviceConfig.capture.loopback = micDeviceInfo.loopback;
+	*micDeviceConfig.capture.pDeviceID = info.info.id;
 
 
 	if (ma_device_init(NULL, &micDeviceConfig, &micDevice) != MA_SUCCESS) {

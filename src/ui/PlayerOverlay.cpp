@@ -375,10 +375,12 @@ void PlayerOverlay::buttonPressed( const void * sender, ofTouchEventArgs & args 
 
 void PlayerOverlay::inputSelected(const void * sender, FMenu<string>::Option & opt) {
 	auto menu = opt.button->findParentOfType<FMenu<string>>();
-  auto config_ref = opt.button->getProperty<ma_device_info>("ma_device_info");
+	auto config_ref = opt.button->getProperty<ma_device_info>("ma_device_info");
+	auto type_ref = opt.button->getProperty<ma_device_type>("ma_device_type"); 
 	bool withZ = menu->view->findChildrenOfType<mui::ToggleButton>()[0]->selected; 
-	if (config_ref) {
-		selectedMicDeviceInfo = *config_ref; 
+	if (config_ref && type_ref) {
+		selectedMicDeviceInfo.info = *config_ref; 
+		selectedMicDeviceInfo.type = *type_ref; 
 		//globals.micDeviceId = (*it).second;
 		if (withZ) {
 			ofSendMessage("start-mic:3");
@@ -391,7 +393,7 @@ void PlayerOverlay::inputSelected(const void * sender, FMenu<string>::Option & o
 	MUI_ROOT->safeRemove(menu);
 }
 
-ma_device_info PlayerOverlay::getSelectedMicDeviceInfo() {
+PlayerOverlay::mic_info PlayerOverlay::getSelectedMicDeviceInfo() {
   return selectedMicDeviceInfo;
 }
 
@@ -493,7 +495,7 @@ void PlayerOverlay::populateMicMenu(FMenu<string> * menu) {
 		int ch = max(1, (int)max(dev.minChannels, dev.maxChannels));
 		auto btn = menu->addOption("[" + ofToString(ch) + " ch] " + string(dev.name), dev.name)->button;
 		btn->setProperty<ma_device_info>(string("ma_device_info"), move(dev));
-		btn->setProperty<bool>(string("ma_loopback"), true);
+		btn->setProperty<ma_device_type>(string("ma_device_type"), ma_device_type_capture); 
 		btn->label->fontSize--;
 		printf("    %u: %s\n", iDevice, pCaptureDeviceInfos[iDevice].name);
 	}
@@ -506,10 +508,10 @@ void PlayerOverlay::populateMicMenu(FMenu<string> * menu) {
 		// for now only allow loopbacks in wasapi
 		if(context.backend != ma_backend_wasapi) continue;
 		
-		dev.loopback = MA_TRUE;
 		int ch = max(1, (int)max(dev.minChannels, dev.maxChannels));
 		auto btn = menu->addOption("[" + ofToString(ch) + " ch loopback] " + string(dev.name), dev.name)->button;
 		btn->setProperty<ma_device_info>(string("ma_device_info"), move(dev));
+		btn->setProperty<ma_device_type>(string("ma_device_type"), ma_device_type_loopback);
 		btn->label->fontSize--;
 		printf("    %u: %s\n", iDevice, pPlaybackDeviceInfos[iDevice].name);
 	}
