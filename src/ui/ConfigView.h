@@ -18,7 +18,6 @@ public:
 	
 	
 	FDropdown<string> * outDevicePicker; 
-	FDropdown<int> * sampleRatePicker;
 
 	void fromGlobals();
 	void toGlobals();
@@ -28,7 +27,6 @@ public:
 private:
 	void pushLabel( string text );
 	void outDevicePickerChanged(const void * sender, string & value);
-	void sampleRatePickerChanged(const void * sender, int & value);
 	void gotMessage(const void * sender, ofMessage & msg);
 	void addDeviceOptions();
 };
