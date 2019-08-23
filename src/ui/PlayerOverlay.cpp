@@ -488,34 +488,41 @@ void PlayerOverlay::populateMicMenu(FMenu<string> * menu) {
 		return;
 	}
 
+
+	auto addDevice = [&](string label, string name, ma_device_info info, ma_device_type type) {
+		auto btn = menu->addOption(label, name)->button;
+		btn->setProperty<ma_device_info>(string("ma_device_info"), move(info));
+		btn->setProperty<ma_device_type>(string("ma_device_type"), move(type));
+		btn->label->fontSize--;
+		printf("    %s\n", info.name);
+	}; 
+
 	printf("Capture Devices\n");
+	addDevice("Default Microphone", "", ma_device_info(), ma_device_type_capture);
+
 	for (iDevice = 0; iDevice < captureDeviceCount; ++iDevice) {
 		ma_device_info dev = pCaptureDeviceInfos[iDevice];
 		ma_context_get_device_info(&context, ma_device_type_capture, &dev.id, ma_share_mode_shared, &dev);
 		int ch = max(1, (int)max(dev.minChannels, dev.maxChannels));
-		auto btn = menu->addOption("[" + ofToString(ch) + " ch] " + string(dev.name), dev.name)->button;
-		btn->setProperty<ma_device_info>(string("ma_device_info"), move(dev));
-		btn->setProperty<ma_device_type>(string("ma_device_type"), ma_device_type_capture); 
-		btn->label->fontSize--;
-		printf("    %u: %s\n", iDevice, pCaptureDeviceInfos[iDevice].name);
+		addDevice("[" + ofToString(ch) + " ch loopback] " + string(dev.name), dev.name, dev, ma_device_type_loopback);
 	}
 
 
-	printf("Playback Devices\n");
-	for (iDevice = 0; iDevice < playbackDeviceCount; ++iDevice) {
-		ma_device_info dev = pPlaybackDeviceInfos[iDevice];
-		ma_context_get_device_info(&context, ma_device_type_capture, &dev.id, ma_share_mode_shared, &dev);
-		// for now only allow loopbacks in wasapi
-		if(context.backend != ma_backend_wasapi) continue;
-		
-		int ch = max(1, (int)max(dev.minChannels, dev.maxChannels));
-		auto btn = menu->addOption("[" + ofToString(ch) + " ch loopback] " + string(dev.name), dev.name)->button;
-		btn->setProperty<ma_device_info>(string("ma_device_info"), move(dev));
-		btn->setProperty<ma_device_type>(string("ma_device_type"), ma_device_type_loopback);
-		btn->label->fontSize--;
-		printf("    %u: %s\n", iDevice, pPlaybackDeviceInfos[iDevice].name);
-	}
+	if (context.backend == ma_backend_wasapi) {
+		printf("Playback Devices\n");
+		// not working: 
+		//addDevice("Default Output (looped back)", "", ma_device_info(), ma_device_type_loopback);
 
+		for (iDevice = 0; iDevice < playbackDeviceCount; ++iDevice) {
+			ma_device_info dev = pPlaybackDeviceInfos[iDevice];
+			ma_context_get_device_info(&context, ma_device_type_capture, &dev.id, ma_share_mode_shared, &dev);
+			// for now only allow loopbacks in wasapi
+			if (context.backend != ma_backend_wasapi) continue;
+
+			int ch = max(1, (int)max(dev.minChannels, dev.maxChannels));
+			addDevice("[" + ofToString(ch) + " ch loopback] " + string(dev.name), dev.name, dev, ma_device_type_loopback);
+		}
+	}
 
 	ma_context_uninit(&context);
 }

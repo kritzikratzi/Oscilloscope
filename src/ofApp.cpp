@@ -553,6 +553,7 @@ void ofApp::draw(){
 }
 
 void ofApp::exit(){
+	stopMic(); 
 	stopApplication();
 	ofstream out(ofxToReadWriteableDataPath("playlist.txt"));
 	playlist->save(out);
@@ -871,9 +872,10 @@ void ofApp::startMic() {
 	micDeviceConfig.pUserData = this;
 	//playDeviceConfig.playback.pDeviceID = globals.deviceId;
 
-	if (!micDeviceConfig.capture.pDeviceID) micDeviceConfig.capture.pDeviceID = new ma_device_id();
-	*micDeviceConfig.capture.pDeviceID = info.info.id;
-
+	if (strcmp(info.info.name,"") != 0) {
+		if (!micDeviceConfig.capture.pDeviceID) micDeviceConfig.capture.pDeviceID = new ma_device_id();
+		*micDeviceConfig.capture.pDeviceID = info.info.id;
+	}
 
 	if (ma_device_init(NULL, &micDeviceConfig, &micDevice) != MA_SUCCESS) {
 		printf("Failed to open capture device.\n");
