@@ -102,8 +102,9 @@ void ofApp::startApplication(){
 	playDeviceConfig = ma_device_config_init(ma_device_type_playback);
 	playDeviceConfig.playback.format = ma_format_f32;
 	playDeviceConfig.playback.channels = 2;
-	playDeviceConfig.bufferSizeInFrames = globals.out_requested.bufferSize;
+	playDeviceConfig.bufferSizeInFrames = 0;
 	playDeviceConfig.sampleRate = 0;
+	
 	playDeviceConfig.dataCallback = [](ma_device* device, void* pOutput, const void* pInput, ma_uint32 frameCount) {
 		ofApp * app = (ofApp*)device->pUserData;
 		globals.out_actual.sampleRate = device->sampleRate;
@@ -880,11 +881,13 @@ void ofApp::startMic() {
 	if (ma_device_init(NULL, &micDeviceConfig, &micDevice) != MA_SUCCESS) {
 		printf("Failed to open capture device.\n");
 		stopMic();
+		return;
 	}
 
 	if (ma_device_start(&micDevice) != MA_SUCCESS) {
 		printf("Failed to start capture device.\n");
 		stopMic();
+		return; 
 	}
 
 
