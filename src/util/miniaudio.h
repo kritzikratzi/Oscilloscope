@@ -8528,6 +8528,22 @@ ma_result ma_device_reroute__wasapi(ma_device* pDevice, ma_device_type deviceTyp
 }
 
 
+ma_result ma_device_stop__wasapi(ma_device* pDevice)
+{
+    ma_assert(pDevice != NULL);
+
+    /*
+    We need to explicitly signal the capture event in loopback mode to ensure we return from WaitForSingleObject() when nothing is being played. When nothing
+    is being played, the event is never signalled internally by WASAPI which means we will deadlock when stopping the device.
+    */
+    if (pDevice->type == ma_device_type_loopback) {
+        SetEvent((HANDLE)pDevice->wasapi.hEventCapture);
+    }
+
+    return MA_SUCCESS;
+}
+
+
 ma_result ma_device_main_loop__wasapi(ma_device* pDevice)
 {
     ma_result result;
@@ -9093,8 +9109,8 @@ ma_result ma_context_init__wasapi(const ma_context_config* pConfig, ma_context* 
     pContext->onGetDeviceInfo  = ma_context_get_device_info__wasapi;
     pContext->onDeviceInit     = ma_device_init__wasapi;
     pContext->onDeviceUninit   = ma_device_uninit__wasapi;
-    pContext->onDeviceStart    = NULL; /* Not used. Started in onDeviceMainLoop. */
-    pContext->onDeviceStop     = NULL; /* Not used. Stopped in onDeviceMainLoop. */
+    pContext->onDeviceStart    = NULL;                      /* Not used. Started in onDeviceMainLoop. */
+    pContext->onDeviceStop     = ma_device_stop__wasapi;    /* Required to ensure the capture event is signalled when stopping a loopback device while nothing is playing. */
     pContext->onDeviceMainLoop = ma_device_main_loop__wasapi;
 
     return result;
@@ -13538,20 +13554,11 @@ ma_result ma_device_init_by_type__alsa(ma_context* pContext, const ma_device_con
         return ma_post_error(pDevice, MA_LOG_LEVEL_ERROR, "[ALSA] Failed to initialize software parameters. snd_pcm_sw_params_current() failed.", MA_FAILED_TO_CONFIGURE_BACKEND_DEVICE);
     }
 
-    if (deviceType == ma_device_type_capture) {
-        if (((ma_snd_pcm_sw_params_set_avail_min_proc)pContext->alsa.snd_pcm_sw_params_set_avail_min)(pPCM, pSWParams, 1) != 0) {
-            ma_free(pSWParams);
-            ((ma_snd_pcm_close_proc)pDevice->pContext->alsa.snd_pcm_close)(pPCM);
-            return ma_post_error(pDevice, MA_LOG_LEVEL_ERROR, "[ALSA] snd_pcm_sw_params_set_avail_min() failed.", MA_FORMAT_NOT_SUPPORTED);
-        }
-    } else {
-        if (((ma_snd_pcm_sw_params_set_avail_min_proc)pContext->alsa.snd_pcm_sw_params_set_avail_min)(pPCM, pSWParams, 1) != 0) {
-            ma_free(pSWParams);
-            ((ma_snd_pcm_close_proc)pDevice->pContext->alsa.snd_pcm_close)(pPCM);
-            return ma_post_error(pDevice, MA_LOG_LEVEL_ERROR, "[ALSA] snd_pcm_sw_params_set_avail_min() failed.", MA_FORMAT_NOT_SUPPORTED);
-        }
+    if (((ma_snd_pcm_sw_params_set_avail_min_proc)pContext->alsa.snd_pcm_sw_params_set_avail_min)(pPCM, pSWParams, ma_prev_power_of_2(internalBufferSizeInFrames/internalPeriods)) != 0) {
+        ma_free(pSWParams);
+        ((ma_snd_pcm_close_proc)pDevice->pContext->alsa.snd_pcm_close)(pPCM);
+        return ma_post_error(pDevice, MA_LOG_LEVEL_ERROR, "[ALSA] snd_pcm_sw_params_set_avail_min() failed.", MA_FORMAT_NOT_SUPPORTED);
     }
-    
 
     if (((ma_snd_pcm_sw_params_get_boundary_proc)pContext->alsa.snd_pcm_sw_params_get_boundary)(pSWParams, &bufferBoundary) < 0) {
         bufferBoundary = internalBufferSizeInFrames;
@@ -13564,7 +13571,7 @@ ma_result ma_device_init_by_type__alsa(ma_context* pContext, const ma_device_con
         Subtle detail here with the start threshold. When in playback-only mode (no full-duplex) we can set the start threshold to
         the size of a period. But for full-duplex we need to set it such that it is at least two periods.
         */
-        if (((ma_snd_pcm_sw_params_set_start_threshold_proc)pContext->alsa.snd_pcm_sw_params_set_start_threshold)(pPCM, pSWParams, internalBufferSizeInFrames) != 0) {
+        if (((ma_snd_pcm_sw_params_set_start_threshold_proc)pContext->alsa.snd_pcm_sw_params_set_start_threshold)(pPCM, pSWParams, (internalBufferSizeInFrames/internalPeriods)*2) != 0) {
             ma_free(pSWParams);
             ((ma_snd_pcm_close_proc)pDevice->pContext->alsa.snd_pcm_close)(pPCM);
             return ma_post_error(pDevice, MA_LOG_LEVEL_ERROR, "[ALSA] Failed to set start threshold for playback device. snd_pcm_sw_params_set_start_threshold() failed.", MA_FAILED_TO_CONFIGURE_BACKEND_DEVICE);
@@ -25749,14 +25756,14 @@ ma_result ma_device_stop(ma_device* pDevice)
 
         /* There's no need to wake up the thread like we do when starting. */
 
+        if (pDevice->pContext->onDeviceStop) {
+            result = pDevice->pContext->onDeviceStop(pDevice);
+        } else {
+            result = MA_SUCCESS;
+        }
+
         /* Asynchronous backends need to be handled differently. */
         if (ma_context_is_backend_asynchronous(pDevice->pContext)) {
-            if (pDevice->pContext->onDeviceStop) {
-                result = pDevice->pContext->onDeviceStop(pDevice);
-            } else {
-                result = MA_SUCCESS;
-            }
-
             ma_device__set_state(pDevice, MA_STATE_STOPPED);
         } else {
             /* Synchronous backends. */
