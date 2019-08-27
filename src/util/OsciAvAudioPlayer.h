@@ -196,7 +196,7 @@ private:
 	AVPacket packet;
 	int packet_data_size;
 	int buffer_size; 
-	uint8_t inbuf[AVCODEC_AUDIO_INBUF_SIZE + FF_INPUT_BUFFER_PADDING_SIZE];
+	uint8_t inbuf[AVCODEC_AUDIO_INBUF_SIZE + AV_INPUT_BUFFER_PADDING_SIZE];
 	int len;
 	int audio_stream_id;
 	
