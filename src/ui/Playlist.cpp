@@ -175,9 +175,14 @@ PlaylistItemRef Playlist::addFile( ofFile file, double duration ){
 			return natural_sort::compare(a.getBaseName(), b.getBaseName())<0;
 		});
 		
+		PlaylistItemRef res;
 		for( auto file : files ){
-			addFile(file); 
+			auto temp = addFile(file);
+			if(res.id == 0 && temp.id > 0){
+				res = temp;
+			}
 		}
+		return res;
 	}
 	else{
 		static set<string> allowed = {
@@ -238,14 +243,19 @@ PlaylistItemRef Playlist::addFile( ofFile file, double duration ){
 		
 		if(duration >= 0 ){
 			filenames[nextItemId] = file.getAbsolutePath();
-			PlaylistItem * item = new PlaylistItem(nextItemId++, file, duration);
+			PlaylistItem * item = new PlaylistItem(nextItemId, file, duration);
 			scroller->view->add(item);
-			return {nextItemId, filenames[nextItemId]};
+			nextItemId ++;
+			return {item->itemId, item->file.getAbsolutePath()};
 		}
 		else if(forbidden.find(ext) == forbidden.end()){
 			filenames[nextItemId] = file.getAbsolutePath();
-			PlaylistItem * item = new PlaylistItem(nextItemId++, file);
+			PlaylistItem * item = new PlaylistItem(nextItemId, file);
 			scroller->view->add(item);
+			nextItemId ++;
+			return {item->itemId, item->file.getAbsolutePath()};
+		}
+		else{
 			return {0,""};
 		}
 	}
@@ -465,7 +475,7 @@ void PlaylistItem::drawBackground(){
 	}
 	
 	if(globals.currentlyPlayingItem == itemId){
-		ofSetColor(0,255,0);
+		ofSetColor(255);
 		ofDrawTriangle({1,1}, {4,height/2}, {1,height-1});
 	}
 	

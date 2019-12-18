@@ -31,7 +31,7 @@ int main(){
 
 	cout << "LAUNCH DESKTOP" << endl;
 	ofSetupOpenGL(&window, 1024, 700, OF_WINDOW);
-	window.setWindowTitle("Oscilloscope");
+	window.setWindowTitle("Dyad");
 	
 	// go fullscreen in mac osx
 	ofxNative::maximizeWindow(window);
@@ -39,7 +39,7 @@ int main(){
 	#if defined(TARGET_OSX)
 	NSWindow * cocoaWindow = (NSWindow*)window.getCocoaWindow();
 //	[cocoaWindow setFrame:[[NSScreen mainScreen] visibleFrame] display:YES];
-	[cocoaWindow setTitle:@"Oscilloscope"];
+	[cocoaWindow setTitle:@"Dyad"];
 	if(globals.alwaysOnTop){
 		[cocoaWindow setLevel: NSFloatingWindowLevel];
 	}
@@ -72,7 +72,7 @@ void setWindowRepresentedFilename( string filename ){
 	NSWindow * cocoaWindow = (NSWindow*)(ofGetWindowPtr()->getCocoaWindow());
 	if(filename == ""){
 		[cocoaWindow setRepresentedFilename:@""];
-		[cocoaWindow setTitle:@"Oscilloscope"];
+		[cocoaWindow setTitle:@"Dyad"];
 	}
 	else if(filename[0] != '/'){
 		[cocoaWindow setRepresentedFilename:@""];

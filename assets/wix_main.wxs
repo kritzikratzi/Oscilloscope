@@ -39,7 +39,7 @@
 			  </Component>
 			</DirectoryRef>
 			
-		<Feature Id="ProductFeature" Title="Oscilloscope" Level="1">
+		<Feature Id="ProductFeature" Title="Dyad" Level="1">
 		   <ComponentGroupRef Id="CGROUP" />
 		   <ComponentRef Id="ProgramMenuDir" />
 		</Feature>

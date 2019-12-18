@@ -90,7 +90,7 @@ class ofApp : public ofBaseApp{
 		uint64_t lastUpdateTime{0};
 		ofVec2f mousePosBeforeHiding;
 		string fileToLoad;
-		string currentFilename{"Oscilloscope"};
+		string currentFilename{"Dyad"};
 		string nextWindowTitle;
 	
 		ofVec2f last;

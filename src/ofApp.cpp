@@ -21,7 +21,7 @@ void ofApp::setup(){
 	mui::MuiConfig::font = "AtlasTypewriter-Regular.otf";
 	mui::MuiConfig::fontSize = 11;
 
-	texSender.setup("Oscilloscope");
+	texSender.setup("Dyad");
 	showInfo = false;
 	dropped = 0;
 	changed = false;
@@ -38,7 +38,6 @@ void ofApp::setup(){
 	
 	root = new mui::Root();
 	
-	globals.player.loadSound(ofxToReadonlyDataPath("konichiwa.wav"));
 //	globals.player.loadSound(ofxToReadonlyDataPath("c:\\Users\\hansi\\Desktop\\3dbounce.wav"));
 	globals.player.setLoop(false);
 	globals.player.stop();
@@ -794,7 +793,7 @@ void ofApp::gotMessage(ofMessage msg){
 
 //--------------------------------------------------------------
 void ofApp::dragEvent(ofDragInfo dragInfo){
-	playlist->handleFileDragged(dragInfo);
+	playlist->fileDragged(dragInfo);
 }
 
 //--------------------------------------------------------------

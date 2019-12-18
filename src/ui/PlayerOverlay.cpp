@@ -18,7 +18,7 @@ PlayerOverlay::PlayerOverlay( float x_, float y_, float width_, float height_)
 	add( configButton );
 	
 	scaleLabel = addLabel( "Scale" );
-	scaleSlider = new mui::SliderWithLabel( x, y, w, h, 0.1, 2, 1, 2 );
+	scaleSlider = new mui::SliderWithLabel( x, y, w, h, 0.1, 5, 1, 2 );
 	scaleSlider->label->fg = ofColor(255);
 	ofAddListener( scaleSlider->slider->onChange, this, &PlayerOverlay::sliderChanged );
 	y += scaleSlider->height + 10;
