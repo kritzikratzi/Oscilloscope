@@ -30,6 +30,7 @@ public:
 	FaToggleButton * configButton;
 	mui::SliderWithLabel * scaleSlider;
 	
+	mui::Label * filenameLabel;
 	FaToggleButton * fullscreenToggle; // toggle fs
 	FaToggleButton * flipXYToggle; // flip x with y axis
 	FaToggleButton * invertXToggle; // mirror around x axis

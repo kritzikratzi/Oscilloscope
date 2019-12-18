@@ -40,6 +40,9 @@ PlayerOverlay::PlayerOverlay( float x_, float y_, float width_, float height_)
 	add( invertYToggle);
 	x += 100;
 	
+	filenameLabel = new mui::Label("-", x, y, w, h);
+	add(filenameLabel);
+	
 	fullscreenToggle = new FaToggleButton( ofxFontAwesome::expand, ofxFontAwesome::compress, x, y, h, h );
 	ofAddListener( fullscreenToggle->onPress, this, &PlayerOverlay::buttonPressed );
 	add( fullscreenToggle);
@@ -166,6 +169,8 @@ void PlayerOverlay::layout(){
 	
 	mui::L(strokeWeightLabel).below(scaleLabel).alignRightEdgeTo(scaleLabel);
 	mui::L(strokeWeightSlider).rightOf(strokeWeightLabel,5).stretchToRightEdgeOfParent(10);
+	
+	mui::L(filenameLabel).leftOf(configButton).stretchToLeftEdgeOfParent(10); 
 	
 	/*mui::L(blurLabel).below(strokeWeightLabel).alignRightEdgeTo(strokeWeightLabel);
 	mui::L(blurSlider).rightOf(blurLabel,5).stretchToRightEdgeOf(this,10);

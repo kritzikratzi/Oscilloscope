@@ -123,12 +123,21 @@ void Playlist::layout(){
 }
 
 bool Playlist::fileDragged( ofDragInfo & args ){
+	PlaylistItemRef res;
+	
 	for( auto & file : args.files ){
-		addFile(ofFile(file, ofFile::Reference));
+		auto temp = addFile(ofFile(file, ofFile::Reference));
+		if(res.id == 0 && temp.id != 0){
+			res = temp;
+		}
 	}
 	
 	scroller->handleLayout();
 	scroller->commit();
+	
+	if(res.id > 0){
+		ofSendMessage("load-id:" + ofToString(res.id));
+	}
 	
 	return true;
 }
@@ -151,7 +160,7 @@ bool Playlist::keyPressed(ofKeyEventArgs & args){
 }
 
 
-void Playlist::addFile( ofFile file, double duration ){
+PlaylistItemRef Playlist::addFile( ofFile file, double duration ){
 	checkNewFiles = true;
 	
 	if(file.isDirectory()){
@@ -227,11 +236,13 @@ void Playlist::addFile( ofFile file, double duration ){
 			filenames[nextItemId] = file.getAbsolutePath();
 			PlaylistItem * item = new PlaylistItem(nextItemId++, file, duration);
 			scroller->view->add(item);
+			return {nextItemId, filenames[nextItemId]};
 		}
 		else if(forbidden.find(ext) == forbidden.end()){
 			filenames[nextItemId] = file.getAbsolutePath();
 			PlaylistItem * item = new PlaylistItem(nextItemId++, file);
 			scroller->view->add(item);
+			return {0,""};
 		}
 	}
 }
@@ -267,7 +278,7 @@ void Playlist::load(istream & in){
 	scroller->commit();
 }
 
-pair<size_t, string> Playlist::getNextItem(size_t itemId) {
+PlaylistItemRef Playlist::getNextItem(size_t itemId) {
 	bool takeNext = false; 
 
 	for (auto el : scroller->view->children) {
@@ -289,7 +300,7 @@ pair<size_t, string> Playlist::getNextItem(size_t itemId) {
 	return{ 0,"" };
 }
 
-pair<size_t, string> Playlist::getNextItemInPlaylist( size_t itemId ){
+PlaylistItemRef Playlist::getNextItemInPlaylist( size_t itemId ){
 	LoopMode * btnMode = loopModeButton->getProperty<LoopMode>("loop_mode");
 	LoopMode mode = btnMode ? *btnMode : LoopMode::all_repeat; 
 
@@ -310,7 +321,7 @@ pair<size_t, string> Playlist::getNextItemInPlaylist( size_t itemId ){
 	}
 	case LoopMode::all_repeat: {
 		auto res = getNextItem(itemId);
-		if (res.first == 0) res = getNextItem(res.first);
+		if (res.id == 0) res = getNextItem(res.id);
 		return res;
 	}
 	case LoopMode::one_repeat: {

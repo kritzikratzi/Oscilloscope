@@ -55,6 +55,7 @@ void ofApp::setup(){
 	
 	playerOverlay = new PlayerOverlay();
 	playerOverlay->visible = false;
+	playerOverlay->filenameLabel->setText("");
 	root->add( playerOverlay );
 	
 	playlist = new Playlist();
@@ -89,7 +90,7 @@ void ofApp::startApplication(){
 	globals.saveToFile();
 	playerOverlay->fromGlobals();
 	playerOverlay->visible = true;
-
+	playerOverlay->filenameLabel->setText(ofFile(globals.player.getFilename(),ofFile::Reference).getFileName());
 	/*if( globals.autoDetect ){
 		cout << "Running auto-detect for sound cards" << endl;
 		getDefaultRtOutputParams( globals.deviceId, globals.sampleRate, globals.bufferSize, globals.numBuffers );
@@ -721,12 +722,15 @@ void ofApp::audioOut( float * output, int bufferSize, int nChannels ){
 	if( fileToLoad != "" ){
 		globals.timeStretch = 1.0;
 		bool res = globals.player.loadSound(fileToLoad);
+		string fname = ofFile(fileToLoad,ofFile::Reference).getFileName();
 		if(!res){
+			playerOverlay->filenameLabel->setText("Failed to load " + fname);
 			currentFilename = fileToLoad;
 			fileToLoad = "";
 			playlistItemEnded(); 
 		}
 		else{
+			playerOverlay->filenameLabel->setText(fname);
 			playerOverlay->timeStretchSlider->slider->value = 1.0;
 			nextWindowTitle = fileToLoad; // back to ui thread ^^
 			currentFilename = fileToLoad;
@@ -791,13 +795,7 @@ void ofApp::gotMessage(ofMessage msg){
 
 //--------------------------------------------------------------
 void ofApp::dragEvent(ofDragInfo dragInfo){
-	if( dragInfo.files.size() >= 1 ){
-		// this runs on a separate thread.
-		// we have to be careful not to make a mess!
-		stopMic();
-		playlistEnable = false;
-		fileToLoad = dragInfo.files[0];
-	}
+	playlist->handleFileDragged(dragInfo);
 }
 
 //--------------------------------------------------------------
@@ -823,11 +821,11 @@ void ofApp::playlistItemEnded(){
 	if(exporting){
 		// do nothing, let it end.
 	}
-	else if(playlistEnable){
+	else{
 		auto next = playlist->getNextItemInPlaylist(globals.currentlyPlayingItem);
-		if(next.first > 0){
-			fileToLoad = next.second;
-			globals.currentlyPlayingItem = next.first;
+		if(next.id > 0){
+			fileToLoad = next.filename;
+			globals.currentlyPlayingItem = next.id;
 		}
 		else if(globals.currentlyPlayingItem == 0){
 			globals.player.setPositionMS(0);
@@ -835,10 +833,6 @@ void ofApp::playlistItemEnded(){
 		else{
 			globals.currentlyPlayingItem = 0;
 		}
-	}
-	else{
-		globals.player.setPositionMS(0);
-		globals.player.play();
 	}
 }
 
@@ -891,7 +885,8 @@ void ofApp::startMic() {
 	}
 
 
-	globals.micActive = true; 
+	globals.micActive = true;
+	playerOverlay->filenameLabel->setText(string(micDevice.capture.name));
 	lastMouseMoved = ofGetElapsedTimeMillis();
 
 }

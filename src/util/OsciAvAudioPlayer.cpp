@@ -16,6 +16,13 @@
 
 extern "C"{
 	#include <libavutil/opt.h>
+	#include <libavcodec/avcodec.h>
+	#include <libavformat/avformat.h>
+	#include <libavutil/avutil.h>
+	#include <libavformat/avformat.h>
+	#include <libavutil/channel_layout.h>
+	#include <libavutil/samplefmt.h>
+	#include <libswresample/swresample.h>
 }
 using namespace std;
 
@@ -39,11 +46,13 @@ OsciAvAudioPlayer::OsciAvAudioPlayer(){
 	container = NULL; 
 	decoded_frame = NULL;
 	codec_context = NULL;
+	packet = new AVPacket();
 	buffer_size = AVCODEC_MAX_AUDIO_FRAME_SIZE;
+	inbuf = new uint8_t[AVCODEC_AUDIO_INBUF_SIZE + AV_INPUT_BUFFER_PADDING_SIZE];
 	swr_context = NULL;
 	swr_context192 = NULL;
 	av_register_all();
-	av_init_packet(&packet);
+	av_init_packet(packet);
 	unloadSound();
 	
 	thread = NULL;
@@ -55,6 +64,8 @@ OsciAvAudioPlayer::~OsciAvAudioPlayer(){
 		thread->stopThread();
 		thread = NULL;
 	}
+	delete [] inbuf;
+	delete packet; 
 }
 
 bool OsciAvAudioPlayer::loadSound(string fileName, bool stream){
@@ -119,11 +130,11 @@ bool OsciAvAudioPlayer::loadSound(string fileName, bool stream){
 	
 	// from here on it's mostly following
 	// https://github.com/FFmpeg/FFmpeg/blob/master/doc/examples/decoding_encoding.c
-	//packet.data = inbuf;
-	//packet.size = fread(inbuf, 1, AVCODEC_AUDIO_INBUF_SIZE, f);
-	av_init_packet(&packet);
-	packet.data = NULL;
-	packet.size = 0;
+	//packet->data = inbuf;
+	//packet->size = fread(inbuf, 1, AVCODEC_AUDIO_INBUF_SIZE, f);
+	av_init_packet(packet);
+	packet->data = NULL;
+	packet->size = 0;
 
 	swr_context = NULL;
 	swr_context192 = NULL;
@@ -185,7 +196,7 @@ void OsciAvAudioPlayer::unloadSound(){
 	decoded_buffer_len = 0;
 	next_seekTarget = -1;
 
-	av_free_packet(&packet);
+	av_free_packet(packet);
 	
 	if( decoded_frame ){
 		av_frame_unref(decoded_frame);
@@ -365,8 +376,8 @@ int OsciAvAudioPlayer::internalAudioOut(float *output, int bufferSize, int nChan
 }
 
 bool OsciAvAudioPlayer::decode_next_frame(){
-	av_free_packet(&packet);
-	int res = av_read_frame(container, &packet);
+	av_free_packet(packet);
+	int res = av_read_frame(container, packet);
 	bool didRead = res >= 0;
 	
 	if( didRead ){
@@ -381,14 +392,14 @@ bool OsciAvAudioPlayer::decode_next_frame(){
 			av_frame_unref(decoded_frame);
 		}
 		
-		len = avcodec_decode_audio4(codec_context, decoded_frame, &got_frame, &packet);
+		len = avcodec_decode_audio4(codec_context, decoded_frame, &got_frame, packet);
 		
 		if (len < 0) {
 			// no data
 			return false;
 		}
 		
-		if( packet.stream_index != audio_stream_id ){
+		if( packet->stream_index != audio_stream_id ){
 			return false;
 		}
 
@@ -516,8 +527,8 @@ bool OsciAvAudioPlayer::decode_next_frame(){
 			
 		}
 
-		packet.size -= len;
-		packet.data += len;
+		packet->size -= len;
+		packet->data += len;
 //		packet->dts =
 //		packet->pts = AV_NOPTS_VALUE;
 		
