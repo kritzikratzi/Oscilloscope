@@ -63,9 +63,6 @@ public:
 	mui::SliderWithLabel * numPtsSlider;
 	mui::Label * numPtsLabel;
 	
-	mui::SliderWithLabel * hueSlider;
-	mui::Label * hueLabel;
-	
 	mui::SliderWithLabel * intensitySlider;
 	mui::Label * intensityLabel;
 	

@@ -17,9 +17,11 @@ void ofApp::setup(){
 	OsciMesh::init();
 	ma_zero_object(&playDevice);
 	ma_zero_object(&micDevice);
+	
+	mui::MuiConfig::font = "AtlasTypewriter-Regular.otf";
+	mui::MuiConfig::fontSize = 11;
 
 	texSender.setup("Oscilloscope");
-	mui::MuiConfig::fontSize = 16;
 	showInfo = false;
 	dropped = 0;
 	changed = false;
@@ -353,10 +355,6 @@ void ofApp::update(){
 	static float * rightBuffer = new float[2048];
 	static float * zmodBuffer = new float[2048];
 
-	// party mode
-	//globals.hue += ofGetMouseX()*100/ofGetWidth();
-	//globals.hue = fmodf(globals.hue,360);
-	
 	MonoSample &left = globals.micActive?micLeft:globals.player.left192;
 	MonoSample &right = globals.micActive?micRight:globals.player.right192;
 	MonoSample &zMod = globals.micActive?micZMod:globals.player.zMod192;
@@ -444,7 +442,7 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-	ofClear(0,255);
+	ofClear(255,255,255,255);
 	
 	if( !fbo.isAllocated() || fbo.getWidth() != ofGetWidth() || fbo.getHeight() != ofGetHeight() ){
 		int w = ofGetWidth();
@@ -483,14 +481,14 @@ void ofApp::draw(){
 		bool sideBySide = playerOverlay->sideBySideToggle->selected && globals.player.fileType == OsciAvAudioPlayer::QUAD;
 		bool flip3d = playerOverlay->flip3dToggle->selected;
 		ofMatrix4x4 viewMatrix = getViewMatrix(flip3d?1:0,globals.player.fileType == OsciAvAudioPlayer::QUAD);
-		ofFloatColor color = ofFloatColor::fromHsb(globals.hue/360.0, 1, 1);
+		ofFloatColor color = ofFloatColor(1,1,0);
 
 		float intensityScale = (globals.micActive ? 2 * 192000.0/max(8000,globals.in_actual.sampleRate) : 1);
 
 		mesh.uSize = globals.strokeWeight/1000.0;
 		mesh.uIntensityBase = max(0.0f,mesh.uIntensity-0.4f)*0.7f-1000.0f*mesh.uSize/500.0f;
 		mesh.uIntensity = globals.intensity/sqrtf(globals.timeStretch)*intensityScale;
-		mesh.uHue = globals.hue;
+		mesh.uHue = 60;
 		mesh.uRgb = globals.player.fileType == OsciAvAudioPlayer::QUAD && !sideBySide?
 			(flip3d?ofVec3f(0,1,1):ofVec3f(1,0,0)):
 			ofVec3f(color.r,color.g,color.b);
@@ -501,7 +499,7 @@ void ofApp::draw(){
 			mesh2.uSize = mesh.uSize;
 			mesh2.uIntensityBase = mesh.uIntensityBase;
 			mesh2.uIntensity = mesh.uIntensity;
-			mesh2.uHue = globals.hue;
+			mesh2.uHue = 60;
 			mesh2.uRgb = sideBySide ? mesh.uRgb : (flip3d ? ofVec3f(1, 0, 0) : ofVec3f(0, 1, 1));
 			if(sideBySide) viewMatrix = getViewMatrix(flip3d?0:1,globals.player.fileType == OsciAvAudioPlayer::QUAD);
 			mesh2.draw(viewMatrix);
@@ -512,6 +510,7 @@ void ofApp::draw(){
 	}
 	
 	ofSetColor(255);
+	ofEnableBlendMode(OF_BLENDMODE_SUBTRACT);
 	fbo.draw(0,0);
 	texSender.update(fbo.getTexture());
 

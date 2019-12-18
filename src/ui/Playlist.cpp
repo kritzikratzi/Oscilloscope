@@ -20,9 +20,9 @@ namespace natural_sort{
 	int compare(const string & a, const string & b);
 }
 
-Playlist::Playlist() : mui::Container(0,0,300,500){
+Playlist::Playlist() : mui::Container(0,0,310,500){
 	name = "playlist";
-	bg = ofColor(125, 50);
+	bg = ofColor(0,0,255, 255);
 	opaque = true;
 
 	header = new mui::Label("Playlist");
@@ -46,21 +46,25 @@ Playlist::Playlist() : mui::Container(0,0,300,500){
 	};
 
 	loopModeButton = new FaButton(ofxFontAwesome::sort_alpha_asc,0,0, 30, 30);
+	loopModeButton->bg = ofColor(0,0);
 	ofAddListener(loopModeButton->onPress, this, &Playlist::buttonPressed);
 	add(loopModeButton);
 	setLoopMode(LoopMode::all_repeat);
 
 
 	shuffleToggle = new FaToggleButton(ofxFontAwesome::random, ofxFontAwesome::random, 0, 0, 30, 30);
+	shuffleToggle->bg = ofColor(0,0);
 	ofAddListener(shuffleToggle->onPress, this, &Playlist::buttonPressed);
 	add(shuffleToggle);
 
 	clearButton = new FaButton(ofxFontAwesome::trash,0,0,30,30);
+	clearButton->bg = ofColor(0,0);
 	clearButton->label->inset.top = -4;
 	ofAddListener(clearButton->onPress, this, &Playlist::buttonPressed);
 	add(clearButton); 
 
 	addFileButton = new FaButton(ofxFontAwesome::folder_open,0,0,30,30);
+	addFileButton->bg = ofColor(0,0);
 	addFileButton->label->inset.top = -2;
 	addFileButton->label->inset.left = 2;
 	ofAddListener(addFileButton->onPress, this, &Playlist::buttonPressed);

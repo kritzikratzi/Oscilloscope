@@ -8,10 +8,11 @@ static string timestring(double t);
 PlayerOverlay::PlayerOverlay( float x_, float y_, float width_, float height_)
 : mui::Container( x_, y_, width_, height_ ){
 	float x = 10, y = 10, w = 400, h = 30;
-	bg = ofColor(125,50);
+	bg = ofColor(0,0,255,255);
 	opaque = true;
 
 	configButton = new FaToggleButton( ofxFontAwesome::cogs, ofxFontAwesome::cogs, x, y, h, h );
+	configButton->bg = ofColor(0,0);
 	ofAddListener( configButton->onPress, this, &PlayerOverlay::buttonPressed );
 	y += configButton->height + 10;
 	add( configButton );
@@ -26,16 +27,19 @@ PlayerOverlay::PlayerOverlay( float x_, float y_, float width_, float height_)
 	
 	w = 90;
 	flipXYToggle = new FaToggleButton( ofxFontAwesome::repeat, ofxFontAwesome::repeat, x, y, h, h );
+	flipXYToggle->bg = ofColor(0,0);
 	ofAddListener( flipXYToggle->onPress, this, &PlayerOverlay::buttonPressed );
 	add( flipXYToggle);
 	x += 100;
 	
 	invertXToggle = new FaToggleButton( ofxFontAwesome::arrows_h, ofxFontAwesome::arrows_h, x, y, h, h );
+	invertXToggle->bg = ofColor(0,0);
 	ofAddListener( invertXToggle->onPress, this, &PlayerOverlay::buttonPressed );
 	add( invertXToggle);
 	x += 100;
 	
 	invertYToggle = new FaToggleButton( ofxFontAwesome::arrows_v, ofxFontAwesome::arrows_v, x, y, h, h );
+	invertYToggle->bg = ofColor(0,0);
 	ofAddListener( invertYToggle->onPress, this, &PlayerOverlay::buttonPressed );
 	add( invertYToggle);
 	x += 100;
@@ -44,34 +48,42 @@ PlayerOverlay::PlayerOverlay( float x_, float y_, float width_, float height_)
 	add(filenameLabel);
 	
 	fullscreenToggle = new FaToggleButton( ofxFontAwesome::expand, ofxFontAwesome::compress, x, y, h, h );
+	fullscreenToggle->bg = ofColor(0,0);
 	ofAddListener( fullscreenToggle->onPress, this, &PlayerOverlay::buttonPressed );
 	add( fullscreenToggle);
 	
 	loadFileButton = new FaButton( ofxFontAwesome::folder_open, x, y, h, h );
+	loadFileButton->bg = ofColor(0,0);
 	ofAddListener( loadFileButton->onPress, this, &PlayerOverlay::buttonPressed );
 	add( loadFileButton );
 	
 	useMicButton = new FaToggleButton( ofxFontAwesome::microphone, ofxFontAwesome::microphone_slash, x, y, h, h );
+	useMicButton->bg = ofColor(0,0);
 	ofAddListener( useMicButton->onPress, this, &PlayerOverlay::buttonPressed );
 	add( useMicButton );
 	
 	playButton = new FaToggleButton( ofxFontAwesome::play, ofxFontAwesome::pause, x, y, h, h );
+	playButton->bg = ofColor(0,0);
 	ofAddListener( playButton->onPress, this, &PlayerOverlay::buttonPressed );
 	add( playButton );
 	
 	sideBySideToggle = new FaToggleButton(ofxFontAwesome::cube, ofxFontAwesome::cube, 10, 1, h, h);
+	sideBySideToggle->bg = ofColor(0,0);
 	ofAddListener(sideBySideToggle->onPress, this, &PlayerOverlay::buttonPressed);
 	add(sideBySideToggle);
 
 	flip3dToggle = new FaToggleButton(ofxFontAwesome::exchange, ofxFontAwesome::exchange, 10, 1, h, h);
+	flip3dToggle->bg = ofColor(0,0);
 	ofAddListener(flip3dToggle->onPress, this, &PlayerOverlay::buttonPressed);
 	add(flip3dToggle);
 
 	zModulationToggle = new FaToggleButton(ofxFontAwesome::adjust, ofxFontAwesome::adjust, 10, 1, h, h);
+	zModulationToggle->bg = ofColor(0,0);
 	ofAddListener(zModulationToggle->onPress, this, &PlayerOverlay::buttonPressed);
 	add(zModulationToggle);
 
 	showPlaylistToggle  = new FaToggleButton(ofxFontAwesome::list, ofxFontAwesome::list, 10, 1, h, h);
+	showPlaylistToggle->bg = ofColor(0,0);
 	ofAddListener(showPlaylistToggle->onPress, this, &PlayerOverlay::buttonPressed);
 	add(showPlaylistToggle);
 
@@ -98,7 +110,7 @@ PlayerOverlay::PlayerOverlay( float x_, float y_, float width_, float height_)
 	strokeWeightSlider->label->fg = ofColor(255);
 	add( strokeWeightSlider );
 	
-	timeStretchLabel = addLabel( "Playback Speed" );
+	timeStretchLabel = addLabel( "Speed" );
 	timeStretchSlider = new mui::SliderWithLabel(0, 0, 100, h, 0.25, 100, 1, 2 );
 	timeStretchSlider->slider->valueMapper = make_shared<mui::Slider::MapperLog>(6000);
 	ofAddListener( timeStretchSlider->slider->onChange, this, &PlayerOverlay::sliderChanged );
@@ -117,12 +129,6 @@ PlayerOverlay::PlayerOverlay( float x_, float y_, float width_, float height_)
 	numPtsSlider->label->fg = ofColor(255);
 	add(numPtsSlider);
 
-	hueLabel = addLabel( "Hue" );
-	hueSlider = new mui::SliderWithLabel(0,0,100,h,0,360, 127, 0);
-	ofAddListener( hueSlider->slider->onChange, this, &PlayerOverlay::sliderChanged );
-	hueSlider->label->fg = ofColor(255);
-	add(hueSlider);
-	
 	intensityLabel = addLabel( "Intensity" );
 	intensitySlider = new mui::SliderWithLabel(0,0,100,h,0,1, 0.5, 2);
 	ofAddListener( intensitySlider->slider->onChange, this, &PlayerOverlay::sliderChanged );
@@ -170,7 +176,7 @@ void PlayerOverlay::layout(){
 	mui::L(strokeWeightLabel).below(scaleLabel).alignRightEdgeTo(scaleLabel);
 	mui::L(strokeWeightSlider).rightOf(strokeWeightLabel,5).stretchToRightEdgeOfParent(10);
 	
-	mui::L(filenameLabel).leftOf(configButton).stretchToLeftEdgeOfParent(10); 
+	mui::L(filenameLabel).leftOf(configButton).stretchToLeftEdgeOfParent(10);
 	
 	/*mui::L(blurLabel).below(strokeWeightLabel).alignRightEdgeTo(strokeWeightLabel);
 	mui::L(blurSlider).rightOf(blurLabel,5).stretchToRightEdgeOf(this,10);
@@ -182,16 +188,13 @@ void PlayerOverlay::layout(){
 	numPtsLabel->visible = false;
 	numPtsSlider->visible = false;
 	
-	mui::L(hueLabel).below(strokeWeightLabel).alignRightEdgeTo(strokeWeightLabel);
-	mui::L(hueSlider).rightOf(hueLabel,5).stretchToRightEdgeOfParent(10);
-	
-	mui::L(intensityLabel).below(hueLabel).alignRightEdgeTo(hueLabel);
+	mui::L(intensityLabel).below(strokeWeightLabel).alignRightEdgeTo(strokeWeightLabel);
 	mui::L(intensitySlider).rightOf(intensityLabel,5).stretchToRightEdgeOfParent(10);
 	
 	mui::L(afterglowLabel).below(intensityLabel).alignRightEdgeTo(intensityLabel);
 	mui::L(afterglowSlider).rightOf(afterglowLabel,5).stretchToRightEdgeOfParent(10);
 	
-	height = afterglowSlider->y + afterglowSlider->height;
+	height = afterglowSlider->y + afterglowSlider->height + 10;
 }
 
 
@@ -295,7 +298,6 @@ void PlayerOverlay::fromGlobals(){
 	timeStretchSlider->slider->value = globals.timeStretch;
 	blurSlider->slider->value = globals.blur;
 	numPtsSlider->slider->value = globals.numPts;
-	hueSlider->slider->value = globals.hue;
 	intensitySlider->slider->value = globals.intensity;
 	afterglowSlider->slider->value = globals.afterglow;
 	invertXToggle->selected = globals.invertX;
@@ -359,6 +361,7 @@ void PlayerOverlay::buttonPressed( const void * sender, ofTouchEventArgs & args 
 		}
 		else{
 			auto micMenu = new FMenu<string>(0,0,400,0);
+			micMenu->bg = ofColor(0,0,255,255);
 			micMenu->onAfterRemove.add([](mui::Container * menu, mui::Container * parent) {
 				MUI_ROOT->safeDelete(menu); 
 			});
@@ -420,9 +423,6 @@ void PlayerOverlay::sliderChanged( const void * sender, float & value ){
 	}
 	else if( sender == numPtsSlider->slider ){
 		globals.numPts = numPtsSlider->slider->value;
-	}
-	else if( sender == hueSlider->slider ){
-		globals.hue = hueSlider->slider->value;
 	}
 	else if( sender == intensitySlider->slider ){
 		globals.intensity = intensitySlider->slider->value;

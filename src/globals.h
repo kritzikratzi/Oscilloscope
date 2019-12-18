@@ -54,7 +54,6 @@ public:
 	float afterglow{0.5f}; // 0...1
 	
 	int numPts{20}; // 1...+inf?
-	float hue{50}; // 0...360
 	
 	float outputVolume{1};
 	float inputVolume{1};
@@ -88,7 +87,6 @@ public:
 		//timeStretch = settings.get( "timeStretch", timeStretch ); // never load timestretch!
 		blur = settings.get( "blur", blur );
 		numPts = settings.get( "numPts", numPts );
-		hue = settings.get( "hue", hue );
 		intensity = settings.get( "intensity", intensity );
 		afterglow = settings.get( "afterglow", afterglow );
 		exportFrameRate = settings.get( "exportFrameRate", exportFrameRate );
@@ -125,7 +123,6 @@ public:
 		// settings.set( "timeStretch", timeStretch ); // never save timestretch!
 		settings.set( "blur", blur );
 		settings.set( "numPts", numPts );
-		settings.set( "hue", hue );
 		settings.set( "intensity", intensity );
 		settings.set( "afterglow", afterglow );
 		settings.set( "exportFrameRate", exportFrameRate );

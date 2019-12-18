@@ -5,7 +5,7 @@
 
 ConfigView::ConfigView()
 : mui::Container(0,0, 500, 40){
-	bg = ofColor(125, 50);
+	bg = ofColor(0,0,255, 255);
 	opaque = true;
 
 	ofAddListener(ofEvents().messageEvent, this, &ConfigView::gotMessage);
