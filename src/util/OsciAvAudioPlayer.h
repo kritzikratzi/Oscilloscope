@@ -45,9 +45,10 @@ public:
 	~OsciAvAudioPlayer(); 
 	
 	// call this first after create the player
-	bool setupAudioOut( int numChannels, int sampleRate, bool interpolate );
+	bool setupAudioOut( int numChannels, int sampleRate, bool interpolate, int visualSampleRate );
 	bool setupVisualSampleRate( int visualSampleRate );
-	int getVisualSampleRate(); 
+	int getVisualSampleRate();
+	int getFileSampleRate(); 
 
 	// call this from the audioOut callback.
 	// returns the number of frames (0...bufferSize) that were played. 

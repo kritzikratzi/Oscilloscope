@@ -155,7 +155,7 @@ string OsciAvAudioPlayer::getFilename(){
 	return loadedFilename;
 }
 
-bool OsciAvAudioPlayer::setupAudioOut( int numChannels, int sampleRate, bool inter ){
+bool OsciAvAudioPlayer::setupAudioOut( int numChannels, int sampleRate, bool inter, int visualSampleRate ){
 	if( numChannels != output_num_channels || sampleRate != output_sample_rate || inter != interpolate ){
 		output_channel_layout = av_get_default_channel_layout(numChannels);
 		output_sample_rate = sampleRate;
@@ -165,24 +165,25 @@ bool OsciAvAudioPlayer::setupAudioOut( int numChannels, int sampleRate, bool int
 		if( swr_context != NULL ){
 			output_config_changed = true;
 		}
+		
+		visual_sample_rate = visualSampleRate;
+		visual_config_changed = true;
 	}
-	
-	return true;
-}
-
-bool OsciAvAudioPlayer::setupVisualSampleRate( int visualSampleRate ){
 	if( visualSampleRate != visual_sample_rate ){
 		visual_sample_rate = visualSampleRate;
 		visual_config_changed = true;
 	}
-	return true; 
+
+	return true;
 }
 
 int OsciAvAudioPlayer::getVisualSampleRate() {
 	return visual_sample_rate; 
 }
 
-
+int OsciAvAudioPlayer::getFileSampleRate(){
+	return codec_context?(codec_context->sample_rate):44100;
+}
 
 void OsciAvAudioPlayer::unloadSound(){
 	if( !isLoaded ) return;
@@ -438,11 +439,7 @@ bool OsciAvAudioPlayer::decode_next_frame(){
 					return false;
 				}
 				
-				int next_v_rate = output_sample_rate;
-				if( next_v_rate != visual_sample_rate ){
-					visual_sample_rate = max(192000,next_v_rate);
-					visual_config_changed = true;
-				}
+				visual_config_changed = true;
 			}
 			
 			if( swr_context192 != NULL && visual_config_changed ){

@@ -25,7 +25,7 @@ Playlist::Playlist() : mui::Container(0,0,310,500){
 	bg = ofColor(0,0,255, 255);
 	opaque = true;
 
-	header = new mui::Label("Playlist");
+	header = new mui::Label("");
 	header->fontSize = 20;
 	header->height = 30;
 	header->commit(); 

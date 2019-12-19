@@ -52,6 +52,7 @@ public:
 	float blur{30}; // 0...255
 	float intensity{0.4f}; // 0...1
 	float afterglow{0.5f}; // 0...1
+	int analogMode{0}; // 0=digital, 1=analog, 2=superanalog
 	
 	int numPts{20}; // 1...+inf?
 	
@@ -89,6 +90,7 @@ public:
 		numPts = settings.get( "numPts", numPts );
 		intensity = settings.get( "intensity", intensity );
 		afterglow = settings.get( "afterglow", afterglow );
+		analogMode = settings.get( "analogMode", analogMode );
 		exportFrameRate = settings.get( "exportFrameRate", exportFrameRate );
 		exportWidth = settings.get( "exportWidth", exportWidth );
 		exportHeight = settings.get( "exportHeight", exportHeight );
@@ -125,6 +127,7 @@ public:
 		settings.set( "numPts", numPts );
 		settings.set( "intensity", intensity );
 		settings.set( "afterglow", afterglow );
+		settings.set( "analogMode", analogMode );
 		settings.set( "exportFrameRate", exportFrameRate );
 		settings.set( "exportWidth", exportWidth );
 		settings.set( "exportHeight", exportHeight );

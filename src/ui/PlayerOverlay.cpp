@@ -86,7 +86,14 @@ PlayerOverlay::PlayerOverlay( float x_, float y_, float width_, float height_)
 	showPlaylistToggle->bg = ofColor(0,0);
 	ofAddListener(showPlaylistToggle->onPress, this, &PlayerOverlay::buttonPressed);
 	add(showPlaylistToggle);
-
+	
+	analogModeToggle  = new mui::ToggleButton("A", 10, 1, h, h);
+	analogModeToggle->fg = ofColor(255);
+	analogModeToggle->selectedFg = ofColor(0);
+	analogModeToggle->bg = ofColor(0,0);
+	ofAddListener(analogModeToggle->onPress, this, &PlayerOverlay::buttonPressed);
+	add(analogModeToggle);
+	
 	x = 10;
 	y += invertYToggle->height + 10;
 	
@@ -151,16 +158,15 @@ PlayerOverlay::PlayerOverlay( float x_, float y_, float width_, float height_)
 }
 
 void PlayerOverlay::layout(){
-	mui::L({configButton,fullscreenToggle, showPlaylistToggle }).columnsFromRight({width, 0},1);
+	mui::L({analogModeToggle, configButton,fullscreenToggle, showPlaylistToggle}).columnsFromRight({width, 0},1);
 	mui::L({zModulationToggle,flip3dToggle,sideBySideToggle }).columnsFromRight({configButton->x-10,0},1);
-
 
 	mui::L(playButton).pos(10,40);
 	mui::L(timeLabelButton).pos(width-10-timeLabelButton->width,playButton->y);
 	mui::L(timeSlider).rightOf(playButton, 10).stretchToRightEdgeOfParent(width-(timeLabelButton->x-10));
 	
 	mui::L(loadFileButton).below(playButton, 10);
-	mui::L(useMicButton).rightOf(loadFileButton, 10 );
+	mui::L(useMicButton).rightOf(loadFileButton, 10);
 	mui::L(outputVolumeLabel).rightOf(useMicButton,20);
 	mui::L(outputVolumeSlider).rightOf(outputVolumeLabel,5).stretchToRightEdgeOfParent(10);
 	
@@ -226,6 +232,7 @@ void PlayerOverlay::update(){
 	outputVolumeLabel->visible = !globals.micActive;
 	outputVolumeSlider->visible = !globals.micActive;
 	playButton->visible = !globals.micActive;
+	analogModeToggle->selected = globals.analogMode == 0?false:true; 
 	
 	if( !globals.micActive ){
 		if( !updateSlider(timeSlider, globals.player.getPosition(), lastTimeVal ) ){
@@ -378,6 +385,9 @@ void PlayerOverlay::buttonPressed( const void * sender, ofTouchEventArgs & args 
 	}
 	else if (sender == showPlaylistToggle) {
 		ofSendMessage(ofMessage("toggle-playlist"));
+	}
+	else if(sender == analogModeToggle){
+		globals.analogMode = globals.analogMode==0?1:0;
 	}
 }
 

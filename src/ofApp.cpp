@@ -38,7 +38,7 @@ void ofApp::setup(){
 	
 	root = new mui::Root();
 	
-//	globals.player.loadSound(ofxToReadonlyDataPath("c:\\Users\\hansi\\Desktop\\3dbounce.wav"));
+	globals.player.loadSound(ofxToReadonlyDataPath("Preview_Dyad_Alpha_kasuga026.wav"));
 	globals.player.setLoop(false);
 	globals.player.stop();
 	globals.player.onEnd = [&](){
@@ -113,7 +113,7 @@ void ofApp::startApplication(){
 		globals.out_actual.bufferSize = frameCount;
 		globals.out_actual.name = device->playback.name;
 
-		globals.player.setupAudioOut(2, globals.out_actual.sampleRate, true);
+		app->updateSampleRate();
 		app->audioOut((float*)pOutput, frameCount, device->playback.channels);
 	};
 
@@ -285,8 +285,7 @@ void ofApp::update(){
 	
 	// are we not export?
 	if( exporting == 0 ){
-		int rate = max(globals.out_actual.sampleRate/4,(int)std::round(globals.out_actual.sampleRate*globals.timeStretch));
-		globals.player.setupAudioOut(2, rate, globals.timeStretch == 1);
+		updateSampleRate();
 	}
 
 	// are we exporting?
@@ -833,6 +832,16 @@ void ofApp::playlistItemEnded(){
 		}
 	}
 }
+
+void ofApp::updateSampleRate(){
+	double s = 1;
+	if(globals.analogMode == 0) s = 1;
+	else s = 4;
+	
+	int rate = max(globals.out_actual.sampleRate/4,(int)std::round(globals.out_actual.sampleRate*globals.timeStretch));
+	globals.player.setupAudioOut(2, rate, globals.timeStretch == 1, globals.player.getFileSampleRate()*s);
+}
+
 
 //--------------------------------------------------------------
 void ofApp::startMic() {
