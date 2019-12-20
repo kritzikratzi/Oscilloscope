@@ -838,8 +838,8 @@ void ofApp::updateSampleRate(){
 	if(globals.analogMode == 0) s = 1;
 	else s = 4;
 	
-	int rate = max(globals.out_actual.sampleRate/4,(int)std::round(globals.out_actual.sampleRate*globals.timeStretch));
-	globals.player.setupAudioOut(2, rate, globals.timeStretch == 1, globals.player.getFileSampleRate()*s);
+	int64_t rate = max((int64_t)globals.out_actual.sampleRate/4,(int64_t)std::round(globals.out_actual.sampleRate*globals.timeStretch));
+	globals.player.setupAudioOut(2, rate, globals.analogMode!=0, globals.player.getFileSampleRate()*s*globals.timeStretch);
 }
 
 

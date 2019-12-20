@@ -23,11 +23,12 @@
 #include <map>
 #include "ofMain.h"
 
+
 //TODO: should/can we move this to cpp file?
 //ok, be careful with these.
 //with flac files written by audacity it's actually quite easy to cause serious read troubles
 //when using frame=192k, inbuf=20480, thres=4096
-#define AVCODEC_MAX_AUDIO_FRAME_SIZE (192000)
+#define OSCI_MAX_AUDIO_FRAME_SIZE (192000*4)
 #define AVCODEC_AUDIO_INBUF_SIZE (20480)
 #define AVCODEC_AUDIO_REFILL_THRESH (4096*3)
 
@@ -45,9 +46,8 @@ public:
 	~OsciAvAudioPlayer(); 
 	
 	// call this first after create the player
-	bool setupAudioOut( int numChannels, int sampleRate, bool interpolate, int visualSampleRate );
-	bool setupVisualSampleRate( int visualSampleRate );
-	int getVisualSampleRate();
+	bool setupAudioOut( int numChannels, int64_t sampleRate, bool interpolate, int64_t visualSampleRate );
+	int64_t getVisualSampleRate();
 	int getFileSampleRate(); 
 
 	// call this from the audioOut callback.
@@ -205,9 +205,9 @@ private:
 	int swr_context_channels = 0; 
 	SwrContext * swr_context192;
 	
-	int visual_sample_rate;
+	int64_t visual_sample_rate;
 	bool visual_sample_rate_auto; 
-	int output_sample_rate;
+	int64_t output_sample_rate;
 	int64_t output_channel_layout;
 	int output_num_channels;
 	int output_expected_buffer_size;
@@ -217,8 +217,8 @@ private:
 	// contains audio data, always in interleaved float format
 	int decoded_buffer_pos;
 	int decoded_buffer_len;
-	float decoded_buffer[AVCODEC_MAX_AUDIO_FRAME_SIZE];
-	float decoded_buffer192[AVCODEC_MAX_AUDIO_FRAME_SIZE];
+	float decoded_buffer[OSCI_MAX_AUDIO_FRAME_SIZE];
+	float decoded_buffer192[OSCI_MAX_AUDIO_FRAME_SIZE];
 	int decoded_buffer_pos192;
 	int decoded_buffer_len192;
 	int numChannels192;

@@ -47,7 +47,7 @@ OsciAvAudioPlayer::OsciAvAudioPlayer(){
 	decoded_frame = NULL;
 	codec_context = NULL;
 	packet = new AVPacket();
-	buffer_size = AVCODEC_MAX_AUDIO_FRAME_SIZE;
+	buffer_size = OSCI_MAX_AUDIO_FRAME_SIZE;
 	inbuf = new uint8_t[AVCODEC_AUDIO_INBUF_SIZE + AV_INPUT_BUFFER_PADDING_SIZE];
 	swr_context = NULL;
 	swr_context192 = NULL;
@@ -155,7 +155,7 @@ string OsciAvAudioPlayer::getFilename(){
 	return loadedFilename;
 }
 
-bool OsciAvAudioPlayer::setupAudioOut( int numChannels, int sampleRate, bool inter, int visualSampleRate ){
+bool OsciAvAudioPlayer::setupAudioOut( int numChannels, int64_t sampleRate, bool inter, int64_t visualSampleRate ){
 	if( numChannels != output_num_channels || sampleRate != output_sample_rate || inter != interpolate ){
 		output_channel_layout = av_get_default_channel_layout(numChannels);
 		output_sample_rate = sampleRate;
@@ -177,7 +177,7 @@ bool OsciAvAudioPlayer::setupAudioOut( int numChannels, int sampleRate, bool int
 	return true;
 }
 
-int OsciAvAudioPlayer::getVisualSampleRate() {
+int64_t OsciAvAudioPlayer::getVisualSampleRate() {
 	return visual_sample_rate; 
 }
 
@@ -408,6 +408,7 @@ bool OsciAvAudioPlayer::decode_next_frame(){
 			lastPts = av_frame_get_best_effort_timestamp(decoded_frame);
 //			lastPts = decoded_frame->pkt_pts;
 			
+			
 			int frame_channels = av_frame_get_channels(decoded_frame);
 			if(frame_channels != swr_context_channels ){
 				output_config_changed = true;
@@ -419,6 +420,13 @@ bool OsciAvAudioPlayer::decode_next_frame(){
 					swr_free(&swr_context);
 					swr_context = NULL;
 				}
+			}
+			
+			if(output_config_changed || visual_config_changed){
+				left192.clear();
+				right192.clear();
+				zMod192.clear();
+				mainOut.clear();
 			}
 			
 			
@@ -488,10 +496,10 @@ bool OsciAvAudioPlayer::decode_next_frame(){
 												 0, NULL);
 
 				//enable these two to disable interpolation
-				//if(!interpolate){
-				//	av_opt_set_int(swr_context192, "filter_size", 4, 0);
-				//	av_opt_set_int(swr_context192, "linear_interp", 1, 0);
-				//}
+				if(!interpolate){
+					av_opt_set_int(swr_context192, "filter_size", 4, 0);
+					av_opt_set_int(swr_context192, "linear_interp", 1, 0);
+				}
 
 				
 				//				av_opt_set_int(swr_context192, "dither_scale", 0, 0);
@@ -506,14 +514,13 @@ bool OsciAvAudioPlayer::decode_next_frame(){
 			/* if a frame has been decoded, resample to desired rate */
 			uint8_t * out192 = (uint8_t*)decoded_buffer192;
 			int samples_converted192 = swr_convert(swr_context192,
-												   (uint8_t**)&out192, AVCODEC_MAX_AUDIO_FRAME_SIZE/4,
+												   (uint8_t**)&out192, OSCI_MAX_AUDIO_FRAME_SIZE/4,
 												   (const uint8_t**)decoded_frame->extended_data, decoded_frame->nb_samples);
-			
 			decoded_buffer_len192 = samples_converted192*numChannels192;
 			decoded_buffer_pos192 = 0;
 
 
-			int samples_per_channel = AVCODEC_MAX_AUDIO_FRAME_SIZE/output_num_channels;
+			int samples_per_channel = OSCI_MAX_AUDIO_FRAME_SIZE/output_num_channels;
 			//samples_per_channel = 512;
 			uint8_t * out = (uint8_t*)decoded_buffer;
 			int samples_converted = swr_convert(swr_context,
