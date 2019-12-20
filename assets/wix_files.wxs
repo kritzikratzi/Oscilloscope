@@ -24,32 +24,32 @@
             <Component Id="cmp059E2C34E04BDF46435D912B0789D1CE" Directory="INSTALLDIR" Guid="*" Win64="yes">
                 <File Id="fil45BA00B7366D9E3AF3C42BC2E00C2154" KeyPath="yes" Source="SourceDir\avutil-55.dll" />
             </Component>
+            <Component Id="cmpDE0F00A802FB8418B6176A6660FD42DE" Directory="INSTALLDIR" Guid="*" Win64="yes">
+                <File Id="fil3B192C890CD8F1A1F9218B149BFA9A11" KeyPath="yes" Source="SourceDir\Dyad.exe" />
+            </Component>
+            <Component Id="cmpE2AA320D9A7D9ED584A37408C9D6EF32" Directory="INSTALLDIR" Guid="*" Win64="yes">
+                <File Id="filD4E2BC8A794772AE996DC897B127118B" KeyPath="yes" Source="SourceDir\Dyad.exp" />
+            </Component>
+            <Component Id="cmpCB78866DE2EABE424DB236DDAE15C760" Directory="INSTALLDIR" Guid="*" Win64="yes">
+                <File Id="fil0D214FFAF60123DAE6F45EB6BF6E6155" KeyPath="yes" Source="SourceDir\Dyad.lib" />
+            </Component>
             <Component Id="cmpC1BC96C420CB883BD3935FB6D1D41307" Directory="INSTALLDIR" Guid="*" Win64="yes">
                 <File Id="fil33C6E17A3B07BF8D9B120BD926B6CBD6" KeyPath="yes" Source="SourceDir\fmodexL64.dll" />
             </Component>
             <Component Id="cmpE2C55B43D0FED97798C06B30CE496064" Directory="INSTALLDIR" Guid="*" Win64="yes">
                 <File Id="filC35A102B270ECA1F210D000296E527AD" KeyPath="yes" Source="SourceDir\FreeImage.dll" />
             </Component>
-            <Component Id="cmpAD3D7C5366B0EE75F9A1FC4B40188186" Directory="INSTALLDIR" Guid="*" Win64="yes">
-                <File Id="fil93A808E5891A09DC03421F6DA54303DF" KeyPath="yes" Source="SourceDir\Oscilloscope.exe" />
-            </Component>
-            <Component Id="cmp61E9D6B1CA24B85697C2B37A9401B7A4" Directory="INSTALLDIR" Guid="*" Win64="yes">
-                <File Id="fil573EDFAF553808E4B0021F612613FC79" KeyPath="yes" Source="SourceDir\Oscilloscope.exp" />
-            </Component>
-            <Component Id="cmpE175ACDF5003956AE140B7D3065DFD47" Directory="INSTALLDIR" Guid="*" Win64="yes">
-                <File Id="fil2AE966B60CF417407AE647FDE9D82D17" KeyPath="yes" Source="SourceDir\Oscilloscope.iobj" />
-            </Component>
-            <Component Id="cmpF777BD7F65BB02F6621AFF241A190235" Directory="INSTALLDIR" Guid="*" Win64="yes">
-                <File Id="filDA48AD64D196D37AC6E8A1AD51B0FBB5" KeyPath="yes" Source="SourceDir\Oscilloscope.ipdb" />
-            </Component>
-            <Component Id="cmp49309094AF8FD3D45F21623FD992642E" Directory="INSTALLDIR" Guid="*" Win64="yes">
-                <File Id="fil5E65DACD24DDA0B0292A35FA46287592" KeyPath="yes" Source="SourceDir\Oscilloscope.lib" />
-            </Component>
             <Component Id="cmpAD9B223F4F4855E37C90BCB9A78AEE8E" Directory="INSTALLDIR" Guid="*" Win64="yes">
                 <File Id="fil01DA9B885539B33CA87883D04A8157AF" KeyPath="yes" Source="SourceDir\readme.md" />
             </Component>
             <Component Id="cmp7A18521991D2C646F7AA6958351E6004" Directory="INSTALLDIR" Guid="*" Win64="yes">
                 <File Id="fil02888CB0F247766124E93F991DB7A7F3" KeyPath="yes" Source="SourceDir\swresample-2.dll" />
+            </Component>
+            <Component Id="cmp07DD4514D26B46F6572879E48ABAC414" Directory="INSTALLDIR" Guid="*" Win64="yes">
+                <File Id="fil7491C1CCC606B7C009ABCE5328B795A0" KeyPath="yes" Source="SourceDir\swscale-4.dll" />
+            </Component>
+            <Component Id="cmp70E010DC4940D05D7F451E91AD74F0AB" Directory="dir38903B42FECED7D073B27F29CA029A00" Guid="*" Win64="yes">
+                <File Id="fil0D5CDD9BC854FD5A963878F0222852AE" KeyPath="yes" Source="SourceDir\data\AtlasTypewriter-Regular.otf" />
             </Component>
             <Component Id="cmp28C46CA8A9FE2E719B42985FDE9D396F" Directory="dir38903B42FECED7D073B27F29CA029A00" Guid="*" Win64="yes">
                 <File Id="fil35E43B77A82DF490FF19CD4915CB55B1" KeyPath="yes" Source="SourceDir\data\fa-regular-400.ttf" />
@@ -68,6 +68,9 @@
             </Component>
             <Component Id="cmpFFC2AA812FFF06F16371EA1D1F7F807B" Directory="dir38903B42FECED7D073B27F29CA029A00" Guid="*" Win64="yes">
                 <File Id="fil69466C0F5B2BAC3526EF537C365F74D0" KeyPath="yes" Source="SourceDir\data\notes.txt" />
+            </Component>
+            <Component Id="cmpE7BFCE4FF38A688ADBD1980C66BE64FC" Directory="dir38903B42FECED7D073B27F29CA029A00" Guid="*" Win64="yes">
+                <File Id="fil4DE9EFBEA397CAE9842D8E4D1433B9FB" KeyPath="yes" Source="SourceDir\data\Preview_Dyad_Alpha_kasuga026.wav" />
             </Component>
             <Component Id="cmp187F75D04F657A31B676EE4A892522EB" Directory="dirC13EFD2462B99BC4181CF9269158442E" Guid="*" Win64="yes">
                 <File Id="fil7E77D5C4FC484809C45AD6D93F684684" KeyPath="yes" Source="SourceDir\data\mui\atlas\ui.png" />

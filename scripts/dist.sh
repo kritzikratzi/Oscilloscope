@@ -44,7 +44,7 @@ if [ "$platform" = "win32" ] || [ "$platform" = "win64" ]
 then
 	pushd
 	cd "$distDir"
-	dlls="assimp.dll Zlib.dll glut32.dll libeay32.dll ssleay32.dll swscale-4.dll Zlib.dll FreeType.dll fmodex64.dll fmodex64L.dll"
+	dlls="assimp.dll Zlib.dll glut32.dll libeay32.dll ssleay32.dll Zlib.dll FreeType.dll fmodex64.dll fmodex64L.dll *.iobj *.ipdb"
 	echo "Deleting unused DLL files: $dlls "
 	echo "Make sure they are specified as 'delay loaded DLLs' in the linker settings"
 	rm $dlls
@@ -86,7 +86,7 @@ then
 			<!--   you can use "INSTALLDIR" for the main directory! -->
 			<!--   or something like dirE346A75FEDD174A44A845475C6757E1F-->
 			<?define MyExeWorkingDir = "INSTALLDIR" ?>
-			<?define MyExeId="fil93A808E5891A09DC03421F6DA54303DF" ?>
+			<?define MyExeId="fil3B192C890CD8F1A1F9218B149BFA9A11" ?>
 		</Include>
 EOF
 
