@@ -45,6 +45,7 @@ PlayerOverlay::PlayerOverlay( float x_, float y_, float width_, float height_)
 	x += 100;
 	
 	filenameLabel = new mui::Label("-", x, y, w, h);
+	filenameLabel->fontSize = 10; 
 	add(filenameLabel);
 	
 	fullscreenToggle = new FaToggleButton( ofxFontAwesome::expand, ofxFontAwesome::compress, x, y, h, h );
