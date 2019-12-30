@@ -41,6 +41,7 @@ PlayerOverlay::PlayerOverlay( float x_, float y_, float width_, float height_)
 	x += 100;
 	
 	filenameLabel = new mui::Label("-", x, y, w, h);
+	filenameLabel->fontSize = 10; 
 	add(filenameLabel);
 	
 	fullscreenToggle = new FaToggleButton( ofxFontAwesome::expand, ofxFontAwesome::compress, x, y, h, h );
@@ -74,7 +75,14 @@ PlayerOverlay::PlayerOverlay( float x_, float y_, float width_, float height_)
 	showPlaylistToggle  = new FaToggleButton(ofxFontAwesome::list, ofxFontAwesome::list, 10, 1, h, h);
 	ofAddListener(showPlaylistToggle->onPress, this, &PlayerOverlay::buttonPressed);
 	add(showPlaylistToggle);
-
+	
+	analogModeToggle  = new mui::ToggleButton("A", 10, 1, h, h);
+	analogModeToggle->fg = ofColor(255);
+	analogModeToggle->selectedFg = ofColor(0);
+	analogModeToggle->bg = ofColor(0,0);
+	ofAddListener(analogModeToggle->onPress, this, &PlayerOverlay::buttonPressed);
+	add(analogModeToggle);
+	
 	x = 10;
 	y += invertYToggle->height + 10;
 	
@@ -98,7 +106,7 @@ PlayerOverlay::PlayerOverlay( float x_, float y_, float width_, float height_)
 	strokeWeightSlider->label->fg = ofColor(255);
 	add( strokeWeightSlider );
 	
-	timeStretchLabel = addLabel( "Playback Speed" );
+	timeStretchLabel = addLabel( "Speed" );
 	timeStretchSlider = new mui::SliderWithLabel(0, 0, 100, h, 0.25, 100, 1, 2 );
 	timeStretchSlider->slider->valueMapper = make_shared<mui::Slider::MapperLog>(6000);
 	ofAddListener( timeStretchSlider->slider->onChange, this, &PlayerOverlay::sliderChanged );
@@ -145,7 +153,7 @@ PlayerOverlay::PlayerOverlay( float x_, float y_, float width_, float height_)
 }
 
 void PlayerOverlay::layout(){
-	mui::L({configButton,fullscreenToggle, showPlaylistToggle }).columnsFromRight({width, 0},1);
+	mui::L({analogModeToggle, configButton,fullscreenToggle, showPlaylistToggle}).columnsFromRight({width, 0},1);
 	mui::L({zModulationToggle,flip3dToggle,sideBySideToggle }).columnsFromRight({configButton->x-10,0},1);
 
 
@@ -191,7 +199,7 @@ void PlayerOverlay::layout(){
 	mui::L(afterglowLabel).below(intensityLabel).alignRightEdgeTo(intensityLabel);
 	mui::L(afterglowSlider).rightOf(afterglowLabel,5).stretchToRightEdgeOfParent(10);
 	
-	height = afterglowSlider->y + afterglowSlider->height;
+	height = afterglowSlider->y + afterglowSlider->height + 10;
 }
 
 
@@ -223,6 +231,7 @@ void PlayerOverlay::update(){
 	outputVolumeLabel->visible = !globals.micActive;
 	outputVolumeSlider->visible = !globals.micActive;
 	playButton->visible = !globals.micActive;
+	analogModeToggle->selected = globals.analogMode == 0?false:true; 
 	
 	if( !globals.micActive ){
 		if( !updateSlider(timeSlider, globals.player.getPosition(), lastTimeVal ) ){
@@ -375,6 +384,9 @@ void PlayerOverlay::buttonPressed( const void * sender, ofTouchEventArgs & args 
 	}
 	else if (sender == showPlaylistToggle) {
 		ofSendMessage(ofMessage("toggle-playlist"));
+	}
+	else if(sender == analogModeToggle){
+		globals.analogMode = globals.analogMode==0?1:0;
 	}
 }
 

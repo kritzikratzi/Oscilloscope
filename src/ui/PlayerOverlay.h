@@ -39,6 +39,7 @@ public:
 	FaToggleButton * flip3dToggle; // for 3d: swap left and right channels
 	FaToggleButton * zModulationToggle; // enable variable brightness control in 3 channel files
 	FaToggleButton * showPlaylistToggle; // show playlist
+	mui::ToggleButton * analogModeToggle; // analog/digital
 
 	FaToggleButton * playButton;
 	mui::Slider * timeSlider;
