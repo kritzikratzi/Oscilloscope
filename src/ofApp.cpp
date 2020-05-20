@@ -751,6 +751,29 @@ void ofApp::gotMessage(ofMessage msg){
 	else if (msg.message == "config-pressed") {
 		// nothing to do, hurray :) see ::update()
 	}
+	else if (msg.message == "load-pressed"){
+		auto menu = new FMenu<string>(0, 0, 300, 0);
+		menu->opaque = true;
+		menu->onAfterRemove.add([](mui::Container * menu, mui::Container * parent) {
+			MUI_ROOT->safeDelete(menu);
+		});
+		
+		menu->addOption("Open file", "open-file", [this]() {
+			ofFileDialogResult res = ofSystemLoadDialog("Load audio file", false );
+			if (res.bSuccess) {
+				playlist->addFile(ofFile(res.filePath, ofFile::ReadOnly));
+			}
+		});
+		menu->addOption("Open folder", "open-folder", [this]() {
+			auto res = ofSystemLoadDialog("Add Folder", true);
+			if (res.bSuccess) {
+				playlist->addFile(ofFile(res.filePath, ofFile::ReadOnly));
+			}
+		});
+		
+		MUI_ROOT->showPopupMenu(menu, root, muiGetMouseX(), muiGetMouseY(), mui::Left, mui::Bottom);
+
+	}
 	else if (msg.message == "out-choice-changed") {
 		configView->toGlobals(); 
 		stopApplication(); 

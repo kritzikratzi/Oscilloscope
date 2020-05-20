@@ -107,7 +107,7 @@ PlayerOverlay::PlayerOverlay( float x_, float y_, float width_, float height_)
 	add( strokeWeightSlider );
 	
 	timeStretchLabel = addLabel( "Speed" );
-	timeStretchSlider = new mui::SliderWithLabel(0, 0, 100, h, 0.25, 100, 1, 2 );
+	timeStretchSlider = new mui::SliderWithLabel(0, 0, 100, h, 0.25, 500, 1, 2 );
 	timeStretchSlider->slider->valueMapper = make_shared<mui::Slider::MapperLog>(6000);
 	ofAddListener( timeStretchSlider->slider->onChange, this, &PlayerOverlay::sliderChanged );
 	timeStretchSlider->label->fg = ofColor(255);
@@ -357,10 +357,7 @@ void PlayerOverlay::buttonPressed( const void * sender, ofTouchEventArgs & args 
 		#endif
 	}
 	else if( sender == loadFileButton ){
-		ofFileDialogResult res = ofSystemLoadDialog("Load audio file", false );
-		if( res.bSuccess ){
-			ofSendMessage("load:" + res.filePath); 
-		}
+		ofSendMessage("load-pressed");
 	}
 	else if( sender == useMicButton ){
 		if( globals.micActive ){

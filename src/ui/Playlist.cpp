@@ -123,21 +123,6 @@ void Playlist::layout(){
 }
 
 bool Playlist::fileDragged( ofDragInfo & args ){
-	PlaylistItemRef res;
-	
-	for( auto & file : args.files ){
-		auto temp = addFile(ofFile(file, ofFile::Reference));
-		if(res.id == 0 && temp.id != 0){
-			res = temp;
-		}
-	}
-	
-	scroller->handleLayout();
-	scroller->commit();
-	
-	if(res.id > 0){
-		ofSendMessage("load-id:" + ofToString(res.id));
-	}
 	
 	return true;
 }
@@ -255,6 +240,9 @@ PlaylistItemRef Playlist::addFile( ofFile file, double duration ){
 			return {0,""};
 		}
 	}
+	
+	scroller->commit();
+	needsLayout = true; 
 }
 
 void Playlist::removeAllFiles(){
@@ -372,11 +360,7 @@ void Playlist::buttonPressed(const void * sender, ofTouchEventArgs & args) {
 		removeAllFiles();
 	}
 	else if (sender == addFileButton) {
-		auto res = ofSystemLoadDialog("Add Folder", true);
-		if (res.bSuccess) {
-			addFile(ofFile(res.filePath, ofFile::ReadOnly));
-			handleLayout(); 
-		}
+		ofSendMessage("load-pressed"); 
 	}
 	else if (sender == loopModeButton) {
 		LoopMode * btnMode = loopModeButton->getProperty<LoopMode>("loop_mode");
@@ -431,9 +415,13 @@ void PlaylistItem::touchDown(ofTouchEventArgs & args){
 		
 		string path = file.getAbsolutePath(); 
 		menu->addOption("Show file", "show-file", [menu,path]() {
-			ofxNative::showFile(path); 
-			MUI_ROOT->removePopup(menu); 
-		}); 
+			ofxNative::showFile(path);
+			MUI_ROOT->removePopup(menu);
+		});
+		menu->addOption("Remove file", "remove-file", [menu,this]() {
+			MUI_ROOT->safeRemoveAndDelete(this);
+			MUI_ROOT->removePopup(menu);
+		});
 
 		MUI_ROOT->showPopupMenu(menu, this, args.x, args.y, mui::Left, mui::Bottom);
 	}
