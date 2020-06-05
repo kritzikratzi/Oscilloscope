@@ -20,7 +20,7 @@ This is the programming documentation. If you are not a programmer please
 Things are moving around a bit at the moment. 
 Make sure to read these instructions before each build. 
 
-1. Download and unzip Openframeworks 0.9.3 or newer
+1. Download and unzip Openframeworks 0.10.1
 1. Open the folder apps/myApps/
 1. Clone the repository with submodules: `git clone --recursive https://github.com/kritzikratzi/Oscilloscope.git`
 1. Download the binary release for ofxAvCodec from [https://github.com/kritzikratzi/ofxAvCodec/releases/tag/0.1](https://github.com/kritzikratzi/ofxAvCodec/releases/tag/0.1)
@@ -36,31 +36,32 @@ Make sure to read these instructions before each build.
 
 You can also build with `make && make run` on the command line. The resulting build will have no icon/no proper name/no retina support. 
 
-### Compiling with Visual studio 2015
-
-**VS Project file is not up to date, 
+### Compiling with Visual studio 2017
 
 The shell commands can be run from a git bash, cygwin, msys, or any other shell emulator. 
 
 1. run `scripts/clean.sh`
-1. run `scripts/prepare.sh win32`
+1. run `scripts/prepare.sh win64`
 1. Open oscilloscope.sln and Build&Run
-
-At this point audio should play through Asio (first choice), or Wasapi. You can follow these instructions to patch OF so you can pick at startup: http://pastebin.com/ZZLZ3jUm
 
 ### Compiling with make in Linux
 
 1. run `scripts/clean.sh`
 1. run `scripts/prepare.sh linux64`
-1. run `make && make run` ? [subwolf knows, i haven't done this in ages!]
+1. run `make && make run`
 
 See scripts/readme.md for the full distribution process. 
 
 ### Package the software
 
 * for osx run `scripts/dist.sh $platform $version`
-* platform is one of `osx linux linux64 win32 win64`
+* platform is one of `osx linux linux64 win64`
 * version is whatever version you want, e.g. `1.0.6`
+
+### Contributors
+
+* [https://github.com/subwolf/](subwolf) Linux support
+* [https://github.com/s-ol/](s-ol) Linux support
 
 
 ## License/Source code
