@@ -24,6 +24,21 @@
             <Component Id="cmp059E2C34E04BDF46435D912B0789D1CE" Directory="INSTALLDIR" Guid="*" Win64="yes">
                 <File Id="fil45BA00B7366D9E3AF3C42BC2E00C2154" KeyPath="yes" Source="SourceDir\avutil-55.dll" />
             </Component>
+            <Component Id="cmpDE0F00A802FB8418B6176A6660FD42DE" Directory="INSTALLDIR" Guid="*" Win64="yes">
+                <File Id="fil3B192C890CD8F1A1F9218B149BFA9A11" KeyPath="yes" Source="SourceDir\Dyad.exe" />
+            </Component>
+            <Component Id="cmpE2AA320D9A7D9ED584A37408C9D6EF32" Directory="INSTALLDIR" Guid="*" Win64="yes">
+                <File Id="filD4E2BC8A794772AE996DC897B127118B" KeyPath="yes" Source="SourceDir\Dyad.exp" />
+            </Component>
+            <Component Id="cmpAF767E45CEC13F60D1B8AD4DF074707E" Directory="INSTALLDIR" Guid="*" Win64="yes">
+                <File Id="fil2933808B5D139856427651C13E3DE53A" KeyPath="yes" Source="SourceDir\Dyad.iobj" />
+            </Component>
+            <Component Id="cmp9C5234C997D247CD9F97D7CA3F62905A" Directory="INSTALLDIR" Guid="*" Win64="yes">
+                <File Id="fil351DBD68DF98D60DF3E6DA7C5E97621C" KeyPath="yes" Source="SourceDir\Dyad.ipdb" />
+            </Component>
+            <Component Id="cmpCB78866DE2EABE424DB236DDAE15C760" Directory="INSTALLDIR" Guid="*" Win64="yes">
+                <File Id="fil0D214FFAF60123DAE6F45EB6BF6E6155" KeyPath="yes" Source="SourceDir\Dyad.lib" />
+            </Component>
             <Component Id="cmpC1BC96C420CB883BD3935FB6D1D41307" Directory="INSTALLDIR" Guid="*" Win64="yes">
                 <File Id="fil33C6E17A3B07BF8D9B120BD926B6CBD6" KeyPath="yes" Source="SourceDir\fmodexL64.dll" />
             </Component>
@@ -50,6 +65,9 @@
             </Component>
             <Component Id="cmp7A18521991D2C646F7AA6958351E6004" Directory="INSTALLDIR" Guid="*" Win64="yes">
                 <File Id="fil02888CB0F247766124E93F991DB7A7F3" KeyPath="yes" Source="SourceDir\swresample-2.dll" />
+            </Component>
+            <Component Id="cmp70E010DC4940D05D7F451E91AD74F0AB" Directory="dir38903B42FECED7D073B27F29CA029A00" Guid="*" Win64="yes">
+                <File Id="fil0D5CDD9BC854FD5A963878F0222852AE" KeyPath="yes" Source="SourceDir\data\AtlasTypewriter-Regular.otf" />
             </Component>
             <Component Id="cmp28C46CA8A9FE2E719B42985FDE9D396F" Directory="dir38903B42FECED7D073B27F29CA029A00" Guid="*" Win64="yes">
                 <File Id="fil35E43B77A82DF490FF19CD4915CB55B1" KeyPath="yes" Source="SourceDir\data\fa-regular-400.ttf" />

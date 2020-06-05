@@ -1,8 +1,8 @@
 		<Include>
 			<?define MyProductName = "Oscilloscope" ?>
 			<!-- use a random version+udid each run! -->
-			<?define MyAppVersion = "1.0.13" ?>
-			<?define MyVersionId = "e71bb848-089b-40e8-992a-83857e65f196" ?>
+			<?define MyAppVersion = "1.0.14" ?>
+			<?define MyVersionId = "c50dae23-ae77-49e8-861b-4380ee9bc447" ?>
 			<?define MyManufacturer = "Oscilloscope" ?>
 			<?define MyUninstallerIconPath = "assets/icon.ico" ?>
 			<!-- for these: create random udid once, then use the same code each run! -->
