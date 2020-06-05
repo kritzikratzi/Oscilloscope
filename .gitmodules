@@ -19,3 +19,6 @@
 [submodule "addons/ofxSyphon"]
 	path = addons/ofxSyphon
 	url = https://github.com/astellato/ofxSyphon.git
+[submodule "addons/ofxLibsamplerate"]
+	path = addons/ofxLibsamplerate
+	url = https://github.com/kritzikratzi/ofxLibsamplerate.git

@@ -13,6 +13,8 @@
 #include "ofxFontAwesome.h"
 #include "FaButton.h"
 #include "FaToggleButton.h"
+#include "FMenu.h"
+#include "ofxNative.h"
 
 namespace natural_sort{
 	int compare(const string & a, const string & b);
@@ -23,12 +25,6 @@ Playlist::Playlist() : mui::Container(0,0,300,500){
 	bg = ofColor(125, 50);
 	opaque = true;
 
-	header = new mui::Label("Playlist");
-	header->fontSize = 20;
-	header->height = 30;
-	header->commit(); 
-	add(header);
-	
 	scroller = new mui::ScrollPane();
 	scroller->canScrollX = false;
 	scroller->canScrollY = true;
@@ -44,21 +40,25 @@ Playlist::Playlist() : mui::Container(0,0,300,500){
 	};
 
 	loopModeButton = new FaButton(ofxFontAwesome::sort_alpha_asc,0,0, 30, 30);
+	loopModeButton->setProperty("tooltip", string("Play all once / repeat one / repeat all"));
 	ofAddListener(loopModeButton->onPress, this, &Playlist::buttonPressed);
 	add(loopModeButton);
 	setLoopMode(LoopMode::all_repeat);
 
 
 	shuffleToggle = new FaToggleButton(ofxFontAwesome::random, ofxFontAwesome::random, 0, 0, 30, 30);
+	shuffleToggle->setProperty("tooltip", string("Shuffle"));
 	ofAddListener(shuffleToggle->onPress, this, &Playlist::buttonPressed);
 	add(shuffleToggle);
 
 	clearButton = new FaButton(ofxFontAwesome::trash,0,0,30,30);
+	clearButton->setProperty("tooltip", string("Clear playlist"));
 	clearButton->label->inset.top = -4;
 	ofAddListener(clearButton->onPress, this, &Playlist::buttonPressed);
 	add(clearButton); 
 
 	addFileButton = new FaButton(ofxFontAwesome::folder_open,0,0,30,30);
+	addFileButton->setProperty("tooltip", string("Open folder"));
 	addFileButton->label->inset.top = -2;
 	addFileButton->label->inset.left = 2;
 	ofAddListener(addFileButton->onPress, this, &Playlist::buttonPressed);
@@ -74,7 +74,6 @@ Playlist::~Playlist(){
 	delete scroller->view->layoutHandler;
 	scroller->view->layoutHandler = nullptr;
 	delete scroller;
-	delete header;
 }
 
 void Playlist::update(){
@@ -108,8 +107,7 @@ void Playlist::draw(){
 }
 
 void Playlist::layout(){
-	mui::L(header).posTL(0,-header->height).stretchToRightEdgeOfParent();
-	mui::L(addFileButton).below(header, 1);
+	mui::L(addFileButton).pos(0, 0);
 	mui::L(clearButton).rightOf(addFileButton, 1);
 	mui::L(loopModeButton).rightOf(clearButton, 15);
 	mui::L(shuffleToggle).rightOf(loopModeButton, 1);
@@ -121,12 +119,6 @@ void Playlist::layout(){
 }
 
 bool Playlist::fileDragged( ofDragInfo & args ){
-	for( auto & file : args.files ){
-		addFile(ofFile(file, ofFile::Reference));
-	}
-	
-	scroller->handleLayout();
-	scroller->commit();
 	
 	return true;
 }
@@ -149,7 +141,7 @@ bool Playlist::keyPressed(ofKeyEventArgs & args){
 }
 
 
-void Playlist::addFile( ofFile file, double duration ){
+PlaylistItemRef Playlist::addFile( ofFile file, double duration ){
 	checkNewFiles = true;
 	
 	if(file.isDirectory()){
@@ -160,9 +152,14 @@ void Playlist::addFile( ofFile file, double duration ){
 			return natural_sort::compare(a.getBaseName(), b.getBaseName())<0;
 		});
 		
+		PlaylistItemRef res;
 		for( auto file : files ){
-			addFile(file); 
+			auto temp = addFile(file);
+			if(res.id == 0 && temp.id > 0){
+				res = temp;
+			}
 		}
+		return res;
 	}
 	else{
 		static set<string> allowed = {
@@ -223,15 +220,25 @@ void Playlist::addFile( ofFile file, double duration ){
 		
 		if(duration >= 0 ){
 			filenames[nextItemId] = file.getAbsolutePath();
-			PlaylistItem * item = new PlaylistItem(nextItemId++, file, duration);
+			PlaylistItem * item = new PlaylistItem(nextItemId, file, duration);
 			scroller->view->add(item);
+			nextItemId ++;
+			return {item->itemId, item->file.getAbsolutePath()};
 		}
 		else if(forbidden.find(ext) == forbidden.end()){
 			filenames[nextItemId] = file.getAbsolutePath();
-			PlaylistItem * item = new PlaylistItem(nextItemId++, file);
+			PlaylistItem * item = new PlaylistItem(nextItemId, file);
 			scroller->view->add(item);
+			nextItemId ++;
+			return {item->itemId, item->file.getAbsolutePath()};
+		}
+		else{
+			return {0,""};
 		}
 	}
+	
+	scroller->commit();
+	needsLayout = true; 
 }
 
 void Playlist::removeAllFiles(){
@@ -265,7 +272,7 @@ void Playlist::load(istream & in){
 	scroller->commit();
 }
 
-pair<size_t, string> Playlist::getNextItem(size_t itemId) {
+PlaylistItemRef Playlist::getNextItem(size_t itemId) {
 	bool takeNext = false; 
 
 	for (auto el : scroller->view->children) {
@@ -287,7 +294,7 @@ pair<size_t, string> Playlist::getNextItem(size_t itemId) {
 	return{ 0,"" };
 }
 
-pair<size_t, string> Playlist::getNextItemInPlaylist( size_t itemId ){
+PlaylistItemRef Playlist::getNextItemInPlaylist( size_t itemId ){
 	LoopMode * btnMode = loopModeButton->getProperty<LoopMode>("loop_mode");
 	LoopMode mode = btnMode ? *btnMode : LoopMode::all_repeat; 
 
@@ -308,7 +315,7 @@ pair<size_t, string> Playlist::getNextItemInPlaylist( size_t itemId ){
 	}
 	case LoopMode::all_repeat: {
 		auto res = getNextItem(itemId);
-		if (res.first == 0) res = getNextItem(res.first);
+		if (res.id == 0) res = getNextItem(res.id);
 		return res;
 	}
 	case LoopMode::one_repeat: {
@@ -349,10 +356,7 @@ void Playlist::buttonPressed(const void * sender, ofTouchEventArgs & args) {
 		removeAllFiles();
 	}
 	else if (sender == addFileButton) {
-		auto res = ofSystemLoadDialog("Add Folder", true);
-		if (res.bSuccess) {
-			addFile(ofFile(res.filePath, ofFile::ReadOnly));
-		}
+		ofSendMessage("load-pressed"); 
 	}
 	else if (sender == loopModeButton) {
 		LoopMode * btnMode = loopModeButton->getProperty<LoopMode>("loop_mode");
@@ -398,7 +402,28 @@ void PlaylistItem::updateDuration(bool & alreadyScanned, bool & shouldRemove ){
 
 
 void PlaylistItem::touchDown(ofTouchEventArgs & args){
-	ofSendMessage("load-id:" + ofToString(itemId));
+	if (muiIsContextClick()) {
+		auto menu = new FMenu<string>(0, 0, 300, 0);
+		menu->opaque = true;
+		menu->onAfterRemove.add([](mui::Container * menu, mui::Container * parent) {
+			MUI_ROOT->safeDelete(menu);
+		});
+		
+		string path = file.getAbsolutePath(); 
+		menu->addOption("Show file", "show-file", [menu,path]() {
+			ofxNative::showFile(path);
+			MUI_ROOT->removePopup(menu);
+		});
+		menu->addOption("Remove file", "remove-file", [menu,this]() {
+			MUI_ROOT->safeRemoveAndDelete(this);
+			MUI_ROOT->removePopup(menu);
+		});
+
+		MUI_ROOT->showPopupMenu(menu, this, args.x, args.y, mui::Left, mui::Bottom);
+	}
+	else {
+		ofSendMessage("load-id:" + ofToString(itemId));
+	}
 }
 
 void PlaylistItem::touchUp(ofTouchEventArgs & args){

@@ -1,40 +1,32 @@
 #pragma once
 
 #include "ofxMightyUI.h"
+#include "FMenu.h"
 
 class ConfigView : public mui::Container{
 public:
-	ConfigView( float x_ = 0, float y_ = 0, float width_ = ofGetWidth(), float height_ = ofGetHeight() );
+	ConfigView();
 	
-	virtual void update();
-	virtual void draw();
+	void update() override;
+	void draw() override;
+	void layout() override; 
+
+	void touchDown( ofTouchEventArgs &touch ) override;
+	void touchMoved( ofTouchEventArgs &touch ) override;
+	void touchUp( ofTouchEventArgs &touch ) override;
+	void touchDoubleTap( ofTouchEventArgs &touch ) override;
 	
-	virtual void touchDown( ofTouchEventArgs &touch );
-	virtual void touchMoved( ofTouchEventArgs &touch );
-	virtual void touchUp( ofTouchEventArgs &touch );
-	virtual void touchDoubleTap( ofTouchEventArgs &touch );
 	
-	
-	mui::ToggleButton * autoDetectButton;
-	mui::SegmentedSelect<int> * sampleRatesSelect;
-	mui::SegmentedSelect<int> * bufferSizeSelect;
-	mui::SegmentedSelect<int> * numbuffersSelect;
-	mui::Button * startButton;
-	
-	mui::Container * blocker;
-	
+	FDropdown<string> * outDevicePicker; 
+
 	void fromGlobals();
 	void toGlobals();
 	
 	void buttonPressed( const void * sender, ofTouchEventArgs & args );
-	bool keyPressed( ofKeyEventArgs &touch);
-	void selectSoundCard( int deviceId );
-	void autoDetect();
 	
 private:
-	
-	void pushLabel( string text, float &x, float &y, float &w, float &h );
-	int selectedSoundCard;
-	vector<mui::ToggleButton*> soundcardButtons;
-	map<mui::ToggleButton*, int> deviceIds;
+	void pushLabel( string text );
+	void outDevicePickerChanged(const void * sender, string & value);
+	void gotMessage(const void * sender, ofMessage & msg);
+	void addDeviceOptions();
 };

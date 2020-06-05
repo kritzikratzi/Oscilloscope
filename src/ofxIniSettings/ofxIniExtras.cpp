@@ -232,7 +232,7 @@ string ofxToHexString(int value, int digits) {
 	string format = "%0"+ofToString(digits)+"x";
     sprintf(buf,format.c_str(),value);
     result = buf;
-	delete buf;
+	delete [] buf;
     return result;
 }
 
@@ -275,11 +275,7 @@ void ofxRotate(ofQuaternion q) {
 	float angle;
 	ofVec3f axis;
 	q.getRotate(angle, axis);
-	ofRotate(angle/TWO_PI*360,axis.x,axis.y,axis.z);
-}
-
-void ofxRotate(ofNode &node, ofQuaternion q) {
-    node.setOrientation(node.getOrientationQuat() * q);
+	ofRotateDeg(angle/TWO_PI*360,axis.x,axis.y,axis.z);
 }
 
 void ofxRotate(float angle, ofVec3f v) {

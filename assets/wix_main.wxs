@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<?include wix_config.wxi ?>
+    <Product Name='$(var.MyProductName) $(var.MyAppVersion)' Manufacturer='$(var.MyManufacturer)'
+        Id='$(var.MyVersionId)' 
+        UpgradeCode='$(var.MyConstantUpgradeCode)'
+        Language='1033' Codepage='1252' Version='$(var.MyAppVersion)'>
+		<Package Id='*' Keywords='Installer' Description="$(var.MyProductName) $(var.MyAppVersion) installer"
+			Comments='${var.MyAppPackageComment}' Manufacturer='$(var.MyManufacturer)'
+			InstallerVersion='200' Platform='x64' Languages='1033' Compressed='yes' SummaryCodepage='1252' />
+
+		<MajorUpgrade AllowDowngrades="yes" />
+		<Media Id='1' Cabinet='Sample.cab' EmbedCab='yes' DiskPrompt="CD-ROM #1" />
+		<Property Id='DiskPrompt' Value="$(var.MyProductName) Installation [1]" />
+		
+		<Icon Id="MyIcon" SourceFile="$(var.MyUninstallerIconPath)"/>
+		<Property Id="ARPPRODUCTICON" Value="MyIcon" />
+
+		<Directory Id="TARGETDIR" Name="SourceDir">
+		  <Directory Id="ProgramFiles64Folder">
+			<Directory Id="INSTALLDIR" Name="$(var.MyProductName)"/>
+		  </Directory>
+		  <Directory Id="ProgramMenuFolder" Name="Programs">
+				<Directory Id="ApplicationProgramsFolder" Name="$(var.MyProductName)"/>
+			</Directory>
+		</Directory>
+		
+			<DirectoryRef Id="ApplicationProgramsFolder">
+			  <Component Id="ProgramMenuDir" Guid="$(var.MyProgramMenuGuid)" Win64="yes">
+						<Shortcut Id="ApplicationStartMenuShortcut" 
+								  Name="$(var.MyProductName)"
+								  Description="$(var.MyProductName)"
+								  Target="[#$(var.MyExeId)]"
+								  WorkingDirectory="$(var.MyExeWorkingDir)"
+								  />
+					<RemoveFolder Id='ApplicationProgramsFolder' On='uninstall' />
+					<RegistryValue Root='HKCU' Key='Software\[Manufacturer]\[ProductName]' Type='string' Value='' KeyPath='yes' />
+			  </Component>
+			</DirectoryRef>
+			
+		<Feature Id="ProductFeature" Title="Oscilloscope" Level="1">
+		   <ComponentGroupRef Id="CGROUP" />
+		   <ComponentRef Id="ProgramMenuDir" />
+		</Feature>
+		
+		<Property Id="LicenseAccepted" Value="1"/>
+		<Property Id="WIXUI_INSTALLDIR" Value="INSTALLDIR" />
+		<UI>
+		  <UIRef Id="WixUI_InstallDir" />
+		  <Publish Dialog="WelcomeDlg"
+				Control="Next"
+				Event="NewDialog"
+				Value="InstallDirDlg"
+				Order="2">1</Publish>
+		  <Publish Dialog="InstallDirDlg"
+				Control="Back"
+				Event="NewDialog"
+				Value="WelcomeDlg"
+				Order="2">1</Publish>
+		</UI>
+	</Product>
+</Wix>

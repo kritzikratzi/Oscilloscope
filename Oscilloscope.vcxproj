@@ -1,5 +1,5 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -18,6 +18,11 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <PropertyGroup Condition="'$(WindowsTargetPlatformVersion)'==''">
+    <LatestTargetPlatformVersion>$([Microsoft.Build.Utilities.ToolLocationHelper]::GetLatestSDKTargetPlatformVersion('Windows', '10.0'))</LatestTargetPlatformVersion>
+    <WindowsTargetPlatformVersion Condition="'$(WindowsTargetPlatformVersion)' == ''">$(LatestTargetPlatformVersion)</WindowsTargetPlatformVersion>
+    <TargetPlatformVersion>$(WindowsTargetPlatformVersion)</TargetPlatformVersion>
+  </PropertyGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{7FD42DF7-442E-479A-BA76-D0022F99702A}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
@@ -27,24 +32,24 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <CharacterSet>Unicode</CharacterSet>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <CharacterSet>Unicode</CharacterSet>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
@@ -66,26 +71,26 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>bin\</OutDir>
-    <IntDir>obj\$(Configuration)\</IntDir>
+    <IntDir>obj\$(Platform)\$(Configuration)\</IntDir>
     <TargetName>$(ProjectName)_debug</TargetName>
     <LinkIncremental>true</LinkIncremental>
     <GenerateManifest>true</GenerateManifest>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>bin\</OutDir>
-    <IntDir>obj\$(Configuration)\</IntDir>
+    <IntDir>obj\$(Platform)\$(Configuration)\</IntDir>
     <TargetName>$(ProjectName)_debug</TargetName>
     <LinkIncremental>true</LinkIncremental>
     <GenerateManifest>true</GenerateManifest>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>bin\</OutDir>
-    <IntDir>obj\$(Configuration)\</IntDir>
+    <IntDir>obj\$(Platform)\$(Configuration)\</IntDir>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>bin\</OutDir>
-    <IntDir>obj\$(Configuration)\</IntDir>
+    <IntDir>obj\$(Platform)\$(Configuration)\</IntDir>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -95,17 +100,16 @@
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;src\ofxIniSettings;src\ui;src\util;addons\ofxAvCodec\libs\avcodec\include;addons\ofxAvCodec\src;addons\ofxAvCodec\libs\avcodec\include-vs;addons\ofxFontAwesome\src;addons\ofxFontStash2\libs;addons\ofxFontStash2\libs\fontstash;addons\ofxFontStash2\libs\fontstash\src;addons\ofxFontStash2\libs\pugixml;addons\ofxFontStash2\libs\pugixml\src;addons\ofxFontStash2\src;addons\ofxMightyUI\src;addons\ofxNative\src;addons\ofxSpout\src;addons\ofxSpout\libs\SpoutSDK\src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;src\ofxIniSettings;src\ui;src\util;addons\ofxAvCodec\libs\avcodec\include-vs;addons\ofxAvCodec\libs\avcodec\include;addons\ofxAvCodec\src;addons\ofxFontAwesome\src;addons\ofxFontStash2\libs;addons\ofxFontStash2\libs\fontstash;addons\ofxFontStash2\libs\fontstash\src;addons\ofxFontStash2\libs\pugixml;addons\ofxFontStash2\libs\pugixml\src;addons\ofxFontStash2\src;addons\ofxMightyUI\libs;addons\ofxMightyUI\libs\stb_textedit;addons\ofxMightyUI\libs\stb_textedit\include;addons\ofxMightyUI\libs\stb_textedit\include\stb_textedit;addons\ofxMightyUI\src;addons\ofxNative\src;addons\ofxSpout\libs;addons\ofxSpout\libs\SpoutSDK;addons\ofxSpout\libs\SpoutSDK\src;addons\ofxSpout\src;addons\ofxSpout\src\ofxSpout;addons\ofxLibsamplerate\libs;addons\ofxLibsamplerate\libs\libsamplerate;addons\ofxLibsamplerate\libs\libsamplerate\include;addons\ofxLibsamplerate\libs\libsamplerate\lib;addons\ofxLibsamplerate\libs\libsamplerate\lib\vs;addons\ofxLibsamplerate\libs\libsamplerate\lib\vs\x64</AdditionalIncludeDirectories>
       <CompileAs>CompileAsCpp</CompileAs>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>%(AdditionalDependencies);avcodec.lib;avdevice.lib;avfilter.lib;avformat.lib;avutil.lib;swresample.lib;swscale.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);addons\ofxAvCodec\libs\avcodec\lib\vs\Win32</AdditionalLibraryDirectories>
-      <SetChecksum>true</SetChecksum>
-      <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
     </Link>
     <PostBuildEvent />
   </ItemDefinitionGroup>
@@ -116,18 +120,18 @@
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;src\ofxIniSettings;src\ui;src\util;addons\ofxAvCodec\libs\avcodec\include;addons\ofxAvCodec\src;addons\ofxAvCodec\libs\avcodec\include-vs;addons\ofxFontAwesome\src;addons\ofxFontStash2\libs;addons\ofxFontStash2\libs\fontstash;addons\ofxFontStash2\libs\fontstash\src;addons\ofxFontStash2\libs\pugixml;addons\ofxFontStash2\libs\pugixml\src;addons\ofxFontStash2\src;addons\ofxMightyUI\src;addons\ofxNative\src;addons\ofxSpout\src;addons\ofxSpout\libs\SpoutSDK\src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;src\ofxIniSettings;src\ui;src\util;addons\ofxAvCodec\libs\avcodec\include-vs;addons\ofxAvCodec\libs\avcodec\include;addons\ofxAvCodec\src;addons\ofxFontAwesome\src;addons\ofxFontStash2\libs;addons\ofxFontStash2\libs\fontstash;addons\ofxFontStash2\libs\fontstash\src;addons\ofxFontStash2\libs\pugixml;addons\ofxFontStash2\libs\pugixml\src;addons\ofxFontStash2\src;addons\ofxMightyUI\libs;addons\ofxMightyUI\libs\stb_textedit;addons\ofxMightyUI\libs\stb_textedit\include;addons\ofxMightyUI\libs\stb_textedit\include\stb_textedit;addons\ofxMightyUI\src;addons\ofxNative\src;addons\ofxSpout\libs;addons\ofxSpout\libs\SpoutSDK;addons\ofxSpout\libs\SpoutSDK\src;addons\ofxSpout\src;addons\ofxSpout\src\ofxSpout;addons\ofxLibsamplerate\libs;addons\ofxLibsamplerate\libs\libsamplerate;addons\ofxLibsamplerate\libs\libsamplerate\include;addons\ofxLibsamplerate\libs\libsamplerate\lib;addons\ofxLibsamplerate\libs\libsamplerate\lib\vs;addons\ofxLibsamplerate\libs\libsamplerate\lib\vs\x64</AdditionalIncludeDirectories>
       <CompileAs>CompileAsCpp</CompileAs>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
-      <AdditionalDependencies>avcodec.lib;avdevice.lib;avfilter.lib;avformat.lib;avutil.lib;swresample.lib;swscale.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);addons\ofxAvCodec\libs\avcodec\lib\vs\x64</AdditionalLibraryDirectories>
-      <SetChecksum>true</SetChecksum>
-      <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
+      <AdditionalDependencies>%(AdditionalDependencies);avcodec.lib;avdevice.lib;avfilter.lib;avformat.lib;avutil.lib;swresample.lib;swscale.lib;libsamplerate.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);addons\ofxAvCodec\libs\avcodec\lib\vs\x64;addons\ofxLibsamplerate\libs\libsamplerate\lib\vs\x64</AdditionalLibraryDirectories>
+      <DelayLoadDLLs>assimp.dll;glut32.dll;libeay32.dll;ssleay32.dll;Zlib.dll;FreeType.dll;fmodex.dll;fmodexL.dll;fmodex64.dll;fmodexL64.dll;%(DelayLoadDLLs)</DelayLoadDLLs>
     </Link>
     <PostBuildEvent />
   </ItemDefinitionGroup>
@@ -137,22 +141,20 @@
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;src\ofxIniSettings;src\ui;src\util;addons\ofxAvCodec\libs\avcodec\include;addons\ofxAvCodec\src;addons\ofxAvCodec\libs\avcodec\include-vs;addons\ofxFontAwesome\src;addons\ofxFontStash2\libs;addons\ofxFontStash2\libs\fontstash;addons\ofxFontStash2\libs\fontstash\src;addons\ofxFontStash2\libs\pugixml;addons\ofxFontStash2\libs\pugixml\src;addons\ofxFontStash2\src;addons\ofxMightyUI\src;addons\ofxNative\src;addons\ofxSpout\src;addons\ofxSpout\libs\SpoutSDK\src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;src\ofxIniSettings;src\ui;src\util;addons\ofxAvCodec\libs\avcodec\include-vs;addons\ofxAvCodec\libs\avcodec\include;addons\ofxAvCodec\src;addons\ofxFontAwesome\src;addons\ofxFontStash2\libs;addons\ofxFontStash2\libs\fontstash;addons\ofxFontStash2\libs\fontstash\src;addons\ofxFontStash2\libs\pugixml;addons\ofxFontStash2\libs\pugixml\src;addons\ofxFontStash2\src;addons\ofxMightyUI\libs;addons\ofxMightyUI\libs\stb_textedit;addons\ofxMightyUI\libs\stb_textedit\include;addons\ofxMightyUI\libs\stb_textedit\include\stb_textedit;addons\ofxMightyUI\src;addons\ofxNative\src;addons\ofxSpout\libs;addons\ofxSpout\libs\SpoutSDK;addons\ofxSpout\libs\SpoutSDK\src;addons\ofxSpout\src;addons\ofxSpout\src\ofxSpout;addons\ofxLibsamplerate\libs;addons\ofxLibsamplerate\libs\libsamplerate;addons\ofxLibsamplerate\libs\libsamplerate\include;addons\ofxLibsamplerate\libs\libsamplerate\lib;addons\ofxLibsamplerate\libs\libsamplerate\lib\vs;addons\ofxLibsamplerate\libs\libsamplerate\lib\vs\x64</AdditionalIncludeDirectories>
       <CompileAs>CompileAsCpp</CompileAs>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
     </ClCompile>
     <Link>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
       <GenerateDebugInformation>false</GenerateDebugInformation>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>%(AdditionalDependencies);avcodec.lib;avdevice.lib;avfilter.lib;avformat.lib;avutil.lib;swresample.lib;swscale.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);addons\ofxAvCodec\libs\avcodec\lib\vs\Win32</AdditionalLibraryDirectories>
-      <SetChecksum>true</SetChecksum>
-      <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
-      <DelayLoadDLLs>assimp.dll;glut32.dll;libeay32.dll;ssleay32.dll;swscale-3.dll;Zlib.dll;FreeType.dll;fmodex.dll;fmodexL.dll;%(DelayLoadDLLs)</DelayLoadDLLs>
     </Link>
     <PostBuildEvent />
   </ItemDefinitionGroup>
@@ -162,8 +164,9 @@
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;src\ofxIniSettings;src\ui;src\util;addons\ofxAvCodec\libs\avcodec\include;addons\ofxAvCodec\src;addons\ofxAvCodec\libs\avcodec\include-vs;addons\ofxFontAwesome\src;addons\ofxFontStash2\libs;addons\ofxFontStash2\libs\fontstash;addons\ofxFontStash2\libs\fontstash\src;addons\ofxFontStash2\libs\pugixml;addons\ofxFontStash2\libs\pugixml\src;addons\ofxFontStash2\src;addons\ofxMightyUI\src;addons\ofxNative\src;addons\ofxSpout\src;addons\ofxSpout\libs\SpoutSDK\src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;src\ofxIniSettings;src\ui;src\util;addons\ofxAvCodec\libs\avcodec\include-vs;addons\ofxAvCodec\libs\avcodec\include;addons\ofxAvCodec\src;addons\ofxFontAwesome\src;addons\ofxFontStash2\libs;addons\ofxFontStash2\libs\fontstash;addons\ofxFontStash2\libs\fontstash\src;addons\ofxFontStash2\libs\pugixml;addons\ofxFontStash2\libs\pugixml\src;addons\ofxFontStash2\src;addons\ofxMightyUI\libs;addons\ofxMightyUI\libs\stb_textedit;addons\ofxMightyUI\libs\stb_textedit\include;addons\ofxMightyUI\libs\stb_textedit\include\stb_textedit;addons\ofxMightyUI\src;addons\ofxNative\src;addons\ofxSpout\libs;addons\ofxSpout\libs\SpoutSDK;addons\ofxSpout\libs\SpoutSDK\src;addons\ofxSpout\src;addons\ofxSpout\src\ofxSpout;addons\ofxLibsamplerate\libs;addons\ofxLibsamplerate\libs\libsamplerate;addons\ofxLibsamplerate\libs\libsamplerate\include;addons\ofxLibsamplerate\libs\libsamplerate\lib;addons\ofxLibsamplerate\libs\libsamplerate\lib\vs;addons\ofxLibsamplerate\libs\libsamplerate\lib\vs\x64</AdditionalIncludeDirectories>
       <CompileAs>CompileAsCpp</CompileAs>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
     </ClCompile>
     <Link>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
@@ -172,15 +175,36 @@
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
-      <AdditionalDependencies>avcodec.lib;avdevice.lib;avfilter.lib;avformat.lib;avutil.lib;swresample.lib;swscale.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);addons\ofxAvCodec\libs\avcodec\lib\vs\x64</AdditionalLibraryDirectories>
-      <SetChecksum>true</SetChecksum>
-      <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
-      <DelayLoadDLLs>assimp.dll;glut32.dll;libeay32.dll;ssleay32.dll;swscale-3.dll;Zlib.dll;FreeType.dll;fmodex.dll;fmodexL.dll;%(DelayLoadDLLs)</DelayLoadDLLs>
+      <AdditionalDependencies>%(AdditionalDependencies);avcodec.lib;avdevice.lib;avfilter.lib;avformat.lib;avutil.lib;swresample.lib;swscale.lib;libsamplerate.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);addons\ofxAvCodec\libs\avcodec\lib\vs\x64;addons\ofxLibsamplerate\libs\libsamplerate\lib\vs\x64</AdditionalLibraryDirectories>
+      <DelayLoadDLLs>assimp.dll;glut32.dll;libeay32.dll;ssleay32.dll;Zlib.dll;FreeType.dll;fmodex.dll;fmodexL.dll;fmodex64.dll;fmodexL64.dll;%(DelayLoadDLLs)</DelayLoadDLLs>
     </Link>
     <PostBuildEvent />
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\ofApp.cpp" />
+    <ClCompile Include="src\globals.cpp" />
+    <ClCompile Include="src\ofxIniSettings\ofxIniExtras.cpp" />
+    <ClCompile Include="src\ofxIniSettings\ofxIniSettings.cpp" />
+    <ClCompile Include="src\OsciMesh.cpp" />
+    <ClCompile Include="src\ui\ConfigView.cpp" />
+    <ClCompile Include="src\ui\ExportScreen.cpp" />
+    <ClCompile Include="src\ui\FMenu.cpp" />
+    <ClCompile Include="src\ui\PlayerOverlay.cpp" />
+    <ClCompile Include="src\ui\Playlist.cpp" />
+    <ClCompile Include="src\util\Audio.cpp" />
+    <ClCompile Include="src\util\OsciAvAudioPlayer.cpp" />
+    <ClCompile Include="src\util\OsciResampler.cpp" />
+    <ClCompile Include="src\util\OsciVideoWriter.cpp" />
+    <ClCompile Include="src\util\TexShare.cpp" />
+    <ClCompile Include="addons\ofxAvCodec\src\ofxAvAudioPlayer.cpp" />
+    <ClCompile Include="addons\ofxAvCodec\src\ofxAvAudioWriter.cpp" />
+    <ClCompile Include="addons\ofxAvCodec\src\ofxAvUtils.cpp" />
+    <ClCompile Include="addons\ofxAvCodec\src\ofxAvVideoPlayer.cpp" />
+    <ClCompile Include="addons\ofxFontStash2\src\ofxFontStash2.cpp" />
+    <ClCompile Include="addons\ofxFontStash2\src\ofxFontStashParser.cpp" />
+    <ClCompile Include="addons\ofxFontStash2\libs\pugixml\src\pugixml.cpp" />
     <ClCompile Include="addons\ofxMightyUI\src\BarButton.cpp" />
     <ClCompile Include="addons\ofxMightyUI\src\Button.cpp" />
     <ClCompile Include="addons\ofxMightyUI\src\Container.cpp" />
@@ -206,6 +230,9 @@
     <ClCompile Include="addons\ofxMightyUI\src\TextureAtlas.cpp" />
     <ClCompile Include="addons\ofxMightyUI\src\ToggleButton.cpp" />
     <ClCompile Include="addons\ofxNative\src\ofxNative_win.cpp" />
+    <ClCompile Include="addons\ofxSpout\src\ofxSpout\Receiver.cpp" />
+    <ClCompile Include="addons\ofxSpout\src\ofxSpout\Sender.cpp" />
+    <ClCompile Include="addons\ofxSpout\src\ofxSpout\Utils.cpp" />
     <ClCompile Include="addons\ofxSpout\libs\SpoutSDK\src\SpoutDirectX.cpp" />
     <ClCompile Include="addons\ofxSpout\libs\SpoutSDK\src\SpoutGLDXinterop.cpp" />
     <ClCompile Include="addons\ofxSpout\libs\SpoutSDK\src\SpoutGLextensions.cpp" />
@@ -215,77 +242,8 @@
     <ClCompile Include="addons\ofxSpout\libs\SpoutSDK\src\SpoutSender.cpp" />
     <ClCompile Include="addons\ofxSpout\libs\SpoutSDK\src\SpoutSenderNames.cpp" />
     <ClCompile Include="addons\ofxSpout\libs\SpoutSDK\src\SpoutSharedMemory.cpp" />
-    <ClCompile Include="addons\ofxSpout\src\ofxSpout\Receiver.cpp" />
-    <ClCompile Include="addons\ofxSpout\src\ofxSpout\Sender.cpp" />
-    <ClCompile Include="addons\ofxSpout\src\ofxSpout\Utils.cpp" />
-    <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\ofApp.cpp" />
-    <ClCompile Include="src\globals.cpp" />
-    <ClCompile Include="src\ofxIniSettings\ofxIniExtras.cpp" />
-    <ClCompile Include="src\ofxIniSettings\ofxIniSettings.cpp" />
-    <ClCompile Include="src\OsciMesh.cpp" />
-    <ClCompile Include="src\ui\ConfigView.cpp" />
-    <ClCompile Include="src\ui\ExportScreen.cpp" />
-    <ClCompile Include="src\ui\FMenu.cpp" />
-    <ClCompile Include="src\ui\PlayerOverlay.cpp" />
-    <ClCompile Include="src\ui\Playlist.cpp" />
-    <ClCompile Include="src\util\Audio.cpp" />
-    <ClCompile Include="src\util\OsciAvAudioPlayer.cpp" />
-    <ClCompile Include="src\util\sounddevices.cpp" />
-    <ClCompile Include="addons\ofxAvCodec\src\ofxAvAudioPlayer.cpp" />
-    <ClCompile Include="addons\ofxAvCodec\src\ofxAvAudioWriter.cpp" />
-    <ClCompile Include="addons\ofxAvCodec\src\ofxAvUtils.cpp" />
-    <ClCompile Include="addons\ofxFontStash2\src\ofxFontStash2.cpp" />
-    <ClCompile Include="addons\ofxFontStash2\src\ofxFontStashParser.cpp" />
-    <ClCompile Include="addons\ofxFontStash2\libs\pugixml\src\pugixml.cpp" />
-    <ClCompile Include="src\util\TexShare.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="addons\ofxFontAwesome\src\ofxFontAwesome4.h" />
-    <ClInclude Include="addons\ofxFontAwesome\src\ofxFontAwesome5.h" />
-    <ClInclude Include="addons\ofxMightyUI\libs\stb_textedit\include\stb_textedit\stb_textedit.h" />
-    <ClInclude Include="addons\ofxMightyUI\src\BarButton.h" />
-    <ClInclude Include="addons\ofxMightyUI\src\Button.h" />
-    <ClInclude Include="addons\ofxMightyUI\src\Container.h" />
-    <ClInclude Include="addons\ofxMightyUI\src\CppTweener.h" />
-    <ClInclude Include="addons\ofxMightyUI\src\EmptyContainer.h" />
-    <ClInclude Include="addons\ofxMightyUI\src\Helpers.h" />
-    <ClInclude Include="addons\ofxMightyUI\src\Image.h" />
-    <ClInclude Include="addons\ofxMightyUI\src\InternalWindow.h" />
-    <ClInclude Include="addons\ofxMightyUI\src\Label.h" />
-    <ClInclude Include="addons\ofxMightyUI\src\Layout.h" />
-    <ClInclude Include="addons\ofxMightyUI\src\MuiConfig.h" />
-    <ClInclude Include="addons\ofxMightyUI\src\MuiCore.h" />
-    <ClInclude Include="addons\ofxMightyUI\src\muievents.h" />
-    <ClInclude Include="addons\ofxMightyUI\src\MuiFilePicker.h" />
-    <ClInclude Include="addons\ofxMightyUI\src\MuiL.h" />
-    <ClInclude Include="addons\ofxMightyUI\src\MuiParameterPanel.h" />
-    <ClInclude Include="addons\ofxMightyUI\src\MuiTextArea.h" />
-    <ClInclude Include="addons\ofxMightyUI\src\ofxMightyUI.h" />
-    <ClInclude Include="addons\ofxMightyUI\src\Root.h" />
-    <ClInclude Include="addons\ofxMightyUI\src\ScrollPane.h" />
-    <ClInclude Include="addons\ofxMightyUI\src\SegmentedSelect.h" />
-    <ClInclude Include="addons\ofxMightyUI\src\Slider.h" />
-    <ClInclude Include="addons\ofxMightyUI\src\SliderWithLabel.h" />
-    <ClInclude Include="addons\ofxMightyUI\src\TextureAtlas.h" />
-    <ClInclude Include="addons\ofxMightyUI\src\ToggleButton.h" />
-    <ClInclude Include="addons\ofxNative\src\ofxNative.h" />
-    <ClInclude Include="addons\ofxSpout\libs\SpoutSDK\src\Spout.h" />
-    <ClInclude Include="addons\ofxSpout\libs\SpoutSDK\src\SpoutCommon.h" />
-    <ClInclude Include="addons\ofxSpout\libs\SpoutSDK\src\SpoutDirectX.h" />
-    <ClInclude Include="addons\ofxSpout\libs\SpoutSDK\src\SpoutGLDXinterop.h" />
-    <ClInclude Include="addons\ofxSpout\libs\SpoutSDK\src\SpoutGLextensions.h" />
-    <ClInclude Include="addons\ofxSpout\libs\SpoutSDK\src\SpoutMemoryShare.h" />
-    <ClInclude Include="addons\ofxSpout\libs\SpoutSDK\src\SpoutReceiver.h" />
-    <ClInclude Include="addons\ofxSpout\libs\SpoutSDK\src\SpoutSDK.h" />
-    <ClInclude Include="addons\ofxSpout\libs\SpoutSDK\src\SpoutSender.h" />
-    <ClInclude Include="addons\ofxSpout\libs\SpoutSDK\src\SpoutSenderNames.h" />
-    <ClInclude Include="addons\ofxSpout\libs\SpoutSDK\src\SpoutSharedMemory.h" />
-    <ClInclude Include="addons\ofxSpout\src\ofxSpout.h" />
-    <ClInclude Include="addons\ofxSpout\src\ofxSpout\Receiver.h" />
-    <ClInclude Include="addons\ofxSpout\src\ofxSpout\Sender.h" />
-    <ClInclude Include="addons\ofxSpout\src\ofxSpout\Utils.h" />
-    <ClInclude Include="resource.h" />
     <ClInclude Include="src\ofApp.h" />
     <ClInclude Include="src\globals.h" />
     <ClInclude Include="src\ofxIniSettings\ofxIniExtras.h" />
@@ -296,34 +254,38 @@
     <ClInclude Include="src\ui\FaButton.h" />
     <ClInclude Include="src\ui\FaToggleButton.h" />
     <ClInclude Include="src\ui\FMenu.h" />
-    <ClInclude Include="src\ui\L.h" />
     <ClInclude Include="src\ui\PlayerOverlay.h" />
     <ClInclude Include="src\ui\Playlist.h" />
     <ClInclude Include="src\util\Audio.h" />
+    <ClInclude Include="src\util\miniaudio.h" />
     <ClInclude Include="src\util\OsciAvAudioPlayer.h" />
+    <ClInclude Include="src\util\OsciResampler.h" />
+    <ClInclude Include="src\util\OsciVideoWriter.hpp" />
     <ClInclude Include="src\util\ShaderLoader.h" />
-    <ClInclude Include="src\util\sounddevices.h" />
-    <ClInclude Include="src\util\split.h" />
+    <ClInclude Include="src\util\TexShare.h" />
     <ClInclude Include="addons\ofxAvCodec\src\ofxAvAudioPlayer.h" />
     <ClInclude Include="addons\ofxAvCodec\src\ofxAvAudioWriter.h" />
     <ClInclude Include="addons\ofxAvCodec\src\ofxAvUtils.h" />
+    <ClInclude Include="addons\ofxAvCodec\src\ofxAvVideoPlayer.h" />
     <ClInclude Include="addons\ofxAvCodec\libs\avcodec\include\libavcodec\avcodec.h" />
+    <ClInclude Include="addons\ofxAvCodec\libs\avcodec\include\libavcodec\avdct.h" />
     <ClInclude Include="addons\ofxAvCodec\libs\avcodec\include\libavcodec\avfft.h" />
     <ClInclude Include="addons\ofxAvCodec\libs\avcodec\include\libavcodec\d3d11va.h" />
+    <ClInclude Include="addons\ofxAvCodec\libs\avcodec\include\libavcodec\dirac.h" />
     <ClInclude Include="addons\ofxAvCodec\libs\avcodec\include\libavcodec\dv_profile.h" />
     <ClInclude Include="addons\ofxAvCodec\libs\avcodec\include\libavcodec\dxva2.h" />
-    <ClInclude Include="addons\ofxAvCodec\libs\avcodec\include\libavcodec\old_codec_ids.h" />
+    <ClInclude Include="addons\ofxAvCodec\libs\avcodec\include\libavcodec\jni.h" />
+    <ClInclude Include="addons\ofxAvCodec\libs\avcodec\include\libavcodec\mediacodec.h" />
     <ClInclude Include="addons\ofxAvCodec\libs\avcodec\include\libavcodec\qsv.h" />
     <ClInclude Include="addons\ofxAvCodec\libs\avcodec\include\libavcodec\vaapi.h" />
     <ClInclude Include="addons\ofxAvCodec\libs\avcodec\include\libavcodec\vda.h" />
     <ClInclude Include="addons\ofxAvCodec\libs\avcodec\include\libavcodec\vdpau.h" />
     <ClInclude Include="addons\ofxAvCodec\libs\avcodec\include\libavcodec\version.h" />
+    <ClInclude Include="addons\ofxAvCodec\libs\avcodec\include\libavcodec\videotoolbox.h" />
     <ClInclude Include="addons\ofxAvCodec\libs\avcodec\include\libavcodec\vorbis_parser.h" />
     <ClInclude Include="addons\ofxAvCodec\libs\avcodec\include\libavcodec\xvmc.h" />
     <ClInclude Include="addons\ofxAvCodec\libs\avcodec\include\libavdevice\avdevice.h" />
     <ClInclude Include="addons\ofxAvCodec\libs\avcodec\include\libavdevice\version.h" />
-    <ClInclude Include="addons\ofxAvCodec\libs\avcodec\include\libavfilter\asrc_abuffer.h" />
-    <ClInclude Include="addons\ofxAvCodec\libs\avcodec\include\libavfilter\avcodec.h" />
     <ClInclude Include="addons\ofxAvCodec\libs\avcodec\include\libavfilter\avfilter.h" />
     <ClInclude Include="addons\ofxAvCodec\libs\avcodec\include\libavfilter\avfiltergraph.h" />
     <ClInclude Include="addons\ofxAvCodec\libs\avcodec\include\libavfilter\buffersink.h" />
@@ -334,8 +296,8 @@
     <ClInclude Include="addons\ofxAvCodec\libs\avcodec\include\libavformat\version.h" />
     <ClInclude Include="addons\ofxAvCodec\libs\avcodec\include\libavutil\adler32.h" />
     <ClInclude Include="addons\ofxAvCodec\libs\avcodec\include\libavutil\aes.h" />
+    <ClInclude Include="addons\ofxAvCodec\libs\avcodec\include\libavutil\aes_ctr.h" />
     <ClInclude Include="addons\ofxAvCodec\libs\avcodec\include\libavutil\attributes.h" />
-    <ClInclude Include="addons\ofxAvCodec\libs\avcodec\include\libavutil\audioconvert.h" />
     <ClInclude Include="addons\ofxAvCodec\libs\avcodec\include\libavutil\audio_fifo.h" />
     <ClInclude Include="addons\ofxAvCodec\libs\avcodec\include\libavutil\avassert.h" />
     <ClInclude Include="addons\ofxAvCodec\libs\avcodec\include\libavutil\avconfig.h" />
@@ -352,6 +314,7 @@
     <ClInclude Include="addons\ofxAvCodec\libs\avcodec\include\libavutil\common.h" />
     <ClInclude Include="addons\ofxAvCodec\libs\avcodec\include\libavutil\cpu.h" />
     <ClInclude Include="addons\ofxAvCodec\libs\avcodec\include\libavutil\crc.h" />
+    <ClInclude Include="addons\ofxAvCodec\libs\avcodec\include\libavutil\des.h" />
     <ClInclude Include="addons\ofxAvCodec\libs\avcodec\include\libavutil\dict.h" />
     <ClInclude Include="addons\ofxAvCodec\libs\avcodec\include\libavutil\display.h" />
     <ClInclude Include="addons\ofxAvCodec\libs\avcodec\include\libavutil\downmix_info.h" />
@@ -363,6 +326,12 @@
     <ClInclude Include="addons\ofxAvCodec\libs\avcodec\include\libavutil\frame.h" />
     <ClInclude Include="addons\ofxAvCodec\libs\avcodec\include\libavutil\hash.h" />
     <ClInclude Include="addons\ofxAvCodec\libs\avcodec\include\libavutil\hmac.h" />
+    <ClInclude Include="addons\ofxAvCodec\libs\avcodec\include\libavutil\hwcontext.h" />
+    <ClInclude Include="addons\ofxAvCodec\libs\avcodec\include\libavutil\hwcontext_cuda.h" />
+    <ClInclude Include="addons\ofxAvCodec\libs\avcodec\include\libavutil\hwcontext_dxva2.h" />
+    <ClInclude Include="addons\ofxAvCodec\libs\avcodec\include\libavutil\hwcontext_qsv.h" />
+    <ClInclude Include="addons\ofxAvCodec\libs\avcodec\include\libavutil\hwcontext_vaapi.h" />
+    <ClInclude Include="addons\ofxAvCodec\libs\avcodec\include\libavutil\hwcontext_vdpau.h" />
     <ClInclude Include="addons\ofxAvCodec\libs\avcodec\include\libavutil\imgutils.h" />
     <ClInclude Include="addons\ofxAvCodec\libs\avcodec\include\libavutil\intfloat.h" />
     <ClInclude Include="addons\ofxAvCodec\libs\avcodec\include\libavutil\intreadwrite.h" />
@@ -370,12 +339,12 @@
     <ClInclude Include="addons\ofxAvCodec\libs\avcodec\include\libavutil\log.h" />
     <ClInclude Include="addons\ofxAvCodec\libs\avcodec\include\libavutil\lzo.h" />
     <ClInclude Include="addons\ofxAvCodec\libs\avcodec\include\libavutil\macros.h" />
+    <ClInclude Include="addons\ofxAvCodec\libs\avcodec\include\libavutil\mastering_display_metadata.h" />
     <ClInclude Include="addons\ofxAvCodec\libs\avcodec\include\libavutil\mathematics.h" />
     <ClInclude Include="addons\ofxAvCodec\libs\avcodec\include\libavutil\md5.h" />
     <ClInclude Include="addons\ofxAvCodec\libs\avcodec\include\libavutil\mem.h" />
     <ClInclude Include="addons\ofxAvCodec\libs\avcodec\include\libavutil\motion_vector.h" />
     <ClInclude Include="addons\ofxAvCodec\libs\avcodec\include\libavutil\murmur3.h" />
-    <ClInclude Include="addons\ofxAvCodec\libs\avcodec\include\libavutil\old_pix_fmts.h" />
     <ClInclude Include="addons\ofxAvCodec\libs\avcodec\include\libavutil\opt.h" />
     <ClInclude Include="addons\ofxAvCodec\libs\avcodec\include\libavutil\parseutils.h" />
     <ClInclude Include="addons\ofxAvCodec\libs\avcodec\include\libavutil\pixdesc.h" />
@@ -383,16 +352,19 @@
     <ClInclude Include="addons\ofxAvCodec\libs\avcodec\include\libavutil\pixfmt.h" />
     <ClInclude Include="addons\ofxAvCodec\libs\avcodec\include\libavutil\random_seed.h" />
     <ClInclude Include="addons\ofxAvCodec\libs\avcodec\include\libavutil\rational.h" />
+    <ClInclude Include="addons\ofxAvCodec\libs\avcodec\include\libavutil\rc4.h" />
     <ClInclude Include="addons\ofxAvCodec\libs\avcodec\include\libavutil\replaygain.h" />
     <ClInclude Include="addons\ofxAvCodec\libs\avcodec\include\libavutil\ripemd.h" />
     <ClInclude Include="addons\ofxAvCodec\libs\avcodec\include\libavutil\samplefmt.h" />
     <ClInclude Include="addons\ofxAvCodec\libs\avcodec\include\libavutil\sha.h" />
     <ClInclude Include="addons\ofxAvCodec\libs\avcodec\include\libavutil\sha512.h" />
     <ClInclude Include="addons\ofxAvCodec\libs\avcodec\include\libavutil\stereo3d.h" />
+    <ClInclude Include="addons\ofxAvCodec\libs\avcodec\include\libavutil\tea.h" />
     <ClInclude Include="addons\ofxAvCodec\libs\avcodec\include\libavutil\threadmessage.h" />
     <ClInclude Include="addons\ofxAvCodec\libs\avcodec\include\libavutil\time.h" />
     <ClInclude Include="addons\ofxAvCodec\libs\avcodec\include\libavutil\timecode.h" />
     <ClInclude Include="addons\ofxAvCodec\libs\avcodec\include\libavutil\timestamp.h" />
+    <ClInclude Include="addons\ofxAvCodec\libs\avcodec\include\libavutil\tree.h" />
     <ClInclude Include="addons\ofxAvCodec\libs\avcodec\include\libavutil\twofish.h" />
     <ClInclude Include="addons\ofxAvCodec\libs\avcodec\include\libavutil\version.h" />
     <ClInclude Include="addons\ofxAvCodec\libs\avcodec\include\libavutil\xtea.h" />
@@ -402,16 +374,60 @@
     <ClInclude Include="addons\ofxAvCodec\libs\avcodec\include\libswscale\version.h" />
     <ClInclude Include="addons\ofxAvCodec\libs\avcodec\include-vs\inttypes.h" />
     <ClInclude Include="addons\ofxFontAwesome\src\ofxFontAwesome.h" />
+    <ClInclude Include="addons\ofxFontAwesome\src\ofxFontAwesome4.h" />
+    <ClInclude Include="addons\ofxFontAwesome\src\ofxFontAwesome5.h" />
     <ClInclude Include="addons\ofxFontStash2\src\ofxFontStash2.h" />
     <ClInclude Include="addons\ofxFontStash2\src\ofxFontStashParser.h" />
     <ClInclude Include="addons\ofxFontStash2\src\ofxFontStashStyle.h" />
-    <ClInclude Include="addons\ofxFontStash2\libs\fontstash\src\fontstash.h" />
     <ClInclude Include="addons\ofxFontStash2\libs\fontstash\src\gl3fontstash.h" />
     <ClInclude Include="addons\ofxFontStash2\libs\fontstash\src\glfontstash.h" />
-    <ClInclude Include="addons\ofxFontStash2\libs\fontstash\src\stb_truetype.h" />
+    <ClInclude Include="addons\ofxFontStash2\libs\fontstash\src\ofx_fontstash.h" />
+    <ClInclude Include="addons\ofxFontStash2\libs\fontstash\src\ofx_stb_truetype.h" />
     <ClInclude Include="addons\ofxFontStash2\libs\pugixml\src\pugiconfig.hpp" />
     <ClInclude Include="addons\ofxFontStash2\libs\pugixml\src\pugixml.hpp" />
-    <ClInclude Include="src\util\TexShare.h" />
+    <ClInclude Include="addons\ofxMightyUI\src\BarButton.h" />
+    <ClInclude Include="addons\ofxMightyUI\src\Button.h" />
+    <ClInclude Include="addons\ofxMightyUI\src\Container.h" />
+    <ClInclude Include="addons\ofxMightyUI\src\CppTweener.h" />
+    <ClInclude Include="addons\ofxMightyUI\src\EmptyContainer.h" />
+    <ClInclude Include="addons\ofxMightyUI\src\Helpers.h" />
+    <ClInclude Include="addons\ofxMightyUI\src\Image.h" />
+    <ClInclude Include="addons\ofxMightyUI\src\InternalWindow.h" />
+    <ClInclude Include="addons\ofxMightyUI\src\Label.h" />
+    <ClInclude Include="addons\ofxMightyUI\src\Layout.h" />
+    <ClInclude Include="addons\ofxMightyUI\src\MuiConfig.h" />
+    <ClInclude Include="addons\ofxMightyUI\src\MuiCore.h" />
+    <ClInclude Include="addons\ofxMightyUI\src\MuiEvents.h" />
+    <ClInclude Include="addons\ofxMightyUI\src\MuiFilePicker.h" />
+    <ClInclude Include="addons\ofxMightyUI\src\MuiL.h" />
+    <ClInclude Include="addons\ofxMightyUI\src\MuiParameterPanel.h" />
+    <ClInclude Include="addons\ofxMightyUI\src\MuiTextArea.h" />
+    <ClInclude Include="addons\ofxMightyUI\src\ofxMightyUI.h" />
+    <ClInclude Include="addons\ofxMightyUI\src\Root.h" />
+    <ClInclude Include="addons\ofxMightyUI\src\ScrollPane.h" />
+    <ClInclude Include="addons\ofxMightyUI\src\SegmentedSelect.h" />
+    <ClInclude Include="addons\ofxMightyUI\src\Slider.h" />
+    <ClInclude Include="addons\ofxMightyUI\src\SliderWithLabel.h" />
+    <ClInclude Include="addons\ofxMightyUI\src\TextureAtlas.h" />
+    <ClInclude Include="addons\ofxMightyUI\src\ToggleButton.h" />
+    <ClInclude Include="addons\ofxMightyUI\libs\stb_textedit\include\stb_textedit\stb_textedit.h" />
+    <ClInclude Include="addons\ofxNative\src\ofxNative.h" />
+    <ClInclude Include="addons\ofxSpout\src\ofxSpout\Receiver.h" />
+    <ClInclude Include="addons\ofxSpout\src\ofxSpout\Sender.h" />
+    <ClInclude Include="addons\ofxSpout\src\ofxSpout\Utils.h" />
+    <ClInclude Include="addons\ofxSpout\src\ofxSpout.h" />
+    <ClInclude Include="addons\ofxSpout\libs\SpoutSDK\src\Spout.h" />
+    <ClInclude Include="addons\ofxSpout\libs\SpoutSDK\src\SpoutCommon.h" />
+    <ClInclude Include="addons\ofxSpout\libs\SpoutSDK\src\SpoutDirectX.h" />
+    <ClInclude Include="addons\ofxSpout\libs\SpoutSDK\src\SpoutGLDXinterop.h" />
+    <ClInclude Include="addons\ofxSpout\libs\SpoutSDK\src\SpoutGLextensions.h" />
+    <ClInclude Include="addons\ofxSpout\libs\SpoutSDK\src\SpoutMemoryShare.h" />
+    <ClInclude Include="addons\ofxSpout\libs\SpoutSDK\src\SpoutReceiver.h" />
+    <ClInclude Include="addons\ofxSpout\libs\SpoutSDK\src\SpoutSDK.h" />
+    <ClInclude Include="addons\ofxSpout\libs\SpoutSDK\src\SpoutSender.h" />
+    <ClInclude Include="addons\ofxSpout\libs\SpoutSDK\src\SpoutSenderNames.h" />
+    <ClInclude Include="addons\ofxSpout\libs\SpoutSDK\src\SpoutSharedMemory.h" />
+    <ClInclude Include="addons\ofxLibsamplerate\libs\libsamplerate\include\samplerate.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="$(OF_ROOT)\libs\openFrameworksCompiled\project\vs\openframeworksLib.vcxproj">
@@ -423,27 +439,7 @@
       <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">/D_DEBUG %(AdditionalOptions)</AdditionalOptions>
       <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">/D_DEBUG %(AdditionalOptions)</AdditionalOptions>
       <AdditionalIncludeDirectories>$(OF_ROOT)\libs\openFrameworksCompiled\project\vs</AdditionalIncludeDirectories>
-      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-      </AdditionalIncludeDirectories>
-      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-      </AdditionalIncludeDirectories>
-      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-      </AdditionalIncludeDirectories>
-      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-      </AdditionalIncludeDirectories>
     </ResourceCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <Library Include="addons\ofxAvCodec\libs\avcodec\lib\vs\Win32\avcodec.lib" />
-    <Library Include="addons\ofxAvCodec\libs\avcodec\lib\vs\Win32\avdevice.lib" />
-    <Library Include="addons\ofxAvCodec\libs\avcodec\lib\vs\Win32\avfilter.lib" />
-    <Library Include="addons\ofxAvCodec\libs\avcodec\lib\vs\Win32\avformat.lib" />
-    <Library Include="addons\ofxAvCodec\libs\avcodec\lib\vs\Win32\avutil.lib" />
-    <Library Include="addons\ofxAvCodec\libs\avcodec\lib\vs\Win32\swresample.lib" />
-    <Library Include="addons\ofxAvCodec\libs\avcodec\lib\vs\Win32\swscale.lib" />
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="icon.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ProjectExtensions>

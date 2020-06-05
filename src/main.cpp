@@ -1,18 +1,15 @@
 #include "ofMain.h"
 #include "ofApp.h"
-#include "sounddevices.h"
 #include "ofxMightyUI.h"
+
 #if defined(TARGET_OSX)
 #import <AppKit/AppKit.h>
+#elif defined(TARGET_WIN32)
+#include "../resource.h"
 #endif
 
-#if defined(__linux__)
-#include "ofAppGlutWindow.h"
-#else
 #include "ofAppGLFWWindow.h"
-#endif
 #include "ofxNative.h"
-
 #include <GL/glew.h>
 
 //========================================================================
@@ -22,15 +19,7 @@ int main(){
 	globals.loadFromFile();
 	ofSetEscapeQuitsApp(false);
 
-	// this kicks off the running of my app
-	// can be OF_WINDOW or OF_FULLSCREEN
-	// pass in width and height too:
-	// using glut on linux, because http://forum.openframeworks.cc/t/application-wont-start-after-ubuntu-upgrade/17491
-	#if defined(__linux__)
-	ofAppGlutWindow window;
-	#else
 	ofAppGLFWWindow window;
-	#endif
 
 	cout << "LAUNCH DESKTOP" << endl;
 	ofSetupOpenGL(&window, 1024, 700, OF_WINDOW);
@@ -47,8 +36,12 @@ int main(){
 		[cocoaWindow setLevel: NSFloatingWindowLevel];
 	}
 	#endif
-	
 
+	#if defined(TARGET_WIN32)
+	HWND hwnd = ofGetWin32Window();
+	HICON hMyIcon = LoadIcon(GetModuleHandle(NULL), MAKEINTRESOURCE(MAIN_ICON));
+	SendMessage(hwnd, WM_SETICON, ICON_BIG, (LPARAM)hMyIcon);
+	#endif
 
 	mui_init();
 	mui::MuiConfig::font = "mui/fonts/Lato-Regular.ttf";
@@ -134,16 +127,7 @@ string ofxToReadonlyDataPath( string filename ){
 // this is great for settings files and the like.
 // for osx this is the application support directory (without sandboxing)
 // or ~/Library/Containers/<bundle-identifier>/
-// for windows it is still the data folder.
+// for windows this is in %APPDATA%
 string ofxToReadWriteableDataPath( string filename ){
-#ifdef TARGET_OSX
-	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES);
-	NSString *appName=[[[NSBundle mainBundle] infoDictionary]  objectForKey:(id)kCFBundleIdentifierKey];
-	NSString *applicationSupportDirectory = [[paths firstObject] stringByAppendingPathComponent:appName];
-	NSString *path = [applicationSupportDirectory stringByAppendingPathComponent:[NSString stringWithUTF8String:filename.c_str()]];
-	string result([path UTF8String]);
-	return result;
-#else
-	return ofToDataPath(filename,true);
-#endif
+	return ofxNative::getSystemDataFolder() + "/" + filename;
 }

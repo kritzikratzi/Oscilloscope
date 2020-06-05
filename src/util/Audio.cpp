@@ -32,29 +32,25 @@ MonoSample::~MonoSample(){
 }
 
 void MonoSample::play(){
-	lock.lock();
+	lock_guard<recursive_mutex> lock(mut);
 	playing = true;
-	lock.unlock();
 }
 
 void MonoSample::playFrom(int position){
-	lock.lock();
+    lock_guard<recursive_mutex> lock(mut);
 	playing = true;
 	playbackIndex = 0;
-	lock.unlock();
 }
 
 void MonoSample::setPosition( int position ){
-	lock.lock();
+    lock_guard<recursive_mutex> lock(mut);
 	playbackIndex = position;
-	lock.unlock(); 
 }
 
 
 void MonoSample::skip( int numSamples ){
-	lock.lock();
+    lock_guard<recursive_mutex> lock(mut);
 	_skip(numSamples);
-	lock.unlock();
 }
 
 void MonoSample::_skip( int numSamples ){
@@ -70,33 +66,29 @@ void MonoSample::_skip( int numSamples ){
 void MonoSample::append(float * buffer, int N){
 	float * data = new float[N];
 	memcpy( data, buffer, sizeof(float)*N );
-	lock.lock();
+    lock_guard<recursive_mutex> lock(mut);
 	bufferData.push_back( data );
 	bufferSizes.push_back( N );
 	totalLength += N;
-	lock.unlock();
 }
 
 void MonoSample::append(float * buffer, int N, int srcStride){
 	float * data = new float[N];
 	AudioAlgo::copy(data, 1, buffer, srcStride, N);
-	lock.lock();
+    lock_guard<recursive_mutex> lock(mut);
 	bufferData.push_back( data );
 	bufferSizes.push_back( N );
 	totalLength += N;
-	lock.unlock();
 }
 
 float * MonoSample::removeHead(bool deleteBuffer){
-	lock.lock();
+    lock_guard<recursive_mutex> lock(mut);
 	if( bufferData.size() > 0 ){
 		float * first = bufferData[0];
 		totalLength -= bufferSizes[0];
 		_skip(-bufferSizes[0]);
 		bufferData.erase(bufferData.begin());
 		bufferSizes.erase(bufferSizes.begin());
-		
-		lock.unlock();
 		
 		if( deleteBuffer){
 			delete[] first;
@@ -106,22 +98,20 @@ float * MonoSample::removeHead(bool deleteBuffer){
 			return first;
 		}
 	}
-	lock.unlock();
 	return NULL;
 }
 
 void MonoSample::clear(){
-	lock.lock();
+    lock_guard<recursive_mutex> lock(mut);
 	while( bufferData.size() > 0 ){
 		removeHead();
 	}
 	playbackIndex = 0;
 	playing = false;
-	lock.unlock();
 }
 
 void MonoSample::peel(int N){
-	lock.lock();
+    lock_guard<recursive_mutex> lock(mut);
 	N = MIN(N,totalLength);
 	int NN = N;
 	while( N > 0 && totalLength > 0 ){
@@ -144,12 +134,10 @@ void MonoSample::peel(int N){
 			break;
 		}
 	}
-	
-	lock.unlock();
 }
 
 float * MonoSample::peelHead( int &numSamples ){
-	lock.lock();
+    lock_guard<recursive_mutex> lock(mut);
 	float * result = NULL;
 	
 	if( bufferSizes.size() > 0 ){
@@ -163,12 +151,11 @@ float * MonoSample::peelHead( int &numSamples ){
 		numSamples = 0;
 	}
 	
-	lock.unlock();
 	return result;
 }
 
 float * MonoSample::peekHead( int &numSamples, int bufferNum ){
-	lock.lock();
+    lock_guard<recursive_mutex> lock(mut);
 	float * result = NULL;
 	if( bufferSizes.size() > bufferNum ){
 		numSamples = bufferSizes[bufferNum];
@@ -177,8 +164,6 @@ float * MonoSample::peekHead( int &numSamples, int bufferNum ){
 	else{
 		numSamples = 0;
 	}
-	
-	lock.unlock();
 	
 	return result;
 }
@@ -190,7 +175,7 @@ int MonoSample::addTo(float *output, int outStride, int N ){
 		return 0;
 	}
 	
-	lock.lock();
+    lock_guard<recursive_mutex> lock(mut);
 	//TODO: make this faster!
 	// find the right index...
 	int copied = 0;
@@ -222,7 +207,6 @@ int MonoSample::addTo(float *output, int outStride, int N ){
 				
 				if( copied >= N ){
 					// done for today!
-					lock.unlock();
 					return copied;
 				}
 			}
@@ -236,12 +220,10 @@ int MonoSample::addTo(float *output, int outStride, int N ){
 			else{
 				playbackIndex = 0;
 				playing = false;
-				lock.unlock();
 				return copied;
 			}
 		}
 	}
-	lock.unlock();
 	return copied;
 }
 
@@ -251,12 +233,12 @@ int MonoSample::copyTo(float *output, int outStride, int N ){
 	int copied = 0;
 	int envEnd = totalLength - attackDecayEnv - 1; // we don't take care of buffers shorter than 2*attack_decay_env!
 	
+    lock_guard<recursive_mutex> lock(mut);
 	if( !playing ){
 		goto zeroPad;
 	}
 	
-	lock.lock();
-	
+
 	
 	while( copied < N ){
 		// find the right buffer...
@@ -283,7 +265,6 @@ int MonoSample::copyTo(float *output, int outStride, int N ){
 				
 				if( copied >= N ){
 					// done for today!
-					lock.unlock();
 					return copied;
 				}
 			}
@@ -297,12 +278,10 @@ int MonoSample::copyTo(float *output, int outStride, int N ){
 			else{
 				playbackIndex = 0;
 				playing = false;
-				lock.unlock();
 				return copied;
 			}
 		}
 	}
-	lock.unlock();
 	
 zeroPad:
 	for( int i = copied; i < N; i++ ){
@@ -312,7 +291,7 @@ zeroPad:
 }
 
 void MonoSample::normalize(float max){
-	lock.lock();
+    lock_guard<recursive_mutex> lock(mut);
 	float maxFound = 0;
 	for( int i = 0; i < bufferSizes.size(); i++ ){
 		float val = AudioAlgo::max_abs(bufferData[i], bufferSizes[i] );
@@ -324,18 +303,16 @@ void MonoSample::normalize(float max){
 			AudioAlgo::scale(bufferData[i], factor, bufferSizes[i] );
 		}
 	}
-	lock.unlock();
 }
 
 float * MonoSample::toArray(){
-	lock.lock();
+    lock_guard<recursive_mutex> lock(mut);
 	float * result = new float[totalLength];
 	int pos = 0;
 	for( int i = 0; i < bufferData.size(); i++ ){
 		memcpy(result+pos, bufferData[i], bufferSizes[i]*sizeof(float));
 		pos += bufferSizes[i];
 	}
-	lock.unlock();
 	
 	return result;
 }

@@ -16,6 +16,13 @@
 
 extern "C"{
 	#include <libavutil/opt.h>
+	#include <libavcodec/avcodec.h>
+	#include <libavformat/avformat.h>
+	#include <libavutil/avutil.h>
+	#include <libavformat/avformat.h>
+	#include <libavutil/channel_layout.h>
+	#include <libavutil/samplefmt.h>
+	#include <libswresample/swresample.h>
 }
 using namespace std;
 
@@ -39,11 +46,13 @@ OsciAvAudioPlayer::OsciAvAudioPlayer(){
 	container = NULL; 
 	decoded_frame = NULL;
 	codec_context = NULL;
-	buffer_size = AVCODEC_MAX_AUDIO_FRAME_SIZE;
+	packet = new AVPacket();
+	buffer_size = OSCI_MAX_AUDIO_FRAME_SIZE;
+	inbuf = new uint8_t[AVCODEC_AUDIO_INBUF_SIZE + AV_INPUT_BUFFER_PADDING_SIZE];
 	swr_context = NULL;
 	swr_context192 = NULL;
 	av_register_all();
-	av_init_packet(&packet);
+	av_init_packet(packet);
 	unloadSound();
 	
 	thread = NULL;
@@ -55,6 +64,8 @@ OsciAvAudioPlayer::~OsciAvAudioPlayer(){
 		thread->stopThread();
 		thread = NULL;
 	}
+	delete [] inbuf;
+	delete packet; 
 }
 
 bool OsciAvAudioPlayer::loadSound(string fileName, bool stream){
@@ -119,11 +130,11 @@ bool OsciAvAudioPlayer::loadSound(string fileName, bool stream){
 	
 	// from here on it's mostly following
 	// https://github.com/FFmpeg/FFmpeg/blob/master/doc/examples/decoding_encoding.c
-	//packet.data = inbuf;
-	//packet.size = fread(inbuf, 1, AVCODEC_AUDIO_INBUF_SIZE, f);
-	av_init_packet(&packet);
-	packet.data = NULL;
-	packet.size = 0;
+	//packet->data = inbuf;
+	//packet->size = fread(inbuf, 1, AVCODEC_AUDIO_INBUF_SIZE, f);
+	av_init_packet(packet);
+	packet->data = NULL;
+	packet->size = 0;
 
 	swr_context = NULL;
 	swr_context192 = NULL;
@@ -144,7 +155,7 @@ string OsciAvAudioPlayer::getFilename(){
 	return loadedFilename;
 }
 
-bool OsciAvAudioPlayer::setupAudioOut( int numChannels, int sampleRate, bool inter ){
+bool OsciAvAudioPlayer::setupAudioOut( int numChannels, int64_t sampleRate, bool inter, int64_t visualSampleRate ){
 	if( numChannels != output_num_channels || sampleRate != output_sample_rate || inter != interpolate ){
 		output_channel_layout = av_get_default_channel_layout(numChannels);
 		output_sample_rate = sampleRate;
@@ -154,20 +165,25 @@ bool OsciAvAudioPlayer::setupAudioOut( int numChannels, int sampleRate, bool int
 		if( swr_context != NULL ){
 			output_config_changed = true;
 		}
+		
+		visual_sample_rate = visualSampleRate;
+		visual_config_changed = true;
 	}
-	
-	return true;
-}
-
-bool OsciAvAudioPlayer::setupVisualSampleRate( int visualSampleRate ){
 	if( visualSampleRate != visual_sample_rate ){
 		visual_sample_rate = visualSampleRate;
 		visual_config_changed = true;
 	}
-	return true; 
+
+	return true;
 }
 
+int64_t OsciAvAudioPlayer::getVisualSampleRate() {
+	return visual_sample_rate; 
+}
 
+int OsciAvAudioPlayer::getFileSampleRate(){
+	return codec_context?(codec_context->sample_rate):44100;
+}
 
 void OsciAvAudioPlayer::unloadSound(){
 	if( !isLoaded ) return;
@@ -181,7 +197,7 @@ void OsciAvAudioPlayer::unloadSound(){
 	decoded_buffer_len = 0;
 	next_seekTarget = -1;
 
-	av_free_packet(&packet);
+	av_free_packet(packet);
 	
 	if( decoded_frame ){
 		av_frame_unref(decoded_frame);
@@ -223,6 +239,7 @@ OsciAvAudioPlayerThread::OsciAvAudioPlayerThread( OsciAvAudioPlayer & player ) :
 void OsciAvAudioPlayerThread::threadedFunction(){
 	ofxNative::setThreadName("Player-Fetcher"); 
 	// make sure we always have a bit of buffer ready
+	vector<float> data; 
 	while( isThreadRunning() ){
 		lock();
 		if( player.wantsAsync ){
@@ -234,12 +251,11 @@ void OsciAvAudioPlayerThread::threadedFunction(){
 				player.zMod192.clear();
 			}
 			if( player.mainOut.totalLength < player.output_expected_buffer_size*4 && player.isLoaded ){
-				float * buffer = new float[player.output_expected_buffer_size*2];
-				int numSamples = player.internalAudioOut(buffer, player.output_expected_buffer_size, 2);
+				data.resize(player.output_expected_buffer_size * 2); 
+				int numSamples = player.internalAudioOut(data.data(), player.output_expected_buffer_size, 2);
 				if( numSamples > 0 ){
-					player.mainOut.append( buffer, 2*numSamples );
+					player.mainOut.append( data.data(), 2*numSamples );
 				}
-				delete buffer;
 			}
 		}
 		else{
@@ -254,6 +270,9 @@ void OsciAvAudioPlayerThread::threadedFunction(){
 int OsciAvAudioPlayer::audioOut(float *output, int bufferSize, int nChannels){
 	if( wantsAsync ){
 		output_expected_buffer_size = bufferSize;
+		if (bufferSize <= 10) {
+			cout << "WTF" << endl; 
+		}
 		if( nChannels != 2 ){
 			// this is fucked up!
 			return 0;
@@ -358,8 +377,8 @@ int OsciAvAudioPlayer::internalAudioOut(float *output, int bufferSize, int nChan
 }
 
 bool OsciAvAudioPlayer::decode_next_frame(){
-	av_free_packet(&packet);
-	int res = av_read_frame(container, &packet);
+	av_free_packet(packet);
+	int res = av_read_frame(container, packet);
 	bool didRead = res >= 0;
 	
 	if( didRead ){
@@ -374,20 +393,21 @@ bool OsciAvAudioPlayer::decode_next_frame(){
 			av_frame_unref(decoded_frame);
 		}
 		
-		len = avcodec_decode_audio4(codec_context, decoded_frame, &got_frame, &packet);
+		len = avcodec_decode_audio4(codec_context, decoded_frame, &got_frame, packet);
 		
 		if (len < 0) {
 			// no data
 			return false;
 		}
 		
-		if( packet.stream_index != audio_stream_id ){
+		if( packet->stream_index != audio_stream_id ){
 			return false;
 		}
 
 		if (got_frame) {
 			lastPts = av_frame_get_best_effort_timestamp(decoded_frame);
 //			lastPts = decoded_frame->pkt_pts;
+			
 			
 			int frame_channels = av_frame_get_channels(decoded_frame);
 			if(frame_channels != swr_context_channels ){
@@ -400,6 +420,13 @@ bool OsciAvAudioPlayer::decode_next_frame(){
 					swr_free(&swr_context);
 					swr_context = NULL;
 				}
+			}
+			
+			if(output_config_changed || visual_config_changed){
+				left192.clear();
+				right192.clear();
+				zMod192.clear();
+				mainOut.clear();
 			}
 			
 			
@@ -420,11 +447,7 @@ bool OsciAvAudioPlayer::decode_next_frame(){
 					return false;
 				}
 				
-				int next_v_rate = output_sample_rate;
-				if( next_v_rate != visual_sample_rate ){
-					visual_sample_rate = max(192000,next_v_rate);
-					visual_config_changed = true;
-				}
+				visual_config_changed = true;
 			}
 			
 			if( swr_context192 != NULL && visual_config_changed ){
@@ -473,10 +496,10 @@ bool OsciAvAudioPlayer::decode_next_frame(){
 												 0, NULL);
 
 				//enable these two to disable interpolation
-				//if(!interpolate){
-				//	av_opt_set_int(swr_context192, "filter_size", 4, 0);
-				//	av_opt_set_int(swr_context192, "linear_interp", 1, 0);
-				//}
+				if(!interpolate){
+					av_opt_set_int(swr_context192, "filter_size", 4, 0);
+					av_opt_set_int(swr_context192, "linear_interp", 1, 0);
+				}
 
 				
 				//				av_opt_set_int(swr_context192, "dither_scale", 0, 0);
@@ -491,14 +514,13 @@ bool OsciAvAudioPlayer::decode_next_frame(){
 			/* if a frame has been decoded, resample to desired rate */
 			uint8_t * out192 = (uint8_t*)decoded_buffer192;
 			int samples_converted192 = swr_convert(swr_context192,
-												   (uint8_t**)&out192, AVCODEC_MAX_AUDIO_FRAME_SIZE/4,
+												   (uint8_t**)&out192, OSCI_MAX_AUDIO_FRAME_SIZE/4,
 												   (const uint8_t**)decoded_frame->extended_data, decoded_frame->nb_samples);
-			
 			decoded_buffer_len192 = samples_converted192*numChannels192;
 			decoded_buffer_pos192 = 0;
 
 
-			int samples_per_channel = AVCODEC_MAX_AUDIO_FRAME_SIZE/output_num_channels;
+			int samples_per_channel = OSCI_MAX_AUDIO_FRAME_SIZE/output_num_channels;
 			//samples_per_channel = 512;
 			uint8_t * out = (uint8_t*)decoded_buffer;
 			int samples_converted = swr_convert(swr_context,
@@ -509,8 +531,8 @@ bool OsciAvAudioPlayer::decode_next_frame(){
 			
 		}
 
-		packet.size -= len;
-		packet.data += len;
+		packet->size -= len;
+		packet->data += len;
 //		packet->dts =
 //		packet->pts = AV_NOPTS_VALUE;
 		
@@ -536,6 +558,7 @@ bool OsciAvAudioPlayer::decode_next_frame(){
 }
 
 unsigned long long OsciAvAudioPlayer::av_time_to_millis( int64_t av_time ){
+	if (!container) return 0; 
 	return av_rescale(1000*av_time,(uint64_t)container->streams[audio_stream_id]->time_base.num,container->streams[audio_stream_id]->time_base.den);
 	//alternative:
 	//return av_time*1000*av_q2d(container->streams[audio_stream_id]->time_base);
@@ -545,6 +568,7 @@ int64_t OsciAvAudioPlayer::millis_to_av_time( unsigned long long ms ){
 	//TODO: fix conversion
 /*	int64_t timeBase = (int64_t(codec_context->time_base.num) * AV_TIME_BASE) / int64_t(codec_context->time_base.den);
 	int64_t seekTarget = int64_t(ms) / timeBase;*/
+	if (!container) return 0; 
 	return av_rescale(ms,container->streams[audio_stream_id]->time_base.den,(uint64_t)container->streams[audio_stream_id]->time_base.num)/1000;
 }
 

@@ -15,6 +15,13 @@ class PlaylistItem;
 class FaButton; 
 class FaToggleButton; 
 
+struct PlaylistItemRef{
+	PlaylistItemRef(){}
+	PlaylistItemRef(size_t id, string filename) : id(id), filename(filename){}
+	size_t id{0};
+	string filename{""};
+};
+
 class Playlist : public mui::Container{
 public:
 	Playlist();
@@ -26,7 +33,7 @@ public:
 	bool fileDragged(ofDragInfo & args) override; 
 	bool keyPressed(ofKeyEventArgs & args) override;
 	
-	void addFile(ofFile file, double duration = -2 );
+	PlaylistItemRef addFile(ofFile file, double duration = -2 );
 	void removeAllFiles();
 	
 	void save(ostream & out);
@@ -36,18 +43,17 @@ public:
 	// finds the next item in the playlist
 	// if id=0, the first item is returned.
 	// returns: {0,""} if there is no further item, otherwise returns the thing you want.
-	pair<size_t, string> getNextItemInPlaylist(size_t id);
+	PlaylistItemRef getNextItemInPlaylist(size_t id);
 	string getItemPath(size_t id); 
 
 	enum class LoopMode { all_once, all_repeat, one_repeat };
 
 private:
-	pair<size_t, string> getNextItem(size_t id);
+	PlaylistItemRef getNextItem(size_t id);
 
 	void setLoopMode(LoopMode mode); 
 	void buttonPressed(const void * sender, ofTouchEventArgs & args); 
 
-	mui::Label * header;
 	mui::ScrollPane * scroller;
 	bool checkNewFiles = false;
 	size_t nextItemId = 1;

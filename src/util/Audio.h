@@ -2,6 +2,7 @@
 // Audio.h
 //
 // Initially created by Hansi on 14.06.14.
+// V1.8, 17.8.2019. got rid of poco dependency
 // V1.7, 10.11.2017: added playFrom, fixed a copy bug in the zero-padding in copyTo
 // V1.6, 4.7.2016: added copyTo, implemented the missing setPosition()
 // V1.5  30.6.2016: Default attack/decay envelope to 0. this is too unexpected! 
@@ -33,8 +34,6 @@
 #ifdef USE_ACCELERATE
 #include <Accelerate/Accelerate.h>
 #endif
-
-#include "Poco/Mutex.h"
 
 /**
  
@@ -167,7 +166,7 @@ public:
 	std::vector<float*> bufferData;
 	std::vector<int> bufferSizes;
 	
-	Poco::Mutex lock;
+	recursive_mutex mut;
 private:
 	void _skip(int numSamples);
 };

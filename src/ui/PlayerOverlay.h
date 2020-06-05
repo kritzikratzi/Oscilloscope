@@ -5,7 +5,7 @@
 #include "FaButton.h"
 #include "FaToggleButton.h"
 #include "FMenu.h"
-
+#include "../util/miniaudio.h"
 
 class PlayerOverlay : public mui::Container{
 public:
@@ -22,15 +22,15 @@ public:
 	virtual void touchUp( ofTouchEventArgs &touch );
 	virtual void touchDoubleTap( ofTouchEventArgs &touch );
 	
-	FMenu * micMenu; 
-	map<string,int> micDeviceIds;
-	
+	void populateMicMenu(FMenu<string> * menu); 
+
 	FaButton * loadFileButton; 
 	FaToggleButton * useMicButton;
 	
-	FaButton * stopButton;
+	FaToggleButton * configButton;
 	mui::SliderWithLabel * scaleSlider;
 	
+	mui::Label * filenameLabel;
 	FaToggleButton * fullscreenToggle; // toggle fs
 	FaToggleButton * flipXYToggle; // flip x with y axis
 	FaToggleButton * invertXToggle; // mirror around x axis
@@ -39,6 +39,7 @@ public:
 	FaToggleButton * flip3dToggle; // for 3d: swap left and right channels
 	FaToggleButton * zModulationToggle; // enable variable brightness control in 3 channel files
 	FaToggleButton * showPlaylistToggle; // show playlist
+	mui::ToggleButton * analogModeToggle; // analog/digital
 
 	FaToggleButton * playButton;
 	mui::Slider * timeSlider;
@@ -72,9 +73,16 @@ public:
 	mui::SliderWithLabel * afterglowSlider;
 	mui::Label * afterglowLabel;
 	
-	void buttonPressed( const void * sender, ofTouchEventArgs & args );
+	void buttonPressed(const void * sender, ofTouchEventArgs & args);
+	void inputSelected(const void * sender, FMenu<string>::Option & opt);
 	void sliderChanged( const void * sender, float & value );
 	
+	struct mic_info{
+		ma_device_info info; 
+		ma_device_type type; 
+	};
+	mic_info getSelectedMicDeviceInfo(); 
 private:
 	mui::Label * addLabel( string text );
+	mic_info selectedMicDeviceInfo; 
 };

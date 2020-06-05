@@ -1,10 +1,7 @@
 #include "PlayerOverlay.h"
-#include <Poco/Delegate.h>
-#include "sounddevices.h"
 #include "ofxFontAwesome.h"
 #include "ofApp.h"
 #include "MuiL.h"
-
 
 static string timestring(double t);
 
@@ -13,12 +10,12 @@ PlayerOverlay::PlayerOverlay( float x_, float y_, float width_, float height_)
 	float x = 10, y = 10, w = 400, h = 30;
 	bg = ofColor(125,50);
 	opaque = true;
-	micMenu = NULL;
 
-	stopButton = new FaButton( ofxFontAwesome::cogs, x, y, h, h );
-	ofAddListener( stopButton->onPress, this, &PlayerOverlay::buttonPressed );
-	y += stopButton->height + 10;
-	add( stopButton );
+	configButton = new FaToggleButton( ofxFontAwesome::cogs, ofxFontAwesome::cogs, x, y, h, h );
+	configButton->setProperty("tooltip", string("Settings"));
+	ofAddListener( configButton->onPress, this, &PlayerOverlay::buttonPressed );
+	y += configButton->height + 10;
+	add( configButton );
 	
 	scaleLabel = addLabel( "Scale" );
 	scaleSlider = new mui::SliderWithLabel( x, y, w, h, 0.1, 2, 1, 2 );
@@ -30,52 +27,75 @@ PlayerOverlay::PlayerOverlay( float x_, float y_, float width_, float height_)
 	
 	w = 90;
 	flipXYToggle = new FaToggleButton( ofxFontAwesome::repeat, ofxFontAwesome::repeat, x, y, h, h );
+	flipXYToggle->setProperty("tooltip", string("Flip X- and Y-axis"));
 	ofAddListener( flipXYToggle->onPress, this, &PlayerOverlay::buttonPressed );
 	add( flipXYToggle);
 	x += 100;
 	
 	invertXToggle = new FaToggleButton( ofxFontAwesome::arrows_h, ofxFontAwesome::arrows_h, x, y, h, h );
+	invertXToggle->setProperty("tooltip", string("Invert X-axis"));
 	ofAddListener( invertXToggle->onPress, this, &PlayerOverlay::buttonPressed );
 	add( invertXToggle);
 	x += 100;
 	
 	invertYToggle = new FaToggleButton( ofxFontAwesome::arrows_v, ofxFontAwesome::arrows_v, x, y, h, h );
+	invertYToggle->setProperty("tooltip", string("Invert Y-axis"));
 	ofAddListener( invertYToggle->onPress, this, &PlayerOverlay::buttonPressed );
 	add( invertYToggle);
 	x += 100;
 	
+	filenameLabel = new mui::Label("-", x, y, w, h);
+	filenameLabel->fontSize = 10; 
+	add(filenameLabel);
+	
 	fullscreenToggle = new FaToggleButton( ofxFontAwesome::expand, ofxFontAwesome::compress, x, y, h, h );
+	fullscreenToggle->setProperty("tooltip", string("Toggle fullscreen"));
 	ofAddListener( fullscreenToggle->onPress, this, &PlayerOverlay::buttonPressed );
 	add( fullscreenToggle);
 	
 	loadFileButton = new FaButton( ofxFontAwesome::folder_open, x, y, h, h );
+	loadFileButton->setProperty("tooltip", string("Load file"));
 	ofAddListener( loadFileButton->onPress, this, &PlayerOverlay::buttonPressed );
 	add( loadFileButton );
 	
 	useMicButton = new FaToggleButton( ofxFontAwesome::microphone, ofxFontAwesome::microphone_slash, x, y, h, h );
+	useMicButton->setProperty("tooltip", string("Use microphone instead of file"));
 	ofAddListener( useMicButton->onPress, this, &PlayerOverlay::buttonPressed );
 	add( useMicButton );
 	
 	playButton = new FaToggleButton( ofxFontAwesome::play, ofxFontAwesome::pause, x, y, h, h );
+	playButton->setProperty("tooltip", string("Play/Pause"));
 	ofAddListener( playButton->onPress, this, &PlayerOverlay::buttonPressed );
 	add( playButton );
 	
 	sideBySideToggle = new FaToggleButton(ofxFontAwesome::cube, ofxFontAwesome::cube, 10, 1, h, h);
+	sideBySideToggle->setProperty("tooltip", string("Switch between side-by-side and anaglyph-3D modes"));
 	ofAddListener(sideBySideToggle->onPress, this, &PlayerOverlay::buttonPressed);
 	add(sideBySideToggle);
 
 	flip3dToggle = new FaToggleButton(ofxFontAwesome::exchange, ofxFontAwesome::exchange, 10, 1, h, h);
+	flip3dToggle->setProperty("tooltip", string("Invert 3d"));
 	ofAddListener(flip3dToggle->onPress, this, &PlayerOverlay::buttonPressed);
 	add(flip3dToggle);
 
 	zModulationToggle = new FaToggleButton(ofxFontAwesome::adjust, ofxFontAwesome::adjust, 10, 1, h, h);
+	zModulationToggle->setProperty("tooltip", string("Enable z-modulation (brightness control)"));
 	ofAddListener(zModulationToggle->onPress, this, &PlayerOverlay::buttonPressed);
 	add(zModulationToggle);
 
 	showPlaylistToggle  = new FaToggleButton(ofxFontAwesome::list, ofxFontAwesome::list, 10, 1, h, h);
+	showPlaylistToggle->setProperty("tooltip", string("Show playlist"));
 	ofAddListener(showPlaylistToggle->onPress, this, &PlayerOverlay::buttonPressed);
 	add(showPlaylistToggle);
-
+	
+	analogModeToggle  = new mui::ToggleButton("A", 10, 1, h, h);
+	analogModeToggle->setProperty("tooltip", string("Analog/digital oscilloscope simulation"));
+	analogModeToggle->fg = ofColor(255);
+	analogModeToggle->selectedFg = ofColor(0);
+	analogModeToggle->bg = ofColor(0,0);
+	ofAddListener(analogModeToggle->onPress, this, &PlayerOverlay::buttonPressed);
+	add(analogModeToggle);
+	
 	x = 10;
 	y += invertYToggle->height + 10;
 	
@@ -99,8 +119,8 @@ PlayerOverlay::PlayerOverlay( float x_, float y_, float width_, float height_)
 	strokeWeightSlider->label->fg = ofColor(255);
 	add( strokeWeightSlider );
 	
-	timeStretchLabel = addLabel( "Time Stretch" );
-	timeStretchSlider = new mui::SliderWithLabel(0, 0, 100, h, 0.25, 100, 1, 2 );
+	timeStretchLabel = addLabel( "Speed" );
+	timeStretchSlider = new mui::SliderWithLabel(0, 0, 100, h, 0.25, 500, 1, 2 );
 	timeStretchSlider->slider->valueMapper = make_shared<mui::Slider::MapperLog>(6000);
 	ofAddListener( timeStretchSlider->slider->onChange, this, &PlayerOverlay::sliderChanged );
 	timeStretchSlider->label->fg = ofColor(255);
@@ -146,8 +166,8 @@ PlayerOverlay::PlayerOverlay( float x_, float y_, float width_, float height_)
 }
 
 void PlayerOverlay::layout(){
-	mui::L({stopButton,fullscreenToggle, showPlaylistToggle }).columnsFromRight({width, 0},1);
-	mui::L({zModulationToggle,flip3dToggle,sideBySideToggle }).columnsFromRight({stopButton->x-10,0},1);
+	mui::L({analogModeToggle, configButton,fullscreenToggle, showPlaylistToggle}).columnsFromRight({width, 0},1);
+	mui::L({zModulationToggle,flip3dToggle,sideBySideToggle }).columnsFromRight({configButton->x-10,0},1);
 
 
 	mui::L(playButton).pos(10,40);
@@ -171,6 +191,8 @@ void PlayerOverlay::layout(){
 	mui::L(strokeWeightLabel).below(scaleLabel).alignRightEdgeTo(scaleLabel);
 	mui::L(strokeWeightSlider).rightOf(strokeWeightLabel,5).stretchToRightEdgeOfParent(10);
 	
+	mui::L(filenameLabel).leftOf(configButton).stretchToLeftEdgeOfParent(10); 
+	
 	/*mui::L(blurLabel).below(strokeWeightLabel).alignRightEdgeTo(strokeWeightLabel);
 	mui::L(blurSlider).rightOf(blurLabel,5).stretchToRightEdgeOf(this,10);
 	
@@ -190,7 +212,7 @@ void PlayerOverlay::layout(){
 	mui::L(afterglowLabel).below(intensityLabel).alignRightEdgeTo(intensityLabel);
 	mui::L(afterglowSlider).rightOf(afterglowLabel,5).stretchToRightEdgeOfParent(10);
 	
-	height = afterglowSlider->y + afterglowSlider->height;
+	height = afterglowSlider->y + afterglowSlider->height + 10;
 }
 
 
@@ -222,6 +244,7 @@ void PlayerOverlay::update(){
 	outputVolumeLabel->visible = !globals.micActive;
 	outputVolumeSlider->visible = !globals.micActive;
 	playButton->visible = !globals.micActive;
+	analogModeToggle->selected = globals.analogMode == 0?false:true; 
 	
 	if( !globals.micActive ){
 		if( !updateSlider(timeSlider, globals.player.getPosition(), lastTimeVal ) ){
@@ -310,9 +333,9 @@ void PlayerOverlay::fromGlobals(){
 void PlayerOverlay::buttonPressed( const void * sender, ofTouchEventArgs & args ){
 	mui::Container * container = (mui::Container*) sender;
 	
-	if( sender == stopButton ){
+	if( sender == configButton ){
 		ofBaseApp * app = ofGetAppPtr();
-		app->gotMessage( ofMessage( "stop-pressed" ) );
+		app->gotMessage( ofMessage( "config-pressed" ) );
 	}
 	else if( sender == playButton ){
 		if( globals.player.isPlaying ){
@@ -347,59 +370,58 @@ void PlayerOverlay::buttonPressed( const void * sender, ofTouchEventArgs & args 
 		#endif
 	}
 	else if( sender == loadFileButton ){
-		ofFileDialogResult res = ofSystemLoadDialog("Load audio file", false );
-		if( res.bSuccess ){
-			ofSendMessage("load:" + res.filePath); 
-		}
+		ofSendMessage("load-pressed");
 	}
 	else if( sender == useMicButton ){
 		if( globals.micActive ){
 			ofSendMessage("stop-mic");
 		}
 		else{
-			if( micMenu != NULL ){
-				MUI_ROOT->safeRemoveAndDelete(micMenu);
-			}
-			
-			micMenu = new FMenu(0,0,400,0);
-			mui::Button * cancelButton = micMenu->addButton("Cancel");
-			cancelButton->bg = ofColor(100,100);
-			vector<ofSoundDevice> infos = ofSoundStream().getDeviceList();
-			for( int i = 0; i < infos.size(); i++ ){
-				ofSoundDevice &info = infos[i];
-				if( info.inputChannels >= 2 ){
-					micMenu->addButton(info.name);
-					micDeviceIds[info.name] = i;
-				}
-			}
-			ofAddListener(micMenu->onPress, this, &PlayerOverlay::buttonPressed);
-			micMenu->autoSize();
-			micMenu->bg = ofColor(150);
+			auto micMenu = new FMenu<string>(0,0,400,0);
+			micMenu->onAfterRemove.add([](mui::Container * menu, mui::Container * parent) {
+				MUI_ROOT->safeDelete(menu); 
+			});
+			populateMicMenu(micMenu); 
+
+			ofAddListener(micMenu->onSelectOption, this, &PlayerOverlay::inputSelected);
 			micMenu->opaque = true; 
 			
-			add(micMenu);
+			MUI_ROOT->showPopupMenu(micMenu, useMicButton, 0, 0, mui::Left, mui::Bottom); 
 		}
 	}
 	else if( sender == timeLabelButton){
 		timeLabelMode = (1+timeLabelMode)%2;
 	}
-	else if( micMenu != NULL && container->parent->parent == micMenu ){
-		map<string,int>::iterator it = micDeviceIds.find(((mui::Button*)sender)->label->text);
-		if( it != micDeviceIds.end() ){
-			globals.micDeviceId = (*it).second;
-			if(ofGetKeyPressed(OF_KEY_SHIFT)){
-				ofSendMessage("start-mic:3");
-			}
-			else{
-				ofSendMessage("start-mic:2");
-			}
-		}
-		MUI_ROOT->safeRemoveAndDelete(micMenu);
-		micMenu = NULL;
-	}
 	else if (sender == showPlaylistToggle) {
 		ofSendMessage(ofMessage("toggle-playlist"));
 	}
+	else if(sender == analogModeToggle){
+		globals.analogMode = globals.analogMode==0?1:0;
+	}
+}
+
+void PlayerOverlay::inputSelected(const void * sender, FMenu<string>::Option & opt) {
+	auto menu = opt.button->findParentOfType<FMenu<string>>();
+	auto config_ref = opt.button->getProperty<ma_device_info>("ma_device_info");
+	auto type_ref = opt.button->getProperty<ma_device_type>("ma_device_type"); 
+	bool withZ = menu->view->findChildrenOfType<mui::ToggleButton>()[0]->selected; 
+	if (config_ref && type_ref) {
+		selectedMicDeviceInfo.info = *config_ref; 
+		selectedMicDeviceInfo.type = *type_ref; 
+		//globals.micDeviceId = (*it).second;
+		if (withZ) {
+			ofSendMessage("start-mic:3");
+		}
+		else {
+			ofSendMessage("start-mic:2");
+		}
+	}
+
+	MUI_ROOT->safeRemove(menu);
+}
+
+PlayerOverlay::mic_info PlayerOverlay::getSelectedMicDeviceInfo() {
+  return selectedMicDeviceInfo;
 }
 
 void PlayerOverlay::sliderChanged( const void * sender, float & value ){
@@ -459,4 +481,75 @@ string timestring( double secs ){
 	":" << setfill('0') << setw(2) << seconds <<
 	":" << setfill('0') << setw(2) << (millis/10);
 	return str.str();
+}
+
+bool filter_mic_menu(const void * sender, bool & value) {
+	const mui::ToggleButton * me = (mui::ToggleButton*)sender; 
+	return true; 
+}
+
+void PlayerOverlay::populateMicMenu(FMenu<string> * menu) {
+
+	mui::ToggleButton * withZ = new mui::ToggleButton("3-channel mode (z-modulation)");
+	withZ->label->horizontalAlign = mui::Left; 
+	ofAddListener(withZ->onChange, filter_mic_menu);
+	withZ->checkbox = true; 
+	menu->view->add(withZ); 
+
+	ma_result result;
+	ma_context context;
+	ma_device_info* pPlaybackDeviceInfos;
+	ma_uint32 playbackDeviceCount;
+	ma_device_info* pCaptureDeviceInfos;
+	ma_uint32 captureDeviceCount;
+	ma_uint32 iDevice;
+
+	if (ma_context_init(NULL, 0, NULL, &context) != MA_SUCCESS) {
+		printf("Failed to initialize context.\n");
+		return;
+	}
+
+	result = ma_context_get_devices(&context, &pPlaybackDeviceInfos, &playbackDeviceCount, &pCaptureDeviceInfos, &captureDeviceCount);
+	if (result != MA_SUCCESS) {
+		printf("Failed to retrieve device information.\n");
+		return;
+	}
+
+
+	auto addDevice = [&](string label, string name, ma_device_info info, ma_device_type type) {
+		auto btn = menu->addOption(label, name)->button;
+		btn->setProperty<ma_device_info>(string("ma_device_info"), move(info));
+		btn->setProperty<ma_device_type>(string("ma_device_type"), move(type));
+		btn->label->fontSize--;
+		printf("    %s\n", info.name);
+	}; 
+
+	printf("Capture Devices\n");
+	addDevice("Default Microphone", "", ma_device_info(), ma_device_type_capture);
+
+	for (iDevice = 0; iDevice < captureDeviceCount; ++iDevice) {
+		ma_device_info dev = pCaptureDeviceInfos[iDevice];
+		ma_context_get_device_info(&context, ma_device_type_capture, &dev.id, ma_share_mode_shared, &dev);
+		int ch = max(1, (int)max(dev.minChannels, dev.maxChannels));
+		addDevice("[" + ofToString(ch) + " ch] " + string(dev.name), dev.name, dev, ma_device_type_capture);
+	}
+
+
+	if (ma_context_is_loopback_supported(&context)) {
+		printf("Playback Devices\n");
+		// not working: 
+		//addDevice("Default Output (looped back)", "", ma_device_info(), ma_device_type_loopback);
+
+		for (iDevice = 0; iDevice < playbackDeviceCount; ++iDevice) {
+			ma_device_info dev = pPlaybackDeviceInfos[iDevice];
+			ma_context_get_device_info(&context, ma_device_type_capture, &dev.id, ma_share_mode_shared, &dev);
+			// for now only allow loopbacks in wasapi
+			if (context.backend != ma_backend_wasapi) continue;
+
+			int ch = max(1, (int)max(dev.minChannels, dev.maxChannels));
+			addDevice("[" + ofToString(ch) + " ch loopback] " + string(dev.name), dev.name, dev, ma_device_type_loopback);
+		}
+	}
+
+	ma_context_uninit(&context);
 }

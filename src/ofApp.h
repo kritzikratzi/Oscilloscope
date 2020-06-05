@@ -1,7 +1,8 @@
 #pragma once
 
+#include "util/miniaudio.h"
+
 #include "ofMain.h"
-#include "util/sounddevices.h"
 #include "util/ShaderLoader.h"
 #include "ofxMightyUI.h"
 
@@ -26,6 +27,7 @@ class ofApp : public ofBaseApp{
 		void stopApplication();
 		void update();
 		void draw();
+		void drawAbove();
 		void exit();
 
 		void keyPressed  (int key);
@@ -43,18 +45,18 @@ class ofApp : public ofBaseApp{
 
 		void beginExport(const ofFile & file);
 		void playlistItemEnded();
-	
+		void updateSampleRate(); 
+
+		void startMic(); 
 		void stopMic();
 		ofMatrix4x4 getViewMatrix(int i, bool isQuad); 
 	
-		ofSoundStream soundStream;
-		ofSoundStream micStream;
 
 		mui::Root * root;
 		ConfigView * configView;
 		ExportScreen * exportScreen;
 	
-		PlayerOverlay * osciView;
+		PlayerOverlay * playerOverlay;
 		Playlist * playlist;
 		bool playlistEnable = false;
 		OsciMesh mesh;
@@ -68,7 +70,13 @@ class ofApp : public ofBaseApp{
 		MonoSample micLeft;
 		MonoSample micRight;
 		MonoSample micZMod;
-	
+
+		ma_device_config playDeviceConfig;
+		ma_device playDevice;
+
+		ma_device_config micDeviceConfig;
+		ma_device micDevice;
+
 		bool changed;
 		bool clearFbos;
 		int dropped;
@@ -89,6 +97,8 @@ class ofApp : public ofBaseApp{
 		ofVec2f last;
 		bool hadWindowFocus = true;
 		bool applicationRunning = false;
+		bool initComplete = false; 
+		ofxFontStashStyle tooltipStyle;
 	
 		mutex mainThreadMutex;
 		queue<function<void()>> mainThreadTasks;
