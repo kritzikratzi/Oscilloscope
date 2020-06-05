@@ -19,15 +19,7 @@ int main(){
 	globals.loadFromFile();
 	ofSetEscapeQuitsApp(false);
 
-	// this kicks off the running of my app
-	// can be OF_WINDOW or OF_FULLSCREEN
-	// pass in width and height too:
-	// using glut on linux, because http://forum.openframeworks.cc/t/application-wont-start-after-ubuntu-upgrade/17491
-	#if defined(__linux__)
-	ofAppGlutWindow window;
-	#else
 	ofAppGLFWWindow window;
-	#endif
 
 	cout << "LAUNCH DESKTOP" << endl;
 	ofSetupOpenGL(&window, 1024, 700, OF_WINDOW);

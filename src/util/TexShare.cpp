@@ -38,7 +38,12 @@ public:
 		spoutSender.send(tex);
 	}
 };
-
+#else
+class TexShareImpl{
+public:
+    void setup(string name){}
+    void update(ofTexture & tex){};
+};
 #endif
 
 TexShare::TexShare(){
