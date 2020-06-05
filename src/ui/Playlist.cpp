@@ -123,21 +123,6 @@ void Playlist::layout(){
 }
 
 bool Playlist::fileDragged( ofDragInfo & args ){
-	PlaylistItemRef res;
-	
-	for( auto & file : args.files ){
-		auto temp = addFile(ofFile(file, ofFile::Reference));
-		if(res.id == 0 && temp.id != 0){
-			res = temp;
-		}
-	}
-	
-	scroller->handleLayout();
-	scroller->commit();
-	
-	if(res.id > 0){
-		ofSendMessage("load-id:" + ofToString(res.id));
-	}
 	
 	return true;
 }
@@ -171,9 +156,14 @@ PlaylistItemRef Playlist::addFile( ofFile file, double duration ){
 			return natural_sort::compare(a.getBaseName(), b.getBaseName())<0;
 		});
 		
+		PlaylistItemRef res;
 		for( auto file : files ){
-			addFile(file); 
+			auto temp = addFile(file);
+			if(res.id == 0 && temp.id > 0){
+				res = temp;
+			}
 		}
+		return res;
 	}
 	else{
 		static set<string> allowed = {
@@ -234,17 +224,25 @@ PlaylistItemRef Playlist::addFile( ofFile file, double duration ){
 		
 		if(duration >= 0 ){
 			filenames[nextItemId] = file.getAbsolutePath();
-			PlaylistItem * item = new PlaylistItem(nextItemId++, file, duration);
+			PlaylistItem * item = new PlaylistItem(nextItemId, file, duration);
 			scroller->view->add(item);
-			return {nextItemId, filenames[nextItemId]};
+			nextItemId ++;
+			return {item->itemId, item->file.getAbsolutePath()};
 		}
 		else if(forbidden.find(ext) == forbidden.end()){
 			filenames[nextItemId] = file.getAbsolutePath();
-			PlaylistItem * item = new PlaylistItem(nextItemId++, file);
+			PlaylistItem * item = new PlaylistItem(nextItemId, file);
 			scroller->view->add(item);
+			nextItemId ++;
+			return {item->itemId, item->file.getAbsolutePath()};
+		}
+		else{
 			return {0,""};
 		}
 	}
+	
+	scroller->commit();
+	needsLayout = true; 
 }
 
 void Playlist::removeAllFiles(){
@@ -362,11 +360,7 @@ void Playlist::buttonPressed(const void * sender, ofTouchEventArgs & args) {
 		removeAllFiles();
 	}
 	else if (sender == addFileButton) {
-		auto res = ofSystemLoadDialog("Add Folder", true);
-		if (res.bSuccess) {
-			addFile(ofFile(res.filePath, ofFile::ReadOnly));
-			handleLayout(); 
-		}
+		ofSendMessage("load-pressed"); 
 	}
 	else if (sender == loopModeButton) {
 		LoopMode * btnMode = loopModeButton->getProperty<LoopMode>("loop_mode");
@@ -421,9 +415,13 @@ void PlaylistItem::touchDown(ofTouchEventArgs & args){
 		
 		string path = file.getAbsolutePath(); 
 		menu->addOption("Show file", "show-file", [menu,path]() {
-			ofxNative::showFile(path); 
-			MUI_ROOT->removePopup(menu); 
-		}); 
+			ofxNative::showFile(path);
+			MUI_ROOT->removePopup(menu);
+		});
+		menu->addOption("Remove file", "remove-file", [menu,this]() {
+			MUI_ROOT->safeRemoveAndDelete(this);
+			MUI_ROOT->removePopup(menu);
+		});
 
 		MUI_ROOT->showPopupMenu(menu, this, args.x, args.y, mui::Left, mui::Bottom);
 	}

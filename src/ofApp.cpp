@@ -112,7 +112,7 @@ void ofApp::startApplication(){
 		globals.out_actual.bufferSize = frameCount;
 		globals.out_actual.name = device->playback.name;
 
-		globals.player.setupAudioOut(2, globals.out_actual.sampleRate, true);
+		app->updateSampleRate();
 		app->audioOut((float*)pOutput, frameCount, device->playback.channels);
 	};
 
@@ -284,8 +284,7 @@ void ofApp::update(){
 	
 	// are we not export?
 	if( exporting == 0 ){
-		int rate = max(globals.out_actual.sampleRate/4,(int)std::round(globals.out_actual.sampleRate*globals.timeStretch));
-		globals.player.setupAudioOut(2, rate, globals.timeStretch == 1);
+		updateSampleRate();
 	}
 
 	// are we exporting?
@@ -353,10 +352,6 @@ void ofApp::update(){
 	static float * rightBuffer = new float[2048];
 	static float * zmodBuffer = new float[2048];
 
-	// party mode
-	//globals.hue += ofGetMouseX()*100/ofGetWidth();
-	//globals.hue = fmodf(globals.hue,360);
-	
 	MonoSample &left = globals.micActive?micLeft:globals.player.left192;
 	MonoSample &right = globals.micActive?micRight:globals.player.right192;
 	MonoSample &zMod = globals.micActive?micZMod:globals.player.zMod192;
@@ -756,6 +751,29 @@ void ofApp::gotMessage(ofMessage msg){
 	else if (msg.message == "config-pressed") {
 		// nothing to do, hurray :) see ::update()
 	}
+	else if (msg.message == "load-pressed"){
+		auto menu = new FMenu<string>(0, 0, 300, 0);
+		menu->opaque = true;
+		menu->onAfterRemove.add([](mui::Container * menu, mui::Container * parent) {
+			MUI_ROOT->safeDelete(menu);
+		});
+		
+		menu->addOption("Open file", "open-file", [this]() {
+			ofFileDialogResult res = ofSystemLoadDialog("Load audio file", false );
+			if (res.bSuccess) {
+				playlist->addFile(ofFile(res.filePath, ofFile::ReadOnly));
+			}
+		});
+		menu->addOption("Open folder", "open-folder", [this]() {
+			auto res = ofSystemLoadDialog("Add Folder", true);
+			if (res.bSuccess) {
+				playlist->addFile(ofFile(res.filePath, ofFile::ReadOnly));
+			}
+		});
+		
+		MUI_ROOT->showPopupMenu(menu, root, muiGetMouseX(), muiGetMouseY(), mui::Left, mui::Bottom);
+
+	}
 	else if (msg.message == "out-choice-changed") {
 		configView->toGlobals(); 
 		stopApplication(); 
@@ -795,7 +813,7 @@ void ofApp::gotMessage(ofMessage msg){
 
 //--------------------------------------------------------------
 void ofApp::dragEvent(ofDragInfo dragInfo){
-	playlist->handleFileDragged(dragInfo);
+	playlist->fileDragged(dragInfo);
 }
 
 //--------------------------------------------------------------
@@ -835,6 +853,17 @@ void ofApp::playlistItemEnded(){
 		}
 	}
 }
+
+void ofApp::updateSampleRate(){
+	double s = 1;
+	if(globals.analogMode == 0) s = 1;
+	else s = 4;
+	
+	int64_t rate = max((int64_t)globals.out_actual.sampleRate/4,(int64_t)std::round(globals.out_actual.sampleRate*globals.timeStretch));
+	int64_t vrate = globals.analogMode!=0?globals.out_actual.sampleRate : globals.player.getFileSampleRate();
+	globals.player.setupAudioOut(2, rate, globals.analogMode!=0, max(vrate*s*globals.timeStretch,192000.0));
+}
+
 
 //--------------------------------------------------------------
 void ofApp::startMic() {

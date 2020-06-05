@@ -44,7 +44,7 @@ class ofApp : public ofBaseApp{
 
 		void beginExport(const ofFile & file);
 		void playlistItemEnded();
-	
+		void updateSampleRate(); 
 
 		void startMic(); 
 		void stopMic();
