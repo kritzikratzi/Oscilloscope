@@ -32,7 +32,7 @@
 #define AVCODEC_AUDIO_INBUF_SIZE (20480)
 #define AVCODEC_AUDIO_REFILL_THRESH (4096*3)
 
-struct OsciAvAudioPlayerThread;
+class OsciAvAudioPlayerThread;
 struct AVPacket;
 struct AVFrame;
 struct AVCodecContext;

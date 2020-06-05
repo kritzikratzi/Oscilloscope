@@ -26,6 +26,8 @@ void ofApp::setup(){
 	clearFbos = false;
 	lastMouseMoved = 0;
 	exporting = 0;
+	tooltipStyle.fontSize = 10;
+	tooltipStyle.color = ofColor(255);
 	
 	applicationRunning = false; 
 	ofSetVerticalSync(true);
@@ -74,6 +76,8 @@ void ofApp::setup(){
 	initComplete = true; 
 	startApplication();
 	windowResized(ofGetWidth(), ofGetHeight());
+
+	root->onDrawAbove.add([&]() {drawAbove(); });
 }
 
 
@@ -549,6 +553,26 @@ void ofApp::draw(){
 	}
 }
 
+//--------------------------------------------------------------
+void ofApp::drawAbove() {
+	auto pos = muiGetMousePos();
+	auto thing = root->findChildAt(pos.x, pos.y, true, true); 
+	if (thing) {
+		auto text = thing->getPropertyString("tooltip"); 
+		if (text != "") {
+			auto container_bb = thing->getGlobalBounds(); 
+			auto text_bb = mui::Helpers::getFontStash().getTextBounds(text, tooltipStyle, 0, 0); 
+			//ofRectangle dest(container_bb.x, container_bb.y - text_bb.height- 3, text_bb.width + 6, text_bb.height + 2);
+			ofRectangle dest(0, root->height - text_bb.height - 3, text_bb.width + 6, text_bb.height + 2);
+			ofSetColor(0);
+			ofDrawRectangle(dest);
+			mui::Helpers::getFontStash().draw(text, tooltipStyle, dest.x+3, dest.y+text_bb.height+1);
+			ofSetColor(255);
+		}
+	}
+}
+
+
 void ofApp::exit(){
 	stopMic(); 
 	stopApplication();
@@ -627,31 +651,6 @@ void ofApp::keyPressed  (int key){
 		globals.loadFromFile();
 		playerOverlay->fromGlobals();
 	}
-
-	if (key == 'n') {
-		ofFile file("notes.txt", ofFile::Append);
-		file << currentFilename << " normalize" << endl;
-		file.close();
-	}
-
-	if (key == 'd') {
-		ofFile file("notes.txt", ofFile::Append);
-		file << currentFilename << " delete" << endl;
-		file.close();
-	}
-
-	if (key == 't') {
-		ofFile file("notes.txt", ofFile::Append);
-		file << currentFilename << " trim" << endl;
-		file.close();
-	}
-
-	if (key == 'c') {
-		ofFile file("notes.txt", ofFile::Append);
-		file << currentFilename << " cut " << globals.player.getPositionMS()/1000.0 << endl;
-		file.close();
-	}
-
 }
 
 //--------------------------------------------------------------

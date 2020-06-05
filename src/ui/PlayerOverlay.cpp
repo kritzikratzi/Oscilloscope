@@ -12,6 +12,7 @@ PlayerOverlay::PlayerOverlay( float x_, float y_, float width_, float height_)
 	opaque = true;
 
 	configButton = new FaToggleButton( ofxFontAwesome::cogs, ofxFontAwesome::cogs, x, y, h, h );
+	configButton->setProperty("tooltip", string("Settings"));
 	ofAddListener( configButton->onPress, this, &PlayerOverlay::buttonPressed );
 	y += configButton->height + 10;
 	add( configButton );
@@ -26,16 +27,19 @@ PlayerOverlay::PlayerOverlay( float x_, float y_, float width_, float height_)
 	
 	w = 90;
 	flipXYToggle = new FaToggleButton( ofxFontAwesome::repeat, ofxFontAwesome::repeat, x, y, h, h );
+	flipXYToggle->setProperty("tooltip", string("Flip X- and Y-axis"));
 	ofAddListener( flipXYToggle->onPress, this, &PlayerOverlay::buttonPressed );
 	add( flipXYToggle);
 	x += 100;
 	
 	invertXToggle = new FaToggleButton( ofxFontAwesome::arrows_h, ofxFontAwesome::arrows_h, x, y, h, h );
+	invertXToggle->setProperty("tooltip", string("Invert X-axis"));
 	ofAddListener( invertXToggle->onPress, this, &PlayerOverlay::buttonPressed );
 	add( invertXToggle);
 	x += 100;
 	
 	invertYToggle = new FaToggleButton( ofxFontAwesome::arrows_v, ofxFontAwesome::arrows_v, x, y, h, h );
+	invertYToggle->setProperty("tooltip", string("Invert Y-axis"));
 	ofAddListener( invertYToggle->onPress, this, &PlayerOverlay::buttonPressed );
 	add( invertYToggle);
 	x += 100;
@@ -45,38 +49,47 @@ PlayerOverlay::PlayerOverlay( float x_, float y_, float width_, float height_)
 	add(filenameLabel);
 	
 	fullscreenToggle = new FaToggleButton( ofxFontAwesome::expand, ofxFontAwesome::compress, x, y, h, h );
+	fullscreenToggle->setProperty("tooltip", string("Toggle fullscreen"));
 	ofAddListener( fullscreenToggle->onPress, this, &PlayerOverlay::buttonPressed );
 	add( fullscreenToggle);
 	
 	loadFileButton = new FaButton( ofxFontAwesome::folder_open, x, y, h, h );
+	loadFileButton->setProperty("tooltip", string("Load file"));
 	ofAddListener( loadFileButton->onPress, this, &PlayerOverlay::buttonPressed );
 	add( loadFileButton );
 	
 	useMicButton = new FaToggleButton( ofxFontAwesome::microphone, ofxFontAwesome::microphone_slash, x, y, h, h );
+	useMicButton->setProperty("tooltip", string("Use microphone instead of file"));
 	ofAddListener( useMicButton->onPress, this, &PlayerOverlay::buttonPressed );
 	add( useMicButton );
 	
 	playButton = new FaToggleButton( ofxFontAwesome::play, ofxFontAwesome::pause, x, y, h, h );
+	playButton->setProperty("tooltip", string("Play/Pause"));
 	ofAddListener( playButton->onPress, this, &PlayerOverlay::buttonPressed );
 	add( playButton );
 	
 	sideBySideToggle = new FaToggleButton(ofxFontAwesome::cube, ofxFontAwesome::cube, 10, 1, h, h);
+	sideBySideToggle->setProperty("tooltip", string("Switch between side-by-side and anaglyph-3D modes"));
 	ofAddListener(sideBySideToggle->onPress, this, &PlayerOverlay::buttonPressed);
 	add(sideBySideToggle);
 
 	flip3dToggle = new FaToggleButton(ofxFontAwesome::exchange, ofxFontAwesome::exchange, 10, 1, h, h);
+	flip3dToggle->setProperty("tooltip", string("Invert 3d"));
 	ofAddListener(flip3dToggle->onPress, this, &PlayerOverlay::buttonPressed);
 	add(flip3dToggle);
 
 	zModulationToggle = new FaToggleButton(ofxFontAwesome::adjust, ofxFontAwesome::adjust, 10, 1, h, h);
+	zModulationToggle->setProperty("tooltip", string("Enable z-modulation (brightness control)"));
 	ofAddListener(zModulationToggle->onPress, this, &PlayerOverlay::buttonPressed);
 	add(zModulationToggle);
 
 	showPlaylistToggle  = new FaToggleButton(ofxFontAwesome::list, ofxFontAwesome::list, 10, 1, h, h);
+	showPlaylistToggle->setProperty("tooltip", string("Show playlist"));
 	ofAddListener(showPlaylistToggle->onPress, this, &PlayerOverlay::buttonPressed);
 	add(showPlaylistToggle);
 	
 	analogModeToggle  = new mui::ToggleButton("A", 10, 1, h, h);
+	analogModeToggle->setProperty("tooltip", string("Analog/digital oscilloscope simulation"));
 	analogModeToggle->fg = ofColor(255);
 	analogModeToggle->selectedFg = ofColor(0);
 	analogModeToggle->bg = ofColor(0,0);

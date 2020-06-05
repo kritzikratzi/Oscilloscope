@@ -25,12 +25,6 @@ Playlist::Playlist() : mui::Container(0,0,300,500){
 	bg = ofColor(125, 50);
 	opaque = true;
 
-	header = new mui::Label("Playlist");
-	header->fontSize = 20;
-	header->height = 30;
-	header->commit(); 
-	add(header);
-	
 	scroller = new mui::ScrollPane();
 	scroller->canScrollX = false;
 	scroller->canScrollY = true;
@@ -46,21 +40,25 @@ Playlist::Playlist() : mui::Container(0,0,300,500){
 	};
 
 	loopModeButton = new FaButton(ofxFontAwesome::sort_alpha_asc,0,0, 30, 30);
+	loopModeButton->setProperty("tooltip", string("Play all once / repeat one / repeat all"));
 	ofAddListener(loopModeButton->onPress, this, &Playlist::buttonPressed);
 	add(loopModeButton);
 	setLoopMode(LoopMode::all_repeat);
 
 
 	shuffleToggle = new FaToggleButton(ofxFontAwesome::random, ofxFontAwesome::random, 0, 0, 30, 30);
+	shuffleToggle->setProperty("tooltip", string("Shuffle"));
 	ofAddListener(shuffleToggle->onPress, this, &Playlist::buttonPressed);
 	add(shuffleToggle);
 
 	clearButton = new FaButton(ofxFontAwesome::trash,0,0,30,30);
+	clearButton->setProperty("tooltip", string("Clear playlist"));
 	clearButton->label->inset.top = -4;
 	ofAddListener(clearButton->onPress, this, &Playlist::buttonPressed);
 	add(clearButton); 
 
 	addFileButton = new FaButton(ofxFontAwesome::folder_open,0,0,30,30);
+	addFileButton->setProperty("tooltip", string("Open folder"));
 	addFileButton->label->inset.top = -2;
 	addFileButton->label->inset.left = 2;
 	ofAddListener(addFileButton->onPress, this, &Playlist::buttonPressed);
@@ -76,7 +74,6 @@ Playlist::~Playlist(){
 	delete scroller->view->layoutHandler;
 	scroller->view->layoutHandler = nullptr;
 	delete scroller;
-	delete header;
 }
 
 void Playlist::update(){
@@ -110,8 +107,7 @@ void Playlist::draw(){
 }
 
 void Playlist::layout(){
-	mui::L(header).posTL(0,-header->height).stretchToRightEdgeOfParent();
-	mui::L(addFileButton).below(header, 1);
+	mui::L(addFileButton).pos(0, 0);
 	mui::L(clearButton).rightOf(addFileButton, 1);
 	mui::L(loopModeButton).rightOf(clearButton, 15);
 	mui::L(shuffleToggle).rightOf(loopModeButton, 1);

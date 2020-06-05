@@ -27,6 +27,7 @@ class ofApp : public ofBaseApp{
 		void stopApplication();
 		void update();
 		void draw();
+		void drawAbove();
 		void exit();
 
 		void keyPressed  (int key);
@@ -97,6 +98,7 @@ class ofApp : public ofBaseApp{
 		bool hadWindowFocus = true;
 		bool applicationRunning = false;
 		bool initComplete = false; 
+		ofxFontStashStyle tooltipStyle;
 	
 		mutex mainThreadMutex;
 		queue<function<void()>> mainThreadTasks;

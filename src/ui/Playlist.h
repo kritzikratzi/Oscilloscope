@@ -54,7 +54,6 @@ private:
 	void setLoopMode(LoopMode mode); 
 	void buttonPressed(const void * sender, ofTouchEventArgs & args); 
 
-	mui::Label * header;
 	mui::ScrollPane * scroller;
 	bool checkNewFiles = false;
 	size_t nextItemId = 1;
