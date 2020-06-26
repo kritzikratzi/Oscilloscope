@@ -36,7 +36,7 @@ cp -R addons/ofxAvCodec/ffmpeg_src/readme.md "$distDir/docs/ffmpeg/notes.md"
 cp -R addons/ofxAvCodec/libs/avcodec/LICENSE.md "$distDir/docs/ffmpeg/license.md"
 cp -R addons/ofxAvCodec/libs/avcodec/README.md "$distDir/docs/ffmpeg/readme.md"
 cp readme.md "$distDir"
-rm "$distDir/Oscilloscope_debug.*"
+rm "$distDir/Oscilloscope_debug*"
 
 echo "platform = $platform"
 
@@ -122,6 +122,19 @@ then
 		lipo /tmp/oscilloscope-fatlib.dylib -thin x86_64 -output "$file"
 		rm /tmp/oscilloscope-fatlib.dylib
 	done
+elif [ "$platform" == "linux" ] || [ "$platform" == "linux64" ]
+then
+	echo "Deleting weird files"
+	cd "$distDir"
+	rm -rf *_debug
+	rm -rf qtc_Desktop_Debug
+	echo "Move into app layout"
+	mkdir app
+	mv data *.so Oscilloscope app
+	echo "Generating startup file"
+	echo "#!/bin/sh" >start_oscilloscope.sh
+	echo "\"\`dirname \$0\`/app/Oscilloscope\" \"\$@\"" >>start_oscilloscope.sh
+	chmod a+x start_oscilloscope.sh
 fi
 
 popd

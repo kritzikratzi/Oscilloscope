@@ -5,19 +5,33 @@ A software oscilloscope attempting to mimic the aesthetic of old school ray osci
 	
 <img src="docs/screenshot.png" width="667">
 
+# How to use
 
-## Not a programmer? 
+After starting the oscilloscope a welcome message is already loaded, press ▶︎ play to make sure your audio setup works. If it doesn't, open ⚙ settings and try to choose another output device. 
 
-This is the programming documentation. If you are not a programmer please
-
-* either visit the user page at <a href="http://asdfg.me/osci/">asdfg.me/osci/</a>
-* or click on the [releases tab](https://github.com/kritzikratzi/Oscilloscope/releases) and download the latest version for your platform
+To open files you can either click the folder icon, or drag a file from Explorer/Finder/Nautilus/... to the application. 
 
 
+|Key   |Action|
+|------|------|
+|Space |Play/Pause|
+|f     |Fullscreen|
+|Tab   |Hide interface|
+|e     |Export to image sequence|
 
-# Project setup 
 
-Things are moving around a bit at the moment. 
+
+For more information
+
+* either visit the user page at <a href="https://oscilloscopemusic.com/osci.php">oscilloscopemusic.com/osci.php</a>
+* [download the latest version](https://github.com/kritzikratzi/Oscilloscope/releases)
+
+
+# Programmer Documentation
+
+## Project setup 
+
+Things are moving around a bit sometimes. 
 Make sure to read these instructions before each build. 
 
 1. Download and unzip Openframeworks 0.10.1
