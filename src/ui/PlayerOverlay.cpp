@@ -404,17 +404,10 @@ void PlayerOverlay::inputSelected(const void * sender, FMenu<string>::Option & o
 	auto menu = opt.button->findParentOfType<FMenu<string>>();
 	auto config_ref = opt.button->getProperty<ma_device_info>("ma_device_info");
 	auto type_ref = opt.button->getProperty<ma_device_type>("ma_device_type"); 
-	bool withZ = menu->view->findChildrenOfType<mui::ToggleButton>()[0]->selected; 
 	if (config_ref && type_ref) {
 		selectedMicDeviceInfo.info = *config_ref; 
 		selectedMicDeviceInfo.type = *type_ref; 
-		//globals.micDeviceId = (*it).second;
-		if (withZ) {
-			ofSendMessage("start-mic:3");
-		}
-		else {
-			ofSendMessage("start-mic:2");
-		}
+		ofSendMessage("start-mic");
 	}
 
 	MUI_ROOT->safeRemove(menu);
@@ -483,19 +476,7 @@ string timestring( double secs ){
 	return str.str();
 }
 
-bool filter_mic_menu(const void * sender, bool & value) {
-	const mui::ToggleButton * me = (mui::ToggleButton*)sender; 
-	return true; 
-}
-
 void PlayerOverlay::populateMicMenu(FMenu<string> * menu) {
-
-	mui::ToggleButton * withZ = new mui::ToggleButton("3-channel mode (z-modulation)");
-	withZ->label->horizontalAlign = mui::Left; 
-	ofAddListener(withZ->onChange, filter_mic_menu);
-	withZ->checkbox = true; 
-	menu->view->add(withZ); 
-
 	ma_result result;
 	ma_context context;
 	ma_device_info* pPlaybackDeviceInfos;

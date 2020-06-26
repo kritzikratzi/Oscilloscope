@@ -780,12 +780,11 @@ void ofApp::gotMessage(ofMessage msg){
 		stopApplication(); 
 		startApplication(); 
 	}
-	else if( msg.message.rfind("start-mic:",0) == 0 ){
+	else if( msg.message == "start-mic" ){
 		if( exporting != 0 ) return;
 		globals.player.stop();
 		
 		startMic(); 
-
 	}
 	else if( msg.message == "stop-mic" ){
 		stopMic();
@@ -872,6 +871,7 @@ void ofApp::startMic() {
 	stopApplication(); 
 
 	auto info = playerOverlay->getSelectedMicDeviceInfo();
+	micChannels = info.info.maxChannels;
 	micDeviceConfig = ma_device_config_init(info.type);
 	micDeviceConfig.capture.format = ma_format_f32;
 	micDeviceConfig.capture.channels = 0;
