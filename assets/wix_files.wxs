@@ -24,21 +24,6 @@
             <Component Id="cmp059E2C34E04BDF46435D912B0789D1CE" Directory="INSTALLDIR" Guid="*" Win64="yes">
                 <File Id="fil45BA00B7366D9E3AF3C42BC2E00C2154" KeyPath="yes" Source="SourceDir\avutil-55.dll" />
             </Component>
-            <Component Id="cmpDE0F00A802FB8418B6176A6660FD42DE" Directory="INSTALLDIR" Guid="*" Win64="yes">
-                <File Id="fil3B192C890CD8F1A1F9218B149BFA9A11" KeyPath="yes" Source="SourceDir\Dyad.exe" />
-            </Component>
-            <Component Id="cmpE2AA320D9A7D9ED584A37408C9D6EF32" Directory="INSTALLDIR" Guid="*" Win64="yes">
-                <File Id="filD4E2BC8A794772AE996DC897B127118B" KeyPath="yes" Source="SourceDir\Dyad.exp" />
-            </Component>
-            <Component Id="cmpAF767E45CEC13F60D1B8AD4DF074707E" Directory="INSTALLDIR" Guid="*" Win64="yes">
-                <File Id="fil2933808B5D139856427651C13E3DE53A" KeyPath="yes" Source="SourceDir\Dyad.iobj" />
-            </Component>
-            <Component Id="cmp9C5234C997D247CD9F97D7CA3F62905A" Directory="INSTALLDIR" Guid="*" Win64="yes">
-                <File Id="fil351DBD68DF98D60DF3E6DA7C5E97621C" KeyPath="yes" Source="SourceDir\Dyad.ipdb" />
-            </Component>
-            <Component Id="cmpCB78866DE2EABE424DB236DDAE15C760" Directory="INSTALLDIR" Guid="*" Win64="yes">
-                <File Id="fil0D214FFAF60123DAE6F45EB6BF6E6155" KeyPath="yes" Source="SourceDir\Dyad.lib" />
-            </Component>
             <Component Id="cmpC1BC96C420CB883BD3935FB6D1D41307" Directory="INSTALLDIR" Guid="*" Win64="yes">
                 <File Id="fil33C6E17A3B07BF8D9B120BD926B6CBD6" KeyPath="yes" Source="SourceDir\fmodexL64.dll" />
             </Component>
@@ -47,18 +32,6 @@
             </Component>
             <Component Id="cmpAD3D7C5366B0EE75F9A1FC4B40188186" Directory="INSTALLDIR" Guid="*" Win64="yes">
                 <File Id="fil93A808E5891A09DC03421F6DA54303DF" KeyPath="yes" Source="SourceDir\Oscilloscope.exe" />
-            </Component>
-            <Component Id="cmp61E9D6B1CA24B85697C2B37A9401B7A4" Directory="INSTALLDIR" Guid="*" Win64="yes">
-                <File Id="fil573EDFAF553808E4B0021F612613FC79" KeyPath="yes" Source="SourceDir\Oscilloscope.exp" />
-            </Component>
-            <Component Id="cmpE175ACDF5003956AE140B7D3065DFD47" Directory="INSTALLDIR" Guid="*" Win64="yes">
-                <File Id="fil2AE966B60CF417407AE647FDE9D82D17" KeyPath="yes" Source="SourceDir\Oscilloscope.iobj" />
-            </Component>
-            <Component Id="cmpF777BD7F65BB02F6621AFF241A190235" Directory="INSTALLDIR" Guid="*" Win64="yes">
-                <File Id="filDA48AD64D196D37AC6E8A1AD51B0FBB5" KeyPath="yes" Source="SourceDir\Oscilloscope.ipdb" />
-            </Component>
-            <Component Id="cmp49309094AF8FD3D45F21623FD992642E" Directory="INSTALLDIR" Guid="*" Win64="yes">
-                <File Id="fil5E65DACD24DDA0B0292A35FA46287592" KeyPath="yes" Source="SourceDir\Oscilloscope.lib" />
             </Component>
             <Component Id="cmpAD9B223F4F4855E37C90BCB9A78AEE8E" Directory="INSTALLDIR" Guid="*" Win64="yes">
                 <File Id="fil01DA9B885539B33CA87883D04A8157AF" KeyPath="yes" Source="SourceDir\readme.md" />
@@ -83,9 +56,6 @@
             </Component>
             <Component Id="cmp447D25701D8D49FE9441FD156F331BEB" Directory="dir38903B42FECED7D073B27F29CA029A00" Guid="*" Win64="yes">
                 <File Id="fil4018D0DA5708533D44573EAAF149E69A" KeyPath="yes" Source="SourceDir\data\konichiwa.wav" />
-            </Component>
-            <Component Id="cmpFFC2AA812FFF06F16371EA1D1F7F807B" Directory="dir38903B42FECED7D073B27F29CA029A00" Guid="*" Win64="yes">
-                <File Id="fil69466C0F5B2BAC3526EF537C365F74D0" KeyPath="yes" Source="SourceDir\data\notes.txt" />
             </Component>
             <Component Id="cmp187F75D04F657A31B676EE4A892522EB" Directory="dirC13EFD2462B99BC4181CF9269158442E" Guid="*" Win64="yes">
                 <File Id="fil7E77D5C4FC484809C45AD6D93F684684" KeyPath="yes" Source="SourceDir\data\mui\atlas\ui.png" />

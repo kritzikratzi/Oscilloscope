@@ -182,6 +182,9 @@
     <PostBuildEvent />
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="addons\ofxSpout\libs\SpoutSDK\src\SpoutCopy.cpp" />
+    <ClCompile Include="addons\ofxSpout\libs\SpoutSDK\src\SpoutFrameCount.cpp" />
+    <ClCompile Include="addons\ofxSpout\libs\SpoutSDK\src\SpoutUtils.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\ofApp.cpp" />
     <ClCompile Include="src\globals.cpp" />
@@ -195,7 +198,6 @@
     <ClCompile Include="src\ui\Playlist.cpp" />
     <ClCompile Include="src\util\Audio.cpp" />
     <ClCompile Include="src\util\OsciAvAudioPlayer.cpp" />
-    <ClCompile Include="src\util\OsciResampler.cpp" />
     <ClCompile Include="src\util\OsciVideoWriter.cpp" />
     <ClCompile Include="src\util\TexShare.cpp" />
     <ClCompile Include="addons\ofxAvCodec\src\ofxAvAudioPlayer.cpp" />
@@ -244,6 +246,9 @@
     <ClCompile Include="addons\ofxSpout\libs\SpoutSDK\src\SpoutSharedMemory.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="addons\ofxSpout\libs\SpoutSDK\src\SpoutCopy.h" />
+    <ClInclude Include="addons\ofxSpout\libs\SpoutSDK\src\SpoutFrameCount.h" />
+    <ClInclude Include="addons\ofxSpout\libs\SpoutSDK\src\SpoutUtils.h" />
     <ClInclude Include="src\ofApp.h" />
     <ClInclude Include="src\globals.h" />
     <ClInclude Include="src\ofxIniSettings\ofxIniExtras.h" />
@@ -259,7 +264,6 @@
     <ClInclude Include="src\util\Audio.h" />
     <ClInclude Include="src\util\miniaudio.h" />
     <ClInclude Include="src\util\OsciAvAudioPlayer.h" />
-    <ClInclude Include="src\util\OsciResampler.h" />
     <ClInclude Include="src\util\OsciVideoWriter.hpp" />
     <ClInclude Include="src\util\ShaderLoader.h" />
     <ClInclude Include="src\util\TexShare.h" />

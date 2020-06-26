@@ -166,8 +166,8 @@ PlayerOverlay::PlayerOverlay( float x_, float y_, float width_, float height_)
 }
 
 void PlayerOverlay::layout(){
-	mui::L({analogModeToggle, configButton,fullscreenToggle, showPlaylistToggle}).columnsFromRight({width, 0},1);
-	mui::L({zModulationToggle,flip3dToggle,sideBySideToggle }).columnsFromRight({configButton->x-10,0},1);
+	mui::L({configButton,fullscreenToggle, showPlaylistToggle}).columnsFromRight({width, 0},1);
+	mui::L({ zModulationToggle,flip3dToggle,sideBySideToggle,analogModeToggle }).columnsFromRight({ configButton->x-10,0},1);
 
 
 	mui::L(playButton).pos(10,40);

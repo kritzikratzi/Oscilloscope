@@ -48,6 +48,7 @@ then
 	echo "Deleting unused DLL files: $dlls "
 	echo "Make sure they are specified as 'delay loaded DLLs' in the linker settings"
 	rm $dlls
+	rm *.exp *.iobj *.ipdb *.lib
 	rm Oscilloscope_debug.*
 	
 	popd

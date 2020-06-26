@@ -584,7 +584,7 @@ void ofApp::exit(){
 
 //----------------------------------------------------------	----
 void ofApp::keyPressed  (int key){
-	key = std::tolower(key);
+	if(key < 255) key = std::tolower(key);
 	
 	if( key == '\t' && !configView->isVisibleOnScreen()){
 		playerOverlay->visible = !playerOverlay->visible;
@@ -757,17 +757,19 @@ void ofApp::gotMessage(ofMessage msg){
 			MUI_ROOT->safeDelete(menu);
 		});
 		
-		menu->addOption("Open file", "open-file", [this]() {
+		menu->addOption("Open file", "open-file", [menu,this]() {
 			ofFileDialogResult res = ofSystemLoadDialog("Load audio file", false );
 			if (res.bSuccess) {
 				playlist->addFile(ofFile(res.filePath, ofFile::ReadOnly));
 			}
+			MUI_ROOT->removePopup(menu);
 		});
-		menu->addOption("Open folder", "open-folder", [this]() {
+		menu->addOption("Open folder", "open-folder", [menu,this]() {
 			auto res = ofSystemLoadDialog("Add Folder", true);
 			if (res.bSuccess) {
 				playlist->addFile(ofFile(res.filePath, ofFile::ReadOnly));
 			}
+			MUI_ROOT->removePopup(menu);
 		});
 		
 		MUI_ROOT->showPopupMenu(menu, root, muiGetMouseX(), muiGetMouseY(), mui::Left, mui::Bottom);

@@ -119,7 +119,10 @@ void Playlist::layout(){
 }
 
 bool Playlist::fileDragged( ofDragInfo & args ){
-	
+	for (auto & f : args.files) addFile(ofFile(f,ofFile::Reference));
+
+	handleLayout(); 
+
 	return true;
 }
 
@@ -153,7 +156,7 @@ PlaylistItemRef Playlist::addFile( ofFile file, double duration ){
 		});
 		
 		PlaylistItemRef res;
-		for( auto file : files ){
+		for( auto & file : files ){
 			auto temp = addFile(file);
 			if(res.id == 0 && temp.id > 0){
 				res = temp;
@@ -238,7 +241,7 @@ PlaylistItemRef Playlist::addFile( ofFile file, double duration ){
 	}
 	
 	scroller->commit();
-	needsLayout = true; 
+	needsLayout = true;
 }
 
 void Playlist::removeAllFiles(){
@@ -415,8 +418,11 @@ void PlaylistItem::touchDown(ofTouchEventArgs & args){
 			MUI_ROOT->removePopup(menu);
 		});
 		menu->addOption("Remove file", "remove-file", [menu,this]() {
+			auto * dad = findParentOfType<Playlist>();
+			visible = false; 
 			MUI_ROOT->safeRemoveAndDelete(this);
 			MUI_ROOT->removePopup(menu);
+			if (dad) dad->handleLayout();
 		});
 
 		MUI_ROOT->showPopupMenu(menu, this, args.x, args.y, mui::Left, mui::Bottom);

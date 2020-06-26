@@ -46,9 +46,6 @@
     <ClCompile Include="src\util\OsciAvAudioPlayer.cpp">
       <Filter>src\util</Filter>
     </ClCompile>
-    <ClCompile Include="src\util\OsciResampler.cpp">
-      <Filter>src\util</Filter>
-    </ClCompile>
     <ClCompile Include="src\util\OsciVideoWriter.cpp">
       <Filter>src\util</Filter>
     </ClCompile>
@@ -185,6 +182,15 @@
       <Filter>local_addons\ofxSpout\libs\SpoutSDK\src</Filter>
     </ClCompile>
     <ClCompile Include="addons\ofxSpout\libs\SpoutSDK\src\SpoutSharedMemory.cpp">
+      <Filter>local_addons\ofxSpout\libs\SpoutSDK\src</Filter>
+    </ClCompile>
+    <ClCompile Include="addons\ofxSpout\libs\SpoutSDK\src\SpoutUtils.cpp">
+      <Filter>local_addons\ofxSpout\libs\SpoutSDK\src</Filter>
+    </ClCompile>
+    <ClCompile Include="addons\ofxSpout\libs\SpoutSDK\src\SpoutFrameCount.cpp">
+      <Filter>local_addons\ofxSpout\libs\SpoutSDK\src</Filter>
+    </ClCompile>
+    <ClCompile Include="addons\ofxSpout\libs\SpoutSDK\src\SpoutCopy.cpp">
       <Filter>local_addons\ofxSpout\libs\SpoutSDK\src</Filter>
     </ClCompile>
   </ItemGroup>
@@ -372,9 +378,6 @@
       <Filter>src\util</Filter>
     </ClInclude>
     <ClInclude Include="src\util\OsciAvAudioPlayer.h">
-      <Filter>src\util</Filter>
-    </ClInclude>
-    <ClInclude Include="src\util\OsciResampler.h">
       <Filter>src\util</Filter>
     </ClInclude>
     <ClInclude Include="src\util\OsciVideoWriter.hpp">
@@ -880,6 +883,15 @@
     </ClInclude>
     <ClInclude Include="addons\ofxLibsamplerate\libs\libsamplerate\include\samplerate.h">
       <Filter>local_addons\ofxLibsamplerate\libs\libsamplerate\include</Filter>
+    </ClInclude>
+    <ClInclude Include="addons\ofxSpout\libs\SpoutSDK\src\SpoutUtils.h">
+      <Filter>local_addons\ofxSpout\libs\SpoutSDK\src</Filter>
+    </ClInclude>
+    <ClInclude Include="addons\ofxSpout\libs\SpoutSDK\src\SpoutFrameCount.h">
+      <Filter>local_addons\ofxSpout\libs\SpoutSDK\src</Filter>
+    </ClInclude>
+    <ClInclude Include="addons\ofxSpout\libs\SpoutSDK\src\SpoutCopy.h">
+      <Filter>local_addons\ofxSpout\libs\SpoutSDK\src</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
