@@ -126,6 +126,7 @@ elif [ "$platform" == "linux" ] || [ "$platform" == "linux64" ]
 then
 	echo "Deleting weird files"
 	cd "$distDir"
+	rm -rf *fmodex*
 	rm -rf *_debug
 	rm -rf qtc_Desktop_Debug
 	echo "Move into app layout"
@@ -135,6 +136,10 @@ then
 	echo "#!/bin/sh" >start_oscilloscope.sh
 	echo "\"\`dirname \$0\`/app/Oscilloscope\" \"\$@\"" >>start_oscilloscope.sh
 	chmod a+x start_oscilloscope.sh
+	cd ..
+	zipTarget="$(basename "$distDir").zip"
+	zip -r "$zipTarget" "$(basename "$distDir")"
+	cd ..
 fi
 
 popd
