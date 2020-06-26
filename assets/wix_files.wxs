@@ -24,9 +24,6 @@
             <Component Id="cmp059E2C34E04BDF46435D912B0789D1CE" Directory="INSTALLDIR" Guid="*" Win64="yes">
                 <File Id="fil45BA00B7366D9E3AF3C42BC2E00C2154" KeyPath="yes" Source="SourceDir\avutil-55.dll" />
             </Component>
-            <Component Id="cmpC1BC96C420CB883BD3935FB6D1D41307" Directory="INSTALLDIR" Guid="*" Win64="yes">
-                <File Id="fil33C6E17A3B07BF8D9B120BD926B6CBD6" KeyPath="yes" Source="SourceDir\fmodexL64.dll" />
-            </Component>
             <Component Id="cmpE2C55B43D0FED97798C06B30CE496064" Directory="INSTALLDIR" Guid="*" Win64="yes">
                 <File Id="filC35A102B270ECA1F210D000296E527AD" KeyPath="yes" Source="SourceDir\FreeImage.dll" />
             </Component>

@@ -44,7 +44,7 @@ if [ "$platform" = "win32" ] || [ "$platform" = "win64" ]
 then
 	pushd
 	cd "$distDir"
-	dlls="assimp.dll Zlib.dll glut32.dll libeay32.dll ssleay32.dll swscale-4.dll Zlib.dll FreeType.dll fmodex64.dll fmodex64L.dll"
+	dlls="assimp.dll Zlib.dll glut32.dll libeay32.dll ssleay32.dll swscale-4.dll Zlib.dll FreeType.dll fmodex64.dll fmodexL64.dll"
 	echo "Deleting unused DLL files: $dlls "
 	echo "Make sure they are specified as 'delay loaded DLLs' in the linker settings"
 	rm $dlls
