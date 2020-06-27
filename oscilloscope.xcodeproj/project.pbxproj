@@ -45,7 +45,6 @@
 		99D6E4D911B8CE5CC990ACC7 /* Helpers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6CBCEE91421A4988FE9371C8 /* Helpers.cpp */; };
 		9A2CDCF9E9B22B8144AFC2D5 /* Button.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6F09124E4BB825D4A3F7F725 /* Button.cpp */; };
 		9C2A2F0D0E5BD02089AB90D7 /* CppTweener.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 92C6E4E94E7CDC7A931B39B0 /* CppTweener.cpp */; };
-		A089A6868FAE1B4F39C77B87 /* OsciResampler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C55DFEF87BB00C4BF3A7395B /* OsciResampler.cpp */; };
 		AAC6E85ECE0C1F374F8EFA0B /* ofxMightyUI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B6E8875D1F1B5C78A2188506 /* ofxMightyUI.cpp */; };
 		B815C93E5673DCDD79C6DBF1 /* MuiConfig.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D99DBF02A180A337BF03E23F /* MuiConfig.cpp */; };
 		B9C14E9C7CDFEEC1CFAE0FA5 /* ofxFontStash2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14928A2388550B51A632DE4D /* ofxFontStash2.cpp */; };
@@ -203,7 +202,6 @@
 		9A7F50D94C194DE34CADF27F /* ofxAvUtils.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = ofxAvUtils.h; path = addons/ofxAvCodec/src/ofxAvUtils.h; sourceTree = SOURCE_ROOT; };
 		9B33A952E660E152898C5032 /* ofxNative_osx.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = ofxNative_osx.mm; path = addons/ofxNative/src/ofxNative_osx.mm; sourceTree = SOURCE_ROOT; };
 		9B7FB08C41B5CE8AEDF10B28 /* parseutils.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = parseutils.h; path = addons/ofxAvCodec/libs/avcodec/include/libavutil/parseutils.h; sourceTree = SOURCE_ROOT; };
-		9B8F0DBA57E8569FA8A46F09 /* OsciResampler.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = OsciResampler.h; path = src/util/OsciResampler.h; sourceTree = SOURCE_ROOT; };
 		9D713F982228DD4D390493E5 /* Label.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = Label.h; path = addons/ofxMightyUI/src/Label.h; sourceTree = SOURCE_ROOT; };
 		9D7295B495FF8445BB7B01B9 /* buffer.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = buffer.h; path = addons/ofxAvCodec/libs/avcodec/include/libavutil/buffer.h; sourceTree = SOURCE_ROOT; };
 		9EB0553DE40F70E595063F52 /* hash.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = hash.h; path = addons/ofxAvCodec/libs/avcodec/include/libavutil/hash.h; sourceTree = SOURCE_ROOT; };
@@ -246,7 +244,6 @@
 		C2B3E2FA70A171E0EE8DD65F /* ConfigView.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = ConfigView.h; path = src/ui/ConfigView.h; sourceTree = SOURCE_ROOT; };
 		C321D226A615C98BB9F36DEC /* OsciAvAudioPlayer.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = OsciAvAudioPlayer.cpp; path = src/util/OsciAvAudioPlayer.cpp; sourceTree = SOURCE_ROOT; };
 		C347233CADF8935C865DDB5E /* version.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = version.h; path = addons/ofxAvCodec/libs/avcodec/include/libswscale/version.h; sourceTree = SOURCE_ROOT; };
-		C55DFEF87BB00C4BF3A7395B /* OsciResampler.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = OsciResampler.cpp; path = src/util/OsciResampler.cpp; sourceTree = SOURCE_ROOT; };
 		C5FB96CE1BFE2C43E6F945B9 /* ofxFontAwesome4.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = ofxFontAwesome4.h; path = addons/ofxFontAwesome/src/ofxFontAwesome4.h; sourceTree = SOURCE_ROOT; };
 		C601BB6A411AC66C61B2EC84 /* eval.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = eval.h; path = addons/ofxAvCodec/libs/avcodec/include/libavutil/eval.h; sourceTree = SOURCE_ROOT; };
 		C700FE02F27F7833BBC780AE /* FaToggleButton.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = FaToggleButton.h; path = src/ui/FaToggleButton.h; sourceTree = SOURCE_ROOT; };
@@ -608,7 +605,6 @@
 		174FB92B07113C7D1223D425 /* util */ = {
 			isa = PBXGroup;
 			children = (
-				C55DFEF87BB00C4BF3A7395B /* OsciResampler.cpp */,
 				C321D226A615C98BB9F36DEC /* OsciAvAudioPlayer.cpp */,
 				C7FE049CD4502E550DDEB840 /* miniaudio.h */,
 				1698AD036118002E1BDECC8D /* OsciVideoWriter.cpp */,
@@ -616,7 +612,6 @@
 				A1BCFFFBF9F6EA0D49A29EC2 /* OsciAvAudioPlayer.h */,
 				0E7AD8E5D3434D069C1A6EC2 /* Audio.h */,
 				AD1ADF1F2FCE814E53084004 /* Audio.cpp */,
-				9B8F0DBA57E8569FA8A46F09 /* OsciResampler.h */,
 				68965801B56E8D1E205AAC60 /* ShaderLoader.h */,
 				BF2CAE493C747B0E34576746 /* OsciVideoWriter.hpp */,
 				3ACDCDD83540F8A5D5E548BC /* TexShare.cpp */,
@@ -1479,7 +1474,6 @@
 				E0BA926531C157501ABBD8CC /* FMenu.cpp in Sources */,
 				4A3AC110E7F2224BFEF7022A /* ExportScreen.cpp in Sources */,
 				130706CE6DF52309553B9482 /* ConfigView.cpp in Sources */,
-				A089A6868FAE1B4F39C77B87 /* OsciResampler.cpp in Sources */,
 				869B0FCA4FD8134FB96D9495 /* OsciAvAudioPlayer.cpp in Sources */,
 				8B0C53D77F9EE1A7F97EAC88 /* OsciVideoWriter.cpp in Sources */,
 				2AF622F5027CBF10E11F6EFA /* Audio.cpp in Sources */,
