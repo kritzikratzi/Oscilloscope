@@ -4,7 +4,7 @@
 #include "miniaudio.h"
 
 ConfigView::ConfigView()
-: mui::Container(0,0, 500, 40){
+: mui::Container(0,0, 500, 80){
 	bg = ofColor(125, 50);
 	opaque = true;
 
@@ -19,8 +19,19 @@ ConfigView::ConfigView()
 		if (value == "") return string("Default Output"); 
 		else return value; 
 	}; 
-	ofAddListener(outDevicePicker->menu->onSelectValue, this, &ConfigView::outDevicePickerChanged); 
+	ofAddListener(outDevicePicker->menu->onSelectValue, this, &ConfigView::outDevicePickerChanged);
 	add(outDevicePicker);
+
+	emulationLabel = new mui::Label("Mode",0,0,100,30);
+	emulationLabel->inset.left = 5; 
+	add(emulationLabel);
+	
+	emulationMode = new mui::SegmentedSelect<int>(0,0,200,30);
+	emulationMode->addSegment("Digital", 0);
+	emulationMode->addSegment("Analog", 1);
+	emulationMode->equallySizedButtons = true;
+	ofAddListener(emulationMode->onChangeValue, this, &ConfigView::emulationModeChanged);
+	add(emulationMode);
 }
 
 
@@ -36,6 +47,8 @@ void ConfigView::draw(){
 //--------------------------------------------------------------
 void ConfigView::layout(){
 	mui::L(outDevicePicker).posTL(5,5).stretchToRightEdgeOfParent(5);
+	mui::L(emulationLabel).below(outDevicePicker,5);
+	mui::L(emulationMode).rightOf(emulationLabel).alignRightEdgeTo(outDevicePicker);
 }
 
 
@@ -60,12 +73,14 @@ void ConfigView::touchDoubleTap( ofTouchEventArgs &touch ){
 
 //--------------------------------------------------------------
 void ConfigView::fromGlobals(){
-	outDevicePicker->setSelectedValue( globals.out_requested.name ); 
+	outDevicePicker->setSelectedValue( globals.out_requested.name );
+	emulationMode->setSelected(globals.analogMode==0?0:1);
 }
 
 //--------------------------------------------------------------
 void ConfigView::toGlobals(){
 	globals.out_requested.name = outDevicePicker->getSelectedValueOr("");
+	globals.analogMode = emulationMode->getSelectedValueOr(1);
 }
 
 
@@ -86,6 +101,12 @@ void ConfigView::outDevicePickerChanged(const void * sender, string & value) {
 	ofSendMessage("out-choice-changed"); 
 }
 
+//--------------------------------------------------------------
+void ConfigView::emulationModeChanged(const void * sender, int & value){
+	globals.analogMode = value;
+}
+
+//--------------------------------------------------------------
 void ConfigView::gotMessage(const void * sender, ofMessage & msg) {
 }
 

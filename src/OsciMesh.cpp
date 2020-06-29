@@ -40,7 +40,8 @@ void OsciMesh::addLines( float * left, float * right, float * bright, int N, int
 	}
 }
 
-inline void OsciMesh::addLine(ofVec2f p0, ofVec2f p1, const float bright){
+inline void OsciMesh::addLine(ofVec2f p0, ofVec2f p1, const float bright_){
+	float bright = bright_*2-1;
 	ofVec2f dir = p1 - p0;
 	float z = dir.length();
 	if (z > EPS) dir /= z;
@@ -51,7 +52,7 @@ inline void OsciMesh::addLine(ofVec2f p0, ofVec2f p1, const float bright){
 	ofVec2f xy(-uSize, -uSize);
 	
 	//make vec3 from vec2+float
-	const auto vec3 = [bright](const ofVec2f & xy, const float & z){ return ofVec3f(xy.x,xy.y,bright); };
+	const auto vec3 = [](const ofVec2f & xy, const float & z){ return ofVec3f(xy.x,xy.y,z); };
 
 	mesh.addVertex(vec3(p0-dir-norm, bright));
 	mesh.addColor(ofFloatColor(-uSize, -uSize, z));

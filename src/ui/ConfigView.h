@@ -17,12 +17,15 @@ public:
 	void touchDoubleTap( ofTouchEventArgs &touch ) override;
 	
 	
-	FDropdown<string> * outDevicePicker; 
+	FDropdown<string> * outDevicePicker;
+	mui::Label * emulationLabel;
+	mui::SegmentedSelect<int> * emulationMode;
 
 	void fromGlobals();
 	void toGlobals();
 	
 	void buttonPressed( const void * sender, ofTouchEventArgs & args );
+	void emulationModeChanged(const void * sender, int & value);
 	
 private:
 	void pushLabel( string text );

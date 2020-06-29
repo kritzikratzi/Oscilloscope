@@ -15,8 +15,8 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
 	OsciMesh::init();
-	ma_zero_object(&playDevice);
-	ma_zero_object(&micDevice);
+	MA_ZERO_OBJECT(&playDevice);
+	MA_ZERO_OBJECT(&micDevice);
 
 	texSender.setup("Oscilloscope");
 	mui::MuiConfig::fontSize = 16;
@@ -107,7 +107,7 @@ void ofApp::startApplication(){
 	playDeviceConfig = ma_device_config_init(ma_device_type_playback);
 	playDeviceConfig.playback.format = ma_format_f32;
 	playDeviceConfig.playback.channels = 2;
-	playDeviceConfig.bufferSizeInFrames = 0;
+	playDeviceConfig.periodSizeInFrames = 0;
 	playDeviceConfig.sampleRate = 0;
 	
 	playDeviceConfig.dataCallback = [](ma_device* device, void* pOutput, const void* pInput, ma_uint32 frameCount) {
@@ -154,7 +154,7 @@ void ofApp::startApplication(){
 			if (dev.name == globals.out_requested.name) {
 				//it's a tiny leak, but it works. we accept it as it is, give it a little hug, and move on.
 				playDeviceConfig.playback.pDeviceID = new ma_device_id();
-				memcpy(playDeviceConfig.playback.pDeviceID, &dev.id, sizeof(ma_device_id));
+				memcpy((void*)playDeviceConfig.playback.pDeviceID, &dev.id, sizeof(ma_device_id));
 			}
 		}
 
@@ -868,14 +868,18 @@ void ofApp::updateSampleRate(){
 //--------------------------------------------------------------
 void ofApp::startMic() {
 	stopMic(); 
-	stopApplication(); 
+	stopApplication();
+	
+	micLeft.clear();
+	micRight.clear();
+	micZMod.clear();
 
 	auto info = playerOverlay->getSelectedMicDeviceInfo();
 	micChannels = info.info.maxChannels;
 	micDeviceConfig = ma_device_config_init(info.type);
 	micDeviceConfig.capture.format = ma_format_f32;
 	micDeviceConfig.capture.channels = 0;
-	micDeviceConfig.bufferSizeInFrames = 0;
+	micDeviceConfig.periodSizeInFrames = 0;
 	micDeviceConfig.sampleRate = 0;
 	micDeviceConfig.dataCallback = [](ma_device* device, void* pOutput, const void* pInput, ma_uint32 frameCount) {
 		ofApp * app = (ofApp*)device->pUserData;
@@ -899,7 +903,8 @@ void ofApp::startMic() {
 
 	if (strcmp(info.info.name,"") != 0) {
 		if (!micDeviceConfig.capture.pDeviceID) micDeviceConfig.capture.pDeviceID = new ma_device_id();
-		*micDeviceConfig.capture.pDeviceID = info.info.id;
+		memcpy((void*)micDeviceConfig.capture.pDeviceID, &info.info.id, sizeof(ma_device_id));
+
 	}
 
 	if (ma_device_init(NULL, &micDeviceConfig, &micDevice) != MA_SUCCESS) {
