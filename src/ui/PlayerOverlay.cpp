@@ -244,6 +244,9 @@ void PlayerOverlay::update(){
 	outputVolumeLabel->visible = !globals.micActive;
 	outputVolumeSlider->visible = !globals.micActive;
 	playButton->visible = !globals.micActive;
+	timeStretchLabel->visible = !globals.micActive;
+	timeStretchSlider->visible = !globals.micActive;
+	timeLabelButton->visible = !globals.micActive;
 	analogModeToggle->selected = globals.analogMode == 0?false:true; 
 	
 	if( !globals.micActive ){
