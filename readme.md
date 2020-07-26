@@ -35,18 +35,20 @@ Things are moving around a bit sometimes.
 Make sure to read these instructions before each build. 
 
 1. Download and unzip Openframeworks 0.10.1
-1. Open the folder apps/myApps/
+1. Open the folder apps/myApps/ (in the OpenFrameworks folder)
 1. Clone the repository with submodules: `git clone --recursive https://github.com/kritzikratzi/Oscilloscope.git`
-1. Download the binary release for ofxAvCodec from [https://github.com/kritzikratzi/ofxAvCodec/releases/tag/0.1](https://github.com/kritzikratzi/ofxAvCodec/releases/tag/0.1)
+1. Download the binary release for ofxAvCodec from [https://github.com/kritzikratzi/ofxAvCodec/releases/tag/0.2](https://github.com/kritzikratzi/ofxAvCodec/releases/tag/0.2)
 1. Replace the addons/ofxAvCodec/libs with the libs folder from the download
 
 
-### Compiling with XCode (OSX10.10+)
+### Compiling with XCode (OSX11.5+)
 
+1. Add the `--deep` value to the `Other Code Signing Flags` key in the Build Settings tab
 1. (optional) run `scripts/clean.sh`
 1. (optional) run `scripts/prepare.sh osx`
 1. Open apps/myApps/oscilloscope/Oscilloscope.xcodeproject and then Build&Run
 1. (Optional) Code sign by running `scripts/sign-mac.sh bin/Oscilloscope.app "Developer ID Application: Name of your certificate"` (run `security find-identity -v -p codesigning` to get a list of installed certs)
+
 
 You can also build with `make && make run` on the command line. The resulting build will have no icon/no proper name/no retina support. 
 
