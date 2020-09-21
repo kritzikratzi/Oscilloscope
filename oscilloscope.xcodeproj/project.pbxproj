@@ -231,6 +231,8 @@
 		B6E8875D1F1B5C78A2188506 /* ofxMightyUI.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = ofxMightyUI.cpp; path = addons/ofxMightyUI/src/ofxMightyUI.cpp; sourceTree = SOURCE_ROOT; };
 		B8F15875D3E67E30731BCD6E /* ofxSyphon.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = ofxSyphon.h; path = addons/ofxSyphon/src/ofxSyphon.h; sourceTree = SOURCE_ROOT; };
 		B8F21FE587FB1FD1C558D093 /* avio.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = avio.h; path = addons/ofxAvCodec/libs/avcodec/include/libavformat/avio.h; sourceTree = SOURCE_ROOT; };
+		BA5F27F22518C178007EE90C /* version.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = version.h; sourceTree = "<group>"; };
+		BA5F27F42518DF93007EE90C /* ofxNative_lin.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = ofxNative_lin.cpp; path = addons/ofxNative/src/ofxNative_lin.cpp; sourceTree = "<group>"; };
 		BA97EF7AEF7764CD6F15DE86 /* ofxFontStash2.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = ofxFontStash2.h; path = addons/ofxFontStash2/src/ofxFontStash2.h; sourceTree = SOURCE_ROOT; };
 		BBEFE75982C6528D8DF52114 /* version.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = version.h; path = addons/ofxAvCodec/libs/avcodec/include/libswresample/version.h; sourceTree = SOURCE_ROOT; };
 		BD07F6706CCC5FC5B4186A2B /* ofxNative.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = ofxNative.h; path = addons/ofxNative/src/ofxNative.h; sourceTree = SOURCE_ROOT; };
@@ -797,6 +799,7 @@
 				BD07F6706CCC5FC5B4186A2B /* ofxNative.h */,
 				9B33A952E660E152898C5032 /* ofxNative_osx.mm */,
 				6FBD34C9A9A88081490F8C2B /* ofxNative_win.cpp */,
+				BA5F27F42518DF93007EE90C /* ofxNative_lin.cpp */,
 			);
 			name = src;
 			sourceTree = "<group>";
@@ -1329,6 +1332,7 @@
 				E24D9D7607931EE882C50190 /* globals.cpp */,
 				96B1109F100084BCFEE9526F /* OsciMesh.cpp */,
 				0BB7EE8B407FA69AE4B0FA93 /* ofxIniSettings */,
+				BA5F27F22518C178007EE90C /* version.h */,
 			);
 			path = src;
 			sourceTree = SOURCE_ROOT;

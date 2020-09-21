@@ -5,6 +5,7 @@
 
 #include "ofApp.h"
 #include "globals.h"
+#include "version.h"
 #include <cctype> 
 #include "ofxNative.h"
 #include "ui/ExportScreen.h"
@@ -32,7 +33,7 @@ void ofApp::setup(){
 	applicationRunning = false; 
 	ofSetVerticalSync(true);
 	ofBackground(0);
-	ofSetBackgroundAuto(false);
+	ofSetBackgroundAuto(true);
 	
 	ofSetFrameRate(60);
 	
@@ -78,6 +79,9 @@ void ofApp::setup(){
 	windowResized(ofGetWidth(), ofGetHeight());
 
 	root->onDrawAbove.add([&]() {drawAbove(); });
+	
+	ofRegisterURLNotification(this);
+	ofLoadURLAsync("https://www.oscilloscopemusic.com/version_oscilloscope.xml");
 }
 
 
@@ -94,6 +98,7 @@ void ofApp::startApplication(){
 	globals.saveToFile();
 	playerOverlay->fromGlobals();
 	playerOverlay->visible = true;
+	forceHidden = false;
 	playerOverlay->filenameLabel->setText(ofFile(globals.player.getFilename(),ofFile::Reference).getFileName());
 	/*if( globals.autoDetect ){
 		cout << "Running auto-detect for sound cards" << endl;
@@ -250,7 +255,7 @@ void ofApp::update(){
 
 	ofVec2f mousePos(ofGetMouseX(), ofGetMouseY());
 	bool insideWindow = ofRectangle(0,0,ofGetWidth(),ofGetHeight()).inside(mousePos);
-	if( lastUpdateTime-lastMouseMoved < globals.secondsBeforeHidingMenu*1000 && playerOverlay->visible == false ){
+	if( !forceHidden && lastUpdateTime-lastMouseMoved < globals.secondsBeforeHidingMenu*1000 && playerOverlay->visible == false ){
 		bool movedEnough = mousePos.distance(mousePosBeforeHiding) > 10*mui::MuiConfig::scaleFactor;
 		if( insideWindow && movedEnough ){
 			// okay, we moved enough!
@@ -443,8 +448,6 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-	ofClear(0,255);
-	
 	if( !fbo.isAllocated() || fbo.getWidth() != ofGetWidth() || fbo.getHeight() != ofGetHeight() ){
 		int w = ofGetWidth();
 		int h = ofGetHeight();
@@ -589,9 +592,11 @@ void ofApp::keyPressed  (int key){
 	if( key == '\t' && !configView->isVisibleOnScreen()){
 		playerOverlay->visible = !playerOverlay->visible;
 		if( playerOverlay->visible ){
+			forceHidden = false;
 			lastMouseMoved = ofGetElapsedTimeMillis();
 		}
 		else{
+			forceHidden = true;
 			lastMouseMoved = 0;
 			mousePosBeforeHiding.x = ofGetMouseX();
 			mousePosBeforeHiding.y = ofGetMouseY();
@@ -971,4 +976,56 @@ ofMatrix4x4 ofApp::getViewMatrix(int i, bool isQuad) {
 	}
 	
 	return result;
+}
+
+void ofApp::urlResponse(ofHttpResponse & response){
+	ofXml xml;
+	xml.load(response.data);
+	
+	// verA<verB?-1   verA=verB?0   verA>verB?1
+	auto compare = []( string verA, string verB ){
+		auto va = ofSplitString(verA, ".");
+		auto vb = ofSplitString(verB, ".");
+		int N = min(va.size(), vb.size());
+		for( int i = 0; i < N; i++){
+			int a = ofToInt(va[i]);
+			int b = ofToInt(vb[i]);
+			if( a < b) return -1;
+			else if( a > b ) return 1;
+		}
+		return va.size()<vb.size()?-1:(va.size()==vb.size()?0:1);
+	};
+	
+	string latestVersionText = "";
+	string latestVersion = app_version;
+	bool foundUpdate = false;
+	string websiteUrl = xml.getChild("items").getAttribute("website").getValue();
+	
+	auto items = xml.getChild("items").getChildren("item");
+	for(auto & item : items){
+		if(compare(latestVersion,item.getChild("version").getValue()) == -1){
+			latestVersionText = item.getChild("title").getValue();
+			latestVersion = item.getChild("version").getValue();
+			foundUpdate = true;
+		}
+	}
+	
+	if(foundUpdate){
+		//regex pattern(R"(^(?:(?:https?|ftp):\/\/)(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,}))\.?)(?::\d{2,5})?(?:[/?#]\S*)?$)", regex_constants::icase | regex_constants::ECMAScript );
+		
+		if(/*!regex_match(websiteUrl, pattern )*/ websiteUrl == ""){
+			websiteUrl = "https://www.oscilloscopemusic.com";
+		}
+		
+		
+		//ofSystemAlertDialog("New version available: " + latestVersionText);
+		playerOverlay->updateButton->setProperty<string>("url", websiteUrl);
+		playerOverlay->updateButton->label->setText("Update available: " + latestVersionText );
+		playerOverlay->updateButton->visible = true;
+		playerOverlay->handleLayout();
+		playlist->height = playerOverlay->height;
+		playlist->handleLayout();
+	}
+	
+	ofStopURLLoader();
 }

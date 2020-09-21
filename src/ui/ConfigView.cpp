@@ -22,7 +22,7 @@ ConfigView::ConfigView()
 	ofAddListener(outDevicePicker->menu->onSelectValue, this, &ConfigView::outDevicePickerChanged);
 	add(outDevicePicker);
 
-	emulationLabel = new mui::Label("Upsampling",0,0,100,30);
+	emulationLabel = new mui::Label("Visual Upsampling",0,0,200,30);
 	emulationLabel->inset.left = 5;
 	add(emulationLabel);
 	

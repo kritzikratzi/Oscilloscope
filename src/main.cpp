@@ -7,6 +7,7 @@
 #elif defined(TARGET_WIN32)
 #include "../resource.h"
 #endif
+#include "version.h"
 
 #include "ofAppGLFWWindow.h"
 #include "ofxNative.h"
@@ -23,7 +24,7 @@ int main(){
 
 	cout << "LAUNCH DESKTOP" << endl;
 	ofSetupOpenGL(&window, 1024, 700, OF_WINDOW);
-	window.setWindowTitle("Oscilloscope");
+	window.setWindowTitle("Oscilloscope " + app_version);
 	
 	// go fullscreen in mac osx
 	ofxNative::maximizeWindow(window);
@@ -31,7 +32,9 @@ int main(){
 	#if defined(TARGET_OSX)
 	NSWindow * cocoaWindow = (NSWindow*)window.getCocoaWindow();
 //	[cocoaWindow setFrame:[[NSScreen mainScreen] visibleFrame] display:YES];
-	[cocoaWindow setTitle:@"Oscilloscope"];
+	NSString * ver = [NSString stringWithUTF8String:app_version.c_str()];
+	NSString * title = [NSString stringWithFormat:@"Oscilloscope %@", ver];
+	[cocoaWindow setTitle:title];
 	if(globals.alwaysOnTop){
 		[cocoaWindow setLevel: NSFloatingWindowLevel];
 	}
@@ -46,7 +49,6 @@ int main(){
 	mui_init();
 	mui::MuiConfig::font = "mui/fonts/Lato-Regular.ttf";
 	ofRunApp(new ofApp);
-	
 }
 
 #ifdef _WIN32
@@ -64,7 +66,9 @@ void setWindowRepresentedFilename( string filename ){
 	NSWindow * cocoaWindow = (NSWindow*)(ofGetWindowPtr()->getCocoaWindow());
 	if(filename == ""){
 		[cocoaWindow setRepresentedFilename:@""];
-		[cocoaWindow setTitle:@"Oscilloscope"];
+		NSString * ver = [NSString stringWithUTF8String:app_version.c_str()];
+		NSString * title = [NSString stringWithFormat:@"Oscilloscope %@", ver];
+		[cocoaWindow setTitle:title];
 	}
 	else if(filename[0] != '/'){
 		[cocoaWindow setRepresentedFilename:@""];
@@ -77,7 +81,12 @@ void setWindowRepresentedFilename( string filename ){
 		[cocoaWindow setRepresentedFilename:file];
 	}
 #else
-	ofGetWindowPtr()->setWindowTitle(filename);
+	if(filename==""){
+		ofGetWindowPtr()->setWindowTitle("Oscilloscope " + " " + app_version);
+	}
+	else{
+		ofGetWindowPtr()->setWindowTitle(filename);
+	}
 #endif
 	
 }

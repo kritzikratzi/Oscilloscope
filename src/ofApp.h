@@ -50,7 +50,9 @@ class ofApp : public ofBaseApp{
 		void startMic(); 
 		void stopMic();
 		ofMatrix4x4 getViewMatrix(int i, bool isQuad); 
-	
+
+		void urlResponse(ofHttpResponse & response);
+
 
 		mui::Root * root;
 		ConfigView * configView;
@@ -90,6 +92,7 @@ class ofApp : public ofBaseApp{
 		uint64_t lastMouseMoved{0};
 		uint64_t lastUpdateTime{0};
 		ofVec2f mousePosBeforeHiding;
+		bool forceHidden = false; 
 		string fileToLoad;
 		string currentFilename{"Oscilloscope"};
 		string nextWindowTitle;

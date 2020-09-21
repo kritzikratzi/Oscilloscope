@@ -2,6 +2,7 @@
 #include "ofxFontAwesome.h"
 #include "ofApp.h"
 #include "MuiL.h"
+#include "ofxNative.h"
 
 static string timestring(double t);
 
@@ -88,14 +89,6 @@ PlayerOverlay::PlayerOverlay( float x_, float y_, float width_, float height_)
 	ofAddListener(showPlaylistToggle->onPress, this, &PlayerOverlay::buttonPressed);
 	add(showPlaylistToggle);
 	
-	analogModeToggle  = new mui::ToggleButton("A", 10, 1, h, h);
-	analogModeToggle->setProperty("tooltip", string("Analog/digital oscilloscope simulation"));
-	analogModeToggle->fg = ofColor(255);
-	analogModeToggle->selectedFg = ofColor(0);
-	analogModeToggle->bg = ofColor(0,0);
-	ofAddListener(analogModeToggle->onPress, this, &PlayerOverlay::buttonPressed);
-	add(analogModeToggle);
-	
 	x = 10;
 	y += invertYToggle->height + 10;
 	
@@ -156,7 +149,13 @@ PlayerOverlay::PlayerOverlay( float x_, float y_, float width_, float height_)
 	afterglowSlider->label->fg = ofColor(255);
 	add(afterglowSlider);
 	
-	
+	updateButton = new mui::Button("");
+	updateButton->label->fontSize = 9;
+	updateButton->label->horizontalAlign = mui::Left;
+	updateButton->bg.a = 0;
+	updateButton->visible = false;
+	ofAddListener( updateButton->onPress, this, &PlayerOverlay::buttonPressed );
+	add(updateButton);
 	
 
 	// make labels the same width
@@ -167,7 +166,7 @@ PlayerOverlay::PlayerOverlay( float x_, float y_, float width_, float height_)
 
 void PlayerOverlay::layout(){
 	mui::L({configButton,fullscreenToggle, showPlaylistToggle}).columnsFromRight({width, 0},1);
-	mui::L({ zModulationToggle,flip3dToggle,sideBySideToggle,analogModeToggle }).columnsFromRight({ configButton->x-10,0},1);
+	mui::L({ zModulationToggle,flip3dToggle,sideBySideToggle }).columnsFromRight({ configButton->x-10,0},1);
 
 
 	mui::L(playButton).pos(10,40);
@@ -212,7 +211,14 @@ void PlayerOverlay::layout(){
 	mui::L(afterglowLabel).below(intensityLabel).alignRightEdgeTo(intensityLabel);
 	mui::L(afterglowSlider).rightOf(afterglowLabel,5).stretchToRightEdgeOfParent(10);
 	
-	height = afterglowSlider->y + afterglowSlider->height + 10;
+	mui::L(updateButton).below(afterglowLabel, 5).stretchToRightEdgeOfParent(10);
+	
+	if(updateButton->visible){
+		height = updateButton->y + updateButton->height + 10;
+	}
+	else{
+		height = afterglowSlider->y + afterglowSlider->height + 10;
+	}
 }
 
 
@@ -247,7 +253,6 @@ void PlayerOverlay::update(){
 	timeStretchLabel->visible = !globals.micActive;
 	timeStretchSlider->visible = !globals.micActive;
 	timeLabelButton->visible = !globals.micActive;
-	analogModeToggle->selected = globals.analogMode == 0?false:true; 
 	
 	if( !globals.micActive ){
 		if( !updateSlider(timeSlider, globals.player.getPosition(), lastTimeVal ) ){
@@ -398,8 +403,8 @@ void PlayerOverlay::buttonPressed( const void * sender, ofTouchEventArgs & args 
 	else if (sender == showPlaylistToggle) {
 		ofSendMessage(ofMessage("toggle-playlist"));
 	}
-	else if(sender == analogModeToggle){
-		globals.analogMode = globals.analogMode==0?1:0;
+	else if(sender == updateButton){
+		ofxNative::openUrl(*updateButton->getProperty<string>(string("url"))); 
 	}
 }
 
