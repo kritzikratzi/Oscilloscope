@@ -193,6 +193,21 @@
     <ClCompile Include="addons\ofxSpout\libs\SpoutSDK\src\SpoutCopy.cpp">
       <Filter>local_addons\ofxSpout\libs\SpoutSDK\src</Filter>
     </ClCompile>
+    <ClCompile Include="src\util\WickedLasers.cpp">
+      <Filter>src\util</Filter>
+    </ClCompile>
+    <ClCompile Include="addons\ofxLiblaserdock\src\LaserdockDevice_desktop.cpp">
+      <Filter>local_addons\ofxLiblaserdock\src</Filter>
+    </ClCompile>
+    <ClCompile Include="addons\ofxLiblaserdock\src\LaserdockDeviceManager.cpp">
+      <Filter>local_addons\ofxLiblaserdock\src</Filter>
+    </ClCompile>
+    <ClCompile Include="addons\ofxLiblaserdock\src\LaserdockDeviceManager_desktop.cpp">
+      <Filter>local_addons\ofxLiblaserdock\src</Filter>
+    </ClCompile>
+    <ClCompile Include="addons\ofxLiblaserdock\src\LaserdockDevice.cpp">
+      <Filter>local_addons\ofxLiblaserdock\src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -329,6 +344,33 @@
     </Filter>
     <Filter Include="local_addons\ofxLibsamplerate\libs\libsamplerate\include">
       <UniqueIdentifier>{A7D29770-C85E-83B1-4D3D-C151}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="local_addons\ofxLiblaserdock">
+      <UniqueIdentifier>{50af8c3c-13d2-4538-b9f5-548372017aec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="local_addons\ofxLiblaserdock\src">
+      <UniqueIdentifier>{32450c74-3592-4403-a462-908ae4c0f0a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="local_addons\ofxLiblaserdock\libs">
+      <UniqueIdentifier>{3e1327f9-c237-4b7a-ad07-db02a2cf9fd4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="local_addons\ofxLiblaserdock\libs\liblaserdock">
+      <UniqueIdentifier>{b6f53fc3-26b3-461c-b43a-2bc6ee3313f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="local_addons\ofxLiblaserdock\libs\liblaserdock\include">
+      <UniqueIdentifier>{2ca5f505-84b6-40ac-8133-ec9c8b869ffa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="local_addons\ofxLiblaserdock\libs\liblaserdock\include\libusb">
+      <UniqueIdentifier>{d62d0329-9cde-4f48-b94c-b0e7da313163}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="local_addons\ofxLiblaserdock\libs\liblaserdock\lib">
+      <UniqueIdentifier>{6fabdfe3-1b28-496f-a10b-0dd488a70d70}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="local_addons\ofxLiblaserdock\libs\liblaserdock\lib\vs">
+      <UniqueIdentifier>{627560a6-50e0-46cd-856f-8c663ecc7a8d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="local_addons\ofxLiblaserdock\libs\liblaserdock\lib\vs\x64">
+      <UniqueIdentifier>{a495f15f-bcaa-4c05-953b-69005f9e96b1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -893,8 +935,48 @@
     <ClInclude Include="addons\ofxSpout\libs\SpoutSDK\src\SpoutCopy.h">
       <Filter>local_addons\ofxSpout\libs\SpoutSDK\src</Filter>
     </ClInclude>
+    <ClInclude Include="src\version.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\util\WickedLasers.h">
+      <Filter>src\util</Filter>
+    </ClInclude>
+    <ClInclude Include="addons\ofxLiblaserdock\src\LaserdockDevice_p.h">
+      <Filter>local_addons\ofxLiblaserdock\src</Filter>
+    </ClInclude>
+    <ClInclude Include="addons\ofxLiblaserdock\src\LaserdockDeviceManager.h">
+      <Filter>local_addons\ofxLiblaserdock\src</Filter>
+    </ClInclude>
+    <ClInclude Include="addons\ofxLiblaserdock\src\LaserdockDeviceManager_p.h">
+      <Filter>local_addons\ofxLiblaserdock\src</Filter>
+    </ClInclude>
+    <ClInclude Include="addons\ofxLiblaserdock\src\LaserdockDevice.h">
+      <Filter>local_addons\ofxLiblaserdock\src</Filter>
+    </ClInclude>
+    <ClInclude Include="addons\ofxLiblaserdock\libs\liblaserdock\include\libusb\libusb.h">
+      <Filter>local_addons\ofxLiblaserdock\libs\liblaserdock\include\libusb</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="icon.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="addons\ofxLiblaserdock\libs\liblaserdock\lib\vs\x64\libusb-1.0.dll">
+      <Filter>local_addons\ofxLiblaserdock\libs\liblaserdock\lib\vs\x64</Filter>
+    </None>
+    <None Include="addons\ofxLiblaserdock\libs\liblaserdock\lib\vs\x64\libusb-1.0.pdb">
+      <Filter>local_addons\ofxLiblaserdock\libs\liblaserdock\lib\vs\x64</Filter>
+    </None>
+    <None Include="addons\ofxLiblaserdock\libs\liblaserdock\lib\vs\x64\laserdocklib.dll">
+      <Filter>local_addons\ofxLiblaserdock\libs\liblaserdock\lib\vs\x64</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="addons\ofxLiblaserdock\libs\liblaserdock\lib\vs\x64\libusb-1.0.lib">
+      <Filter>local_addons\ofxLiblaserdock\libs\liblaserdock\lib\vs\x64</Filter>
+    </Library>
+    <Library Include="addons\ofxLiblaserdock\libs\liblaserdock\lib\vs\x64\laserdocklib.lib">
+      <Filter>local_addons\ofxLiblaserdock\libs\liblaserdock\lib\vs\x64</Filter>
+    </Library>
   </ItemGroup>
 </Project>

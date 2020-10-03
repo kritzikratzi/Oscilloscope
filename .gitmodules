@@ -22,3 +22,6 @@
 [submodule "addons/ofxLibsamplerate"]
 	path = addons/ofxLibsamplerate
 	url = https://github.com/kritzikratzi/ofxLibsamplerate.git
+[submodule "addons/ofxLiblaserdock"]
+	path = addons/ofxLiblaserdock
+	url = https://github.com/kritzikratzi/ofxLiblaserdock.git

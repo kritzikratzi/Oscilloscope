@@ -20,11 +20,12 @@ extern void setWindowRepresentedFilename( string filename );
 string ofxFormatTime(double seconds); 
 
 enum class ExportFormat{H264=1,IMAGE_SEQUENCE_PNG=2,IMAGE_SEQUENCE_TIFF=3};
+class WickedLasers; 
 
 #define globals (Globals::instance)
 class Globals{
 public:
-	Globals(){}
+	Globals();
 	
 	struct AudioConfig {
 		string name; 
@@ -68,77 +69,19 @@ public:
 	float secondsBeforeHidingMenu{0.5};
 	
 	bool alwaysOnTop{false};
-	
-	void loadFromFile( string settingsFile = ofxToReadWriteableDataPath("settings.txt") ){
-		ofxIniSettings settings = ofxIniSettings(settingsFile);
-		out_requested.bufferSize = settings.get("out_bufferSize", out_requested.bufferSize);
-		out_requested.sampleRate = settings.get("out_sampleRate", out_requested.sampleRate);
-		out_requested.name = settings.get("out_deviceName", out_requested.name);
-		in_requested.bufferSize = settings.get("in_bufferSize", in_requested.sampleRate);
-		in_requested.sampleRate = settings.get("in_sampleRate", in_requested.sampleRate);
-		in_requested.name = settings.get("in_deviceName", in_requested.name);
 
-		scale = settings.get( "scale", scale );
-		flipXY = settings.get( "flipXY", flipXY );
-		zModulation = settings.get( "zModulation", zModulation );
-		invertX = settings.get( "invertX", invertX );
-		invertY = settings.get( "invertY", invertY );
-		outputVolume = settings.get( "outputVolume", outputVolume );
-		inputVolume = settings.get( "inputVolume", inputVolume );
-		strokeWeight = settings.get( "strokeWeight", strokeWeight );
-		//timeStretch = settings.get( "timeStretch", timeStretch ); // never load timestretch!
-		blur = settings.get( "blur", blur );
-		numPts = settings.get( "numPts", numPts );
-		hue = settings.get( "hue", hue );
-		intensity = settings.get( "intensity", intensity );
-		afterglow = settings.get( "afterglow", afterglow );
-		analogMode = settings.get( "analogMode", analogMode );
-		exportFrameRate = settings.get( "exportFrameRate", exportFrameRate );
-		exportWidth = settings.get( "exportWidth", exportWidth );
-		exportHeight = settings.get( "exportHeight", exportHeight );
-		exportFormat = (ExportFormat)settings.get("exportFormat", (int)exportFormat);
-		//secondsBeforeHidingMenu = settings.get( "secondsBeforeHidingMenu", secondsBeforeHidingMenu );
-	}
-	
-	
-	void saveToFile( string settingsFile = ofxToReadWriteableDataPath("settings.txt") ){
-		if(!ofFile(settingsFile, ofFile::Reference).exists()){
-			ofFile file(settingsFile, ofFile::WriteOnly);
-			file << endl;
-			file.close();
-		}
+	// laser stuff. none of this is ever stored!
+	unique_ptr<WickedLasers> laserPtr; 
+	bool laserConnected{ false };
+	float laserSize{ 0.5 };
+	float laserIntensity{ 0.0 };
+	float laserKeystoneX{ 0.0 };
+	float laserKeystoneY{ 0.0 };
+	float laserOffsetX{ 0.0 };
+	float laserOffsetY{ 0.0 };
 
-		ofxIniSettings settings = ofxIniSettings(settingsFile);
-		
-		//settings.set("out_bufferSize", out_requested.bufferSize);
-		//settings.set("out_sampleRate", out_requested.sampleRate);
-		settings.set("out_deviceName", out_requested.name);
-		//settings.set("in_bufferSize", in_requested.bufferSize);
-		//settings.set("in_sampleRate", in_requested.sampleRate);
-		settings.set("in_deviceName", in_requested.name);
-		settings.set( "scale", scale );
-		settings.set( "flipXY", flipXY );
-		settings.set( "zModulation", zModulation );
-		settings.set( "invertX", invertX );
-		settings.set( "invertY", invertY );
-		settings.set( "outputVolume", outputVolume );
-		settings.set( "inputVolume", inputVolume );
-		settings.set( "strokeWeight", strokeWeight );
-		// settings.set( "timeStretch", timeStretch ); // never save timestretch!
-		settings.set( "blur", blur );
-		settings.set( "numPts", numPts );
-		settings.set( "hue", hue );
-		settings.set( "intensity", intensity );
-		settings.set( "afterglow", afterglow );
-		settings.set( "analogMode", analogMode );
-		settings.set( "exportFrameRate", exportFrameRate );
-		settings.set( "exportWidth", exportWidth );
-		settings.set( "exportHeight", exportHeight );
-		settings.set( "exportFormat", (int)exportFormat );
-		// settings.set( "secondsBeforeHidingMenu", secondsBeforeHidingMenu );
-	}
-	
-	
+	void loadFromFile(string settingsFile = ofxToReadWriteableDataPath("settings.txt"));
+	void saveToFile(string settingsFile = ofxToReadWriteableDataPath("settings.txt"));
 	
 	// runtime variables (not saved)
 	OsciAvAudioPlayer player;

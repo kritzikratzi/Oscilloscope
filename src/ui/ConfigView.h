@@ -21,6 +21,19 @@ public:
 	mui::Label * emulationLabel;
 	mui::SegmentedSelect<int> * emulationMode;
 
+	mui::Label* laserConnectLabel; 
+	mui::Button* laserConnect; 
+	mui::Label* laserSizeLabel;
+	mui::SliderWithLabel* laserSize;
+	mui::Label* laserIntensityLabel;
+	mui::SliderWithLabel* laserIntensity;
+	mui::Label* laserOffsetLabel;
+	mui::SliderWithLabel* laserOffsetX;
+	mui::SliderWithLabel* laserOffsetY;
+	mui::Label* laserKeystoneLabel;
+	mui::SliderWithLabel* laserKeystoneX;
+	mui::SliderWithLabel* laserKeystoneY;
+
 	void fromGlobals();
 	void toGlobals();
 	

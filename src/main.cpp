@@ -82,7 +82,7 @@ void setWindowRepresentedFilename( string filename ){
 	}
 #else
 	if(filename==""){
-		ofGetWindowPtr()->setWindowTitle("Oscilloscope " + " " + app_version);
+		ofGetWindowPtr()->setWindowTitle("Oscilloscope " + app_version);
 	}
 	else{
 		ofGetWindowPtr()->setWindowTitle(filename);

@@ -20,7 +20,7 @@
   </ItemGroup>
   <PropertyGroup Condition="'$(WindowsTargetPlatformVersion)'==''">
     <LatestTargetPlatformVersion>$([Microsoft.Build.Utilities.ToolLocationHelper]::GetLatestSDKTargetPlatformVersion('Windows', '10.0'))</LatestTargetPlatformVersion>
-    <WindowsTargetPlatformVersion Condition="'$(WindowsTargetPlatformVersion)' == ''">$(LatestTargetPlatformVersion)</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion Condition="'$(WindowsTargetPlatformVersion)' == ''">10.0</WindowsTargetPlatformVersion>
     <TargetPlatformVersion>$(WindowsTargetPlatformVersion)</TargetPlatformVersion>
   </PropertyGroup>
   <PropertyGroup Label="Globals">
@@ -32,24 +32,24 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <CharacterSet>Unicode</CharacterSet>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <CharacterSet>Unicode</CharacterSet>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
@@ -120,7 +120,7 @@
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;src\ofxIniSettings;src\ui;src\util;addons\ofxAvCodec\libs\avcodec\include-vs;addons\ofxAvCodec\libs\avcodec\include;addons\ofxAvCodec\src;addons\ofxFontAwesome\src;addons\ofxFontStash2\libs;addons\ofxFontStash2\libs\fontstash;addons\ofxFontStash2\libs\fontstash\src;addons\ofxFontStash2\libs\pugixml;addons\ofxFontStash2\libs\pugixml\src;addons\ofxFontStash2\src;addons\ofxMightyUI\libs;addons\ofxMightyUI\libs\stb_textedit;addons\ofxMightyUI\libs\stb_textedit\include;addons\ofxMightyUI\libs\stb_textedit\include\stb_textedit;addons\ofxMightyUI\src;addons\ofxNative\src;addons\ofxSpout\libs;addons\ofxSpout\libs\SpoutSDK;addons\ofxSpout\libs\SpoutSDK\src;addons\ofxSpout\src;addons\ofxSpout\src\ofxSpout;addons\ofxLibsamplerate\libs;addons\ofxLibsamplerate\libs\libsamplerate;addons\ofxLibsamplerate\libs\libsamplerate\include;addons\ofxLibsamplerate\libs\libsamplerate\lib;addons\ofxLibsamplerate\libs\libsamplerate\lib\vs;addons\ofxLibsamplerate\libs\libsamplerate\lib\vs\x64</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;src\ofxIniSettings;src\ui;src\util;addons\ofxAvCodec\libs\avcodec\include-vs;addons\ofxAvCodec\libs\avcodec\include;addons\ofxAvCodec\src;addons\ofxFontAwesome\src;addons\ofxFontStash2\libs;addons\ofxFontStash2\libs\fontstash;addons\ofxFontStash2\libs\fontstash\src;addons\ofxFontStash2\libs\pugixml;addons\ofxFontStash2\libs\pugixml\src;addons\ofxFontStash2\src;addons\ofxMightyUI\libs;addons\ofxMightyUI\libs\stb_textedit;addons\ofxMightyUI\libs\stb_textedit\include;addons\ofxMightyUI\libs\stb_textedit\include\stb_textedit;addons\ofxMightyUI\src;addons\ofxNative\src;addons\ofxSpout\libs;addons\ofxSpout\libs\SpoutSDK;addons\ofxSpout\libs\SpoutSDK\src;addons\ofxSpout\src;addons\ofxSpout\src\ofxSpout;addons\ofxLibsamplerate\libs;addons\ofxLibsamplerate\libs\libsamplerate;addons\ofxLibsamplerate\libs\libsamplerate\include;addons\ofxLibsamplerate\libs\libsamplerate\lib;addons\ofxLibsamplerate\libs\libsamplerate\lib\vs;addons\ofxLibsamplerate\libs\libsamplerate\lib\vs\x64;addons\ofxLiblaserdock\libs\liblaserdock\include\;addons\ofxLiblaserdock\src</AdditionalIncludeDirectories>
       <CompileAs>CompileAsCpp</CompileAs>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <ObjectFileName>$(IntDir)</ObjectFileName>
@@ -164,7 +164,7 @@
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;src\ofxIniSettings;src\ui;src\util;addons\ofxAvCodec\libs\avcodec\include-vs;addons\ofxAvCodec\libs\avcodec\include;addons\ofxAvCodec\src;addons\ofxFontAwesome\src;addons\ofxFontStash2\libs;addons\ofxFontStash2\libs\fontstash;addons\ofxFontStash2\libs\fontstash\src;addons\ofxFontStash2\libs\pugixml;addons\ofxFontStash2\libs\pugixml\src;addons\ofxFontStash2\src;addons\ofxMightyUI\libs;addons\ofxMightyUI\libs\stb_textedit;addons\ofxMightyUI\libs\stb_textedit\include;addons\ofxMightyUI\libs\stb_textedit\include\stb_textedit;addons\ofxMightyUI\src;addons\ofxNative\src;addons\ofxSpout\libs;addons\ofxSpout\libs\SpoutSDK;addons\ofxSpout\libs\SpoutSDK\src;addons\ofxSpout\src;addons\ofxSpout\src\ofxSpout;addons\ofxLibsamplerate\libs;addons\ofxLibsamplerate\libs\libsamplerate;addons\ofxLibsamplerate\libs\libsamplerate\include;addons\ofxLibsamplerate\libs\libsamplerate\lib;addons\ofxLibsamplerate\libs\libsamplerate\lib\vs;addons\ofxLibsamplerate\libs\libsamplerate\lib\vs\x64</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;src\ofxIniSettings;src\ui;src\util;addons\ofxAvCodec\libs\avcodec\include-vs;addons\ofxAvCodec\libs\avcodec\include;addons\ofxAvCodec\src;addons\ofxFontAwesome\src;addons\ofxFontStash2\libs;addons\ofxFontStash2\libs\fontstash;addons\ofxFontStash2\libs\fontstash\src;addons\ofxFontStash2\libs\pugixml;addons\ofxFontStash2\libs\pugixml\src;addons\ofxFontStash2\src;addons\ofxMightyUI\libs;addons\ofxMightyUI\libs\stb_textedit;addons\ofxMightyUI\libs\stb_textedit\include;addons\ofxMightyUI\libs\stb_textedit\include\stb_textedit;addons\ofxMightyUI\src;addons\ofxNative\src;addons\ofxSpout\libs;addons\ofxSpout\libs\SpoutSDK;addons\ofxSpout\libs\SpoutSDK\src;addons\ofxSpout\src;addons\ofxSpout\src\ofxSpout;addons\ofxLibsamplerate\libs;addons\ofxLibsamplerate\libs\libsamplerate;addons\ofxLibsamplerate\libs\libsamplerate\include;addons\ofxLibsamplerate\libs\libsamplerate\lib;addons\ofxLibsamplerate\libs\libsamplerate\lib\vs;addons\ofxLibsamplerate\libs\libsamplerate\lib\vs\x64;addons\ofxLiblaserdock\libs\liblaserdock\include\;addons\ofxLiblaserdock\src</AdditionalIncludeDirectories>
       <CompileAs>CompileAsCpp</CompileAs>
       <ObjectFileName>$(IntDir)</ObjectFileName>
     </ClCompile>
@@ -182,6 +182,10 @@
     <PostBuildEvent />
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="addons\ofxLiblaserdock\src\LaserdockDevice.cpp" />
+    <ClCompile Include="addons\ofxLiblaserdock\src\LaserdockDeviceManager.cpp" />
+    <ClCompile Include="addons\ofxLiblaserdock\src\LaserdockDeviceManager_desktop.cpp" />
+    <ClCompile Include="addons\ofxLiblaserdock\src\LaserdockDevice_desktop.cpp" />
     <ClCompile Include="addons\ofxSpout\libs\SpoutSDK\src\SpoutCopy.cpp" />
     <ClCompile Include="addons\ofxSpout\libs\SpoutSDK\src\SpoutFrameCount.cpp" />
     <ClCompile Include="addons\ofxSpout\libs\SpoutSDK\src\SpoutUtils.cpp" />
@@ -244,8 +248,14 @@
     <ClCompile Include="addons\ofxSpout\libs\SpoutSDK\src\SpoutSender.cpp" />
     <ClCompile Include="addons\ofxSpout\libs\SpoutSDK\src\SpoutSenderNames.cpp" />
     <ClCompile Include="addons\ofxSpout\libs\SpoutSDK\src\SpoutSharedMemory.cpp" />
+    <ClCompile Include="src\util\WickedLasers.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="addons\ofxLiblaserdock\libs\liblaserdock\include\libusb\libusb.h" />
+    <ClInclude Include="addons\ofxLiblaserdock\src\LaserdockDevice.h" />
+    <ClInclude Include="addons\ofxLiblaserdock\src\LaserdockDeviceManager.h" />
+    <ClInclude Include="addons\ofxLiblaserdock\src\LaserdockDeviceManager_p.h" />
+    <ClInclude Include="addons\ofxLiblaserdock\src\LaserdockDevice_p.h" />
     <ClInclude Include="addons\ofxSpout\libs\SpoutSDK\src\SpoutCopy.h" />
     <ClInclude Include="addons\ofxSpout\libs\SpoutSDK\src\SpoutFrameCount.h" />
     <ClInclude Include="addons\ofxSpout\libs\SpoutSDK\src\SpoutUtils.h" />
@@ -432,6 +442,8 @@
     <ClInclude Include="addons\ofxSpout\libs\SpoutSDK\src\SpoutSenderNames.h" />
     <ClInclude Include="addons\ofxSpout\libs\SpoutSDK\src\SpoutSharedMemory.h" />
     <ClInclude Include="addons\ofxLibsamplerate\libs\libsamplerate\include\samplerate.h" />
+    <ClInclude Include="src\util\WickedLasers.h" />
+    <ClInclude Include="src\version.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="$(OF_ROOT)\libs\openFrameworksCompiled\project\vs\openframeworksLib.vcxproj">
@@ -444,6 +456,15 @@
       <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">/D_DEBUG %(AdditionalOptions)</AdditionalOptions>
       <AdditionalIncludeDirectories>$(OF_ROOT)\libs\openFrameworksCompiled\project\vs</AdditionalIncludeDirectories>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="addons\ofxLiblaserdock\libs\liblaserdock\lib\vs\x64\laserdocklib.dll" />
+    <None Include="addons\ofxLiblaserdock\libs\liblaserdock\lib\vs\x64\libusb-1.0.dll" />
+    <None Include="addons\ofxLiblaserdock\libs\liblaserdock\lib\vs\x64\libusb-1.0.pdb" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="addons\ofxLiblaserdock\libs\liblaserdock\lib\vs\x64\laserdocklib.lib" />
+    <Library Include="addons\ofxLiblaserdock\libs\liblaserdock\lib\vs\x64\libusb-1.0.lib" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ProjectExtensions>

@@ -10,6 +10,7 @@
 #include "ofxNative.h"
 #include "ui/ExportScreen.h"
 #include "MuiL.h"
+#include "util/WickedLasers.h"
 
 #include "GLFW/glfw3.h"
 
@@ -95,7 +96,6 @@ void ofApp::startApplication(){
 	micRight.playFrom(0);
 	micZMod.playFrom(0);
 
-	globals.saveToFile();
 	playerOverlay->fromGlobals();
 	playerOverlay->visible = true;
 	forceHidden = false;
@@ -184,6 +184,7 @@ void ofApp::startApplication(){
 
 void ofApp::stopApplication(){
 	if( !applicationRunning ) return;
+	globals.saveToFile();
 	applicationRunning = false;
 	ma_device_stop(&playDevice);
 	ma_device_uninit(&playDevice);
@@ -493,9 +494,18 @@ void ofApp::draw(){
 		mesh.uIntensityBase = max(0.0f,mesh.uIntensity-0.4f)*0.7f-1000.0f*mesh.uSize/500.0f;
 		mesh.uIntensity = globals.intensity/sqrtf(globals.timeStretch)*intensityScale;
 		mesh.uHue = globals.hue;
-		mesh.uRgb = globals.player.fileType == OsciAvAudioPlayer::QUAD && !sideBySide?
-			(flip3d?ofVec3f(0,1,1):ofVec3f(1,0,0)):
-			ofVec3f(color.r,color.g,color.b);
+		if (globals.player.fileType == OsciAvAudioPlayer::QUAD && !sideBySide) {
+			mesh.uRgb = (flip3d ? ofVec3f(0, 1, 1) : ofVec3f(1, 0, 0));
+		}
+		else {
+			if (globals.hue == 360) {
+				mesh.uRgb = ofVec3f(1, 1, 1);
+			}
+			else {
+				ofFloatColor col = ofFloatColor::fromHsb(globals.hue / 360.0, 1, 1);
+				mesh.uRgb = ofVec3f(col.r, col.g, col.b);
+			}
+		};
 		//mesh.uRgb = ofVec3f(1, 1, 1); 
 		mesh.draw(viewMatrix);
 		
@@ -589,7 +599,7 @@ void ofApp::exit(){
 void ofApp::keyPressed  (int key){
 	if(key < 255) key = std::tolower(key);
 	
-	if( key == '\t' && !configView->isVisibleOnScreen()){
+	if( key == '\t'){
 		playerOverlay->visible = !playerOverlay->visible;
 		if( playerOverlay->visible ){
 			forceHidden = false;
@@ -715,6 +725,8 @@ void ofApp::audioIn(float * input, int bufferSize, int nChannels){
 				break;
 		}
 	}
+
+	globals.laserPtr->addBuffer(input, bufferSize, nChannels, globals.in_actual.sampleRate);
 }
 
 void ofApp::audioOut( float * output, int bufferSize, int nChannels ){
@@ -740,19 +752,16 @@ void ofApp::audioOut( float * output, int bufferSize, int nChannels ){
 	memset(output, 0, bufferSize*nChannels);
 	if( globals.player.isLoaded && exporting == 0 && !globals.micActive ){
 		globals.player.audioOut(output, bufferSize, nChannels);
+		if (globals.player.isPlaying) {
+			globals.laserPtr->addBuffer(output, bufferSize, nChannels, globals.out_actual.sampleRate);
+		}
 		AudioAlgo::scale(output, globals.outputVolume, nChannels*bufferSize);
 	}
 }
 
 //--------------------------------------------------------------
 void ofApp::gotMessage(ofMessage msg){
-	if( msg.message == "start-pressed" ){
-		startApplication();
-	}
-	else if( msg.message == "stop-pressed" ){
-		stopApplication();
-	}
-	else if (msg.message == "config-pressed") {
+	if (msg.message == "config-pressed") {
 		// nothing to do, hurray :) see ::update()
 	}
 	else if (msg.message == "load-pressed"){
@@ -986,8 +995,8 @@ void ofApp::urlResponse(ofHttpResponse & response){
 	auto compare = []( string verA, string verB ){
 		auto va = ofSplitString(verA, ".");
 		auto vb = ofSplitString(verB, ".");
-		int N = min(va.size(), vb.size());
-		for( int i = 0; i < N; i++){
+		size_t N = min(va.size(), vb.size());
+		for( size_t i = 0; i < N; i++){
 			int a = ofToInt(va[i]);
 			int b = ofToInt(vb[i]);
 			if( a < b) return -1;
