@@ -51,7 +51,7 @@ ConfigView::ConfigView()
 
 	laserConnectLabel = make_label("Wickedlasers Ilda-Adapter");
 	add(laserConnectLabel);
-	laserConnect = new mui::Button("Connect",0,0,100,30);
+	laserConnect = new mui::Button("Show config",0,0,100,30);
 	laserConnect->setProperty("tooltip", string("Connect to a wickedlasers ilda-dongle or laserscanner"));
 	ofAddListener(laserConnect->onPress, this, &ConfigView::buttonPressed); 
 	add(laserConnect);
@@ -80,6 +80,14 @@ ConfigView::ConfigView()
 	add(laserKeystoneX);
 	laserKeystoneY = make_slider(-1, 1, 0, 2);
 	add(laserKeystoneY);
+
+	hiddenLaserUi = {
+		laserSizeLabel, laserSize,
+		laserIntensityLabel, laserIntensity,
+		laserOffsetLabel, laserOffsetX, laserOffsetY,
+		laserKeystoneLabel, laserKeystoneX, laserKeystoneY
+	};
+	for (auto c : hiddenLaserUi) c->visible = false;
 }
 
 
@@ -175,14 +183,22 @@ void ConfigView::pushLabel( string text ){
 //--------------------------------------------------------------
 void ConfigView::buttonPressed( const void * sender, ofTouchEventArgs & args ){
 	if (sender == laserConnect) {
-		if (globals.laserConnected) {
-			globals.laserPtr->disconnect(); 
+		if (!showLaserConfig) {
+			for (auto c : hiddenLaserUi) c->visible = true;
+			laserConnect->label->setText("Connect");
+			MUI_ROOT->handleLayout();
+			showLaserConfig = true; 
 		}
-		else {
-			globals.laserPtr->connect();
-		}
+		else{
+			if (globals.laserConnected) {
+				globals.laserPtr->disconnect();
+			}
+			else {
+				globals.laserPtr->connect();
+			}
 
-		laserConnect->label->setText(globals.laserConnected?"Disconnect":"Connect");
+			laserConnect->label->setText(globals.laserConnected ? "Disconnect" : "Connect");
+		}
 	}
 }
 

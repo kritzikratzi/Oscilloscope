@@ -57,6 +57,10 @@ void WickedLasers::addBuffer(float* buffer, int bufferSize, int nChannels, int s
 	}
 }
 
+void WickedLasers::die() {
+	exiting = true;
+	if(resampleThread.joinable()) resampleThread.join();
+}
 
 void WickedLasers::processIncomming() {
 	while (!exiting) {

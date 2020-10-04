@@ -16,6 +16,7 @@ public:
 	~WickedLasers();
 
 	void addBuffer(float* buffer, int bufferSize, int nChannels, int sampleRate);
+	void die();
 
 	int bufferSize;
 	MonoSample left;

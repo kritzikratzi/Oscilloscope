@@ -45,4 +45,7 @@ private:
 	void outDevicePickerChanged(const void * sender, string & value);
 	void gotMessage(const void * sender, ofMessage & msg);
 	void addDeviceOptions();
+
+	bool showLaserConfig{ false };
+	vector<mui::Container*> hiddenLaserUi;
 };

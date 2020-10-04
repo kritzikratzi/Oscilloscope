@@ -592,6 +592,7 @@ void ofApp::exit(){
 	ofstream out(ofxToReadWriteableDataPath("playlist.txt"));
 	playlist->save(out);
 	out.close();
+	globals.laserPtr->die();
 }
 
 
