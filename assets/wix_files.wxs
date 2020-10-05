@@ -9,6 +9,9 @@
     </Fragment>
     <Fragment>
         <ComponentGroup Id="CGROUP">
+            <Component Id="cmpC76CDD15946ADD012F33BACEBF54EBBD" Directory="INSTALLDIR" Guid="*" Win64="yes">
+                <File Id="filA2289B57A58B7180024C82715664FB5C" KeyPath="yes" Source="SourceDir\api-ms-win-crt-runtime-l1-1-0.dll" />
+            </Component>
             <Component Id="cmpFEF9FEF52C61FCBD01D0D459BE1414CA" Directory="INSTALLDIR" Guid="*" Win64="yes">
                 <File Id="filBE8ECB1927212D075972FFF61D93E86B" KeyPath="yes" Source="SourceDir\avcodec-57.dll" />
             </Component>
@@ -33,6 +36,9 @@
             <Component Id="cmpC8361D1828750D633A3AC1FD2CC96100" Directory="INSTALLDIR" Guid="*" Win64="yes">
                 <File Id="filDFF358D07C70223FA2685FAD5B3F813A" KeyPath="yes" Source="SourceDir\libusb-1.0.dll" />
             </Component>
+            <Component Id="cmp39878D1E6847FC98DBBF4DBC681E5084" Directory="INSTALLDIR" Guid="*" Win64="yes">
+                <File Id="fil3BD6AB8669794DC115F4C73104390A09" KeyPath="yes" Source="SourceDir\msvcp140.dll" />
+            </Component>
             <Component Id="cmpAD3D7C5366B0EE75F9A1FC4B40188186" Directory="INSTALLDIR" Guid="*" Win64="yes">
                 <File Id="fil93A808E5891A09DC03421F6DA54303DF" KeyPath="yes" Source="SourceDir\Oscilloscope.exe" />
             </Component>
@@ -41,6 +47,12 @@
             </Component>
             <Component Id="cmp7A18521991D2C646F7AA6958351E6004" Directory="INSTALLDIR" Guid="*" Win64="yes">
                 <File Id="fil02888CB0F247766124E93F991DB7A7F3" KeyPath="yes" Source="SourceDir\swresample-2.dll" />
+            </Component>
+            <Component Id="cmp205CE1B3FD300245D64A125F321CB3F9" Directory="INSTALLDIR" Guid="*" Win64="yes">
+                <File Id="fil8D5C9BB003D0EB90E056990E2C6A31D8" KeyPath="yes" Source="SourceDir\vcomp140.dll" />
+            </Component>
+            <Component Id="cmp9E6863D5DA03BD69631F202C92D19A60" Directory="INSTALLDIR" Guid="*" Win64="yes">
+                <File Id="fil6DCA05CC056CECDC2C762F38EC1A9C8E" KeyPath="yes" Source="SourceDir\vcruntime140.dll" />
             </Component>
             <Component Id="cmp70E010DC4940D05D7F451E91AD74F0AB" Directory="dir38903B42FECED7D073B27F29CA029A00" Guid="*" Win64="yes">
                 <File Id="fil0D5CDD9BC854FD5A963878F0222852AE" KeyPath="yes" Source="SourceDir\data\AtlasTypewriter-Regular.otf" />

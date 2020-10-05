@@ -28,6 +28,7 @@ fi
 
 
 mkdir -p "$distDir"
+cp windows_dlls/*.dll bin
 cp -R bin/* "$distDir"
 
 cp -R docs "$distDir"
