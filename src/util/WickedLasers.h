@@ -13,7 +13,7 @@ struct LaserdockSample;
 class WickedLasers {
 public:
 	WickedLasers();
-	~WickedLasers();
+	virtual ~WickedLasers();
 
 	void addBuffer(float* buffer, int bufferSize, int nChannels, int sampleRate);
 	void die();

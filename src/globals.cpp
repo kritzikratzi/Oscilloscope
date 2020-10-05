@@ -11,8 +11,8 @@
 
 Globals Globals::instance; 
 
-Globals::Globals() {
-	laserPtr = make_unique<WickedLasers>();
+void Globals::init() {
+	laserPtr = make_shared<WickedLasers>();
 }
 
 string ofxFormatTime(double seconds) {

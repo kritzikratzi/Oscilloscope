@@ -6,3 +6,4 @@ addons/ofxNative
 addons/ofxSyphon
 addons/ofxSpout
 addons/ofxLibsamplerate
+addons/ofxLiblaserdock
