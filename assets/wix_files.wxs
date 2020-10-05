@@ -27,6 +27,12 @@
             <Component Id="cmpE2C55B43D0FED97798C06B30CE496064" Directory="INSTALLDIR" Guid="*" Win64="yes">
                 <File Id="filC35A102B270ECA1F210D000296E527AD" KeyPath="yes" Source="SourceDir\FreeImage.dll" />
             </Component>
+            <Component Id="cmp95970DCF912572925A1B91B8F1AFA798" Directory="INSTALLDIR" Guid="*" Win64="yes">
+                <File Id="fil3A4C9D5D8F723EEA0A39447DC59CC7B7" KeyPath="yes" Source="SourceDir\laserdocklib.dll" />
+            </Component>
+            <Component Id="cmpC8361D1828750D633A3AC1FD2CC96100" Directory="INSTALLDIR" Guid="*" Win64="yes">
+                <File Id="filDFF358D07C70223FA2685FAD5B3F813A" KeyPath="yes" Source="SourceDir\libusb-1.0.dll" />
+            </Component>
             <Component Id="cmpAD3D7C5366B0EE75F9A1FC4B40188186" Directory="INSTALLDIR" Guid="*" Win64="yes">
                 <File Id="fil93A808E5891A09DC03421F6DA54303DF" KeyPath="yes" Source="SourceDir\Oscilloscope.exe" />
             </Component>

@@ -235,7 +235,8 @@ void WickedLasers::connect() {
 			ofGetWindowPtr()->setClipboardString(cmd);
 			ofSystemAlertDialog("No laserdock device found. \n\nPlease run Oscilloscope as root, \nor add udev rules for libusb (vendor=0x1fc9, product=0x04d8)");
 		#elif defined(_WIN32)
-			string url = "https://oscilloscopemusic.com/downloads/laserdock-driver.zip");
+			string url = "https://oscilloscopemusic.com/downloads/laserdock-driver.zip";
+			ofGetWindowPtr()->setClipboardString(url);
 			ofSystemAlertDialog("No laserdock device found. \n\Please install the driver from\n " + url + "\n\n(url copied to clipboard)");
 		#else
 			ofSystemAlertDialog("No laserdock device found.");
