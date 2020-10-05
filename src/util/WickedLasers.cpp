@@ -230,7 +230,17 @@ void WickedLasers::connect() {
 		globals.laserConnected = true; 
 	}
 	else {
-		ofSystemAlertDialog("no laser device found. on windows you must install wickedlasers LaserOS first");
+		#if defined(TARGET_LINUX)
+			string cmd = "sudo echo ATTRS{idVendor}==\\\"0x1fc9\\\", ATTRS{idProduct}==\\\"0x04d8\\\", TAG+=\\\"uaccess\\\", ENV{ID_MM_DEVICE_IGNORE}=\\\"1\\\" >/etc/udev/rules.d/70-laserdock-dongle";
+			ofGetWindowPtr()->setClipboardString(cmd);
+			ofSystemAlertDialog("No laserdock device found. \n\nPlease run Oscilloscope as root, \nor add udev rules for libusb (vendor=0x1fc9, product=0x04d8)");
+		#elif defined(_WIN32)
+			string url = "https://oscilloscopemusic.com/downloads/laserdock-driver.zip");
+			ofSystemAlertDialog("No laserdock device found. \n\Please install the driver from\n " + url + "\n\n(url copied to clipboard)");
+		#else
+			ofSystemAlertDialog("No laserdock device found.");
+		#endif
+
 		connected = false;
 		globals.laserConnected = false; 
 	}
