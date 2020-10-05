@@ -1030,7 +1030,7 @@ void ofApp::urlResponse(ofHttpResponse & response){
 		
 		//ofSystemAlertDialog("New version available: " + latestVersionText);
 		playerOverlay->updateButton->setProperty<string>("url", websiteUrl);
-		playerOverlay->updateButton->label->setText("Update available: " + latestVersionText );
+		playerOverlay->updateButton->label->setText("Update available: From " + app_version + " to " + latestVersionText );
 		playerOverlay->updateButton->visible = true;
 		playerOverlay->handleLayout();
 		playlist->height = playerOverlay->height;
