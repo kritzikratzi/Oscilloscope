@@ -25,7 +25,8 @@ class WickedLasers;
 #define globals (Globals::instance)
 class Globals{
 public:
-	Globals();
+	Globals(){};
+	void init(); 
 	
 	struct AudioConfig {
 		string name; 
@@ -71,7 +72,7 @@ public:
 	bool alwaysOnTop{false};
 
 	// laser stuff. none of this is ever stored!
-	unique_ptr<WickedLasers> laserPtr; 
+	shared_ptr<WickedLasers> laserPtr{nullptr}; 
 	bool laserConnected{ false };
 	float laserSize{ 0.5 };
 	float laserIntensity{ 0.0 };

@@ -16,6 +16,7 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
+	globals.init();
 	OsciMesh::init();
 	MA_ZERO_OBJECT(&playDevice);
 	MA_ZERO_OBJECT(&micDevice);

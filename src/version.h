@@ -8,6 +8,6 @@
 #ifndef version_h
 #define version_h
 
-const static string app_version = "1.0.15";
+const static string app_version = "1.1.0";
 
 #endif /* version_h */
