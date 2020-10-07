@@ -31,6 +31,8 @@ fi
 app="$1"
 signingIdentity="$2"
 
+echo "Clearing strange file attributes"
+xattr -cr "$app"
 
 signdir() {
 	pluginName=$1
@@ -40,7 +42,7 @@ signdir() {
 	| ( while read FOO; do
 	    codesign -d "$FOO"
 	    if [ $? != 0 ]; then
-	        sudo codesign -f -s "$signingIdentity" -vvvv "$FOO"
+	        sudo codesign --options=runtime -f -s "$signingIdentity" -vvvv "$FOO"
 	    fi
 	done)
 	# Sign most other files
@@ -50,7 +52,7 @@ signdir() {
 	    codesign -d "$FOO"
 	    if [ $? != 0 ]; then
 			echo "Signing: $FOO"
-	        sudo codesign -f -s "$signingIdentity" -vvvv "$FOO" 2>&1
+	        sudo codesign --options=runtime -f -s "$signingIdentity" -vvvv "$FOO" 2>&1
 	    fi
 	done)
 	# Sanity check, this doesn't sign anything, because everything is signed
@@ -59,7 +61,7 @@ signdir() {
 	    codesign -v "$FOO"
 	    if [ $? != 0 ]; then
 			echo "Checking: $FOO"
-	        sudo codesign -f -s "$signingIdentity" -vvvv "$FOO" 2>&1
+	        sudo codesign --options=runtime -f -s "$signingIdentity" -vvvv "$FOO" 2>&1
 	    fi
 	done)
 	# Test sig
@@ -73,7 +75,7 @@ signdir() {
 	| ( while read FOO; do
 	    codesign -v "$FOO"
 	    if [ $? != 0 ]; then
-	        sudo codesign -s "$signingIdentity" -vvvv "$FOO" 2>&1
+	        sudo codesign --options=runtime -s "$signingIdentity" -vvvv "$FOO" 2>&1
 	    fi
 	done)
 }
@@ -82,6 +84,6 @@ signdir "Contents/Frameworks/GLUT.framework"
 #signdir ffmpeg.mac
 
 # finally sign $app
-sudo codesign -s "$signingIdentity" -vvvv --force "$app"
+sudo codesign --options=runtime -s "$signingIdentity" -vvvv --force "$app"
 # Now the verification works
 codesign -vvvv --deep "$app"

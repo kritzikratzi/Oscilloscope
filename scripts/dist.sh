@@ -28,7 +28,6 @@ fi
 
 
 mkdir -p "$distDir"
-cp windows_dlls/*.dll bin
 cp -R bin/* "$distDir"
 
 cp -R docs "$distDir"
@@ -43,6 +42,8 @@ echo "platform = $platform"
 
 if [ "$platform" = "win32" ] || [ "$platform" = "win64" ]
 then
+	echo "Copying windows dlls"
+	cp windows_dlls/*.dll "$distDir"
 	pushd
 	cd "$distDir"
 	dlls="assimp.dll Zlib.dll glut32.dll libeay32.dll ssleay32.dll swscale-4.dll Zlib.dll FreeType.dll fmodex64.dll fmodexL64.dll"
@@ -114,16 +115,36 @@ then
 	echo "Moving data folder into resources"
 	cd "$distDir"
 	mv data/* Oscilloscope.app/Contents/Resources
+	mv readme.md Oscilloscope.app/Contents/Resources
+	mv docs Oscilloscope.app/Contents/Resources
 	rm -rf data
 	
 	echo "Stripping all dylibs to 64bit only"
 	for file in $(find Oscilloscope.app -type f -name "*.dylib")
 	do
-		echo "    > processing " $(basename $file)
-		mv "$file" /tmp/oscilloscope-fatlib.dylib
-		lipo /tmp/oscilloscope-fatlib.dylib -thin x86_64 -output "$file"
-		rm /tmp/oscilloscope-fatlib.dylib
+		lines=$(file "$file" | grep -v x86_64 | wc -l)
+		if [ "$lines" -eq "0" ]
+		then
+			echo "    > skipping " $(basename $file)
+		else
+			echo "    > stripping " $(basename $file)
+			mv "$file" /tmp/oscilloscope-fatlib.dylib
+			lipo /tmp/oscilloscope-fatlib.dylib -thin x86_64 -output "$file"
+			rm /tmp/oscilloscope-fatlib.dylib
+		fi
 	done
+	
+	if [ -f "../../scripts/osx-config.sh" ]
+	then
+		echo "Loading signing/notarization config ..."
+		source ../../scripts/osx-config.sh
+		../../scripts/osx-sign.sh "Oscilloscope.app" "$DEVELOPER_IDENTITY"
+		../../scripts/osx-notarize.sh "Oscilloscope.app" "org.sd.oscilloscope" "$NOTARIZE_USER" "$NOTARIZE_PASSWORD" "../Oscilloscope-$version-$platform.zip"
+		
+	else
+		echo "Not signing. If you want to sign, please copy scripts/osx-config-template.sh to scripts/osx-config.sh"
+		echo "and edit username/password"
+	fi	
 elif [ "$platform" == "linux" ] || [ "$platform" == "linux64" ]
 then
 	echo "Deleting weird files"
