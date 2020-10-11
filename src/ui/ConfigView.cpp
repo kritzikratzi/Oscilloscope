@@ -219,7 +219,7 @@ void ConfigView::gotMessage(const void * sender, ofMessage & msg) {
 
 //--------------------------------------------------------------
 void ConfigView::addDeviceOptions() {
-	ma_context context;
+	ma_context & context = *globals.context;
 	ma_device_info* pPlaybackDeviceInfos;
 	ma_uint32 playbackDeviceCount;
 	ma_device_info* pCaptureDeviceInfos;
@@ -227,11 +227,6 @@ void ConfigView::addDeviceOptions() {
 	ma_uint32 iDevice;
 	ma_result result; 
 
-	if (ma_context_init(NULL, 0, NULL, &context) != MA_SUCCESS) {
-		printf("Failed to initialize context.\n");
-		return;
-	}
-	
 	result = ma_context_get_devices(&context, &pPlaybackDeviceInfos, &playbackDeviceCount, &pCaptureDeviceInfos, &captureDeviceCount);
 	if (result != MA_SUCCESS) {
 		printf("Failed to retrieve device information.\n");
@@ -248,6 +243,4 @@ void ConfigView::addDeviceOptions() {
 		btn->setProperty<ma_device_info>(string("ma_device_info"), move(dev));
 		printf("    %u: %s\n", iDevice, pPlaybackDeviceInfos[iDevice].name);
 	}
-
-	ma_context_uninit(&context);
 }

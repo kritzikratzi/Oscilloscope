@@ -1,5 +1,9 @@
 #define MINIAUDIO_IMPLEMENTATION
 #define MA_COINIT_VALUE COINIT_APARTMENTTHREADED
+#ifdef __APPLE__
+	#define MA_NO_RUNTIME_LINKING
+#endif
+
 #include "util/miniaudio.h"
 #undef MINIAUDIO_IMPLEMENTATION
 
@@ -136,18 +140,13 @@ void ofApp::startApplication(){
 	//playDeviceConfig.playback.pDeviceID = globals.deviceId;
 
 	do{ // just "do" to be able to break
-		ma_context context;
+		ma_context & context = *globals.context;
 		ma_device_info* pPlaybackDeviceInfos;
 		ma_uint32 playbackDeviceCount;
 		ma_device_info* pCaptureDeviceInfos;
 		ma_uint32 captureDeviceCount;
 		ma_uint32 iDevice;
 		ma_result result;
-
-		if (ma_context_init(NULL, 0, NULL, &context) != MA_SUCCESS) {
-			printf("Failed to initialize context.\n");
-			break;
-		}
 
 		result = ma_context_get_devices(&context, &pPlaybackDeviceInfos, &playbackDeviceCount, &pCaptureDeviceInfos, &captureDeviceCount);
 		if (result != MA_SUCCESS) {
@@ -163,8 +162,6 @@ void ofApp::startApplication(){
 				memcpy((void*)playDeviceConfig.playback.pDeviceID, &dev.id, sizeof(ma_device_id));
 			}
 		}
-
-		ma_context_uninit(&context);
 
 	} while (false);
 
@@ -943,12 +940,9 @@ void ofApp::startMic() {
 }
 //--------------------------------------------------------------
 void ofApp::stopMic(){
-	globals.micActive = false;
-	ma_device_uninit(&micDevice);
 	if (globals.micActive) {
-		/*micStream.stop();
-		micStream = ofSoundStream();
 		globals.micActive = false;
+		ma_device_uninit(&micDevice);
 		nextWindowTitle = currentFilename; // back to the previous window title*/
 	}
 }

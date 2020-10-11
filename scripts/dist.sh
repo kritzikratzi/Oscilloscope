@@ -138,7 +138,7 @@ then
 	then
 		echo "Loading signing/notarization config ..."
 		source ../../scripts/osx-config.sh
-		../../scripts/osx-sign.sh "Oscilloscope.app" "$DEVELOPER_IDENTITY"
+		../../scripts/osx-sign.sh "Oscilloscope.app" "$DEVELOPER_IDENTITY" "../../Oscilloscope.entitlements"
 		../../scripts/osx-notarize.sh "Oscilloscope.app" "org.sd.oscilloscope" "$NOTARIZE_USER" "$NOTARIZE_PASSWORD" "../Oscilloscope-$version-$platform.zip"
 		
 	else

@@ -13,10 +13,9 @@
 #include "ofxNative.h"
 #include <GL/glew.h>
 
+
 //========================================================================
 int main(){
-	// please read about the asio/wasapi patch for of0.9x in windows: http://pastebin.com/ZZLZ3jUm
-
 	globals.loadFromFile();
 	ofSetEscapeQuitsApp(false);
 

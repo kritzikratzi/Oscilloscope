@@ -20,7 +20,8 @@ extern void setWindowRepresentedFilename( string filename );
 string ofxFormatTime(double seconds); 
 
 enum class ExportFormat{H264=1,IMAGE_SEQUENCE_PNG=2,IMAGE_SEQUENCE_TIFF=3};
-class WickedLasers; 
+class WickedLasers;
+struct ma_context; 
 
 #define globals (Globals::instance)
 class Globals{
@@ -34,6 +35,8 @@ public:
 		int sampleRate; 
 	};
 
+	ma_context * context;
+	
 	// audio settings
 	AudioConfig out_requested{ "",0, 0 };
 	AudioConfig out_actual{ "",512, 44100 };

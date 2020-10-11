@@ -8,11 +8,17 @@
 
 #include "globals.h"
 #include "util/WickedLasers.h"
+#include "util/miniaudio.h"
 
 Globals Globals::instance; 
 
 void Globals::init() {
 	laserPtr = make_shared<WickedLasers>();
+	context = new ma_context();
+	if (ma_context_init(NULL, 0, NULL, context) != MA_SUCCESS) {
+		ofSystemAlertDialog("Failed to initialize audio context :(");
+		
+	}
 }
 
 string ofxFormatTime(double seconds) {

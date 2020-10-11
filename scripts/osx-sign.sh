@@ -12,24 +12,26 @@ realpath() {
   echo "$REALPATH"
 }
 
-if [ -z "$1" ]
-then
-	echo "Usage: $0 <application binary> <signing-identity>"
-	echo "No binary provided"
-	exit
-fi
 
-if [ -z "$2" ]
+app="$1"
+signingIdentity="$2"
+entitlements="$3"
+
+if [[ -z "$1" || -z "$2" || -z "$3" ]]
 then
-	echo "Usage: $0 <application binary> <signing-identity>"
-	echo "No signing identity provided. "
-	echo "Searching for available options..."
-	security find-identity -v -p codesigning
+	echo "Usage: $0 <application binary> <signing-identity> <entitlements>"
 	exit
 fi
 
 app="$1"
 signingIdentity="$2"
+entitlements="$3"
+me=$(dirname $0)
+
+# you might want extra_options="--options=runtime"
+# to sign an older binary which needs to be notarized
+extra_options="--options=runtime --entitlements $entitlements "
+
 
 echo "Clearing strange file attributes"
 xattr -cr "$app"
@@ -42,7 +44,7 @@ signdir() {
 	| ( while read FOO; do
 	    codesign -d "$FOO"
 	    if [ $? != 0 ]; then
-	        sudo codesign --options=runtime -f -s "$signingIdentity" -vvvv "$FOO"
+	        sudo codesign $extra_options -f -s "$signingIdentity" -vvvv "$FOO"
 	    fi
 	done)
 	# Sign most other files
@@ -52,7 +54,7 @@ signdir() {
 	    codesign -d "$FOO"
 	    if [ $? != 0 ]; then
 			echo "Signing: $FOO"
-	        sudo codesign --options=runtime -f -s "$signingIdentity" -vvvv "$FOO" 2>&1
+	        sudo codesign $extra_options -f -s "$signingIdentity" -vvvv "$FOO" 2>&1
 	    fi
 	done)
 	# Sanity check, this doesn't sign anything, because everything is signed
@@ -61,7 +63,7 @@ signdir() {
 	    codesign -v "$FOO"
 	    if [ $? != 0 ]; then
 			echo "Checking: $FOO"
-	        sudo codesign --options=runtime -f -s "$signingIdentity" -vvvv "$FOO" 2>&1
+	        sudo codesign $extra_options -f -s "$signingIdentity" -vvvv "$FOO" 2>&1
 	    fi
 	done)
 	# Test sig
@@ -75,7 +77,7 @@ signdir() {
 	| ( while read FOO; do
 	    codesign -v "$FOO"
 	    if [ $? != 0 ]; then
-	        sudo codesign --options=runtime -s "$signingIdentity" -vvvv "$FOO" 2>&1
+	        sudo codesign $extra_options -s "$signingIdentity" -vvvv "$FOO" 2>&1
 	    fi
 	done)
 }
@@ -84,6 +86,6 @@ signdir "Contents/Frameworks/GLUT.framework"
 #signdir ffmpeg.mac
 
 # finally sign $app
-sudo codesign --options=runtime -s "$signingIdentity" -vvvv --force "$app"
+sudo codesign $extra_options -s "$signingIdentity" -vvvv --force "$app"
 # Now the verification works
 codesign -vvvv --deep "$app"

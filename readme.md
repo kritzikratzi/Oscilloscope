@@ -44,10 +44,8 @@ Make sure to read these instructions before each build.
 ### Compiling with XCode (OSX11.5+)
 
 1. Add the `--deep` value to the `Other Code Signing Flags` key in the Build Settings tab
-1. (optional) run `scripts/clean.sh`
-1. (optional) run `scripts/prepare.sh osx`
 1. Open apps/myApps/oscilloscope/Oscilloscope.xcodeproject and then Build&Run
-1. (Optional) Code sign by running `scripts/sign-mac.sh bin/Oscilloscope.app "Developer ID Application: Name of your certificate"` (run `security find-identity -v -p codesigning` to get a list of installed certs)
+1. (Optional) Sign&Notarize with apple: Copy `scripts/osx-config-template.sh` to `osx-config.sh`, then run `scripts/dist.sh osx 1.1.0`
 
 
 You can also build with `make && make run` on the command line. The resulting build will have no icon/no proper name/no retina support. 

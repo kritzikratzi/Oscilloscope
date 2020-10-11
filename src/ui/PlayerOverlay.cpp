@@ -59,7 +59,7 @@ PlayerOverlay::PlayerOverlay( float x_, float y_, float width_, float height_)
 	ofAddListener( loadFileButton->onPress, this, &PlayerOverlay::buttonPressed );
 	add( loadFileButton );
 	
-	useMicButton = new FaToggleButton( ofxFontAwesome::microphone, ofxFontAwesome::microphone_slash, x, y, h, h );
+	useMicButton = new FaToggleButton( ofxFontAwesome::microphone, ofxFontAwesome::microphone, x, y, h, h );
 	useMicButton->setProperty("tooltip", string("Use microphone instead of file"));
 	ofAddListener( useMicButton->onPress, this, &PlayerOverlay::buttonPressed );
 	add( useMicButton );
@@ -486,17 +486,12 @@ string timestring( double secs ){
 
 void PlayerOverlay::populateMicMenu(FMenu<string> * menu) {
 	ma_result result;
-	ma_context context;
+	ma_context & context = *globals.context;
 	ma_device_info* pPlaybackDeviceInfos;
 	ma_uint32 playbackDeviceCount;
 	ma_device_info* pCaptureDeviceInfos;
 	ma_uint32 captureDeviceCount;
 	ma_uint32 iDevice;
-
-	if (ma_context_init(NULL, 0, NULL, &context) != MA_SUCCESS) {
-		printf("Failed to initialize context.\n");
-		return;
-	}
 
 	result = ma_context_get_devices(&context, &pPlaybackDeviceInfos, &playbackDeviceCount, &pCaptureDeviceInfos, &captureDeviceCount);
 	if (result != MA_SUCCESS) {
@@ -539,6 +534,4 @@ void PlayerOverlay::populateMicMenu(FMenu<string> * menu) {
 			addDevice("[" + ofToString(ch) + " ch loopback] " + string(dev.name), dev.name, dev, ma_device_type_loopback);
 		}
 	}
-
-	ma_context_uninit(&context);
 }

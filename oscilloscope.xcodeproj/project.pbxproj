@@ -55,6 +55,7 @@
 		BAF994F4252B816D00D5C335 /* WickedLasers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BAF994F3252B816D00D5C335 /* WickedLasers.cpp */; };
 		BAF99500252B85D400D5C335 /* libusb-1.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BAF994FE252B85CC00D5C335 /* libusb-1.0.0.dylib */; };
 		BAF99501252B85D700D5C335 /* liblaserdocklib.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BAF994FF252B85CC00D5C335 /* liblaserdocklib.dylib */; };
+		BAF99531252F9D4900D5C335 /* AudioUnit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BAF99530252F9D4900D5C335 /* AudioUnit.framework */; };
 		BD571A91D1F3B6066B493F2D /* MuiEvents.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D69B389B7DBDE863424F73CB /* MuiEvents.cpp */; };
 		C6C0DD3551EE3D6CC3702A9E /* TexShare.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3ACDCDD83540F8A5D5E548BC /* TexShare.cpp */; };
 		D11B1B0CE2F86F3CA3AB7473 /* InternalWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 53AE519E9B1A8F53D6684C51 /* InternalWindow.cpp */; };
@@ -257,6 +258,8 @@
 		BAF994FE252B85CC00D5C335 /* libusb-1.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = "libusb-1.0.0.dylib"; sourceTree = "<group>"; };
 		BAF994FF252B85CC00D5C335 /* liblaserdocklib.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = liblaserdocklib.dylib; sourceTree = "<group>"; };
 		BAF99502252B881B00D5C335 /* version.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = version.h; sourceTree = "<group>"; };
+		BAF99504252DE04300D5C335 /* Oscilloscope.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Oscilloscope.entitlements; sourceTree = "<group>"; };
+		BAF99530252F9D4900D5C335 /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
 		BBEFE75982C6528D8DF52114 /* version.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = version.h; path = addons/ofxAvCodec/libs/avcodec/include/libswresample/version.h; sourceTree = SOURCE_ROOT; };
 		BD07F6706CCC5FC5B4186A2B /* ofxNative.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = ofxNative.h; path = addons/ofxNative/src/ofxNative.h; sourceTree = SOURCE_ROOT; };
 		BDD7B676AEA10ABCA0BB8DBE /* qsv.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = qsv.h; path = addons/ofxAvCodec/libs/avcodec/include/libavcodec/qsv.h; sourceTree = SOURCE_ROOT; };
@@ -511,6 +514,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BAF99531252F9D4900D5C335 /* AudioUnit.framework in Frameworks */,
 				E1A3FD40C8BCD507345F1126 /* Syphon.framework in Frameworks */,
 				BAF99501252B85D700D5C335 /* liblaserdocklib.dylib in Frameworks */,
 				BAF99500252B85D400D5C335 /* libusb-1.0.0.dylib in Frameworks */,
@@ -1023,6 +1027,14 @@
 			path = osx;
 			sourceTree = "<group>";
 		};
+		BAF9952F252F9D4900D5C335 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BAF99530252F9D4900D5C335 /* AudioUnit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		BB08EE3F0E495684AB212487 /* ofxMightyUI */ = {
 			isa = PBXGroup;
 			children = (
@@ -1415,6 +1427,7 @@
 			isa = PBXGroup;
 			children = (
 				E4B6FCAD0C3E899E008CF71C /* openFrameworks-Info.plist */,
+				BAF99504252DE04300D5C335 /* Oscilloscope.entitlements */,
 				E4EB6923138AFD0F00A09F29 /* Project.xcconfig */,
 				E4B69E1C0A3A1BDC003C02F2 /* src */,
 				E42962AA2163EDD300A6A9E2 /* openFrameworks */,
@@ -1422,6 +1435,7 @@
 				6948EE371B920CB800B5AC1A /* local_addons */,
 				E4B69B5B0A3A1756003C02F2 /* OscilloscopeDebug.app */,
 				BAAD879D230812A900EC74F8 /* Recovered References */,
+				BAF9952F252F9D4900D5C335 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1510,6 +1524,21 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0600;
+				TargetAttributes = {
+					E4B69B5A0A3A1756003C02F2 = {
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.Mac = {
+								enabled = 0;
+							};
+							com.apple.HardenedRuntime = {
+								enabled = 1;
+							};
+							com.apple.Sandbox = {
+								enabled = 1;
+							};
+						};
+					};
+				};
 			};
 			buildConfigurationList = E4B69B4D0A3A1720003C02F2 /* Build configuration list for PBXProject "oscilloscope" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -1721,8 +1750,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E4EB6923138AFD0F00A09F29 /* Project.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Oscilloscope.entitlements;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					addons/ofxSyphon/libs/Syphon/lib/osx,
@@ -1968,8 +1999,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E4EB6923138AFD0F00A09F29 /* Project.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Oscilloscope.entitlements;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
+				ENABLE_HARDENED_RUNTIME = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					addons/ofxSyphon/libs/Syphon/lib/osx,
@@ -2064,8 +2097,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E4EB6923138AFD0F00A09F29 /* Project.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Oscilloscope.entitlements;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					addons/ofxSyphon/libs/Syphon/lib/osx,
