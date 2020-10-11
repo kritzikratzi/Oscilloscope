@@ -1,6 +1,6 @@
 /*
 Audio playback and capture library. Choice of public domain or MIT-0. See license statements at the end of this file.
-miniaudio - v0.10.18 - 2020-08-30
+miniaudio - v0.10.21 - TBD
 
 David Reid - mackron@gmail.com
 
@@ -114,8 +114,8 @@ event indicating that the device needs to stop and handle it in a different thre
     ```
 
 You must never try uninitializing and reinitializing a device inside the callback. You must also never try to stop and start it from inside the callback. There
-are a few other things you shouldn't do in the callback depending on your requirements, however this isn't so much a thread-safety thing, but rather a real-
-time processing thing which is beyond the scope of this introduction.
+are a few other things you shouldn't do in the callback depending on your requirements, however this isn't so much a thread-safety thing, but rather a
+real-time processing thing which is beyond the scope of this introduction.
 
 The example above demonstrates the initialization of a playback device, but it works exactly the same for capture. All you need to do is change the device type
 from `ma_device_type_playback` to `ma_device_type_capture` when setting up the config, like so:
@@ -230,8 +230,30 @@ The Windows build should compile cleanly on all popular compilers without the ne
 2.2. macOS and iOS
 ------------------
 The macOS build should compile cleanly without the need to download any dependencies nor link to any libraries or frameworks. The iOS build needs to be
-compiled as Objective-C (sorry) and will need to link the relevant frameworks but should Just Work with Xcode. Compiling through the command line requires
-linking to `-lpthread` and `-lm`.
+compiled as Objective-C and will need to link the relevant frameworks but should compile cleanly out of the box with Xcode. Compiling through the command line
+requires linking to `-lpthread` and `-lm`.
+
+Due to the way miniaudio links to frameworks at runtime, you application may not pass Apple's notaraization process. To fix this there are two options. The
+first is to use the `MA_NO_RUNTIME_LINKING` option, like so:
+
+    ```c
+    #ifdef __APPLE__
+        #define MA_NO_RUNTIME_LINKING
+    #endif 
+    #define MINIAUDIO_IMPLEMENTATION
+    #include "miniaudio.h"
+    ```
+
+This will require linking with `-framework CoreFoundation -framework CoreAudio -framework AudioUnit`. Alternatively, if you would rather keep using runtime
+linking you can add the following to your entitlements.xcent file:
+
+    ```
+    <key>com.apple.security.cs.allow-dyld-environment-variables</key>
+    <true/>
+    <key>com.apple.security.cs.allow-unsigned-executable-memory</key>
+    <true/>
+    ```
+
 
 2.3. Linux
 ----------
@@ -248,7 +270,7 @@ starts with Android 8 which means older versions will fall back to OpenSL|ES whi
 
 2.6. Emscripten
 ---------------
-The Emscripten build emits Web Audio JavaScript directly and should Just Work without any configuration. You cannot use -std=c* compiler flags, nor -ansi.
+The Emscripten build emits Web Audio JavaScript directly and should compile cleanly out of the box. You cannot use -std=c* compiler flags, nor -ansi.
 
 
 2.7. Build Options
@@ -1421,7 +1443,7 @@ extern "C" {
 
 #define MA_VERSION_MAJOR    0
 #define MA_VERSION_MINOR    10
-#define MA_VERSION_REVISION 18
+#define MA_VERSION_REVISION 21
 #define MA_VERSION_STRING   MA_XSTRINGIFY(MA_VERSION_MAJOR) "." MA_XSTRINGIFY(MA_VERSION_MINOR) "." MA_XSTRINGIFY(MA_VERSION_REVISION)
 
 #if defined(_MSC_VER) && !defined(__clang__)
@@ -2026,6 +2048,7 @@ typedef struct
 {
     ma_format format;
     ma_uint32 channels;
+    ma_uint32 sampleRate;
     ma_uint32 lpf1Count;
     ma_uint32 lpf2Count;
     ma_lpf1 lpf1[1];
@@ -2094,6 +2117,7 @@ typedef struct
 {
     ma_format format;
     ma_uint32 channels;
+    ma_uint32 sampleRate;
     ma_uint32 hpf1Count;
     ma_uint32 hpf2Count;
     ma_hpf1 hpf1[1];
@@ -12860,6 +12884,22 @@ static ma_result ma_device_init_internal__wasapi(ma_context* pContext, ma_device
     }
 
     pData->formatOut = ma_format_from_WAVEFORMATEX((WAVEFORMATEX*)&wf);
+    if (pData->formatOut == ma_format_unknown) {
+        /*
+        The format isn't supported. This is almost certainly because the exclusive mode format isn't supported by miniaudio. We need to return MA_SHARE_MODE_NOT_SUPPORTED
+        in this case so that the caller can detect it and fall back to shared mode if desired. We should never get here if shared mode was requested, but just for
+        completeness we'll check for it and return MA_FORMAT_NOT_SUPPORTED.
+        */
+        if (shareMode == ma_share_mode_exclusive) {
+            result = MA_SHARE_MODE_NOT_SUPPORTED;
+        } else {
+            result = MA_FORMAT_NOT_SUPPORTED;
+        }
+        
+        errorMsg = "[WASAPI] Native format not supported.";
+        goto done;
+    }
+
     pData->channelsOut = wf.Format.nChannels;
     pData->sampleRateOut = wf.Format.nSamplesPerSec;
 
@@ -13237,8 +13277,11 @@ static ma_result ma_device_reinit__wasapi(ma_device* pDevice, ma_device_type dev
 static ma_result ma_device_init__wasapi(ma_context* pContext, const ma_device_config* pConfig, ma_device* pDevice)
 {
     ma_result result = MA_SUCCESS;
+
+#ifdef MA_WIN32_DESKTOP
     HRESULT hr;
     ma_IMMDeviceEnumerator* pDeviceEnumerator;
+#endif
 
     (void)pContext;
 
@@ -13537,7 +13580,7 @@ static ma_result ma_device_stop__wasapi(ma_device* pDevice)
     In loopback mode it's possible for WaitForSingleObject() to get stuck in a deadlock when nothing is being played. When nothing
     is being played, the event is never signalled internally by WASAPI which means we will deadlock when stopping the device.
     */
-    if (pDevice->type == ma_device_type_capture || pDevice->type == ma_device_type_duplex || pDevice->type == ma_device_type_duplex) {
+    if (pDevice->type == ma_device_type_capture || pDevice->type == ma_device_type_duplex || pDevice->type == ma_device_type_loopback) {
         SetEvent((HANDLE)pDevice->wasapi.hEventCapture);
     }
 
@@ -20059,7 +20102,7 @@ static ma_result ma_result_from_pulse(int result)
         case MA_PA_ERR_ACCESS:   return MA_ACCESS_DENIED;
         case MA_PA_ERR_INVALID:  return MA_INVALID_ARGS;
         case MA_PA_ERR_NOENTITY: return MA_NO_DEVICE;
-        default:                  return MA_ERROR;
+        default:                 return MA_ERROR;
     }
 }
 
@@ -22807,7 +22850,14 @@ static ma_result ma_get_channel_map_from_AudioChannelLayout(AudioChannelLayout* 
         Need to use the tag to determine the channel map. For now I'm just assuming a default channel map, but later on this should
         be updated to determine the mapping based on the tag.
         */
-        UInt32 channelCount = ma_min(AudioChannelLayoutTag_GetNumberOfChannels(pChannelLayout->mChannelLayoutTag), channelMapCap);
+        UInt32 channelCount;
+
+        /* Our channel map retrieval APIs below take 32-bit integers, so we'll want to clamp the channel map capacity. */
+        if (channelMapCap > 0xFFFFFFFF) {
+            channelMapCap = 0xFFFFFFFF;
+        }
+
+        channelCount = ma_min(AudioChannelLayoutTag_GetNumberOfChannels(pChannelLayout->mChannelLayoutTag), (UInt32)channelMapCap);
 
         switch (pChannelLayout->mChannelLayoutTag)
         {
@@ -24323,17 +24373,22 @@ static ma_result ma_context__init_device_tracking__coreaudio(ma_context* pContex
     
     ma_spinlock_lock(&g_DeviceTrackingInitLock_CoreAudio);
     {
-        AudioObjectPropertyAddress propAddress;
-        propAddress.mScope    = kAudioObjectPropertyScopeGlobal;
-        propAddress.mElement  = kAudioObjectPropertyElementMaster;
-        
-        ma_mutex_init(&g_DeviceTrackingMutex_CoreAudio);
-        
-        propAddress.mSelector = kAudioHardwarePropertyDefaultInputDevice;
-        ((ma_AudioObjectAddPropertyListener_proc)pContext->coreaudio.AudioObjectAddPropertyListener)(kAudioObjectSystemObject, &propAddress, &ma_default_device_changed__coreaudio, NULL);
-        
-        propAddress.mSelector = kAudioHardwarePropertyDefaultOutputDevice;
-        ((ma_AudioObjectAddPropertyListener_proc)pContext->coreaudio.AudioObjectAddPropertyListener)(kAudioObjectSystemObject, &propAddress, &ma_default_device_changed__coreaudio, NULL);
+        /* Don't do anything if we've already initializd device tracking. */
+        if (g_DeviceTrackingInitCounter_CoreAudio == 0) {
+            AudioObjectPropertyAddress propAddress;
+            propAddress.mScope    = kAudioObjectPropertyScopeGlobal;
+            propAddress.mElement  = kAudioObjectPropertyElementMaster;
+            
+            ma_mutex_init(&g_DeviceTrackingMutex_CoreAudio);
+            
+            propAddress.mSelector = kAudioHardwarePropertyDefaultInputDevice;
+            ((ma_AudioObjectAddPropertyListener_proc)pContext->coreaudio.AudioObjectAddPropertyListener)(kAudioObjectSystemObject, &propAddress, &ma_default_device_changed__coreaudio, NULL);
+            
+            propAddress.mSelector = kAudioHardwarePropertyDefaultOutputDevice;
+            ((ma_AudioObjectAddPropertyListener_proc)pContext->coreaudio.AudioObjectAddPropertyListener)(kAudioObjectSystemObject, &propAddress, &ma_default_device_changed__coreaudio, NULL);
+            
+            g_DeviceTrackingInitCounter_CoreAudio += 1;
+        }
     }
     ma_spinlock_unlock(&g_DeviceTrackingInitLock_CoreAudio);
 
@@ -24346,21 +24401,26 @@ static ma_result ma_context__uninit_device_tracking__coreaudio(ma_context* pCont
     
     ma_spinlock_lock(&g_DeviceTrackingInitLock_CoreAudio);
     {
-        AudioObjectPropertyAddress propAddress;
-        propAddress.mScope    = kAudioObjectPropertyScopeGlobal;
-        propAddress.mElement  = kAudioObjectPropertyElementMaster;
+        g_DeviceTrackingInitCounter_CoreAudio -= 1;
         
-        propAddress.mSelector = kAudioHardwarePropertyDefaultInputDevice;
-        ((ma_AudioObjectRemovePropertyListener_proc)pContext->coreaudio.AudioObjectRemovePropertyListener)(kAudioObjectSystemObject, &propAddress, &ma_default_device_changed__coreaudio, NULL);
-        
-        propAddress.mSelector = kAudioHardwarePropertyDefaultOutputDevice;
-        ((ma_AudioObjectRemovePropertyListener_proc)pContext->coreaudio.AudioObjectRemovePropertyListener)(kAudioObjectSystemObject, &propAddress, &ma_default_device_changed__coreaudio, NULL);
-        
-        /* At this point there should be no tracked devices. If so there's an error somewhere. */
-        MA_ASSERT(g_ppTrackedDevices_CoreAudio == NULL);
-        MA_ASSERT(g_TrackedDeviceCount_CoreAudio == 0);
-        
-        ma_mutex_uninit(&g_DeviceTrackingMutex_CoreAudio);
+        if (g_DeviceTrackingInitCounter_CoreAudio == 0) {
+            AudioObjectPropertyAddress propAddress;
+            propAddress.mScope    = kAudioObjectPropertyScopeGlobal;
+            propAddress.mElement  = kAudioObjectPropertyElementMaster;
+            
+            propAddress.mSelector = kAudioHardwarePropertyDefaultInputDevice;
+            ((ma_AudioObjectRemovePropertyListener_proc)pContext->coreaudio.AudioObjectRemovePropertyListener)(kAudioObjectSystemObject, &propAddress, &ma_default_device_changed__coreaudio, NULL);
+            
+            propAddress.mSelector = kAudioHardwarePropertyDefaultOutputDevice;
+            ((ma_AudioObjectRemovePropertyListener_proc)pContext->coreaudio.AudioObjectRemovePropertyListener)(kAudioObjectSystemObject, &propAddress, &ma_default_device_changed__coreaudio, NULL);
+
+            /* At this point there should be no tracked devices. If not there's an error somewhere. */
+            if (g_ppTrackedDevices_CoreAudio != NULL) {
+                ma_context_post_error(pContext, NULL, MA_LOG_LEVEL_WARNING, "You have uninitialized all contexts while an associated device is still active.", MA_INVALID_OPERATION);
+            }
+            
+            ma_mutex_uninit(&g_DeviceTrackingMutex_CoreAudio);
+        }
     }
     ma_spinlock_unlock(&g_DeviceTrackingInitLock_CoreAudio);
     
@@ -24734,7 +24794,6 @@ static ma_result ma_device_init_internal__coreaudio(ma_context* pContext, ma_dev
             return result;
         }
         
-        /* From what I can see, Apple's documentation implies that we should keep the sample rate consistent. */
         origFormatSize = sizeof(origFormat);
         if (deviceType == ma_device_type_playback) {
             status = ((ma_AudioUnitGetProperty_proc)pContext->coreaudio.AudioUnitGetProperty)(pData->audioUnit, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Output, MA_COREAUDIO_OUTPUT_BUS, &origFormat, &origFormatSize);
@@ -24747,7 +24806,17 @@ static ma_result ma_device_init_internal__coreaudio(ma_context* pContext, ma_dev
             return result;
         }
         
+        /*
+        Update 2020-10-10:
+        
+        I cannot remember where I read this in the documentation and I cannot find it again. For now I'm going to remove this
+        and see what the feedback from the community is like. If this results in issues we can add it back in again. The idea
+        is that the closest sample rate natively supported by the backend to the requested sample rate should be used if possible.
+        */
+    #if 0
+        /* From what I can see, Apple's documentation implies that we should keep the sample rate consistent. */
         bestFormat.mSampleRate = origFormat.mSampleRate;
+    #endif
         
         status = ((ma_AudioUnitSetProperty_proc)pContext->coreaudio.AudioUnitSetProperty)(pData->audioUnit, kAudioUnitProperty_StreamFormat, formatScope, formatElement, &bestFormat, sizeof(bestFormat));
         if (status != noErr) {
@@ -35203,10 +35272,11 @@ static ma_result ma_lpf_reinit__internal(const ma_lpf_config* pConfig, ma_lpf* p
         }
     }
 
-    pLPF->lpf1Count = lpf1Count;
-    pLPF->lpf2Count = lpf2Count;
-    pLPF->format    = pConfig->format;
-    pLPF->channels  = pConfig->channels;
+    pLPF->lpf1Count  = lpf1Count;
+    pLPF->lpf2Count  = lpf2Count;
+    pLPF->format     = pConfig->format;
+    pLPF->channels   = pConfig->channels;
+    pLPF->sampleRate = pConfig->sampleRate;
 
     return MA_SUCCESS;
 }
@@ -35709,10 +35779,11 @@ static ma_result ma_hpf_reinit__internal(const ma_hpf_config* pConfig, ma_hpf* p
         }
     }
 
-    pHPF->hpf1Count = hpf1Count;
-    pHPF->hpf2Count = hpf2Count;
-    pHPF->format    = pConfig->format;
-    pHPF->channels  = pConfig->channels;
+    pHPF->hpf1Count  = hpf1Count;
+    pHPF->hpf2Count  = hpf2Count;
+    pHPF->format     = pConfig->format;
+    pHPF->channels   = pConfig->channels;
+    pHPF->sampleRate = pConfig->sampleRate;
 
     return MA_SUCCESS;
 }
@@ -42383,7 +42454,7 @@ static ma_result ma_default_vfs_tell__stdio(ma_vfs* pVFS, ma_vfs_file file, ma_i
     return MA_SUCCESS;
 }
 
-#if !((defined(_POSIX_C_SOURCE) && _POSIX_C_SOURCE >= 1) || defined(_XOPEN_SOURCE) || defined(_POSIX_SOURCE))
+#if !defined(_MSC_VER) && !((defined(_POSIX_C_SOURCE) && _POSIX_C_SOURCE >= 1) || defined(_XOPEN_SOURCE) || defined(_POSIX_SOURCE))
 int fileno(FILE *stream);
 #endif
 
@@ -45883,6 +45954,8 @@ MA_API ma_result ma_decoder_seek_to_pcm_frame(ma_decoder* pDecoder, ma_uint64 fr
         if (result == MA_SUCCESS) {
             pDecoder->readPointerInPCMFrames = frameIndex;
         }
+
+        return result;
     }
 
     /* Should never get here, but if we do it means onSeekToPCMFrame was not set by the backend. */
@@ -62529,6 +62602,22 @@ The following miscellaneous changes have also been made.
 /*
 REVISION HISTORY
 ================
+v0.10.21 - TBD
+  - WASAPI: Fix a copy and paste bug relating to loopback mode.
+  - Core Audio: Fix a bug when using multiple contexts.
+  - Core Audio: Fix a compilation warning.
+  - Core Audio: Improvements to sample rate selection.
+  - Core Audio: Add notes regarding the Apple notarization process.
+
+v0.10.20 - 2020-10-06
+  - Fix build errors with UWP.
+  - Minor documentation updates.
+
+v0.10.19 - 2020-09-22
+  - WASAPI: Return an error when exclusive mode is requested, but the native format is not supported by miniaudio.
+  - Fix a bug where ma_decoder_seek_to_pcm_frames() never returns MA_SUCCESS even though it was successful.
+  - Store the sample rate in the `ma_lpf` and `ma_hpf` structures.
+
 v0.10.18 - 2020-08-30
   - Fix build errors with VC6.
   - Fix a bug in channel converter for s32 format.
