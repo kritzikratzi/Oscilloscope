@@ -33,6 +33,7 @@ ConfigView::ConfigView()
 		if (value == "") return string("Default Output"); 
 		else return value; 
 	}; 
+	addDeviceOptions();
 	ofAddListener(outDevicePicker->menu->onSelectValue, this, &ConfigView::outDevicePickerChanged);
 	add(outDevicePicker);
 

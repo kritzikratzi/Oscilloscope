@@ -984,6 +984,8 @@ ofMatrix4x4 ofApp::getViewMatrix(int i, bool isQuad) {
 }
 
 void ofApp::urlResponse(ofHttpResponse & response){
+	ofStopURLLoader();
+
 	ofXml xml;
 	xml.load(response.data);
 	
@@ -1031,6 +1033,4 @@ void ofApp::urlResponse(ofHttpResponse & response){
 		playlist->height = playerOverlay->height;
 		playlist->handleLayout();
 	}
-	
-	ofStopURLLoader();
 }
