@@ -7,6 +7,13 @@
 #include "util/miniaudio.h"
 #undef MINIAUDIO_IMPLEMENTATION
 
+#ifdef __APPLE__
+#if MA_MAX_CHANNELS != 128
+#error OSX Configuration should be set to 128ch to support blackhole64ch
+#endif
+#endif
+
+
 #include "ofApp.h"
 #include "globals.h"
 #include "version.h"
@@ -776,6 +783,7 @@ void ofApp::gotMessage(ofMessage msg){
 				playlist->addFile(ofFile(res.filePath, ofFile::ReadOnly));
 			}
 			MUI_ROOT->removePopup(menu);
+			playlist->handleLayout();
 		});
 		menu->addOption("Open folder", "open-folder", [menu,this]() {
 			auto res = ofSystemLoadDialog("Add Folder", true);
@@ -783,6 +791,7 @@ void ofApp::gotMessage(ofMessage msg){
 				playlist->addFile(ofFile(res.filePath, ofFile::ReadOnly));
 			}
 			MUI_ROOT->removePopup(menu);
+			playlist->handleLayout();
 		});
 		
 		MUI_ROOT->showPopupMenu(menu, root, muiGetMouseX(), muiGetMouseY(), mui::Left, mui::Bottom);
