@@ -24,7 +24,7 @@ public:
 	void show(const ofFile & file); 
 	void layout() override; 
 	
-	const std::filesystem::path & getFile();
+	const std::filesystem::path getFile();
 	ExportFormat getFormat();
 private:
 	

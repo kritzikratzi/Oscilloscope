@@ -48,7 +48,7 @@ ExportScreen::ExportScreen() : mui::Container(){
 	
 	formatSelectLabel = makeLabel("Format");
 	formatSelect = new mui::SegmentedSelect<ExportFormat>();
-	//formatSelect->addSegment("h264", ExportFormat::H264);
+	formatSelect->addSegment("h264", ExportFormat::H264);
 	formatSelect->addSegment("png", ExportFormat::IMAGE_SEQUENCE_PNG);
 	formatSelect->addSegment("tiff", ExportFormat::IMAGE_SEQUENCE_TIFF);
 	formatSelect->setSelected(globals.exportFormat);
@@ -162,7 +162,7 @@ void ExportScreen::buttonPressed(const void * sender, ofTouchEventArgs & args ){
 			globals.exportWidth = max(2,ofToInt(widthText->getText()));
 			globals.exportHeight = max(2,ofToInt(heightText->getText()));
 			globals.exportFrameRate = max(2,ofToInt(fpsText->getText()));
-			globals.exportFormat = formatSelect->getSelectedValueOr(ExportFormat::IMAGE_SEQUENCE_PNG);
+			globals.exportFormat = formatSelect->getSelectedValueOr(ExportFormat::H264);
 			
 
 			ofSendMessage("begin-export");
@@ -186,10 +186,16 @@ void ExportScreen::show(const ofFile & file){
 	handleLayout();
 }
 
-const std::filesystem::path & ExportScreen::getFile(){
-	return filePicker->getFile();
+const std::filesystem::path ExportScreen::getFile(){
+	ofFile file(filePicker->getFile());
+	if(getFormat()==ExportFormat::H264 && file.getExtension() != "mp4"){
+		return ofFile(file.getAbsolutePath() + ".mp4", ofFile::Reference);
+	}
+	else{
+		return file;
+	}
 }
 
 ExportFormat ExportScreen::getFormat(){
-	return formatSelect->getSelectedValueOr(ExportFormat::IMAGE_SEQUENCE_PNG);
+	return formatSelect->getSelectedValueOr(ExportFormat::H264);
 }

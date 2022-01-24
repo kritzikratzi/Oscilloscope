@@ -338,6 +338,9 @@ void ofApp::update(){
 		int len;
 		do{
 			len = globals.player.audioOutSync(output, bufferSize, 2);
+			if(video_writer.isOpen()){
+				video_writer.addAudioFrame(output, len);
+			}
 		}
 		while( globals.player.getPositionMS() < targetTimeMS && len > 0 );
 		
@@ -348,7 +351,13 @@ void ofApp::update(){
 		
 	}
 	else if( exporting == 3 ){
+		if(video_writer.isOpen()){
+   			video_writer.close();
+		}
+		
+	
 		exporting = 0;
+		exportSampleRate = 0;
 		globals.player.endSync();
 		globals.player.setLoop(true);
 		globals.player.setPositionMS(0);
@@ -533,20 +542,15 @@ void ofApp::draw(){
 	texSender.update(fbo.getTexture());
 
 	if( exporting >= 2 ){
-		
-		string ext;
-		switch(exportFormat){
-			case ExportFormat::H264: ext = "tiff"; break; // tbd
-			case ExportFormat::IMAGE_SEQUENCE_TIFF: ext = "tiff"; break;
-			case ExportFormat::IMAGE_SEQUENCE_PNG: ext = "png"; break;
-			default: ext = "tiff"; break;
-		}
-		
-		string filename	= ofToDataPath(exportDir + "/" + ofToString(exportFrameNum, 5, '0') + "." + ext);
-		
 		ofPixels pixels;
 		fbo.readToPixels(pixels);
-		ofSaveImage(pixels, filename);
+		if(video_writer.isOpen()){
+			video_writer.addVideoFrame(pixels);
+		}
+		else{
+			string filename	= ofToDataPath(exportDir + "/" + ofToString(exportFrameNum, 5, '0') + "." + exportExt);
+			ofSaveImage(pixels, filename);
+		}
 	}
 	
 	if( showInfo || exporting > 0 ){
@@ -844,15 +848,47 @@ void ofApp::beginExport(const ofFile & file){
 	
 	exportFormat = globals.exportFormat;
 	exportDir = file.getAbsolutePath();
-	ofDirectory dir(exportDir);
-	dir.create();
-	if( dir.exists() && !dir.isDirectory() ){
-		// don't export!
-		ofSystemAlertDialog("Something went wrong while trying to create export directory. Sorry?");
+	
+	switch(exportFormat){
+		case ExportFormat::H264:
+			exportExt = "mp4";
+			exportSampleRate = 96000;
+			break;
+		case ExportFormat::IMAGE_SEQUENCE_TIFF:
+			exportExt = "tiff";
+			exportSampleRate = 96000;
+			break;
+		case ExportFormat::IMAGE_SEQUENCE_PNG:
+			exportExt = "png"; break;
+			exportSampleRate = 96000;
+	}
+
+
+	if(exportFormat == ExportFormat::H264){
+		// set up video_writer
+		OsciVideoWriter::OutputConfig output_config = {
+			.video_framerate = globals.exportFrameRate,
+			.video_width = globals.exportWidth,
+			.video_height = globals.exportHeight,
+			.audio_sample_rate = exportSampleRate,
+			.audio_n_channels = 2
+		};
+		if(!video_writer.open(exportDir, output_config)){
+			ofSystemAlertDialog("Something went wrong while trying to create export mp4 file. Sorry?");
+			return;
+		}
 	}
 	else{
-		exporting = 1;
+		ofDirectory dir(exportDir);
+		dir.create();
+		if( !dir.exists() || !dir.isDirectory() ){
+			// don't export!
+			ofSystemAlertDialog("Something went wrong while trying to create export directory. Sorry?");
+			return;
+		}
 	}
+	
+	exporting = 1;
 }
 
 //--------------------------------------------------------------
@@ -882,8 +918,19 @@ void ofApp::updateSampleRate(){
 	else s = 4;
 	
 	int64_t rate = max((int64_t)globals.out_actual.sampleRate/4,(int64_t)std::round(globals.out_actual.sampleRate*globals.timeStretch));
-	int64_t vrate = globals.analogMode!=0?globals.out_actual.sampleRate : globals.player.getFileSampleRate();
-	globals.player.setupAudioOut(2, rate, globals.analogMode!=0, max(vrate*s*globals.timeStretch,192000.0));
+	
+	double vrate =
+		(globals.analogMode!=0?globals.out_actual.sampleRate : globals.player.getFileSampleRate())
+		* s * globals.timeStretch;
+	
+	if(exportSampleRate !=0){
+		rate = exportSampleRate;
+		vrate =
+			(globals.analogMode!=0?rate : globals.player.getFileSampleRate())
+			* s;
+	}
+
+	globals.player.setupAudioOut(2, rate, globals.analogMode!=0, max(vrate,192000.0));
 }
 
 

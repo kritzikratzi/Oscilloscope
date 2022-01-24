@@ -13,6 +13,7 @@
 #include "ofxAvAudioPlayer.h"
 #include "OsciMesh.h"
 #include "util/TexShare.h"
+#include "util/OsciVideoWriter.hpp"
 
 class ExportScreen;
 enum class ExportFormat;
@@ -86,7 +87,9 @@ class ofApp : public ofBaseApp{
 	
 		int exporting;
 		int exportFrameNum;
-		ExportFormat exportFormat; 
+		ExportFormat exportFormat;
+		int exportSampleRate;
+		string exportExt;
 		string exportDir;
 	
 		uint64_t lastMouseMoved{0};
@@ -105,4 +108,6 @@ class ofApp : public ofBaseApp{
 	
 		mutex mainThreadMutex;
 		queue<function<void()>> mainThreadTasks;
+	
+		OsciVideoWriter video_writer;
 };

@@ -639,14 +639,14 @@
 				BAF994F3252B816D00D5C335 /* WickedLasers.cpp */,
 				BAF994F2252B816D00D5C335 /* WickedLasers.h */,
 				C321D226A615C98BB9F36DEC /* OsciAvAudioPlayer.cpp */,
-				C7FE049CD4502E550DDEB840 /* miniaudio.h */,
-				1698AD036118002E1BDECC8D /* OsciVideoWriter.cpp */,
-				F0AD03D6E5C0F87482B4838F /* TexShare.h */,
 				A1BCFFFBF9F6EA0D49A29EC2 /* OsciAvAudioPlayer.h */,
+				1698AD036118002E1BDECC8D /* OsciVideoWriter.cpp */,
+				BF2CAE493C747B0E34576746 /* OsciVideoWriter.hpp */,
+				C7FE049CD4502E550DDEB840 /* miniaudio.h */,
+				F0AD03D6E5C0F87482B4838F /* TexShare.h */,
 				0E7AD8E5D3434D069C1A6EC2 /* Audio.h */,
 				AD1ADF1F2FCE814E53084004 /* Audio.cpp */,
 				68965801B56E8D1E205AAC60 /* ShaderLoader.h */,
-				BF2CAE493C747B0E34576746 /* OsciVideoWriter.hpp */,
 				3ACDCDD83540F8A5D5E548BC /* TexShare.cpp */,
 			);
 			name = util;
