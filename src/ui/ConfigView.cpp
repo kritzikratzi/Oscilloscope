@@ -37,13 +37,13 @@ ConfigView::ConfigView()
 	ofAddListener(outDevicePicker->menu->onSelectValue, this, &ConfigView::outDevicePickerChanged);
 	add(outDevicePicker);
 
-	emulationLabel = make_label("Visual Upsampling");
+	emulationLabel = make_label("Simulation");
 	add(emulationLabel);
 	
 	emulationMode = new mui::SegmentedSelect<int>(0,0,200,30);
-	auto lowChoice = emulationMode->addSegment("Off", 0);
+	auto lowChoice = emulationMode->addSegment("Digital", 0);
 	lowChoice->setProperty("tooltip", string("Disables upsampling. "));
-	auto highChoice = emulationMode->addSegment("On", 1);
+	auto highChoice = emulationMode->addSegment("Analog", 1);
 	highChoice->setProperty("tooltip", string("Enables upsampling. This resembles an analog oscilloscope more closely. "));
 	emulationMode->equallySizedButtons = true;
 	ofAddListener(emulationMode->onChangeValue, this, &ConfigView::emulationModeChanged);
