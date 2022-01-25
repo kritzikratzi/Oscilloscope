@@ -75,6 +75,7 @@ mui::Label * Dialog::addLabel(const std::string & text){
 	mui::Label * label = new mui::Label(text,0,0,380,20);
 	add(label);
 	labels.push_back(label);
+	return label;
 }
 
 mui::Button * Dialog::addButton(const std::string & text, const std::function<void()> & on_choice){
@@ -83,6 +84,7 @@ mui::Button * Dialog::addButton(const std::string & text, const std::function<vo
 	ofAddListener(button->onPress, this, &Dialog::buttonPressed);
 	add(button);
 	buttons.push_back(button);
+	return button;
 }
 
 void Dialog::buttonPressed(const void * sender, ofTouchEventArgs & args){

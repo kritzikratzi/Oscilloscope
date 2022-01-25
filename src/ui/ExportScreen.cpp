@@ -222,18 +222,18 @@ const ExportFileInfo ExportScreen::getFileInfo(){
 
 	if(in_path == ""){
 		return ExportFileInfo{
-			.file = std::move(in_file),
-			.exists = false,
-			.error = "Please select a valid file/directory",
-			.sampleRate = 96000,
-			.format = format
+			std::move(in_file), // file
+			false, // exists
+			"Please select a valid file/directory", // error
+			96000, // sampleRate
+			format // format
 		};
 	}
 	
 
-	bool is_dir;
-	std::string ext;
-	int sampleRate;
+	bool is_dir = false;
+	std::string ext = "";
+	int sampleRate = 96000;
 	
 	
 	switch(format){
@@ -270,11 +270,11 @@ const ExportFileInfo ExportScreen::getFileInfo(){
 	}
 	
 	return ExportFileInfo{
-		.file = std::move(file),
-		.exists = exists,
-		.error = error,
-		.sampleRate = sampleRate,
-		.format = format
+		std::move(file), // file
+		exists = exists, // exists
+		error = error, // error
+		sampleRate = sampleRate, // sampleRate
+		format = format // format
 	};
 }
 

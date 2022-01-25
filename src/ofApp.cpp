@@ -867,11 +867,11 @@ void ofApp::beginExport(const ofFile & file){
 	if(exportFormat == ExportFormat::H264){
 		// set up video_writer
 		OsciVideoWriter::OutputConfig output_config = {
-			.video_framerate = globals.exportFrameRate,
-			.video_width = globals.exportWidth,
-			.video_height = globals.exportHeight,
-			.audio_sample_rate = exportSampleRate,
-			.audio_n_channels = 2
+			globals.exportFrameRate, // video_framerate
+			globals.exportWidth, // video_width
+			globals.exportHeight, // video_height
+			exportSampleRate, // audio_sample_rate
+			2 // audio_n_channels
 		};
 		if(!video_writer.open(exportDir, output_config)){
 			ofSystemAlertDialog("Something went wrong while trying to create export mp4 file. Sorry?");

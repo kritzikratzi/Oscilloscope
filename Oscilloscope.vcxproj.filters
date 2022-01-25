@@ -208,6 +208,9 @@
     <ClCompile Include="addons\ofxLiblaserdock\src\LaserdockDevice.cpp">
       <Filter>local_addons\ofxLiblaserdock\src</Filter>
     </ClCompile>
+    <ClCompile Include="src\ui\Dialogs.cpp">
+      <Filter>src\ui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -955,6 +958,9 @@
     </ClInclude>
     <ClInclude Include="addons\ofxLiblaserdock\libs\liblaserdock\include\libusb\libusb.h">
       <Filter>local_addons\ofxLiblaserdock\libs\liblaserdock\include\libusb</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ui\Dialogs.h">
+      <Filter>src\ui</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

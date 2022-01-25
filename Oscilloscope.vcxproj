@@ -196,6 +196,7 @@
     <ClCompile Include="src\ofxIniSettings\ofxIniSettings.cpp" />
     <ClCompile Include="src\OsciMesh.cpp" />
     <ClCompile Include="src\ui\ConfigView.cpp" />
+    <ClCompile Include="src\ui\Dialogs.cpp" />
     <ClCompile Include="src\ui\ExportScreen.cpp" />
     <ClCompile Include="src\ui\FMenu.cpp" />
     <ClCompile Include="src\ui\PlayerOverlay.cpp" />
@@ -265,6 +266,7 @@
     <ClInclude Include="src\ofxIniSettings\ofxIniSettings.h" />
     <ClInclude Include="src\OsciMesh.h" />
     <ClInclude Include="src\ui\ConfigView.h" />
+    <ClInclude Include="src\ui\Dialogs.h" />
     <ClInclude Include="src\ui\ExportScreen.h" />
     <ClInclude Include="src\ui\FaButton.h" />
     <ClInclude Include="src\ui\FaToggleButton.h" />
