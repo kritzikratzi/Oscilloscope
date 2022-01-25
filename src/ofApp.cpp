@@ -124,7 +124,7 @@ void ofApp::startApplication(){
 	playDeviceConfig = ma_device_config_init(ma_device_type_playback);
 	playDeviceConfig.playback.format = ma_format_f32;
 	playDeviceConfig.playback.channels = 2;
-	playDeviceConfig.periodSizeInFrames = 0;
+	playDeviceConfig.periodSizeInFrames = 512;
 	playDeviceConfig.sampleRate = 0;
 	
 	playDeviceConfig.dataCallback = [](ma_device* device, void* pOutput, const void* pInput, ma_uint32 frameCount) {
@@ -220,7 +220,7 @@ void ofApp::update(){
 		}
 	}
 	
-	bool anythingGoingOn = globals.player.isPlaying || exporting>0;
+	bool anythingGoingOn = globals.player.isPlaying || exporting>0 || globals.micActive;
 	if( ofGetMousePressed() || !anythingGoingOn){
 		lastMouseMoved = lastUpdateTime;
 	}
@@ -943,13 +943,22 @@ void ofApp::startMic() {
 	micRight.clear();
 	micZMod.clear();
 
+	auto ma_min_max = [](const ma_device_info & d){
+		std::pair<int,int> res{1,1};
+		for(int i = 0; i < d.nativeDataFormatCount; i++){
+			res.first = min(res.first, (int)d.nativeDataFormats[i].channels);
+			res.second = max(res.second, (int)d.nativeDataFormats[i].channels);
+		}
+		return res;
+	};
+
 	auto info = playerOverlay->getSelectedMicDeviceInfo();
-	micChannels = info.info.maxChannels;
+	micChannels = ma_min_max(info.info).second;
 	micDeviceConfig = ma_device_config_init(info.type);
 	micDeviceConfig.capture.format = ma_format_f32;
 	micDeviceConfig.capture.channels = 0;
-	micDeviceConfig.periodSizeInFrames = 0;
-	micDeviceConfig.sampleRate = 0;
+	micDeviceConfig.periodSizeInFrames = 512;
+	micDeviceConfig.sampleRate = 222222; // oversample? :D
 	micDeviceConfig.dataCallback = [](ma_device* device, void* pOutput, const void* pInput, ma_uint32 frameCount) {
 		ofApp * app = (ofApp*)device->pUserData;
 		app->micChannels = device->capture.channels;

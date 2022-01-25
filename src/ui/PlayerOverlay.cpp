@@ -511,10 +511,20 @@ void PlayerOverlay::populateMicMenu(FMenu<string> * menu) {
 	printf("Capture Devices\n");
 	addDevice("Default Microphone", "", ma_device_info(), ma_device_type_capture);
 
+	auto ma_min_max = [](const ma_device_info & d){
+		std::pair<int,int> res{1,1};
+		for(int i = 0; i < d.nativeDataFormatCount; i++){
+			res.first = min(res.first, (int)d.nativeDataFormats[i].channels);
+			res.second = max(res.second, (int)d.nativeDataFormats[i].channels);
+		}
+		return res;
+	};
+
 	for (iDevice = 0; iDevice < captureDeviceCount; ++iDevice) {
 		ma_device_info dev = pCaptureDeviceInfos[iDevice];
-		ma_context_get_device_info(&context, ma_device_type_capture, &dev.id, ma_share_mode_shared, &dev);
-		int ch = max(1, (int)max(dev.minChannels, dev.maxChannels));
+		ma_context_get_device_info(&context, ma_device_type_capture, &dev.id, &dev);
+		auto ch_limits = ma_min_max(dev);
+		int ch = max(1, (int)max(ch_limits.first, ch_limits.second));
 		addDevice("[" + ofToString(ch) + " ch] " + string(dev.name), dev.name, dev, ma_device_type_capture);
 	}
 
@@ -526,11 +536,12 @@ void PlayerOverlay::populateMicMenu(FMenu<string> * menu) {
 
 		for (iDevice = 0; iDevice < playbackDeviceCount; ++iDevice) {
 			ma_device_info dev = pPlaybackDeviceInfos[iDevice];
-			ma_context_get_device_info(&context, ma_device_type_capture, &dev.id, ma_share_mode_shared, &dev);
+			ma_context_get_device_info(&context, ma_device_type_capture, &dev.id, &dev);
 			// for now only allow loopbacks in wasapi
 			if (context.backend != ma_backend_wasapi) continue;
 
-			int ch = max(1, (int)max(dev.minChannels, dev.maxChannels));
+			auto ch_limits = ma_min_max(dev);
+			int ch = max(1, (int)max(ch_limits.first, ch_limits.second));
 			addDevice("[" + ofToString(ch) + " ch loopback] " + string(dev.name), dev.name, dev, ma_device_type_loopback);
 		}
 	}

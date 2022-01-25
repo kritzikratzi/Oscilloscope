@@ -30,6 +30,7 @@ me=$(dirname $0)
 
 # you might want extra_options="--options=runtime"
 # to sign an older binary which needs to be notarized
+#extra_options="--options=runtime --entitlements $entitlements "
 extra_options="--options=runtime --entitlements $entitlements "
 
 
@@ -82,9 +83,12 @@ signdir() {
 	done)
 }
 
-signdir "Contents/Frameworks/GLUT.framework"
-#signdir ffmpeg.mac
-
+find "$app" -name "*.dylib" -type f -print | sort -r \
+| ( while read FOO; do
+	echo "sign dylib: $FOO"
+    sudo codesign $extra_options -f -s "$signingIdentity" -vvvv "$FOO"
+done)
+	
 # finally sign $app
 sudo codesign $extra_options -s "$signingIdentity" -vvvv --force "$app"
 # Now the verification works

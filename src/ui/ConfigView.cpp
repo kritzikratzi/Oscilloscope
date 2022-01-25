@@ -239,7 +239,7 @@ void ConfigView::addDeviceOptions() {
 	printf("Playback Devices\n");
 	for (iDevice = 0; iDevice < playbackDeviceCount; ++iDevice) {
 		ma_device_info dev = pPlaybackDeviceInfos[iDevice];
-		ma_context_get_device_info(&context, ma_device_type_playback, &dev.id, ma_share_mode_shared, &dev);
+		ma_context_get_device_info(&context, ma_device_type_playback, &dev.id, &dev);
 		auto btn = outDevicePicker->addOption(dev.name, dev.name)->button;
 		btn->setProperty<ma_device_info>(string("ma_device_info"), move(dev));
 		printf("    %u: %s\n", iDevice, pPlaybackDeviceInfos[iDevice].name);

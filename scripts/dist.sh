@@ -139,8 +139,7 @@ then
 		echo "Loading signing/notarization config ..."
 		source ../../scripts/osx-config.sh
 		../../scripts/osx-sign.sh "Oscilloscope.app" "$DEVELOPER_IDENTITY" "../../Oscilloscope.entitlements"
-		../../scripts/osx-notarize.sh "Oscilloscope.app" "org.sd.oscilloscope" "$NOTARIZE_USER" "$NOTARIZE_PASSWORD" "../Oscilloscope-$version-$platform.zip"
-		
+		../../scripts/osx-notarize.sh "Oscilloscope.app" "org.sd.oscilloscope" "$DEVELOPER_TEAMID" "$ASC_PROVIDER" "$NOTARIZE_USER" "$NOTARIZE_PASSWORD" "../Oscilloscope-$version-$platform.zip"
 	else
 		echo "Not signing. If you want to sign, please copy scripts/osx-config-template.sh to scripts/osx-config.sh"
 		echo "and edit username/password"

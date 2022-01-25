@@ -4,13 +4,15 @@
 # otherwise you end up with things in weird places
 appFolder="$1"
 bundleId="$2"
-username="$3"
-password="$4"
-zipDest="$5"
+teamId="$3"
+ascProvider="$4"
+username="$5"
+password="$6"
+zipDest="$7"
 
-if [[ -z "$appFolder" || -z "$bundleId" || -z "$username" || -z "$password" || -z "$zipDest" ]]
+if [[ -z "$appFolder" || -z "$bundleId" || -z "$username" || -z "$password" || -z "$zipDest"  || -z "$teamId" ]]
 then
-	echo "Usage: $0 <application binary> <bundle-id> <username> <password> <zip-destination>"
+	echo "Usage: $0 <application binary> <bundle-id> <team-id> <asc-provider> <username> <password> <zip-destination>"
 	exit
 fi
 
@@ -27,7 +29,8 @@ fi
 ditto -c -k --keepParent "$appName.app" "$zipDest"
 
 echo "Uploading for notarization..."
-uuid="$(xcrun altool --notarize-app --primary-bundle-id "$bundleId" --username "$username" --password "$password" --file "$zipDest" 2>&1 | grep RequestUUID | cut -d " " -f 3)"
+echo xcrun altool -asc-provider $ascProvider --team-id $teamId --notarize-app --primary-bundle-id "$bundleId" --username "$username" --password "$password" --file "$zipDest" 
+uuid="$(xcrun altool -asc-provider $ascProvider --team-id $teamId --notarize-app --primary-bundle-id "$bundleId" --username "$username" --password "$password" --file "$zipDest" 2>&1 | grep RequestUUID | cut -d " " -f 3)"
 
 if [ -z "$uuid" ]
 then
@@ -39,7 +42,7 @@ fi
 
 while true
 do
-	output="$(xcrun altool --notarization-info "$uuid" -u "$username" -p "$password" 2>&1)"
+	output="$(xcrun altool --team-id $teamId --notarization-info "$uuid" -u "$username" -p "$password" 2>&1)"
 	res=$(echo "$output" | grep "Status Message" | xargs | cut -d " " -f 3-99)
 	if [ -z "$res" ]
 	then
