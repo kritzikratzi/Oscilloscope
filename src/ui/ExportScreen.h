@@ -16,19 +16,31 @@ class ofxAvVideoWriter;
 
 enum class ExportFormat;
 
+struct ExportFileInfo{
+	ofFile file;
+	bool exists;
+	std::string error;
+	int sampleRate;
+	ExportFormat format;
+};
+
 class ExportScreen : public mui::Container{
 public:
 	ExportScreen();
 	~ExportScreen();
 	
 	void show(const ofFile & file); 
-	void layout() override; 
+	void layout() override;
+	
+	void commit();
 	
 	const std::filesystem::path getFile();
+	const ExportFileInfo getFileInfo();
 	ExportFormat getFormat();
 private:
 	
 	void buttonPressed(const void * sender, ofTouchEventArgs & args );
+	void beginExport();
 	
 	mui::Container * view;
 	

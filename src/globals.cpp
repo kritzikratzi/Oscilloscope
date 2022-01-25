@@ -63,6 +63,7 @@ void Globals::loadFromFile(string settingsFile) {
 	exportWidth = settings.get("exportWidth", exportWidth);
 	exportHeight = settings.get("exportHeight", exportHeight);
 	exportFormat = (ExportFormat)settings.get("exportFormat", (int)exportFormat);
+	exportSampleRate = settings.get("exportSampleRate", (int)exportSampleRate);
 
 	laserOffsetX = settings.get("laserOffsetX", laserOffsetX);
 	laserOffsetY = settings.get("laserOffsetY", laserOffsetY);
@@ -107,6 +108,7 @@ void Globals::saveToFile(string settingsFile) {
 	settings.set("exportWidth", exportWidth);
 	settings.set("exportHeight", exportHeight);
 	settings.set("exportFormat", (int)exportFormat);
+	settings.set("exportSampleRate", (int)exportSampleRate);
 
 	settings.set("laserOffsetX", laserOffsetX);
 	settings.set("laserOffsetY", laserOffsetY);

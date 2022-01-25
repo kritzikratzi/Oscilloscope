@@ -68,6 +68,7 @@ public:
 	int exportWidth{1920};
 	int exportHeight{1080};
 	int exportFrameRate{60};
+	int exportSampleRate{96000};
 	ExportFormat exportFormat{ExportFormat::IMAGE_SEQUENCE_PNG};
 	
 	float secondsBeforeHidingMenu{0.5};

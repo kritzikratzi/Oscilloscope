@@ -11,7 +11,7 @@
 #include "MuiFilePicker.h"
 #include "MuiTextArea.h"
 #include "globals.h"
-
+#include "Dialogs.h"
 
 ExportScreen::ExportScreen() : mui::Container(){
 	
@@ -60,6 +60,10 @@ ExportScreen::ExportScreen() : mui::Container(){
 		if(file=="") return string("-");
 		else return ofFile(file,ofFile::Reference).getFileName();
 	});
+	filePicker->onFileChanged.add([&](){
+		commit();
+	});
+	
 	view->add(filePicker);
 	
 	
@@ -152,22 +156,42 @@ void ExportScreen::layout(){
 	mui::L(view).spreadEvenlyHorizontally(0, width, mui::Center).spreadEvenlyVertically(0, height,mui::Middle);
 }
 
+void ExportScreen::beginExport(){
+	globals.exportWidth = max(2,ofToInt(widthText->getText()));
+	globals.exportHeight = max(2,ofToInt(heightText->getText()));
+	globals.exportFrameRate = max(2,ofToInt(fpsText->getText()));
+	globals.exportFormat = formatSelect->getSelectedValueOr(ExportFormat::H264);
+
+
+	ofSendMessage("begin-export");
+	visible = false;
+}
+
 void ExportScreen::buttonPressed(const void * sender, ofTouchEventArgs & args ){
 	
 	if(sender == exportButton ){
-		if(filePicker->getFile()==""){
-			ofSystemAlertDialog("Please select the output directory/file first");
+		ExportFileInfo info = getFileInfo();
+		
+		if(info.error != ""){
+			//ofSystemAlertDialog(info.error);
+			show_ok_dialog(info.error, [](){});
+			return;
+		}
+		
+		if((std::filesystem::path)info.file==""){
+			show_ok_dialog("Please select a valid output directory/file first", [](){});
+			return;
+		}
+		
+		if(info.exists){
+			show_yes_no_dialog("Destination already exists. Overwrite?", [&](bool yes){
+				if(yes) beginExport();
+			});
 		}
 		else{
-			globals.exportWidth = max(2,ofToInt(widthText->getText()));
-			globals.exportHeight = max(2,ofToInt(heightText->getText()));
-			globals.exportFrameRate = max(2,ofToInt(fpsText->getText()));
-			globals.exportFormat = formatSelect->getSelectedValueOr(ExportFormat::H264);
-			
-
-			ofSendMessage("begin-export");
-			visible = false;
+			beginExport();
 		}
+		
 	}
 	else if(sender == cancelButton){
 		visible = false;
@@ -182,20 +206,88 @@ void ExportScreen::buttonPressed(const void * sender, ofTouchEventArgs & args ){
 void ExportScreen::show(const ofFile & file){
 	defaultName = file.getBaseName();
 	filePicker->setDefaultSaveName(defaultName);
+	commit();
 	visible = true;
 	handleLayout();
 }
 
 const std::filesystem::path ExportScreen::getFile(){
-	ofFile file(filePicker->getFile());
-	if(getFormat()==ExportFormat::H264 && file.getExtension() != "mp4"){
-		return ofFile(file.getAbsolutePath() + ".mp4", ofFile::Reference);
+	return getFileInfo().file;
+}
+
+const ExportFileInfo ExportScreen::getFileInfo(){
+	std::filesystem::path in_path(filePicker->getFile());
+	ofFile in_file(in_path, ofFile::Reference);
+	ExportFormat format = getFormat();
+
+	if(in_path == ""){
+		return ExportFileInfo{
+			.file = std::move(in_file),
+			.exists = false,
+			.error = "Please select a valid file/directory",
+			.sampleRate = 96000,
+			.format = format
+		};
+	}
+	
+
+	bool is_dir;
+	std::string ext;
+	int sampleRate;
+	
+	
+	switch(format){
+		case ExportFormat::H264:
+			is_dir = false;
+			ext = "mp4";
+			sampleRate = 96000;
+			break;
+		case ExportFormat::IMAGE_SEQUENCE_TIFF:
+			is_dir = true;
+			ext = "tiff";
+			sampleRate = 96000;
+			break;
+		case ExportFormat::IMAGE_SEQUENCE_PNG:
+			is_dir = true;
+			ext = "png"; break;
+			sampleRate = 96000;
+	}
+	
+	ofFile file;
+	if(!is_dir && in_file.getExtension() != ext){
+		file = ofFile(in_file.getAbsolutePath() + "." + ext, ofFile::Reference);
 	}
 	else{
-		return file;
+		file = in_file;
 	}
+	
+	bool exists = file.exists();
+	
+	std::string error;
+	if(exists && is_dir != in_file.isDirectory()){
+		if(is_dir) error = "Expected directory, but got file";
+		else error = "Expected file, but got directory";
+	}
+	
+	return ExportFileInfo{
+		.file = std::move(file),
+		.exists = exists,
+		.error = error,
+		.sampleRate = sampleRate,
+		.format = format
+	};
 }
+
 
 ExportFormat ExportScreen::getFormat(){
 	return formatSelect->getSelectedValueOr(ExportFormat::H264);
+}
+
+void ExportScreen::commit(){
+	ExportFileInfo info = getFileInfo();
+	
+	filePicker->bg = info.exists && info.error == ""?
+		ofColor( 255, 128, 128, 50 ) :
+		ofColor( 128, 50 );
+
 }

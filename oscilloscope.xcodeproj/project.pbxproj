@@ -48,6 +48,7 @@
 		AAC6E85ECE0C1F374F8EFA0B /* ofxMightyUI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B6E8875D1F1B5C78A2188506 /* ofxMightyUI.cpp */; };
 		B815C93E5673DCDD79C6DBF1 /* MuiConfig.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D99DBF02A180A337BF03E23F /* MuiConfig.cpp */; };
 		B9C14E9C7CDFEEC1CFAE0FA5 /* ofxFontStash2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14928A2388550B51A632DE4D /* ofxFontStash2.cpp */; };
+		BA2AE59427A03C7C0058337F /* Dialogs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BA2AE59227A03C7C0058337F /* Dialogs.cpp */; };
 		BAF994EA252B7FC200D5C335 /* LaserdockDevice_desktop.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BAF994D1252B7FC200D5C335 /* LaserdockDevice_desktop.cpp */; };
 		BAF994EB252B7FC200D5C335 /* LaserdockDeviceManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BAF994D3252B7FC200D5C335 /* LaserdockDeviceManager.cpp */; };
 		BAF994EC252B7FC200D5C335 /* LaserdockDeviceManager_desktop.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BAF994D6252B7FC200D5C335 /* LaserdockDeviceManager_desktop.cpp */; };
@@ -239,6 +240,8 @@
 		B6E8875D1F1B5C78A2188506 /* ofxMightyUI.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = ofxMightyUI.cpp; path = addons/ofxMightyUI/src/ofxMightyUI.cpp; sourceTree = SOURCE_ROOT; };
 		B8F15875D3E67E30731BCD6E /* ofxSyphon.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = ofxSyphon.h; path = addons/ofxSyphon/src/ofxSyphon.h; sourceTree = SOURCE_ROOT; };
 		B8F21FE587FB1FD1C558D093 /* avio.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = avio.h; path = addons/ofxAvCodec/libs/avcodec/include/libavformat/avio.h; sourceTree = SOURCE_ROOT; };
+		BA2AE59227A03C7C0058337F /* Dialogs.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Dialogs.cpp; path = ui/Dialogs.cpp; sourceTree = "<group>"; };
+		BA2AE59327A03C7C0058337F /* Dialogs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Dialogs.h; path = ui/Dialogs.h; sourceTree = "<group>"; };
 		BA5F27F22518C178007EE90C /* version.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = version.h; sourceTree = "<group>"; };
 		BA5F27F42518DF93007EE90C /* ofxNative_lin.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = ofxNative_lin.cpp; path = addons/ofxNative/src/ofxNative_lin.cpp; sourceTree = "<group>"; };
 		BA97EF7AEF7764CD6F15DE86 /* ofxFontStash2.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = ofxFontStash2.h; path = addons/ofxFontStash2/src/ofxFontStash2.h; sourceTree = SOURCE_ROOT; };
@@ -1470,6 +1473,8 @@
 		EA790A0D5374D4FBDC428E28 /* ui */ = {
 			isa = PBXGroup;
 			children = (
+				BA2AE59227A03C7C0058337F /* Dialogs.cpp */,
+				BA2AE59327A03C7C0058337F /* Dialogs.h */,
 				8E29CB28D9B06973A5EBE471 /* ExportScreen.h */,
 				EF35A907FA27F67FE7E1F7B5 /* PlayerOverlay.cpp */,
 				93304FF5C76B40A71504E445 /* FaButton.h */,
@@ -1624,6 +1629,7 @@
 				33183F94D120D78CE8DE846A /* ofxIniSettings.cpp in Sources */,
 				72A00B8BA9C4C30A62776C0F /* ofxIniExtras.cpp in Sources */,
 				4619E80C1178F4A19501F6A2 /* ofxAvAudioPlayer.cpp in Sources */,
+				BA2AE59427A03C7C0058337F /* Dialogs.cpp in Sources */,
 				16AA50CD9A68C43079318B25 /* ofxAvAudioWriter.cpp in Sources */,
 				088638B9AEDFB13B061C575F /* ofxAvUtils.cpp in Sources */,
 				EF164C56D00B0BACFB2A4783 /* ofxAvVideoPlayer.cpp in Sources */,
