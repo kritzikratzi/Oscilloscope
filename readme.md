@@ -71,7 +71,7 @@ NOTE: If you want the compilation to go faster, you can do a multithreaded compi
 3. Open a terminal inside the OpenFrameworks folder or cd into it.
 	Note: Make sure that this is the folder with the OpenFrameworks README and not a contanining folder!
 		
-Everything from here on out is done in this terminal, just run each command in order.
+Everything from here on out is done in this terminal, just run each command in order. (ignore **bold comments**)
 	
 	sudo apt-get install gobjc++
 	cd scripts/linux/ubuntu
@@ -80,8 +80,11 @@ Everything from here on out is done in this terminal, just run each command in o
 	git clone --recursive https://github.com/kritzikratzi/Oscilloscope.git
 	cd Oscilloscope
 	scripts/clean.sh
-	scripts/prepare.sh
+	scripts/prepare.sh linux64
 	make
+
+If you get compiler errors, try running the below command and then re-running the `make`
+	scripts/fix-the-broken-stuff.sh
 
 The Oscilloscope executable will be located in the bin/ folder.
 
