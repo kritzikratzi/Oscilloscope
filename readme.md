@@ -60,9 +60,11 @@ The shell commands can be run from a git bash, cygwin, msys, or any other shell 
 
 ### Compiling with make in Linux
 
-This is a full install including OF (thx rrolison68!)
+NOTE: Currently broken due to issues in the dependency ofxNative and ofxLiblaserdock also by Kritzikratzi. Workarounds and details in the next section.
 
-	cd
+This is a full Ubuntu install including OF (thx rrolison68 and DJ_Level_3!)
+
+	sudo apt-get install gobjc++
 	wget -c https://openframeworks.cc/versions/v0.10.1/of_v0.10.1_linux64gcc6_release.tar.gz
 	tar -zxvf of_v0.10.1_linux64gcc6_release.tar.gz
 	mv of_v0.10.1_linux64gcc6_release OF
@@ -75,9 +77,15 @@ This is a full install including OF (thx rrolison68!)
 	scripts/clean.sh
 	cp -R addons/ofxMightyUI/bin/data/* bin/data/
 	cp -R addons/ofxFontAwesome/bin/data/* bin/data/
-	make -j2
+	make
 	bin/Oscilloscope
 See scripts/readme.md for the full distribution process. 
+
+### Linux error workarounds
+
+If you get the compiler error "Cocoa/Cocoa.h not found" or "Frameworks/Frameworks.h not found", ofxNative is broken. Comment out everything in addons/ofxNative/src/ofxNative_osx.mm. This is an addon by Kritzikratzi that adds commands for OSX, but it has some broken dependencies when running on Ubuntu. We're not using it since we're not on OSX, so commenting everything out works for now. An issue is open about this as of 8/29/2022.
+
+If youo get a few compiler errors in a row, one of which mentions importing <cstdio>, ofxLiblaserdock is broken. Add `#include <cstdio>` to addons/ofxLiblaserdock/src/LaserdockDeviceManager.h, immediately below `#include <vector>`. A pull request is pending to fix this as of 8/29/2022.
 
 ### Package the software
 
@@ -89,6 +97,7 @@ See scripts/readme.md for the full distribution process.
 
 * [https://github.com/subwolf/](subwolf) Linux support
 * [https://github.com/s-ol/](s-ol) Linux support
+* [https://github.com/DJLevel3](DJ_Level_3) Fixing Linux Support
 
 
 ## License/Source code
