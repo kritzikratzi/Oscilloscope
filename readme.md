@@ -64,7 +64,7 @@ NOTE: Currently broken due to issues in the dependency ofxNative and ofxLiblaser
 
 Instructions for a full Ubuntu install including OpenFrameworks (thx rrolison68 and DJ_Level_3!)
 
-1. Download the latest release of [https://github.com/openframeworks/openFrameworks/releases/latest](OpenFrameworks)
+1. Download the latest release of [OpenFrameworks](https://github.com/openframeworks/openFrameworks/releases/latest)
 2. Extract it somewhere (you'll be doing everything inside this OpenFrameworks folder)
 3. Open a terminal inside the OpenFrameworks folder or cd into it.
 	Note: Make sure that this is the folder with the OpenFrameworks README and not a contanining folder!
@@ -99,9 +99,9 @@ If youo get a few compiler errors in a row, one of which mentions importing <cst
 
 ### Contributors
 
-* [https://github.com/subwolf/](subwolf) Linux support
-* [https://github.com/s-ol/](s-ol) Linux support
-* [https://github.com/DJLevel3](DJ_Level_3) Fixing Linux Support
+* [subwolf](https://github.com/subwolf/) - Linux support
+* [s-ol](https://github.com/s-ol/) - Linux support
+* [DJ_Level_3](https://github.com/DJLevel3) - Fixing/Updating Linux Support
 
 
 ## License/Source code
