@@ -64,6 +64,8 @@ NOTE: Currently broken due to issues in the dependency ofxNative and ofxLiblaser
 
 Instructions for a full Ubuntu install including OpenFrameworks (thx rrolison68 and DJ_Level_3!)
 
+NOTE: If you want the compilation to go faster, you can do a multithreaded compilation by adding the `-jX` option to the last `make` command, where X is any integer up to the number of hardware threads in your system. (e.g. 2 cores, hyperthreading -> `make -j4`, 8 cores, no hyperthreading -> `make -j8`)
+
 1. Download the latest release of [OpenFrameworks](https://github.com/openframeworks/openFrameworks/releases/latest)
 2. Extract it somewhere (you'll be doing everything inside this OpenFrameworks folder)
 3. Open a terminal inside the OpenFrameworks folder or cd into it.
@@ -81,16 +83,20 @@ Everything from here on out is done in this terminal, just run each command in o
 	cp -R addons/ofxMightyUI/bin/data/* bin/data/
 	cp -R addons/ofxFontAwesome/bin/data/* bin/data/
 	make
-	bin/Oscilloscope
-See scripts/readme.md for the full distribution process. 
+
+The Oscilloscope executable will be located in the bin/ folder.
+
+See scripts/readme.md for the full distribution process.
 
 ### Known Ubuntu compiler errors and workarounds
 
 Note: Some of these errors appear a little while back in the terminal, make sure you can scroll up to look for them. The final stop message isn't very helpful.
 
-If you get the compiler error "Cocoa/Cocoa.h not found" or "Frameworks/Frameworks.h not found", ofxNative is broken. Comment out everything in addons/ofxNative/src/ofxNative_osx.mm. This is an addon by Kritzikratzi that adds commands for OSX, but it has some broken dependencies when running on Ubuntu. We're not using it since we're not on OSX, so commenting everything out works for now. An issue is open about this as of 8/29/2022.
+If you get the compiler error `"Cocoa/Cocoa.h not found"` or `"Frameworks/Frameworks.h not found"`, ofxNative is broken. Comment out everything in `addons/ofxNative/src/ofxNative_osx.mm`. This is an addon by Kritzikratzi that adds commands for OSX, but it has some broken dependencies when running on Ubuntu. We're not using it since we're not on OSX, so commenting everything out works for now. An issue is open about this as of 8/29/2022.
 
-If youo get a few compiler errors in a row, one of which mentions importing <cstdio>, ofxLiblaserdock is broken. Add `#include <cstdio>` to addons/ofxLiblaserdock/src/LaserdockDeviceManager.h, immediately below `#include <vector>`. A pull request is pending to fix this as of 8/29/2022.
+If youo get a few compiler errors in a row, one of which mentions importing \<cstdio\>, ofxLiblaserdock is broken. Add `#include <cstdio>` to `addons/ofxLiblaserdock/src/LaserdockDeviceManager.h`, immediately below `#include <vector>`. A pull request is pending to fix this as of 8/29/2022.
+
+To fix both of these automatically, before running `make`, run  `scripts/fix-the-broken-stuff.sh`.
 
 ### Package the software
 
