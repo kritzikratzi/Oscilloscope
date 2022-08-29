@@ -60,7 +60,7 @@ The shell commands can be run from a git bash, cygwin, msys, or any other shell 
 
 ### Compiling with make in Linux
 
-NOTE: Currently broken due to issues in the dependency ofxNative and ofxLiblaserdock also by Kritzikratzi. Workarounds and details in the next section.
+NOTE: Currently partially broken due to issues in the dependencies ofxNative and ofxLiblaserdock (also by Kritzikratzi), more about them later
 
 Instructions for a full Ubuntu install including OpenFrameworks (thx rrolison68 and DJ_Level_3!)
 
@@ -83,8 +83,7 @@ Everything from here on out is done in this terminal, just run each command in o
 	scripts/prepare.sh linux64
 	make
 
-If you get compiler errors, try running the below command and then re-running the `make`
-	scripts/fix-the-broken-stuff.sh
+If you get compiler errors, try running `scripts/fix-the-broken-stuff.sh` and then re-running the `make` command or see the next section.
 
 The Oscilloscope executable will be located in the bin/ folder.
 
@@ -98,7 +97,7 @@ If you get the compiler error `"Cocoa/Cocoa.h not found"` or `"Frameworks/Framew
 
 If youo get a few compiler errors in a row, one of which mentions importing \<cstdio\>, ofxLiblaserdock is broken. Add `#include <cstdio>` to `addons/ofxLiblaserdock/src/LaserdockDeviceManager.h`, immediately below `#include <vector>`. A pull request is pending to fix this as of 8/29/2022.
 
-To fix both of these automatically, before running `make`, run  `scripts/fix-the-broken-stuff.sh`
+`scripts/fix-the-broken-stuff.sh` fixes these automatically.
 
 ### Package the software
 
