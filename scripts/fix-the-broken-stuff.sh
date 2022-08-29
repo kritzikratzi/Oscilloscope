@@ -22,4 +22,4 @@ cp -v addons/ofxNative/src/ofxNative_osx.mm.bak addons/ofxNative/src/ofxNative_o
 
 sed -i -e '0,/#include <vector>/s//#include <vector>\n#include <cstdio>/' addons/ofxLiblaserdock/src/LaserdockDeviceManager.h
 
-sed -i -e '0,/*\//s//*/' -e '$a*/' /addons/ofxNative/src/ofxNative_osx.mm
+sed -i -e '0,/*\//s//*/' -e '$a*/' addons/ofxNative/src/ofxNative_osx.mm
