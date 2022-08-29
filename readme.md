@@ -64,12 +64,12 @@ NOTE: Currently broken due to issues in the dependency ofxNative and ofxLiblaser
 
 Instructions for a full Ubuntu install including OpenFrameworks (thx rrolison68 and DJ_Level_3!)
 
-	Download the latest release of [https://github.com/openframeworks/openFrameworks/releases/latest](OpenFrameworks)
-	Extract it somewhere (you'll be doing everything inside this OpenFrameworks folder)
-	Open a terminal inside the OpenFrameworks folder or cd into it.
-		Note: Make sure that this is the folder with the OpenFrameworks README and not a contanining folder!
+1. Download the latest release of [https://github.com/openframeworks/openFrameworks/releases/latest](OpenFrameworks)
+2. Extract it somewhere (you'll be doing everything inside this OpenFrameworks folder)
+3. Open a terminal inside the OpenFrameworks folder or cd into it.
+	Note: Make sure that this is the folder with the OpenFrameworks README and not a contanining folder!
 		
-	Everything from here on out is done in this terminal, just run each command in order.
+Everything from here on out is done in this terminal, just run each command in order.
 	
 	sudo apt-get install gobjc++
 	cd scripts/linux/ubuntu
@@ -85,7 +85,7 @@ Instructions for a full Ubuntu install including OpenFrameworks (thx rrolison68 
 	bin/Oscilloscope
 See scripts/readme.md for the full distribution process. 
 
-### Linux error workarounds
+### Known Ubuntu compiler errors and workarounds
 
 If you get the compiler error "Cocoa/Cocoa.h not found" or "Frameworks/Frameworks.h not found", ofxNative is broken. Comment out everything in addons/ofxNative/src/ofxNative_osx.mm. This is an addon by Kritzikratzi that adds commands for OSX, but it has some broken dependencies when running on Ubuntu. We're not using it since we're not on OSX, so commenting everything out works for now. An issue is open about this as of 8/29/2022.
 
