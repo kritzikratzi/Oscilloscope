@@ -9,6 +9,10 @@
 #include "OsciVideoWriter.hpp"
 #include "ofMain.h"
 
+#define AV_CODEC_FLAG_GLOBAL_HEADER (1 << 22)
+#define CODEC_FLAG_GLOBAL_HEADER AV_CODEC_FLAG_GLOBAL_HEADER
+#define AVFMT_RAWPICTURE 0x0020
+
 extern "C"{
 	#include <stdlib.h>
 	#include <stdio.h>
