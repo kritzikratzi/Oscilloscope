@@ -95,7 +95,7 @@ If you get the compiler error `"Cocoa/Cocoa.h not found"` or `"Frameworks/Framew
 
 If youo get a few compiler errors in a row, one of which mentions importing \<cstdio\>, ofxLiblaserdock is broken. Add `#include <cstdio>` to `addons/ofxLiblaserdock/src/LaserdockDeviceManager.h`, immediately below `#include <vector>`. A pull request is pending to fix this as of 8/29/2022.
 
-To fix both of these automatically, before running `make`, run  `scripts/fix-the-broken-stuff.sh` **from the main Oscilloscope folder**
+To fix both of these automatically, before running `make`, run  `scripts/fix-the-broken-stuff.sh`
 
 ### Package the software
 
