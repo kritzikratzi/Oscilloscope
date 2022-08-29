@@ -74,7 +74,6 @@ Everything from here on out is done in this terminal, just run each command in o
 	sudo apt-get install gobjc++
 	cd scripts/linux/ubuntu
 	sudo ./install_dependencies.sh
-	cd
 	cd ../../../apps/myApps
 	git clone --recursive https://github.com/kritzikratzi/Oscilloscope.git
 	cd Oscilloscope
