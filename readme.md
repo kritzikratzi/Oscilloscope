@@ -80,8 +80,7 @@ Everything from here on out is done in this terminal, just run each command in o
 	git clone --recursive https://github.com/kritzikratzi/Oscilloscope.git
 	cd Oscilloscope
 	scripts/clean.sh
-	cp -R addons/ofxMightyUI/bin/data/* bin/data/
-	cp -R addons/ofxFontAwesome/bin/data/* bin/data/
+	scripts/prepare.sh
 	make
 
 The Oscilloscope executable will be located in the bin/ folder.
