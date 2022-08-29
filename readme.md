@@ -78,12 +78,13 @@ Everything from here on out is done in this terminal, just run each command in o
 	sudo ./install_dependencies.sh
 	cd ../../../apps/myApps
 	git clone --recursive https://github.com/kritzikratzi/Oscilloscope.git
-	cd Oscilloscope
-	scripts/clean.sh
-	scripts/prepare.sh linux64
+	cd Oscilloscope/scritps
+	./clean.sh
+	./prepare.sh linux64
+	cd ..
 	make
 
-If you get compiler errors, try running `scripts/fix-the-broken-stuff.sh` and then re-running the `make` command or see the next section.
+If you get compiler errors, try running `scripts/fix-the-broken-stuff.sh` from the Oscilloscope/scripts directory and then re-running the `make` command or see the next section.
 
 The Oscilloscope executable will be located in the bin/ folder.
 
