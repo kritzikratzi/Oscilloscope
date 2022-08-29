@@ -62,16 +62,20 @@ The shell commands can be run from a git bash, cygwin, msys, or any other shell 
 
 NOTE: Currently broken due to issues in the dependency ofxNative and ofxLiblaserdock also by Kritzikratzi. Workarounds and details in the next section.
 
-This is a full Ubuntu install including OF (thx rrolison68 and DJ_Level_3!)
+Instructions for a full Ubuntu install including OpenFrameworks (thx rrolison68 and DJ_Level_3!)
 
+	Download the latest release of [https://github.com/openframeworks/openFrameworks/releases/latest](OpenFrameworks)
+	Extract it somewhere (you'll be doing everything inside this OpenFrameworks folder)
+	Open a terminal inside the OpenFrameworks folder or cd into it.
+		Note: Make sure that this is the folder with the OpenFrameworks README and not a contanining folder!
+		
+	Everything from here on out is done in this terminal, just run each command in order.
+	
 	sudo apt-get install gobjc++
-	wget -c https://openframeworks.cc/versions/v0.10.1/of_v0.10.1_linux64gcc6_release.tar.gz
-	tar -zxvf of_v0.10.1_linux64gcc6_release.tar.gz
-	mv of_v0.10.1_linux64gcc6_release OF
-	cd OF/scripts/linux/ubuntu
+	cd scripts/linux/ubuntu
 	sudo ./install_dependencies.sh
 	cd
-	cd OF/apps/myApps
+	cd ../../../apps/myApps
 	git clone --recursive https://github.com/kritzikratzi/Oscilloscope.git
 	cd Oscilloscope
 	scripts/clean.sh
