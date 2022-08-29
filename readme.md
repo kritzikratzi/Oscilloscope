@@ -86,6 +86,8 @@ See scripts/readme.md for the full distribution process.
 
 ### Known Ubuntu compiler errors and workarounds
 
+Note: Some of these errors appear a little while back in the terminal, make sure you can scroll up to look for them. The final stop message isn't very helpful.
+
 If you get the compiler error "Cocoa/Cocoa.h not found" or "Frameworks/Frameworks.h not found", ofxNative is broken. Comment out everything in addons/ofxNative/src/ofxNative_osx.mm. This is an addon by Kritzikratzi that adds commands for OSX, but it has some broken dependencies when running on Ubuntu. We're not using it since we're not on OSX, so commenting everything out works for now. An issue is open about this as of 8/29/2022.
 
 If youo get a few compiler errors in a row, one of which mentions importing <cstdio>, ofxLiblaserdock is broken. Add `#include <cstdio>` to addons/ofxLiblaserdock/src/LaserdockDeviceManager.h, immediately below `#include <vector>`. A pull request is pending to fix this as of 8/29/2022.
