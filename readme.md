@@ -34,7 +34,7 @@ For more information
 Things are moving around a bit sometimes. 
 Make sure to read these instructions before each build. 
 
-1. Download and unzip Openframeworks 0.10.1
+1. Download and unzip the latest Openframeworks
 1. Open the folder apps/myApps/ (in the OpenFrameworks folder)
 1. Clone the repository with submodules: `git clone --recursive https://github.com/kritzikratzi/Oscilloscope.git`
 1. Download the binary release for ofxAvCodec from [https://github.com/kritzikratzi/ofxAvCodec/releases/tag/0.2](https://github.com/kritzikratzi/ofxAvCodec/releases/tag/0.2)
