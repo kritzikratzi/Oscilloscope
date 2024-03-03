@@ -48,15 +48,8 @@
 		AAC6E85ECE0C1F374F8EFA0B /* ofxMightyUI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B6E8875D1F1B5C78A2188506 /* ofxMightyUI.cpp */; };
 		B815C93E5673DCDD79C6DBF1 /* MuiConfig.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D99DBF02A180A337BF03E23F /* MuiConfig.cpp */; };
 		B9C14E9C7CDFEEC1CFAE0FA5 /* ofxFontStash2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14928A2388550B51A632DE4D /* ofxFontStash2.cpp */; };
-		BA2AE59427A03C7C0058337F /* Dialogs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BA2AE59227A03C7C0058337F /* Dialogs.cpp */; };
-		BAF994EA252B7FC200D5C335 /* LaserdockDevice_desktop.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BAF994D1252B7FC200D5C335 /* LaserdockDevice_desktop.cpp */; };
-		BAF994EB252B7FC200D5C335 /* LaserdockDeviceManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BAF994D3252B7FC200D5C335 /* LaserdockDeviceManager.cpp */; };
-		BAF994EC252B7FC200D5C335 /* LaserdockDeviceManager_desktop.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BAF994D6252B7FC200D5C335 /* LaserdockDeviceManager_desktop.cpp */; };
-		BAF994ED252B7FC200D5C335 /* LaserdockDevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BAF994D7252B7FC200D5C335 /* LaserdockDevice.cpp */; };
-		BAF994F4252B816D00D5C335 /* WickedLasers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BAF994F3252B816D00D5C335 /* WickedLasers.cpp */; };
-		BAF99500252B85D400D5C335 /* libusb-1.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BAF994FE252B85CC00D5C335 /* libusb-1.0.0.dylib */; };
-		BAF99501252B85D700D5C335 /* liblaserdocklib.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BAF994FF252B85CC00D5C335 /* liblaserdocklib.dylib */; };
-		BAF99531252F9D4900D5C335 /* AudioUnit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BAF99530252F9D4900D5C335 /* AudioUnit.framework */; };
+		B9FD752A5D3595DFBB21DC43 /* ofxNative_lin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 689F91436802555C2FCB7DD8 /* ofxNative_lin.cpp */; };
+		BAA0B29429E78D7100467B64 /* AudioUnit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BAA0B29329E78D7100467B64 /* AudioUnit.framework */; };
 		BD571A91D1F3B6066B493F2D /* MuiEvents.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D69B389B7DBDE863424F73CB /* MuiEvents.cpp */; };
 		C6C0DD3551EE3D6CC3702A9E /* TexShare.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3ACDCDD83540F8A5D5E548BC /* TexShare.cpp */; };
 		D11B1B0CE2F86F3CA3AB7473 /* InternalWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 53AE519E9B1A8F53D6684C51 /* InternalWindow.cpp */; };
@@ -70,6 +63,8 @@
 		EF164C56D00B0BACFB2A4783 /* ofxAvVideoPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BE7E11D15A7AA11EA0527BDB /* ofxAvVideoPlayer.cpp */; };
 		F69BB946B27EB7B7BBFBF486 /* BarButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1085F45B014C6DA226C30C24 /* BarButton.cpp */; };
 		F6A85CE8725DF1E01967CA7B /* Container.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 78468443D3C51716E9537BD8 /* Container.cpp */; };
+		F73E52D38B8EAD78168EF10E /* WickedLasers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6554B2C46FB63670FDA3D944 /* WickedLasers.cpp */; };
+		F7DFAE1EA6378418B6C9609C /* Dialogs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C142701336C826BC609411E /* Dialogs.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -104,6 +99,7 @@
 		13871FB364F63FF49DB01946 /* ScrollPane.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = ScrollPane.h; path = addons/ofxMightyUI/src/ScrollPane.h; sourceTree = SOURCE_ROOT; };
 		14928A2388550B51A632DE4D /* ofxFontStash2.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = ofxFontStash2.cpp; path = addons/ofxFontStash2/src/ofxFontStash2.cpp; sourceTree = SOURCE_ROOT; };
 		153E06DD1D9ED7D8CD0EA4B6 /* vda.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = vda.h; path = addons/ofxAvCodec/libs/avcodec/include/libavcodec/vda.h; sourceTree = SOURCE_ROOT; };
+		1542F6E463A6904BEB432FD8 /* libusb.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = libusb.h; path = addons/ofxLiblaserdock/libs/liblaserdock/include/libusb/libusb.h; sourceTree = SOURCE_ROOT; };
 		1558B426B3D45FAE2A0ED677 /* ofxIniExtras.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = ofxIniExtras.h; path = src/ofxIniSettings/ofxIniExtras.h; sourceTree = SOURCE_ROOT; };
 		1575E590D32D81DB7A6DBD31 /* SliderWithLabel.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = SliderWithLabel.cpp; path = addons/ofxMightyUI/src/SliderWithLabel.cpp; sourceTree = SOURCE_ROOT; };
 		15B5A81A0A2FE213F23A5735 /* MuiFilePicker.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = MuiFilePicker.h; path = addons/ofxMightyUI/src/MuiFilePicker.h; sourceTree = SOURCE_ROOT; };
@@ -117,6 +113,7 @@
 		202C4CAE4D413C7383AAA65C /* ConfigView.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = ConfigView.cpp; path = src/ui/ConfigView.cpp; sourceTree = SOURCE_ROOT; };
 		22511AFA0483A3137988A015 /* sha512.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = sha512.h; path = addons/ofxAvCodec/libs/avcodec/include/libavutil/sha512.h; sourceTree = SOURCE_ROOT; };
 		22800AEC15A0BAF9B71181F1 /* Root.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Root.cpp; path = addons/ofxMightyUI/src/Root.cpp; sourceTree = SOURCE_ROOT; };
+		22DB05DAC646089BFED80FC8 /* inttypes.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = inttypes.h; path = "addons/ofxAvCodec/libs/avcodec/include-vs/inttypes.h"; sourceTree = SOURCE_ROOT; };
 		25A195A6480AB560CAA0E429 /* camellia.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = camellia.h; path = addons/ofxAvCodec/libs/avcodec/include/libavutil/camellia.h; sourceTree = SOURCE_ROOT; };
 		2797C89B1A5238095A0EF6CC /* avfft.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = avfft.h; path = addons/ofxAvCodec/libs/avcodec/include/libavcodec/avfft.h; sourceTree = SOURCE_ROOT; };
 		28EFD7E7D0DDBAEFF3B15694 /* avcodec.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = avcodec.h; path = addons/ofxAvCodec/libs/avcodec/include/libavcodec/avcodec.h; sourceTree = SOURCE_ROOT; };
@@ -128,6 +125,7 @@
 		2FC9272ECA6A1EFBE9729A5A /* error.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = error.h; path = addons/ofxAvCodec/libs/avcodec/include/libavutil/error.h; sourceTree = SOURCE_ROOT; };
 		2FE25810E75E2B3106A0D328 /* version.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = version.h; path = addons/ofxAvCodec/libs/avcodec/include/libavutil/version.h; sourceTree = SOURCE_ROOT; };
 		308669402CA6461A4D29CABE /* MuiParameterPanel.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = MuiParameterPanel.h; path = addons/ofxMightyUI/src/MuiParameterPanel.h; sourceTree = SOURCE_ROOT; };
+		32D7D474CA953F17EC768761 /* LaserdockDeviceManager.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = LaserdockDeviceManager.h; path = addons/ofxLiblaserdock/src/LaserdockDeviceManager.h; sourceTree = SOURCE_ROOT; };
 		33283CAA89339FEB48C04393 /* ofxAvAudioWriter.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = ofxAvAudioWriter.cpp; path = addons/ofxAvCodec/src/ofxAvAudioWriter.cpp; sourceTree = SOURCE_ROOT; };
 		343A3F8480A60CAED80488CF /* random_seed.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = random_seed.h; path = addons/ofxAvCodec/libs/avcodec/include/libavutil/random_seed.h; sourceTree = SOURCE_ROOT; };
 		35ED9438DC80393AEE93EF2E /* ofxFontAwesome5.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = ofxFontAwesome5.h; path = addons/ofxFontAwesome/src/ofxFontAwesome5.h; sourceTree = SOURCE_ROOT; };
@@ -150,6 +148,7 @@
 		47B156499FF102252F9DA700 /* Helpers.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = Helpers.h; path = addons/ofxMightyUI/src/Helpers.h; sourceTree = SOURCE_ROOT; };
 		4924CE8BE93E1875CF0FA14E /* MuiFilePicker.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = MuiFilePicker.cpp; path = addons/ofxMightyUI/src/MuiFilePicker.cpp; sourceTree = SOURCE_ROOT; };
 		494D0FFDC5995D53334BB926 /* mastering_display_metadata.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = mastering_display_metadata.h; path = addons/ofxAvCodec/libs/avcodec/include/libavutil/mastering_display_metadata.h; sourceTree = SOURCE_ROOT; };
+		4C142701336C826BC609411E /* Dialogs.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Dialogs.cpp; path = src/ui/Dialogs.cpp; sourceTree = SOURCE_ROOT; };
 		4CFC5D2536D1970AABA399B3 /* avformat.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = avformat.h; path = addons/ofxAvCodec/libs/avcodec/include/libavformat/avformat.h; sourceTree = SOURCE_ROOT; };
 		4DB544CC30F210F546D88EE3 /* SyphonNameboundClient.m */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = SyphonNameboundClient.m; path = addons/ofxSyphon/libs/Syphon/src/SyphonNameboundClient.m; sourceTree = SOURCE_ROOT; };
 		4DFC3E817E33A7A379EADC43 /* murmur3.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = murmur3.h; path = addons/ofxAvCodec/libs/avcodec/include/libavutil/murmur3.h; sourceTree = SOURCE_ROOT; };
@@ -159,6 +158,7 @@
 		5343F24C844F79643D32BE11 /* stereo3d.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = stereo3d.h; path = addons/ofxAvCodec/libs/avcodec/include/libavutil/stereo3d.h; sourceTree = SOURCE_ROOT; };
 		53AE519E9B1A8F53D6684C51 /* InternalWindow.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = InternalWindow.cpp; path = addons/ofxMightyUI/src/InternalWindow.cpp; sourceTree = SOURCE_ROOT; };
 		53D3C6AF666740D0A14D0807 /* cpu.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = cpu.h; path = addons/ofxAvCodec/libs/avcodec/include/libavutil/cpu.h; sourceTree = SOURCE_ROOT; };
+		57747151DAAE24A250E44398 /* LaserdockDeviceManager_p.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = LaserdockDeviceManager_p.h; path = addons/ofxLiblaserdock/src/LaserdockDeviceManager_p.h; sourceTree = SOURCE_ROOT; };
 		5818AE188B08B356725B9C2F /* aes.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = aes.h; path = addons/ofxAvCodec/libs/avcodec/include/libavutil/aes.h; sourceTree = SOURCE_ROOT; };
 		587681D2F6AD6172D1899F0E /* OsciMesh.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = OsciMesh.h; path = src/OsciMesh.h; sourceTree = SOURCE_ROOT; };
 		58D4E88E2B9D70AEDE441AD8 /* base64.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = base64.h; path = addons/ofxAvCodec/libs/avcodec/include/libavutil/base64.h; sourceTree = SOURCE_ROOT; };
@@ -170,8 +170,10 @@
 		613037050B1F013119E9B20F /* avdevice.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = avdevice.h; path = addons/ofxAvCodec/libs/avcodec/include/libavdevice/avdevice.h; sourceTree = SOURCE_ROOT; };
 		6297AC2A8FE90404D96997FC /* log.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = log.h; path = addons/ofxAvCodec/libs/avcodec/include/libavutil/log.h; sourceTree = SOURCE_ROOT; };
 		63763663A226D8DC1CCF219E /* MuiCore.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = MuiCore.h; path = addons/ofxMightyUI/src/MuiCore.h; sourceTree = SOURCE_ROOT; };
+		6554B2C46FB63670FDA3D944 /* WickedLasers.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = WickedLasers.cpp; path = src/util/WickedLasers.cpp; sourceTree = SOURCE_ROOT; };
 		685B6454DEDAD4ED0FFA1356 /* attributes.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = attributes.h; path = addons/ofxAvCodec/libs/avcodec/include/libavutil/attributes.h; sourceTree = SOURCE_ROOT; };
 		68965801B56E8D1E205AAC60 /* ShaderLoader.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = ShaderLoader.h; path = src/util/ShaderLoader.h; sourceTree = SOURCE_ROOT; };
+		689F91436802555C2FCB7DD8 /* ofxNative_lin.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = ofxNative_lin.cpp; path = addons/ofxNative/src/ofxNative_lin.cpp; sourceTree = SOURCE_ROOT; };
 		6BAADDA3987FD42ACB15C5BD /* hmac.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = hmac.h; path = addons/ofxAvCodec/libs/avcodec/include/libavutil/hmac.h; sourceTree = SOURCE_ROOT; };
 		6CBCEE91421A4988FE9371C8 /* Helpers.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Helpers.cpp; path = addons/ofxMightyUI/src/Helpers.cpp; sourceTree = SOURCE_ROOT; };
 		6CEDF4DA368152A28B3504F2 /* ofxSyphonServerDirectory.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = ofxSyphonServerDirectory.h; path = addons/ofxSyphon/src/ofxSyphonServerDirectory.h; sourceTree = SOURCE_ROOT; };
@@ -189,11 +191,13 @@
 		7DA6D04971D79A612B0F53B2 /* tea.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = tea.h; path = addons/ofxAvCodec/libs/avcodec/include/libavutil/tea.h; sourceTree = SOURCE_ROOT; };
 		7E73E57039614BF83C5458F1 /* ofx_stb_truetype.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = ofx_stb_truetype.h; path = addons/ofxFontStash2/libs/fontstash/src/ofx_stb_truetype.h; sourceTree = SOURCE_ROOT; };
 		80A5AA2160B3FD43FD0F6101 /* ScrollPane.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = ScrollPane.cpp; path = addons/ofxMightyUI/src/ScrollPane.cpp; sourceTree = SOURCE_ROOT; };
+		80C2738C16AAFB71496066D3 /* LaserdockDevice_p.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = LaserdockDevice_p.h; path = addons/ofxLiblaserdock/src/LaserdockDevice_p.h; sourceTree = SOURCE_ROOT; };
 		823D497743ABFCCFB371FD17 /* audio_fifo.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = audio_fifo.h; path = addons/ofxAvCodec/libs/avcodec/include/libavutil/audio_fifo.h; sourceTree = SOURCE_ROOT; };
 		83524310F713FE5B83E9DA99 /* globals.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = globals.h; path = src/globals.h; sourceTree = SOURCE_ROOT; };
 		83CE6E7034787039834DE6C5 /* MuiL.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = MuiL.h; path = addons/ofxMightyUI/src/MuiL.h; sourceTree = SOURCE_ROOT; };
 		882DF3FFD9EEBEEE1FBFDE8B /* d3d11va.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = d3d11va.h; path = addons/ofxAvCodec/libs/avcodec/include/libavcodec/d3d11va.h; sourceTree = SOURCE_ROOT; };
 		896E951D7EB8D76BE955844E /* SegmentedSelect.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = SegmentedSelect.cpp; path = addons/ofxMightyUI/src/SegmentedSelect.cpp; sourceTree = SOURCE_ROOT; };
+		8BEAD1BB282C557812121361 /* version.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = version.h; path = src/version.h; sourceTree = SOURCE_ROOT; };
 		8C4571415C84E9A2D4AF3339 /* ofxMightyUI.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = ofxMightyUI.h; path = addons/ofxMightyUI/src/ofxMightyUI.h; sourceTree = SOURCE_ROOT; };
 		8E29CB28D9B06973A5EBE471 /* ExportScreen.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = ExportScreen.h; path = src/ui/ExportScreen.h; sourceTree = SOURCE_ROOT; };
 		8F3F89F450002DC39DC405F0 /* Root.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = Root.h; path = addons/ofxMightyUI/src/Root.h; sourceTree = SOURCE_ROOT; };
@@ -211,6 +215,7 @@
 		9A7F50D94C194DE34CADF27F /* ofxAvUtils.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = ofxAvUtils.h; path = addons/ofxAvCodec/src/ofxAvUtils.h; sourceTree = SOURCE_ROOT; };
 		9B33A952E660E152898C5032 /* ofxNative_osx.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = ofxNative_osx.mm; path = addons/ofxNative/src/ofxNative_osx.mm; sourceTree = SOURCE_ROOT; };
 		9B7FB08C41B5CE8AEDF10B28 /* parseutils.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = parseutils.h; path = addons/ofxAvCodec/libs/avcodec/include/libavutil/parseutils.h; sourceTree = SOURCE_ROOT; };
+		9C23D1DF820DCC169BE39973 /* WickedLasers.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = WickedLasers.h; path = src/util/WickedLasers.h; sourceTree = SOURCE_ROOT; };
 		9D713F982228DD4D390493E5 /* Label.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = Label.h; path = addons/ofxMightyUI/src/Label.h; sourceTree = SOURCE_ROOT; };
 		9D7295B495FF8445BB7B01B9 /* buffer.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = buffer.h; path = addons/ofxAvCodec/libs/avcodec/include/libavutil/buffer.h; sourceTree = SOURCE_ROOT; };
 		9EB0553DE40F70E595063F52 /* hash.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = hash.h; path = addons/ofxAvCodec/libs/avcodec/include/libavutil/hash.h; sourceTree = SOURCE_ROOT; };
@@ -240,31 +245,11 @@
 		B6E8875D1F1B5C78A2188506 /* ofxMightyUI.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = ofxMightyUI.cpp; path = addons/ofxMightyUI/src/ofxMightyUI.cpp; sourceTree = SOURCE_ROOT; };
 		B8F15875D3E67E30731BCD6E /* ofxSyphon.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = ofxSyphon.h; path = addons/ofxSyphon/src/ofxSyphon.h; sourceTree = SOURCE_ROOT; };
 		B8F21FE587FB1FD1C558D093 /* avio.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = avio.h; path = addons/ofxAvCodec/libs/avcodec/include/libavformat/avio.h; sourceTree = SOURCE_ROOT; };
-		BA2AE59227A03C7C0058337F /* Dialogs.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Dialogs.cpp; path = ui/Dialogs.cpp; sourceTree = "<group>"; };
-		BA2AE59327A03C7C0058337F /* Dialogs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Dialogs.h; path = ui/Dialogs.h; sourceTree = "<group>"; };
-		BA5F27F22518C178007EE90C /* version.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = version.h; sourceTree = "<group>"; };
-		BA5F27F42518DF93007EE90C /* ofxNative_lin.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = ofxNative_lin.cpp; path = addons/ofxNative/src/ofxNative_lin.cpp; sourceTree = "<group>"; };
 		BA97EF7AEF7764CD6F15DE86 /* ofxFontStash2.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = ofxFontStash2.h; path = addons/ofxFontStash2/src/ofxFontStash2.h; sourceTree = SOURCE_ROOT; };
-		BAF994D0252B7FC200D5C335 /* LaserdockDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LaserdockDevice.h; sourceTree = "<group>"; };
-		BAF994D1252B7FC200D5C335 /* LaserdockDevice_desktop.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LaserdockDevice_desktop.cpp; sourceTree = "<group>"; };
-		BAF994D2252B7FC200D5C335 /* LaserdockDeviceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LaserdockDeviceManager.h; sourceTree = "<group>"; };
-		BAF994D3252B7FC200D5C335 /* LaserdockDeviceManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LaserdockDeviceManager.cpp; sourceTree = "<group>"; };
-		BAF994D4252B7FC200D5C335 /* LaserdockDeviceManager_p.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LaserdockDeviceManager_p.h; sourceTree = "<group>"; };
-		BAF994D5252B7FC200D5C335 /* LaserdockDevice_p.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LaserdockDevice_p.h; sourceTree = "<group>"; };
-		BAF994D6252B7FC200D5C335 /* LaserdockDeviceManager_desktop.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LaserdockDeviceManager_desktop.cpp; sourceTree = "<group>"; };
-		BAF994D7252B7FC200D5C335 /* LaserdockDevice.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LaserdockDevice.cpp; sourceTree = "<group>"; };
-		BAF994D8252B7FC200D5C335 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = LICENSE; path = addons/ofxLiblaserdock/LICENSE; sourceTree = "<group>"; };
-		BAF994D9252B7FC200D5C335 /* readme.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = readme.md; path = addons/ofxLiblaserdock/readme.md; sourceTree = "<group>"; };
-		BAF994DE252B7FC200D5C335 /* libusb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = libusb.h; sourceTree = "<group>"; };
-		BAF994F2252B816D00D5C335 /* WickedLasers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WickedLasers.h; path = util/WickedLasers.h; sourceTree = "<group>"; };
-		BAF994F3252B816D00D5C335 /* WickedLasers.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = WickedLasers.cpp; path = util/WickedLasers.cpp; sourceTree = "<group>"; };
-		BAF994FE252B85CC00D5C335 /* libusb-1.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = "libusb-1.0.0.dylib"; sourceTree = "<group>"; };
-		BAF994FF252B85CC00D5C335 /* liblaserdocklib.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = liblaserdocklib.dylib; sourceTree = "<group>"; };
-		BAF99502252B881B00D5C335 /* version.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = version.h; sourceTree = "<group>"; };
-		BAF99504252DE04300D5C335 /* Oscilloscope.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Oscilloscope.entitlements; sourceTree = "<group>"; };
-		BAF99530252F9D4900D5C335 /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
+		BAA0B29329E78D7100467B64 /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
 		BBEFE75982C6528D8DF52114 /* version.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = version.h; path = addons/ofxAvCodec/libs/avcodec/include/libswresample/version.h; sourceTree = SOURCE_ROOT; };
 		BD07F6706CCC5FC5B4186A2B /* ofxNative.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = ofxNative.h; path = addons/ofxNative/src/ofxNative.h; sourceTree = SOURCE_ROOT; };
+		BD57A43CBA5EEB5A47F3C521 /* time.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = time.h; path = addons/ofxAvCodec/libs/avcodec/include/libavutil/time.h; sourceTree = SOURCE_ROOT; };
 		BDD7B676AEA10ABCA0BB8DBE /* qsv.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = qsv.h; path = addons/ofxAvCodec/libs/avcodec/include/libavcodec/qsv.h; sourceTree = SOURCE_ROOT; };
 		BDF7D6E1CA120A43B1998DF5 /* Button.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = Button.h; path = addons/ofxMightyUI/src/Button.h; sourceTree = SOURCE_ROOT; };
 		BE4F9D9C2D022C7B6F4832C3 /* common.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = common.h; path = addons/ofxAvCodec/libs/avcodec/include/libavutil/common.h; sourceTree = SOURCE_ROOT; };
@@ -286,12 +271,14 @@
 		C90D89DFDAC6DBFDF5106A88 /* buffersrc.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = buffersrc.h; path = addons/ofxAvCodec/libs/avcodec/include/libavfilter/buffersrc.h; sourceTree = SOURCE_ROOT; };
 		CB6A58F48543E56689B89D4F /* stb_textedit.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = stb_textedit.h; path = addons/ofxMightyUI/libs/stb_textedit/include/stb_textedit/stb_textedit.h; sourceTree = SOURCE_ROOT; };
 		CC13194C07F44E4B38A38DF8 /* ofxSyphonServer.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = ofxSyphonServer.h; path = addons/ofxSyphon/src/ofxSyphonServer.h; sourceTree = SOURCE_ROOT; };
+		CC5997F14C02786FF86CFA74 /* Dialogs.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = Dialogs.h; path = src/ui/Dialogs.h; sourceTree = SOURCE_ROOT; };
 		CF12F96906C9C0A1773E1068 /* MuiTextArea.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = MuiTextArea.h; path = addons/ofxMightyUI/src/MuiTextArea.h; sourceTree = SOURCE_ROOT; };
 		CFADC9C9CBD45270C4E1AEC4 /* dxva2.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = dxva2.h; path = addons/ofxAvCodec/libs/avcodec/include/libavcodec/dxva2.h; sourceTree = SOURCE_ROOT; };
 		D0A73FCDB3B5A29E58EACFCB /* ofxSyphonClient.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = ofxSyphonClient.mm; path = addons/ofxSyphon/src/ofxSyphonClient.mm; sourceTree = SOURCE_ROOT; };
 		D22A1C4B74C46AB3D0094630 /* Layout.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Layout.cpp; path = addons/ofxMightyUI/src/Layout.cpp; sourceTree = SOURCE_ROOT; };
 		D4898DF5F5607C249400904E /* cast5.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = cast5.h; path = addons/ofxAvCodec/libs/avcodec/include/libavutil/cast5.h; sourceTree = SOURCE_ROOT; };
 		D4AB919F697B061CA525A950 /* vorbis_parser.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = vorbis_parser.h; path = addons/ofxAvCodec/libs/avcodec/include/libavcodec/vorbis_parser.h; sourceTree = SOURCE_ROOT; };
+		D4E72F32061F841861593F74 /* LaserdockDevice.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = LaserdockDevice.h; path = addons/ofxLiblaserdock/src/LaserdockDevice.h; sourceTree = SOURCE_ROOT; };
 		D58DCB2C0AEFDE6171E29540 /* Syphon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Syphon.framework; path = addons/ofxSyphon/libs/Syphon/lib/osx/Syphon.framework; sourceTree = "<group>"; };
 		D5C116309FD6110D12B9411A /* mathematics.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = mathematics.h; path = addons/ofxAvCodec/libs/avcodec/include/libavutil/mathematics.h; sourceTree = SOURCE_ROOT; };
 		D5F3EFB095DD67AEDA193B75 /* samplerate.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = samplerate.h; path = addons/ofxLibsamplerate/libs/libsamplerate/include/samplerate.h; sourceTree = SOURCE_ROOT; };
@@ -517,10 +504,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BAF99531252F9D4900D5C335 /* AudioUnit.framework in Frameworks */,
+				BAA0B29429E78D7100467B64 /* AudioUnit.framework in Frameworks */,
 				E1A3FD40C8BCD507345F1126 /* Syphon.framework in Frameworks */,
-				BAF99501252B85D700D5C335 /* liblaserdocklib.dylib in Frameworks */,
-				BAF99500252B85D400D5C335 /* libusb-1.0.0.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -597,6 +582,7 @@
 				5343F24C844F79643D32BE11 /* stereo3d.h */,
 				7DA6D04971D79A612B0F53B2 /* tea.h */,
 				451EAFE776A83B9CF0C8E5DF /* threadmessage.h */,
+				BD57A43CBA5EEB5A47F3C521 /* time.h */,
 				B2E7EBBFA96564BE9B35FA79 /* timecode.h */,
 				1BB8938DCC4D4258A15CF825 /* timestamp.h */,
 				0B625EDE699823C7535C5681 /* tree.h */,
@@ -618,10 +604,10 @@
 		0BB7EE8B407FA69AE4B0FA93 /* ofxIniSettings */ = {
 			isa = PBXGroup;
 			children = (
-				42FBC10FCD8E5A8491F100B6 /* ofxIniSettings.cpp */,
-				A0DC320BFC45CF9C67AD92AB /* ofxIniExtras.cpp */,
 				1558B426B3D45FAE2A0ED677 /* ofxIniExtras.h */,
 				0847DB7A511BD3EC507B73C7 /* ofxIniSettings.h */,
+				42FBC10FCD8E5A8491F100B6 /* ofxIniSettings.cpp */,
+				A0DC320BFC45CF9C67AD92AB /* ofxIniExtras.cpp */,
 			);
 			name = ofxIniSettings;
 			sourceTree = "<group>";
@@ -639,20 +625,37 @@
 		174FB92B07113C7D1223D425 /* util */ = {
 			isa = PBXGroup;
 			children = (
-				BAF994F3252B816D00D5C335 /* WickedLasers.cpp */,
-				BAF994F2252B816D00D5C335 /* WickedLasers.h */,
-				C321D226A615C98BB9F36DEC /* OsciAvAudioPlayer.cpp */,
-				A1BCFFFBF9F6EA0D49A29EC2 /* OsciAvAudioPlayer.h */,
-				1698AD036118002E1BDECC8D /* OsciVideoWriter.cpp */,
-				BF2CAE493C747B0E34576746 /* OsciVideoWriter.hpp */,
 				C7FE049CD4502E550DDEB840 /* miniaudio.h */,
-				F0AD03D6E5C0F87482B4838F /* TexShare.h */,
-				0E7AD8E5D3434D069C1A6EC2 /* Audio.h */,
-				AD1ADF1F2FCE814E53084004 /* Audio.cpp */,
 				68965801B56E8D1E205AAC60 /* ShaderLoader.h */,
+				C321D226A615C98BB9F36DEC /* OsciAvAudioPlayer.cpp */,
 				3ACDCDD83540F8A5D5E548BC /* TexShare.cpp */,
+				AD1ADF1F2FCE814E53084004 /* Audio.cpp */,
+				0E7AD8E5D3434D069C1A6EC2 /* Audio.h */,
+				6554B2C46FB63670FDA3D944 /* WickedLasers.cpp */,
+				F0AD03D6E5C0F87482B4838F /* TexShare.h */,
+				1698AD036118002E1BDECC8D /* OsciVideoWriter.cpp */,
+				A1BCFFFBF9F6EA0D49A29EC2 /* OsciAvAudioPlayer.h */,
+				BF2CAE493C747B0E34576746 /* OsciVideoWriter.hpp */,
+				9C23D1DF820DCC169BE39973 /* WickedLasers.h */,
 			);
 			name = util;
+			sourceTree = "<group>";
+		};
+		17C9DAB1FF1089F303A42C62 /* ofxLiblaserdock */ = {
+			isa = PBXGroup;
+			children = (
+				71C2FB8B02108475F12BF433 /* libs */,
+				4778BDC7FE4BDD24C059F108 /* src */,
+			);
+			name = ofxLiblaserdock;
+			sourceTree = "<group>";
+		};
+		18BFAF16202BA659121C049C /* include */ = {
+			isa = PBXGroup;
+			children = (
+				40255F9393D80786D395004B /* libusb */,
+			);
+			name = include;
 			sourceTree = "<group>";
 		};
 		30DAE02644D85EE93AC32C17 /* libavformat */ = {
@@ -673,6 +676,14 @@
 			name = Syphon;
 			sourceTree = "<group>";
 		};
+		40255F9393D80786D395004B /* libusb */ = {
+			isa = PBXGroup;
+			children = (
+				1542F6E463A6904BEB432FD8 /* libusb.h */,
+			);
+			name = libusb;
+			sourceTree = "<group>";
+		};
 		44030EEF372663423FBA9FA6 /* src */ = {
 			isa = PBXGroup;
 			children = (
@@ -680,6 +691,17 @@
 				A66D7A64BA90EB02398D2F16 /* glfontstash.h */,
 				FA057608919E6E02A63E7AB7 /* ofx_fontstash.h */,
 				7E73E57039614BF83C5458F1 /* ofx_stb_truetype.h */,
+			);
+			name = src;
+			sourceTree = "<group>";
+		};
+		4778BDC7FE4BDD24C059F108 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				D4E72F32061F841861593F74 /* LaserdockDevice.h */,
+				32D7D474CA953F17EC768761 /* LaserdockDeviceManager.h */,
+				57747151DAAE24A250E44398 /* LaserdockDeviceManager_p.h */,
+				80C2738C16AAFB71496066D3 /* LaserdockDevice_p.h */,
 			);
 			name = src;
 			sourceTree = "<group>";
@@ -718,7 +740,6 @@
 		6948EE371B920CB800B5AC1A /* local_addons */ = {
 			isa = PBXGroup;
 			children = (
-				BAF994CE252B7F6B00D5C335 /* ofxLiblaserdock */,
 				76B6CD7EFC793B741FBFA754 /* ofxAvCodec */,
 				E274F8B5F79D9553EB2EB467 /* ofxFontAwesome */,
 				88CCE135290E1DCC58B78E38 /* ofxFontStash2 */,
@@ -726,6 +747,7 @@
 				77F725E71D232BD47D3340A9 /* ofxNative */,
 				9741CCB3450C7AB6F0E2754C /* ofxSyphon */,
 				EFD71408908F9707D38C2237 /* ofxLibsamplerate */,
+				17C9DAB1FF1089F303A42C62 /* ofxLiblaserdock */,
 			);
 			name = local_addons;
 			sourceTree = "<group>";
@@ -743,6 +765,14 @@
 			children = (
 				995EC34862A48438B149E087 /* fontstash */,
 				8DF3024E269407B1C1DEA0A5 /* pugixml */,
+			);
+			name = libs;
+			sourceTree = "<group>";
+		};
+		71C2FB8B02108475F12BF433 /* libs */ = {
+			isa = PBXGroup;
+			children = (
+				BA720E87455BE8DE7CF0C39D /* liblaserdock */,
 			);
 			name = libs;
 			sourceTree = "<group>";
@@ -832,9 +862,9 @@
 			isa = PBXGroup;
 			children = (
 				BD07F6706CCC5FC5B4186A2B /* ofxNative.h */,
+				689F91436802555C2FCB7DD8 /* ofxNative_lin.cpp */,
 				9B33A952E660E152898C5032 /* ofxNative_osx.mm */,
 				6FBD34C9A9A88081490F8C2B /* ofxNative_win.cpp */,
-				BA5F27F42518DF93007EE90C /* ofxNative_lin.cpp */,
 			);
 			name = src;
 			sourceTree = "<group>";
@@ -881,6 +911,7 @@
 		A2A324BB7598B541BCD978F0 /* avcodec */ = {
 			isa = PBXGroup;
 			children = (
+				BDD56E2239D519A63C322967 /* include-vs */,
 				A31714C651B37E91430B1F43 /* include */,
 			);
 			name = avcodec;
@@ -944,7 +975,7 @@
 			name = src;
 			sourceTree = "<group>";
 		};
-		BAAD879D230812A900EC74F8 /* Recovered References */ = {
+		BA3496E629DB313C0042B535 /* Recovered References */ = {
 			isa = PBXGroup;
 			children = (
 				D58DCB2C0AEFDE6171E29540 /* Syphon.framework */,
@@ -952,88 +983,18 @@
 			name = "Recovered References";
 			sourceTree = "<group>";
 		};
-		BAF994CE252B7F6B00D5C335 /* ofxLiblaserdock */ = {
+		BA720E87455BE8DE7CF0C39D /* liblaserdock */ = {
 			isa = PBXGroup;
 			children = (
-				BAF994DA252B7FC200D5C335 /* libs */,
-				BAF994D8252B7FC200D5C335 /* LICENSE */,
-				BAF994D9252B7FC200D5C335 /* readme.md */,
-				BAF994CF252B7FC200D5C335 /* src */,
+				18BFAF16202BA659121C049C /* include */,
 			);
-			name = ofxLiblaserdock;
+			name = liblaserdock;
 			sourceTree = "<group>";
 		};
-		BAF994CF252B7FC200D5C335 /* src */ = {
+		BAA0B29229E78D7100467B64 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				BAF994D0252B7FC200D5C335 /* LaserdockDevice.h */,
-				BAF994D1252B7FC200D5C335 /* LaserdockDevice_desktop.cpp */,
-				BAF994D2252B7FC200D5C335 /* LaserdockDeviceManager.h */,
-				BAF994D3252B7FC200D5C335 /* LaserdockDeviceManager.cpp */,
-				BAF994D4252B7FC200D5C335 /* LaserdockDeviceManager_p.h */,
-				BAF994D5252B7FC200D5C335 /* LaserdockDevice_p.h */,
-				BAF994D6252B7FC200D5C335 /* LaserdockDeviceManager_desktop.cpp */,
-				BAF994D7252B7FC200D5C335 /* LaserdockDevice.cpp */,
-			);
-			name = src;
-			path = addons/ofxLiblaserdock/src;
-			sourceTree = "<group>";
-		};
-		BAF994DA252B7FC200D5C335 /* libs */ = {
-			isa = PBXGroup;
-			children = (
-				BAF994DB252B7FC200D5C335 /* liblaserdock */,
-			);
-			name = libs;
-			path = addons/ofxLiblaserdock/libs;
-			sourceTree = "<group>";
-		};
-		BAF994DB252B7FC200D5C335 /* liblaserdock */ = {
-			isa = PBXGroup;
-			children = (
-				BAF994F5252B85CC00D5C335 /* lib */,
-				BAF994DC252B7FC200D5C335 /* include */,
-			);
-			path = liblaserdock;
-			sourceTree = "<group>";
-		};
-		BAF994DC252B7FC200D5C335 /* include */ = {
-			isa = PBXGroup;
-			children = (
-				BAF994DD252B7FC200D5C335 /* libusb */,
-			);
-			path = include;
-			sourceTree = "<group>";
-		};
-		BAF994DD252B7FC200D5C335 /* libusb */ = {
-			isa = PBXGroup;
-			children = (
-				BAF994DE252B7FC200D5C335 /* libusb.h */,
-			);
-			path = libusb;
-			sourceTree = "<group>";
-		};
-		BAF994F5252B85CC00D5C335 /* lib */ = {
-			isa = PBXGroup;
-			children = (
-				BAF994FD252B85CC00D5C335 /* osx */,
-			);
-			path = lib;
-			sourceTree = "<group>";
-		};
-		BAF994FD252B85CC00D5C335 /* osx */ = {
-			isa = PBXGroup;
-			children = (
-				BAF994FE252B85CC00D5C335 /* libusb-1.0.0.dylib */,
-				BAF994FF252B85CC00D5C335 /* liblaserdocklib.dylib */,
-			);
-			path = osx;
-			sourceTree = "<group>";
-		};
-		BAF9952F252F9D4900D5C335 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				BAF99530252F9D4900D5C335 /* AudioUnit.framework */,
+				BAA0B29329E78D7100467B64 /* AudioUnit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1052,6 +1013,14 @@
 			children = (
 			);
 			name = addons;
+			sourceTree = "<group>";
+		};
+		BDD56E2239D519A63C322967 /* include-vs */ = {
+			isa = PBXGroup;
+			children = (
+				22DB05DAC646089BFED80FC8 /* inttypes.h */,
+			);
+			name = "include-vs";
 			sourceTree = "<group>";
 		};
 		C48A91A55FA7BF389C973CAE /* libswresample */ = {
@@ -1430,33 +1399,31 @@
 			isa = PBXGroup;
 			children = (
 				E4B6FCAD0C3E899E008CF71C /* openFrameworks-Info.plist */,
-				BAF99504252DE04300D5C335 /* Oscilloscope.entitlements */,
 				E4EB6923138AFD0F00A09F29 /* Project.xcconfig */,
 				E4B69E1C0A3A1BDC003C02F2 /* src */,
 				E42962AA2163EDD300A6A9E2 /* openFrameworks */,
 				BB4B014C10F69532006C3DED /* addons */,
 				6948EE371B920CB800B5AC1A /* local_addons */,
 				E4B69B5B0A3A1756003C02F2 /* OscilloscopeDebug.app */,
-				BAAD879D230812A900EC74F8 /* Recovered References */,
-				BAF9952F252F9D4900D5C335 /* Frameworks */,
+				BA3496E629DB313C0042B535 /* Recovered References */,
+				BAA0B29229E78D7100467B64 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
 		E4B69E1C0A3A1BDC003C02F2 /* src */ = {
 			isa = PBXGroup;
 			children = (
-				BAF99502252B881B00D5C335 /* version.h */,
 				E4B69E1D0A3A1BDC003C02F2 /* main.cpp */,
 				E4B69E1E0A3A1BDC003C02F2 /* ofApp.cpp */,
 				E4B69E1F0A3A1BDC003C02F2 /* ofApp.h */,
 				EA790A0D5374D4FBDC428E28 /* ui */,
+				8BEAD1BB282C557812121361 /* version.h */,
 				174FB92B07113C7D1223D425 /* util */,
-				587681D2F6AD6172D1899F0E /* OsciMesh.h */,
+				0BB7EE8B407FA69AE4B0FA93 /* ofxIniSettings */,
 				83524310F713FE5B83E9DA99 /* globals.h */,
 				E24D9D7607931EE882C50190 /* globals.cpp */,
+				587681D2F6AD6172D1899F0E /* OsciMesh.h */,
 				96B1109F100084BCFEE9526F /* OsciMesh.cpp */,
-				0BB7EE8B407FA69AE4B0FA93 /* ofxIniSettings */,
-				BA5F27F22518C178007EE90C /* version.h */,
 			);
 			path = src;
 			sourceTree = SOURCE_ROOT;
@@ -1473,20 +1440,20 @@
 		EA790A0D5374D4FBDC428E28 /* ui */ = {
 			isa = PBXGroup;
 			children = (
-				BA2AE59227A03C7C0058337F /* Dialogs.cpp */,
-				BA2AE59327A03C7C0058337F /* Dialogs.h */,
-				8E29CB28D9B06973A5EBE471 /* ExportScreen.h */,
-				EF35A907FA27F67FE7E1F7B5 /* PlayerOverlay.cpp */,
-				93304FF5C76B40A71504E445 /* FaButton.h */,
-				40D390F5E5A6E99975219389 /* FMenu.h */,
-				3BF43EBF3205CA55C58861E2 /* Playlist.cpp */,
-				08828A92B33B3813F0C43D52 /* Playlist.h */,
+				202C4CAE4D413C7383AAA65C /* ConfigView.cpp */,
 				1ABD52E69040B2006AA9746F /* FMenu.cpp */,
 				C700FE02F27F7833BBC780AE /* FaToggleButton.h */,
-				6010D13AB5E4AA5D6689EDF5 /* PlayerOverlay.h */,
-				4309FC10963F83BB917314CB /* ExportScreen.cpp */,
+				4C142701336C826BC609411E /* Dialogs.cpp */,
+				40D390F5E5A6E99975219389 /* FMenu.h */,
+				CC5997F14C02786FF86CFA74 /* Dialogs.h */,
 				C2B3E2FA70A171E0EE8DD65F /* ConfigView.h */,
-				202C4CAE4D413C7383AAA65C /* ConfigView.cpp */,
+				93304FF5C76B40A71504E445 /* FaButton.h */,
+				EF35A907FA27F67FE7E1F7B5 /* PlayerOverlay.cpp */,
+				6010D13AB5E4AA5D6689EDF5 /* PlayerOverlay.h */,
+				8E29CB28D9B06973A5EBE471 /* ExportScreen.h */,
+				3BF43EBF3205CA55C58861E2 /* Playlist.cpp */,
+				4309FC10963F83BB917314CB /* ExportScreen.cpp */,
+				08828A92B33B3813F0C43D52 /* Playlist.h */,
 			);
 			name = ui;
 			sourceTree = "<group>";
@@ -1529,23 +1496,8 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0600;
-				TargetAttributes = {
-					E4B69B5A0A3A1756003C02F2 = {
-						SystemCapabilities = {
-							com.apple.ApplicationGroups.Mac = {
-								enabled = 0;
-							};
-							com.apple.HardenedRuntime = {
-								enabled = 1;
-							};
-							com.apple.Sandbox = {
-								enabled = 1;
-							};
-						};
-					};
-				};
 			};
-			buildConfigurationList = E4B69B4D0A3A1720003C02F2 /* Build configuration list for PBXProject "oscilloscope" */;
+			buildConfigurationList = E4B69B4D0A3A1720003C02F2 /* Build configuration list for PBXProject "Oscilloscope" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -1577,7 +1529,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "echo \"$GCC_PREPROCESSOR_DEFINITIONS\";\nAPPSTORE=`expr \"$GCC_PREPROCESSOR_DEFINITIONS\" : \".*APPSTORE=\\([0-9]*\\)\"`\nif [ -z \"$APPSTORE\" ] ; then\necho \"Note: Not copying bin/data to App Package or doing App Code signing. Use AppStore target for AppStore distribution\";\nelse\n# Copy bin/data into App/Resources\nrsync -avz --exclude='.DS_Store' \"${SRCROOT}/bin/data/\" \"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/data/\"\n\n# ---- Code Sign App Package ----\n\n# WARNING: You may have to run Clean in Xcode after changing CODE_SIGN_IDENTITY!\n\n# Verify that $CODE_SIGN_IDENTITY is set\nif [ -z \"${CODE_SIGN_IDENTITY}\" ] ; then\necho \"CODE_SIGN_IDENTITY needs to be set for framework code-signing\"\nexit 0\nfi\n\nif [ -z \"${CODE_SIGN_ENTITLEMENTS}\" ] ; then\necho \"CODE_SIGN_ENTITLEMENTS needs to be set for framework code-signing!\"\n\nif [ \"${CONFIGURATION}\" = \"Release\" ] ; then\nexit 1\nelse\n# Code-signing is optional for non-release builds.\nexit 0\nfi\nfi\n\nITEMS=\"\"\n\nFRAMEWORKS_DIR=\"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}\"\necho \"$FRAMEWORKS_DIR\"\nif [ -d \"$FRAMEWORKS_DIR\" ] ; then\nFRAMEWORKS=$(find \"${FRAMEWORKS_DIR}\" -depth -type d -name \"*.framework\" -or -name \"*.dylib\" -or -name \"*.bundle\" | sed -e \"s/\\(.*framework\\)/\\1\\/Versions\\/A\\//\")\nRESULT=$?\nif [[ $RESULT != 0 ]] ; then\nexit 1\nfi\n\nITEMS=\"${FRAMEWORKS}\"\nfi\n\nLOGINITEMS_DIR=\"${TARGET_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/Library/LoginItems/\"\nif [ -d \"$LOGINITEMS_DIR\" ] ; then\nLOGINITEMS=$(find \"${LOGINITEMS_DIR}\" -depth -type d -name \"*.app\")\nRESULT=$?\nif [[ $RESULT != 0 ]] ; then\nexit 1\nfi\n\nITEMS=\"${ITEMS}\"$'\\n'\"${LOGINITEMS}\"\nfi\n\n# Prefer the expanded name, if available.\nCODE_SIGN_IDENTITY_FOR_ITEMS=\"${EXPANDED_CODE_SIGN_IDENTITY_NAME}\"\nif [ \"${CODE_SIGN_IDENTITY_FOR_ITEMS}\" = \"\" ] ; then\n# Fall back to old behavior.\nCODE_SIGN_IDENTITY_FOR_ITEMS=\"${CODE_SIGN_IDENTITY}\"\nfi\n\necho \"Identity:\"\necho \"${CODE_SIGN_IDENTITY_FOR_ITEMS}\"\n\necho \"Entitlements:\"\necho \"${CODE_SIGN_ENTITLEMENTS}\"\n\necho \"Found:\"\necho \"${ITEMS}\"\n\n# Change the Internal Field Separator (IFS) so that spaces in paths will not cause problems below.\nSAVED_IFS=$IFS\nIFS=$(echo -en \"\\n\\b\")\n\n# Loop through all items.\nfor ITEM in $ITEMS;\ndo\necho \"Signing '${ITEM}'\"\ncodesign --force --verbose --sign \"${CODE_SIGN_IDENTITY_FOR_ITEMS}\" --entitlements \"${CODE_SIGN_ENTITLEMENTS}\" \"${ITEM}\"\nRESULT=$?\nif [[ $RESULT != 0 ]] ; then\necho \"Failed to sign '${ITEM}'.\"\nIFS=$SAVED_IFS\nexit 1\nfi\ndone\n\n# Restore $IFS.\nIFS=$SAVED_IFS\n\nfi\n";
+			shellScript = "echo \"$GCC_PREPROCESSOR_DEFINITIONS\";\nAPPSTORE=`expr \"$GCC_PREPROCESSOR_DEFINITIONS\" : \".*APPSTORE=\\([0-9]*\\)\"`\nif [ -z \"$APPSTORE\" ] ; then\necho \"Note: Not copying bin/data to App Package or doing App Code signing. Use AppStore target for AppStore distribution\";\nelse\n# Copy bin/data into App/Resources\nrsync -avz --exclude='.DS_Store' \"${SRCROOT}/bin/data/\" \"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/data/\"\n\n# ---- Code Sign App Package ----\n\n# WARNING: You may have to run Clean in Xcode after changing CODE_SIGN_IDENTITY!\n\n# Verify that $CODE_SIGN_IDENTITY is set\nif [ -z \"${CODE_SIGN_IDENTITY}\" ] ; then\necho \"CODE_SIGN_IDENTITY needs to be set for framework code-signing\"\nexit 0\nfi\n\nif [ -z \"${CODE_SIGN_ENTITLEMENTS}\" ] ; then\necho \"CODE_SIGN_ENTITLEMENTS needs to be set for framework code-signing!\"\n\nif [ \"${CONFIGURATION}\" = \"Release\" ] ; then\nexit 1\nelse\n# Code-signing is optional for non-release builds.\nexit 0\nfi\nfi\n\nITEMS=\"\"\n\nFRAMEWORKS_DIR=\"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}\"\necho \"$FRAMEWORKS_DIR\"\nif [ -d \"$FRAMEWORKS_DIR\" ] ; then\nFRAMEWORKS=$(find \"${FRAMEWORKS_DIR}\" -depth -type d -name \"*.framework\" -or -name \"*.dylib\" -or -name \"*.bundle\" | sed -e \"s/\\(.*framework\\)/\\1\\/Versions\\/A\\//\")\nRESULT=$?\nif [[ $RESULT != 0 ]] ; then\nexit 1\nfi\n\nITEMS=\"${FRAMEWORKS}\"\nfi\n\nLOGINITEMS_DIR=\"${TARGET_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/Library/LoginItems/\"\nif [ -d \"$LOGINITEMS_DIR\" ] ; then\nLOGINITEMS=$(find \"${LOGINITEMS_DIR}\" -depth -type d -name \"*.app\")\nRESULT=$?\nif [[ $RESULT != 0 ]] ; then\nexit 1\nfi\n\nITEMS=\"${ITEMS}\"$'\\n'\"${LOGINITEMS}\"\nfi\n\n# Prefer the expanded name, if available.\nCODE_SIGN_IDENTITY_FOR_ITEMS=\"${EXPANDED_CODE_SIGN_IDENTITY_NAME}\"\nif [ \"${CODE_SIGN_IDENTITY_FOR_ITEMS}\" = \"\" ] ; then\n# Fall back to old behavior.\nCODE_SIGN_IDENTITY_FOR_ITEMS=\"${CODE_SIGN_IDENTITY}\"\nfi\n\necho \"Identity:\"\necho \"${CODE_SIGN_IDENTITY_FOR_ITEMS}\"\n\necho \"Entitlements:\"\necho \"${CODE_SIGN_ENTITLEMENTS}\"\n\necho \"Found:\"\necho \"${ITEMS}\"\n\n# Change the Internal Field Separator (IFS) so that spaces in paths will not cause problems below.\nSAVED_IFS=$IFS\nIFS=$(echo -en \"\\n\\b\")\n\n# Loop through all items.\nfor ITEM in $ITEMS;\ndo\necho \"Stripping invalid archs '${ITEM}'\"\nlipo -extract x86_64 \"${ITEM}\" -o \"${ITEM}\"\necho \"Signing '${ITEM}'\"\ncodesign --force --verbose --sign \"${CODE_SIGN_IDENTITY_FOR_ITEMS}\" --entitlements \"${CODE_SIGN_ENTITLEMENTS}\" \"${ITEM}\"\nRESULT=$?\nif [[ $RESULT != 0 ]] ; then\necho \"Failed to sign '${ITEM}'.\"\nIFS=$SAVED_IFS\nexit 1\nfi\ndone\n\n# Restore $IFS.\nIFS=$SAVED_IFS\n\nfi\n";
 		};
 		E42962A92163ECCD00A6A9E2 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1603,7 +1555,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "mkdir -p \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/Resources/\"\n# Copy default icon file into App/Resources\nrsync -aved \"$ICON_FILE\" \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/Resources/\"\n# Copy libfmod and change install directory for fmod to run\nrsync -aved \"$OF_PATH/libs/fmodex/lib/osx/libfmodex.dylib\" \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/Frameworks/\";\ninstall_name_tool -change @executable_path/libfmodex.dylib @executable_path/../Frameworks/libfmodex.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS/$PRODUCT_NAME\";\n\n\nrsync -aved addons/ofxFontAwesome/bin/data/ \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/Resources\"\nrsync -aved addons/ofxMightyUI/bin/data/ \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/Resources\"\nrsync -aved addons/ofxAvCodec/libs/avcodec/lib/osx/libavutil.55.34.100.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\"\nrsync -aved addons/ofxAvCodec/libs/avcodec/lib/osx/libswscale.4.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\"\nrsync -aved addons/ofxAvCodec/libs/avcodec/lib/osx/libavformat.57.56.100.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\"\nrsync -aved addons/ofxAvCodec/libs/avcodec/lib/osx/libswscale.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\"\nrsync -aved addons/ofxAvCodec/libs/avcodec/lib/osx/libavformat.57.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\"\nrsync -aved addons/ofxAvCodec/libs/avcodec/lib/osx/libavformat.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\"\nrsync -aved addons/ofxAvCodec/libs/avcodec/lib/osx/libswscale.4.2.100.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\"\nrsync -aved addons/ofxAvCodec/libs/avcodec/lib/osx/libavutil.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\"\nrsync -aved addons/ofxAvCodec/libs/avcodec/lib/osx/libavfilter.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\"\nrsync -aved addons/ofxAvCodec/libs/avcodec/lib/osx/libavutil.55.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\"\nrsync -aved addons/ofxAvCodec/libs/avcodec/lib/osx/libopenh264.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\"\nrsync -aved addons/ofxAvCodec/libs/avcodec/lib/osx/libavfilter.6.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\"\nrsync -aved addons/ofxAvCodec/libs/avcodec/lib/osx/libswresample.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\"\nrsync -aved addons/ofxAvCodec/libs/avcodec/lib/osx/libavdevice.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\"\nrsync -aved addons/ofxAvCodec/libs/avcodec/lib/osx/libswresample.2.3.100.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\"\nrsync -aved addons/ofxAvCodec/libs/avcodec/lib/osx/libavdevice.57.1.100.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\"\nrsync -aved addons/ofxAvCodec/libs/avcodec/lib/osx/libswresample.2.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\"\nrsync -aved addons/ofxAvCodec/libs/avcodec/lib/osx/libavcodec.57.64.101.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\"\nrsync -aved addons/ofxAvCodec/libs/avcodec/lib/osx/libavfilter.6.65.100.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\"\nrsync -aved addons/ofxAvCodec/libs/avcodec/lib/osx/libavdevice.57.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\"\nrsync -aved addons/ofxAvCodec/libs/avcodec/lib/osx/libavcodec.57.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\"\nrsync -aved addons/ofxAvCodec/libs/avcodec/lib/osx/libavcodec.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\"\nrsync -aved addons/ofxLiblaserdock/libs/liblaserdock/lib/osx/liblaserdocklib.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\"\n\nrsync -aved addons/ofxLiblaserdock/libs/liblaserdock/lib/osx/libusb-1.0.0.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\"\n\n\necho \"$GCC_PREPROCESSOR_DEFINITIONS\";\n";
+			shellScript = "mkdir -p \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/Resources/\"\n# Copy default icon file into App/Resources\nrsync -aved \"$ICON_FILE\" \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/Resources/\"\n# Copy libfmod and change install directory for fmod to run\nrsync -aved \"$OF_PATH/libs/fmod/lib/osx/libfmod.dylib\" \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/Frameworks/\";\n# Not needed as we now call install_name_tool -id @loader_path/../Frameworks/libfmod.dylib libfmod.dylib on the dylib directly which prevents the need for calling every post build - keeping here for reference and possible legacy usage \n# install_name_tool -change @rpath/libfmod.dylib @executable_path/../Frameworks/libfmod.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS/$PRODUCT_NAME\";\n\nrsync -aved addons/ofxFontAwesome/bin/data/ \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/Resources\"\nrsync -aved addons/ofxMightyUI/bin/data/ \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/Resources\"\n\nrsync -aved addons/ofxAvCodec/libs/avcodec/lib/osx/libavformat.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\"\nrsync -aved addons/ofxAvCodec/libs/avcodec/lib/osx/libavcodec.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\"\nrsync -aved addons/ofxAvCodec/libs/avcodec/lib/osx/libavfilter.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\"\nrsync -aved addons/ofxAvCodec/libs/avcodec/lib/osx/libswscale.4.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\"\nrsync -aved addons/ofxAvCodec/libs/avcodec/lib/osx/libswresample.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\"\nrsync -aved addons/ofxAvCodec/libs/avcodec/lib/osx/libavcodec.57.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\"\nrsync -aved addons/ofxAvCodec/libs/avcodec/lib/osx/libavutil.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\"\nrsync -aved addons/ofxAvCodec/libs/avcodec/lib/osx/libavfilter.6.65.100.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\"\nrsync -aved addons/ofxAvCodec/libs/avcodec/lib/osx/libswscale.4.2.100.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\"\nrsync -aved addons/ofxAvCodec/libs/avcodec/lib/osx/libavutil.55.34.100.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\"\nrsync -aved addons/ofxAvCodec/libs/avcodec/lib/osx/libavfilter.6.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\"\nrsync -aved addons/ofxAvCodec/libs/avcodec/lib/osx/libswscale.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\"\nrsync -aved addons/ofxAvCodec/libs/avcodec/lib/osx/libavformat.57.56.100.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\"\nrsync -aved addons/ofxAvCodec/libs/avcodec/lib/osx/libavdevice.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\"\nrsync -aved addons/ofxAvCodec/libs/avcodec/lib/osx/libswresample.2.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\"\nrsync -aved addons/ofxAvCodec/libs/avcodec/lib/osx/libavdevice.57.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\"\nrsync -aved addons/ofxAvCodec/libs/avcodec/lib/osx/libavcodec.57.64.101.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\"\nrsync -aved addons/ofxAvCodec/libs/avcodec/lib/osx/libavdevice.57.1.100.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\"\nrsync -aved addons/ofxAvCodec/libs/avcodec/lib/osx/libopenh264.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\"\nrsync -aved addons/ofxAvCodec/libs/avcodec/lib/osx/libswresample.2.3.100.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\"\nrsync -aved addons/ofxAvCodec/libs/avcodec/lib/osx/libavformat.57.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\"\nrsync -aved addons/ofxAvCodec/libs/avcodec/lib/osx/libavutil.55.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\"\n\n\nrsync -aved addons/ofxLiblaserdock/libs/liblaserdock/lib/osx/liblaserdocklib.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\"\n#install_name_tool -change @rpath/liblaserdocklib.dylib @executable_path/../Frameworks/liblaserdocklib.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS/$PRODUCT_NAME\";\nrsync -aved addons/ofxLiblaserdock/libs/liblaserdock/lib/osx/libusb-1.0.0.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS\"\n\necho \"$GCC_PREPROCESSOR_DEFINITIONS\";\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1614,22 +1566,22 @@
 			files = (
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
 				E4B69E210A3A1BDC003C02F2 /* ofApp.cpp in Sources */,
+				130706CE6DF52309553B9482 /* ConfigView.cpp in Sources */,
+				E0BA926531C157501ABBD8CC /* FMenu.cpp in Sources */,
+				F7DFAE1EA6378418B6C9609C /* Dialogs.cpp in Sources */,
 				779F006B1089D7BF1E35CA16 /* PlayerOverlay.cpp in Sources */,
 				47E6637381747C2B89B8EB09 /* Playlist.cpp in Sources */,
-				E0BA926531C157501ABBD8CC /* FMenu.cpp in Sources */,
 				4A3AC110E7F2224BFEF7022A /* ExportScreen.cpp in Sources */,
-				130706CE6DF52309553B9482 /* ConfigView.cpp in Sources */,
 				869B0FCA4FD8134FB96D9495 /* OsciAvAudioPlayer.cpp in Sources */,
-				8B0C53D77F9EE1A7F97EAC88 /* OsciVideoWriter.cpp in Sources */,
-				BAF994F4252B816D00D5C335 /* WickedLasers.cpp in Sources */,
-				2AF622F5027CBF10E11F6EFA /* Audio.cpp in Sources */,
 				C6C0DD3551EE3D6CC3702A9E /* TexShare.cpp in Sources */,
-				161FDE95984DBAABAF3A15C0 /* globals.cpp in Sources */,
-				DE6DDE17760CDDA6787F0352 /* OsciMesh.cpp in Sources */,
+				2AF622F5027CBF10E11F6EFA /* Audio.cpp in Sources */,
+				F73E52D38B8EAD78168EF10E /* WickedLasers.cpp in Sources */,
+				8B0C53D77F9EE1A7F97EAC88 /* OsciVideoWriter.cpp in Sources */,
 				33183F94D120D78CE8DE846A /* ofxIniSettings.cpp in Sources */,
 				72A00B8BA9C4C30A62776C0F /* ofxIniExtras.cpp in Sources */,
+				161FDE95984DBAABAF3A15C0 /* globals.cpp in Sources */,
+				DE6DDE17760CDDA6787F0352 /* OsciMesh.cpp in Sources */,
 				4619E80C1178F4A19501F6A2 /* ofxAvAudioPlayer.cpp in Sources */,
-				BA2AE59427A03C7C0058337F /* Dialogs.cpp in Sources */,
 				16AA50CD9A68C43079318B25 /* ofxAvAudioWriter.cpp in Sources */,
 				088638B9AEDFB13B061C575F /* ofxAvUtils.cpp in Sources */,
 				EF164C56D00B0BACFB2A4783 /* ofxAvVideoPlayer.cpp in Sources */,
@@ -1646,14 +1598,10 @@
 				D11B1B0CE2F86F3CA3AB7473 /* InternalWindow.cpp in Sources */,
 				326D9B4A2C212E0F3899DD2A /* Label.cpp in Sources */,
 				EBD8AD528395D4FD14BBF9AF /* Layout.cpp in Sources */,
-				BAF994EB252B7FC200D5C335 /* LaserdockDeviceManager.cpp in Sources */,
 				B815C93E5673DCDD79C6DBF1 /* MuiConfig.cpp in Sources */,
 				787016069CB1B998EC35D6AD /* MuiCore.cpp in Sources */,
 				BD571A91D1F3B6066B493F2D /* MuiEvents.cpp in Sources */,
-				BAF994ED252B7FC200D5C335 /* LaserdockDevice.cpp in Sources */,
-				BAF994EA252B7FC200D5C335 /* LaserdockDevice_desktop.cpp in Sources */,
 				4FAD2AA91CE0AC34CE7D83CF /* MuiFilePicker.cpp in Sources */,
-				BAF994EC252B7FC200D5C335 /* LaserdockDeviceManager_desktop.cpp in Sources */,
 				9256F69B72E92207D448C545 /* MuiParameterPanel.cpp in Sources */,
 				2B353568B1F4258191072B44 /* MuiTextArea.cpp in Sources */,
 				D9D09F5B3664CB3A7DC0930F /* Root.cpp in Sources */,
@@ -1664,6 +1612,7 @@
 				41F5016662856B85887CE301 /* TextureAtlas.cpp in Sources */,
 				410FECA3CFE48D2AB7FBB7FF /* ToggleButton.cpp in Sources */,
 				AAC6E85ECE0C1F374F8EFA0B /* ofxMightyUI.cpp in Sources */,
+				B9FD752A5D3595DFBB21DC43 /* ofxNative_lin.cpp in Sources */,
 				2C3BAF5FF47B529EC8A2E9B4 /* ofxNative_osx.mm in Sources */,
 				73C9BEC5ACA9646B68827E49 /* ofxNative_win.cpp in Sources */,
 				5FA93AAAC98591A2D88DC6A5 /* SyphonNameboundClient.m in Sources */,
@@ -1707,47 +1656,24 @@
 					addons/ofxAvCodec/libs/avcodec/include,
 					addons/ofxAvCodec/src,
 					addons/ofxFontAwesome/src,
-					addons/ofxFontStash2/libs,
-					addons/ofxFontStash2/libs/fontstash,
 					addons/ofxFontStash2/libs/fontstash/src,
-					addons/ofxFontStash2/libs/pugixml,
 					addons/ofxFontStash2/libs/pugixml/src,
 					addons/ofxFontStash2/src,
-					addons/ofxMightyUI/libs,
-					addons/ofxMightyUI/libs/stb_textedit,
+					addons/ofxFontStash2/libs/fontstash/src,
 					addons/ofxMightyUI/libs/stb_textedit/include,
-					addons/ofxMightyUI/libs/stb_textedit/include/stb_textedit,
 					addons/ofxMightyUI/src,
 					addons/ofxNative/src,
 					addons/ofxSyphon/libs,
-					addons/ofxSyphon/libs/Syphon,
-					addons/ofxSyphon/libs/Syphon/lib,
-					addons/ofxSyphon/libs/Syphon/lib/osx,
 					addons/ofxSyphon/libs/Syphon/src,
 					addons/ofxSyphon/src,
-					addons/ofxSpout/libs,
-					addons/ofxSpout/libs/SpoutSDK,
-					addons/ofxSpout/libs/SpoutSDK/src,
 					addons/ofxSpout/src,
-					addons/ofxSpout/src/ofxSpout,
-					addons/ofxLibsamplerate/libs,
-					addons/ofxLibsamplerate/libs/libsamplerate,
 					addons/ofxLibsamplerate/libs/libsamplerate/include,
-					addons/ofxLibsamplerate/libs/libsamplerate/lib,
-					addons/ofxLibsamplerate/libs/libsamplerate/lib/osx,
+					addons/ofxLiblaserdock/libs/liblaserdock/include,
+					addons/ofxLiblaserdock/src,
 				);
-				LD_RUNPATH_SEARCH_PATHS = "@executable_path";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
-				OTHER_CPLUSPLUSFLAGS = (
-					"-D__MACOSX_CORE__",
-					"-mtune=native",
-				);
-				OTHER_LDFLAGS = (
-					"$(OF_CORE_LIBS)",
-					"$(OF_CORE_FRAMEWORKS)",
-					addons/ofxLiblaserdock/libs/liblaserdock/lib/osx/liblaserdocklib.dylib,
-					"addons/ofxLiblaserdock/libs/liblaserdock/lib/osx/libusb-1.0.0.dylib",
-				);
+				OTHER_CODE_SIGN_FLAGS = "--deep";
+				OTHER_CPLUSPLUSFLAGS = "-D__MACOSX_CORE__";
 				SDKROOT = macosx;
 			};
 			name = AppStore;
@@ -1756,10 +1682,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E4EB6923138AFD0F00A09F29 /* Project.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = Oscilloscope.entitlements;
+				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_LINK_OBJC_RUNTIME = NO;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
-				ENABLE_HARDENED_RUNTIME = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					addons/ofxSyphon/libs/Syphon/lib/osx,
@@ -1786,6 +1712,7 @@
 					addons/ofxFontStash2/libs/pugixml,
 					addons/ofxFontStash2/libs/pugixml/src,
 					addons/ofxFontStash2/src,
+					addons/ofxFontStash2/libs/fontstash/src,
 					addons/ofxMightyUI/libs,
 					addons/ofxMightyUI/libs/stb_textedit,
 					addons/ofxMightyUI/libs/stb_textedit/include,
@@ -1799,15 +1726,9 @@
 					addons/ofxSyphon/libs/Syphon/src,
 					addons/ofxSyphon/src,
 					addons/ofxSpout/libs,
-					addons/ofxSpout/libs/SpoutSDK,
-					addons/ofxSpout/libs/SpoutSDK/src,
 					addons/ofxSpout/src,
 					addons/ofxSpout/src/ofxSpout,
-					addons/ofxLibsamplerate/libs,
-					addons/ofxLibsamplerate/libs/libsamplerate,
 					addons/ofxLibsamplerate/libs/libsamplerate/include,
-					addons/ofxLibsamplerate/libs/libsamplerate/lib,
-					addons/ofxLibsamplerate/libs/libsamplerate/lib/osx,
 					addons/ofxLiblaserdock/libs/liblaserdock/include,
 					addons/ofxLiblaserdock/src,
 				);
@@ -1815,38 +1736,23 @@
 				ICON_FILE = "$(ICON_FILE_PATH)$(ICON)";
 				INFOPLIST_FILE = "openFrameworks-Info.plist";
 				INSTALL_PATH = /Applications;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/addons/ofxLiblaserdock/libs/liblaserdock/lib/vs/x64",
-					"$(PROJECT_DIR)/addons/ofxLiblaserdock/libs/liblaserdock/lib/osx",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				OF_CORE_FRAMEWORKS = "-framework Accelerate -framework AGL -framework AppKit -framework ApplicationServices -framework AudioToolbox -framework AVFoundation -framework Cocoa -framework CoreAudio -framework CoreFoundation -framework CoreMedia -framework CoreServices -framework CoreVideo -framework IOKit -framework OpenGL -framework QuartzCore  -framework Security";
 				OTHER_LDFLAGS = (
 					"$(OF_CORE_LIBS)",
 					"$(OF_CORE_FRAMEWORKS)",
 					"$(LIB_OF)",
-					addons/ofxAvCodec/libs/avcodec/lib/osx/libswscale.4.2.100.dylib,
-					addons/ofxAvCodec/libs/avcodec/lib/osx/libavfilter.6.65.100.dylib,
-					addons/ofxAvCodec/libs/avcodec/lib/osx/libavdevice.57.1.100.dylib,
-					addons/ofxAvCodec/libs/avcodec/lib/osx/libavdevice.57.1.100.dylib,
-					addons/ofxAvCodec/libs/avcodec/lib/osx/libavutil.55.34.100.dylib,
-					addons/ofxAvCodec/libs/avcodec/lib/osx/libavcodec.57.64.101.dylib,
-					addons/ofxAvCodec/libs/avcodec/lib/osx/libavfilter.6.65.100.dylib,
-					addons/ofxAvCodec/libs/avcodec/lib/osx/libswresample.2.3.100.dylib,
-					addons/ofxAvCodec/libs/avcodec/lib/osx/libavcodec.57.64.101.dylib,
-					addons/ofxAvCodec/libs/avcodec/lib/osx/libavformat.57.56.100.dylib,
-					addons/ofxAvCodec/libs/avcodec/lib/osx/libavutil.55.34.100.dylib,
-					addons/ofxAvCodec/libs/avcodec/lib/osx/libswscale.4.2.100.dylib,
-					addons/ofxAvCodec/libs/avcodec/lib/osx/libswscale.4.2.100.dylib,
-					addons/ofxAvCodec/libs/avcodec/lib/osx/libavformat.57.56.100.dylib,
-					addons/ofxAvCodec/libs/avcodec/lib/osx/libavcodec.57.64.101.dylib,
-					addons/ofxAvCodec/libs/avcodec/lib/osx/libswresample.2.3.100.dylib,
-					addons/ofxAvCodec/libs/avcodec/lib/osx/libswresample.2.3.100.dylib,
-					addons/ofxAvCodec/libs/avcodec/lib/osx/libopenh264.dylib,
-					addons/ofxAvCodec/libs/avcodec/lib/osx/libavdevice.57.1.100.dylib,
-					addons/ofxAvCodec/libs/avcodec/lib/osx/libavfilter.6.65.100.dylib,
-					addons/ofxAvCodec/libs/avcodec/lib/osx/libavformat.57.56.100.dylib,
-					addons/ofxAvCodec/libs/avcodec/lib/osx/libavutil.55.34.100.dylib,
 					addons/ofxLibsamplerate/libs/libsamplerate/lib/osx/libsamplerate.a,
+					"addons/ofxLiblaserdock/libs/liblaserdock/lib/osx/libusb-1.0.0.dylib",
+					addons/ofxLiblaserdock/libs/liblaserdock/lib/osx/liblaserdocklib.dylib,
+					addons/ofxAvCodec/libs/avcodec/lib/osx/libavfilter.6.65.100.dylib,
+					addons/ofxAvCodec/libs/avcodec/lib/osx/libswscale.4.2.100.dylib,
+					addons/ofxAvCodec/libs/avcodec/lib/osx/libavutil.55.34.100.dylib,
+					addons/ofxAvCodec/libs/avcodec/lib/osx/libavformat.57.56.100.dylib,
+					addons/ofxAvCodec/libs/avcodec/lib/osx/libavcodec.57.64.101.dylib,
+					addons/ofxAvCodec/libs/avcodec/lib/osx/libavdevice.57.1.100.dylib,
+					addons/ofxAvCodec/libs/avcodec/lib/osx/libopenh264.dylib,
+					addons/ofxAvCodec/libs/avcodec/lib/osx/libswresample.2.3.100.dylib,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -1883,48 +1789,25 @@
 					addons/ofxAvCodec/libs/avcodec/include,
 					addons/ofxAvCodec/src,
 					addons/ofxFontAwesome/src,
-					addons/ofxFontStash2/libs,
-					addons/ofxFontStash2/libs/fontstash,
 					addons/ofxFontStash2/libs/fontstash/src,
-					addons/ofxFontStash2/libs/pugixml,
 					addons/ofxFontStash2/libs/pugixml/src,
 					addons/ofxFontStash2/src,
-					addons/ofxMightyUI/libs,
-					addons/ofxMightyUI/libs/stb_textedit,
+					addons/ofxFontStash2/libs/fontstash/src,
 					addons/ofxMightyUI/libs/stb_textedit/include,
-					addons/ofxMightyUI/libs/stb_textedit/include/stb_textedit,
 					addons/ofxMightyUI/src,
 					addons/ofxNative/src,
 					addons/ofxSyphon/libs,
-					addons/ofxSyphon/libs/Syphon,
-					addons/ofxSyphon/libs/Syphon/lib,
-					addons/ofxSyphon/libs/Syphon/lib/osx,
 					addons/ofxSyphon/libs/Syphon/src,
 					addons/ofxSyphon/src,
-					addons/ofxSpout/libs,
-					addons/ofxSpout/libs/SpoutSDK,
-					addons/ofxSpout/libs/SpoutSDK/src,
 					addons/ofxSpout/src,
-					addons/ofxSpout/src/ofxSpout,
-					addons/ofxLibsamplerate/libs,
-					addons/ofxLibsamplerate/libs/libsamplerate,
 					addons/ofxLibsamplerate/libs/libsamplerate/include,
-					addons/ofxLibsamplerate/libs/libsamplerate/lib,
-					addons/ofxLibsamplerate/libs/libsamplerate/lib/osx,
+					addons/ofxLiblaserdock/libs/liblaserdock/include,
+					addons/ofxLiblaserdock/src,
 				);
-				LD_RUNPATH_SEARCH_PATHS = "@executable_path";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				ONLY_ACTIVE_ARCH = YES;
-				OTHER_CPLUSPLUSFLAGS = (
-					"-D__MACOSX_CORE__",
-					"-mtune=native",
-				);
-				OTHER_LDFLAGS = (
-					"$(OF_CORE_LIBS)",
-					"$(OF_CORE_FRAMEWORKS)",
-					addons/ofxLiblaserdock/libs/liblaserdock/lib/osx/liblaserdocklib.dylib,
-					"addons/ofxLiblaserdock/libs/liblaserdock/lib/osx/libusb-1.0.0.dylib",
-				);
+				OTHER_CODE_SIGN_FLAGS = "--deep";
+				OTHER_CPLUSPLUSFLAGS = "-D__MACOSX_CORE__";
 				SDKROOT = macosx;
 			};
 			name = Debug;
@@ -1959,47 +1842,24 @@
 					addons/ofxAvCodec/libs/avcodec/include,
 					addons/ofxAvCodec/src,
 					addons/ofxFontAwesome/src,
-					addons/ofxFontStash2/libs,
-					addons/ofxFontStash2/libs/fontstash,
 					addons/ofxFontStash2/libs/fontstash/src,
-					addons/ofxFontStash2/libs/pugixml,
 					addons/ofxFontStash2/libs/pugixml/src,
 					addons/ofxFontStash2/src,
-					addons/ofxMightyUI/libs,
-					addons/ofxMightyUI/libs/stb_textedit,
+					addons/ofxFontStash2/libs/fontstash/src,
 					addons/ofxMightyUI/libs/stb_textedit/include,
-					addons/ofxMightyUI/libs/stb_textedit/include/stb_textedit,
 					addons/ofxMightyUI/src,
 					addons/ofxNative/src,
 					addons/ofxSyphon/libs,
-					addons/ofxSyphon/libs/Syphon,
-					addons/ofxSyphon/libs/Syphon/lib,
-					addons/ofxSyphon/libs/Syphon/lib/osx,
 					addons/ofxSyphon/libs/Syphon/src,
 					addons/ofxSyphon/src,
-					addons/ofxSpout/libs,
-					addons/ofxSpout/libs/SpoutSDK,
-					addons/ofxSpout/libs/SpoutSDK/src,
 					addons/ofxSpout/src,
-					addons/ofxSpout/src/ofxSpout,
-					addons/ofxLibsamplerate/libs,
-					addons/ofxLibsamplerate/libs/libsamplerate,
 					addons/ofxLibsamplerate/libs/libsamplerate/include,
-					addons/ofxLibsamplerate/libs/libsamplerate/lib,
-					addons/ofxLibsamplerate/libs/libsamplerate/lib/osx,
+					addons/ofxLiblaserdock/libs/liblaserdock/include,
+					addons/ofxLiblaserdock/src,
 				);
-				LD_RUNPATH_SEARCH_PATHS = "@executable_path";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
-				OTHER_CPLUSPLUSFLAGS = (
-					"-D__MACOSX_CORE__",
-					"-mtune=native",
-				);
-				OTHER_LDFLAGS = (
-					"$(OF_CORE_LIBS)",
-					"$(OF_CORE_FRAMEWORKS)",
-					addons/ofxLiblaserdock/libs/liblaserdock/lib/osx/liblaserdocklib.dylib,
-					"addons/ofxLiblaserdock/libs/liblaserdock/lib/osx/libusb-1.0.0.dylib",
-				);
+				OTHER_CODE_SIGN_FLAGS = "--deep";
+				OTHER_CPLUSPLUSFLAGS = "-D__MACOSX_CORE__";
 				SDKROOT = macosx;
 			};
 			name = Release;
@@ -2008,10 +1868,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E4EB6923138AFD0F00A09F29 /* Project.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = Oscilloscope.entitlements;
+				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_LINK_OBJC_RUNTIME = NO;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
-				ENABLE_HARDENED_RUNTIME = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					addons/ofxSyphon/libs/Syphon/lib/osx,
@@ -2036,6 +1896,7 @@
 					addons/ofxFontStash2/libs/pugixml,
 					addons/ofxFontStash2/libs/pugixml/src,
 					addons/ofxFontStash2/src,
+					addons/ofxFontStash2/libs/fontstash/src,
 					addons/ofxMightyUI/libs,
 					addons/ofxMightyUI/libs/stb_textedit,
 					addons/ofxMightyUI/libs/stb_textedit/include,
@@ -2049,15 +1910,9 @@
 					addons/ofxSyphon/libs/Syphon/src,
 					addons/ofxSyphon/src,
 					addons/ofxSpout/libs,
-					addons/ofxSpout/libs/SpoutSDK,
-					addons/ofxSpout/libs/SpoutSDK/src,
 					addons/ofxSpout/src,
 					addons/ofxSpout/src/ofxSpout,
-					addons/ofxLibsamplerate/libs,
-					addons/ofxLibsamplerate/libs/libsamplerate,
 					addons/ofxLibsamplerate/libs/libsamplerate/include,
-					addons/ofxLibsamplerate/libs/libsamplerate/lib,
-					addons/ofxLibsamplerate/libs/libsamplerate/lib/osx,
 					addons/ofxLiblaserdock/libs/liblaserdock/include,
 					addons/ofxLiblaserdock/src,
 				);
@@ -2065,38 +1920,23 @@
 				ICON_FILE = "$(ICON_FILE_PATH)$(ICON)";
 				INFOPLIST_FILE = "openFrameworks-Info.plist";
 				INSTALL_PATH = /Applications;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/addons/ofxLiblaserdock/libs/liblaserdock/lib/vs/x64",
-					"$(PROJECT_DIR)/addons/ofxLiblaserdock/libs/liblaserdock/lib/osx",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				OF_CORE_FRAMEWORKS = "-framework Accelerate -framework AGL -framework AppKit -framework ApplicationServices -framework AudioToolbox -framework AVFoundation -framework Cocoa -framework CoreAudio -framework CoreFoundation -framework CoreMedia -framework CoreServices -framework CoreVideo -framework IOKit -framework OpenGL -framework QuartzCore  -framework Security";
 				OTHER_LDFLAGS = (
 					"$(OF_CORE_LIBS)",
 					"$(OF_CORE_FRAMEWORKS)",
 					"$(LIB_OF_DEBUG)",
-					addons/ofxAvCodec/libs/avcodec/lib/osx/libswscale.4.2.100.dylib,
-					addons/ofxAvCodec/libs/avcodec/lib/osx/libavfilter.6.65.100.dylib,
-					addons/ofxAvCodec/libs/avcodec/lib/osx/libavdevice.57.1.100.dylib,
-					addons/ofxAvCodec/libs/avcodec/lib/osx/libavdevice.57.1.100.dylib,
-					addons/ofxAvCodec/libs/avcodec/lib/osx/libavutil.55.34.100.dylib,
-					addons/ofxAvCodec/libs/avcodec/lib/osx/libavcodec.57.64.101.dylib,
-					addons/ofxAvCodec/libs/avcodec/lib/osx/libavfilter.6.65.100.dylib,
-					addons/ofxAvCodec/libs/avcodec/lib/osx/libswresample.2.3.100.dylib,
-					addons/ofxAvCodec/libs/avcodec/lib/osx/libavcodec.57.64.101.dylib,
-					addons/ofxAvCodec/libs/avcodec/lib/osx/libavformat.57.56.100.dylib,
-					addons/ofxAvCodec/libs/avcodec/lib/osx/libavutil.55.34.100.dylib,
-					addons/ofxAvCodec/libs/avcodec/lib/osx/libswscale.4.2.100.dylib,
-					addons/ofxAvCodec/libs/avcodec/lib/osx/libswscale.4.2.100.dylib,
-					addons/ofxAvCodec/libs/avcodec/lib/osx/libavformat.57.56.100.dylib,
-					addons/ofxAvCodec/libs/avcodec/lib/osx/libavcodec.57.64.101.dylib,
-					addons/ofxAvCodec/libs/avcodec/lib/osx/libswresample.2.3.100.dylib,
-					addons/ofxAvCodec/libs/avcodec/lib/osx/libswresample.2.3.100.dylib,
-					addons/ofxAvCodec/libs/avcodec/lib/osx/libopenh264.dylib,
-					addons/ofxAvCodec/libs/avcodec/lib/osx/libavdevice.57.1.100.dylib,
-					addons/ofxAvCodec/libs/avcodec/lib/osx/libavfilter.6.65.100.dylib,
-					addons/ofxAvCodec/libs/avcodec/lib/osx/libavformat.57.56.100.dylib,
-					addons/ofxAvCodec/libs/avcodec/lib/osx/libavutil.55.34.100.dylib,
 					addons/ofxLibsamplerate/libs/libsamplerate/lib/osx/libsamplerate.a,
+					"addons/ofxLiblaserdock/libs/liblaserdock/lib/osx/libusb-1.0.0.dylib",
+					addons/ofxLiblaserdock/libs/liblaserdock/lib/osx/liblaserdocklib.dylib,
+					addons/ofxAvCodec/libs/avcodec/lib/osx/libavfilter.6.65.100.dylib,
+					addons/ofxAvCodec/libs/avcodec/lib/osx/libswscale.4.2.100.dylib,
+					addons/ofxAvCodec/libs/avcodec/lib/osx/libavutil.55.34.100.dylib,
+					addons/ofxAvCodec/libs/avcodec/lib/osx/libavformat.57.56.100.dylib,
+					addons/ofxAvCodec/libs/avcodec/lib/osx/libavcodec.57.64.101.dylib,
+					addons/ofxAvCodec/libs/avcodec/lib/osx/libavdevice.57.1.100.dylib,
+					addons/ofxAvCodec/libs/avcodec/lib/osx/libopenh264.dylib,
+					addons/ofxAvCodec/libs/avcodec/lib/osx/libswresample.2.3.100.dylib,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)Debug";
 				WRAPPER_EXTENSION = app;
@@ -2107,10 +1947,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E4EB6923138AFD0F00A09F29 /* Project.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = Oscilloscope.entitlements;
+				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_LINK_OBJC_RUNTIME = NO;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
-				ENABLE_HARDENED_RUNTIME = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					addons/ofxSyphon/libs/Syphon/lib/osx,
@@ -2134,6 +1974,7 @@
 					addons/ofxFontStash2/libs/pugixml,
 					addons/ofxFontStash2/libs/pugixml/src,
 					addons/ofxFontStash2/src,
+					addons/ofxFontStash2/libs/fontstash/src,
 					addons/ofxMightyUI/libs,
 					addons/ofxMightyUI/libs/stb_textedit,
 					addons/ofxMightyUI/libs/stb_textedit/include,
@@ -2147,15 +1988,9 @@
 					addons/ofxSyphon/libs/Syphon/src,
 					addons/ofxSyphon/src,
 					addons/ofxSpout/libs,
-					addons/ofxSpout/libs/SpoutSDK,
-					addons/ofxSpout/libs/SpoutSDK/src,
 					addons/ofxSpout/src,
 					addons/ofxSpout/src/ofxSpout,
-					addons/ofxLibsamplerate/libs,
-					addons/ofxLibsamplerate/libs/libsamplerate,
 					addons/ofxLibsamplerate/libs/libsamplerate/include,
-					addons/ofxLibsamplerate/libs/libsamplerate/lib,
-					addons/ofxLibsamplerate/libs/libsamplerate/lib/osx,
 					addons/ofxLiblaserdock/libs/liblaserdock/include,
 					addons/ofxLiblaserdock/src,
 				);
@@ -2163,38 +1998,23 @@
 				ICON_FILE = "$(ICON_FILE_PATH)$(ICON)";
 				INFOPLIST_FILE = "openFrameworks-Info.plist";
 				INSTALL_PATH = /Applications;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/addons/ofxLiblaserdock/libs/liblaserdock/lib/vs/x64",
-					"$(PROJECT_DIR)/addons/ofxLiblaserdock/libs/liblaserdock/lib/osx",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				OF_CORE_FRAMEWORKS = "-framework Accelerate -framework AGL -framework AppKit -framework ApplicationServices -framework AudioToolbox -framework AVFoundation -framework Cocoa -framework CoreAudio -framework CoreFoundation -framework CoreMedia -framework CoreServices -framework CoreVideo -framework IOKit -framework OpenGL -framework QuartzCore  -framework Security";
 				OTHER_LDFLAGS = (
 					"$(OF_CORE_LIBS)",
 					"$(OF_CORE_FRAMEWORKS)",
 					"$(LIB_OF)",
-					addons/ofxAvCodec/libs/avcodec/lib/osx/libswscale.4.2.100.dylib,
-					addons/ofxAvCodec/libs/avcodec/lib/osx/libavfilter.6.65.100.dylib,
-					addons/ofxAvCodec/libs/avcodec/lib/osx/libavdevice.57.1.100.dylib,
-					addons/ofxAvCodec/libs/avcodec/lib/osx/libavdevice.57.1.100.dylib,
-					addons/ofxAvCodec/libs/avcodec/lib/osx/libavutil.55.34.100.dylib,
-					addons/ofxAvCodec/libs/avcodec/lib/osx/libavcodec.57.64.101.dylib,
-					addons/ofxAvCodec/libs/avcodec/lib/osx/libavfilter.6.65.100.dylib,
-					addons/ofxAvCodec/libs/avcodec/lib/osx/libswresample.2.3.100.dylib,
-					addons/ofxAvCodec/libs/avcodec/lib/osx/libavcodec.57.64.101.dylib,
-					addons/ofxAvCodec/libs/avcodec/lib/osx/libavformat.57.56.100.dylib,
-					addons/ofxAvCodec/libs/avcodec/lib/osx/libavutil.55.34.100.dylib,
-					addons/ofxAvCodec/libs/avcodec/lib/osx/libswscale.4.2.100.dylib,
-					addons/ofxAvCodec/libs/avcodec/lib/osx/libswscale.4.2.100.dylib,
-					addons/ofxAvCodec/libs/avcodec/lib/osx/libavformat.57.56.100.dylib,
-					addons/ofxAvCodec/libs/avcodec/lib/osx/libavcodec.57.64.101.dylib,
-					addons/ofxAvCodec/libs/avcodec/lib/osx/libswresample.2.3.100.dylib,
-					addons/ofxAvCodec/libs/avcodec/lib/osx/libswresample.2.3.100.dylib,
-					addons/ofxAvCodec/libs/avcodec/lib/osx/libopenh264.dylib,
-					addons/ofxAvCodec/libs/avcodec/lib/osx/libavdevice.57.1.100.dylib,
-					addons/ofxAvCodec/libs/avcodec/lib/osx/libavfilter.6.65.100.dylib,
-					addons/ofxAvCodec/libs/avcodec/lib/osx/libavformat.57.56.100.dylib,
-					addons/ofxAvCodec/libs/avcodec/lib/osx/libavutil.55.34.100.dylib,
 					addons/ofxLibsamplerate/libs/libsamplerate/lib/osx/libsamplerate.a,
+					"addons/ofxLiblaserdock/libs/liblaserdock/lib/osx/libusb-1.0.0.dylib",
+					addons/ofxLiblaserdock/libs/liblaserdock/lib/osx/liblaserdocklib.dylib,
+					addons/ofxAvCodec/libs/avcodec/lib/osx/libavfilter.6.65.100.dylib,
+					addons/ofxAvCodec/libs/avcodec/lib/osx/libswscale.4.2.100.dylib,
+					addons/ofxAvCodec/libs/avcodec/lib/osx/libavutil.55.34.100.dylib,
+					addons/ofxAvCodec/libs/avcodec/lib/osx/libavformat.57.56.100.dylib,
+					addons/ofxAvCodec/libs/avcodec/lib/osx/libavcodec.57.64.101.dylib,
+					addons/ofxAvCodec/libs/avcodec/lib/osx/libavdevice.57.1.100.dylib,
+					addons/ofxAvCodec/libs/avcodec/lib/osx/libopenh264.dylib,
+					addons/ofxAvCodec/libs/avcodec/lib/osx/libswresample.2.3.100.dylib,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -2205,7 +2025,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		E4B69B4D0A3A1720003C02F2 /* Build configuration list for PBXProject "oscilloscope" */ = {
+		E4B69B4D0A3A1720003C02F2 /* Build configuration list for PBXProject "Oscilloscope" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E4B69B4E0A3A1720003C02F2 /* Debug */,

@@ -852,7 +852,7 @@ void ofApp::beginExport(const ofFile & file){
 	switch(exportFormat){
 		case ExportFormat::H264:
 			exportExt = "mp4";
-			exportSampleRate = 96000;
+			exportSampleRate = 192000;
 			break;
 		case ExportFormat::IMAGE_SEQUENCE_TIFF:
 			exportExt = "tiff";

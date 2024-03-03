@@ -55,7 +55,9 @@ bool OsciVideoWriter::open(std::string outputFile, const OsciVideoWriter::Output
 	outputFile = ofToDataPath(outputFile,true);
 	
 
-	wd.out_fmt = av_guess_format( "mp4", nullptr, nullptr );
+	// use m4a instead mp4 to support alac
+	// https://github.com/nschlia/ffmpegfs/issues/37
+	wd.out_fmt = av_guess_format( "mov", nullptr, nullptr );
 	if( !wd.out_fmt ){
 		close();
 		return false;
@@ -74,7 +76,7 @@ bool OsciVideoWriter::open(std::string outputFile, const OsciVideoWriter::Output
 
 	//out_pix_fmt = AV_PIX_FMT_YUV420P;
 	wd.out_video_st = add_video_stream(wd.out_ctx, AV_CODEC_ID_H264, config.video_width, config.video_height, config.video_framerate );
-	wd.out_audio_st = add_audio_stream(wd.out_ctx, AV_CODEC_ID_AAC, config.audio_sample_rate, config.audio_n_channels);
+	wd.out_audio_st = add_audio_stream(wd.out_ctx, AV_CODEC_ID_ALAC, config.audio_sample_rate, config.audio_n_channels);
 	
 	open_video(wd.out_ctx, wd.out_video_st);
 	open_audio(wd.out_ctx, wd.out_audio_st);
@@ -199,8 +201,28 @@ AVStream * add_audio_stream(AVFormatContext *out_ctx, AVCodecID codec_id, int sa
 		c->bit_rate = 320000; // 320kb
 		c->rc_min_rate = 320000; // 320kb
 		c->rc_max_rate = 320000; // 320kb
-		c->qmin = 31;
-		c->qmax = 31;
+		c->qmin = 0;
+		c->qmax = 1;
+		c->global_quality = 2;
+		c->strict_std_compliance = FF_COMPLIANCE_EXPERIMENTAL;
+		av_opt_set(c->priv_data, "aac_coder", "twoloop", 0);
+		av_opt_set(c->priv_data, "aac_ms", "0", 0);
+		av_opt_set(c->priv_data, "aac_is", "0", 0);
+		av_opt_set(c->priv_data, "aac_pns", "0", 0);
+		av_opt_set(c->priv_data, "aac_tns", "0", 0);
+		av_opt_set(c->priv_data, "aac_ltp", "0", 0);
+		av_opt_set(c->priv_data, "aac_pred", "0", 0);
+		av_opt_set(c->priv_data, "aac_pce", "0", 0);
+//		c->profile = FF_PROFILE_AAC_MAIN;
+		c->compression_level = 0;
+	}
+	else if(c->codec_id == AV_CODEC_ID_ALAC){
+		c->sample_fmt = AV_SAMPLE_FMT_S16P;
+		c->bit_rate = 320000; // 320kb
+		c->rc_min_rate = 320000; // 320kb
+		c->rc_max_rate = 320000; // 320kb
+		c->qmin = 0;
+		c->qmax = 1;
 		c->global_quality = 2;
 //		c->profile = FF_PROFILE_AAC_MAIN;
 		c->strict_std_compliance = FF_COMPLIANCE_STRICT;
@@ -238,7 +260,6 @@ void open_audio(AVFormatContext *oc, AVStream *st)
 	AVCodec *codec;
 	
 	c = st->codec;
-	
 	/* find the audio encoder */
 	codec = avcodec_find_encoder(c->codec_id);
 	if (!codec) {
@@ -280,6 +301,28 @@ rinseAndRepeat:
 			for(int ch = 0; ch < out_num_channels; ch++){
 				for(int idx = 0; idx < lenPerChannel; idx++){
 					dest[idx + idx_offset + ch*buffer_len_per_channel] = buffer[out_num_channels*idx + ch];
+				}
+			}
+			break;
+		}
+		case AV_SAMPLE_FMT_S32P:{
+			int32_t * idest = (int32_t*)(out_audio_buffer);
+			int idx_offset = out_audio_buffer_offset/out_num_channels;
+			int buffer_len_per_channel = requiredLength/out_num_channels;
+			for(int ch = 0; ch < out_num_channels; ch++){
+				for(int idx = 0; idx < lenPerChannel; idx++){
+					idest[idx + idx_offset + ch*buffer_len_per_channel] = ofMap(buffer[out_num_channels*idx + ch],-1,1,-2147483647,2147483647,true);
+				}
+			}
+			break;
+		}
+		case AV_SAMPLE_FMT_S16P:{
+			int16_t * sdest = (int16_t*)(out_audio_buffer);
+			int idx_offset = out_audio_buffer_offset/out_num_channels;
+			int buffer_len_per_channel = requiredLength/out_num_channels;
+			for(int ch = 0; ch < out_num_channels; ch++){
+				for(int idx = 0; idx < lenPerChannel; idx++){
+					sdest[idx + idx_offset + ch*buffer_len_per_channel] = ofMap(buffer[out_num_channels*idx + ch],-1,1,-32767,32767,true);
 				}
 			}
 			break;
