@@ -34,7 +34,7 @@ For more information
 Things are moving around a bit sometimes. 
 Make sure to read these instructions before each build. 
 
-1. Download and unzip Openframeworks 0.10.1
+1. Download and unzip the latest Openframeworks
 1. Open the folder apps/myApps/ (in the OpenFrameworks folder)
 1. Clone the repository with submodules: `git clone --recursive https://github.com/kritzikratzi/Oscilloscope.git`
 1. Download the binary release for ofxAvCodec from [https://github.com/kritzikratzi/ofxAvCodec/releases/tag/0.2](https://github.com/kritzikratzi/ofxAvCodec/releases/tag/0.2)
@@ -60,24 +60,45 @@ The shell commands can be run from a git bash, cygwin, msys, or any other shell 
 
 ### Compiling with make in Linux
 
-This is a full install including OF (thx rrolison68!)
+NOTE: Currently partially broken due to issues in the dependencies ofxNative and ofxLiblaserdock (also by Kritzikratzi), more about them later
 
-	cd
-	wget -c https://openframeworks.cc/versions/v0.10.1/of_v0.10.1_linux64gcc6_release.tar.gz
-	tar -zxvf of_v0.10.1_linux64gcc6_release.tar.gz
-	mv of_v0.10.1_linux64gcc6_release OF
-	cd OF/scripts/linux/ubuntu
+Instructions for a full Ubuntu install including OpenFrameworks (thx rrolison68 and DJ_Level_3!)
+
+NOTE: If you want the compilation to go faster, you can do a multithreaded compilation by adding the `-jX` option to the last `make` command, where X is any integer up to the number of hardware threads in your system. (e.g. 2 cores, hyperthreading -> `make -j4`, 8 cores, no hyperthreading -> `make -j8`)
+
+1. Download the latest release of [OpenFrameworks](https://github.com/openframeworks/openFrameworks/releases/latest)
+2. Extract it somewhere (you'll be doing everything inside this OpenFrameworks folder)
+3. Open a terminal inside the OpenFrameworks folder or cd into it.
+	Note: Make sure that this is the folder with the OpenFrameworks README and not a contanining folder!
+		
+Everything from here on out is done in this terminal, just run each command in order. (ignore **bold comments**)
+	
+	sudo apt-get install gobjc++
+	cd scripts/linux/ubuntu
 	sudo ./install_dependencies.sh
-	cd
-	cd OF/apps/myApps
+	cd ../../../apps/myApps
 	git clone --recursive https://github.com/kritzikratzi/Oscilloscope.git
-	cd Oscilloscope
-	scripts/clean.sh
-	cp -R addons/ofxMightyUI/bin/data/* bin/data/
-	cp -R addons/ofxFontAwesome/bin/data/* bin/data/
-	make -j2
-	bin/Oscilloscope
-See scripts/readme.md for the full distribution process. 
+	cd Oscilloscope/scritps
+	./clean.sh
+	./prepare.sh linux64
+	cd ..
+	make
+
+If you get compiler errors, try running `scripts/fix-the-broken-stuff.sh` from the Oscilloscope/scripts directory and then re-running the `make` command or see the next section.
+
+The Oscilloscope executable will be located in the bin/ folder.
+
+See scripts/readme.md for the full distribution process.
+
+### Known Ubuntu compiler errors and workarounds
+
+Note: Some of these errors appear a little while back in the terminal, make sure you can scroll up to look for them. The final stop message isn't very helpful.
+
+If you get the compiler error `"Cocoa/Cocoa.h not found"` or `"Frameworks/Frameworks.h not found"`, ofxNative is broken. Comment out everything in `addons/ofxNative/src/ofxNative_osx.mm`. This is an addon by Kritzikratzi that adds commands for OSX, but it has some broken dependencies when running on Ubuntu. We're not using it since we're not on OSX, so commenting everything out works for now. An issue is open about this as of 8/29/2022.
+
+If youo get a few compiler errors in a row, one of which mentions importing \<cstdio\>, ofxLiblaserdock is broken. Add `#include <cstdio>` to `addons/ofxLiblaserdock/src/LaserdockDeviceManager.h`, immediately below `#include <vector>`. A pull request is pending to fix this as of 8/29/2022.
+
+`scripts/fix-the-broken-stuff.sh` fixes these automatically.
 
 ### Package the software
 
@@ -87,8 +108,9 @@ See scripts/readme.md for the full distribution process.
 
 ### Contributors
 
-* [https://github.com/subwolf/](subwolf) Linux support
-* [https://github.com/s-ol/](s-ol) Linux support
+* [subwolf](https://github.com/subwolf/) - Linux support
+* [s-ol](https://github.com/s-ol/) - Linux support
+* [DJ_Level_3](https://github.com/DJLevel3) - Fixing/Updating Linux Support
 
 
 ## License/Source code
